@@ -72,12 +72,7 @@ public class MavenIT0109ReleaseUpdateTest
         verifier.assertArtifactNotPresent( GROUPID, ARTIFACTID, OLD_VERSION, TYPE );
         verifier.assertArtifactNotPresent( GROUPID, ARTIFACTID, NEW_VERSION, TYPE );
 
-        Map m = new HashMap();
-/*
-        m.put( "MAVEN_OPTS",
-               "-Xdebug -Xnoagent -Djava.compiler=NONE -Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=5005" );
-*/
-        verifier.executeGoal( "package", m );
+        verifier.executeGoal( "package" );
 
         verifier.assertArtifactNotPresent( GROUPID, ARTIFACTID, OLD_VERSION, TYPE );
         verifier.assertArtifactPresent( GROUPID, ARTIFACTID, NEW_VERSION, TYPE );

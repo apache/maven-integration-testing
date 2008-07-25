@@ -52,8 +52,7 @@ public class MavenIT0113ServerAuthzAvailableToWagonMgrInPlugin
         List cliOptions = new ArrayList();
         cliOptions.add( "--settings" );
         cliOptions.add( "settings.xml" );
-        verifier.setCliOptions( cliOptions );
-        verifier.executeGoal( "install" );
+        verifier.executeGoal( "install", cliOptions );
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
     }

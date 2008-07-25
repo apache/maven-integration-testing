@@ -108,9 +108,7 @@ public class MavenITmng3314OfflineSnapshotsTest
         {
             List cliOptions = new ArrayList();
             cliOptions.add( "-o" );
-            verifier.setCliOptions( cliOptions );
-
-            verifier.executeGoal( "compile" );
+            verifier.executeGoal( "compile", cliOptions );
 
             fail( "Dependency should be missing from local repo, and in offline this should make the project build fail." );
         }
@@ -137,8 +135,6 @@ public class MavenITmng3314OfflineSnapshotsTest
         // Expected outcome: build success
         try
         {
-            verifier.getCliOptions().clear();
-
             verifier.executeGoal( "compile" );
         }
         finally
@@ -162,9 +158,7 @@ public class MavenITmng3314OfflineSnapshotsTest
         {
             List cliOptions = new ArrayList();
             cliOptions.add( "-o" );
-            verifier.setCliOptions( cliOptions );
-
-            verifier.executeGoal( "compile" );
+            verifier.executeGoal( "compile", cliOptions );
         }
         finally
         {

@@ -21,12 +21,10 @@ public class MavenIT0066Test
         Verifier verifier = new Verifier( testDir.getAbsolutePath() );
         List cliOptions = new ArrayList();
         cliOptions.add( "-f other-pom.xml" );
-        verifier.setCliOptions( cliOptions );
-        verifier.executeGoal( "install" );
+        verifier.executeGoal( "install", cliOptions);
         verifier.assertFilePresent( "" );
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
-
     }
 }
 

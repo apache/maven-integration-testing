@@ -23,8 +23,7 @@ public class MavenIT0039Test
         Verifier verifier = new Verifier( testDir.getAbsolutePath() );
         List cliOptions = new ArrayList();
         cliOptions.add( "-r" );
-        verifier.setCliOptions( cliOptions );
-        verifier.executeGoal( "package" );
+        verifier.executeGoal( "package", cliOptions );
         verifier.assertFilePresent( "project/target/maven-it-it0039-p1-1.0.jar" );
         verifier.assertFilePresent( "project2/target/maven-it-it0039-p2-1.0.jar" );
         verifier.verifyErrorFreeLog();

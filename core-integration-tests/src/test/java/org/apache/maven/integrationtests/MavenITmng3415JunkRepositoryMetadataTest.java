@@ -94,8 +94,7 @@ public class MavenITmng3415JunkRepositoryMetadataTest
         cliOptions.add( "-s" );
         cliOptions.add( settings.getPath() );
 
-        verifier.setCliOptions( cliOptions );
-        verifier.executeGoal( "package" );
+        verifier.executeGoal( "package", cliOptions );
 
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
@@ -173,11 +172,7 @@ public class MavenITmng3415JunkRepositoryMetadataTest
         cliOptions.add( "-X" );
         cliOptions.add( "-s" );
         cliOptions.add( settings.getPath() );
-
-        verifier.setCliOptions( cliOptions );
-
-        verifier.executeGoal( "package" );
-
+        verifier.executeGoal( "package", cliOptions );
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
 

@@ -38,22 +38,16 @@ public class MavenITmng3372DirectInvocationOfPlugins
         File settingsFile = new File( testBaseDir, "settings.xml" );
 
         Verifier verifier = new Verifier( plugin.getAbsolutePath() );
-
         verifier.deleteArtifact( "org.apache.maven.its.mng3372", "mng3372-maven-plugin", "1", "jar" );
-
-        verifier.executeGoals( Arrays.asList( new String[]{ "clean", "install" } ) );
-
+        verifier.executeGoal( "clean, install" );
         verifier = new Verifier( project.getAbsolutePath() );
 
         List cliOptions = new ArrayList();
         cliOptions.add( "-s" );
         cliOptions.add( "\"" + settingsFile.getAbsolutePath() + "\"" );
 
-        verifier.setCliOptions( cliOptions );
-        verifier.executeGoal( "mng3372:test" );
-
+        verifier.executeGoal( "mng3372:test", cliOptions );
         verifier.verifyErrorFreeLog();
-
         verifier.resetStreams();
     }
 
@@ -63,17 +57,11 @@ public class MavenITmng3372DirectInvocationOfPlugins
         // The testdir is computed from the location of this
         // file.
         File testBaseDir = ResourceExtractor.simpleExtractResources( getClass(), "/mng-3372-directInvocationOfPlugins/dependency-tree" );
-
         Verifier verifier = new Verifier( testBaseDir.getAbsolutePath() );
-
         List cliOptions = new ArrayList();
         cliOptions.add( "-U" );
-
-        verifier.setCliOptions( cliOptions );
-        verifier.executeGoal( "dependency:tree" );
-
+        verifier.executeGoal( "dependency:tree", cliOptions );
         verifier.verifyErrorFreeLog();
-
         verifier.resetStreams();
     }
 }

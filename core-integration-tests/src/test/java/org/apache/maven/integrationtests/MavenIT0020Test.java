@@ -20,12 +20,10 @@ public class MavenIT0020Test
         File testDir = ResourceExtractor.simpleExtractResources( getClass(), "/it0020" );
         Verifier verifier = new Verifier( testDir.getAbsolutePath() );
         verifier.deleteArtifact( "org.apache.maven.its.plugins", "maven-it-it0020", "1.0-SNAPSHOT", "maven-plugin" );
-        List goals = Arrays.asList( new String[]{"install"} );
-        verifier.executeGoals( goals );
+        verifier.executeGoal( "install" );
 
         verifier = new Verifier( testDir.getAbsolutePath() );        
-        goals = Arrays.asList( new String[]{"org.apache.maven.its.it0020:maven-it-it0020:it0020"} );
-        verifier.executeGoals( goals );
+        verifier.executeGoal( "org.apache.maven.its.it0020:maven-it-it0020:it0020" );
         verifier.assertFilePresent( "target/out.txt" );
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();

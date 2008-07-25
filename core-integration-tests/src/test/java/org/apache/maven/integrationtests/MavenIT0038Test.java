@@ -22,8 +22,7 @@ public class MavenIT0038Test
         Verifier verifier = new Verifier( testDir.getAbsolutePath() );
         List cliOptions = new ArrayList();
         cliOptions.add( "-f project/pom2.xml" );
-        verifier.setCliOptions( cliOptions );
-        verifier.executeGoal( "package" );
+        verifier.executeGoal( "package", cliOptions);
         verifier.assertFilePresent( "project/target/maven-it-it0038-1.0-build2.jar" );
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();

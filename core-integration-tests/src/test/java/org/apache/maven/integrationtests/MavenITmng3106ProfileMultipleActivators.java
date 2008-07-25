@@ -40,9 +40,7 @@ public class MavenITmng3106ProfileMultipleActivators
         List cliOptions = new ArrayList();
         cliOptions.add( "-Dprofile1.on=true" );
 
-        verifier.setCliOptions( cliOptions );
-        verifier.executeGoal( "package" );
-
+        verifier.executeGoal( "package", cliOptions );
         verifier.verifyErrorFreeLog();
         verifier.assertFilePresent( "target/profile1/touch.txt" );
         verifier.assertFilePresent( "target/profile2/touch.txt" );

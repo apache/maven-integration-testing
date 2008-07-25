@@ -22,8 +22,7 @@ public class MavenIT0058Test
         Verifier verifier = new Verifier( testDir.getAbsolutePath() );
         List cliOptions = new ArrayList();
         cliOptions.add( "--settings ./settings.xml" );
-        verifier.setCliOptions( cliOptions );
-        verifier.executeGoal( "package" );
+        verifier.executeGoal( "package", cliOptions );
         verifier.assertFilePresent( "subproject/target/subproject-1.0.jar" );
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();

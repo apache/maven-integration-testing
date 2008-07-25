@@ -42,9 +42,7 @@ public class MavenITmng3221InfiniteForking
 
             List cliOptions = new ArrayList();
             cliOptions.add( "-Psite" );
-            verifier.setCliOptions( cliOptions );
-
-            verifier.executeGoal( "site" );
+            verifier.executeGoal( "site", cliOptions );
             verifier.verifyErrorFreeLog();
         }
         finally
@@ -86,9 +84,7 @@ public class MavenITmng3221InfiniteForking
 
             List cliOptions = new ArrayList();
             cliOptions.add( "-Pplugin" );
-            verifier.setCliOptions( cliOptions );
-
-            verifier.executeGoal( "package" );
+            verifier.executeGoal( "package", cliOptions );
             verifier.verifyErrorFreeLog();
         }
         finally

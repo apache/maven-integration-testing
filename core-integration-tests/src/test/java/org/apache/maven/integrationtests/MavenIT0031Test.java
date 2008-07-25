@@ -1,6 +1,8 @@
 package org.apache.maven.integrationtests;
 
 import org.apache.maven.artifact.versioning.InvalidVersionSpecificationException;
+import org.apache.maven.it.DefaultInvocationRequest;
+import org.apache.maven.it.InvocationRequest;
 import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
@@ -30,18 +32,14 @@ public class MavenIT0031Test
         Verifier verifier = new Verifier( testDir.getAbsolutePath() );
         List cliOptions = new ArrayList();
         cliOptions.add( "--settings settings.xml" );
-        verifier.setCliOptions( cliOptions );
-        Properties systemProperties = new Properties();
-        systemProperties.put( "model", "src/main/mdo/test.mdo" );
-        systemProperties.put( "version", "1.0.0" );
-        verifier.setSystemProperties( systemProperties );
-        Properties verifierProperties = new Properties();
-        verifierProperties.put( "failOnErrorOutput", "false" );
-        verifier.setVerifierProperties( verifierProperties );
-        verifier.executeGoal( "modello:java" );
+        
+        InvocationRequest r = new DefaultInvocationRequest()
+            .addSystemProperty( "model", "src/main/mdo/test.mdo" )
+            .addSystemProperty( "version", "1.0.0" )
+            .setGoals( "modello:java" )
+            .addCliOption( "--settings settings.xml" );
+        
         verifier.assertFilePresent( "target/generated-sources/modello/org/apache/maven/it/it0031/Root.java" );
-        // don't verify error free log
         verifier.resetStreams();
-
     }
 }

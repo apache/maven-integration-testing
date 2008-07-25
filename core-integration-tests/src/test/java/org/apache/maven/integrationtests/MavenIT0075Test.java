@@ -23,14 +23,11 @@ public class MavenIT0075Test
         Verifier verifier = new Verifier( testDir.getAbsolutePath() );
         List cliOptions = new ArrayList();
         cliOptions.add( "-Dactivate=anything" );
-        verifier.setCliOptions( cliOptions );
-        List goals = Arrays.asList( new String[]{"help:active-profiles", "package", "eclipse:eclipse", "clean:clean"} );
-        verifier.executeGoals( goals );
+        verifier.executeGoal( "help:active-profiles, package, eclipse:eclipse, clean:clean", cliOptions );
         verifier.assertFileNotPresent( "sub1/target/maven-it-it0075-sub1-1.0.jar" );
         verifier.assertFileNotPresent( "sub2/target/maven-it-it0075-sub2-1.0.jar" );
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
-
     }
 }
 

@@ -19,15 +19,10 @@ public class MavenIT0073Test
     {
         File testDir = ResourceExtractor.simpleExtractResources( getClass(), "/it0073" );
         Verifier verifier = new Verifier( testDir.getAbsolutePath() );
-        verifier.deleteArtifact( "org.apache.maven.its.plugins", "maven-it-plugin-context-passing", "1.0",
-                                 "maven-plugin" );
-        List goals = Arrays.asList( new String[]{"org.apache.maven.its.plugins:maven-it-plugin-context-passing:throw",
-            "org.apache.maven.its.plugins:maven-it-plugin-context-passing:catch"} );
-        verifier.executeGoals( goals );
+        verifier.deleteArtifact( "org.apache.maven.its.plugins", "maven-it-plugin-context-passing", "1.0", "maven-plugin" );
+        verifier.executeGoal( "org.apache.maven.its.plugins:maven-it-plugin-context-passing:throw, org.apache.maven.its.plugins:maven-it-plugin-context-passing:catch" );
         verifier.assertFilePresent( "target/thrown-value" );
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
-
     }
 }
-

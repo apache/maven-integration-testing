@@ -21,12 +21,10 @@ public class MavenIT0105Test
         Verifier verifier = new Verifier( testDir.getAbsolutePath() );
         List cliOptions = new ArrayList();
         cliOptions.add( "-Dparam=PARAM" );
-        verifier.setCliOptions( cliOptions );
-        verifier.executeGoal( "test" );
+        verifier.executeGoal( "test", cliOptions );
         verifier.assertFilePresent( "target/classes/test.properties" );
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
-
     }
 }
 

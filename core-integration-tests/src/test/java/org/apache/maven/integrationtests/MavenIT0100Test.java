@@ -19,23 +19,12 @@ public class MavenIT0100Test
     {
         File testDir = ResourceExtractor.simpleExtractResources( getClass(), "/it0100" );
         File child = new File( testDir, "parent/child" );
-
         Verifier verifier = new Verifier( child.getAbsolutePath() );
-
         List options = new ArrayList();
         options.add( "-Doutput=\"" + new File( child, "target/effective-pom.txt" ).getAbsolutePath() + "\"" );
-
-        verifier.setCliOptions( options );
-
-        List goals = new ArrayList();
-        goals.add( "org.apache.maven.plugins:maven-help-plugin:2.0.2:effective-pom" );
-        goals.add( "verify" );
-
-        verifier.executeGoals( goals );
-
+        verifier.executeGoal( "org.apache.maven.plugins:maven-help-plugin:2.0.2:effective-pom, verify", options );
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
-
     }
 }
 

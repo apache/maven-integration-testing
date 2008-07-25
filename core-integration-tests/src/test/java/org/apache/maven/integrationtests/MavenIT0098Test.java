@@ -24,8 +24,7 @@ public class MavenIT0098Test
         Verifier verifier = new Verifier( testDir.getAbsolutePath() );
         List cliOptions = new ArrayList();
         cliOptions.add( "-Dtest.property=\"Test Property\"" );
-        verifier.setCliOptions( cliOptions );
-        verifier.executeGoal( "test" );
+        verifier.executeGoal( "test", cliOptions );
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
 

@@ -21,14 +21,10 @@ public class MavenIT0059Test
     {
         File testDir = ResourceExtractor.simpleExtractResources( getClass(), "/it0059" );
         Verifier verifier = new Verifier( testDir.getAbsolutePath() );
-        Properties verifierProperties = new Properties();
-        verifierProperties.put( "failOnErrorOutput", "false" );
-        verifier.setVerifierProperties( verifierProperties );
         verifier.executeGoal( "package" );
         verifier.assertFilePresent( "target/maven-it-it0059-1.0.jar" );
         // don't verify error free log
         verifier.resetStreams();
-
     }
 }
 

@@ -1,6 +1,8 @@
 package org.apache.maven.integrationtests;
 
 import org.apache.maven.artifact.versioning.InvalidVersionSpecificationException;
+import org.apache.maven.it.DefaultInvocationRequest;
+import org.apache.maven.it.InvocationRequest;
 import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
@@ -24,11 +26,13 @@ public class MavenIT0026Test
     {
         File testDir = ResourceExtractor.simpleExtractResources( getClass(), "/it0026" );
         Verifier verifier = new Verifier( testDir.getAbsolutePath() );
-        Properties systemProperties = new Properties();
-        systemProperties.put( "org.apache.maven.user-settings", "user-settings.xml" );
-        systemProperties.put( "org.apache.maven.global-settings", "global-settings.xml" );
-        verifier.setSystemProperties( systemProperties );
-        verifier.executeGoal( "org.apache.maven.its.plugins:maven-it-plugin-touch:touch" );
+        
+        InvocationRequest r = new DefaultInvocationRequest()
+            .addSystemProperty( "org.apache.maven.user-settings", "user-settings.xml" )
+            .addSystemProperty( "org.apache.maven.global-settings", "global-settings.xml" )
+            .setGoals( "org.apache.maven.its.plugins:maven-it-plugin-touch:touch" );
+        
+        verifier.invoke(  r );
         verifier.assertFilePresent( "target/test.txt" );
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();

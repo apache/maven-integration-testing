@@ -83,10 +83,7 @@ public class MavenITmng3482DependencyPomInterpolationTest
 
         cliOptions.add( "-s" );
         cliOptions.add( "\"" + settings.getAbsolutePath() + "\"" );
-
-        verifier.setCliOptions( cliOptions );
-
-        verifier.executeGoal( "compile" );
+        verifier.executeGoal( "compile", cliOptions );
 
         /*
          * This is the simplest way to check a build

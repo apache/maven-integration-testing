@@ -1,22 +1,18 @@
 package org.apache.maven.integrationtests;
 
 /*
- * Licensed to the Apache Software Foundation (ASF) under one
- * or more contributor license agreements.  See the NOTICE file
- * distributed with this work for additional information
- * regarding copyright ownership.  The ASF licenses this file
- * to you under the Apache License, Version 2.0 (the
- * "License"); you may not use this file except in compliance
- * with the License.  You may obtain a copy of the License at
- *
- *  http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing,
- * software distributed under the License is distributed on an
- * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
- * KIND, either express or implied.  See the License for the
- * specific language governing permissions and limitations
- * under the License.
+ * Licensed to the Apache Software Foundation (ASF) under one or more contributor license
+ * agreements. See the NOTICE file distributed with this work for additional information regarding
+ * copyright ownership. The ASF licenses this file to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance with the License. You may obtain a
+ * copy of the License at
+ * 
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed under the License
+ * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
+ * or implied. See the License for the specific language governing permissions and limitations under
+ * the License.
  */
 
 import org.apache.maven.it.VerificationException;
@@ -36,6 +32,7 @@ public class IntegrationTestSuite
         throws VerificationException
     {
         Verifier verifier = null;
+
         try
         {
             verifier = new Verifier( "" );
@@ -43,8 +40,7 @@ public class IntegrationTestSuite
 
             String executable = verifier.getExecutable();
 
-            out.println( "Running integration tests for Maven " + mavenVersion + "\n\tusing Maven executable: " +
-                executable );
+            out.println( "Running integration tests for Maven '" + mavenVersion + "'\n\tusing Maven executable: " + executable );
 
             System.setProperty( "maven.version", mavenVersion );
         }
@@ -234,33 +230,26 @@ public class IntegrationTestSuite
         // ----------------------------------------------------------------------------------------------------
         // Tests that need to be fixed.
         // ----------------------------------------------------------------------------------------------------
-
         // Pending resolution in code
         // suite.addTestSuite( MavenITmng3391ImportScopeErrorScenariosTest.class );
         // suite.addTestSuite( MavenITmng3284UsingCachedPluginsTest.class );
         // suite.addTestSuite( MavenITmng3530DynamicPOMInterpolationTest.class );
-
         // Test 18 always fails because it is trying to delete a
         // commonly used artifact (commons-logging-1.0.3) that is in use
         // in the repo. It should be redone using fake artifacts.
         // suite.addTestSuite( MavenIT0018Test.class );
-
         // this test is flakey on windows and isn't a test of the core.
         // suite.addTestSuite( MavenIT0020Test.class );
-
         // -- not passing for 2.0.7 either, looks to be 2.1+ ?
         // suite.addTestSuite( MavenIT0120EjbClientDependency.class );
-
         // suite.addTestSuite( MavenIT0108SnapshotUpdateTest.class ); -- MNG-3137
         // suite.addTestSuite( MavenIT0121TransitiveDepManVersion.class ); -- MNG-3038
         // suite.addTestSuite( MavenIT0122ReactorDependencyResolutionTest.class ); -- MNG-3023
         // suite.addTestSuite( MavenIT0123SnapshotRangeRepositoryTest.class ); -- MNG-2994
         // suite.addTestSuite( MavenIT0124PomExtensionComponentOverrideTest.class ); -- MNG-2771
-
         // suite.addTestSuite( MavenIT0126TestJarDependency.class ); // MJAR-75 / MNG-3160
         // suite.addTestSuite(MavenIT0091Test.class); // MNG-3160
         // suite.addTestSuite(MavenIT0106Test.class); // MNG-3160
-
         return suite;
     }
 }

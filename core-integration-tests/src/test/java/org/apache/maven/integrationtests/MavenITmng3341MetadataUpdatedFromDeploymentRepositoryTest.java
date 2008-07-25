@@ -40,8 +40,7 @@ public class MavenITmng3341MetadataUpdatedFromDeploymentRepositoryTest
         List cliOptions = new ArrayList();
         cliOptions.add( "-s" );
         cliOptions.add( "settings.xml" );
-        verifier.setCliOptions( cliOptions );
-        verifier.executeGoal( "deploy" );
+        verifier.executeGoal( "deploy", cliOptions );
 
         verifier.verifyErrorFreeLog();
 

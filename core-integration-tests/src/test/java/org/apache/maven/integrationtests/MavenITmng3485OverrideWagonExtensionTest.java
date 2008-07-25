@@ -21,18 +21,12 @@ public class MavenITmng3485OverrideWagonExtensionTest
         throws Exception
     {
         File testDir = ResourceExtractor.simpleExtractResources( getClass(), "/mng-3485-overrideWagonExtension" );
-
         Verifier verifier;
-
         verifier = new Verifier( testDir.getAbsolutePath() );
-
         List cliOptions = new ArrayList();
-        verifier.setCliOptions( cliOptions );
-        verifier.executeGoal( "deploy" );
-
+        verifier.executeGoal( "deploy", cliOptions );
         verifier.assertFilePresent( "target/wagon-data" );
         verifier.verifyErrorFreeLog();
-
         verifier.resetStreams();
     }
 }

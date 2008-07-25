@@ -17,17 +17,12 @@ public class MavenITmng3535SelfReferentialProperties extends AbstractMavenIntegr
 	}
 
     public void testitMNG3535() throws Exception {
-        File testDir = ResourceExtractor.simpleExtractResources(getClass(),
-                "/mng-3535-selfReferentialProperties");
+        File testDir = ResourceExtractor.simpleExtractResources(getClass(), "/mng-3535-selfReferentialProperties");
         Verifier verifier = new Verifier(testDir.getAbsolutePath());
-
         List opts = new ArrayList();
         opts.add( "-X" );
-        verifier.setCliOptions( opts );
-
         verifier.setAutoclean( false );
-        verifier.executeGoal("verify");
-
+        verifier.executeGoal("verify", opts );
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
     }

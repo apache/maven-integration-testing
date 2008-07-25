@@ -59,8 +59,7 @@ public class MavenITmng3052DepRepoAggregationTest
     public void testitMNG3052 ()
         throws Exception
     {
-        File testDir = ResourceExtractor.simpleExtractResources( getClass(),
-                                                                 "/mng-3052depRepoAggregation" )
+        File testDir = ResourceExtractor.simpleExtractResources( getClass(), "/mng-3052depRepoAggregation" )
                                         .getCanonicalFile();
 
         File foo = new File( testDir, "foo" );
@@ -90,8 +89,7 @@ public class MavenITmng3052DepRepoAggregationTest
         // This one is a transitive dependency, and will be deployed to a
         // repository that is NOT listed in the main project's POM (wombat).
         verifier = new Verifier( foo.getAbsolutePath() );
-        verifier.setCliOptions( cliOptions );
-        verifier.executeGoal( "deploy" );
+        verifier.executeGoal( "deploy", cliOptions );
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
 
@@ -100,8 +98,7 @@ public class MavenITmng3052DepRepoAggregationTest
         // repository entry that should enable resolution of the transitive
         // dependency it lists (foo, above).
         verifier = new Verifier( bar.getAbsolutePath() );
-        verifier.setCliOptions( cliOptions );
-        verifier.executeGoal( "deploy" );
+        verifier.executeGoal( "deploy", cliOptions );
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
 
@@ -116,8 +113,7 @@ public class MavenITmng3052DepRepoAggregationTest
         // repositories declared in the bar POM to find the transitive dependency
         // (foo, top).
         verifier = new Verifier( wombat.getAbsolutePath() );
-        verifier.setCliOptions( cliOptions );
-        verifier.executeGoal( "package" );
+        verifier.executeGoal( "package", cliOptions );
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
     }

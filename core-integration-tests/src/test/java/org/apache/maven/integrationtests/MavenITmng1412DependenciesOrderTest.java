@@ -33,13 +33,8 @@ public class MavenITmng1412DependenciesOrderTest
 
         List cliOptions = new ArrayList();
         cliOptions.add( "-X" );
-
-        verifier.setCliOptions( cliOptions );
-
-        verifier.executeGoal( "test" );
-
+        verifier.executeGoal( "test", cliOptions );
         verifier.verifyErrorFreeLog();
-
         verifier.resetStreams();
     }
 }

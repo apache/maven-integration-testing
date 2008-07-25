@@ -36,10 +36,7 @@ public class MavenITmng3545ProfileDeactivation
         verifier = new Verifier( testDir.getAbsolutePath() );
 
         List cliOptions = new ArrayList();
-
-        verifier.setCliOptions( cliOptions );
-        verifier.executeGoal( "package" );
-
+        verifier.executeGoal( "package", cliOptions );
         verifier.verifyErrorFreeLog();
         // profile 1 and 2 are active by default
         verifier.assertFilePresent( "target/profile1/touch.txt" );
@@ -69,10 +66,7 @@ public class MavenITmng3545ProfileDeactivation
         // Deactivate active by default profiles
         cliOptions.add( "-P-profile1" );
         cliOptions.add( "-P -profile2" );
-
-        verifier.setCliOptions( cliOptions );
-        verifier.executeGoal( "package" );
-
+        verifier.executeGoal( "package", cliOptions );
         verifier.verifyErrorFreeLog();
         verifier.assertFileNotPresent( "target/profile1/touch.txt" );
         verifier.assertFileNotPresent( "target/profile2/touch.txt" );
@@ -93,11 +87,8 @@ public class MavenITmng3545ProfileDeactivation
     
         // Deactivate active by default profiles
         cliOptions.add( "-P!profile1" );
-        cliOptions.add( "-P !profile2" );
-    
-        verifier.setCliOptions( cliOptions );
-        verifier.executeGoal( "package" );
-    
+        cliOptions.add( "-P !profile2" );    
+        verifier.executeGoal( "package", cliOptions );
         verifier.verifyErrorFreeLog();
         verifier.assertFileNotPresent( "target/profile1/touch.txt" );
         verifier.assertFileNotPresent( "target/profile2/touch.txt" );
@@ -125,10 +116,7 @@ public class MavenITmng3545ProfileDeactivation
         // Activate with a prop, then deactivate
         cliOptions.add( "-Dprofile3-active-by-property=true" );
         cliOptions.add( "-P-profile3" );
-
-        verifier.setCliOptions( cliOptions );
-        verifier.executeGoal( "package" );
-
+        verifier.executeGoal( "package", cliOptions );
         verifier.verifyErrorFreeLog();
         verifier.assertFilePresent( "target/profile1/touch.txt" );
         verifier.assertFilePresent( "target/profile2/touch.txt" );
@@ -158,10 +146,7 @@ public class MavenITmng3545ProfileDeactivation
         // Activate then deactivate
         cliOptions.add( "-Pprofile4" );
         cliOptions.add( "-P-profile4" );
-
-        verifier.setCliOptions( cliOptions );
-        verifier.executeGoal( "package" );
-
+        verifier.executeGoal( "package", cliOptions );
         verifier.verifyErrorFreeLog();
         verifier.assertFilePresent( "target/profile1/touch.txt" );
         verifier.assertFilePresent( "target/profile2/touch.txt" );
@@ -190,10 +175,7 @@ public class MavenITmng3545ProfileDeactivation
 
         // Activate
         cliOptions.add( "-Pprofile4" );
-
-        verifier.setCliOptions( cliOptions );
-        verifier.executeGoal( "package" );
-
+        verifier.executeGoal( "package", cliOptions );
         verifier.verifyErrorFreeLog();
         verifier.assertFileNotPresent( "target/profile1/touch.txt" );
         verifier.assertFileNotPresent( "target/profile2/touch.txt" );

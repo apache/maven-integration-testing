@@ -23,11 +23,9 @@ public class MavenIT0107Test
         File testDir = ResourceExtractor.simpleExtractResources( getClass(), "/it0107" );
         Verifier verifier = new Verifier( testDir.getAbsolutePath() );
         List cliOptions = new ArrayList();
-        verifier.setCliOptions( cliOptions );
-        verifier.executeGoal( "validate" );
+        verifier.executeGoal( "validate", cliOptions );
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
-
     }
 }
 

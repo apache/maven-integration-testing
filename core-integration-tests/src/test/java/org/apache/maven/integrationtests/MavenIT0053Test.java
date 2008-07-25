@@ -23,8 +23,7 @@ public class MavenIT0053Test
         Verifier verifier = new Verifier( testDir.getAbsolutePath() );
         List cliOptions = new ArrayList();
         cliOptions.add( "--no-plugin-registry" );
-        verifier.setCliOptions( cliOptions );
-        verifier.executeGoal( "package" );
+        verifier.executeGoal( "package", cliOptions );
         verifier.assertFilePresent( "target/maven-it-it0053-1.0-SNAPSHOT.jar" );
         verifier.assertFileNotPresent( "target/maven-it-it0053-1.0-SNAPSHOT-sources.jar" );
         verifier.verifyErrorFreeLog();

@@ -23,8 +23,7 @@ public class MavenIT0046Test
         verifier.deleteArtifact( "org.apache.maven.plugins", "maven-it-it-plugin", "1.0", "maven-plugin" );
         List cliOptions = new ArrayList();
         cliOptions.add( "--no-plugin-registry --fail-never" );
-        verifier.setCliOptions( cliOptions );
-        verifier.executeGoal( "org.apache.maven.its.plugins:maven-it-plugin-touch:touch" );
+        verifier.executeGoal( "org.apache.maven.its.plugins:maven-it-plugin-touch:touch", cliOptions );
         verifier.assertFilePresent( "target/touch.txt" );
         verifier.assertFileNotPresent( "subproject/target/touch.txt" );
         verifier.assertFilePresent( "subproject2/target/touch.txt" );

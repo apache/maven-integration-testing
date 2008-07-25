@@ -21,8 +21,7 @@ public class MavenIT0069Test
         Verifier verifier = new Verifier( testDir.getAbsolutePath() );
         List cliOptions = new ArrayList();
         cliOptions.add( "-o" );
-        verifier.setCliOptions( cliOptions );
-        verifier.executeGoal( "compile" );
+        verifier.executeGoal( "compile", cliOptions );
         verifier.assertFilePresent( "target/classes/org/apache/maven/it0069/ClassworldBasedThing.class" );
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();

@@ -1,5 +1,7 @@
 package org.apache.maven.integrationtests;
 
+import org.apache.maven.it.DefaultInvocationRequest;
+import org.apache.maven.it.InvocationRequest;
 import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
@@ -20,10 +22,12 @@ public class MavenIT0021Test
         File testDir = ResourceExtractor.simpleExtractResources( getClass(), "/it0021" );
         Verifier verifier = new Verifier( testDir.getAbsolutePath() );
         verifier.deleteArtifact( "org.apache.maven", "maven-core-it-support", "1.0", "jar" );
-        Properties systemProperties = new Properties();
-        systemProperties.put( "includeProfile", "true" );
-        verifier.setSystemProperties( systemProperties );
-        verifier.executeGoal( "compile" );
+        
+        InvocationRequest r = new DefaultInvocationRequest()
+            .addSystemProperty( "includeProfile", "true" )
+            .setGoals( "compile" );
+        
+        verifier.invoke( r );
         verifier.assertArtifactPresent( "org.apache.maven", "maven-core-it-support", "1.0", "jar" );
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();

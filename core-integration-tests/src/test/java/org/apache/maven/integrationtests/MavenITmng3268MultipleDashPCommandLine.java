@@ -30,9 +30,7 @@ public class MavenITmng3268MultipleDashPCommandLine
         cliOptions.add( "-Pprofile1,profile2" );
         cliOptions.add( "-Pprofile3" );
         cliOptions.add( "-P profile4" );
-        verifier.setCliOptions( cliOptions );
-        verifier.executeGoal( "package" );
-
+        verifier.executeGoal( "package", cliOptions );
         verifier.verifyErrorFreeLog();
         verifier.assertFilePresent( "target/profile1/touch.txt" );
         verifier.assertFilePresent( "target/profile2/touch.txt" );

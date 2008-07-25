@@ -19,14 +19,9 @@ public class MavenIT0068Test
         File testDir = ResourceExtractor.simpleExtractResources( getClass(), "/it0068" );
         Verifier verifier = new Verifier( testDir.getAbsolutePath() );
         verifier.deleteArtifact( "org.codehaus.modello", "modello-core", "1.0-alpha-3", "jar" );
-        Properties verifierProperties = new Properties();
-        verifierProperties.put( "failOnErrorOutput", "false" );
-        verifier.setVerifierProperties( verifierProperties );
         verifier.executeGoal( "generate-sources" );
         verifier.assertFilePresent( "target/generated-sources/modello/org/apache/maven/settings/Settings.java" );
-// don't verify error free log
         verifier.resetStreams();
-
     }
 }
 

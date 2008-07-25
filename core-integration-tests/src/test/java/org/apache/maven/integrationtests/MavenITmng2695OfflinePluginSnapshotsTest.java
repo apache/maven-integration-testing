@@ -108,10 +108,7 @@ public class MavenITmng2695OfflinePluginSnapshotsTest
         {
             List cliOptions = new ArrayList();
             cliOptions.add( "-o" );
-            verifier.setCliOptions( cliOptions );
-
-            verifier.executeGoal( "compile" );
-
+            verifier.executeGoal( "compile", cliOptions );
             fail( "Plugin should be missing from local repo, and in offline this should make the project build fail." );
         }
         catch( VerificationException e )
@@ -137,8 +134,6 @@ public class MavenITmng2695OfflinePluginSnapshotsTest
         // Expected outcome: build success
         try
         {
-            verifier.getCliOptions().clear();
-
             verifier.executeGoal( "compile" );
         }
         finally
@@ -162,9 +157,7 @@ public class MavenITmng2695OfflinePluginSnapshotsTest
         {
             List cliOptions = new ArrayList();
             cliOptions.add( "-o" );
-            verifier.setCliOptions( cliOptions );
-
-            verifier.executeGoal( "compile" );
+            verifier.executeGoal( "compile", cliOptions );
         }
         finally
         {

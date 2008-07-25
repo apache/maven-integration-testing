@@ -27,8 +27,7 @@ public class MavenIT0051Test
         Verifier verifier = new Verifier( testDir.getAbsolutePath() );
         List cliOptions = new ArrayList();
         cliOptions.add( "--no-plugin-registry -DperformRelease=true" );
-        verifier.setCliOptions( cliOptions );
-        verifier.executeGoal( "package" );
+        verifier.executeGoal( "package", cliOptions );
         verifier.assertFilePresent( "target/maven-it-it0051-1.0.jar" );
         verifier.assertFilePresent( "target/maven-it-it0051-1.0-sources.jar" );
         verifier.verifyErrorFreeLog();

@@ -14,25 +14,14 @@ public class MavenITmng3259DepsDroppedInMultiModuleBuild
         throws Exception
     {
         File testDir = ResourceExtractor.simpleExtractResources( getClass(), "/mng-3259-depsDroppedInMultiModuleBuild" );
-
         Verifier verifier;
-
         verifier = new Verifier( new File( testDir, "parent" ).getAbsolutePath() );
-
         List cliOptions = new ArrayList();
-
-        verifier.setCliOptions( cliOptions );
-
-        verifier.executeGoal( "install" );
-
+        verifier.executeGoal( "install", cliOptions );
         verifier.verifyErrorFreeLog();
-
         verifier.resetStreams();
-
         verifier = new Verifier( testDir.getAbsolutePath() );
-
         verifier.executeGoal( "install" );
-
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
     }

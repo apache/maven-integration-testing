@@ -21,17 +21,12 @@ public class MavenITmng2234ActiveProfilesFromSettingsTest
         throws Exception
     {
         File testDir = ResourceExtractor.simpleExtractResources( getClass(), "/mng-2234-activeProfilesFromSettings" );
-
         Verifier verifier;
-
         verifier = new Verifier( testDir.getAbsolutePath() );
-
         List cliOptions = new ArrayList();
         cliOptions.add( "-s" );
         cliOptions.add( "settings.xml" );
-        verifier.setCliOptions( cliOptions );
-        verifier.executeGoal( "install" );
-
+        verifier.executeGoal( "install", cliOptions );
         verifier.verifyErrorFreeLog();
         verifier.assertFilePresent( "target/touch.txt" );
         verifier.resetStreams();

@@ -38,9 +38,7 @@ public class MavenITmng3394POMPluginVersionDominanceTest
 
         verifier = new Verifier( testDir.getAbsolutePath() );
 
-        verifier.setCliOptions( Collections.singletonList( "-X" ) );
-
-        verifier.executeGoal( "install" );
+        verifier.executeGoal( "install", Collections.singletonList( "-X" ) );
 
         /*
          * This is the simplest way to check a build

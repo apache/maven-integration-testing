@@ -38,20 +38,12 @@ public class MavenITmng3355TranslatedPathInterpolationTest
     public void testitMNG3355()
         throws Exception
     {
-        File testDir = ResourceExtractor.simpleExtractResources( getClass(),
-                                                                 "/mng-3355" );
-
-        Verifier verifier;
-
-        verifier = new Verifier( testDir.getAbsolutePath() );
-
+        File testDir = ResourceExtractor.simpleExtractResources( getClass(), "/mng-3355" );
+        Verifier verifier = new Verifier( testDir.getAbsolutePath() );
         List cliOptions = new ArrayList();
         cliOptions.add( "-Dversion=foo" );
-        verifier.setCliOptions( cliOptions );
-        verifier.executeGoal( "validate" );
-
+        verifier.executeGoal( "validate", cliOptions );
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
     }
-
 }

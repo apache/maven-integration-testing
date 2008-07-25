@@ -61,10 +61,8 @@ public class MavenITmng3099SettingsProfilesWithNoPOM
         cliOptions.add( "-s" );
         cliOptions.add( "\"" + new File( testDir, "settings.xml" ).getAbsolutePath() + "\"" );
 
-        verifier.setCliOptions( cliOptions );
-
         verifier.setAutoclean( false );
-        verifier.executeGoal( "org.apache.maven.its.mng3099:maven-mng3099-plugin:1:profile-props" );
+        verifier.executeGoal( "org.apache.maven.its.mng3099:maven-mng3099-plugin:1:profile-props", cliOptions );
 
 
         List lines = verifier.loadFile( new File( testDir, "log.txt" ), false );

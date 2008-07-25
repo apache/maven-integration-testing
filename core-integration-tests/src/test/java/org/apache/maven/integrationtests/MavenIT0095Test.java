@@ -20,22 +20,12 @@ public class MavenIT0095Test
         // TODO: This is WRONG! Need to run only sub1 to effective-pom, then run all to verify.
         File testDir = ResourceExtractor.simpleExtractResources( getClass(), "/it0095" );
         File sub1 = new File( testDir, "sub1" );
-
         Verifier verifier = new Verifier( sub1.getAbsolutePath() );
-
         List options = new ArrayList();
         options.add( "-Doutput=\"" + new File( sub1, "target/effective-pom.xml" ).getAbsolutePath() + "\"" );
-
-        verifier.setCliOptions( options );
-
-        List goals = new ArrayList();
-        goals.add( "org.apache.maven.plugins:maven-help-plugin:2.0.2:effective-pom" );
-        goals.add( "verify" );
-
-        verifier.executeGoals( goals );
+        verifier.executeGoal( "org.apache.maven.plugins:maven-help-plugin:2.0.2:effective-pom, verify", options );
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
-
     }
 }
 

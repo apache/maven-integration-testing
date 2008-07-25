@@ -22,8 +22,7 @@ public class MavenIT0067Test
         verifier.deleteArtifact( "org.apache.maven", "maven-core-it-support", "1.0", "jar" );
         List cliOptions = new ArrayList();
         cliOptions.add( "-P test-profile" );
-        verifier.setCliOptions( cliOptions );
-        verifier.executeGoal( "compile" );
+        verifier.executeGoal( "compile", cliOptions );
         verifier.assertFilePresent( "target/classes/org/apache/maven/it0067/Person.class" );
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();

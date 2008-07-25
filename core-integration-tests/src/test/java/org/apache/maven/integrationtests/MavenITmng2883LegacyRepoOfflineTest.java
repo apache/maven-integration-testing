@@ -57,14 +57,11 @@ public class MavenITmng2883LegacyRepoOfflineTest
         // used to inject the remote repository
         cliOptions.add( "-s" );
         cliOptions.add( settings.getAbsolutePath() );
-
-        verifier.setCliOptions( cliOptions );
-
         // execute once just to make sure this test works at all!
         try
         {
             // this will ensure that all relevant plugins are present.
-            verifier.executeGoal( "initialize" );
+            verifier.executeGoal( "initialize", cliOptions );
         }
         catch ( VerificationException e )
         {
@@ -73,8 +70,6 @@ public class MavenITmng2883LegacyRepoOfflineTest
 
         // the centerpiece of these tests!
         cliOptions.add( "-o" );
-
-        verifier.setCliOptions( cliOptions );
         verifier.setAutoclean( false );
 
         // clear out the parent POM if it's in the local repository.
@@ -82,7 +77,7 @@ public class MavenITmng2883LegacyRepoOfflineTest
 
         try
         {
-            verifier.executeGoal( "initialize" );
+            verifier.executeGoal( "initialize", cliOptions );
 
             fail( "Build should fail with unresolvable parent POM." );
         }
@@ -149,14 +144,11 @@ public class MavenITmng2883LegacyRepoOfflineTest
         // used to inject the remote repository
         cliOptions.add( "-s" );
         cliOptions.add( settings.getAbsolutePath() );
-
-        verifier.setCliOptions( cliOptions );
-
         // execute once just to make sure this test works at all!
         try
         {
             // this will ensure that all relevant plugins are present.
-            verifier.executeGoal( "compile" );
+            verifier.executeGoal( "compile", cliOptions );
         }
         catch ( VerificationException e )
         {
@@ -166,15 +158,13 @@ public class MavenITmng2883LegacyRepoOfflineTest
         // the centerpiece of these tests!
         cliOptions.add( "-o" );
 
-        verifier.setCliOptions( cliOptions );
-
         // clear out the dependency if it's in the local repository.
         verifier.deleteArtifact( "org.apache.maven.its.mng2883", "dep", "1.0-SNAPSHOT", "pom" );
         verifier.deleteArtifact( "org.apache.maven.its.mng2883", "dep", "1.0-SNAPSHOT", "jar" );
 
         try
         {
-            verifier.executeGoal( "compile" );
+            verifier.executeGoal( "compile", cliOptions );
 
             fail( "Build should fail with unresolvable dependency artifact." );
         }
@@ -247,15 +237,13 @@ public class MavenITmng2883LegacyRepoOfflineTest
         cliOptions.add( "-s" );
         cliOptions.add( settings.getAbsolutePath() );
 
-        verifier.setCliOptions( cliOptions );
-
         // clear out the dependency if it's in the local repository.
         verifier.deleteArtifact( "org.apache.maven.its.mng2883", "plugin", "1.0-SNAPSHOT", "pom" );
         verifier.deleteArtifact( "org.apache.maven.its.mng2883", "plugin", "1.0-SNAPSHOT", "jar" );
 
         try
         {
-            verifier.executeGoal( "org.apache.maven.its.mng2883:plugin:1.0-SNAPSHOT:run" );
+            verifier.executeGoal( "org.apache.maven.its.mng2883:plugin:1.0-SNAPSHOT:run", cliOptions );
 
             fail( "Build should fail with unresolvable plugin artifact." );
         }

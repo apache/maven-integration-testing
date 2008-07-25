@@ -22,8 +22,7 @@ public class MavenIT0045Test
         verifier.deleteArtifact( "org.apache.maven.its.plugins", "maven-it-plugin-no-project", "1.0", "maven-plugin" );
         List cliOptions = new ArrayList();
         cliOptions.add( "--no-plugin-registry" );
-        verifier.setCliOptions( cliOptions );
-        verifier.executeGoal( "org.apache.maven.its.plugins:maven-it-plugin-no-project:light-touch" );
+        verifier.executeGoal( "org.apache.maven.its.plugins:maven-it-plugin-no-project:light-touch", cliOptions );
         verifier.assertFilePresent( "target/touch.txt" );
         verifier.assertFileNotPresent( "subproject/target/touch.txt" );
         verifier.verifyErrorFreeLog();

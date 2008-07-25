@@ -54,10 +54,7 @@ public class MavenITmng3426PluginsClasspathOverrideTest
         Verifier verifier = new Verifier( testDir.getAbsolutePath() );
         List cliOptions = new ArrayList();
         cliOptions.add( "-X" );
-
-        verifier.setCliOptions( cliOptions );
-
-        verifier.executeGoal( "org.codehaus.mojo:castor-maven-plugin:generate" );
+        verifier.executeGoal( "org.codehaus.mojo:castor-maven-plugin:generate", cliOptions );
         verifier.verifyErrorFreeLog();
 
         // The generated file header contains the castor version used for code generation

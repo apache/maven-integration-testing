@@ -23,11 +23,9 @@ public class MavenIT0101Test
         Verifier verifier = new Verifier( testDir.getAbsolutePath() );
         List cliOptions = new ArrayList();
         cliOptions.add( "--settings settings.xml" );
-        verifier.setCliOptions( cliOptions );
-        verifier.executeGoal( "compile" );
+        verifier.executeGoal( "compile", cliOptions );
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
-
     }
 }
 

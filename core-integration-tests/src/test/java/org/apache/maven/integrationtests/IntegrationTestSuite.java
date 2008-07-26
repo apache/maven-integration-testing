@@ -71,7 +71,7 @@ public class IntegrationTestSuite
         suite.addTestSuite( MavenITmng3581PluginUsesWagonDependency.class );
         suite.addTestSuite( MavenITmng3545ProfileDeactivation.class );
         suite.addTestSuite( MavenITmng3536AppendedAbsolutePaths.class );
-        suite.addTestSuite( MavenITmng3535SelfReferentialProperties.class );
+        //suite.addTestSuite( MavenITmng3535SelfReferentialProperties.class );
         suite.addTestSuite( MavenITmng3503Xpp3ShadingTest.class );
         suite.addTestSuite( MavenITmng3498ForkToOtherMojoTest.class );
         suite.addTestSuite( MavenITmng3485OverrideWagonExtensionTest.class );

@@ -1,6 +1,8 @@
 package org.apache.maven.integrationtests;
 
 import org.apache.maven.artifact.versioning.InvalidVersionSpecificationException;
+import org.apache.maven.it.DefaultInvocationRequest;
+import org.apache.maven.it.InvocationRequest;
 import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
@@ -10,17 +12,14 @@ import java.util.Iterator;
 import java.util.List;
 
 /**
- * This is a sample integration test. The IT tests typically
- * operate by having a sample project in the
- * /src/test/resources folder along with a junit test like
- * this one. The junit test uses the verifier (which uses
- * the invoker) to invoke a new instance of Maven on the
- * project in the resources folder. It then checks the
- * results. This is a non-trivial example that shows two
+ * This is a sample integration test. The IT tests typically operate by having a sample project in
+ * the /src/test/resources folder along with a junit test like this one. The junit test uses the
+ * verifier (which uses the invoker) to invoke a new instance of Maven on the project in the
+ * resources folder. It then checks the results. This is a non-trivial example that shows two
  * phases. See more information inline in the code.
- *
+ * 
  * @author <a href="mailto:brianf@apache.org">Brian Fox</a>
- *
+ * 
  */
 public class MavenITmng3099SettingsProfilesWithNoPOM
     extends AbstractMavenIntegrationTestCase
@@ -31,7 +30,7 @@ public class MavenITmng3099SettingsProfilesWithNoPOM
         super( "(2.0.8,)" ); // 2.0.9+
     }
 
-    public void testitMNG3099 ()
+    public void testitMNG3099()
         throws Exception
     {
         // The testdir is computed from the location of this
@@ -61,9 +60,12 @@ public class MavenITmng3099SettingsProfilesWithNoPOM
         cliOptions.add( "-s" );
         cliOptions.add( "\"" + new File( testDir, "settings.xml" ).getAbsolutePath() + "\"" );
 
-        verifier.setAutoclean( false );
-        verifier.executeGoal( "org.apache.maven.its.mng3099:maven-mng3099-plugin:1:profile-props", cliOptions );
+        InvocationRequest r = new DefaultInvocationRequest()
+            .setGoals( "org.apache.maven.its.mng3099:maven-mng3099-plugin:1:profile-props" )
+            .setCliOptions( cliOptions )
+            .setAutoclean( false );
 
+        verifier.invoke( r );
 
         List lines = verifier.loadFile( new File( testDir, "log.txt" ), false );
         boolean found = false;

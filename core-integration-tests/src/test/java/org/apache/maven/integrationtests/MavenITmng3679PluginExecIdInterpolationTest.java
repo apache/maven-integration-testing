@@ -18,14 +18,10 @@ public class MavenITmng3679PluginExecIdInterpolationTest
         throws Exception
     {
         File testDir = ResourceExtractor.simpleExtractResources( getClass(), "/mng-3679-pluginExecIdInterpolation" );
-
         Verifier verifier = new Verifier( testDir.getAbsolutePath() );
-
         verifier.executeGoal( "validate" );
-
         verifier.verifyErrorFreeLog();
-        verifier.resetStreams();
-        
+        verifier.resetStreams();       
         assertTrue( new File( testDir, "target/check.txt" ).exists() );
     }
 }

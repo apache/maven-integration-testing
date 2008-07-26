@@ -1,6 +1,8 @@
 package org.apache.maven.integrationtests;
 
 import org.apache.maven.artifact.versioning.InvalidVersionSpecificationException;
+import org.apache.maven.it.DefaultInvocationRequest;
+import org.apache.maven.it.InvocationRequest;
 import org.apache.maven.it.VerificationException;
 import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.IOUtil;
@@ -70,15 +72,20 @@ public class MavenITmng2883LegacyRepoOfflineTest
 
         // the centerpiece of these tests!
         cliOptions.add( "-o" );
-        verifier.setAutoclean( false );
 
+        
         // clear out the parent POM if it's in the local repository.
         verifier.deleteArtifact( "org.apache.maven.its.mng2883", "parent", "1.0-SNAPSHOT", "pom" );
 
         try
         {
-            verifier.executeGoal( "initialize", cliOptions );
+            InvocationRequest r = new DefaultInvocationRequest()
+                .setGoals( "initialize" )
+                .setCliOptions( cliOptions )
+                .setAutoclean( false );
 
+            verifier.invoke( r );
+            
             fail( "Build should fail with unresolvable parent POM." );
         }
         catch ( VerificationException e )

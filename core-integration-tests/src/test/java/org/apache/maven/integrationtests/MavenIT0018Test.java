@@ -21,11 +21,9 @@ public class MavenIT0018Test
         Verifier verifier = new Verifier( testDir.getAbsolutePath() );
         verifier.deleteArtifact( "commons-logging", "commons-logging", "1.0.3", "jar" );
         verifier.executeGoal( "package" );
-// TODO: I would like to build some small core-it artifacts for this purpose instead
         verifier.assertArtifactPresent( "commons-logging", "commons-logging", "1.0.3", "jar" );
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
-
     }
 }
 

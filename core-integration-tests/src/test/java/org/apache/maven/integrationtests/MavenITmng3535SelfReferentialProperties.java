@@ -1,6 +1,8 @@
 package org.apache.maven.integrationtests;
 
 import org.apache.maven.artifact.versioning.InvalidVersionSpecificationException;
+import org.apache.maven.it.DefaultInvocationRequest;
+import org.apache.maven.it.InvocationRequest;
 import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
@@ -21,8 +23,13 @@ public class MavenITmng3535SelfReferentialProperties extends AbstractMavenIntegr
         Verifier verifier = new Verifier(testDir.getAbsolutePath());
         List opts = new ArrayList();
         opts.add( "-X" );
-        verifier.setAutoclean( false );
-        verifier.executeGoal("verify", opts );
+        
+        InvocationRequest r = new DefaultInvocationRequest()
+            .setGoals( "verify" )
+            .setCliOptions( opts )
+            .setAutoclean( false );
+        
+        verifier.invoke( r );        
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
     }

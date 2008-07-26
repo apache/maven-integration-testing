@@ -1,6 +1,8 @@
 package org.apache.maven.integrationtests;
 
 import org.apache.maven.artifact.versioning.InvalidVersionSpecificationException;
+import org.apache.maven.it.DefaultInvocationRequest;
+import org.apache.maven.it.InvocationRequest;
 import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
@@ -10,17 +12,16 @@ import java.util.Iterator;
 import java.util.List;
 
 /**
- * Check that plugin versions in the POM obey the correct order
- * of precedence. Specifically, that mojos in the default lifecycle
- * bindings can find plugin versions in the pluginManagement section
- * when the build/plugins section is missing that plugin, and that
- * plugin versions in build/plugins override those in build/pluginManagement.
+ * Check that plugin versions in the POM obey the correct order of precedence. Specifically, that
+ * mojos in the default lifecycle bindings can find plugin versions in the pluginManagement section
+ * when the build/plugins section is missing that plugin, and that plugin versions in build/plugins
+ * override those in build/pluginManagement.
  */
 public class MavenITmng3394POMPluginVersionDominanceTest
     extends AbstractMavenIntegrationTestCase
 {
 
-	private static final String BASEDIR_PREFIX = "/mng-3394-pomPluginVersionDominance/";
+    private static final String BASEDIR_PREFIX = "/mng-3394-pomPluginVersionDominance/";
 
     public MavenITmng3394POMPluginVersionDominanceTest()
         throws InvalidVersionSpecificationException
@@ -28,7 +29,7 @@ public class MavenITmng3394POMPluginVersionDominanceTest
         super( "(2.0.8,)" ); // only test in 2.0.9+
     }
 
-    public void testitMNG3394a ()
+    public void testitMNG3394a()
         throws Exception
     {
         //testShouldUsePluginVersionFromPluginMgmtForLifecycleMojoWhenNotInBuildPlugins 
@@ -73,7 +74,7 @@ public class MavenITmng3394POMPluginVersionDominanceTest
         assertTrue( "No reference to maven-site-plugin, version 2.0-beta-5 found in build log.", foundSiteBeta5 );
     }
 
-    public void testitMNG3394b ()
+    public void testitMNG3394b()
         throws Exception
     {
         //testShouldPreferPluginVersionFromBuildPluginsOverThatInPluginMgmt
@@ -83,8 +84,11 @@ public class MavenITmng3394POMPluginVersionDominanceTest
 
         verifier = new Verifier( testDir.getAbsolutePath() );
 
-        verifier.setAutoclean( false );
-        verifier.executeGoal( "clean" );
+        InvocationRequest r = new DefaultInvocationRequest()
+            .setGoals( "clean" )
+            .setAutoclean( false );
+
+        verifier.invoke( r );
 
         /*
          * This is the simplest way to check a build

@@ -55,9 +55,8 @@ public class MavenITmng3652UserAgentHeader
         
         List cliOptions = new ArrayList();
         cliOptions.add( "-DtestPort=" + port );
-        verifier.setCliOptions( cliOptions );
         
-        verifier.executeGoal( "validate" );
+        verifier.executeGoal( "validate", cliOptions );
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
         
@@ -83,9 +82,8 @@ public class MavenITmng3652UserAgentHeader
         cliOptions = new ArrayList();
         cliOptions.add( "-DtestPort=" + port );
         cliOptions.add( "-DtestProtocol=dav:http" );
-        verifier.setCliOptions( cliOptions );
         
-        verifier.executeGoal( "validate" );
+        verifier.executeGoal( "validate", cliOptions );
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
         
@@ -99,9 +97,8 @@ public class MavenITmng3652UserAgentHeader
         cliOptions.add( "-DtestPort=" + port );
         cliOptions.add( "--settings" );
         cliOptions.add( "settings-no-config.xml" );
-        verifier.setCliOptions( cliOptions );
         
-        verifier.executeGoal( "validate" );
+        verifier.executeGoal( "validate", cliOptions );
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
         
@@ -115,9 +112,8 @@ public class MavenITmng3652UserAgentHeader
         cliOptions.add( "-DtestPort=" + port );
         cliOptions.add( "--settings" );
         cliOptions.add( "settings.xml" );
-        verifier.setCliOptions( cliOptions );
         
-        verifier.executeGoal( "validate" );
+        verifier.executeGoal( "validate", cliOptions );
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
         

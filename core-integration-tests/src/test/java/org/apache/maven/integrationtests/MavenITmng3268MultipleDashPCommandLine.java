@@ -1,12 +1,11 @@
 package org.apache.maven.integrationtests;
 
-import org.apache.maven.artifact.versioning.InvalidVersionSpecificationException;
-import org.apache.maven.it.Verifier;
-import org.apache.maven.it.util.ResourceExtractor;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.apache.maven.artifact.versioning.InvalidVersionSpecificationException;
+import org.apache.maven.it.IntegrationTestRunner;
 
 public class MavenITmng3268MultipleDashPCommandLine
     extends AbstractMavenIntegrationTestCase
@@ -20,11 +19,11 @@ public class MavenITmng3268MultipleDashPCommandLine
     public void testMultipleProfileParams ()
         throws Exception
     {
-        File testDir = ResourceExtractor.simpleExtractResources( getClass(), "/mng-3268-MultipleDashPCommandLine" );
+        File testDir = extractTestResources( getClass(), "/mng-3268-MultipleDashPCommandLine" );
 
-        Verifier verifier;
+        IntegrationTestRunner verifier;
 
-        verifier = new Verifier( testDir.getAbsolutePath() );
+        verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
 
         List cliOptions = new ArrayList();
         cliOptions.add( "-Pprofile1,profile2" );

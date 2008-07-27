@@ -1,9 +1,8 @@
 package org.apache.maven.integrationtests;
 
-import org.apache.maven.it.Verifier;
-import org.apache.maven.it.util.ResourceExtractor;
-
 import java.io.File;
+
+import org.apache.maven.it.IntegrationTestRunner;
 
 public class MavenIT0079Test
     extends AbstractMavenIntegrationTestCase
@@ -16,8 +15,8 @@ public class MavenIT0079Test
     public void testit0079()
         throws Exception
     {
-        File testDir = ResourceExtractor.simpleExtractResources( getClass(), "/it0079" );
-        Verifier verifier = new Verifier( testDir.getAbsolutePath() );
+        File testDir = extractTestResources( getClass(), "/it0079" );
+        IntegrationTestRunner verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
         verifier.executeGoal( "deploy" );
         verifier.assertFilePresent(
             "target/test-repo/org/apache/maven/its/it0079/maven-it-it0079/SNAPSHOT/maven-it-it0079-*-1.jar" );

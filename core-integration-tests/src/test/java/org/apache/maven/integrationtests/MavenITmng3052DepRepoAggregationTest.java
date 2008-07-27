@@ -19,19 +19,18 @@
 
 package org.apache.maven.integrationtests;
 
-import org.apache.maven.artifact.versioning.InvalidVersionSpecificationException;
-import org.apache.maven.it.Verifier;
-import org.apache.maven.it.util.FileUtils;
-import org.apache.maven.it.util.IOUtil;
-import org.apache.maven.it.util.ResourceExtractor;
-import org.apache.maven.it.util.StringUtils;
-
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.apache.maven.artifact.versioning.InvalidVersionSpecificationException;
+import org.apache.maven.it.IntegrationTestRunner;
+import org.codehaus.plexus.util.FileUtils;
+import org.codehaus.plexus.util.IOUtil;
+import org.codehaus.plexus.util.StringUtils;
 
 /**
  * This is a test set for <a href="http://jira.codehaus.org/browse/MNG-3052">MNG-3052</a>.
@@ -59,7 +58,7 @@ public class MavenITmng3052DepRepoAggregationTest
     public void testitMNG3052 ()
         throws Exception
     {
-        File testDir = ResourceExtractor.simpleExtractResources( getClass(), "/mng-3052depRepoAggregation" )
+        File testDir = extractTestResources( getClass(), "/mng-3052depRepoAggregation" )
                                         .getCanonicalFile();
 
         File foo = new File( testDir, "foo" );
@@ -82,13 +81,13 @@ public class MavenITmng3052DepRepoAggregationTest
         List cliOptions = new ArrayList();
         cliOptions.add( "-X" );
 
-        Verifier verifier;
+        IntegrationTestRunner verifier;
 
         // First, build the two levels of dependencies that will be resolved.
 
         // This one is a transitive dependency, and will be deployed to a
         // repository that is NOT listed in the main project's POM (wombat).
-        verifier = new Verifier( foo.getAbsolutePath() );
+        verifier = new IntegrationTestRunner( foo.getAbsolutePath() );
         verifier.executeGoal( "deploy", cliOptions );
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
@@ -97,7 +96,7 @@ public class MavenITmng3052DepRepoAggregationTest
         // that IS listed in the main project's POM (wombat). It lists its own
         // repository entry that should enable resolution of the transitive
         // dependency it lists (foo, above).
-        verifier = new Verifier( bar.getAbsolutePath() );
+        verifier = new IntegrationTestRunner( bar.getAbsolutePath() );
         verifier.executeGoal( "deploy", cliOptions );
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
@@ -112,7 +111,7 @@ public class MavenITmng3052DepRepoAggregationTest
         // project (above) was deployed. It should be able to use the
         // repositories declared in the bar POM to find the transitive dependency
         // (foo, top).
-        verifier = new Verifier( wombat.getAbsolutePath() );
+        verifier = new IntegrationTestRunner( wombat.getAbsolutePath() );
         verifier.executeGoal( "package", cliOptions );
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();

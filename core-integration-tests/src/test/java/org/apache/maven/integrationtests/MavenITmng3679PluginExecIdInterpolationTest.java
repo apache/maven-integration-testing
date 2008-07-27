@@ -2,8 +2,7 @@ package org.apache.maven.integrationtests;
 
 import java.io.File;
 
-import org.apache.maven.it.Verifier;
-import org.apache.maven.it.util.ResourceExtractor;
+import org.apache.maven.it.IntegrationTestRunner;
 
 /**
  * Checks that a plugin execution with an id that contains an expression will 
@@ -17,8 +16,8 @@ public class MavenITmng3679PluginExecIdInterpolationTest
     public void testitMNG3679 ()
         throws Exception
     {
-        File testDir = ResourceExtractor.simpleExtractResources( getClass(), "/mng-3679-pluginExecIdInterpolation" );
-        Verifier verifier = new Verifier( testDir.getAbsolutePath() );
+        File testDir = extractTestResources( getClass(), "/mng-3679-pluginExecIdInterpolation" );
+        IntegrationTestRunner verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
         verifier.executeGoal( "validate" );
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();       

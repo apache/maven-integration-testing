@@ -1,9 +1,8 @@
 package org.apache.maven.integrationtests;
 
-import org.apache.maven.it.Verifier;
-import org.apache.maven.it.util.ResourceExtractor;
-
 import java.io.File;
+
+import org.apache.maven.it.IntegrationTestRunner;
 
 /**
  * #it0106 MNG-2318 not yet fixed
@@ -18,8 +17,8 @@ public class MavenIT0106Test
     public void testit0106()
         throws Exception
     {
-        File testDir = ResourceExtractor.simpleExtractResources( getClass(), "/it0106" );
-        Verifier verifier = new Verifier( testDir.getAbsolutePath() );
+        File testDir = extractTestResources( getClass(), "/it0106" );
+        IntegrationTestRunner verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
         verifier.executeGoal( "clean" );
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();

@@ -19,15 +19,14 @@
 
 package org.apache.maven.integrationtests;
 
-import org.apache.maven.artifact.versioning.InvalidVersionSpecificationException;
-import org.apache.maven.it.VerificationException;
-import org.apache.maven.it.Verifier;
-import org.apache.maven.it.util.FileUtils;
-import org.apache.maven.it.util.ResourceExtractor;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.apache.maven.artifact.versioning.InvalidVersionSpecificationException;
+import org.apache.maven.it.IntegrationTestException;
+import org.apache.maven.it.IntegrationTestRunner;
+import org.codehaus.plexus.util.FileUtils;
 
 /**
  * This is a test set for <a href="http://jira.codehaus.org/browse/MNG-3314">MNG-3314</a>.
@@ -75,11 +74,11 @@ public class MavenITmng3314OfflineSnapshotsTest
     public void testitMNG3314 ()
         throws Exception
     {
-        File testParentDir = ResourceExtractor.simpleExtractResources( getClass(), "/mng-3314-offlineSnapshots" );
+        File testParentDir = extractTestResources( getClass(), "/mng-3314-offlineSnapshots" );
 
         File testDep = new File( testParentDir, "dep" );
 
-        Verifier verifier = new Verifier( testDep.getAbsolutePath() );
+        IntegrationTestRunner verifier = new IntegrationTestRunner( testDep.getAbsolutePath() );
 
         // Deploy the dependency to the test repository.
         verifier.executeGoal( "deploy" );
@@ -97,7 +96,7 @@ public class MavenITmng3314OfflineSnapshotsTest
 
         File testProject = new File( testParentDir, "project" );
 
-        verifier = new Verifier( testProject.getAbsolutePath() );
+        verifier = new IntegrationTestRunner( testProject.getAbsolutePath() );
 
         // Conditions for this build:
         // 1. dependency is NOT in local repository
@@ -112,7 +111,7 @@ public class MavenITmng3314OfflineSnapshotsTest
 
             fail( "Dependency should be missing from local repo, and in offline this should make the project build fail." );
         }
-        catch( VerificationException e )
+        catch( IntegrationTestException e )
         {
             // should fail.
         }

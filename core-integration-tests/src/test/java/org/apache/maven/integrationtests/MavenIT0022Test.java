@@ -3,9 +3,8 @@ package org.apache.maven.integrationtests;
 import java.io.File;
 
 import org.apache.maven.it.DefaultInvocationRequest;
+import org.apache.maven.it.IntegrationTestRunner;
 import org.apache.maven.it.InvocationRequest;
-import org.apache.maven.it.Verifier;
-import org.apache.maven.it.util.ResourceExtractor;
 
 public class MavenIT0022Test
     extends AbstractMavenIntegrationTestCase
@@ -17,8 +16,8 @@ public class MavenIT0022Test
     public void testit0022()
         throws Exception
     {
-        File testDir = ResourceExtractor.simpleExtractResources( getClass(), "/it0022" );
-        Verifier verifier = new Verifier( testDir.getAbsolutePath() );
+        File testDir = extractTestResources( getClass(), "/it0022" );
+        IntegrationTestRunner verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
         
         InvocationRequest r = new DefaultInvocationRequest()
             .addSystemProperty( "includeProfile", "true" )

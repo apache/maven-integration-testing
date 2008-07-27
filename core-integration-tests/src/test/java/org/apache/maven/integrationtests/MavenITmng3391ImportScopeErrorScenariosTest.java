@@ -1,10 +1,9 @@
 package org.apache.maven.integrationtests;
 
-import org.apache.maven.artifact.versioning.InvalidVersionSpecificationException;
-import org.apache.maven.it.Verifier;
-import org.apache.maven.it.util.ResourceExtractor;
-
 import java.io.File;
+
+import org.apache.maven.artifact.versioning.InvalidVersionSpecificationException;
+import org.apache.maven.it.IntegrationTestRunner;
 
 public class MavenITmng3391ImportScopeErrorScenariosTest
     extends AbstractMavenIntegrationTestCase
@@ -18,10 +17,10 @@ public class MavenITmng3391ImportScopeErrorScenariosTest
     public void testitMNG3391a()
         throws Exception
     {
-        File testDir = ResourceExtractor.simpleExtractResources( getClass(),
+        File testDir = extractTestResources( getClass(),
                                                                  "/mng-3391-importScopeErrorScenarios/depMgmt-importPom-noParentCycle" );
 
-        Verifier verifier = new Verifier( testDir.getAbsolutePath() );
+        IntegrationTestRunner verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
 
         verifier.deleteArtifact( "org.apache.maven.its.mng3391.2", "dm-pom", "1", "pom" );
 
@@ -35,14 +34,14 @@ public class MavenITmng3391ImportScopeErrorScenariosTest
     public void testitMNG3391b()
         throws Exception
     {
-        File testDir = ResourceExtractor.simpleExtractResources( getClass(),
+        File testDir = extractTestResources( getClass(),
                                                                  "/mng-3391-importScopeErrorScenarios/depMgmt-importPom-noParentCycle" );
 
-        Verifier verifier = new Verifier( testDir.getAbsolutePath() );
+        IntegrationTestRunner verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
 
         verifier.deleteArtifact( "org.apache.maven.its.mng3391.2", "dm-pom", "1", "pom" );
 
-        Verifier v2 = new Verifier( new File( testDir, "dm-pom" ).getAbsolutePath() );
+        IntegrationTestRunner v2 = new IntegrationTestRunner( new File( testDir, "dm-pom" ).getAbsolutePath() );
         v2.executeGoal( "install" );
         v2.verifyErrorFreeLog();
         v2.resetStreams();
@@ -55,10 +54,10 @@ public class MavenITmng3391ImportScopeErrorScenariosTest
     public void testitMNG3391c()
         throws Exception
     {
-        File testDir = ResourceExtractor.simpleExtractResources( getClass(),
+        File testDir = extractTestResources( getClass(),
                                                                  "/mng-3391-importScopeErrorScenarios/depMgmt-importPom-parentCycle" );
 
-        Verifier verifier = new Verifier( testDir.getAbsolutePath() );
+        IntegrationTestRunner verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
 
         verifier.deleteArtifact( "org.apache.maven.its.mng3391.1", "dm-pom", "1", "pom" );
 
@@ -72,10 +71,10 @@ public class MavenITmng3391ImportScopeErrorScenariosTest
     public void testitMNG3391d()
         throws Exception
     {
-        File testDir = ResourceExtractor.simpleExtractResources( getClass(),
+        File testDir = extractTestResources( getClass(),
                                                                  "/mng-3391-importScopeErrorScenarios/depMgmt-importPom-parentCycle" );
 
-        Verifier verifier = new Verifier( new File( testDir, "dm-pom" ).getAbsolutePath() );
+        IntegrationTestRunner verifier = new IntegrationTestRunner( new File( testDir, "dm-pom" ).getAbsolutePath() );
         verifier.executeGoal( "install" );
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();

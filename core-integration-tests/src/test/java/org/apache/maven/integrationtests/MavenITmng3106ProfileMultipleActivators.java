@@ -5,8 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.maven.artifact.versioning.InvalidVersionSpecificationException;
-import org.apache.maven.it.Verifier;
-import org.apache.maven.it.util.ResourceExtractor;
+import org.apache.maven.it.IntegrationTestRunner;
 
 /**
  * Test that profiles with multiple activators are activated 
@@ -31,11 +30,11 @@ public class MavenITmng3106ProfileMultipleActivators
     public void testProfilesWithMultipleActivators()
         throws Exception
     {
-        File testDir = ResourceExtractor.simpleExtractResources( getClass(), "/mng-3106-ProfileMultipleActivators" );
+        File testDir = extractTestResources( getClass(), "/mng-3106-ProfileMultipleActivators" );
 
-        Verifier verifier;
+        IntegrationTestRunner verifier;
 
-        verifier = new Verifier( testDir.getAbsolutePath() );
+        verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
 
         List cliOptions = new ArrayList();
         cliOptions.add( "-Dprofile1.on=true" );

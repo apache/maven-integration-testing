@@ -19,14 +19,11 @@ package org.apache.maven.integrationtests;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
-import org.apache.maven.it.util.FileUtils;
-import org.apache.maven.it.util.ResourceExtractor;
-
 import java.io.File;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
+
+import org.apache.maven.it.IntegrationTestRunner;
+import org.codehaus.plexus.util.FileUtils;
 
 /**
  * Test to verify that a release can be updated.
@@ -49,8 +46,8 @@ public class MavenIT0109ReleaseUpdateTest
     public void testReleaseUpdated()
         throws Exception
     {
-        File testDir = ResourceExtractor.simpleExtractResources( getClass(), "/it0109-releaseUpdate" );
-        Verifier verifier = new Verifier( testDir.getAbsolutePath() );
+        File testDir = extractTestResources( getClass(), "/it0109-releaseUpdate" );
+        IntegrationTestRunner verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
         verifier.deleteArtifact( GROUPID, ARTIFACTID, OLD_VERSION, TYPE );
         verifier.deleteArtifact( GROUPID, ARTIFACTID, OLD_VERSION, POM_TYPE );
         verifier.deleteArtifact( GROUPID, ARTIFACTID, NEW_VERSION, TYPE );

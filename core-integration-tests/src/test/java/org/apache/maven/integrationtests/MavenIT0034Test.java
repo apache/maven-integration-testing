@@ -1,9 +1,8 @@
 package org.apache.maven.integrationtests;
 
-import org.apache.maven.it.Verifier;
-import org.apache.maven.it.util.ResourceExtractor;
-
 import java.io.File;
+
+import org.apache.maven.it.IntegrationTestRunner;
 
 public class MavenIT0034Test
     extends AbstractMavenIntegrationTestCase
@@ -15,8 +14,8 @@ public class MavenIT0034Test
     public void testit0034()
         throws Exception
     {
-        File testDir = ResourceExtractor.simpleExtractResources( getClass(), "/it0034" );
-        Verifier verifier = new Verifier( testDir.getAbsolutePath() );
+        File testDir = extractTestResources( getClass(), "/it0034" );
+        IntegrationTestRunner verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
         verifier.deleteArtifact( "org.apache.maven", "maven-core-it-support", "1.4", "jar" );
         verifier.deleteArtifact( "junit", "junit", "3.8", "jar" );
         verifier.executeGoal( "package" );

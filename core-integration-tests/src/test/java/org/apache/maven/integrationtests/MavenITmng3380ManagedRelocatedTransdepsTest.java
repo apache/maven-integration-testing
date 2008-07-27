@@ -1,10 +1,9 @@
 package org.apache.maven.integrationtests;
 
-import org.apache.maven.artifact.versioning.InvalidVersionSpecificationException;
-import org.apache.maven.it.Verifier;
-import org.apache.maven.it.util.ResourceExtractor;
-
 import java.io.File;
+
+import org.apache.maven.artifact.versioning.InvalidVersionSpecificationException;
+import org.apache.maven.it.IntegrationTestRunner;
 
 /**
  * expected project.getArtifacts() results:
@@ -31,9 +30,9 @@ public class MavenITmng3380ManagedRelocatedTransdepsTest
     {
 
         // compute test directory
-        File testDir = ResourceExtractor.simpleExtractResources( getClass(), "/mng-3380-managedRelocatedTransdeps" );
+        File testDir = extractTestResources( getClass(), "/mng-3380-managedRelocatedTransdeps" );
 
-        Verifier verifier = new Verifier( testDir.getAbsolutePath() );
+        IntegrationTestRunner verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
 
         deleteArtifacts( verifier );
 
@@ -42,7 +41,7 @@ public class MavenITmng3380ManagedRelocatedTransdepsTest
         String path = testDir.getAbsolutePath() //
             + "/consumer";
 
-        verifier = new Verifier( path );
+        verifier = new IntegrationTestRunner( path );
         verifier.executeGoal( "package" );
 
         // verify no errors so far
@@ -56,41 +55,41 @@ public class MavenITmng3380ManagedRelocatedTransdepsTest
         // install projects
         String path = testDir.getAbsolutePath() //
             + "/other-c";
-        Verifier verifier = new Verifier( path );
+        IntegrationTestRunner verifier = new IntegrationTestRunner( path );
         verifier.executeGoal( "install" );
 
         path = testDir.getAbsolutePath() //
             + "/other-b";
-        verifier = new Verifier( path );
+        verifier = new IntegrationTestRunner( path );
         verifier.executeGoal( "install" );
 
         path = testDir.getAbsolutePath() //
             + "/other-a";
-        verifier = new Verifier( path );
+        verifier = new IntegrationTestRunner( path );
         verifier.executeGoal( "install" );
 
         path = testDir.getAbsolutePath() //
             + "/transdep-old";
-        verifier = new Verifier( path );
+        verifier = new IntegrationTestRunner( path );
         verifier.executeGoal( "install" );
 
         path = testDir.getAbsolutePath() //
             + "/transdep-new-1";
-        verifier = new Verifier( path );
+        verifier = new IntegrationTestRunner( path );
         verifier.executeGoal( "install" );
 
         path = testDir.getAbsolutePath() //
             + "/transdep-new-2";
-        verifier = new Verifier( path );
+        verifier = new IntegrationTestRunner( path );
         verifier.executeGoal( "install" );
 
         path = testDir.getAbsolutePath() //
             + "/direct-dep";
-        verifier = new Verifier( path );
+        verifier = new IntegrationTestRunner( path );
         verifier.executeGoal( "install" );
     }
 
-    private void deleteArtifacts( Verifier verifier )
+    private void deleteArtifacts( IntegrationTestRunner verifier )
         throws Exception
     {
         // delete projects

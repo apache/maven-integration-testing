@@ -7,8 +7,7 @@ import java.util.List;
 import junit.framework.Assert;
 
 import org.apache.maven.artifact.versioning.InvalidVersionSpecificationException;
-import org.apache.maven.it.Verifier;
-import org.apache.maven.it.util.ResourceExtractor;
+import org.apache.maven.it.IntegrationTestRunner;
 
 /**
  * Integration test to check MNG-3284 - that explicitly defined plugins are used, not the one that is cached.
@@ -28,14 +27,14 @@ public class MavenITmng3284UsingCachedPluginsTest
 
         // The testdir is computed from the location of this
         // file.
-        File testDir = ResourceExtractor.simpleExtractResources( getClass(), "/mng3284-usingCachedPlugins" );
+        File testDir = extractTestResources( getClass(), "/mng3284-usingCachedPlugins" );
 
-        Verifier verifier;
+        IntegrationTestRunner verifier;
 
         /*
          * Build Mojo v1
          */
-        verifier = new Verifier( new File( testDir.getAbsolutePath(), "mojo" ).getAbsolutePath() );
+        verifier = new IntegrationTestRunner( new File( testDir.getAbsolutePath(), "mojo" ).getAbsolutePath() );
         verifier.executeGoal( "install" );
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
@@ -43,7 +42,7 @@ public class MavenITmng3284UsingCachedPluginsTest
         /*
          * Build Mojo v2
          */
-        verifier = new Verifier( new File( testDir.getAbsolutePath(), "mojo2" ).getAbsolutePath() );
+        verifier = new IntegrationTestRunner( new File( testDir.getAbsolutePath(), "mojo2" ).getAbsolutePath() );
         verifier.executeGoal( "install" );
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
@@ -51,7 +50,7 @@ public class MavenITmng3284UsingCachedPluginsTest
         /*
          * Run the simple build
          */
-        verifier = new Verifier( testDir.getAbsolutePath() );
+        verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
         verifier.executeGoal( "install" );
         verifier.verifyErrorFreeLog();
 

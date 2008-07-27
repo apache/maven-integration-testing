@@ -5,9 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.maven.artifact.versioning.InvalidVersionSpecificationException;
-import org.apache.maven.integrationtests.AbstractMavenIntegrationTestCase;
-import org.apache.maven.it.Verifier;
-import org.apache.maven.it.util.ResourceExtractor;
+import org.apache.maven.it.IntegrationTestRunner;
 
 
 public class MavenITmng2123VersionRangeDependencyTest
@@ -27,9 +25,9 @@ public class MavenITmng2123VersionRangeDependencyTest
 
         // The testdir is computed from the location of this
         // file.
-        File testDir = ResourceExtractor.simpleExtractResources( getClass(), "/mng-2123-npe-with-conflicting-ranges" );
+        File testDir = extractTestResources( getClass(), "/mng-2123-npe-with-conflicting-ranges" );
 
-        Verifier verifier;
+        IntegrationTestRunner verifier;
 
         /*
          * We must first make sure that any artifact created
@@ -38,7 +36,7 @@ public class MavenITmng2123VersionRangeDependencyTest
          * unstable test results. Fortunately, the verifier
          * makes it easy to do this.
          */
-        verifier = new Verifier( testDir.getAbsolutePath() );
+        verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
         verifier.deleteArtifact( "org.apache.maven.its.mng2123", "parent", "1.0", "pom" );
         verifier.deleteArtifact( "org.apache.maven.its.mng2123", "artifact-combined", "1.0", "jar" );
         verifier.deleteArtifact( "org.apache.maven.its.mng2123", "artifact-fix", "1.0", "jar" );
@@ -76,7 +74,7 @@ public class MavenITmng2123VersionRangeDependencyTest
         /*
          * Build the artifact with a fix version of commons-collections
          */
-        verifier = new Verifier( new File( testDir.getAbsolutePath(), "artifact-fix" ).getAbsolutePath() );
+        verifier = new IntegrationTestRunner( new File( testDir.getAbsolutePath(), "artifact-fix" ).getAbsolutePath() );
         verifier.executeGoal( "install" );
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
@@ -84,7 +82,7 @@ public class MavenITmng2123VersionRangeDependencyTest
         /*
          * Build the artifact with a version range of commons-collections
          */
-        verifier = new Verifier( new File( testDir.getAbsolutePath(), "artifact-range" ).getAbsolutePath() );
+        verifier = new IntegrationTestRunner( new File( testDir.getAbsolutePath(), "artifact-range" ).getAbsolutePath() );
         verifier.executeGoal( "install" );
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
@@ -95,7 +93,7 @@ public class MavenITmng2123VersionRangeDependencyTest
          * artifact that uses the artifacts above.
          * On any version >= 2.0.9 it should work
          */
-        verifier = new Verifier( new File( testDir.getAbsolutePath(), "artifact-combined" ).getAbsolutePath() );
+        verifier = new IntegrationTestRunner( new File( testDir.getAbsolutePath(), "artifact-combined" ).getAbsolutePath() );
         verifier.executeGoal( "install" );
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();

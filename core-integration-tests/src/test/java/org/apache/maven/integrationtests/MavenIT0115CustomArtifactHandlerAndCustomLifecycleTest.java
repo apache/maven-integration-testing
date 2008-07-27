@@ -19,12 +19,9 @@ package org.apache.maven.integrationtests;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
-import org.apache.maven.it.util.ResourceExtractor;
-
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
+
+import org.apache.maven.it.IntegrationTestRunner;
 
 public class MavenIT0115CustomArtifactHandlerAndCustomLifecycleTest
     extends AbstractMavenIntegrationTestCase
@@ -32,24 +29,24 @@ public class MavenIT0115CustomArtifactHandlerAndCustomLifecycleTest
     public void testit0115()
         throws Exception
     {
-        File testDir = ResourceExtractor.simpleExtractResources( getClass(), "/it0115-customArtifactHandlerAndCustomLifecycle" );
+        File testDir = extractTestResources( getClass(), "/it0115-customArtifactHandlerAndCustomLifecycle" );
 
-        Verifier verifier;
+        IntegrationTestRunner verifier;
 
         // Install the parent POM
-        verifier = new Verifier( testDir.getAbsolutePath() );
+        verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
         verifier.deleteArtifact( "org.apache.maven.its.it0115", "test-extension", "1.0-SNAPSHOT", "jar" );
         verifier.deleteArtifact( "org.apache.maven.its.it0115", "test-project", "1.0-SNAPSHOT", "jar" );
 
         // Install the plugin to test for Authz info in the WagonManager
-        verifier = new Verifier( new File( testDir.getAbsolutePath(), "test-extension" ).getAbsolutePath() );
+        verifier = new IntegrationTestRunner( new File( testDir.getAbsolutePath(), "test-extension" ).getAbsolutePath() );
         verifier.executeGoal( "install" );
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
 
         // Build the test project that uses the plugin.
         File testProject = new File( testDir.getAbsolutePath(), "test-project" );
-        verifier = new Verifier( testProject.getAbsolutePath() );
+        verifier = new IntegrationTestRunner( testProject.getAbsolutePath() );
         verifier.executeGoal( "package" );
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();

@@ -1,10 +1,9 @@
 package org.apache.maven.integrationtests;
 
-import org.apache.maven.artifact.versioning.InvalidVersionSpecificationException;
-import org.apache.maven.it.Verifier;
-import org.apache.maven.it.util.ResourceExtractor;
-
 import java.io.File;
+
+import org.apache.maven.artifact.versioning.InvalidVersionSpecificationException;
+import org.apache.maven.it.IntegrationTestRunner;
 
 public class MavenITmng3581PluginUsesWagonDependency
     extends AbstractMavenIntegrationTestCase
@@ -22,16 +21,16 @@ public class MavenITmng3581PluginUsesWagonDependency
     public void testmng3581()
         throws Exception
     {
-        File testDir = ResourceExtractor.simpleExtractResources( getClass(), "/mng-3581-useWagonDependency" );
+        File testDir = extractTestResources( getClass(), "/mng-3581-useWagonDependency" );
         File pluginDir = new File( testDir, "plugin" );
         File projectDir = new File( testDir, "project" );
 
-        Verifier verifier = new Verifier( pluginDir.getAbsolutePath() );
+        IntegrationTestRunner verifier = new IntegrationTestRunner( pluginDir.getAbsolutePath() );
         verifier.executeGoal( "install" );
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
 
-        verifier = new Verifier( projectDir.getAbsolutePath() );
+        verifier = new IntegrationTestRunner( projectDir.getAbsolutePath() );
         verifier.executeGoal( "validate" );
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();

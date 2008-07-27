@@ -1,17 +1,13 @@
 package org.apache.maven.integrationtests;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
 import junit.framework.Assert;
 
 import org.apache.maven.artifact.versioning.InvalidVersionSpecificationException;
-import org.apache.maven.integrationtests.AbstractMavenIntegrationTestCase;
-import org.apache.maven.it.Verifier;
-import org.apache.maven.it.util.FileUtils;
-import org.apache.maven.it.util.ResourceExtractor;
+import org.apache.maven.it.IntegrationTestRunner;
 
 public class MavenITmng2972OverridePluginDependency
     extends AbstractMavenIntegrationTestCase
@@ -28,33 +24,33 @@ public class MavenITmng2972OverridePluginDependency
 
         // The testdir is computed from the location of this
         // file.
-        File testDir = ResourceExtractor.simpleExtractResources( getClass(), "/mng2972-overridingPluginDependency" );
+        File testDir = extractTestResources( getClass(), "/mng2972-overridingPluginDependency" );
 
-        Verifier verifier;
+        IntegrationTestRunner verifier;
 
         /*
          * We must first make sure that any artifact created by this test has been removed from the local repository.
          * Failing to do this could cause unstable test results. Fortunately, the verifier makes it easy to do this.
          */
-        verifier = new Verifier( testDir.getAbsolutePath() );
+        verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
         verifier.deleteArtifact( "org.apache.maven.its.mng2972", "user", "1.0", "jar" );
         verifier.deleteArtifact( "org.apache.maven.its.mng2972", "mojo", "0.0.1-SNAPSHOT", "jar" );
         verifier.deleteArtifact( "org.apache.maven.its.mng2972", "dep", "1.0", "jar" );
         verifier.deleteArtifact( "org.apache.maven.its.mng2972", "dep", "2.0", "jar" );
 
-        verifier = new Verifier( new File( testDir.getAbsolutePath(), "dep1" ).getAbsolutePath() );
+        verifier = new IntegrationTestRunner( new File( testDir.getAbsolutePath(), "dep1" ).getAbsolutePath() );
         verifier.executeGoal( "install" );
         verifier.verifyErrorFreeLog();
 
-        verifier = new Verifier( new File( testDir.getAbsolutePath(), "dep2" ).getAbsolutePath() );
+        verifier = new IntegrationTestRunner( new File( testDir.getAbsolutePath(), "dep2" ).getAbsolutePath() );
         verifier.executeGoal( "install" );
         verifier.verifyErrorFreeLog();
 
-        verifier = new Verifier( new File( testDir.getAbsolutePath(), "mojo" ).getAbsolutePath() );
+        verifier = new IntegrationTestRunner( new File( testDir.getAbsolutePath(), "mojo" ).getAbsolutePath() );
         verifier.executeGoal( "install" );
         verifier.verifyErrorFreeLog();
 
-        verifier = new Verifier( new File( testDir.getAbsolutePath(), "user" ).getAbsolutePath() );
+        verifier = new IntegrationTestRunner( new File( testDir.getAbsolutePath(), "user" ).getAbsolutePath() );
         verifier.executeGoal( "validate" );
         verifier.verifyErrorFreeLog();
 
@@ -81,7 +77,7 @@ public class MavenITmng2972OverridePluginDependency
          * Now try to execute the plugin directly
          */
 
-        verifier = new Verifier( new File( testDir.getAbsolutePath(), "user" ).getAbsolutePath() );
+        verifier = new IntegrationTestRunner( new File( testDir.getAbsolutePath(), "user" ).getAbsolutePath() );
         verifier.executeGoal( "org.apache.maven.its.mng2972:mojo:0.0.1-SNAPSHOT:test" );
         verifier.verifyErrorFreeLog();
 

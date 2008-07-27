@@ -1,14 +1,5 @@
 package org.apache.maven.integrationtests;
 
-import org.apache.maven.artifact.versioning.InvalidVersionSpecificationException;
-import org.apache.maven.it.DefaultInvocationRequest;
-import org.apache.maven.it.InvocationRequest;
-import org.apache.maven.it.VerificationException;
-import org.apache.maven.it.Verifier;
-import org.apache.maven.it.util.IOUtil;
-import org.apache.maven.it.util.ResourceExtractor;
-import org.apache.maven.it.util.StringUtils;
-
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -18,6 +9,14 @@ import java.io.Writer;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+
+import org.apache.maven.artifact.versioning.InvalidVersionSpecificationException;
+import org.apache.maven.it.DefaultInvocationRequest;
+import org.apache.maven.it.IntegrationTestException;
+import org.apache.maven.it.IntegrationTestRunner;
+import org.apache.maven.it.InvocationRequest;
+import org.codehaus.plexus.util.IOUtil;
+import org.codehaus.plexus.util.StringUtils;
 
 /**
  * This is a sample integration test. The IT tests typically
@@ -45,13 +44,13 @@ public class MavenITmng2883LegacyRepoOfflineTest
         throws Exception
     {
         String testName = "parent";
-        File testDir = ResourceExtractor.simpleExtractResources( getClass(),
+        File testDir = extractTestResources( getClass(),
                                                                  "/mng-2883-legacy-repo-offline/"
                                                                                  + testName );
 
-        Verifier verifier;
+        IntegrationTestRunner verifier;
 
-        verifier = new Verifier( testDir.getAbsolutePath() );
+        verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
 
         File settings = writeSettings( testDir );
         List cliOptions = new ArrayList();
@@ -65,9 +64,9 @@ public class MavenITmng2883LegacyRepoOfflineTest
             // this will ensure that all relevant plugins are present.
             verifier.executeGoal( "initialize", cliOptions );
         }
-        catch ( VerificationException e )
+        catch ( IntegrationTestException e )
         {
-            throw new VerificationException( "Build should succeed the first time through when NOT in offline mode!", e );
+            throw new IntegrationTestException( "Build should succeed the first time through when NOT in offline mode!", e );
         }
 
         // the centerpiece of these tests!
@@ -88,7 +87,7 @@ public class MavenITmng2883LegacyRepoOfflineTest
             
             fail( "Build should fail with unresolvable parent POM." );
         }
-        catch ( VerificationException e )
+        catch ( IntegrationTestException e )
         {
         }
 
@@ -136,13 +135,13 @@ public class MavenITmng2883LegacyRepoOfflineTest
         throws Exception
     {
         String testName = "dependency";
-        File testDir = ResourceExtractor.simpleExtractResources( getClass(),
+        File testDir = extractTestResources( getClass(),
                                                                  "/mng-2883-legacy-repo-offline/"
                                                                                  + testName );
 
-        Verifier verifier;
+        IntegrationTestRunner verifier;
 
-        verifier = new Verifier( testDir.getAbsolutePath() );
+        verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
 
         List cliOptions = new ArrayList();
 
@@ -157,9 +156,9 @@ public class MavenITmng2883LegacyRepoOfflineTest
             // this will ensure that all relevant plugins are present.
             verifier.executeGoal( "compile", cliOptions );
         }
-        catch ( VerificationException e )
+        catch ( IntegrationTestException e )
         {
-            throw new VerificationException( "Build should succeed the first time through when NOT in offline mode!", e );
+            throw new IntegrationTestException( "Build should succeed the first time through when NOT in offline mode!", e );
         }
 
         // the centerpiece of these tests!
@@ -175,7 +174,7 @@ public class MavenITmng2883LegacyRepoOfflineTest
 
             fail( "Build should fail with unresolvable dependency artifact." );
         }
-        catch ( VerificationException e )
+        catch ( IntegrationTestException e )
         {
         }
 
@@ -225,13 +224,13 @@ public class MavenITmng2883LegacyRepoOfflineTest
         throws Exception
     {
         String testName = "plugin";
-        File testDir = ResourceExtractor.simpleExtractResources( getClass(),
+        File testDir = extractTestResources( getClass(),
                                                                  "/mng-2883-legacy-repo-offline/"
                                                                                  + testName );
 
-        Verifier verifier;
+        IntegrationTestRunner verifier;
 
-        verifier = new Verifier( testDir.getAbsolutePath() );
+        verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
 
         List cliOptions = new ArrayList();
 
@@ -254,7 +253,7 @@ public class MavenITmng2883LegacyRepoOfflineTest
 
             fail( "Build should fail with unresolvable plugin artifact." );
         }
-        catch ( VerificationException e )
+        catch ( IntegrationTestException e )
         {
         }
 

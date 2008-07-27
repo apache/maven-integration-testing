@@ -1,10 +1,9 @@
 package org.apache.maven.integrationtests;
 
-import org.apache.maven.artifact.versioning.InvalidVersionSpecificationException;
-import org.apache.maven.it.Verifier;
-import org.apache.maven.it.util.ResourceExtractor;
-
 import java.io.File;
+
+import org.apache.maven.artifact.versioning.InvalidVersionSpecificationException;
+import org.apache.maven.it.IntegrationTestRunner;
 
 /**
  * Tests that the PluginDescriptor.getArtifacts() call returns all of the dependencies of the plugin,
@@ -21,9 +20,9 @@ public class MavenITmng3428PluginDescriptorArtifactsIncompleteTest
     public void testitMNG3428 ()
         throws Exception
     {
-        File testDir = ResourceExtractor.simpleExtractResources( getClass(), "/mng-3428-pluginDescriptorArtifactsIncomplete" );
+        File testDir = extractTestResources( getClass(), "/mng-3428-pluginDescriptorArtifactsIncomplete" );
 
-        Verifier verifier = new Verifier( testDir.getAbsolutePath() );
+        IntegrationTestRunner verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
 
         // First, build the plugin we'll use to test the PluginDescriptor artifact collection.
         verifier.executeGoal( "install" );

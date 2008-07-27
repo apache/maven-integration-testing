@@ -5,9 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.maven.artifact.versioning.InvalidVersionSpecificationException;
-import org.apache.maven.integrationtests.AbstractMavenIntegrationTestCase;
-import org.apache.maven.it.Verifier;
-import org.apache.maven.it.util.ResourceExtractor;
+import org.apache.maven.it.IntegrationTestRunner;
 
 /**
  * Test that pom.xml encoding is properly detected.
@@ -29,9 +27,9 @@ public class MavenITmng2254PomEncodingTest
     {
         // The testdir is computed from the location of this
         // file.
-        File testDir = ResourceExtractor.simpleExtractResources( getClass(), "/mng-2254-PomEncoding" );
+        File testDir = extractTestResources( getClass(), "/mng-2254-PomEncoding" );
 
-        Verifier verifier = new Verifier( testDir.getAbsolutePath() );
+        IntegrationTestRunner verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
 
         List cliOptions = new ArrayList();
         cliOptions.add( "-N" );

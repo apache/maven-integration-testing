@@ -14,8 +14,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.apache.maven.artifact.versioning.InvalidVersionSpecificationException;
-import org.apache.maven.it.Verifier;
-import org.apache.maven.it.util.ResourceExtractor;
+import org.apache.maven.it.IntegrationTestRunner;
 
 public class MavenITmng3652UserAgentHeader
     extends AbstractMavenIntegrationTestCase
@@ -35,11 +34,11 @@ public class MavenITmng3652UserAgentHeader
     public void testmng3652()
         throws Exception
     {
-        File testDir = ResourceExtractor.simpleExtractResources( getClass(), "/mng-3652-user-agent" );
+        File testDir = extractTestResources( getClass(), "/mng-3652-user-agent" );
         File pluginDir = new File( testDir, "test-plugin" );
         File projectDir = new File( testDir, "test-project" );
 
-        Verifier verifier = new Verifier( pluginDir.getAbsolutePath() );
+        IntegrationTestRunner verifier = new IntegrationTestRunner( pluginDir.getAbsolutePath() );
         verifier.executeGoal( "install" );
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
@@ -51,7 +50,7 @@ public class MavenITmng3652UserAgentHeader
         t.setDaemon( true );
         t.start();
         
-        verifier = new Verifier( projectDir.getAbsolutePath() );
+        verifier = new IntegrationTestRunner( projectDir.getAbsolutePath() );
         
         List cliOptions = new ArrayList();
         cliOptions.add( "-DtestPort=" + port );

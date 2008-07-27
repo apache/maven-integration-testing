@@ -20,14 +20,10 @@
 package org.apache.maven.integrationtests;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
 
 import org.apache.maven.artifact.versioning.InvalidVersionSpecificationException;
-import org.apache.maven.integrationtests.AbstractMavenIntegrationTestCase;
-import org.apache.maven.it.Verifier;
-import org.apache.maven.it.util.FileUtils;
-import org.apache.maven.it.util.ResourceExtractor;
+import org.apache.maven.it.IntegrationTestRunner;
+import org.codehaus.plexus.util.FileUtils;
 
 /**
  * This is a test set for <a href="http://jira.codehaus.org/browse/MNG-3667">MNG-3667</a>.
@@ -52,11 +48,11 @@ public class MavenITmng3667ResolveDepsWithBadPomVersionTest
     {
         // The testdir is computed from the location of this
         // file.
-        File testDir = ResourceExtractor.simpleExtractResources( getClass(), "/mng-3667-resolveDepsWithBadPomVersion" );
+        File testDir = extractTestResources( getClass(), "/mng-3667-resolveDepsWithBadPomVersion" );
         File repoDir = new File( testDir, "repo" );
         File projectDir = new File( testDir, "project" );
 
-        Verifier verifier;
+        IntegrationTestRunner verifier;
 
         /*
          * We must first make sure that any artifact created
@@ -65,7 +61,7 @@ public class MavenITmng3667ResolveDepsWithBadPomVersionTest
          * unstable test results. Fortunately, the verifier
          * makes it easy to do this.
          */
-        verifier = new Verifier( projectDir.getAbsolutePath() );
+        verifier = new IntegrationTestRunner( projectDir.getAbsolutePath() );
         
         File localRepoDir = new File( verifier.localRepo );
         FileUtils.copyDirectoryStructure( repoDir, localRepoDir );

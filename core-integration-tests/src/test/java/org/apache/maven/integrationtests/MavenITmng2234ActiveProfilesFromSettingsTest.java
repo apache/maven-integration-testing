@@ -1,12 +1,11 @@
 package org.apache.maven.integrationtests;
 
-import org.apache.maven.artifact.versioning.InvalidVersionSpecificationException;
-import org.apache.maven.it.Verifier;
-import org.apache.maven.it.util.ResourceExtractor;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.apache.maven.artifact.versioning.InvalidVersionSpecificationException;
+import org.apache.maven.it.IntegrationTestRunner;
 
 public class MavenITmng2234ActiveProfilesFromSettingsTest
     extends AbstractMavenIntegrationTestCase
@@ -20,9 +19,9 @@ public class MavenITmng2234ActiveProfilesFromSettingsTest
     public void testitMNG2234 ()
         throws Exception
     {
-        File testDir = ResourceExtractor.simpleExtractResources( getClass(), "/mng-2234-activeProfilesFromSettings" );
-        Verifier verifier;
-        verifier = new Verifier( testDir.getAbsolutePath() );
+        File testDir = extractTestResources( getClass(), "/mng-2234-activeProfilesFromSettings" );
+        IntegrationTestRunner verifier;
+        verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
         List cliOptions = new ArrayList();
         cliOptions.add( "-s" );
         cliOptions.add( "settings.xml" );

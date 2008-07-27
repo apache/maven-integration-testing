@@ -1,14 +1,10 @@
 package org.apache.maven.integrationtests;
 
-import org.apache.maven.it.Verifier;
-import org.apache.maven.it.util.ResourceExtractor;
-
-import java.io.File;
+import org.apache.maven.it.IntegrationTestRunner;
 
 public class MavenIT0000Test
     extends AbstractMavenIntegrationTestCase
 {
-
     /**
      * The simplest of builds. We have one application class and one test
      * class. There are no resources, no source generation, no resource
@@ -18,16 +14,14 @@ public class MavenIT0000Test
     public void testit0000()
         throws Exception
     {
-        File testDir = ResourceExtractor.simpleExtractResources( getClass(), "/it0000" );
-        Verifier verifier = new Verifier( testDir.getAbsolutePath() );
-        verifier.executeGoal( "package" );
-        verifier.assertFilePresent( "target/classes/org/apache/maven/it0000/Person.class" );
-        verifier.assertFilePresent( "target/test-classes/org/apache/maven/it0000/PersonTest.class" );
-        verifier.assertFilePresent( "target/maven-it-it0000-1.0.jar" );
-        verifier.assertFilePresent( "target/surefire-reports/org.apache.maven.it0000.PersonTest.txt" );
-        verifier.verifyErrorFreeLog();
-        verifier.resetStreams();
-
+        IntegrationTestRunner itr = createTestRunner( "/it000" );
+        itr.invoke( createInvocationRequest( "package" ) );
+        itr.assertFilePresent( "target/classes/org/apache/maven/it0000/Person.class" );
+        itr.assertFilePresent( "target/test-classes/org/apache/maven/it0000/PersonTest.class" );
+        itr.assertFilePresent( "target/maven-it-it0000-1.0.jar" );
+        itr.assertFilePresent( "target/surefire-reports/org.apache.maven.it0000.PersonTest.txt" );
+        itr.verifyErrorFreeLog();
+        itr.resetStreams();
     }
 }
 

@@ -1,9 +1,8 @@
 package org.apache.maven.integrationtests;
 
-import org.apache.maven.it.Verifier;
-import org.apache.maven.it.util.ResourceExtractor;
-
 import java.io.File;
+
+import org.apache.maven.it.IntegrationTestRunner;
 
 public class MavenIT0018Test
     extends AbstractMavenIntegrationTestCase
@@ -17,8 +16,8 @@ public class MavenIT0018Test
     public void testit0018()
         throws Exception
     {
-        File testDir = ResourceExtractor.simpleExtractResources( getClass(), "/it0018" );
-        Verifier verifier = new Verifier( testDir.getAbsolutePath() );
+        File testDir = extractTestResources( getClass(), "/it0018" );
+        IntegrationTestRunner verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
         verifier.deleteArtifact( "commons-logging", "commons-logging", "1.0.3", "jar" );
         verifier.executeGoal( "package" );
         verifier.assertArtifactPresent( "commons-logging", "commons-logging", "1.0.3", "jar" );

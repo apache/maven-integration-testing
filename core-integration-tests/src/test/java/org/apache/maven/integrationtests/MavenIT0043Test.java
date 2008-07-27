@@ -1,9 +1,8 @@
 package org.apache.maven.integrationtests;
 
-import org.apache.maven.it.Verifier;
-import org.apache.maven.it.util.ResourceExtractor;
-
 import java.io.File;
+
+import org.apache.maven.it.IntegrationTestRunner;
 
 public class MavenIT0043Test
     extends AbstractMavenIntegrationTestCase
@@ -15,10 +14,10 @@ public class MavenIT0043Test
     public void testit0043()
         throws Exception
     {
-        File testDir = ResourceExtractor.simpleExtractResources( getClass(), "/it0043" );
+        File testDir = extractTestResources( getClass(), "/it0043" );
 
         File child1 = new File( testDir, "child1" );
-        Verifier verifier = new Verifier( child1.getAbsolutePath() );
+        IntegrationTestRunner verifier = new IntegrationTestRunner( child1.getAbsolutePath() );
 
         verifier.deleteArtifact( "org.apache.maven.plugins", "maven-help-plugin", "2.0.2", "jar" );
 
@@ -27,7 +26,7 @@ public class MavenIT0043Test
         verifier.resetStreams();
 
         File child2 = new File( testDir, "child2" );
-        verifier = new Verifier( child2.getAbsolutePath() );
+        verifier = new IntegrationTestRunner( child2.getAbsolutePath() );
 
         verifier.executeGoal( "org.apache.maven.plugins:maven-help-plugin:2.0.2:effective-pom" );
         verifier.verifyErrorFreeLog();

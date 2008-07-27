@@ -1,14 +1,12 @@
 package org.apache.maven.integrationtests;
 
-import org.apache.maven.artifact.versioning.InvalidVersionSpecificationException;
-import org.apache.maven.it.VerificationException;
-import org.apache.maven.it.Verifier;
-import org.apache.maven.it.util.ResourceExtractor;
-
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
+
+import org.apache.maven.artifact.versioning.InvalidVersionSpecificationException;
+import org.apache.maven.it.IntegrationTestException;
+import org.apache.maven.it.IntegrationTestRunner;
 
 /**
  * Tests that the PluginDescriptor.getArtifacts() call returns all of the dependencies of the plugin,
@@ -25,9 +23,9 @@ public class MavenITmng3473PluginReportCrash
     public void testitMNG3473 ()
         throws Exception
     {
-        File testDir = ResourceExtractor.simpleExtractResources( getClass(), "/mng-3473PluginReportCrash" );
+        File testDir = extractTestResources( getClass(), "/mng-3473PluginReportCrash" );
 
-        Verifier verifier = new Verifier( testDir.getAbsolutePath() );
+        IntegrationTestRunner verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
 
 
         File logFile = new File( testDir, "log.txt" );
@@ -57,7 +55,7 @@ public class MavenITmng3473PluginReportCrash
         {
           verifier.executeGoal( "site", cliOptions );
         }
-        catch (VerificationException e)
+        catch (IntegrationTestException e)
         {
           //expected this but don't require it cause some os's don't return the correct error code
         }

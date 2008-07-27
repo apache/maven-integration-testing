@@ -19,16 +19,15 @@ package org.apache.maven.integrationtests;
  * under the License.
  */
 
-import org.apache.maven.artifact.versioning.InvalidVersionSpecificationException;
-import org.apache.maven.it.Verifier;
-import org.apache.maven.it.util.FileUtils;
-import org.apache.maven.it.util.ResourceExtractor;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
 import junit.framework.Assert;
+
+import org.apache.maven.artifact.versioning.InvalidVersionSpecificationException;
+import org.apache.maven.it.IntegrationTestRunner;
+import org.codehaus.plexus.util.FileUtils;
 
 /**
  * @author <a href="mailto:nicolas@apache.org">Nicolas De Loof</a>
@@ -49,9 +48,9 @@ public class MavenITmng3426PluginsClasspathOverrideTest
 
         // The testdir is computed from the location of this
         // file.
-        File testDir = ResourceExtractor.simpleExtractResources( getClass(), "/mng3426-overridingPluginDependency" );
+        File testDir = extractTestResources( getClass(), "/mng3426-overridingPluginDependency" );
 
-        Verifier verifier = new Verifier( testDir.getAbsolutePath() );
+        IntegrationTestRunner verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
         List cliOptions = new ArrayList();
         cliOptions.add( "-X" );
         verifier.executeGoal( "org.codehaus.mojo:castor-maven-plugin:generate", cliOptions );

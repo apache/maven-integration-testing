@@ -1,9 +1,8 @@
 package org.apache.maven.integrationtests;
 
-import org.apache.maven.it.Verifier;
-import org.apache.maven.it.util.ResourceExtractor;
-
 import java.io.File;
+
+import org.apache.maven.it.IntegrationTestRunner;
 
 public class MavenIT0124PomExtensionComponentOverrideTest
     extends AbstractMavenIntegrationTestCase
@@ -16,20 +15,20 @@ public class MavenIT0124PomExtensionComponentOverrideTest
      */
     public void testit0124() throws Exception
     {
-        File testDir = ResourceExtractor.simpleExtractResources( getClass(), "/it0124-pomExtensionComponentOverride/extension" );
-        Verifier verifier = new Verifier( testDir.getAbsolutePath() );
+        File testDir = extractTestResources( getClass(), "/it0124-pomExtensionComponentOverride/extension" );
+        IntegrationTestRunner verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
         verifier.executeGoal( "install" );
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
 
-        testDir = ResourceExtractor.simpleExtractResources( getClass(), "/it0124-pomExtensionComponentOverride/plugin" );
-        verifier = new Verifier( testDir.getAbsolutePath() );
+        testDir = extractTestResources( getClass(), "/it0124-pomExtensionComponentOverride/plugin" );
+        verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
         verifier.executeGoal( "install" );
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
 
-        testDir = ResourceExtractor.simpleExtractResources( getClass(), "/it0124-pomExtensionComponentOverride/project" );
-        verifier = new Verifier( testDir.getAbsolutePath() );
+        testDir = extractTestResources( getClass(), "/it0124-pomExtensionComponentOverride/project" );
+        verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
         verifier.executeGoal( "verify" );
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();

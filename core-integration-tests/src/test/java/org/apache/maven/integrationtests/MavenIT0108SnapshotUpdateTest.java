@@ -16,16 +16,15 @@ package org.apache.maven.integrationtests;
  * limitations under the License.
  */
 
-import org.apache.maven.it.Verifier;
-import org.apache.maven.it.util.FileUtils;
-import org.apache.maven.it.util.ResourceExtractor;
-
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
+
+import org.apache.maven.it.IntegrationTestRunner;
+import org.codehaus.plexus.util.FileUtils;
 
 /**
  * Downloads a snapshot dependency that was deployed with uniqueVersion = false, and checks it can be
@@ -34,7 +33,7 @@ import java.util.Locale;
 public class MavenIT0108SnapshotUpdateTest
     extends AbstractMavenIntegrationTestCase
 {
-    private Verifier verifier;
+    private IntegrationTestRunner verifier;
 
     private File artifact;
 
@@ -49,8 +48,8 @@ public class MavenIT0108SnapshotUpdateTest
     {
         super.setUp();
 
-        File testDir = ResourceExtractor.simpleExtractResources( getClass(), "/it0108-snapshotUpdate" );
-        verifier = new Verifier( testDir.getAbsolutePath() );
+        File testDir = extractTestResources( getClass(), "/it0108-snapshotUpdate" );
+        verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
         localRepoFile = getLocalRepoFile( verifier );
         deleteLocalArtifact( verifier, localRepoFile );
 
@@ -255,7 +254,7 @@ public class MavenIT0108SnapshotUpdateTest
         verifier.assertArtifactContents( "org.apache.maven", "maven-core-it-support", "1.0-SNAPSHOT", "jar", s );
     }
 
-    private static File deleteLocalArtifact( Verifier verifier, File localRepoFile )
+    private static File deleteLocalArtifact( IntegrationTestRunner verifier, File localRepoFile )
         throws IOException
     {
         verifier.deleteArtifact( "org.apache.maven", "maven-core-it-support", "1.0-SNAPSHOT", "jar" );
@@ -264,7 +263,7 @@ public class MavenIT0108SnapshotUpdateTest
         return localRepoFile;
     }
 
-    private static File getLocalRepoFile( Verifier verifier )
+    private static File getLocalRepoFile( IntegrationTestRunner verifier )
     {
         return new File(
             verifier.getArtifactPath( "org.apache.maven", "maven-core-it-support", "1.0-SNAPSHOT", "jar" ) );

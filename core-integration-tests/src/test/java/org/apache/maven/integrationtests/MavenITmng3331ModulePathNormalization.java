@@ -1,12 +1,8 @@
 package org.apache.maven.integrationtests;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
 
-import org.apache.maven.integrationtests.AbstractMavenIntegrationTestCase;
-import org.apache.maven.it.Verifier;
-import org.apache.maven.it.util.ResourceExtractor;
+import org.apache.maven.it.IntegrationTestRunner;
 
 /**
  * This is a sample integration test. The IT tests typically
@@ -28,11 +24,11 @@ public class MavenITmng3331ModulePathNormalization
         throws Exception
     {
         //testMNG3331ModuleWithSpaces
-        File testDir = ResourceExtractor.simpleExtractResources( getClass(), "/mng-3331-modulePathNormalization/with-spaces" );
+        File testDir = extractTestResources( getClass(), "/mng-3331-modulePathNormalization/with-spaces" );
 
-        Verifier verifier;
+        IntegrationTestRunner verifier;
 
-        verifier = new Verifier( testDir.getAbsolutePath() );
+        verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
 
         verifier.executeGoal( "initialize" );
 
@@ -58,11 +54,11 @@ public class MavenITmng3331ModulePathNormalization
         throws Exception
     {
         //testMNG3331ModuleWithRelativeParentDirRef
-        File testDir = ResourceExtractor.simpleExtractResources( getClass(), "/mng-3331-modulePathNormalization/with-relative-parentDir-ref" );
+        File testDir = extractTestResources( getClass(), "/mng-3331-modulePathNormalization/with-relative-parentDir-ref" );
 
-        Verifier verifier;
+        IntegrationTestRunner verifier;
 
-        verifier = new Verifier( new File( testDir, "parent" ).getAbsolutePath() );
+        verifier = new IntegrationTestRunner( new File( testDir, "parent" ).getAbsolutePath() );
 
         verifier.executeGoal( "initialize" );
 

@@ -19,12 +19,11 @@ package org.apache.maven.integrationtests;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
-import org.apache.maven.it.util.ResourceExtractor;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.apache.maven.it.IntegrationTestRunner;
 
 public class MavenITmng3355TranslatedPathInterpolationTest
     extends AbstractMavenIntegrationTestCase
@@ -38,8 +37,8 @@ public class MavenITmng3355TranslatedPathInterpolationTest
     public void testitMNG3355()
         throws Exception
     {
-        File testDir = ResourceExtractor.simpleExtractResources( getClass(), "/mng-3355" );
-        Verifier verifier = new Verifier( testDir.getAbsolutePath() );
+        File testDir = extractTestResources( getClass(), "/mng-3355" );
+        IntegrationTestRunner verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
         List cliOptions = new ArrayList();
         cliOptions.add( "-Dversion=foo" );
         verifier.executeGoal( "validate", cliOptions );

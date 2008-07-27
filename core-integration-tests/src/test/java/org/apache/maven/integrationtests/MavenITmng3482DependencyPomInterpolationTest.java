@@ -19,11 +19,6 @@
 
 package org.apache.maven.integrationtests;
 
-import org.apache.maven.it.Verifier;
-import org.apache.maven.it.util.IOUtil;
-import org.apache.maven.it.util.ResourceExtractor;
-import org.apache.maven.it.util.StringUtils;
-
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -32,6 +27,10 @@ import java.io.Reader;
 import java.io.Writer;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.apache.maven.it.IntegrationTestRunner;
+import org.codehaus.plexus.util.IOUtil;
+import org.codehaus.plexus.util.StringUtils;
 
 /**
  * This is a test set for <a href="http://jira.codehaus.org/browse/MNG-3482">MNG-3482</a>.
@@ -50,11 +49,11 @@ public class MavenITmng3482DependencyPomInterpolationTest
     {
         // The testdir is computed from the location of this
         // file.
-        File testDir = ResourceExtractor.simpleExtractResources( getClass(), "/mng-3482" );
+        File testDir = extractTestResources( getClass(), "/mng-3482" );
 
         File settings = writeSettings( testDir );
 
-        Verifier verifier;
+        IntegrationTestRunner verifier;
 
         /*
          * We must first make sure that any artifact created
@@ -63,7 +62,7 @@ public class MavenITmng3482DependencyPomInterpolationTest
          * unstable test results. Fortunately, the verifier
          * makes it easy to do this.
          */
-        verifier = new Verifier( testDir.getAbsolutePath() );
+        verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
 
         verifier.deleteArtifact( "org.apache.maven.its.mng3482", "mng-3482", "1", "pom" );
         verifier.deleteArtifact( "org.apache.maven.its.mng3482", "mng-3482", "1", "jar" );

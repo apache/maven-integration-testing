@@ -6,8 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.maven.artifact.versioning.InvalidVersionSpecificationException;
-import org.apache.maven.it.Verifier;
-import org.apache.maven.it.util.ResourceExtractor;
+import org.apache.maven.it.IntegrationTestRunner;
 
 /**
  * Test activation and deactivation of profiles.
@@ -29,11 +28,11 @@ public class MavenITmng3545ProfileDeactivation
     public void testBasicBuildWithDefaultProfiles()
         throws Exception
     {
-        File testDir = ResourceExtractor.simpleExtractResources( getClass(), "/mng-3545-ProfileDeactivation" );
+        File testDir = extractTestResources( getClass(), "/mng-3545-ProfileDeactivation" );
 
-        Verifier verifier;
+        IntegrationTestRunner verifier;
 
-        verifier = new Verifier( testDir.getAbsolutePath() );
+        verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
 
         List cliOptions = new ArrayList();
         verifier.executeGoal( "package", cliOptions );
@@ -55,11 +54,11 @@ public class MavenITmng3545ProfileDeactivation
     public void testDeactivateDefaultProfilesDash()
         throws Exception
     {
-        File testDir = ResourceExtractor.simpleExtractResources( getClass(), "/mng-3545-ProfileDeactivation" );
+        File testDir = extractTestResources( getClass(), "/mng-3545-ProfileDeactivation" );
 
-        Verifier verifier;
+        IntegrationTestRunner verifier;
 
-        verifier = new Verifier( testDir.getAbsolutePath() );
+        verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
 
         List cliOptions = new ArrayList();
 
@@ -77,11 +76,11 @@ public class MavenITmng3545ProfileDeactivation
     public void testDeactivateDefaultProfilesExclamation()
         throws Exception
     {
-        File testDir = ResourceExtractor.simpleExtractResources( getClass(), "/mng-3545-ProfileDeactivation" );
+        File testDir = extractTestResources( getClass(), "/mng-3545-ProfileDeactivation" );
     
-        Verifier verifier;
+        IntegrationTestRunner verifier;
     
-        verifier = new Verifier( testDir.getAbsolutePath() );
+        verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
     
         List cliOptions = new ArrayList();
     
@@ -105,11 +104,11 @@ public class MavenITmng3545ProfileDeactivation
         throws Exception
     {
 
-        File testDir = ResourceExtractor.simpleExtractResources( getClass(), "/mng-3545-ProfileDeactivation" );
+        File testDir = extractTestResources( getClass(), "/mng-3545-ProfileDeactivation" );
 
-        Verifier verifier;
+        IntegrationTestRunner verifier;
 
-        verifier = new Verifier( testDir.getAbsolutePath() );
+        verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
 
         List cliOptions = new ArrayList();
 
@@ -135,11 +134,11 @@ public class MavenITmng3545ProfileDeactivation
         throws Exception
     {
 
-        File testDir = ResourceExtractor.simpleExtractResources( getClass(), "/mng-3545-ProfileDeactivation" );
+        File testDir = extractTestResources( getClass(), "/mng-3545-ProfileDeactivation" );
 
-        Verifier verifier;
+        IntegrationTestRunner verifier;
 
-        verifier = new Verifier( testDir.getAbsolutePath() );
+        verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
 
         List cliOptions = new ArrayList();
 
@@ -165,11 +164,11 @@ public class MavenITmng3545ProfileDeactivation
         throws Exception
     {
 
-        File testDir = ResourceExtractor.simpleExtractResources( getClass(), "/mng-3545-ProfileDeactivation" );
+        File testDir = extractTestResources( getClass(), "/mng-3545-ProfileDeactivation" );
 
-        Verifier verifier;
+        IntegrationTestRunner verifier;
 
-        verifier = new Verifier( testDir.getAbsolutePath() );
+        verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
 
         List cliOptions = new ArrayList();
 
@@ -191,7 +190,7 @@ public class MavenITmng3545ProfileDeactivation
     public void tearDown()
         throws IOException
     {
-        File testDir = ResourceExtractor.simpleExtractResources( getClass(), "/mng-3545-ProfileDeactivation" );
+        File testDir = extractTestResources( getClass(), "/mng-3545-ProfileDeactivation" );
 
         File targetDir = new File( testDir, "target" );
         if ( targetDir.exists() )

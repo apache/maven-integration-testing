@@ -1,10 +1,9 @@
 package org.apache.maven.integrationtests;
 
-import org.apache.maven.artifact.versioning.InvalidVersionSpecificationException;
-import org.apache.maven.it.Verifier;
-import org.apache.maven.it.util.ResourceExtractor;
-
 import java.io.File;
+
+import org.apache.maven.artifact.versioning.InvalidVersionSpecificationException;
+import org.apache.maven.it.IntegrationTestRunner;
 
 public class MavenITmng3475BaseAlignedDir
     extends AbstractMavenIntegrationTestCase
@@ -19,11 +18,11 @@ public class MavenITmng3475BaseAlignedDir
     public void testitMNG3475()
         throws Exception
     {
-        File testDir = ResourceExtractor.simpleExtractResources( getClass(),
+        File testDir = extractTestResources( getClass(),
                                                                  "/mng-3475-baseAlignedDir" );
 
         File pluginDir = new File( testDir, "plugin" );
-        Verifier verifier = new Verifier( pluginDir.getAbsolutePath() );
+        IntegrationTestRunner verifier = new IntegrationTestRunner( pluginDir.getAbsolutePath() );
 
         verifier.executeGoal( "install" );
 
@@ -31,7 +30,7 @@ public class MavenITmng3475BaseAlignedDir
         verifier.resetStreams();
 
         File projectDir = new File( testDir, "project" );
-        verifier = new Verifier( projectDir.getAbsolutePath() );
+        verifier = new IntegrationTestRunner( projectDir.getAbsolutePath() );
 
         verifier.executeGoal( "validate" );
         verifier.verifyErrorFreeLog();

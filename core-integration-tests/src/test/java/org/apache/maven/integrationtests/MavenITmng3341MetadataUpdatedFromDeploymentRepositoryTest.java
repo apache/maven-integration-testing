@@ -1,18 +1,17 @@
 package org.apache.maven.integrationtests;
 
-import org.apache.maven.artifact.versioning.InvalidVersionSpecificationException;
-import org.apache.maven.it.Verifier;
-import org.apache.maven.it.util.FileUtils;
-import org.apache.maven.it.util.ResourceExtractor;
-import org.codehaus.plexus.util.xml.Xpp3Dom;
-import org.codehaus.plexus.util.xml.Xpp3DomBuilder;
-import org.codehaus.plexus.util.xml.pull.XmlPullParserException;
-
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.apache.maven.artifact.versioning.InvalidVersionSpecificationException;
+import org.apache.maven.it.IntegrationTestRunner;
+import org.codehaus.plexus.util.FileUtils;
+import org.codehaus.plexus.util.xml.Xpp3Dom;
+import org.codehaus.plexus.util.xml.Xpp3DomBuilder;
+import org.codehaus.plexus.util.xml.pull.XmlPullParserException;
 
 public class MavenITmng3341MetadataUpdatedFromDeploymentRepositoryTest
     extends AbstractMavenIntegrationTestCase
@@ -27,15 +26,15 @@ public class MavenITmng3341MetadataUpdatedFromDeploymentRepositoryTest
         throws Exception
     {
         File testDir =
-            ResourceExtractor.simpleExtractResources( getClass(), "/mng-3341-metadataUpdatedFromDeploymentRepository" );
+            extractTestResources( getClass(), "/mng-3341-metadataUpdatedFromDeploymentRepository" );
 
         File targetRepository = new File( testDir, "target-repository" );
         FileUtils.deleteDirectory( targetRepository );
         FileUtils.copyDirectoryStructure( new File( testDir, "deployment-repository" ), targetRepository );
 
-        Verifier verifier;
+        IntegrationTestRunner verifier;
 
-        verifier = new Verifier( testDir.getAbsolutePath() );
+        verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
 
         List cliOptions = new ArrayList();
         cliOptions.add( "-s" );

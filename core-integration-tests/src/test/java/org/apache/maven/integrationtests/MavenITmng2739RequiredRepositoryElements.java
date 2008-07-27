@@ -19,14 +19,13 @@
 
 package org.apache.maven.integrationtests;
 
-import org.apache.maven.artifact.versioning.InvalidVersionSpecificationException;
-import org.apache.maven.it.VerificationException;
-import org.apache.maven.it.Verifier;
-import org.apache.maven.it.util.ResourceExtractor;
-
 import java.io.File;
 import java.util.Iterator;
 import java.util.List;
+
+import org.apache.maven.artifact.versioning.InvalidVersionSpecificationException;
+import org.apache.maven.it.IntegrationTestException;
+import org.apache.maven.it.IntegrationTestRunner;
 
 /**
  * This is a test set for <a href="http://jira.codehaus.org/browse/MNG-2739">MNG-2739</a>.
@@ -49,11 +48,11 @@ public class MavenITmng2739RequiredRepositoryElements
     public void testitMNG2739_RepositoryId()
         throws Exception
     {
-        File testDir = ResourceExtractor.simpleExtractResources( getClass(), "/mng-2739/repo-id" );
+        File testDir = extractTestResources( getClass(), "/mng-2739/repo-id" );
 
-        Verifier verifier;
+        IntegrationTestRunner verifier;
 
-        verifier = new Verifier( testDir.getAbsolutePath() );
+        verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
 
         try
         {
@@ -62,7 +61,7 @@ public class MavenITmng2739RequiredRepositoryElements
             fail( "POM should NOT validate: repository <id/> element is missing in: "
                   + new File( testDir, "pom.xml" ) );
         }
-        catch ( VerificationException e )
+        catch ( IntegrationTestException e )
         {
         }
 
@@ -88,11 +87,11 @@ public class MavenITmng2739RequiredRepositoryElements
     {
         // The testdir is computed from the location of this
         // file.
-        File testDir = ResourceExtractor.simpleExtractResources( getClass(), "/mng-2739/repo-url" );
+        File testDir = extractTestResources( getClass(), "/mng-2739/repo-url" );
 
-        Verifier verifier;
+        IntegrationTestRunner verifier;
 
-        verifier = new Verifier( testDir.getAbsolutePath() );
+        verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
 
         try
         {
@@ -101,7 +100,7 @@ public class MavenITmng2739RequiredRepositoryElements
             fail( "POM should NOT validate: repository <url/> element is missing in: "
                   + new File( testDir, "pom.xml" ) );
         }
-        catch ( VerificationException e )
+        catch ( IntegrationTestException e )
         {
         }
 

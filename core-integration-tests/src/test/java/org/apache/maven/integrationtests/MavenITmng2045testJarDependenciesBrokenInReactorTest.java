@@ -1,13 +1,9 @@
 package org.apache.maven.integrationtests;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
 
 import org.apache.maven.artifact.versioning.InvalidVersionSpecificationException;
-import org.apache.maven.integrationtests.AbstractMavenIntegrationTestCase;
-import org.apache.maven.it.Verifier;
-import org.apache.maven.it.util.ResourceExtractor;
+import org.apache.maven.it.IntegrationTestRunner;
 
 /**
  * Simple IT test invoking maven in a reactor with 2 projects.
@@ -28,10 +24,10 @@ public class MavenITmng2045testJarDependenciesBrokenInReactorTest extends Abstra
     public void testitMNG2045()
         throws Exception
     {
-        File testDir = ResourceExtractor.simpleExtractResources( getClass(), "/mng-2045-testJarDependenciesBrokenInReactor" );
-        Verifier verifier;
+        File testDir = extractTestResources( getClass(), "/mng-2045-testJarDependenciesBrokenInReactor" );
+        IntegrationTestRunner verifier;
 
-        verifier = new Verifier( testDir.getAbsolutePath() );
+        verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
         verifier.deleteArtifact( "testing", "mng-2045-test", "1.0-SNAPSHOT", "pom" );
         verifier.deleteArtifact( "testing", "first-project", "1.0-SNAPSHOT", "jar" );
         verifier.deleteArtifact( "testing", "second-project", "1.0-SNAPSHOT", "jar" );

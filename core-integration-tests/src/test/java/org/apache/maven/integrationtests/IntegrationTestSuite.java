@@ -15,13 +15,13 @@ package org.apache.maven.integrationtests;
  * the License.
  */
 
-import org.apache.maven.it.VerificationException;
-import org.apache.maven.it.Verifier;
-
 import java.io.PrintStream;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
+
+import org.apache.maven.it.IntegrationTestException;
+import org.apache.maven.it.IntegrationTestRunner;
 
 public class IntegrationTestSuite
     extends AbstractMavenIntegrationTestCase
@@ -29,13 +29,13 @@ public class IntegrationTestSuite
     private static PrintStream out = System.out;
 
     public static Test suite()
-        throws VerificationException
+        throws IntegrationTestException
     {
-        Verifier verifier = null;
+        IntegrationTestRunner verifier = null;
 
         try
         {
-            verifier = new Verifier( "" );
+            verifier = new IntegrationTestRunner( "" );
             String mavenVersion = verifier.getMavenVersion();
 
             String executable = verifier.getExecutable();

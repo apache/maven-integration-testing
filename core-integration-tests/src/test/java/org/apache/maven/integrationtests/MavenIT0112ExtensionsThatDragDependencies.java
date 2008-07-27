@@ -19,10 +19,9 @@ package org.apache.maven.integrationtests;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
-import org.apache.maven.it.util.ResourceExtractor;
-
 import java.io.File;
+
+import org.apache.maven.it.IntegrationTestRunner;
 
 public class MavenIT0112ExtensionsThatDragDependencies
     extends AbstractMavenIntegrationTestCase
@@ -30,23 +29,23 @@ public class MavenIT0112ExtensionsThatDragDependencies
     public void testit0112()
         throws Exception
     {
-        File testDir = ResourceExtractor.simpleExtractResources( getClass(), "/it0112-extensionsThatDragDependencies" );
+        File testDir = extractTestResources( getClass(), "/it0112-extensionsThatDragDependencies" );
 
-        Verifier verifier;
+        IntegrationTestRunner verifier;
 
         // Install the parent POM
-        verifier = new Verifier( testDir.getAbsolutePath() );
+        verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
         verifier.deleteArtifact( "org.apache.maven.its.it0112", "test-extension", "1.0-SNAPSHOT", "jar" );
         verifier.deleteArtifact( "org.apache.maven.its.it0112", "test-project", "1.0-SNAPSHOT", "jar" );
 
         // Install the extension with the resources required for the test
-        verifier = new Verifier( new File( testDir.getAbsolutePath(), "test-extension" ).getAbsolutePath() );
+        verifier = new IntegrationTestRunner( new File( testDir.getAbsolutePath(), "test-extension" ).getAbsolutePath() );
         verifier.executeGoal( "install" );
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
 
         // Run the whole test
-        verifier = new Verifier( new File( testDir.getAbsolutePath(), "test-project" ).getAbsolutePath() );
+        verifier = new IntegrationTestRunner( new File( testDir.getAbsolutePath(), "test-project" ).getAbsolutePath() );
         verifier.executeGoal( "org.apache.maven.plugins:maven-project-info-reports-plugin:2.0.1:scm" );
         // ommitted because we always get velocity errors that aren't covered by the verifier
 //        verifier.verifyErrorFreeLog();

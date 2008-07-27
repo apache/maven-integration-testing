@@ -21,8 +21,7 @@ package org.apache.maven.integrationtests;
 
 import java.io.File;
 
-import org.apache.maven.it.Verifier;
-import org.apache.maven.it.util.ResourceExtractor;
+import org.apache.maven.it.IntegrationTestRunner;
 
 public class MavenIT0126TestJarDependency
     extends AbstractMavenIntegrationTestCase
@@ -34,9 +33,9 @@ public class MavenIT0126TestJarDependency
     public void testit0126()
         throws Exception
     {
-        File testDir = ResourceExtractor.simpleExtractResources( getClass(), "/it0126-testJarDependency" );
+        File testDir = extractTestResources( getClass(), "/it0126-testJarDependency" );
 
-        Verifier verifier = new Verifier( testDir.getAbsolutePath() );
+        IntegrationTestRunner verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
         /* It is important to start from empty repository*/
         verifier.deleteArtifact( "org.apache.maven.its.it0126", "parent", "1.0-SNAPSHOT", "pom" );
         verifier.deleteArtifact( "org.apache.maven.its.it0126", "client", "1.0-SNAPSHOT", "jar" );

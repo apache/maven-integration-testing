@@ -1,10 +1,9 @@
 package org.apache.maven.integrationtests;
 
-import org.apache.maven.it.VerificationException;
-import org.apache.maven.it.Verifier;
-import org.apache.maven.it.util.ResourceExtractor;
-
 import java.io.File;
+
+import org.apache.maven.it.IntegrationTestException;
+import org.apache.maven.it.IntegrationTestRunner;
 
 public class MavenITmng1491ReactorArtifactIdCollision
     extends AbstractMavenIntegrationTestCase
@@ -12,11 +11,11 @@ public class MavenITmng1491ReactorArtifactIdCollision
     public void testitMNG1491 ()
         throws Exception
     {
-        File testDir = ResourceExtractor.simpleExtractResources( getClass(), "/mng-1491-reactorArtifactIdCollision" );
+        File testDir = extractTestResources( getClass(), "/mng-1491-reactorArtifactIdCollision" );
 
-        Verifier verifier;
+        IntegrationTestRunner verifier;
 
-        verifier = new Verifier( testDir.getAbsolutePath() );
+        verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
 
         try
         {
@@ -26,7 +25,7 @@ public class MavenITmng1491ReactorArtifactIdCollision
 
             fail( "Build should fail due to duplicate artifactId's in the reactor." );
         }
-        catch( VerificationException e )
+        catch( IntegrationTestException e )
         {
             // expected.
         }

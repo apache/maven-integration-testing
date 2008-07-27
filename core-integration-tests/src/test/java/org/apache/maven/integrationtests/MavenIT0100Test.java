@@ -1,11 +1,10 @@
 package org.apache.maven.integrationtests;
 
-import org.apache.maven.it.Verifier;
-import org.apache.maven.it.util.ResourceExtractor;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.apache.maven.it.IntegrationTestRunner;
 
 public class MavenIT0100Test
     extends AbstractMavenIntegrationTestCase
@@ -17,9 +16,9 @@ public class MavenIT0100Test
     public void testit0100()
         throws Exception
     {
-        File testDir = ResourceExtractor.simpleExtractResources( getClass(), "/it0100" );
+        File testDir = extractTestResources( getClass(), "/it0100" );
         File child = new File( testDir, "parent/child" );
-        Verifier verifier = new Verifier( child.getAbsolutePath() );
+        IntegrationTestRunner verifier = new IntegrationTestRunner( child.getAbsolutePath() );
         List options = new ArrayList();
         options.add( "-Doutput=\"" + new File( child, "target/effective-pom.txt" ).getAbsolutePath() + "\"" );
         verifier.executeGoal( "org.apache.maven.plugins:maven-help-plugin:2.0.2:effective-pom, verify", options );

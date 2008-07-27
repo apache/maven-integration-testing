@@ -1,9 +1,8 @@
 package org.apache.maven.integrationtests;
 
-import org.apache.maven.it.Verifier;
-import org.apache.maven.it.util.ResourceExtractor;
-
 import java.io.File;
+
+import org.apache.maven.it.IntegrationTestRunner;
 
 public class MavenIT0057Test
     extends AbstractMavenIntegrationTestCase
@@ -15,8 +14,8 @@ public class MavenIT0057Test
     public void testit0057()
         throws Exception
     {
-        File testDir = ResourceExtractor.simpleExtractResources( getClass(), "/it0057" );
-        Verifier verifier = new Verifier( testDir.getAbsolutePath() );
+        File testDir = extractTestResources( getClass(), "/it0057" );
+        IntegrationTestRunner verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
         verifier.executeGoal( "package" );
         verifier.assertFilePresent( "target/classes/org/apache/maven/it0057/Person.class" );
         verifier.assertFilePresent( "target/test-classes/org/apache/maven/it0057/PersonTest.class" );

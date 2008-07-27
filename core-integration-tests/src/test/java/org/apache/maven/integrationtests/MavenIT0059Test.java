@@ -1,12 +1,8 @@
 package org.apache.maven.integrationtests;
 
-import org.apache.maven.it.Verifier;
-import org.apache.maven.it.util.ResourceExtractor;
-
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Properties;
+
+import org.apache.maven.it.IntegrationTestRunner;
 
 public class MavenIT0059Test
     extends AbstractMavenIntegrationTestCase
@@ -19,8 +15,8 @@ public class MavenIT0059Test
     public void testit0059()
         throws Exception
     {
-        File testDir = ResourceExtractor.simpleExtractResources( getClass(), "/it0059" );
-        Verifier verifier = new Verifier( testDir.getAbsolutePath() );
+        File testDir = extractTestResources( getClass(), "/it0059" );
+        IntegrationTestRunner verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
         verifier.executeGoal( "package" );
         verifier.assertFilePresent( "target/maven-it-it0059-1.0.jar" );
         // don't verify error free log

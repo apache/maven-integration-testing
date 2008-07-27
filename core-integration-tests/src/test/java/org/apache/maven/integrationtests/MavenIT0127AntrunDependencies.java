@@ -21,8 +21,7 @@ package org.apache.maven.integrationtests;
 
 import java.io.File;
 
-import org.apache.maven.it.Verifier;
-import org.apache.maven.it.util.ResourceExtractor;
+import org.apache.maven.it.IntegrationTestRunner;
 
 public class MavenIT0127AntrunDependencies
     extends AbstractMavenIntegrationTestCase
@@ -34,9 +33,9 @@ public class MavenIT0127AntrunDependencies
     public void testit0127()
         throws Exception
     {
-        File testDir = ResourceExtractor.simpleExtractResources( getClass(), "/it0127-antrunDependencies" );
+        File testDir = extractTestResources( getClass(), "/it0127-antrunDependencies" );
 
-        Verifier verifier = new Verifier( testDir.getAbsolutePath() );
+        IntegrationTestRunner verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
         verifier.deleteArtifact( "org.apache.maven.its.it0127", "parent", "1.0-SNAPSHOT", "pom" );
         verifier.deleteArtifact( "org.apache.maven.its.it0127", "a", "1.0-SNAPSHOT", "jar" );
         verifier.deleteArtifact( "org.apache.maven.its.it0127", "b",  "1.0-SNAPSHOT", "jar" );

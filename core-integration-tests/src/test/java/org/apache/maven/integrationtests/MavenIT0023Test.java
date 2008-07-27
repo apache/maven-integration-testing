@@ -1,13 +1,10 @@
 package org.apache.maven.integrationtests;
 
-import org.apache.maven.it.Verifier;
-import org.apache.maven.it.util.ResourceExtractor;
-import org.apache.maven.artifact.versioning.InvalidVersionSpecificationException;
-
 import java.io.File;
-import java.util.Properties;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.maven.it.IntegrationTestRunner;
 
 public class MavenIT0023Test
     extends AbstractMavenIntegrationTestCase
@@ -19,8 +16,8 @@ public class MavenIT0023Test
     public void testit0023()
         throws Exception
     {
-        File testDir = ResourceExtractor.simpleExtractResources( getClass(), "/it0023" );
-        Verifier verifier = new Verifier( testDir.getAbsolutePath() );
+        File testDir = extractTestResources( getClass(), "/it0023" );
+        IntegrationTestRunner verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
         List cliOptions = new ArrayList();
         cliOptions.add( "--settings settings.xml" );
         verifier.executeGoal( "org.apache.maven.its.plugins:maven-it-plugin-touch:touch", cliOptions );

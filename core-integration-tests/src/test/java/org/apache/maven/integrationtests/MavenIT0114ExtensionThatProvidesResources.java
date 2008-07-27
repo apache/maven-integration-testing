@@ -1,12 +1,11 @@
 package org.apache.maven.integrationtests;
 
-import org.apache.maven.artifact.versioning.InvalidVersionSpecificationException;
-import org.apache.maven.it.Verifier;
-import org.apache.maven.it.util.ResourceExtractor;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.apache.maven.artifact.versioning.InvalidVersionSpecificationException;
+import org.apache.maven.it.IntegrationTestRunner;
 
 public class MavenIT0114ExtensionThatProvidesResources
     extends AbstractMavenIntegrationTestCase
@@ -21,12 +20,12 @@ public class MavenIT0114ExtensionThatProvidesResources
         throws Exception
     {
         File testDir =
-            ResourceExtractor.simpleExtractResources( getClass(), "/it0114-extensionThatProvidesResources" );
+            extractTestResources( getClass(), "/it0114-extensionThatProvidesResources" );
 
-        Verifier verifier;
+        IntegrationTestRunner verifier;
 
         // Install the parent POM, extension and the plugin 
-        verifier = new Verifier( testDir.getAbsolutePath() );
+        verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
         verifier.deleteArtifact( "org.apache.maven.its.it0114", "it0114-plugin-runner", "1.0", "pom" );                
         verifier.deleteArtifact( "org.apache.maven.its.it0114", "it0114-extension", "1.0", "jar" );
         verifier.deleteArtifact( "org.apache.maven.its.it0114", "it0114-plugin", "1.0", "jar" );
@@ -39,8 +38,8 @@ public class MavenIT0114ExtensionThatProvidesResources
         
         //now run the test
         testDir =
-            ResourceExtractor.simpleExtractResources( getClass(), "/it0114-extensionThatProvidesResources/test-project" );
-        verifier = new Verifier( testDir.getAbsolutePath() );
+            extractTestResources( getClass(), "/it0114-extensionThatProvidesResources/test-project" );
+        verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
         cliOptions = new ArrayList();
         verifier.executeGoal( "verify" );
         verifier.verifyErrorFreeLog();

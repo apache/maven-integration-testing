@@ -1,13 +1,12 @@
 package org.apache.maven.integrationtests;
 
-import org.apache.maven.artifact.versioning.InvalidVersionSpecificationException;
-import org.apache.maven.it.VerificationException;
-import org.apache.maven.it.Verifier;
-import org.apache.maven.it.util.ResourceExtractor;
-
 import java.io.File;
 import java.util.Iterator;
 import java.util.List;
+
+import org.apache.maven.artifact.versioning.InvalidVersionSpecificationException;
+import org.apache.maven.it.IntegrationTestException;
+import org.apache.maven.it.IntegrationTestRunner;
 
 public class MavenITmng3220ImportScopeTest
     extends AbstractMavenIntegrationTestCase
@@ -21,11 +20,11 @@ public class MavenITmng3220ImportScopeTest
     public void testitMNG3220a()
         throws Exception
     {
-        File testDir = ResourceExtractor.simpleExtractResources( getClass(),
+        File testDir = extractTestResources( getClass(),
                                                                  "/mng-3220-importedDepMgmt/imported-pom-depMgmt" );
 
         File dmDir = new File( testDir, "dm-pom" );
-        Verifier verifier = new Verifier( dmDir.getAbsolutePath() );
+        IntegrationTestRunner verifier = new IntegrationTestRunner( dmDir.getAbsolutePath() );
 
         verifier.executeGoal( "install" );
 
@@ -33,7 +32,7 @@ public class MavenITmng3220ImportScopeTest
         verifier.resetStreams();
 
         File projectDir = new File( testDir, "project" );
-        verifier = new Verifier( projectDir.getAbsolutePath() );
+        verifier = new IntegrationTestRunner( projectDir.getAbsolutePath() );
 
         verifier.executeGoal( "package" );
         verifier.verifyErrorFreeLog();
@@ -43,17 +42,17 @@ public class MavenITmng3220ImportScopeTest
     public void testitMNG3220b()
         throws Exception
     {
-        File testDir = ResourceExtractor.simpleExtractResources( getClass(),
+        File testDir = extractTestResources( getClass(),
                                                                  "/mng-3220-importedDepMgmt/depMgmt-pom-module-notImported" );
 
-        Verifier verifier = new Verifier( testDir.getAbsolutePath() );
+        IntegrationTestRunner verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
 
         try
         {
             verifier.executeGoal( "install" );
             fail( "Should fail to build with missing junit version." );
         }
-        catch ( VerificationException e )
+        catch ( IntegrationTestException e )
         {
         }
 

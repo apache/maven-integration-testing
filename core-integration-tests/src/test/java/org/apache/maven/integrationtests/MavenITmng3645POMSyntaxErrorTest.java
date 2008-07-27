@@ -19,12 +19,11 @@
 
 package org.apache.maven.integrationtests;
 
-import org.apache.maven.artifact.versioning.InvalidVersionSpecificationException;
-import org.apache.maven.it.VerificationException;
-import org.apache.maven.it.Verifier;
-import org.apache.maven.it.util.ResourceExtractor;
-
 import java.io.File;
+
+import org.apache.maven.artifact.versioning.InvalidVersionSpecificationException;
+import org.apache.maven.it.IntegrationTestException;
+import org.apache.maven.it.IntegrationTestRunner;
 
 /**
  * This is a test set for <a href="http://jira.codehaus.org/browse/MNG-xxxx">MNG-xxxx</a>.
@@ -49,9 +48,9 @@ public class MavenITmng3645POMSyntaxErrorTest
     {
         // The testdir is computed from the location of this
         // file.
-        File testDir = ResourceExtractor.simpleExtractResources( getClass(), "/mng-3645-pomSyntaxError" );
+        File testDir = extractTestResources( getClass(), "/mng-3645-pomSyntaxError" );
 
-        Verifier verifier = new Verifier( testDir.getAbsolutePath() );
+        IntegrationTestRunner verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
 
         try
         {
@@ -59,7 +58,7 @@ public class MavenITmng3645POMSyntaxErrorTest
 
             fail( "Should fail to validate the POM syntax due to missing dependency element inside dependencyManagement section." );
         }
-        catch ( VerificationException e )
+        catch ( IntegrationTestException e )
         {
             // expect this.
         }

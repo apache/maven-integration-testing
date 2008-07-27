@@ -22,8 +22,7 @@ package org.apache.maven.integrationtests;
 import java.io.File;
 
 import org.apache.maven.artifact.versioning.InvalidVersionSpecificationException;
-import org.apache.maven.it.Verifier;
-import org.apache.maven.it.util.ResourceExtractor;
+import org.apache.maven.it.IntegrationTestRunner;
 
 public class MavenITmng3396DependencyManagementForOverConstrainedRanges
     extends AbstractMavenIntegrationTestCase
@@ -40,9 +39,9 @@ public class MavenITmng3396DependencyManagementForOverConstrainedRanges
         throws Exception
     {
         String baseDir = "/mng-3396-dependencyManagementForOverConstrainedRanges";
-        File testDir = ResourceExtractor.simpleExtractResources( getClass(), baseDir + "/dependencies" );
+        File testDir = extractTestResources( getClass(), baseDir + "/dependencies" );
 
-        Verifier verifier = new Verifier( testDir.getAbsolutePath() );
+        IntegrationTestRunner verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
         verifier.deleteArtifact( GROUP_ID, "A", "1.0", "pom" );
         verifier.deleteArtifact( GROUP_ID, "A", "1.0", "jar" );
         verifier.deleteArtifact( GROUP_ID, "B", "1.0", "pom" );
@@ -51,9 +50,9 @@ public class MavenITmng3396DependencyManagementForOverConstrainedRanges
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
 
-        testDir = ResourceExtractor.simpleExtractResources( getClass(), baseDir + "/plugin" );
+        testDir = extractTestResources( getClass(), baseDir + "/plugin" );
 
-        verifier = new Verifier( testDir.getAbsolutePath() );
+        verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
         verifier.deleteArtifact( GROUP_ID, "A", "1.0", "pom" );
         verifier.deleteArtifact( GROUP_ID, "A", "1.0", "jar" );
         verifier.deleteArtifact( GROUP_ID, "A", "3.0", "pom" );
@@ -64,9 +63,9 @@ public class MavenITmng3396DependencyManagementForOverConstrainedRanges
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
 
-        testDir = ResourceExtractor.simpleExtractResources( getClass(), baseDir + "/pluginuser" );
+        testDir = extractTestResources( getClass(), baseDir + "/pluginuser" );
 
-        verifier = new Verifier( testDir.getAbsolutePath() );
+        verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
         verifier.deleteArtifact( GROUP_ID, "pluginuser", "1.0", "pom" );
         verifier.deleteArtifact( GROUP_ID, "pluginuser", "1.0", "jar" );
         verifier.executeGoal( "install" );

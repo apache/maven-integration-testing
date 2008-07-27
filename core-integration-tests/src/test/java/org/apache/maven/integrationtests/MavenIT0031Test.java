@@ -1,15 +1,13 @@
 package org.apache.maven.integrationtests;
 
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.apache.maven.artifact.versioning.InvalidVersionSpecificationException;
 import org.apache.maven.it.DefaultInvocationRequest;
+import org.apache.maven.it.IntegrationTestRunner;
 import org.apache.maven.it.InvocationRequest;
-import org.apache.maven.it.Verifier;
-import org.apache.maven.it.util.ResourceExtractor;
-
-import java.io.File;
-import java.util.Properties;
-import java.util.List;
-import java.util.ArrayList;
 
 public class MavenIT0031Test
     extends AbstractMavenIntegrationTestCase
@@ -28,8 +26,8 @@ public class MavenIT0031Test
     public void testit0031()
         throws Exception
     {
-        File testDir = ResourceExtractor.simpleExtractResources( getClass(), "/it0031" );
-        Verifier verifier = new Verifier( testDir.getAbsolutePath() );
+        File testDir = extractTestResources( getClass(), "/it0031" );
+        IntegrationTestRunner verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
         List cliOptions = new ArrayList();
         cliOptions.add( "--settings settings.xml" );
         

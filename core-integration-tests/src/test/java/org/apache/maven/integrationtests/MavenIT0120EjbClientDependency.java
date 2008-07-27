@@ -21,8 +21,7 @@ package org.apache.maven.integrationtests;
 
 import java.io.File;
 
-import org.apache.maven.it.Verifier;
-import org.apache.maven.it.util.ResourceExtractor;
+import org.apache.maven.it.IntegrationTestRunner;
 
 public class MavenIT0120EjbClientDependency
     extends AbstractMavenIntegrationTestCase
@@ -30,9 +29,9 @@ public class MavenIT0120EjbClientDependency
     public void testit0120()
         throws Exception
     {
-        File testDir = ResourceExtractor.simpleExtractResources( getClass(), "/it0120-ejbClientDependency" );
+        File testDir = extractTestResources( getClass(), "/it0120-ejbClientDependency" );
 
-        Verifier verifier = new Verifier( testDir.getAbsolutePath() );
+        IntegrationTestRunner verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
         verifier.deleteArtifact( "org.apache.maven.its.it0120", "parent", "1.0-SNAPSHOT", "pom" );
         verifier.deleteArtifact( "org.apache.maven.its.it0120", "client", "1.0-SNAPSHOT", "jar" );
         verifier.deleteArtifact( "org.apache.maven.its.it0120", "model", "1.0-SNAPSHOT", "ejb" );

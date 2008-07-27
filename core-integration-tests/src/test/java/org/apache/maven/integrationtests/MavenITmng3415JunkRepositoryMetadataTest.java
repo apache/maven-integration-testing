@@ -1,13 +1,5 @@
 package org.apache.maven.integrationtests;
 
-import org.apache.maven.artifact.versioning.InvalidVersionSpecificationException;
-import org.apache.maven.it.VerificationException;
-import org.apache.maven.it.Verifier;
-import org.apache.maven.it.util.FileUtils;
-import org.apache.maven.it.util.IOUtil;
-import org.apache.maven.it.util.ResourceExtractor;
-import org.apache.maven.it.util.StringUtils;
-
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -17,6 +9,13 @@ import java.io.Writer;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+
+import org.apache.maven.artifact.versioning.InvalidVersionSpecificationException;
+import org.apache.maven.it.IntegrationTestException;
+import org.apache.maven.it.IntegrationTestRunner;
+import org.codehaus.plexus.util.FileUtils;
+import org.codehaus.plexus.util.IOUtil;
+import org.codehaus.plexus.util.StringUtils;
 
 /**
  * This is a sample integration test. The IT tests typically
@@ -73,7 +72,7 @@ public class MavenITmng3415JunkRepositoryMetadataTest
     {
         String methodName = getMethodName();
 
-        File testDir = ResourceExtractor.simpleExtractResources( getClass(), RESOURCE_BASE );
+        File testDir = extractTestResources( getClass(), RESOURCE_BASE );
         File projectDir = new File( testDir, "project" );
 
         File logFile = new File( projectDir, "log.txt" );
@@ -85,9 +84,9 @@ public class MavenITmng3415JunkRepositoryMetadataTest
 
         setupDummyDependency( testDir, localRepo, true );
 
-        Verifier verifier;
+        IntegrationTestRunner verifier;
 
-        verifier = new Verifier( projectDir.getAbsolutePath() );
+        verifier = new IntegrationTestRunner( projectDir.getAbsolutePath() );
 
         List cliOptions = new ArrayList();
         cliOptions.add( "-X" );
@@ -154,7 +153,7 @@ public class MavenITmng3415JunkRepositoryMetadataTest
     {
         String methodName = getMethodName();
 
-        File testDir = ResourceExtractor.simpleExtractResources( getClass(), RESOURCE_BASE );
+        File testDir = extractTestResources( getClass(), RESOURCE_BASE );
         File projectDir = new File( testDir, "project" );
 
         File logFile = new File( projectDir, "log.txt" );
@@ -164,9 +163,9 @@ public class MavenITmng3415JunkRepositoryMetadataTest
 
         setupDummyDependency( testDir, localRepo, true );
 
-        Verifier verifier;
+        IntegrationTestRunner verifier;
 
-        verifier = new Verifier( projectDir.getAbsolutePath() );
+        verifier = new IntegrationTestRunner( projectDir.getAbsolutePath() );
 
         List cliOptions = new ArrayList();
         cliOptions.add( "-X" );
@@ -212,7 +211,7 @@ public class MavenITmng3415JunkRepositoryMetadataTest
     private void setupDummyDependency( File testDir,
                                        File localRepo,
                                        boolean resetUpdateInterval )
-        throws VerificationException, IOException
+        throws IntegrationTestException, IOException
     {
         File metadata = getMetadataFile( localRepo );
 
@@ -279,13 +278,13 @@ public class MavenITmng3415JunkRepositoryMetadataTest
     }
 
     private File findLocalRepoDirectory()
-        throws VerificationException, IOException
+        throws IntegrationTestException, IOException
     {
-        File testDir = ResourceExtractor.simpleExtractResources( getClass(),
+        File testDir = extractTestResources( getClass(),
                                                                  RESOURCE_BASE
                                                                                  + "/maven-find-local-repo-plugin" );
 
-        Verifier verifier = new Verifier( testDir.getAbsolutePath() );
+        IntegrationTestRunner verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
 
         verifier.deleteArtifact( "org.apache.maven.plugins", "maven-find-local-repo-plugin", "1.0-SNAPSHOT", "jar" );
 
@@ -355,10 +354,10 @@ public class MavenITmng3415JunkRepositoryMetadataTest
         return settingsOut;
     }
 
-    private void assertOutputLinePresent( Verifier verifier,
+    private void assertOutputLinePresent( IntegrationTestRunner verifier,
                                    File logFile,
                                    String lineContents )
-        throws VerificationException
+        throws IntegrationTestException
     {
         List lines = verifier.loadFile( logFile, false );
 
@@ -376,10 +375,10 @@ public class MavenITmng3415JunkRepositoryMetadataTest
         assertTrue( "Build output in:\n\n" + logFile + "\n\nshould contain line with contents:\n\n" + lineContents + "\n", found );
     }
 
-    private void assertOutputLineMissing( Verifier verifier,
+    private void assertOutputLineMissing( IntegrationTestRunner verifier,
                                    File logFile,
                                    String lineContents )
-        throws VerificationException
+        throws IntegrationTestException
     {
         List lines = verifier.loadFile( logFile, false );
 

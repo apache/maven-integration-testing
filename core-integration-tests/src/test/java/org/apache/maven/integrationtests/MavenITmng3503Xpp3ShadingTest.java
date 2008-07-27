@@ -20,13 +20,9 @@
 package org.apache.maven.integrationtests;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
 
 import org.apache.maven.artifact.versioning.InvalidVersionSpecificationException;
-import org.apache.maven.integrationtests.AbstractMavenIntegrationTestCase;
-import org.apache.maven.it.Verifier;
-import org.apache.maven.it.util.ResourceExtractor;
+import org.apache.maven.it.IntegrationTestRunner;
 
 /**
  * This is a test set for <a href="http://jira.codehaus.org/browse/MNG-xxxx">MNG-xxxx</a>.
@@ -51,9 +47,9 @@ public class MavenITmng3503Xpp3ShadingTest
     {
         // The testdir is computed from the location of this
         // file.
-        File testDir = ResourceExtractor.simpleExtractResources( getClass(), "/mng-3503-xpp3Shading" );
+        File testDir = extractTestResources( getClass(), "/mng-3503-xpp3Shading" );
 
-        Verifier verifier;
+        IntegrationTestRunner verifier;
 
         /*
          * We must first make sure that any artifact created
@@ -62,7 +58,7 @@ public class MavenITmng3503Xpp3ShadingTest
          * unstable test results. Fortunately, the verifier
          * makes it easy to do this.
          */
-        verifier = new Verifier( testDir.getAbsolutePath() );
+        verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
 
         verifier.executeGoal( "install" );
 

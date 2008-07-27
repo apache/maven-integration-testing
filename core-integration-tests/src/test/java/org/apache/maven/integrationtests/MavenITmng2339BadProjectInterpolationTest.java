@@ -19,12 +19,11 @@ package org.apache.maven.integrationtests;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
-import org.apache.maven.it.util.ResourceExtractor;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.apache.maven.it.IntegrationTestRunner;
 
 public class MavenITmng2339BadProjectInterpolationTest
     extends AbstractMavenIntegrationTestCase
@@ -38,9 +37,9 @@ public class MavenITmng2339BadProjectInterpolationTest
     public void testitMNG2339a()
         throws Exception
     {
-        File testDir = ResourceExtractor.simpleExtractResources( getClass(), "/mng-2339-badProjectInterpolation/a" );
-        Verifier verifier;
-        verifier = new Verifier( testDir.getAbsolutePath() );
+        File testDir = extractTestResources( getClass(), "/mng-2339-badProjectInterpolation/a" );
+        IntegrationTestRunner verifier;
+        verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
         List cliOptions = new ArrayList();
         cliOptions.add( "-Dversion=foo" );
         verifier.executeGoal( "validate", cliOptions );
@@ -52,11 +51,11 @@ public class MavenITmng2339BadProjectInterpolationTest
     public void testitMNG2339b()
         throws Exception
     {
-        File testDir = ResourceExtractor.simpleExtractResources( getClass(), "/mng-2339-badProjectInterpolation/b" );
+        File testDir = extractTestResources( getClass(), "/mng-2339-badProjectInterpolation/b" );
 
-        Verifier verifier;
+        IntegrationTestRunner verifier;
 
-        verifier = new Verifier( testDir.getAbsolutePath() );
+        verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
 
         verifier.executeGoal( "initialize" );
 
@@ -69,7 +68,7 @@ public class MavenITmng2339BadProjectInterpolationTest
         File logFile = new File( testDir, "log.txt" );
         logFile.renameTo( new File( testDir, "log-pom-specified.txt" ) );
 
-        verifier = new Verifier( testDir.getAbsolutePath() );
+        verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
         List cliOptions = new ArrayList();
         cliOptions.add( "-Dversion=2" );
         verifier.executeGoal( "initialize", cliOptions );

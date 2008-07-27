@@ -1,12 +1,11 @@
 package org.apache.maven.integrationtests;
 
-import org.apache.maven.artifact.versioning.InvalidVersionSpecificationException;
-import org.apache.maven.it.Verifier;
-import org.apache.maven.it.util.ResourceExtractor;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.apache.maven.artifact.versioning.InvalidVersionSpecificationException;
+import org.apache.maven.it.IntegrationTestRunner;
 
 public class MavenITmng3221InfiniteForking
     extends AbstractMavenIntegrationTestCase
@@ -20,17 +19,17 @@ public class MavenITmng3221InfiniteForking
     public void testitMNG3221a()
         throws Exception
     {
-        File testDir = ResourceExtractor.simpleExtractResources( getClass(), "/mng-3221" );
+        File testDir = extractTestResources( getClass(), "/mng-3221" );
         File logBackupDir = testDir.getAbsoluteFile().getParentFile();
 
         File reportDir = new File( testDir, "report" );
         File projectDir = new File( testDir, "user" );
 
-        Verifier verifier = null;
+        IntegrationTestRunner verifier = null;
 
         try
         {
-            verifier = new Verifier( reportDir.getAbsolutePath() );
+            verifier = new IntegrationTestRunner( reportDir.getAbsolutePath() );
 
             verifier.deleteArtifact( "tests", "maven-forking-report-plugin", "1", "jar" );
 
@@ -38,7 +37,7 @@ public class MavenITmng3221InfiniteForking
             verifier.verifyErrorFreeLog();
             verifier.resetStreams();
 
-            verifier = new Verifier( projectDir.getAbsolutePath() );
+            verifier = new IntegrationTestRunner( projectDir.getAbsolutePath() );
 
             List cliOptions = new ArrayList();
             cliOptions.add( "-Psite" );
@@ -62,17 +61,17 @@ public class MavenITmng3221InfiniteForking
     public void testitMNG3221b()
         throws Exception
     {
-        File testDir = ResourceExtractor.simpleExtractResources( getClass(), "/mng-3221" );
+        File testDir = extractTestResources( getClass(), "/mng-3221" );
         File logBackupDir = testDir.getAbsoluteFile().getParentFile();
 
         File pluginDir = new File( testDir, "plugin" );
         File projectDir = new File( testDir, "user" );
 
-        Verifier verifier = null;
+        IntegrationTestRunner verifier = null;
 
         try
         {
-            verifier = new Verifier( pluginDir.getAbsolutePath() );
+            verifier = new IntegrationTestRunner( pluginDir.getAbsolutePath() );
 
             verifier.deleteArtifact( "tests", "maven-forking-test-plugin", "1", "jar" );
 
@@ -80,7 +79,7 @@ public class MavenITmng3221InfiniteForking
             verifier.verifyErrorFreeLog();
             verifier.resetStreams();
 
-            verifier = new Verifier( projectDir.getAbsolutePath() );
+            verifier = new IntegrationTestRunner( projectDir.getAbsolutePath() );
 
             List cliOptions = new ArrayList();
             cliOptions.add( "-Pplugin" );

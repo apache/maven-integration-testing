@@ -1,15 +1,14 @@
 package org.apache.maven.integrationtests;
 
-import org.apache.maven.artifact.versioning.InvalidVersionSpecificationException;
-import org.apache.maven.it.DefaultInvocationRequest;
-import org.apache.maven.it.InvocationRequest;
-import org.apache.maven.it.Verifier;
-import org.apache.maven.it.util.ResourceExtractor;
-
 import java.io.File;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+
+import org.apache.maven.artifact.versioning.InvalidVersionSpecificationException;
+import org.apache.maven.it.DefaultInvocationRequest;
+import org.apache.maven.it.IntegrationTestRunner;
+import org.apache.maven.it.InvocationRequest;
 
 /**
  * Check that plugin versions in the POM obey the correct order of precedence. Specifically, that
@@ -33,11 +32,11 @@ public class MavenITmng3394POMPluginVersionDominanceTest
         throws Exception
     {
         //testShouldUsePluginVersionFromPluginMgmtForLifecycleMojoWhenNotInBuildPlugins 
-        File testDir = ResourceExtractor.simpleExtractResources( getClass(), BASEDIR_PREFIX + "lifecycleMojoVersionInPluginMgmt" );
+        File testDir = extractTestResources( getClass(), BASEDIR_PREFIX + "lifecycleMojoVersionInPluginMgmt" );
 
-        Verifier verifier;
+        IntegrationTestRunner verifier;
 
-        verifier = new Verifier( testDir.getAbsolutePath() );
+        verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
 
         verifier.executeGoal( "install", Collections.singletonList( "-X" ) );
 
@@ -78,11 +77,11 @@ public class MavenITmng3394POMPluginVersionDominanceTest
         throws Exception
     {
         //testShouldPreferPluginVersionFromBuildPluginsOverThatInPluginMgmt
-        File testDir = ResourceExtractor.simpleExtractResources( getClass(), BASEDIR_PREFIX + "preferBuildPluginOverPluginMgmt" );
+        File testDir = extractTestResources( getClass(), BASEDIR_PREFIX + "preferBuildPluginOverPluginMgmt" );
 
-        Verifier verifier;
+        IntegrationTestRunner verifier;
 
-        verifier = new Verifier( testDir.getAbsolutePath() );
+        verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
 
         InvocationRequest r = new DefaultInvocationRequest()
             .setGoals( "clean" )

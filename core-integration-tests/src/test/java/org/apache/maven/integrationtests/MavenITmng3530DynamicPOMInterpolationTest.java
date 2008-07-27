@@ -19,11 +19,10 @@
 
 package org.apache.maven.integrationtests;
 
-import org.apache.maven.artifact.versioning.InvalidVersionSpecificationException;
-import org.apache.maven.it.Verifier;
-import org.apache.maven.it.util.ResourceExtractor;
-
 import java.io.File;
+
+import org.apache.maven.artifact.versioning.InvalidVersionSpecificationException;
+import org.apache.maven.it.IntegrationTestRunner;
 
 /**
  * This is a test set for <a href="http://jira.codehaus.org/browse/MNG-3530">MNG-3530</a>.
@@ -48,7 +47,7 @@ public class MavenITmng3530DynamicPOMInterpolationTest
     public void testitMNG3530_BuildPath()
         throws Exception
     {
-        File testDir = ResourceExtractor.simpleExtractResources( getClass(), BASEDIR + "build-path" );
+        File testDir = extractTestResources( getClass(), BASEDIR + "build-path" );
         File pluginDir = new File( testDir, "plugin" );
         File projectDir = new File( testDir, "project" );
 
@@ -56,7 +55,7 @@ public class MavenITmng3530DynamicPOMInterpolationTest
         // validates that the modification propagated into the validation-mojo
         // configuration. Once this is installed, we can run a project build that
         // uses it to see how Maven will respond to a modification in the project build directory.
-        Verifier verifier = new Verifier( pluginDir.getAbsolutePath() );
+        IntegrationTestRunner verifier = new IntegrationTestRunner( pluginDir.getAbsolutePath() );
         verifier.executeGoal( "install" );
 
         verifier.verifyErrorFreeLog();
@@ -64,7 +63,7 @@ public class MavenITmng3530DynamicPOMInterpolationTest
 
         // Now, build the project. If the plugin configuration doesn't recognize
         // the update to the project.build.directory, it will fail the build.
-        verifier = new Verifier( projectDir.getAbsolutePath() );
+        verifier = new IntegrationTestRunner( projectDir.getAbsolutePath() );
 
         verifier.executeGoal( "package" );
         verifier.verifyErrorFreeLog();
@@ -74,7 +73,7 @@ public class MavenITmng3530DynamicPOMInterpolationTest
     public void testitMNG3530_POMProperty()
         throws Exception
     {
-        File testDir = ResourceExtractor.simpleExtractResources( getClass(), BASEDIR
+        File testDir = extractTestResources( getClass(), BASEDIR
                                                                              + "pom-property" );
         File pluginDir = new File( testDir, "plugin" );
         File projectDir = new File( testDir, "project" );
@@ -83,7 +82,7 @@ public class MavenITmng3530DynamicPOMInterpolationTest
         // validates that the modification propagated into the validation-mojo
         // configuration. Once this is installed, we can run a project build that
         // uses it to see how Maven will respond to a modification in the POM property.
-        Verifier verifier = new Verifier( pluginDir.getAbsolutePath() );
+        IntegrationTestRunner verifier = new IntegrationTestRunner( pluginDir.getAbsolutePath() );
         verifier.executeGoal( "install" );
 
         verifier.verifyErrorFreeLog();
@@ -91,7 +90,7 @@ public class MavenITmng3530DynamicPOMInterpolationTest
 
         // Now, build the project. If the plugin configuration doesn't recognize
         // the update to the myDirectory, it will fail the build.
-        verifier = new Verifier( projectDir.getAbsolutePath() );
+        verifier = new IntegrationTestRunner( projectDir.getAbsolutePath() );
 
         verifier.executeGoal( "package" );
         verifier.verifyErrorFreeLog();
@@ -101,14 +100,14 @@ public class MavenITmng3530DynamicPOMInterpolationTest
     public void testitMNG3530_ResourceDirectoryInterpolation()
         throws Exception
     {
-        File testDir = ResourceExtractor.simpleExtractResources( getClass(), BASEDIR
+        File testDir = extractTestResources( getClass(), BASEDIR
                                                                              + "resource-object" );
         File pluginDir = new File( testDir, "plugin" );
         File projectDir = new File( testDir, "project" );
 
         // First, install the plugin which validates that all resource directory
         // specifications have been interpolated.
-        Verifier verifier = new Verifier( pluginDir.getAbsolutePath() );
+        IntegrationTestRunner verifier = new IntegrationTestRunner( pluginDir.getAbsolutePath() );
         verifier.executeGoal( "install" );
 
         verifier.verifyErrorFreeLog();
@@ -116,7 +115,7 @@ public class MavenITmng3530DynamicPOMInterpolationTest
 
         // Now, build the project. If the plugin finds an uninterpolated resource
         // directory, it will fail the build.
-        verifier = new Verifier( projectDir.getAbsolutePath() );
+        verifier = new IntegrationTestRunner( projectDir.getAbsolutePath() );
 
         verifier.executeGoal( "package" );
         verifier.verifyErrorFreeLog();

@@ -1,15 +1,14 @@
 package org.apache.maven.integrationtests;
 
-import org.apache.maven.artifact.versioning.InvalidVersionSpecificationException;
-import org.apache.maven.it.DefaultInvocationRequest;
-import org.apache.maven.it.InvocationRequest;
-import org.apache.maven.it.Verifier;
-import org.apache.maven.it.util.ResourceExtractor;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+
+import org.apache.maven.artifact.versioning.InvalidVersionSpecificationException;
+import org.apache.maven.it.DefaultInvocationRequest;
+import org.apache.maven.it.IntegrationTestRunner;
+import org.apache.maven.it.InvocationRequest;
 
 /**
  * This is a sample integration test. The IT tests typically operate by having a sample project in
@@ -35,13 +34,13 @@ public class MavenITmng3099SettingsProfilesWithNoPOM
     {
         // The testdir is computed from the location of this
         // file.
-        File testDir = ResourceExtractor.simpleExtractResources( getClass(), "/mng-3099-settingsProfilesWithNoPOM" );
+        File testDir = extractTestResources( getClass(), "/mng-3099-settingsProfilesWithNoPOM" );
 
         File plugin = new File( testDir, "plugin" );
 
-        Verifier verifier;
+        IntegrationTestRunner verifier;
 
-        verifier = new Verifier( plugin.getAbsolutePath() );
+        verifier = new IntegrationTestRunner( plugin.getAbsolutePath() );
 
         verifier.executeGoal( "install" );
 
@@ -51,7 +50,7 @@ public class MavenITmng3099SettingsProfilesWithNoPOM
          */
         verifier.resetStreams();
 
-        verifier = new Verifier( testDir.getAbsolutePath() );
+        verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
 
         /*
          * Use the settings for this test, which contains the profile we're looking for.

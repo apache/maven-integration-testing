@@ -19,10 +19,9 @@
 
 package org.apache.maven.integrationtests;
 
-import org.apache.maven.it.Verifier;
-import org.apache.maven.it.util.ResourceExtractor;
-
 import java.io.File;
+
+import org.apache.maven.it.IntegrationTestRunner;
 
 /**
  * This is a test set for <a href="http://jira.codehaus.org/browse/MNG-3498">MNG-3498</a>.
@@ -47,12 +46,12 @@ public class MavenITmng3498ForkToOtherMojoTest
     {
         // The testdir is computed from the location of this
         // file.
-        File testDir = ResourceExtractor.simpleExtractResources( getClass(), "/mng-3498" );
+        File testDir = extractTestResources( getClass(), "/mng-3498" );
 
         File pluginDir = new File( testDir, "maven-mng3498-plugin" );
         File projectDir = new File( testDir, "mng-3498-project" );
 
-        Verifier verifier = new Verifier( pluginDir.getAbsolutePath() );
+        IntegrationTestRunner verifier = new IntegrationTestRunner( pluginDir.getAbsolutePath() );
         verifier.deleteArtifact( "org.apache.maven.its.mng3498", "maven-mng3498-plugin", "1", "pom" );
 
         verifier.executeGoal( "install" );
@@ -60,7 +59,7 @@ public class MavenITmng3498ForkToOtherMojoTest
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
 
-        verifier = new Verifier( projectDir.getAbsolutePath() );
+        verifier = new IntegrationTestRunner( projectDir.getAbsolutePath() );
 
         verifier.executeGoal( "validate" );
 

@@ -1,11 +1,10 @@
 package org.apache.maven.integrationtests;
 
 import java.io.File;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 
-import org.apache.maven.it.Verifier;
-import org.apache.maven.it.util.ResourceExtractor;
+import org.apache.maven.it.IntegrationTestRunner;
 
 public class MavenIT0129ResourceProvidedToAPluginAsAPluginDependency
     extends AbstractMavenIntegrationTestCase
@@ -14,12 +13,12 @@ public class MavenIT0129ResourceProvidedToAPluginAsAPluginDependency
         throws Exception
     {
         File testDir =
-            ResourceExtractor.simpleExtractResources( getClass(), "/it0129-resourcesForAPluginProvidedAsAPluginDependency" );
+            extractTestResources( getClass(), "/it0129-resourcesForAPluginProvidedAsAPluginDependency" );
 
-        Verifier verifier;
+        IntegrationTestRunner verifier;
 
         // Install the parent POM, extension and the plugin
-        verifier = new Verifier( testDir.getAbsolutePath() );
+        verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
         verifier.deleteArtifact( "org.apache.maven.its.it0129", "it0129-plugin-runner", "1.0", "pom" );
         verifier.deleteArtifact( "org.apache.maven.its.it0129", "it0129-extension", "1.0", "jar" );
         verifier.deleteArtifact( "org.apache.maven.its.it0129", "it0129-plugin", "1.0", "jar" );
@@ -31,8 +30,8 @@ public class MavenIT0129ResourceProvidedToAPluginAsAPluginDependency
         verifier.resetStreams();
 
         //now run the test
-        testDir = ResourceExtractor.simpleExtractResources( getClass(), "/it0129-resourcesForAPluginProvidedAsAPluginDependency/test-project" );
-        verifier = new Verifier( testDir.getAbsolutePath() );
+        testDir = extractTestResources( getClass(), "/it0129-resourcesForAPluginProvidedAsAPluginDependency/test-project" );
+        verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
         cliOptions = new ArrayList();
         verifier.executeGoal( "verify" );
         verifier.verifyErrorFreeLog();

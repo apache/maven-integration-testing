@@ -5,9 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.maven.artifact.versioning.InvalidVersionSpecificationException;
-import org.apache.maven.integrationtests.AbstractMavenIntegrationTestCase;
-import org.apache.maven.it.Verifier;
-import org.apache.maven.it.util.ResourceExtractor;
+import org.apache.maven.it.IntegrationTestRunner;
 
 /**
  * @author <a href="mailto:brianf@apache.org">Brian Fox</a>
@@ -28,9 +26,9 @@ public class MavenITmng2277AggregatorAndResolutionPluginsTest
    
         // The testdir is computed from the location of this
         // file.
-        File testDir = ResourceExtractor.simpleExtractResources( getClass(), "/mng2277aggregatorPlugins" );
+        File testDir = extractTestResources( getClass(), "/mng2277aggregatorPlugins" );
 
-        Verifier verifier;
+        IntegrationTestRunner verifier;
 
         /*
          * We must first make sure that any artifact created
@@ -39,7 +37,7 @@ public class MavenITmng2277AggregatorAndResolutionPluginsTest
          * unstable test results. Fortunately, the verifier
          * makes it easy to do this.
          */
-        verifier = new Verifier( testDir.getAbsolutePath() );
+        verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
         verifier.deleteArtifact( "org.apache.maven.its.mng2277", "parent", "1.0", "pom" );
         verifier.deleteArtifact( "org.apache.maven.its.mng2277", "test", "1.0", "jar" );
         verifier.deleteArtifact( "org.apache.maven.its.mng2277", "assembly", "1.0", "jar" );

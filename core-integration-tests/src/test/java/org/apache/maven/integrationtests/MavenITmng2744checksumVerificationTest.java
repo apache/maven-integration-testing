@@ -1,13 +1,9 @@
 package org.apache.maven.integrationtests;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
 
 import org.apache.maven.artifact.versioning.InvalidVersionSpecificationException;
-import org.apache.maven.integrationtests.AbstractMavenIntegrationTestCase;
-import org.apache.maven.it.Verifier;
-import org.apache.maven.it.util.ResourceExtractor;
+import org.apache.maven.it.IntegrationTestRunner;
 
 /**
  * Tests that artifact checksums are properly verified.
@@ -28,9 +24,9 @@ public class MavenITmng2744checksumVerificationTest
     public void testitMNG2744()
         throws Exception
     {
-        File testDir = ResourceExtractor.simpleExtractResources( getClass(), "/mng-2744-checksumVerification" );
+        File testDir = extractTestResources( getClass(), "/mng-2744-checksumVerification" );
 
-        Verifier verifier = new Verifier( testDir.getAbsolutePath() );
+        IntegrationTestRunner verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
 
         verifier.deleteArtifact( "org.apache.maven.its.mng2744", "a", "1", "pom" );
         verifier.deleteArtifact( "org.apache.maven.its.mng2744", "a", "1", "jar" );

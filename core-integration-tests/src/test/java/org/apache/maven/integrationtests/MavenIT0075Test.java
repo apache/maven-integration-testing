@@ -1,12 +1,10 @@
 package org.apache.maven.integrationtests;
 
-import org.apache.maven.it.Verifier;
-import org.apache.maven.it.util.ResourceExtractor;
-
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
+
+import org.apache.maven.it.IntegrationTestRunner;
 
 public class MavenIT0075Test
     extends AbstractMavenIntegrationTestCase
@@ -19,8 +17,8 @@ public class MavenIT0075Test
     public void testit0075()
         throws Exception
     {
-        File testDir = ResourceExtractor.simpleExtractResources( getClass(), "/it0075" );
-        Verifier verifier = new Verifier( testDir.getAbsolutePath() );
+        File testDir = extractTestResources( getClass(), "/it0075" );
+        IntegrationTestRunner verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
         List cliOptions = new ArrayList();
         cliOptions.add( "-Dactivate=anything" );
         verifier.executeGoal( "help:active-profiles, package, eclipse:eclipse, clean:clean", cliOptions );

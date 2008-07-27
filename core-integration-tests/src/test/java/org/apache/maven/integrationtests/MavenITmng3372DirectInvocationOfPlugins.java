@@ -1,14 +1,12 @@
 package org.apache.maven.integrationtests;
 
-import org.apache.maven.it.Verifier;
-import org.apache.maven.it.util.ResourceExtractor;
-
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import junit.framework.TestCase;
+
+import org.apache.maven.it.IntegrationTestRunner;
 
 /**
  * This is a sample integration test. The IT tests typically
@@ -24,7 +22,7 @@ import junit.framework.TestCase;
  *
  */
 public class MavenITmng3372DirectInvocationOfPlugins
-    extends TestCase
+    extends AbstractMavenIntegrationTestCase
 {
 
     public void testitMNG3372()
@@ -32,15 +30,15 @@ public class MavenITmng3372DirectInvocationOfPlugins
     {
         // The testdir is computed from the location of this
         // file.
-        File testBaseDir = ResourceExtractor.simpleExtractResources( getClass(), "/mng-3372-directInvocationOfPlugins/direct-using-prefix" );
+        File testBaseDir = extractTestResources( getClass(), "/mng-3372-directInvocationOfPlugins/direct-using-prefix" );
         File plugin = new File( testBaseDir, "plugin" );
         File project = new File( testBaseDir, "project" );
         File settingsFile = new File( testBaseDir, "settings.xml" );
 
-        Verifier verifier = new Verifier( plugin.getAbsolutePath() );
+        IntegrationTestRunner verifier = new IntegrationTestRunner( plugin.getAbsolutePath() );
         verifier.deleteArtifact( "org.apache.maven.its.mng3372", "mng3372-maven-plugin", "1", "jar" );
         verifier.executeGoal( "clean, install" );
-        verifier = new Verifier( project.getAbsolutePath() );
+        verifier = new IntegrationTestRunner( project.getAbsolutePath() );
 
         List cliOptions = new ArrayList();
         cliOptions.add( "-s" );
@@ -56,8 +54,8 @@ public class MavenITmng3372DirectInvocationOfPlugins
     {
         // The testdir is computed from the location of this
         // file.
-        File testBaseDir = ResourceExtractor.simpleExtractResources( getClass(), "/mng-3372-directInvocationOfPlugins/dependency-tree" );
-        Verifier verifier = new Verifier( testBaseDir.getAbsolutePath() );
+        File testBaseDir = extractTestResources( getClass(), "/mng-3372-directInvocationOfPlugins/dependency-tree" );
+        IntegrationTestRunner verifier = new IntegrationTestRunner( testBaseDir.getAbsolutePath() );
         List cliOptions = new ArrayList();
         cliOptions.add( "-U" );
         verifier.executeGoal( "dependency:tree", cliOptions );

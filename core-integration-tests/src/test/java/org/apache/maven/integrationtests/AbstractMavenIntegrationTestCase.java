@@ -85,7 +85,7 @@ public abstract class AbstractMavenIntegrationTestCase
     protected void runTest()
         throws Throwable
     {
-        out.print( getITName() + "(" + getName() + ").." );
+        out.print( getITName() + "(" + getName() + "[" + getLocation() + "]).." );
 
         if ( skip )
         {
@@ -145,7 +145,26 @@ public abstract class AbstractMavenIntegrationTestCase
     {
         return new DefaultInvocationRequest().setGoals( goals );
     }
+
+    private String getLocation()
+    {
+        String location = getClass().getName().substring( getClass().getPackage().getName().length() + 6 ).toLowerCase();
+        location = location.substring( 0, location.length() - 4 );
+        return location;
+    }
     
+    // The end goal will be to pull the resources required for a test based on naming. Right now we can't
+    // because no one stuck to the original naming.
+    public IntegrationTestRunner createTestRunner()
+        throws IOException, IntegrationTestException
+    {
+        String location = getLocation();
+        System.out.println( location);
+        File basedir = extractTestResources( getClass(), location );
+        IntegrationTestRunner runner = new IntegrationTestRunner( basedir );
+        return runner;
+    }
+
     public IntegrationTestRunner createTestRunner( String location )
         throws IOException, IntegrationTestException
     {
@@ -153,9 +172,9 @@ public abstract class AbstractMavenIntegrationTestCase
         {
             location = "/" + location;
         }
-        
+
         File basedir = extractTestResources( getClass(), location );
-        IntegrationTestRunner runner = new IntegrationTestRunner( basedir );        
+        IntegrationTestRunner runner = new IntegrationTestRunner( basedir );
         return runner;
     }
 }

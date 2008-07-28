@@ -14,7 +14,7 @@ public class MavenIT0000Test
     public void testit0000()
         throws Exception
     {
-        IntegrationTestRunner itr = createTestRunner( "it000" );
+        IntegrationTestRunner itr = createTestRunner();
         itr.invoke( createInvocationRequest( "package" ) );
         itr.assertFilePresent( "target/classes/org/apache/maven/it0000/Person.class" );
         itr.assertFilePresent( "target/test-classes/org/apache/maven/it0000/PersonTest.class" );

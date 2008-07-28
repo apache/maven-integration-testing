@@ -1,7 +1,5 @@
 package org.apache.maven.integrationtests;
 
-import java.io.File;
-
 import org.apache.maven.it.IntegrationTestRunner;
 
 public class MavenIT0002Test
@@ -14,10 +12,9 @@ public class MavenIT0002Test
     public void testit0002()
         throws Exception
     {
-        File testDir = extractTestResources( getClass(), "/it0002" );
-        IntegrationTestRunner verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
+        IntegrationTestRunner verifier = createTestRunner( "it002" );
         verifier.deleteArtifact( "org.apache.maven.its", "maven-core-it-support", "1.0", "jar" );
-        verifier.executeGoal( "package" );
+        verifier.invoke( createInvocationRequest( "package" ) );        
         verifier.assertFilePresent( "target/classes/org/apache/maven/it0002/Person.class" );
         verifier.assertFilePresent( "target/test-classes/org/apache/maven/it0002/PersonTest.class" );
         verifier.assertFilePresent( "target/maven-it-it0002-1.0.jar" );
@@ -25,7 +22,6 @@ public class MavenIT0002Test
         verifier.assertArtifactPresent( "org.apache.maven.its", "maven-core-it-support", "1.0", "jar" );
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
-
     }
 }
 

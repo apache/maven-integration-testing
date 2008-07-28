@@ -149,6 +149,11 @@ public abstract class AbstractMavenIntegrationTestCase
     public IntegrationTestRunner createTestRunner( String location )
         throws IOException, IntegrationTestException
     {
+        if ( !location.startsWith( "/" ) )
+        {
+            location = "/" + location;
+        }
+        
         File basedir = extractTestResources( getClass(), location );
         IntegrationTestRunner runner = new IntegrationTestRunner( basedir );        
         return runner;

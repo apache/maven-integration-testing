@@ -15,16 +15,14 @@ public class MavenIT0001Test
     public void testit0001()
         throws Exception
     {
-        File testDir = extractTestResources( getClass(), "/it0001" );
-        IntegrationTestRunner verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
-        verifier.executeGoal( "package" );
+        IntegrationTestRunner verifier = createTestRunner( "it001" );
+        verifier.invoke( createInvocationRequest( "package" ) );        
         verifier.assertFilePresent( "target/classes/org/apache/maven/it0001/Person.class" );
         verifier.assertFilePresent( "target/test-classes/org/apache/maven/it0001/PersonTest.class" );
         verifier.assertFilePresent( "target/maven-it-it0001-1.0.jar" );
         verifier.assertFilePresent( "target/maven-it-it0001-1.0.jar!/it0001.properties" );
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
-
     }
 }
 

@@ -29,14 +29,14 @@ public class MavenITmng2254PomEncodingTest
         // file.
         File testDir = extractTestResources( getClass(), "/mng-2254-PomEncoding" );
 
-        IntegrationTestRunner verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
+        IntegrationTestRunner itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
 
         List cliOptions = new ArrayList();
         cliOptions.add( "-N" );
-        verifier.executeGoal( "compile" );
+        itr.executeGoal( "compile" );
 
-        verifier.verifyErrorFreeLog();
+        itr.verifyErrorFreeLog();
 
-        verifier.resetStreams();
+        itr.resetStreams();
     }
 }

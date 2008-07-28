@@ -13,31 +13,31 @@ public class MavenIT0119PluginPrefixOrder
     {
         File testDir = extractTestResources( getClass(), "/it0119-pluginprefixorder" );
 
-        IntegrationTestRunner verifier;
+        IntegrationTestRunner itr;
 
         // Install the parent POM, extension and the plugin
-        verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
+        itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
 
-        verifier.executeGoal( "install" );
-        verifier.verifyErrorFreeLog();
-        verifier.resetStreams();
+        itr.executeGoal( "install" );
+        itr.verifyErrorFreeLog();
+        itr.resetStreams();
         
 
         // now run the test. Since we have apache and codehaus, i should get the apache one first
         testDir = extractTestResources( getClass(), "/it0119-pluginprefixorder/test-project" );
-        verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
-        verifier.executeGoal( "it0119:apache" );
-        verifier.verifyErrorFreeLog();
+        itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
+        itr.executeGoal( "it0119:apache" );
+        itr.verifyErrorFreeLog();
 
         
 //      now run the test. Since we have apache and codehaus and a prefix in my settings, i should get the custom one first
         testDir = extractTestResources( getClass(), "/it0119-pluginprefixorder/test-project" );
-        verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
+        itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
         
         //use my custom settings upon invocation.
         ArrayList cli = new ArrayList();
         cli.add("-s '" +testDir.getAbsolutePath()+"/settings.xml'");
-        verifier.executeGoal( "it0119:custom", cli );
-        verifier.verifyErrorFreeLog();
+        itr.executeGoal( "it0119:custom", cli );
+        itr.verifyErrorFreeLog();
     }
 }

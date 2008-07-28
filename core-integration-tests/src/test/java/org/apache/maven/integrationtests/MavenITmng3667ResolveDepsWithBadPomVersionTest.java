@@ -52,21 +52,21 @@ public class MavenITmng3667ResolveDepsWithBadPomVersionTest
         File repoDir = new File( testDir, "repo" );
         File projectDir = new File( testDir, "project" );
 
-        IntegrationTestRunner verifier;
+        IntegrationTestRunner itr;
 
         /*
          * We must first make sure that any artifact created
          * by this test has been removed from the local
          * repository. Failing to do this could cause
-         * unstable test results. Fortunately, the verifier
+         * unstable test results. Fortunately, the itr
          * makes it easy to do this.
          */
-        verifier = new IntegrationTestRunner( projectDir.getAbsolutePath() );
+        itr = new IntegrationTestRunner( projectDir.getAbsolutePath() );
         
-        File localRepoDir = new File( verifier.localRepo );
+        File localRepoDir = new File( itr.localRepo );
         FileUtils.copyDirectoryStructure( repoDir, localRepoDir );
 
-        verifier.executeGoal( "compile" );
+        itr.executeGoal( "compile" );
 
         /*
          * This is the simplest way to check a build
@@ -74,15 +74,15 @@ public class MavenITmng3667ResolveDepsWithBadPomVersionTest
          * an IT test: make the build pass when the test
          * should pass, and make the build fail when the
          * test should fail. There are other methods
-         * supported by the verifier. They can be seen here:
-         * http://maven.apache.org/shared/maven-verifier/apidocs/index.html
+         * supported by the itr. They can be seen here:
+         * http://maven.apache.org/shared/maven-itr/apidocs/index.html
          */
-        verifier.verifyErrorFreeLog();
+        itr.verifyErrorFreeLog();
 
         /*
-         * Reset the streams before executing the verifier
+         * Reset the streams before executing the itr
          * again.
          */
-        verifier.resetStreams();
+        itr.resetStreams();
     }
 }

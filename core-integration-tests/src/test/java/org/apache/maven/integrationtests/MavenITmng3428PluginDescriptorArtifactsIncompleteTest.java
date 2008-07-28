@@ -22,10 +22,10 @@ public class MavenITmng3428PluginDescriptorArtifactsIncompleteTest
     {
         File testDir = extractTestResources( getClass(), "/mng-3428-pluginDescriptorArtifactsIncomplete" );
 
-        IntegrationTestRunner verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
+        IntegrationTestRunner itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
 
         // First, build the plugin we'll use to test the PluginDescriptor artifact collection.
-        verifier.executeGoal( "install" );
+        itr.executeGoal( "install" );
 
         /*
          * This is the simplest way to check a build
@@ -33,22 +33,22 @@ public class MavenITmng3428PluginDescriptorArtifactsIncompleteTest
          * an IT test: make the build pass when the test
          * should pass, and make the build fail when the
          * test should fail. There are other methods
-         * supported by the verifier. They can be seen here:
-         * http://maven.apache.org/shared/maven-verifier/apidocs/index.html
+         * supported by the itr. They can be seen here:
+         * http://maven.apache.org/shared/maven-itr/apidocs/index.html
          */
-        verifier.verifyErrorFreeLog();
+        itr.verifyErrorFreeLog();
 
         /*
-         * Reset the streams before executing the verifier
+         * Reset the streams before executing the itr
          * again.
          */
-        verifier.resetStreams();
+        itr.resetStreams();
 
         // This should only succeed if commons-cli is part of ${plugin.artifacts}. The
         // commons-cli library is part of Maven's core classpath, so if this mojo succeeds
         // it means the PluginDescriptor.getArtifacts() call returns an unfiltered collection.
-        verifier.executeGoal( "tests:test-cli-maven-plugin:1:test" );
-        verifier.verifyErrorFreeLog();
-        verifier.resetStreams();
+        itr.executeGoal( "tests:test-cli-maven-plugin:1:test" );
+        itr.verifyErrorFreeLog();
+        itr.resetStreams();
     }
 }

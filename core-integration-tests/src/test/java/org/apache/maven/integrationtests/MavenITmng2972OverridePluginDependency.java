@@ -26,36 +26,36 @@ public class MavenITmng2972OverridePluginDependency
         // file.
         File testDir = extractTestResources( getClass(), "/mng2972-overridingPluginDependency" );
 
-        IntegrationTestRunner verifier;
+        IntegrationTestRunner itr;
 
         /*
          * We must first make sure that any artifact created by this test has been removed from the local repository.
-         * Failing to do this could cause unstable test results. Fortunately, the verifier makes it easy to do this.
+         * Failing to do this could cause unstable test results. Fortunately, the itr makes it easy to do this.
          */
-        verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
-        verifier.deleteArtifact( "org.apache.maven.its.mng2972", "user", "1.0", "jar" );
-        verifier.deleteArtifact( "org.apache.maven.its.mng2972", "mojo", "0.0.1-SNAPSHOT", "jar" );
-        verifier.deleteArtifact( "org.apache.maven.its.mng2972", "dep", "1.0", "jar" );
-        verifier.deleteArtifact( "org.apache.maven.its.mng2972", "dep", "2.0", "jar" );
+        itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
+        itr.deleteArtifact( "org.apache.maven.its.mng2972", "user", "1.0", "jar" );
+        itr.deleteArtifact( "org.apache.maven.its.mng2972", "mojo", "0.0.1-SNAPSHOT", "jar" );
+        itr.deleteArtifact( "org.apache.maven.its.mng2972", "dep", "1.0", "jar" );
+        itr.deleteArtifact( "org.apache.maven.its.mng2972", "dep", "2.0", "jar" );
 
-        verifier = new IntegrationTestRunner( new File( testDir.getAbsolutePath(), "dep1" ).getAbsolutePath() );
-        verifier.executeGoal( "install" );
-        verifier.verifyErrorFreeLog();
+        itr = new IntegrationTestRunner( new File( testDir.getAbsolutePath(), "dep1" ).getAbsolutePath() );
+        itr.executeGoal( "install" );
+        itr.verifyErrorFreeLog();
 
-        verifier = new IntegrationTestRunner( new File( testDir.getAbsolutePath(), "dep2" ).getAbsolutePath() );
-        verifier.executeGoal( "install" );
-        verifier.verifyErrorFreeLog();
+        itr = new IntegrationTestRunner( new File( testDir.getAbsolutePath(), "dep2" ).getAbsolutePath() );
+        itr.executeGoal( "install" );
+        itr.verifyErrorFreeLog();
 
-        verifier = new IntegrationTestRunner( new File( testDir.getAbsolutePath(), "mojo" ).getAbsolutePath() );
-        verifier.executeGoal( "install" );
-        verifier.verifyErrorFreeLog();
+        itr = new IntegrationTestRunner( new File( testDir.getAbsolutePath(), "mojo" ).getAbsolutePath() );
+        itr.executeGoal( "install" );
+        itr.verifyErrorFreeLog();
 
-        verifier = new IntegrationTestRunner( new File( testDir.getAbsolutePath(), "user" ).getAbsolutePath() );
-        verifier.executeGoal( "validate" );
-        verifier.verifyErrorFreeLog();
+        itr = new IntegrationTestRunner( new File( testDir.getAbsolutePath(), "user" ).getAbsolutePath() );
+        itr.executeGoal( "validate" );
+        itr.verifyErrorFreeLog();
 
         List lines =
-            verifier.loadFile( new File( testDir.getAbsolutePath(), "user" ).getAbsolutePath(), "log.txt", false );
+            itr.loadFile( new File( testDir.getAbsolutePath(), "user" ).getAbsolutePath(), "log.txt", false );
         int foundVersionOne = 0;
         int foundVersionTwo = 0;
         for ( Iterator i = lines.iterator(); i.hasNext(); )
@@ -68,7 +68,7 @@ public class MavenITmng2972OverridePluginDependency
                 foundVersionTwo++;
         }
 
-        verifier.resetStreams();
+        itr.resetStreams();
 
         Assert.assertEquals( "Should not be using plugin dependency version 1", 0, foundVersionOne );
         Assert.assertEquals( "Should be using plugin version 2 once.", 1, foundVersionTwo );
@@ -77,11 +77,11 @@ public class MavenITmng2972OverridePluginDependency
          * Now try to execute the plugin directly
          */
 
-        verifier = new IntegrationTestRunner( new File( testDir.getAbsolutePath(), "user" ).getAbsolutePath() );
-        verifier.executeGoal( "org.apache.maven.its.mng2972:mojo:0.0.1-SNAPSHOT:test" );
-        verifier.verifyErrorFreeLog();
+        itr = new IntegrationTestRunner( new File( testDir.getAbsolutePath(), "user" ).getAbsolutePath() );
+        itr.executeGoal( "org.apache.maven.its.mng2972:mojo:0.0.1-SNAPSHOT:test" );
+        itr.verifyErrorFreeLog();
 
-        lines = verifier.loadFile( new File( testDir.getAbsolutePath(), "user" ).getAbsolutePath(), "log.txt", false );
+        lines = itr.loadFile( new File( testDir.getAbsolutePath(), "user" ).getAbsolutePath(), "log.txt", false );
         foundVersionOne = 0;
         foundVersionTwo = 0;
         for ( Iterator i = lines.iterator(); i.hasNext(); )
@@ -94,7 +94,7 @@ public class MavenITmng2972OverridePluginDependency
                 foundVersionTwo++;
         }
 
-        verifier.resetStreams();
+        itr.resetStreams();
 
         Assert.assertEquals( "Should not be using plugin dependency version 1", 0, foundVersionOne );
         Assert.assertEquals( "Should be using plugin version 2 once.", 1, foundVersionTwo );

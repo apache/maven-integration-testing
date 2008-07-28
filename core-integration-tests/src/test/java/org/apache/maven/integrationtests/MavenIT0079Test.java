@@ -16,14 +16,14 @@ public class MavenIT0079Test
         throws Exception
     {
         File testDir = extractTestResources( getClass(), "/it0079" );
-        IntegrationTestRunner verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
-        verifier.executeGoal( "deploy" );
-        verifier.assertFilePresent(
+        IntegrationTestRunner itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
+        itr.executeGoal( "deploy" );
+        itr.assertFilePresent(
             "target/test-repo/org/apache/maven/its/it0079/maven-it-it0079/SNAPSHOT/maven-it-it0079-*-1.jar" );
-        verifier.assertFilePresent(
+        itr.assertFilePresent(
             "target/test-repo/org/apache/maven/its/it0079/maven-it-it0079/SNAPSHOT/maven-it-it0079-*-1-sources.jar" );
-        verifier.verifyErrorFreeLog();
-        verifier.resetStreams();
+        itr.verifyErrorFreeLog();
+        itr.resetStreams();
 
     }
 }

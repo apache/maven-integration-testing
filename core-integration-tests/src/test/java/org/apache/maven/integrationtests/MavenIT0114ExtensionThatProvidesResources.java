@@ -22,28 +22,28 @@ public class MavenIT0114ExtensionThatProvidesResources
         File testDir =
             extractTestResources( getClass(), "/it0114-extensionThatProvidesResources" );
 
-        IntegrationTestRunner verifier;
+        IntegrationTestRunner itr;
 
         // Install the parent POM, extension and the plugin 
-        verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
-        verifier.deleteArtifact( "org.apache.maven.its.it0114", "it0114-plugin-runner", "1.0", "pom" );                
-        verifier.deleteArtifact( "org.apache.maven.its.it0114", "it0114-extension", "1.0", "jar" );
-        verifier.deleteArtifact( "org.apache.maven.its.it0114", "it0114-plugin", "1.0", "jar" );
-        verifier.deleteArtifact( "org.apache.maven.its.it0114", "it0114-parent", "1.0", "pom" );
+        itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
+        itr.deleteArtifact( "org.apache.maven.its.it0114", "it0114-plugin-runner", "1.0", "pom" );                
+        itr.deleteArtifact( "org.apache.maven.its.it0114", "it0114-extension", "1.0", "jar" );
+        itr.deleteArtifact( "org.apache.maven.its.it0114", "it0114-plugin", "1.0", "jar" );
+        itr.deleteArtifact( "org.apache.maven.its.it0114", "it0114-parent", "1.0", "pom" );
         
         List cliOptions = new ArrayList();        
-        verifier.executeGoal( "install" );
-        verifier.verifyErrorFreeLog();
-        verifier.resetStreams();
+        itr.executeGoal( "install" );
+        itr.verifyErrorFreeLog();
+        itr.resetStreams();
         
         //now run the test
         testDir =
             extractTestResources( getClass(), "/it0114-extensionThatProvidesResources/test-project" );
-        verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
+        itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
         cliOptions = new ArrayList();
-        verifier.executeGoal( "verify" );
-        verifier.verifyErrorFreeLog();
-        verifier.resetStreams();
+        itr.executeGoal( "verify" );
+        itr.verifyErrorFreeLog();
+        itr.resetStreams();
         
     }
 }

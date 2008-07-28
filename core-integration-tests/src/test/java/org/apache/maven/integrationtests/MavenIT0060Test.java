@@ -17,14 +17,14 @@ public class MavenIT0060Test
         throws Exception
     {
         File testDir = extractTestResources( getClass(), "/it0060" );
-        IntegrationTestRunner verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
-        verifier.executeGoal( "test" );
-        verifier.assertFilePresent( "subproject/target/classes/org/apache/maven/it0060/Person.class" );
-        verifier.assertFilePresent( "subproject/target/test-classes/org/apache/maven/it0060/PersonTest.class" );
-        verifier.assertFileNotPresent( "subproject/target/test-classes/org/apache/maven/it0060/PersonTwoTest.class" );
-        verifier.assertFileNotPresent( "subproject/target/test-classes/org/apache/maven/it0060/PersonThreeTest.class" );
-        verifier.verifyErrorFreeLog();
-        verifier.resetStreams();
+        IntegrationTestRunner itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
+        itr.executeGoal( "test" );
+        itr.assertFilePresent( "subproject/target/classes/org/apache/maven/it0060/Person.class" );
+        itr.assertFilePresent( "subproject/target/test-classes/org/apache/maven/it0060/PersonTest.class" );
+        itr.assertFileNotPresent( "subproject/target/test-classes/org/apache/maven/it0060/PersonTwoTest.class" );
+        itr.assertFileNotPresent( "subproject/target/test-classes/org/apache/maven/it0060/PersonThreeTest.class" );
+        itr.verifyErrorFreeLog();
+        itr.resetStreams();
 
     }
 }

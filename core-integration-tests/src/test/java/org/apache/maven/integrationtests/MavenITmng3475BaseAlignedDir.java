@@ -22,19 +22,19 @@ public class MavenITmng3475BaseAlignedDir
                                                                  "/mng-3475-baseAlignedDir" );
 
         File pluginDir = new File( testDir, "plugin" );
-        IntegrationTestRunner verifier = new IntegrationTestRunner( pluginDir.getAbsolutePath() );
+        IntegrationTestRunner itr = new IntegrationTestRunner( pluginDir.getAbsolutePath() );
 
-        verifier.executeGoal( "install" );
+        itr.executeGoal( "install" );
 
-        verifier.verifyErrorFreeLog();
-        verifier.resetStreams();
+        itr.verifyErrorFreeLog();
+        itr.resetStreams();
 
         File projectDir = new File( testDir, "project" );
-        verifier = new IntegrationTestRunner( projectDir.getAbsolutePath() );
+        itr = new IntegrationTestRunner( projectDir.getAbsolutePath() );
 
-        verifier.executeGoal( "validate" );
-        verifier.verifyErrorFreeLog();
-        verifier.resetStreams();
+        itr.executeGoal( "validate" );
+        itr.verifyErrorFreeLog();
+        itr.resetStreams();
     }
 
 }

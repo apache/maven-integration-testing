@@ -28,12 +28,12 @@ public class MavenITmng1412DependenciesOrderTest
         // The testdir is computed from the location of this file.
         File testDir = extractTestResources( getClass(), "/mng-1412-DependenciesOrder" );
 
-        IntegrationTestRunner verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
+        IntegrationTestRunner itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
 
         List cliOptions = new ArrayList();
         cliOptions.add( "-X" );
-        verifier.executeGoal( "test", cliOptions );
-        verifier.verifyErrorFreeLog();
-        verifier.resetStreams();
+        itr.executeGoal( "test", cliOptions );
+        itr.verifyErrorFreeLog();
+        itr.resetStreams();
     }
 }

@@ -9,16 +9,16 @@ public class MavenIT0006Test
 {
 
     /**
-     * Integration test for the verifier plugin.
+     * Integration test for the itr plugin.
      */
     public void testit0006()
         throws Exception
     {
         File testDir = extractTestResources( getClass(), "/it0006" );
-        IntegrationTestRunner verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
-        verifier.executeGoal( "integration-test" );
-        verifier.verifyErrorFreeLog();
-        verifier.resetStreams();
+        IntegrationTestRunner itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
+        itr.executeGoal( "integration-test" );
+        itr.verifyErrorFreeLog();
+        itr.resetStreams();
 
     }
 }

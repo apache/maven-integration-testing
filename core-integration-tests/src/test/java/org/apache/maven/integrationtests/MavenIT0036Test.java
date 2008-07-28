@@ -15,11 +15,11 @@ public class MavenIT0036Test
         throws Exception
     {
         File testDir = extractTestResources( getClass(), "/it0036" );
-        IntegrationTestRunner verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
-        verifier.executeGoal( "package" );
-        verifier.assertFilePresent( "target/maven-it-it0036-1.0.jar" );
-        verifier.verifyErrorFreeLog();
-        verifier.resetStreams();
+        IntegrationTestRunner itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
+        itr.executeGoal( "package" );
+        itr.assertFilePresent( "target/maven-it-it0036-1.0.jar" );
+        itr.verifyErrorFreeLog();
+        itr.resetStreams();
 
     }
 }

@@ -27,25 +27,25 @@ public class MavenITmng3684BuildPluginParameterTest
         File pluginDir = new File( testDir, "maven-mng3684-plugin" );
         File projectDir = new File( testDir, "project" );
 
-        IntegrationTestRunner verifier = new IntegrationTestRunner( pluginDir.getAbsolutePath() );
-        verifier.executeGoal( "install" );
+        IntegrationTestRunner itr = new IntegrationTestRunner( pluginDir.getAbsolutePath() );
+        itr.executeGoal( "install" );
         
-        verifier.verifyErrorFreeLog();
-        verifier.resetStreams();
+        itr.verifyErrorFreeLog();
+        itr.resetStreams();
         
-        verifier = new IntegrationTestRunner( projectDir.getAbsolutePath() );
-        verifier.executeGoal( "validate" );
+        itr = new IntegrationTestRunner( projectDir.getAbsolutePath() );
+        itr.executeGoal( "validate" );
 
-        verifier.verifyErrorFreeLog();
-        verifier.resetStreams();
+        itr.verifyErrorFreeLog();
+        itr.resetStreams();
         
         File logFile = new File( projectDir, "log.txt" );
         logFile.renameTo( new File( projectDir, "log-validate.txt" ) );
         
-        verifier.executeGoal( "site" );
+        itr.executeGoal( "site" );
 
-        verifier.verifyErrorFreeLog();
-        verifier.resetStreams();
+        itr.verifyErrorFreeLog();
+        itr.resetStreams();
         
         logFile.renameTo( new File( projectDir, "log-site.txt" ) );
         

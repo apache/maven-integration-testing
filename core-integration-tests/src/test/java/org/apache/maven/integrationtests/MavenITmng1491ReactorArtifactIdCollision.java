@@ -13,15 +13,15 @@ public class MavenITmng1491ReactorArtifactIdCollision
     {
         File testDir = extractTestResources( getClass(), "/mng-1491-reactorArtifactIdCollision" );
 
-        IntegrationTestRunner verifier;
+        IntegrationTestRunner itr;
 
-        verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
+        itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
 
         try
         {
-            verifier.executeGoal( "initialize" );
+            itr.executeGoal( "initialize" );
 
-            verifier.verifyErrorFreeLog();
+            itr.verifyErrorFreeLog();
 
             fail( "Build should fail due to duplicate artifactId's in the reactor." );
         }

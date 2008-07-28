@@ -8,7 +8,7 @@ import org.apache.maven.it.IntegrationTestRunner;
  * This is a sample integration test. The IT tests typically
  * operate by having a sample project in the
  * /src/test/resources folder along with a junit test like
- * this one. The junit test uses the verifier (which uses
+ * this one. The junit test uses the itr (which uses
  * the invoker) to invoke a new instance of Maven on the
  * project in the resources folder. It then checks the
  * results. This is a non-trivial example that shows two
@@ -26,11 +26,11 @@ public class MavenITmng3331ModulePathNormalization
         //testMNG3331ModuleWithSpaces
         File testDir = extractTestResources( getClass(), "/mng-3331-modulePathNormalization/with-spaces" );
 
-        IntegrationTestRunner verifier;
+        IntegrationTestRunner itr;
 
-        verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
+        itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
 
-        verifier.executeGoal( "initialize" );
+        itr.executeGoal( "initialize" );
 
         /*
          * This is the simplest way to check a build
@@ -38,16 +38,16 @@ public class MavenITmng3331ModulePathNormalization
          * an IT test: make the build pass when the test
          * should pass, and make the build fail when the
          * test should fail. There are other methods
-         * supported by the verifier. They can be seen here:
-         * http://maven.apache.org/shared/maven-verifier/apidocs/index.html
+         * supported by the itr. They can be seen here:
+         * http://maven.apache.org/shared/maven-itr/apidocs/index.html
          */
-        verifier.verifyErrorFreeLog();
+        itr.verifyErrorFreeLog();
 
         /*
-         * Reset the streams before executing the verifier
+         * Reset the streams before executing the itr
          * again.
          */
-        verifier.resetStreams();
+        itr.resetStreams();
     }
 
     public void testitMNG3331b ()
@@ -56,11 +56,11 @@ public class MavenITmng3331ModulePathNormalization
         //testMNG3331ModuleWithRelativeParentDirRef
         File testDir = extractTestResources( getClass(), "/mng-3331-modulePathNormalization/with-relative-parentDir-ref" );
 
-        IntegrationTestRunner verifier;
+        IntegrationTestRunner itr;
 
-        verifier = new IntegrationTestRunner( new File( testDir, "parent" ).getAbsolutePath() );
+        itr = new IntegrationTestRunner( new File( testDir, "parent" ).getAbsolutePath() );
 
-        verifier.executeGoal( "initialize" );
+        itr.executeGoal( "initialize" );
 
         /*
          * This is the simplest way to check a build
@@ -68,16 +68,16 @@ public class MavenITmng3331ModulePathNormalization
          * an IT test: make the build pass when the test
          * should pass, and make the build fail when the
          * test should fail. There are other methods
-         * supported by the verifier. They can be seen here:
-         * http://maven.apache.org/shared/maven-verifier/apidocs/index.html
+         * supported by the itr. They can be seen here:
+         * http://maven.apache.org/shared/maven-itr/apidocs/index.html
          */
-        verifier.verifyErrorFreeLog();
+        itr.verifyErrorFreeLog();
 
         /*
-         * Reset the streams before executing the verifier
+         * Reset the streams before executing the itr
          * again.
          */
-        verifier.resetStreams();
+        itr.resetStreams();
     }
 
 }

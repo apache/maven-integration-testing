@@ -15,10 +15,10 @@ public class MavenIT0096Test
         throws Exception
     {
         File testDir = extractTestResources( getClass(), "/it0096" );
-        IntegrationTestRunner verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
-        verifier.executeGoal( "package" );
-        verifier.verifyErrorFreeLog();
-        verifier.resetStreams();
+        IntegrationTestRunner itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
+        itr.executeGoal( "package" );
+        itr.verifyErrorFreeLog();
+        itr.resetStreams();
 
     }
 }

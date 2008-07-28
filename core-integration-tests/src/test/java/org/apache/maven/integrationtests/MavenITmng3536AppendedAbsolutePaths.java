@@ -17,18 +17,18 @@ public class MavenITmng3536AppendedAbsolutePaths extends AbstractMavenIntegratio
         File testDir = extractTestResources( getClass(),
                                                                  "/mng-3536-appendedAbsolutePaths" );
         File pluginDir = new File( testDir, "plugin" );
-        IntegrationTestRunner verifier = new IntegrationTestRunner( pluginDir.getAbsolutePath() );
+        IntegrationTestRunner itr = new IntegrationTestRunner( pluginDir.getAbsolutePath() );
 
-        verifier.executeGoal( "install" );
+        itr.executeGoal( "install" );
 
-        verifier.verifyErrorFreeLog();
-        verifier.resetStreams();
+        itr.verifyErrorFreeLog();
+        itr.resetStreams();
 
         File projectDir = new File( testDir, "project" );
-        verifier = new IntegrationTestRunner( projectDir.getAbsolutePath() );
+        itr = new IntegrationTestRunner( projectDir.getAbsolutePath() );
 
-        verifier.executeGoal( "verify" );
-        verifier.verifyErrorFreeLog();
-        verifier.resetStreams();
+        itr.executeGoal( "verify" );
+        itr.verifyErrorFreeLog();
+        itr.resetStreams();
     }
 }

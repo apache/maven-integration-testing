@@ -50,11 +50,11 @@ public class MavenITmng3645POMSyntaxErrorTest
         // file.
         File testDir = extractTestResources( getClass(), "/mng-3645-pomSyntaxError" );
 
-        IntegrationTestRunner verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
+        IntegrationTestRunner itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
 
         try
         {
-            verifier.executeGoal( "validate" );
+            itr.executeGoal( "validate" );
 
             fail( "Should fail to validate the POM syntax due to missing dependency element inside dependencyManagement section." );
         }

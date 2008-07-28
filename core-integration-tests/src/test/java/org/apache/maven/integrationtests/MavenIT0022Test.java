@@ -17,15 +17,15 @@ public class MavenIT0022Test
         throws Exception
     {
         File testDir = extractTestResources( getClass(), "/it0022" );
-        IntegrationTestRunner verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
+        IntegrationTestRunner itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
         
         InvocationRequest r = new DefaultInvocationRequest()
             .addSystemProperty( "includeProfile", "true" )
             .setGoals( "org.apache.maven.its.plugins:maven-it-plugin-touch:touch" );
         
-        verifier.invoke( r );
-        verifier.assertFilePresent( "target/test.txt" );
-        verifier.verifyErrorFreeLog();
-        verifier.resetStreams();
+        itr.invoke( r );
+        itr.assertFilePresent( "target/test.txt" );
+        itr.verifyErrorFreeLog();
+        itr.resetStreams();
     }
 }

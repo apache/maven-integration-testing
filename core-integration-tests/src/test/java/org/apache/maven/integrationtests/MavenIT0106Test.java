@@ -18,10 +18,10 @@ public class MavenIT0106Test
         throws Exception
     {
         File testDir = extractTestResources( getClass(), "/it0106" );
-        IntegrationTestRunner verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
-        verifier.executeGoal( "clean" );
-        verifier.verifyErrorFreeLog();
-        verifier.resetStreams();
+        IntegrationTestRunner itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
+        itr.executeGoal( "clean" );
+        itr.verifyErrorFreeLog();
+        itr.resetStreams();
 
     }
 }

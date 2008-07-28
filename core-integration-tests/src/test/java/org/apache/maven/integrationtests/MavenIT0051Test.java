@@ -23,14 +23,14 @@ public class MavenIT0051Test
         throws Exception
     {
         File testDir = extractTestResources( getClass(), "/it0051" );
-        IntegrationTestRunner verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
+        IntegrationTestRunner itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
         List cliOptions = new ArrayList();
         cliOptions.add( "--no-plugin-registry -DperformRelease=true" );
-        verifier.executeGoal( "package", cliOptions );
-        verifier.assertFilePresent( "target/maven-it-it0051-1.0.jar" );
-        verifier.assertFilePresent( "target/maven-it-it0051-1.0-sources.jar" );
-        verifier.verifyErrorFreeLog();
-        verifier.resetStreams();
+        itr.executeGoal( "package", cliOptions );
+        itr.assertFilePresent( "target/maven-it-it0051-1.0.jar" );
+        itr.assertFilePresent( "target/maven-it-it0051-1.0-sources.jar" );
+        itr.verifyErrorFreeLog();
+        itr.resetStreams();
 
     }
 }

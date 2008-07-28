@@ -17,20 +17,20 @@ public class MavenIT0043Test
         File testDir = extractTestResources( getClass(), "/it0043" );
 
         File child1 = new File( testDir, "child1" );
-        IntegrationTestRunner verifier = new IntegrationTestRunner( child1.getAbsolutePath() );
+        IntegrationTestRunner itr = new IntegrationTestRunner( child1.getAbsolutePath() );
 
-        verifier.deleteArtifact( "org.apache.maven.plugins", "maven-help-plugin", "2.0.2", "jar" );
+        itr.deleteArtifact( "org.apache.maven.plugins", "maven-help-plugin", "2.0.2", "jar" );
 
-        verifier.executeGoal( "org.apache.maven.plugins:maven-help-plugin:2.0.2:effective-pom" );
-        verifier.verifyErrorFreeLog();
-        verifier.resetStreams();
+        itr.executeGoal( "org.apache.maven.plugins:maven-help-plugin:2.0.2:effective-pom" );
+        itr.verifyErrorFreeLog();
+        itr.resetStreams();
 
         File child2 = new File( testDir, "child2" );
-        verifier = new IntegrationTestRunner( child2.getAbsolutePath() );
+        itr = new IntegrationTestRunner( child2.getAbsolutePath() );
 
-        verifier.executeGoal( "org.apache.maven.plugins:maven-help-plugin:2.0.2:effective-pom" );
-        verifier.verifyErrorFreeLog();
-        verifier.resetStreams();
+        itr.executeGoal( "org.apache.maven.plugins:maven-help-plugin:2.0.2:effective-pom" );
+        itr.verifyErrorFreeLog();
+        itr.resetStreams();
 
     }
 }

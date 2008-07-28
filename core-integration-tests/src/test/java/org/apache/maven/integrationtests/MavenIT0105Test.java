@@ -17,13 +17,13 @@ public class MavenIT0105Test
         throws Exception
     {
         File testDir = extractTestResources( getClass(), "/it0105" );
-        IntegrationTestRunner verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
+        IntegrationTestRunner itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
         List cliOptions = new ArrayList();
         cliOptions.add( "-Dparam=PARAM" );
-        verifier.executeGoal( "test", cliOptions );
-        verifier.assertFilePresent( "target/classes/test.properties" );
-        verifier.verifyErrorFreeLog();
-        verifier.resetStreams();
+        itr.executeGoal( "test", cliOptions );
+        itr.assertFilePresent( "target/classes/test.properties" );
+        itr.verifyErrorFreeLog();
+        itr.resetStreams();
     }
 }
 

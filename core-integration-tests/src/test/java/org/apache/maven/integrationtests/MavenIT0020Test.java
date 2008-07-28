@@ -15,15 +15,15 @@ public class MavenIT0020Test
         throws Exception
     {
         File testDir = extractTestResources( getClass(), "/it0020" );
-        IntegrationTestRunner verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
-        verifier.deleteArtifact( "org.apache.maven.its.plugins", "maven-it-it0020", "1.0-SNAPSHOT", "maven-plugin" );
-        verifier.executeGoal( "install" );
+        IntegrationTestRunner itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
+        itr.deleteArtifact( "org.apache.maven.its.plugins", "maven-it-it0020", "1.0-SNAPSHOT", "maven-plugin" );
+        itr.executeGoal( "install" );
 
-        verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );        
-        verifier.executeGoal( "org.apache.maven.its.it0020:maven-it-it0020:it0020" );
-        verifier.assertFilePresent( "target/out.txt" );
-        verifier.verifyErrorFreeLog();
-        verifier.resetStreams();
+        itr = new IntegrationTestRunner( testDir.getAbsolutePath() );        
+        itr.executeGoal( "org.apache.maven.its.it0020:maven-it-it0020:it0020" );
+        itr.assertFilePresent( "target/out.txt" );
+        itr.verifyErrorFreeLog();
+        itr.resetStreams();
     }
 }
 

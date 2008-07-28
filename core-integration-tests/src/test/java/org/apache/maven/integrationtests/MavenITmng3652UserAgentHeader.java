@@ -38,10 +38,10 @@ public class MavenITmng3652UserAgentHeader
         File pluginDir = new File( testDir, "test-plugin" );
         File projectDir = new File( testDir, "test-project" );
 
-        IntegrationTestRunner verifier = new IntegrationTestRunner( pluginDir.getAbsolutePath() );
-        verifier.executeGoal( "install" );
-        verifier.verifyErrorFreeLog();
-        verifier.resetStreams();
+        IntegrationTestRunner itr = new IntegrationTestRunner( pluginDir.getAbsolutePath() );
+        itr.executeGoal( "install" );
+        itr.verifyErrorFreeLog();
+        itr.resetStreams();
 
         int port = ( Math.abs( new Random().nextInt() ) % 2048 ) + 1024;
 
@@ -50,14 +50,14 @@ public class MavenITmng3652UserAgentHeader
         t.setDaemon( true );
         t.start();
         
-        verifier = new IntegrationTestRunner( projectDir.getAbsolutePath() );
+        itr = new IntegrationTestRunner( projectDir.getAbsolutePath() );
         
         List cliOptions = new ArrayList();
         cliOptions.add( "-DtestPort=" + port );
         
-        verifier.executeGoal( "validate", cliOptions );
-        verifier.verifyErrorFreeLog();
-        verifier.resetStreams();
+        itr.executeGoal( "validate", cliOptions );
+        itr.verifyErrorFreeLog();
+        itr.resetStreams();
         
         String userAgent = s.userAgent;
         assertNotNull( userAgent );
@@ -65,7 +65,7 @@ public class MavenITmng3652UserAgentHeader
         File touchFile = new File( projectDir, "target/touch.txt" );
         assertTrue( touchFile.exists() );
         
-        List lines = verifier.loadFile( touchFile, false );
+        List lines = itr.loadFile( touchFile, false );
 
         // NOTE: system property for maven.version may not exist if you use -Dtest
         // surefire parameter to run this single test. Therefore, the plugin writes
@@ -82,9 +82,9 @@ public class MavenITmng3652UserAgentHeader
         cliOptions.add( "-DtestPort=" + port );
         cliOptions.add( "-DtestProtocol=dav:http" );
         
-        verifier.executeGoal( "validate", cliOptions );
-        verifier.verifyErrorFreeLog();
-        verifier.resetStreams();
+        itr.executeGoal( "validate", cliOptions );
+        itr.verifyErrorFreeLog();
+        itr.resetStreams();
         
         userAgent = s.userAgent;
         assertNotNull( userAgent );
@@ -97,9 +97,9 @@ public class MavenITmng3652UserAgentHeader
         cliOptions.add( "--settings" );
         cliOptions.add( "settings-no-config.xml" );
         
-        verifier.executeGoal( "validate", cliOptions );
-        verifier.verifyErrorFreeLog();
-        verifier.resetStreams();
+        itr.executeGoal( "validate", cliOptions );
+        itr.verifyErrorFreeLog();
+        itr.resetStreams();
         
         userAgent = s.userAgent;
         assertNotNull( userAgent );
@@ -112,9 +112,9 @@ public class MavenITmng3652UserAgentHeader
         cliOptions.add( "--settings" );
         cliOptions.add( "settings.xml" );
         
-        verifier.executeGoal( "validate", cliOptions );
-        verifier.verifyErrorFreeLog();
-        verifier.resetStreams();
+        itr.executeGoal( "validate", cliOptions );
+        itr.verifyErrorFreeLog();
+        itr.resetStreams();
         
         userAgent = s.userAgent;
         assertNotNull( userAgent );

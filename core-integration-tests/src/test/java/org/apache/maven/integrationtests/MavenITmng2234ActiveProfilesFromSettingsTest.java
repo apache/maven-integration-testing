@@ -20,14 +20,14 @@ public class MavenITmng2234ActiveProfilesFromSettingsTest
         throws Exception
     {
         File testDir = extractTestResources( getClass(), "/mng-2234-activeProfilesFromSettings" );
-        IntegrationTestRunner verifier;
-        verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
+        IntegrationTestRunner itr;
+        itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
         List cliOptions = new ArrayList();
         cliOptions.add( "-s" );
         cliOptions.add( "settings.xml" );
-        verifier.executeGoal( "install", cliOptions );
-        verifier.verifyErrorFreeLog();
-        verifier.assertFilePresent( "target/touch.txt" );
-        verifier.resetStreams();
+        itr.executeGoal( "install", cliOptions );
+        itr.verifyErrorFreeLog();
+        itr.assertFilePresent( "target/touch.txt" );
+        itr.resetStreams();
     }
 }

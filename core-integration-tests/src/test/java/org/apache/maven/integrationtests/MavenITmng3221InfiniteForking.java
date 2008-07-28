@@ -25,30 +25,30 @@ public class MavenITmng3221InfiniteForking
         File reportDir = new File( testDir, "report" );
         File projectDir = new File( testDir, "user" );
 
-        IntegrationTestRunner verifier = null;
+        IntegrationTestRunner itr = null;
 
         try
         {
-            verifier = new IntegrationTestRunner( reportDir.getAbsolutePath() );
+            itr = new IntegrationTestRunner( reportDir.getAbsolutePath() );
 
-            verifier.deleteArtifact( "tests", "maven-forking-report-plugin", "1", "jar" );
+            itr.deleteArtifact( "tests", "maven-forking-report-plugin", "1", "jar" );
 
-            verifier.executeGoal( "install" );
-            verifier.verifyErrorFreeLog();
-            verifier.resetStreams();
+            itr.executeGoal( "install" );
+            itr.verifyErrorFreeLog();
+            itr.resetStreams();
 
-            verifier = new IntegrationTestRunner( projectDir.getAbsolutePath() );
+            itr = new IntegrationTestRunner( projectDir.getAbsolutePath() );
 
             List cliOptions = new ArrayList();
             cliOptions.add( "-Psite" );
-            verifier.executeGoal( "site", cliOptions );
-            verifier.verifyErrorFreeLog();
+            itr.executeGoal( "site", cliOptions );
+            itr.verifyErrorFreeLog();
         }
         finally
         {
-            if ( verifier != null )
+            if ( itr != null )
             {
-                verifier.resetStreams();
+                itr.resetStreams();
             }
 
             File logFile = new File( projectDir, "log.txt" );
@@ -67,30 +67,30 @@ public class MavenITmng3221InfiniteForking
         File pluginDir = new File( testDir, "plugin" );
         File projectDir = new File( testDir, "user" );
 
-        IntegrationTestRunner verifier = null;
+        IntegrationTestRunner itr = null;
 
         try
         {
-            verifier = new IntegrationTestRunner( pluginDir.getAbsolutePath() );
+            itr = new IntegrationTestRunner( pluginDir.getAbsolutePath() );
 
-            verifier.deleteArtifact( "tests", "maven-forking-test-plugin", "1", "jar" );
+            itr.deleteArtifact( "tests", "maven-forking-test-plugin", "1", "jar" );
 
-            verifier.executeGoal( "install" );
-            verifier.verifyErrorFreeLog();
-            verifier.resetStreams();
+            itr.executeGoal( "install" );
+            itr.verifyErrorFreeLog();
+            itr.resetStreams();
 
-            verifier = new IntegrationTestRunner( projectDir.getAbsolutePath() );
+            itr = new IntegrationTestRunner( projectDir.getAbsolutePath() );
 
             List cliOptions = new ArrayList();
             cliOptions.add( "-Pplugin" );
-            verifier.executeGoal( "package", cliOptions );
-            verifier.verifyErrorFreeLog();
+            itr.executeGoal( "package", cliOptions );
+            itr.verifyErrorFreeLog();
         }
         finally
         {
-            if ( verifier != null )
+            if ( itr != null )
             {
-                verifier.resetStreams();
+                itr.resetStreams();
             }
 
             File logFile = new File( projectDir, "log.txt" );

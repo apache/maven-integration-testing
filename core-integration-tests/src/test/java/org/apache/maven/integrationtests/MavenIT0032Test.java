@@ -15,14 +15,14 @@ public class MavenIT0032Test
         throws Exception
     {
         File testDir = extractTestResources( getClass(), "/it0032" );
-        IntegrationTestRunner verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
-        verifier.executeGoal( "package" );
-        verifier.assertFilePresent( "target/classes/org/apache/maven/it0032/Person.class" );
-        verifier.assertFilePresent( "target/test-classes/org/apache/maven/it0032/PersonTest.class" );
-        verifier.assertFilePresent( "target/maven-it-it0032-1.0.jar" );
-        verifier.assertFilePresent( "target/maven-it-it0032-1.0.jar!/it0032.properties" );
-        verifier.verifyErrorFreeLog();
-        verifier.resetStreams();
+        IntegrationTestRunner itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
+        itr.executeGoal( "package" );
+        itr.assertFilePresent( "target/classes/org/apache/maven/it0032/Person.class" );
+        itr.assertFilePresent( "target/test-classes/org/apache/maven/it0032/PersonTest.class" );
+        itr.assertFilePresent( "target/maven-it-it0032-1.0.jar" );
+        itr.assertFilePresent( "target/maven-it-it0032-1.0.jar!/it0032.properties" );
+        itr.verifyErrorFreeLog();
+        itr.resetStreams();
 
     }
 }

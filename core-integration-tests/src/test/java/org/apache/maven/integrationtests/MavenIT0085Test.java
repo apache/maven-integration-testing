@@ -18,13 +18,13 @@ public class MavenIT0085Test
         throws Exception
     {
         File testDir = extractTestResources( getClass(), "/it0085" );
-        IntegrationTestRunner verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
-        verifier.executeGoal( "package" );
-        verifier.assertFileNotPresent( "war/target/war-1.0/WEB-INF/lib/pom.xml" );
-        verifier.assertFileNotPresent( "war/target/war-1.0/WEB-INF/lib/it0085-dep-1.0.jar" );
-        verifier.assertFilePresent( "war/target/war-1.0/WEB-INF/lib/junit-3.8.1.jar" );
-        verifier.verifyErrorFreeLog();
-        verifier.resetStreams();
+        IntegrationTestRunner itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
+        itr.executeGoal( "package" );
+        itr.assertFileNotPresent( "war/target/war-1.0/WEB-INF/lib/pom.xml" );
+        itr.assertFileNotPresent( "war/target/war-1.0/WEB-INF/lib/it0085-dep-1.0.jar" );
+        itr.assertFilePresent( "war/target/war-1.0/WEB-INF/lib/junit-3.8.1.jar" );
+        itr.verifyErrorFreeLog();
+        itr.resetStreams();
 
     }
 }

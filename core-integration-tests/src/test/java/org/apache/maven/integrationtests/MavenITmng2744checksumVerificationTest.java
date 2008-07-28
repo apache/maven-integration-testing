@@ -26,16 +26,16 @@ public class MavenITmng2744checksumVerificationTest
     {
         File testDir = extractTestResources( getClass(), "/mng-2744-checksumVerification" );
 
-        IntegrationTestRunner verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
+        IntegrationTestRunner itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
 
-        verifier.deleteArtifact( "org.apache.maven.its.mng2744", "a", "1", "pom" );
-        verifier.deleteArtifact( "org.apache.maven.its.mng2744", "a", "1", "jar" );
-        verifier.deleteArtifact( "org.apache.maven.its.mng2744", "b", "1", "pom" );
-        verifier.deleteArtifact( "org.apache.maven.its.mng2744", "b", "1", "jar" );
+        itr.deleteArtifact( "org.apache.maven.its.mng2744", "a", "1", "pom" );
+        itr.deleteArtifact( "org.apache.maven.its.mng2744", "a", "1", "jar" );
+        itr.deleteArtifact( "org.apache.maven.its.mng2744", "b", "1", "pom" );
+        itr.deleteArtifact( "org.apache.maven.its.mng2744", "b", "1", "jar" );
 
-        verifier.executeGoal( "compile" );
-        verifier.verifyErrorFreeLog();
-        verifier.resetStreams();
+        itr.executeGoal( "compile" );
+        itr.verifyErrorFreeLog();
+        itr.resetStreams();
     }
 
 }

@@ -35,13 +35,13 @@ public class MavenIT0127AntrunDependencies
     {
         File testDir = extractTestResources( getClass(), "/it0127-antrunDependencies" );
 
-        IntegrationTestRunner verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
-        verifier.deleteArtifact( "org.apache.maven.its.it0127", "parent", "1.0-SNAPSHOT", "pom" );
-        verifier.deleteArtifact( "org.apache.maven.its.it0127", "a", "1.0-SNAPSHOT", "jar" );
-        verifier.deleteArtifact( "org.apache.maven.its.it0127", "b",  "1.0-SNAPSHOT", "jar" );
-        verifier.executeGoal( "compile" ); 
-        verifier.verifyErrorFreeLog();
-        verifier.resetStreams();
+        IntegrationTestRunner itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
+        itr.deleteArtifact( "org.apache.maven.its.it0127", "parent", "1.0-SNAPSHOT", "pom" );
+        itr.deleteArtifact( "org.apache.maven.its.it0127", "a", "1.0-SNAPSHOT", "jar" );
+        itr.deleteArtifact( "org.apache.maven.its.it0127", "b",  "1.0-SNAPSHOT", "jar" );
+        itr.executeGoal( "compile" ); 
+        itr.verifyErrorFreeLog();
+        itr.resetStreams();
     }
     
     

@@ -17,16 +17,16 @@ public class MavenIT0013Test
         throws Exception
     {
         File testDir = extractTestResources( getClass(), "/it0013" );
-        IntegrationTestRunner verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
-        verifier.deleteArtifact( "org.apache.maven.its.plugins", "maven-it-it0013", "1.0-SNAPSHOT", "maven-plugin" );
-        verifier.executeGoal( "install" );
-        verifier.assertFilePresent( "target/maven-it-it0013-1.0-SNAPSHOT.jar" );
+        IntegrationTestRunner itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
+        itr.deleteArtifact( "org.apache.maven.its.plugins", "maven-it-it0013", "1.0-SNAPSHOT", "maven-plugin" );
+        itr.executeGoal( "install" );
+        itr.assertFilePresent( "target/maven-it-it0013-1.0-SNAPSHOT.jar" );
 
-        verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );        
-        verifier.executeGoal( "org.apache.maven.its.it0013:maven-it-it0013:it0013" );
-        verifier.assertFilePresent( "target/it0013-verify" );
-        verifier.verifyErrorFreeLog();
-        verifier.resetStreams();
+        itr = new IntegrationTestRunner( testDir.getAbsolutePath() );        
+        itr.executeGoal( "org.apache.maven.its.it0013:maven-it-it0013:it0013" );
+        itr.assertFilePresent( "target/it0013-verify" );
+        itr.verifyErrorFreeLog();
+        itr.resetStreams();
     }
 }
 

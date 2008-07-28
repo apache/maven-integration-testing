@@ -16,21 +16,21 @@ public class MavenIT0125NewestConflictResolverTest
     public void testit0125() throws Exception
     {
         File testDir = extractTestResources( getClass(), "/it0125-newestConflictResolver/dependency" );
-        IntegrationTestRunner verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
-        verifier.executeGoal( "install" );
-        verifier.verifyErrorFreeLog();
-        verifier.resetStreams();
+        IntegrationTestRunner itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
+        itr.executeGoal( "install" );
+        itr.verifyErrorFreeLog();
+        itr.resetStreams();
 
         testDir = extractTestResources( getClass(), "/it0125-newestConflictResolver/plugin" );
-        verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
-        verifier.executeGoal( "install" );
-        verifier.verifyErrorFreeLog();
-        verifier.resetStreams();
+        itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
+        itr.executeGoal( "install" );
+        itr.verifyErrorFreeLog();
+        itr.resetStreams();
 
         testDir = extractTestResources( getClass(), "/it0125-newestConflictResolver/project" );
-        verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
-        verifier.executeGoal( "verify" );
-        verifier.verifyErrorFreeLog();
-        verifier.resetStreams();
+        itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
+        itr.executeGoal( "verify" );
+        itr.verifyErrorFreeLog();
+        itr.resetStreams();
     }
 }

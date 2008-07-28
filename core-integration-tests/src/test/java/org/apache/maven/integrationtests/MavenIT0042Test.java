@@ -15,18 +15,18 @@ public class MavenIT0042Test
         throws Exception
     {
         File testDir = extractTestResources( getClass(), "/it0042" );
-        IntegrationTestRunner verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
-        verifier.executeGoal( "package" );
-        verifier.assertFilePresent( "test-component-a/target/test-component-a-0.1.jar" );
-        verifier.assertFilePresent( "test-component-b/target/test-component-b-0.1.jar" );
-        verifier.assertFilePresent( "test-component-c/target/test-component-c-0.1.war" );
-        verifier.assertFilePresent(
+        IntegrationTestRunner itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
+        itr.executeGoal( "package" );
+        itr.assertFilePresent( "test-component-a/target/test-component-a-0.1.jar" );
+        itr.assertFilePresent( "test-component-b/target/test-component-b-0.1.jar" );
+        itr.assertFilePresent( "test-component-c/target/test-component-c-0.1.war" );
+        itr.assertFilePresent(
             "test-component-c/target/test-component-c-0.1.war!/WEB-INF/lib/test-component-a-0.1.jar" );
-        verifier.assertFilePresent(
+        itr.assertFilePresent(
             "test-component-c/target/test-component-c-0.1.war!/WEB-INF/lib/test-component-b-0.1.jar" );
-        verifier.assertFilePresent( "test-component-c/target/my-test" );
-        verifier.verifyErrorFreeLog();
-        verifier.resetStreams();
+        itr.assertFilePresent( "test-component-c/target/my-test" );
+        itr.verifyErrorFreeLog();
+        itr.resetStreams();
 
     }
 }

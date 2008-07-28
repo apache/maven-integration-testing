@@ -15,14 +15,14 @@ public class MavenIT0034Test
         throws Exception
     {
         File testDir = extractTestResources( getClass(), "/it0034" );
-        IntegrationTestRunner verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
-        verifier.deleteArtifact( "org.apache.maven", "maven-core-it-support", "1.4", "jar" );
-        verifier.deleteArtifact( "junit", "junit", "3.8", "jar" );
-        verifier.executeGoal( "package" );
-        verifier.assertArtifactPresent( "junit", "junit", "3.8", "jar" );
-        verifier.assertArtifactPresent( "org.apache.maven", "maven-core-it-support", "1.4", "jar" );
-        verifier.verifyErrorFreeLog();
-        verifier.resetStreams();
+        IntegrationTestRunner itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
+        itr.deleteArtifact( "org.apache.maven", "maven-core-it-support", "1.4", "jar" );
+        itr.deleteArtifact( "junit", "junit", "3.8", "jar" );
+        itr.executeGoal( "package" );
+        itr.assertArtifactPresent( "junit", "junit", "3.8", "jar" );
+        itr.assertArtifactPresent( "org.apache.maven", "maven-core-it-support", "1.4", "jar" );
+        itr.verifyErrorFreeLog();
+        itr.resetStreams();
 
     }
 }

@@ -17,13 +17,13 @@ public class MavenIT0090Test
         throws Exception
     {
         File testDir = extractTestResources( getClass(), "/it0090" );
-        IntegrationTestRunner verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
+        IntegrationTestRunner itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
         Map envVars = new HashMap();
         envVars.put( "MAVEN_TEST_ENVAR", "MAVEN_TEST_ENVAR_VALUE" );
-        verifier.executeGoal( "test", envVars );
-        verifier.assertFilePresent( "target/mojo-generated.properties" );
-        verifier.verifyErrorFreeLog();
-        verifier.resetStreams();
+        itr.executeGoal( "test", envVars );
+        itr.assertFilePresent( "target/mojo-generated.properties" );
+        itr.verifyErrorFreeLog();
+        itr.resetStreams();
     }
 }
 

@@ -18,12 +18,12 @@ public class MavenIT0102Test
         throws Exception
     {
         File testDir = extractTestResources( getClass(), "/it0102" );
-        IntegrationTestRunner verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
+        IntegrationTestRunner itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
         List options = new ArrayList();
         options.add( "-Doutput=" + new File( testDir, "target/effective-pom.txt" ).getAbsolutePath() );
-        verifier.executeGoal( "org.apache.maven.plugins:maven-help-plugin:2.0.2:effective-pom, verify", options );
-        verifier.verifyErrorFreeLog();
-        verifier.resetStreams();
+        itr.executeGoal( "org.apache.maven.plugins:maven-help-plugin:2.0.2:effective-pom, verify", options );
+        itr.verifyErrorFreeLog();
+        itr.resetStreams();
     }
 }
 

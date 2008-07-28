@@ -16,10 +16,10 @@ public class MavenITmng2562Timestamp extends AbstractMavenIntegrationTestCase {
     public void testitMNG2562() throws Exception {
         File testDir = extractTestResources(getClass(),
                 "/mng-2562-timestamp");
-        IntegrationTestRunner verifier = new IntegrationTestRunner(testDir.getAbsolutePath());
-        verifier.executeGoal("verify");
+        IntegrationTestRunner itr = new IntegrationTestRunner(testDir.getAbsolutePath());
+        itr.executeGoal("verify");
 
-        verifier.verifyErrorFreeLog();
-        verifier.resetStreams();
+        itr.verifyErrorFreeLog();
+        itr.resetStreams();
     }
 }

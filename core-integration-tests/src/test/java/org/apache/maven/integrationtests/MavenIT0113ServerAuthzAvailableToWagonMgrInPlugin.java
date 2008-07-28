@@ -33,26 +33,26 @@ public class MavenIT0113ServerAuthzAvailableToWagonMgrInPlugin
     {
         File testDir = extractTestResources( getClass(), "/it0113-serverAuthzAvailableToWagonMgrInPlugin" );
 
-        IntegrationTestRunner verifier;
+        IntegrationTestRunner itr;
 
         // Install the parent POM
-        verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
-        verifier.deleteArtifact( "org.apache.maven.its.it0113", "maven-it0113-plugin", "1.0-SNAPSHOT", "jar" );
-        verifier.deleteArtifact( "org.apache.maven.its.it0113", "test-project", "1.0-SNAPSHOT", "jar" );
+        itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
+        itr.deleteArtifact( "org.apache.maven.its.it0113", "maven-it0113-plugin", "1.0-SNAPSHOT", "jar" );
+        itr.deleteArtifact( "org.apache.maven.its.it0113", "test-project", "1.0-SNAPSHOT", "jar" );
 
         // Install the plugin to test for Authz info in the WagonManager
-        verifier = new IntegrationTestRunner( new File( testDir.getAbsolutePath(), "maven-it0113-plugin" ).getAbsolutePath() );
-        verifier.executeGoal( "install" );
-        verifier.verifyErrorFreeLog();
-        verifier.resetStreams();
+        itr = new IntegrationTestRunner( new File( testDir.getAbsolutePath(), "maven-it0113-plugin" ).getAbsolutePath() );
+        itr.executeGoal( "install" );
+        itr.verifyErrorFreeLog();
+        itr.resetStreams();
 
         // Build the test project that uses the plugin.
-        verifier = new IntegrationTestRunner( new File( testDir.getAbsolutePath(), "test-project" ).getAbsolutePath() );
+        itr = new IntegrationTestRunner( new File( testDir.getAbsolutePath(), "test-project" ).getAbsolutePath() );
         List cliOptions = new ArrayList();
         cliOptions.add( "--settings" );
         cliOptions.add( "settings.xml" );
-        verifier.executeGoal( "install", cliOptions );
-        verifier.verifyErrorFreeLog();
-        verifier.resetStreams();
+        itr.executeGoal( "install", cliOptions );
+        itr.verifyErrorFreeLog();
+        itr.resetStreams();
     }
 }

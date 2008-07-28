@@ -20,12 +20,12 @@ public class MavenIT0098Test
         throws Exception
     {
         File testDir = extractTestResources( getClass(), "/it0098" );
-        IntegrationTestRunner verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
+        IntegrationTestRunner itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
         List cliOptions = new ArrayList();
         cliOptions.add( "-Dtest.property=\"Test Property\"" );
-        verifier.executeGoal( "test", cliOptions );
-        verifier.verifyErrorFreeLog();
-        verifier.resetStreams();
+        itr.executeGoal( "test", cliOptions );
+        itr.verifyErrorFreeLog();
+        itr.resetStreams();
 
     }
 }

@@ -25,7 +25,7 @@ public class MavenITmng3473PluginReportCrash
     {
         File testDir = extractTestResources( getClass(), "/mng-3473PluginReportCrash" );
 
-        IntegrationTestRunner verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
+        IntegrationTestRunner itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
 
 
         File logFile = new File( testDir, "log.txt" );
@@ -33,18 +33,18 @@ public class MavenITmng3473PluginReportCrash
         // force the use of the 2.4.1 plugin version via a profile here...
         List cliOptions = new ArrayList();
         cliOptions.add( "-Pplugin-2.4.1" );
-        verifier.executeGoal( "install", cliOptions );
-        verifier.verifyErrorFreeLog();
-        verifier.resetStreams();
+        itr.executeGoal( "install", cliOptions );
+        itr.verifyErrorFreeLog();
+        itr.resetStreams();
 
         logFile.renameTo( new File( testDir, "log-2.4.1-preinstall.txt" ) );
 
         //should succeed with 2.4.1
-        verifier.executeGoal( "org.apache.maven.plugins:maven-help-plugin:2.0.2:effective-pom, site" );
+        itr.executeGoal( "org.apache.maven.plugins:maven-help-plugin:2.0.2:effective-pom, site" );
 
         // NOTE: Velocity prints an [ERROR] line pertaining to an incorrect macro usage when run in 2.1, so this doesn't work.
-//        verifier.verifyErrorFreeLog();
-        verifier.resetStreams();
+//        itr.verifyErrorFreeLog();
+        itr.resetStreams();
 
         logFile.renameTo( new File( testDir, "log-2.4.1.txt" ) );
 
@@ -53,14 +53,14 @@ public class MavenITmng3473PluginReportCrash
         cliOptions.add( "-Pplugin-2.4" );
         try
         {
-          verifier.executeGoal( "site", cliOptions );
+          itr.executeGoal( "site", cliOptions );
         }
         catch (IntegrationTestException e)
         {
           //expected this but don't require it cause some os's don't return the correct error code
         }
-        verifier.verifyTextInLog( "org/apache/maven/doxia/module/site/manager/SiteModuleNotFoundException" );
-        verifier.resetStreams();
+        itr.verifyTextInLog( "org/apache/maven/doxia/module/site/manager/SiteModuleNotFoundException" );
+        itr.resetStreams();
 
         logFile.renameTo( new File( testDir, "log-2.4.txt" ) );
     }

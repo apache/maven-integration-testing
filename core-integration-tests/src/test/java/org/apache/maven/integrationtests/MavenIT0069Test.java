@@ -17,13 +17,13 @@ public class MavenIT0069Test
         throws Exception
     {
         File testDir = extractTestResources( getClass(), "/it0069" );
-        IntegrationTestRunner verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
+        IntegrationTestRunner itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
         List cliOptions = new ArrayList();
         cliOptions.add( "-o" );
-        verifier.executeGoal( "compile", cliOptions );
-        verifier.assertFilePresent( "target/classes/org/apache/maven/it0069/ClassworldBasedThing.class" );
-        verifier.verifyErrorFreeLog();
-        verifier.resetStreams();
+        itr.executeGoal( "compile", cliOptions );
+        itr.assertFilePresent( "target/classes/org/apache/maven/it0069/ClassworldBasedThing.class" );
+        itr.verifyErrorFreeLog();
+        itr.resetStreams();
 
     }
 }

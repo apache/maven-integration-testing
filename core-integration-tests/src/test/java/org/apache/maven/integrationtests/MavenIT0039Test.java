@@ -19,14 +19,14 @@ public class MavenIT0039Test
         throws Exception
     {
         File testDir = extractTestResources( getClass(), "/it0039" );
-        IntegrationTestRunner verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
+        IntegrationTestRunner itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
         List cliOptions = new ArrayList();
         cliOptions.add( "-r" );
-        verifier.executeGoal( "package", cliOptions );
-        verifier.assertFilePresent( "project/target/maven-it-it0039-p1-1.0.jar" );
-        verifier.assertFilePresent( "project2/target/maven-it-it0039-p2-1.0.jar" );
-        verifier.verifyErrorFreeLog();
-        verifier.resetStreams();
+        itr.executeGoal( "package", cliOptions );
+        itr.assertFilePresent( "project/target/maven-it-it0039-p1-1.0.jar" );
+        itr.assertFilePresent( "project2/target/maven-it-it0039-p2-1.0.jar" );
+        itr.verifyErrorFreeLog();
+        itr.resetStreams();
 
     }
 }

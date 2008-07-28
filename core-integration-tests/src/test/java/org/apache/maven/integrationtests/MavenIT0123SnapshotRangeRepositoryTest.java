@@ -16,9 +16,9 @@ public class MavenIT0123SnapshotRangeRepositoryTest
     public void testit0123() throws Exception
     {
         File testDir = extractTestResources( getClass(), "/it0123-snapshotRangeRepository" );
-        IntegrationTestRunner verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
-        verifier.executeGoal( "compile" );
-        verifier.verifyErrorFreeLog();
-        verifier.resetStreams();
+        IntegrationTestRunner itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
+        itr.executeGoal( "compile" );
+        itr.verifyErrorFreeLog();
+        itr.resetStreams();
     }
 }

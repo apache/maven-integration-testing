@@ -15,13 +15,13 @@ public class MavenIT0033Test
         throws Exception
     {
         File testDir = extractTestResources( getClass(), "/it0033" );
-        IntegrationTestRunner verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
-        verifier.executeGoal( "package" );
-        verifier.assertFilePresent( "target/maven-it-it0033-1.0.ear" );
-        verifier.assertFilePresent( "target/maven-it-it0033-1.0.ear!/META-INF/application.xml" );
-        verifier.assertFilePresent( "target/maven-it-it0033-1.0.ear!/META-INF/appserver-application.xml" );
-        verifier.verifyErrorFreeLog();
-        verifier.resetStreams();
+        IntegrationTestRunner itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
+        itr.executeGoal( "package" );
+        itr.assertFilePresent( "target/maven-it-it0033-1.0.ear" );
+        itr.assertFilePresent( "target/maven-it-it0033-1.0.ear!/META-INF/application.xml" );
+        itr.assertFilePresent( "target/maven-it-it0033-1.0.ear!/META-INF/appserver-application.xml" );
+        itr.verifyErrorFreeLog();
+        itr.resetStreams();
 
     }
 }

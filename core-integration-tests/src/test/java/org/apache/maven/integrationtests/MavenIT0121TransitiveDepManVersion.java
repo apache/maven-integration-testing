@@ -38,27 +38,27 @@ public class MavenIT0121TransitiveDepManVersion
 
         File testProjectDir = new File( testDirBase, "test-project" );
         
-        IntegrationTestRunner verifier = new IntegrationTestRunner( testProjectDir.getAbsolutePath() );
-        verifier.deleteArtifact( "org.apache.maven.its.it0121", "A", "1.0", "pom" );
-        verifier.deleteArtifact( "org.apache.maven.its.it0121", "A", "1.0", "jar" );
-        verifier.deleteArtifact( "org.apache.maven.its.it0121", "B", "1.0", "pom" );
-        verifier.deleteArtifact( "org.apache.maven.its.it0121", "B", "1.0", "jar" );
-        verifier.deleteArtifact( "org.apache.maven.its.it0121", "C", "1.0", "pom" );
-        verifier.deleteArtifact( "org.apache.maven.its.it0121", "D", "1.0", "jar" );
-        verifier.executeGoal( "install" );
-        verifier.verifyErrorFreeLog();
-        verifier.resetStreams();
+        IntegrationTestRunner itr = new IntegrationTestRunner( testProjectDir.getAbsolutePath() );
+        itr.deleteArtifact( "org.apache.maven.its.it0121", "A", "1.0", "pom" );
+        itr.deleteArtifact( "org.apache.maven.its.it0121", "A", "1.0", "jar" );
+        itr.deleteArtifact( "org.apache.maven.its.it0121", "B", "1.0", "pom" );
+        itr.deleteArtifact( "org.apache.maven.its.it0121", "B", "1.0", "jar" );
+        itr.deleteArtifact( "org.apache.maven.its.it0121", "C", "1.0", "pom" );
+        itr.deleteArtifact( "org.apache.maven.its.it0121", "D", "1.0", "jar" );
+        itr.executeGoal( "install" );
+        itr.verifyErrorFreeLog();
+        itr.resetStreams();
     }
 
     private void compileDDep( File testDirBase, String projectDDepDir, String version )
         throws IntegrationTestException, IOException
     {
         File testOtherDepDir = new File( testDirBase, "test-other-deps/" + projectDDepDir );
-        IntegrationTestRunner verifierOtherDep = new IntegrationTestRunner( testOtherDepDir.getAbsolutePath() );
-        verifierOtherDep.deleteArtifact( "org.apache.maven.its.it0121", "D", version, "jar" );
-        verifierOtherDep.deleteArtifact( "org.apache.maven.its.it0121", "D", version, "pom" );
-        verifierOtherDep.executeGoal( "install" );
-        verifierOtherDep.verifyErrorFreeLog();
-        verifierOtherDep.resetStreams();
+        IntegrationTestRunner itrOtherDep = new IntegrationTestRunner( testOtherDepDir.getAbsolutePath() );
+        itrOtherDep.deleteArtifact( "org.apache.maven.its.it0121", "D", version, "jar" );
+        itrOtherDep.deleteArtifact( "org.apache.maven.its.it0121", "D", version, "pom" );
+        itrOtherDep.executeGoal( "install" );
+        itrOtherDep.verifyErrorFreeLog();
+        itrOtherDep.resetStreams();
     }
 }

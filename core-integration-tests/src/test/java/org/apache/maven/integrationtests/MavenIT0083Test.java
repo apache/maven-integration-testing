@@ -15,19 +15,19 @@ public class MavenIT0083Test
         throws Exception
     {
         File testDir = extractTestResources( getClass(), "/it0083" );
-        IntegrationTestRunner verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
-        verifier.executeGoal( "package" );
-        verifier.assertFilePresent( "test-component-a/target/test-component-a-0.1.jar" );
-        verifier.assertFilePresent( "test-component-b/target/test-component-b-0.1.jar" );
-        verifier.assertFilePresent( "test-component-c/target/test-component-c-0.1.war" );
-        verifier.assertFilePresent(
+        IntegrationTestRunner itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
+        itr.executeGoal( "package" );
+        itr.assertFilePresent( "test-component-a/target/test-component-a-0.1.jar" );
+        itr.assertFilePresent( "test-component-b/target/test-component-b-0.1.jar" );
+        itr.assertFilePresent( "test-component-c/target/test-component-c-0.1.war" );
+        itr.assertFilePresent(
             "test-component-c/target/test-component-c-0.1.war!/WEB-INF/lib/test-component-b-0.1.jar" );
-        verifier.assertFileNotPresent(
+        itr.assertFileNotPresent(
             "test-component-c/target/test-component-c-0.1/WEB-INF/lib/test-component-a-0.1.jar" );
-        verifier.assertFilePresent(
+        itr.assertFilePresent(
             "test-component-c/target/test-component-c-0.1/WEB-INF/lib/test-component-b-0.1.jar" );
-        verifier.verifyErrorFreeLog();
-        verifier.resetStreams();
+        itr.verifyErrorFreeLog();
+        itr.resetStreams();
 
     }
 }

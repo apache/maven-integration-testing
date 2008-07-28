@@ -20,11 +20,11 @@ public class MavenIT0107Test
         throws Exception
     {
         File testDir = extractTestResources( getClass(), "/it0107" );
-        IntegrationTestRunner verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
+        IntegrationTestRunner itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
         List cliOptions = new ArrayList();
-        verifier.executeGoal( "validate", cliOptions );
-        verifier.verifyErrorFreeLog();
-        verifier.resetStreams();
+        itr.executeGoal( "validate", cliOptions );
+        itr.verifyErrorFreeLog();
+        itr.resetStreams();
     }
 }
 

@@ -27,7 +27,7 @@ public class MavenIT0031Test
         throws Exception
     {
         File testDir = extractTestResources( getClass(), "/it0031" );
-        IntegrationTestRunner verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
+        IntegrationTestRunner itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
         List cliOptions = new ArrayList();
         cliOptions.add( "--settings settings.xml" );
         
@@ -37,7 +37,7 @@ public class MavenIT0031Test
             .setGoals( "modello:java" )
             .addCliOption( "--settings settings.xml" );
         
-        verifier.assertFilePresent( "target/generated-sources/modello/org/apache/maven/it/it0031/Root.java" );
-        verifier.resetStreams();
+        itr.assertFilePresent( "target/generated-sources/modello/org/apache/maven/it/it0031/Root.java" );
+        itr.resetStreams();
     }
 }

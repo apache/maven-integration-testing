@@ -47,35 +47,35 @@ public class MavenIT0109ReleaseUpdateTest
         throws Exception
     {
         File testDir = extractTestResources( getClass(), "/it0109-releaseUpdate" );
-        IntegrationTestRunner verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
-        verifier.deleteArtifact( GROUPID, ARTIFACTID, OLD_VERSION, TYPE );
-        verifier.deleteArtifact( GROUPID, ARTIFACTID, OLD_VERSION, POM_TYPE );
-        verifier.deleteArtifact( GROUPID, ARTIFACTID, NEW_VERSION, TYPE );
-        verifier.deleteArtifact( GROUPID, ARTIFACTID, NEW_VERSION, POM_TYPE );
+        IntegrationTestRunner itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
+        itr.deleteArtifact( GROUPID, ARTIFACTID, OLD_VERSION, TYPE );
+        itr.deleteArtifact( GROUPID, ARTIFACTID, OLD_VERSION, POM_TYPE );
+        itr.deleteArtifact( GROUPID, ARTIFACTID, NEW_VERSION, TYPE );
+        itr.deleteArtifact( GROUPID, ARTIFACTID, NEW_VERSION, POM_TYPE );
 
-        writeMetadata( new File( verifier.localRepo ), "maven-metadata-it.releases.xml", OLD_VERSION,
+        writeMetadata( new File( itr.localRepo ), "maven-metadata-it.releases.xml", OLD_VERSION,
                        "20051230031110" );
 
-        // create a repository (TODO: into verifier)
+        // create a repository (TODO: into itr)
         File repository = new File( testDir, "repository" );
         repository.mkdirs();
 
-        // create artifact in repository (TODO: into verifier)
+        // create artifact in repository (TODO: into itr)
         writeArtifact( repository, OLD_VERSION );
         writeArtifact( repository, NEW_VERSION );
 
         writeMetadata( repository, "maven-metadata.xml", NEW_VERSION, "20061230031110" );
 
-        verifier.assertArtifactNotPresent( GROUPID, ARTIFACTID, OLD_VERSION, TYPE );
-        verifier.assertArtifactNotPresent( GROUPID, ARTIFACTID, NEW_VERSION, TYPE );
+        itr.assertArtifactNotPresent( GROUPID, ARTIFACTID, OLD_VERSION, TYPE );
+        itr.assertArtifactNotPresent( GROUPID, ARTIFACTID, NEW_VERSION, TYPE );
 
-        verifier.executeGoal( "package" );
+        itr.executeGoal( "package" );
 
-        verifier.assertArtifactNotPresent( GROUPID, ARTIFACTID, OLD_VERSION, TYPE );
-        verifier.assertArtifactPresent( GROUPID, ARTIFACTID, NEW_VERSION, TYPE );
+        itr.assertArtifactNotPresent( GROUPID, ARTIFACTID, OLD_VERSION, TYPE );
+        itr.assertArtifactPresent( GROUPID, ARTIFACTID, NEW_VERSION, TYPE );
 
-        verifier.verifyErrorFreeLog();
-        verifier.resetStreams();
+        itr.verifyErrorFreeLog();
+        itr.resetStreams();
     }
 
     private static void writeMetadata( File repository, String fileName, String version, String timestamp )

@@ -16,12 +16,12 @@ public class MavenIT0089Test
         throws Exception
     {
         File testDir = extractTestResources( getClass(), "/it0089" );
-        IntegrationTestRunner verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
-        verifier.deleteArtifact( "org.apache.maven.plugins", "maven-it-it-plugin", "1.0", "maven-plugin" );
-        verifier.executeGoal( "install" );
-        verifier.assertFilePresent( "project/target/output.txt" );
-        verifier.verifyErrorFreeLog();
-        verifier.resetStreams();
+        IntegrationTestRunner itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
+        itr.deleteArtifact( "org.apache.maven.plugins", "maven-it-it-plugin", "1.0", "maven-plugin" );
+        itr.executeGoal( "install" );
+        itr.assertFilePresent( "project/target/output.txt" );
+        itr.verifyErrorFreeLog();
+        itr.resetStreams();
 
     }
 }

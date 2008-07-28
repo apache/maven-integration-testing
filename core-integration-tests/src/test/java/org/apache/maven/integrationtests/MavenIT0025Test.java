@@ -15,12 +15,12 @@ public class MavenIT0025Test
         throws Exception
     {
         File testDir = extractTestResources( getClass(), "/it0025" );
-        IntegrationTestRunner verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
-        verifier.executeGoal( "process-sources" );
-        verifier.assertFilePresent( "target/test.txt" );
-        verifier.assertFilePresent( "target/test2.txt" );
-        verifier.verifyErrorFreeLog();
-        verifier.resetStreams();
+        IntegrationTestRunner itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
+        itr.executeGoal( "process-sources" );
+        itr.assertFilePresent( "target/test.txt" );
+        itr.assertFilePresent( "target/test2.txt" );
+        itr.verifyErrorFreeLog();
+        itr.resetStreams();
 
     }
 }

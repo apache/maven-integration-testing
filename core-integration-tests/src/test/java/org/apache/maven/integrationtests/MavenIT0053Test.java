@@ -19,14 +19,14 @@ public class MavenIT0053Test
         throws Exception
     {
         File testDir = extractTestResources( getClass(), "/it0053" );
-        IntegrationTestRunner verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
+        IntegrationTestRunner itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
         List cliOptions = new ArrayList();
         cliOptions.add( "--no-plugin-registry" );
-        verifier.executeGoal( "package", cliOptions );
-        verifier.assertFilePresent( "target/maven-it-it0053-1.0-SNAPSHOT.jar" );
-        verifier.assertFileNotPresent( "target/maven-it-it0053-1.0-SNAPSHOT-sources.jar" );
-        verifier.verifyErrorFreeLog();
-        verifier.resetStreams();
+        itr.executeGoal( "package", cliOptions );
+        itr.assertFilePresent( "target/maven-it-it0053-1.0-SNAPSHOT.jar" );
+        itr.assertFileNotPresent( "target/maven-it-it0053-1.0-SNAPSHOT-sources.jar" );
+        itr.verifyErrorFreeLog();
+        itr.resetStreams();
 
     }
 }

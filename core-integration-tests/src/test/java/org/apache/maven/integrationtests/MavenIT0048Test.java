@@ -16,11 +16,11 @@ public class MavenIT0048Test
         throws Exception
     {
         File testDir = extractTestResources( getClass(), "/it0048" );
-        IntegrationTestRunner verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
-        verifier.executeGoal( "test" );
-        verifier.assertFilePresent( "target/testFileOutput.txt" );
-        verifier.verifyErrorFreeLog();
-        verifier.resetStreams();
+        IntegrationTestRunner itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
+        itr.executeGoal( "test" );
+        itr.assertFilePresent( "target/testFileOutput.txt" );
+        itr.verifyErrorFreeLog();
+        itr.resetStreams();
 
     }
 }

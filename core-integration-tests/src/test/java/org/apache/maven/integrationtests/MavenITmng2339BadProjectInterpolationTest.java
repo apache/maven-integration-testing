@@ -38,13 +38,13 @@ public class MavenITmng2339BadProjectInterpolationTest
         throws Exception
     {
         File testDir = extractTestResources( getClass(), "/mng-2339-badProjectInterpolation/a" );
-        IntegrationTestRunner verifier;
-        verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
+        IntegrationTestRunner itr;
+        itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
         List cliOptions = new ArrayList();
         cliOptions.add( "-Dversion=foo" );
-        verifier.executeGoal( "validate", cliOptions );
-        verifier.verifyErrorFreeLog();
-        verifier.resetStreams();
+        itr.executeGoal( "validate", cliOptions );
+        itr.verifyErrorFreeLog();
+        itr.resetStreams();
     }
 
     // test that -Dversion=1.0 is still available for interpolation.
@@ -53,27 +53,27 @@ public class MavenITmng2339BadProjectInterpolationTest
     {
         File testDir = extractTestResources( getClass(), "/mng-2339-badProjectInterpolation/b" );
 
-        IntegrationTestRunner verifier;
+        IntegrationTestRunner itr;
 
-        verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
+        itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
 
-        verifier.executeGoal( "initialize" );
+        itr.executeGoal( "initialize" );
 
         assertTrue( "Touchfile using ${project.version} for ${version} does not exist.",
                     new File( testDir, "target/touch-1.txt" ).exists() );
 
-        verifier.verifyErrorFreeLog();
-        verifier.resetStreams();
+        itr.verifyErrorFreeLog();
+        itr.resetStreams();
 
         File logFile = new File( testDir, "log.txt" );
         logFile.renameTo( new File( testDir, "log-pom-specified.txt" ) );
 
-        verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
+        itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
         List cliOptions = new ArrayList();
         cliOptions.add( "-Dversion=2" );
-        verifier.executeGoal( "initialize", cliOptions );
-        verifier.verifyErrorFreeLog();
-        verifier.resetStreams();
+        itr.executeGoal( "initialize", cliOptions );
+        itr.verifyErrorFreeLog();
+        itr.resetStreams();
 
         logFile.renameTo( new File( testDir, "log-cli-specified.txt" ) );
 

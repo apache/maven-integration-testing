@@ -15,11 +15,11 @@ public class MavenIT0068Test
         throws Exception
     {
         File testDir = extractTestResources( getClass(), "/it0068" );
-        IntegrationTestRunner verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
-        verifier.deleteArtifact( "org.codehaus.modello", "modello-core", "1.0-alpha-3", "jar" );
-        verifier.executeGoal( "generate-sources" );
-        verifier.assertFilePresent( "target/generated-sources/modello/org/apache/maven/settings/Settings.java" );
-        verifier.resetStreams();
+        IntegrationTestRunner itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
+        itr.deleteArtifact( "org.codehaus.modello", "modello-core", "1.0-alpha-3", "jar" );
+        itr.executeGoal( "generate-sources" );
+        itr.assertFilePresent( "target/generated-sources/modello/org/apache/maven/settings/Settings.java" );
+        itr.resetStreams();
     }
 }
 

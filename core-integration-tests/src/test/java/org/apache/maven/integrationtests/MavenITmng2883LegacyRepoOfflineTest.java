@@ -22,7 +22,7 @@ import org.codehaus.plexus.util.StringUtils;
  * This is a sample integration test. The IT tests typically
  * operate by having a sample project in the
  * /src/test/resources folder along with a junit test like
- * this one. The junit test uses the verifier (which uses
+ * this one. The junit test uses the itr (which uses
  * the invoker) to invoke a new instance of Maven on the
  * project in the resources folder. It then checks the
  * results. This is a non-trivial example that shows two
@@ -48,9 +48,9 @@ public class MavenITmng2883LegacyRepoOfflineTest
                                                                  "/mng-2883-legacy-repo-offline/"
                                                                                  + testName );
 
-        IntegrationTestRunner verifier;
+        IntegrationTestRunner itr;
 
-        verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
+        itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
 
         File settings = writeSettings( testDir );
         List cliOptions = new ArrayList();
@@ -62,7 +62,7 @@ public class MavenITmng2883LegacyRepoOfflineTest
         try
         {
             // this will ensure that all relevant plugins are present.
-            verifier.executeGoal( "initialize", cliOptions );
+            itr.executeGoal( "initialize", cliOptions );
         }
         catch ( IntegrationTestException e )
         {
@@ -74,7 +74,7 @@ public class MavenITmng2883LegacyRepoOfflineTest
 
         
         // clear out the parent POM if it's in the local repository.
-        verifier.deleteArtifact( "org.apache.maven.its.mng2883", "parent", "1.0-SNAPSHOT", "pom" );
+        itr.deleteArtifact( "org.apache.maven.its.mng2883", "parent", "1.0-SNAPSHOT", "pom" );
 
         try
         {
@@ -83,7 +83,7 @@ public class MavenITmng2883LegacyRepoOfflineTest
                 .setCliOptions( cliOptions )
                 .setAutoclean( false );
 
-            verifier.invoke( r );
+            itr.invoke( r );
             
             fail( "Build should fail with unresolvable parent POM." );
         }
@@ -95,7 +95,7 @@ public class MavenITmng2883LegacyRepoOfflineTest
         missingMessages.add( "System is offline." );
         missingMessages.add( "org.apache.maven.its.mng2883:parent:pom:1.0-SNAPSHOT" );
 
-        List lines = verifier.loadFile( new File( testDir, "log.txt" ), false );
+        List lines = itr.loadFile( new File( testDir, "log.txt" ), false );
 
         for ( Iterator it = lines.iterator(); it.hasNext(); )
         {
@@ -139,9 +139,9 @@ public class MavenITmng2883LegacyRepoOfflineTest
                                                                  "/mng-2883-legacy-repo-offline/"
                                                                                  + testName );
 
-        IntegrationTestRunner verifier;
+        IntegrationTestRunner itr;
 
-        verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
+        itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
 
         List cliOptions = new ArrayList();
 
@@ -154,7 +154,7 @@ public class MavenITmng2883LegacyRepoOfflineTest
         try
         {
             // this will ensure that all relevant plugins are present.
-            verifier.executeGoal( "compile", cliOptions );
+            itr.executeGoal( "compile", cliOptions );
         }
         catch ( IntegrationTestException e )
         {
@@ -165,12 +165,12 @@ public class MavenITmng2883LegacyRepoOfflineTest
         cliOptions.add( "-o" );
 
         // clear out the dependency if it's in the local repository.
-        verifier.deleteArtifact( "org.apache.maven.its.mng2883", "dep", "1.0-SNAPSHOT", "pom" );
-        verifier.deleteArtifact( "org.apache.maven.its.mng2883", "dep", "1.0-SNAPSHOT", "jar" );
+        itr.deleteArtifact( "org.apache.maven.its.mng2883", "dep", "1.0-SNAPSHOT", "pom" );
+        itr.deleteArtifact( "org.apache.maven.its.mng2883", "dep", "1.0-SNAPSHOT", "jar" );
 
         try
         {
-            verifier.executeGoal( "compile", cliOptions );
+            itr.executeGoal( "compile", cliOptions );
 
             fail( "Build should fail with unresolvable dependency artifact." );
         }
@@ -184,7 +184,7 @@ public class MavenITmng2883LegacyRepoOfflineTest
         missingMessages.add( "offline mode." );
         missingMessages.add( "org.apache.maven.its.mng2883:dep:jar:1.0-SNAPSHOT" );
 
-        List lines = verifier.loadFile( new File( testDir, "log.txt" ), false );
+        List lines = itr.loadFile( new File( testDir, "log.txt" ), false );
 
         for ( Iterator it = lines.iterator(); it.hasNext(); )
         {
@@ -228,9 +228,9 @@ public class MavenITmng2883LegacyRepoOfflineTest
                                                                  "/mng-2883-legacy-repo-offline/"
                                                                                  + testName );
 
-        IntegrationTestRunner verifier;
+        IntegrationTestRunner itr;
 
-        verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
+        itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
 
         List cliOptions = new ArrayList();
 
@@ -244,12 +244,12 @@ public class MavenITmng2883LegacyRepoOfflineTest
         cliOptions.add( settings.getAbsolutePath() );
 
         // clear out the dependency if it's in the local repository.
-        verifier.deleteArtifact( "org.apache.maven.its.mng2883", "plugin", "1.0-SNAPSHOT", "pom" );
-        verifier.deleteArtifact( "org.apache.maven.its.mng2883", "plugin", "1.0-SNAPSHOT", "jar" );
+        itr.deleteArtifact( "org.apache.maven.its.mng2883", "plugin", "1.0-SNAPSHOT", "pom" );
+        itr.deleteArtifact( "org.apache.maven.its.mng2883", "plugin", "1.0-SNAPSHOT", "jar" );
 
         try
         {
-            verifier.executeGoal( "org.apache.maven.its.mng2883:plugin:1.0-SNAPSHOT:run", cliOptions );
+            itr.executeGoal( "org.apache.maven.its.mng2883:plugin:1.0-SNAPSHOT:run", cliOptions );
 
             fail( "Build should fail with unresolvable plugin artifact." );
         }
@@ -261,7 +261,7 @@ public class MavenITmng2883LegacyRepoOfflineTest
         missingMessages.add( "System is offline." );
         missingMessages.add( "org.apache.maven.its.mng2883:plugin:pom:1.0-SNAPSHOT" );
 
-        List lines = verifier.loadFile( new File( testDir, "log.txt" ), false );
+        List lines = itr.loadFile( new File( testDir, "log.txt" ), false );
 
         for ( Iterator it = lines.iterator(); it.hasNext(); )
         {

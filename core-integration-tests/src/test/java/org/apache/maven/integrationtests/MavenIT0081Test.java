@@ -15,12 +15,12 @@ public class MavenIT0081Test
         throws Exception
     {
         File testDir = extractTestResources( getClass(), "/it0081" );
-        IntegrationTestRunner verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
-        verifier.deleteArtifact( "org.apache.maven.its.it0081", "test-plugin", "0.1", "maven-plugin" );
-        verifier.executeGoal( "install" );
-        verifier.assertFilePresent( "test-component-c/target/org.apache.maven.wagon.providers.ftp.FtpWagon" );
-        verifier.verifyErrorFreeLog();
-        verifier.resetStreams();
+        IntegrationTestRunner itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
+        itr.deleteArtifact( "org.apache.maven.its.it0081", "test-plugin", "0.1", "maven-plugin" );
+        itr.executeGoal( "install" );
+        itr.assertFilePresent( "test-component-c/target/org.apache.maven.wagon.providers.ftp.FtpWagon" );
+        itr.verifyErrorFreeLog();
+        itr.resetStreams();
 
     }
 }

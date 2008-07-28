@@ -17,10 +17,10 @@ public class MavenIT0103Test
         throws Exception
     {
         File testDir = extractTestResources( getClass(), "/it0103" );
-        IntegrationTestRunner verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
-        verifier.executeGoal( "package" );
-        verifier.verifyErrorFreeLog();
-        verifier.resetStreams();
+        IntegrationTestRunner itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
+        itr.executeGoal( "package" );
+        itr.verifyErrorFreeLog();
+        itr.resetStreams();
 
     }
 }

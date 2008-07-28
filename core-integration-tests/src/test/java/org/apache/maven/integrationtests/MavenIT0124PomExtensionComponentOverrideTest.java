@@ -16,21 +16,21 @@ public class MavenIT0124PomExtensionComponentOverrideTest
     public void testit0124() throws Exception
     {
         File testDir = extractTestResources( getClass(), "/it0124-pomExtensionComponentOverride/extension" );
-        IntegrationTestRunner verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
-        verifier.executeGoal( "install" );
-        verifier.verifyErrorFreeLog();
-        verifier.resetStreams();
+        IntegrationTestRunner itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
+        itr.executeGoal( "install" );
+        itr.verifyErrorFreeLog();
+        itr.resetStreams();
 
         testDir = extractTestResources( getClass(), "/it0124-pomExtensionComponentOverride/plugin" );
-        verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
-        verifier.executeGoal( "install" );
-        verifier.verifyErrorFreeLog();
-        verifier.resetStreams();
+        itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
+        itr.executeGoal( "install" );
+        itr.verifyErrorFreeLog();
+        itr.resetStreams();
 
         testDir = extractTestResources( getClass(), "/it0124-pomExtensionComponentOverride/project" );
-        verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
-        verifier.executeGoal( "verify" );
-        verifier.verifyErrorFreeLog();
-        verifier.resetStreams();
+        itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
+        itr.executeGoal( "verify" );
+        itr.verifyErrorFreeLog();
+        itr.resetStreams();
     }
 }

@@ -14,12 +14,12 @@ public class MavenIT0077Test
         throws Exception
     {
         File testDir = extractTestResources( getClass(), "/it0077" );
-        IntegrationTestRunner verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
-        verifier.deleteArtifact( "org.apache.maven.its.it0077", "sub1", "1.0", "test-jar" );
-        verifier.executeGoal( "install" );
-        verifier.assertArtifactPresent( "org.apache.maven.its.it0077", "sub1", "1.0", "test-jar" );
-        verifier.verifyErrorFreeLog();
-        verifier.resetStreams();
+        IntegrationTestRunner itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
+        itr.deleteArtifact( "org.apache.maven.its.it0077", "sub1", "1.0", "test-jar" );
+        itr.executeGoal( "install" );
+        itr.assertArtifactPresent( "org.apache.maven.its.it0077", "sub1", "1.0", "test-jar" );
+        itr.verifyErrorFreeLog();
+        itr.resetStreams();
     }
 }
 

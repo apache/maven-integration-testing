@@ -15,12 +15,12 @@ public class MavenIT0027Test
         throws Exception
     {
         File testDir = extractTestResources( getClass(), "/it0027" );
-        IntegrationTestRunner verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
-        verifier.executeGoal( "org.apache.maven.its.plugins:maven-it-plugin-fork:fork, org.apache.maven.its.plugins:maven-it-plugin-fork:fork-goal" );
-        verifier.assertFilePresent( "target/forked/touch.txt" );
-        verifier.assertFilePresent( "target/forked2/touch.txt" );
-        verifier.verifyErrorFreeLog();
-        verifier.resetStreams();
+        IntegrationTestRunner itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
+        itr.executeGoal( "org.apache.maven.its.plugins:maven-it-plugin-fork:fork, org.apache.maven.its.plugins:maven-it-plugin-fork:fork-goal" );
+        itr.assertFilePresent( "target/forked/touch.txt" );
+        itr.assertFilePresent( "target/forked2/touch.txt" );
+        itr.verifyErrorFreeLog();
+        itr.resetStreams();
 
     }
 }

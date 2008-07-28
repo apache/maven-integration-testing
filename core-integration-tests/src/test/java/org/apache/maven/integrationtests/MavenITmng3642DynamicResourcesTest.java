@@ -49,26 +49,26 @@ public class MavenITmng3642DynamicResourcesTest
         // file.
         File testDir = extractTestResources( getClass(), "/mng-3642-dynamicResources" );
 
-        IntegrationTestRunner verifier;
+        IntegrationTestRunner itr;
 
         /*
          * We must first make sure that any artifact created
          * by this test has been removed from the local
          * repository. Failing to do this could cause
-         * unstable test results. Fortunately, the verifier
+         * unstable test results. Fortunately, the itr
          * makes it easy to do this.
          */
-        verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
+        itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
 
         /*
          * The Command Line Options (CLI) are passed to the
-         * verifier as a list. This is handy for things like
+         * itr as a list. This is handy for things like
          * redefining the local repository if needed. In
          * this case, we use the -N flag so that Maven won't
          * recurse. We are only installing the parent pom to
          * the local repo here.
          */
-        verifier.executeGoal( "process-test-resources" );
+        itr.executeGoal( "process-test-resources" );
 
         /*
          * This is the simplest way to check a build
@@ -76,16 +76,16 @@ public class MavenITmng3642DynamicResourcesTest
          * an IT test: make the build pass when the test
          * should pass, and make the build fail when the
          * test should fail. There are other methods
-         * supported by the verifier. They can be seen here:
-         * http://maven.apache.org/shared/maven-verifier/apidocs/index.html
+         * supported by the itr. They can be seen here:
+         * http://maven.apache.org/shared/maven-itr/apidocs/index.html
          */
-        verifier.verifyErrorFreeLog();
+        itr.verifyErrorFreeLog();
 
         /*
-         * Reset the streams before executing the verifier
+         * Reset the streams before executing the itr
          * again.
          */
-        verifier.resetStreams();
+        itr.resetStreams();
 
 		File first = new File( testDir, "target/test-classes/one.txt" );
 		assertTrue( "First resource file was not present: " + first, first.exists() );

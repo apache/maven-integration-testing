@@ -21,11 +21,11 @@ public class MavenIT0010Test
         throws Exception
     {
         File testDir = extractTestResources( getClass(), "/it0010" );
-        IntegrationTestRunner verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
-        verifier.executeGoal( "compile" );
-        verifier.assertFilePresent( "target/classes/org/apache/maven/it0010/PersonFinder.class" );
-        verifier.verifyErrorFreeLog();
-        verifier.resetStreams();
+        IntegrationTestRunner itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
+        itr.executeGoal( "compile" );
+        itr.assertFilePresent( "target/classes/org/apache/maven/it0010/PersonFinder.class" );
+        itr.verifyErrorFreeLog();
+        itr.resetStreams();
 
     }
 }

@@ -21,7 +21,7 @@ import org.codehaus.plexus.util.StringUtils;
  * This is a sample integration test. The IT tests typically
  * operate by having a sample project in the
  * /src/test/resources folder along with a junit test like
- * this one. The junit test uses the verifier (which uses
+ * this one. The junit test uses the itr (which uses
  * the invoker) to invoke a new instance of Maven on the
  * project in the resources folder. It then checks the
  * results. This is a non-trivial example that shows two
@@ -84,19 +84,19 @@ public class MavenITmng3415JunkRepositoryMetadataTest
 
         setupDummyDependency( testDir, localRepo, true );
 
-        IntegrationTestRunner verifier;
+        IntegrationTestRunner itr;
 
-        verifier = new IntegrationTestRunner( projectDir.getAbsolutePath() );
+        itr = new IntegrationTestRunner( projectDir.getAbsolutePath() );
 
         List cliOptions = new ArrayList();
         cliOptions.add( "-X" );
         cliOptions.add( "-s" );
         cliOptions.add( settings.getPath() );
 
-        verifier.executeGoal( "package", cliOptions );
+        itr.executeGoal( "package", cliOptions );
 
-        verifier.verifyErrorFreeLog();
-        verifier.resetStreams();
+        itr.verifyErrorFreeLog();
+        itr.resetStreams();
 
         File firstLogFile = new File( testDir, "log-" + methodName + "-firstBuild.txt" );
         logFile.renameTo( firstLogFile );
@@ -105,10 +105,10 @@ public class MavenITmng3415JunkRepositoryMetadataTest
 
         setupDummyDependency( testDir, localRepo, true );
 
-        verifier.executeGoal( "package" );
+        itr.executeGoal( "package" );
 
-        verifier.verifyErrorFreeLog();
-        verifier.resetStreams();
+        itr.verifyErrorFreeLog();
+        itr.resetStreams();
 
         File secondLogFile = new File( testDir, "log-" + methodName + "-secondBuild.txt" );
         logFile.renameTo( secondLogFile );
@@ -163,39 +163,39 @@ public class MavenITmng3415JunkRepositoryMetadataTest
 
         setupDummyDependency( testDir, localRepo, true );
 
-        IntegrationTestRunner verifier;
+        IntegrationTestRunner itr;
 
-        verifier = new IntegrationTestRunner( projectDir.getAbsolutePath() );
+        itr = new IntegrationTestRunner( projectDir.getAbsolutePath() );
 
         List cliOptions = new ArrayList();
         cliOptions.add( "-X" );
         cliOptions.add( "-s" );
         cliOptions.add( settings.getPath() );
-        verifier.executeGoal( "package", cliOptions );
-        verifier.verifyErrorFreeLog();
-        verifier.resetStreams();
+        itr.executeGoal( "package", cliOptions );
+        itr.verifyErrorFreeLog();
+        itr.resetStreams();
 
         File firstLogFile = new File( testDir, "log-" + methodName + "-firstBuild.txt" );
         logFile.renameTo( firstLogFile );
 
         // FIXME: There really should be a better way than this!
-        assertOutputLinePresent( verifier, firstLogFile, "snapshot tests:missing:1.0-SNAPSHOT: checking for updates from testing-repo" );
+        assertOutputLinePresent( itr, firstLogFile, "snapshot tests:missing:1.0-SNAPSHOT: checking for updates from testing-repo" );
 
         File updateCheckFile = getUpdateCheckFile( localRepo );
         long firstLastMod = updateCheckFile.lastModified();
 
         setupDummyDependency( testDir, localRepo, false );
 
-        verifier.executeGoal( "package" );
+        itr.executeGoal( "package" );
 
-        verifier.verifyErrorFreeLog();
-        verifier.resetStreams();
+        itr.verifyErrorFreeLog();
+        itr.resetStreams();
 
         File secondLogFile = new File( testDir, "log-" + methodName + "-secondBuild.txt" );
         logFile.renameTo( secondLogFile );
 
         // FIXME: There really should be a better way than this!
-        assertOutputLineMissing( verifier, secondLogFile, "snapshot tests:missing:1.0-SNAPSHOT: checking for updates from testing-repo" );
+        assertOutputLineMissing( itr, secondLogFile, "snapshot tests:missing:1.0-SNAPSHOT: checking for updates from testing-repo" );
 
         assertEquals( "Last-modified time should be unchanged from first build through second build for the file we use for updateInterval checks.", firstLastMod, updateCheckFile.lastModified() );
     }
@@ -284,21 +284,21 @@ public class MavenITmng3415JunkRepositoryMetadataTest
                                                                  RESOURCE_BASE
                                                                                  + "/maven-find-local-repo-plugin" );
 
-        IntegrationTestRunner verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
+        IntegrationTestRunner itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
 
-        verifier.deleteArtifact( "org.apache.maven.plugins", "maven-find-local-repo-plugin", "1.0-SNAPSHOT", "jar" );
+        itr.deleteArtifact( "org.apache.maven.plugins", "maven-find-local-repo-plugin", "1.0-SNAPSHOT", "jar" );
 
-        verifier.executeGoal( "install" );
+        itr.executeGoal( "install" );
 
-        verifier.verifyErrorFreeLog();
-        verifier.resetStreams();
+        itr.verifyErrorFreeLog();
+        itr.resetStreams();
 
-        verifier.executeGoal( "find-local-repo:find" );
+        itr.executeGoal( "find-local-repo:find" );
 
-        verifier.verifyErrorFreeLog();
-        verifier.resetStreams();
+        itr.verifyErrorFreeLog();
+        itr.resetStreams();
 
-        List lines = verifier.loadFile( new File( testDir, "target/local-repository-location.txt" ),
+        List lines = itr.loadFile( new File( testDir, "target/local-repository-location.txt" ),
                                         false );
 
         File localRepo = new File( (String) lines.get( 0 ) );
@@ -354,12 +354,12 @@ public class MavenITmng3415JunkRepositoryMetadataTest
         return settingsOut;
     }
 
-    private void assertOutputLinePresent( IntegrationTestRunner verifier,
+    private void assertOutputLinePresent( IntegrationTestRunner itr,
                                    File logFile,
                                    String lineContents )
         throws IntegrationTestException
     {
-        List lines = verifier.loadFile( logFile, false );
+        List lines = itr.loadFile( logFile, false );
 
         boolean found = false;
         for ( Iterator it = lines.iterator(); it.hasNext(); )
@@ -375,12 +375,12 @@ public class MavenITmng3415JunkRepositoryMetadataTest
         assertTrue( "Build output in:\n\n" + logFile + "\n\nshould contain line with contents:\n\n" + lineContents + "\n", found );
     }
 
-    private void assertOutputLineMissing( IntegrationTestRunner verifier,
+    private void assertOutputLineMissing( IntegrationTestRunner itr,
                                    File logFile,
                                    String lineContents )
         throws IntegrationTestException
     {
-        List lines = verifier.loadFile( logFile, false );
+        List lines = itr.loadFile( logFile, false );
 
         boolean found = false;
         for ( Iterator it = lines.iterator(); it.hasNext(); )

@@ -16,14 +16,14 @@ public class MavenIT0009Test
         throws Exception
     {
         File testDir = extractTestResources( getClass(), "/it0009" );
-        IntegrationTestRunner verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
-        verifier.deleteArtifact( "org.apache.maven.its.plugins", "maven-it-plugin-touch", "1.0", "maven-plugin" );
-        verifier.executeGoal( "generate-resources" );
-        verifier.assertFilePresent( "target/pluginItem" );
-        verifier.assertFilePresent( "target/goalItem" );
-        verifier.assertFileNotPresent( "target/bad-item" );
-        verifier.verifyErrorFreeLog();
-        verifier.resetStreams();
+        IntegrationTestRunner itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
+        itr.deleteArtifact( "org.apache.maven.its.plugins", "maven-it-plugin-touch", "1.0", "maven-plugin" );
+        itr.executeGoal( "generate-resources" );
+        itr.assertFilePresent( "target/pluginItem" );
+        itr.assertFilePresent( "target/goalItem" );
+        itr.assertFileNotPresent( "target/bad-item" );
+        itr.verifyErrorFreeLog();
+        itr.resetStreams();
 
     }
 }

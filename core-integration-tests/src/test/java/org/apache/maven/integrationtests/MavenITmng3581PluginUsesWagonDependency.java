@@ -25,15 +25,15 @@ public class MavenITmng3581PluginUsesWagonDependency
         File pluginDir = new File( testDir, "plugin" );
         File projectDir = new File( testDir, "project" );
 
-        IntegrationTestRunner verifier = new IntegrationTestRunner( pluginDir.getAbsolutePath() );
-        verifier.executeGoal( "install" );
-        verifier.verifyErrorFreeLog();
-        verifier.resetStreams();
+        IntegrationTestRunner itr = new IntegrationTestRunner( pluginDir.getAbsolutePath() );
+        itr.executeGoal( "install" );
+        itr.verifyErrorFreeLog();
+        itr.resetStreams();
 
-        verifier = new IntegrationTestRunner( projectDir.getAbsolutePath() );
-        verifier.executeGoal( "validate" );
-        verifier.verifyErrorFreeLog();
-        verifier.resetStreams();
+        itr = new IntegrationTestRunner( projectDir.getAbsolutePath() );
+        itr.executeGoal( "validate" );
+        itr.verifyErrorFreeLog();
+        itr.resetStreams();
 
     }
 }

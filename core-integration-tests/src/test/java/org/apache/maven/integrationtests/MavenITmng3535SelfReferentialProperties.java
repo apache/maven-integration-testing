@@ -23,7 +23,7 @@ public class MavenITmng3535SelfReferentialProperties
         throws Exception
     {
         File testDir = extractTestResources( getClass(), "/mng-3535-selfReferentialProperties" );
-        IntegrationTestRunner verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
+        IntegrationTestRunner itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
         List opts = new ArrayList();
         opts.add( "-X" );
 
@@ -32,8 +32,8 @@ public class MavenITmng3535SelfReferentialProperties
             .setCliOptions( opts )
             .setAutoclean( false );
 
-        verifier.invoke( r );
-        verifier.verifyErrorFreeLog();
-        verifier.resetStreams();
+        itr.invoke( r );
+        itr.verifyErrorFreeLog();
+        itr.resetStreams();
     }
 }

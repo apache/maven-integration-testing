@@ -31,24 +31,24 @@ public class MavenIT0112ExtensionsThatDragDependencies
     {
         File testDir = extractTestResources( getClass(), "/it0112-extensionsThatDragDependencies" );
 
-        IntegrationTestRunner verifier;
+        IntegrationTestRunner itr;
 
         // Install the parent POM
-        verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
-        verifier.deleteArtifact( "org.apache.maven.its.it0112", "test-extension", "1.0-SNAPSHOT", "jar" );
-        verifier.deleteArtifact( "org.apache.maven.its.it0112", "test-project", "1.0-SNAPSHOT", "jar" );
+        itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
+        itr.deleteArtifact( "org.apache.maven.its.it0112", "test-extension", "1.0-SNAPSHOT", "jar" );
+        itr.deleteArtifact( "org.apache.maven.its.it0112", "test-project", "1.0-SNAPSHOT", "jar" );
 
         // Install the extension with the resources required for the test
-        verifier = new IntegrationTestRunner( new File( testDir.getAbsolutePath(), "test-extension" ).getAbsolutePath() );
-        verifier.executeGoal( "install" );
-        verifier.verifyErrorFreeLog();
-        verifier.resetStreams();
+        itr = new IntegrationTestRunner( new File( testDir.getAbsolutePath(), "test-extension" ).getAbsolutePath() );
+        itr.executeGoal( "install" );
+        itr.verifyErrorFreeLog();
+        itr.resetStreams();
 
         // Run the whole test
-        verifier = new IntegrationTestRunner( new File( testDir.getAbsolutePath(), "test-project" ).getAbsolutePath() );
-        verifier.executeGoal( "org.apache.maven.plugins:maven-project-info-reports-plugin:2.0.1:scm" );
-        // ommitted because we always get velocity errors that aren't covered by the verifier
-//        verifier.verifyErrorFreeLog();
-        verifier.resetStreams();
+        itr = new IntegrationTestRunner( new File( testDir.getAbsolutePath(), "test-project" ).getAbsolutePath() );
+        itr.executeGoal( "org.apache.maven.plugins:maven-project-info-reports-plugin:2.0.1:scm" );
+        // ommitted because we always get velocity errors that aren't covered by the itr
+//        itr.verifyErrorFreeLog();
+        itr.resetStreams();
     }
 }

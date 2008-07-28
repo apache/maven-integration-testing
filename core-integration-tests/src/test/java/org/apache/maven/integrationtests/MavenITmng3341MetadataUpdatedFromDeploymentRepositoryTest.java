@@ -32,16 +32,16 @@ public class MavenITmng3341MetadataUpdatedFromDeploymentRepositoryTest
         FileUtils.deleteDirectory( targetRepository );
         FileUtils.copyDirectoryStructure( new File( testDir, "deployment-repository" ), targetRepository );
 
-        IntegrationTestRunner verifier;
+        IntegrationTestRunner itr;
 
-        verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
+        itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
 
         List cliOptions = new ArrayList();
         cliOptions.add( "-s" );
         cliOptions.add( "settings.xml" );
-        verifier.executeGoal( "deploy", cliOptions );
+        itr.executeGoal( "deploy", cliOptions );
 
-        verifier.verifyErrorFreeLog();
+        itr.verifyErrorFreeLog();
 
         Xpp3Dom dom = readDom( new File( targetRepository,
                                          "org/apache/maven/its/mng3341/test-artifact/1.0-SNAPSHOT/maven-metadata.xml" ) );
@@ -52,7 +52,7 @@ public class MavenITmng3341MetadataUpdatedFromDeploymentRepositoryTest
         assertEquals( "other-plugin", plugins[0].getChild( "prefix" ).getValue() );
         assertEquals( "test-artifact", plugins[1].getChild( "prefix" ).getValue() );
 
-        verifier.resetStreams();
+        itr.resetStreams();
     }
 
     private Xpp3Dom readDom( File file )

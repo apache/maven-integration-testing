@@ -17,13 +17,13 @@ public class MavenIT0066Test
         throws Exception
     {
         File testDir = extractTestResources( getClass(), "/it0066" );
-        IntegrationTestRunner verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
+        IntegrationTestRunner itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
         List cliOptions = new ArrayList();
         cliOptions.add( "-f other-pom.xml" );
-        verifier.executeGoal( "install", cliOptions);
-        verifier.assertFilePresent( "" );
-        verifier.verifyErrorFreeLog();
-        verifier.resetStreams();
+        itr.executeGoal( "install", cliOptions);
+        itr.assertFilePresent( "" );
+        itr.verifyErrorFreeLog();
+        itr.resetStreams();
     }
 }
 

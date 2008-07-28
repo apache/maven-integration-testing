@@ -13,7 +13,7 @@ import org.apache.maven.it.InvocationRequest;
 /**
  * This is a sample integration test. The IT tests typically operate by having a sample project in
  * the /src/test/resources folder along with a junit test like this one. The junit test uses the
- * verifier (which uses the invoker) to invoke a new instance of Maven on the project in the
+ * itr (which uses the invoker) to invoke a new instance of Maven on the project in the
  * resources folder. It then checks the results. This is a non-trivial example that shows two
  * phases. See more information inline in the code.
  * 
@@ -38,19 +38,19 @@ public class MavenITmng3099SettingsProfilesWithNoPOM
 
         File plugin = new File( testDir, "plugin" );
 
-        IntegrationTestRunner verifier;
+        IntegrationTestRunner itr;
 
-        verifier = new IntegrationTestRunner( plugin.getAbsolutePath() );
+        itr = new IntegrationTestRunner( plugin.getAbsolutePath() );
 
-        verifier.executeGoal( "install" );
+        itr.executeGoal( "install" );
 
         /*
-         * Reset the streams before executing the verifier
+         * Reset the streams before executing the itr
          * again.
          */
-        verifier.resetStreams();
+        itr.resetStreams();
 
-        verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
+        itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
 
         /*
          * Use the settings for this test, which contains the profile we're looking for.
@@ -64,9 +64,9 @@ public class MavenITmng3099SettingsProfilesWithNoPOM
             .setCliOptions( cliOptions )
             .setAutoclean( false );
 
-        verifier.invoke( r );
+        itr.invoke( r );
 
-        List lines = verifier.loadFile( new File( testDir, "log.txt" ), false );
+        List lines = itr.loadFile( new File( testDir, "log.txt" ), false );
         boolean found = false;
         for ( Iterator it = lines.iterator(); it.hasNext(); )
         {

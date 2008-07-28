@@ -19,12 +19,12 @@ public class MavenIT0095Test
         // TODO: This is WRONG! Need to run only sub1 to effective-pom, then run all to verify.
         File testDir = extractTestResources( getClass(), "/it0095" );
         File sub1 = new File( testDir, "sub1" );
-        IntegrationTestRunner verifier = new IntegrationTestRunner( sub1.getAbsolutePath() );
+        IntegrationTestRunner itr = new IntegrationTestRunner( sub1.getAbsolutePath() );
         List options = new ArrayList();
         options.add( "-Doutput=\"" + new File( sub1, "target/effective-pom.xml" ).getAbsolutePath() + "\"" );
-        verifier.executeGoal( "org.apache.maven.plugins:maven-help-plugin:2.0.2:effective-pom, verify", options );
-        verifier.verifyErrorFreeLog();
-        verifier.resetStreams();
+        itr.executeGoal( "org.apache.maven.plugins:maven-help-plugin:2.0.2:effective-pom, verify", options );
+        itr.verifyErrorFreeLog();
+        itr.resetStreams();
     }
 }
 

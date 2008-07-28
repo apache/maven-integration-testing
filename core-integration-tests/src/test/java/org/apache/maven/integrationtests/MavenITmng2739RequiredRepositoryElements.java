@@ -50,13 +50,13 @@ public class MavenITmng2739RequiredRepositoryElements
     {
         File testDir = extractTestResources( getClass(), "/mng-2739/repo-id" );
 
-        IntegrationTestRunner verifier;
+        IntegrationTestRunner itr;
 
-        verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
+        itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
 
         try
         {
-            verifier.executeGoal( "validate" );
+            itr.executeGoal( "validate" );
 
             fail( "POM should NOT validate: repository <id/> element is missing in: "
                   + new File( testDir, "pom.xml" ) );
@@ -65,9 +65,9 @@ public class MavenITmng2739RequiredRepositoryElements
         {
         }
 
-        verifier.resetStreams();
+        itr.resetStreams();
 
-        List listing = verifier.loadFile( new File( testDir, "log.txt" ), false );
+        List listing = itr.loadFile( new File( testDir, "log.txt" ), false );
         boolean foundNpe = false;
         for ( Iterator it = listing.iterator(); it.hasNext(); )
         {
@@ -89,13 +89,13 @@ public class MavenITmng2739RequiredRepositoryElements
         // file.
         File testDir = extractTestResources( getClass(), "/mng-2739/repo-url" );
 
-        IntegrationTestRunner verifier;
+        IntegrationTestRunner itr;
 
-        verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
+        itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
 
         try
         {
-            verifier.executeGoal( "validate" );
+            itr.executeGoal( "validate" );
 
             fail( "POM should NOT validate: repository <url/> element is missing in: "
                   + new File( testDir, "pom.xml" ) );
@@ -104,9 +104,9 @@ public class MavenITmng2739RequiredRepositoryElements
         {
         }
 
-        verifier.resetStreams();
+        itr.resetStreams();
 
-        List listing = verifier.loadFile( new File( testDir, "log.txt" ), false );
+        List listing = itr.loadFile( new File( testDir, "log.txt" ), false );
         boolean foundNpe = false;
         for ( Iterator it = listing.iterator(); it.hasNext(); )
         {

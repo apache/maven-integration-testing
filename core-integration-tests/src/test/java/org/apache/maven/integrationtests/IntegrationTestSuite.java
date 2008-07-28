@@ -31,14 +31,14 @@ public class IntegrationTestSuite
     public static Test suite()
         throws IntegrationTestException
     {
-        IntegrationTestRunner verifier = null;
+        IntegrationTestRunner itr = null;
 
         try
         {
-            verifier = new IntegrationTestRunner( "" );
-            String mavenVersion = verifier.getMavenVersion();
+            itr = new IntegrationTestRunner( "" );
+            String mavenVersion = itr.getMavenVersion();
 
-            String executable = verifier.getExecutable();
+            String executable = itr.getExecutable();
 
             out.println( "Running integration tests for Maven '" + mavenVersion + "'\n\tusing Maven executable: " + executable );
 
@@ -46,9 +46,9 @@ public class IntegrationTestSuite
         }
         finally
         {
-            if ( verifier != null )
+            if ( itr != null )
             {
-                verifier.resetStreams();
+                itr.resetStreams();
             }
         }
 

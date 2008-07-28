@@ -16,14 +16,14 @@ public class MavenIT0055Test
         throws Exception
     {
         File testDir = extractTestResources( getClass(), "/it0055" );
-        IntegrationTestRunner verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
-        verifier.executeGoal( "test-compile" );
-        verifier.assertFilePresent( "target/classes/org/apache/maven/it0055/Person.class" );
-        verifier.assertFilePresent( "target/test-classes/org/apache/maven/it0055/PersonTest.class" );
-        verifier.assertFileNotPresent( "target/classes/org/apache/maven/it0055/PersonTwo.class" );
-        verifier.assertFileNotPresent( "target/test-classes/org/apache/maven/it0055/PersonTwoTest.class" );
-        verifier.verifyErrorFreeLog();
-        verifier.resetStreams();
+        IntegrationTestRunner itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
+        itr.executeGoal( "test-compile" );
+        itr.assertFilePresent( "target/classes/org/apache/maven/it0055/Person.class" );
+        itr.assertFilePresent( "target/test-classes/org/apache/maven/it0055/PersonTest.class" );
+        itr.assertFileNotPresent( "target/classes/org/apache/maven/it0055/PersonTwo.class" );
+        itr.assertFileNotPresent( "target/test-classes/org/apache/maven/it0055/PersonTwoTest.class" );
+        itr.verifyErrorFreeLog();
+        itr.resetStreams();
 
     }
 }

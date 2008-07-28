@@ -30,20 +30,20 @@ public class MavenITmng3545ProfileDeactivation
     {
         File testDir = extractTestResources( getClass(), "/mng-3545-ProfileDeactivation" );
 
-        IntegrationTestRunner verifier;
+        IntegrationTestRunner itr;
 
-        verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
+        itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
 
         List cliOptions = new ArrayList();
-        verifier.executeGoal( "package", cliOptions );
-        verifier.verifyErrorFreeLog();
+        itr.executeGoal( "package", cliOptions );
+        itr.verifyErrorFreeLog();
         // profile 1 and 2 are active by default
-        verifier.assertFilePresent( "target/profile1/touch.txt" );
-        verifier.assertFilePresent( "target/profile2/touch.txt" );
-        verifier.assertFileNotPresent( "target/profile3/touch.txt" );
-        verifier.assertFileNotPresent( "target/profile4/touch.txt" );
-        verifier.assertFileNotPresent( "target/profile5/touch.txt" );
-        verifier.resetStreams();
+        itr.assertFilePresent( "target/profile1/touch.txt" );
+        itr.assertFilePresent( "target/profile2/touch.txt" );
+        itr.assertFileNotPresent( "target/profile3/touch.txt" );
+        itr.assertFileNotPresent( "target/profile4/touch.txt" );
+        itr.assertFileNotPresent( "target/profile5/touch.txt" );
+        itr.resetStreams();
 
     }
 
@@ -56,20 +56,20 @@ public class MavenITmng3545ProfileDeactivation
     {
         File testDir = extractTestResources( getClass(), "/mng-3545-ProfileDeactivation" );
 
-        IntegrationTestRunner verifier;
+        IntegrationTestRunner itr;
 
-        verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
+        itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
 
         List cliOptions = new ArrayList();
 
         // Deactivate active by default profiles
         cliOptions.add( "-P-profile1" );
         cliOptions.add( "-P -profile2" );
-        verifier.executeGoal( "package", cliOptions );
-        verifier.verifyErrorFreeLog();
-        verifier.assertFileNotPresent( "target/profile1/touch.txt" );
-        verifier.assertFileNotPresent( "target/profile2/touch.txt" );
-        verifier.resetStreams();
+        itr.executeGoal( "package", cliOptions );
+        itr.verifyErrorFreeLog();
+        itr.assertFileNotPresent( "target/profile1/touch.txt" );
+        itr.assertFileNotPresent( "target/profile2/touch.txt" );
+        itr.resetStreams();
 
     }
 
@@ -78,20 +78,20 @@ public class MavenITmng3545ProfileDeactivation
     {
         File testDir = extractTestResources( getClass(), "/mng-3545-ProfileDeactivation" );
     
-        IntegrationTestRunner verifier;
+        IntegrationTestRunner itr;
     
-        verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
+        itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
     
         List cliOptions = new ArrayList();
     
         // Deactivate active by default profiles
         cliOptions.add( "-P!profile1" );
         cliOptions.add( "-P !profile2" );    
-        verifier.executeGoal( "package", cliOptions );
-        verifier.verifyErrorFreeLog();
-        verifier.assertFileNotPresent( "target/profile1/touch.txt" );
-        verifier.assertFileNotPresent( "target/profile2/touch.txt" );
-        verifier.resetStreams();
+        itr.executeGoal( "package", cliOptions );
+        itr.verifyErrorFreeLog();
+        itr.assertFileNotPresent( "target/profile1/touch.txt" );
+        itr.assertFileNotPresent( "target/profile2/touch.txt" );
+        itr.resetStreams();
     
     }
 
@@ -106,23 +106,23 @@ public class MavenITmng3545ProfileDeactivation
 
         File testDir = extractTestResources( getClass(), "/mng-3545-ProfileDeactivation" );
 
-        IntegrationTestRunner verifier;
+        IntegrationTestRunner itr;
 
-        verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
+        itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
 
         List cliOptions = new ArrayList();
 
         // Activate with a prop, then deactivate
         cliOptions.add( "-Dprofile3-active-by-property=true" );
         cliOptions.add( "-P-profile3" );
-        verifier.executeGoal( "package", cliOptions );
-        verifier.verifyErrorFreeLog();
-        verifier.assertFilePresent( "target/profile1/touch.txt" );
-        verifier.assertFilePresent( "target/profile2/touch.txt" );
-        verifier.assertFileNotPresent( "target/profile3/touch.txt" );
-        verifier.assertFileNotPresent( "target/profile4/touch.txt" );
-        verifier.assertFileNotPresent( "target/profile5/touch.txt" );
-        verifier.resetStreams();
+        itr.executeGoal( "package", cliOptions );
+        itr.verifyErrorFreeLog();
+        itr.assertFilePresent( "target/profile1/touch.txt" );
+        itr.assertFilePresent( "target/profile2/touch.txt" );
+        itr.assertFileNotPresent( "target/profile3/touch.txt" );
+        itr.assertFileNotPresent( "target/profile4/touch.txt" );
+        itr.assertFileNotPresent( "target/profile5/touch.txt" );
+        itr.resetStreams();
     }
 
     /**
@@ -136,23 +136,23 @@ public class MavenITmng3545ProfileDeactivation
 
         File testDir = extractTestResources( getClass(), "/mng-3545-ProfileDeactivation" );
 
-        IntegrationTestRunner verifier;
+        IntegrationTestRunner itr;
 
-        verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
+        itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
 
         List cliOptions = new ArrayList();
 
         // Activate then deactivate
         cliOptions.add( "-Pprofile4" );
         cliOptions.add( "-P-profile4" );
-        verifier.executeGoal( "package", cliOptions );
-        verifier.verifyErrorFreeLog();
-        verifier.assertFilePresent( "target/profile1/touch.txt" );
-        verifier.assertFilePresent( "target/profile2/touch.txt" );
-        verifier.assertFileNotPresent( "target/profile3/touch.txt" );
-        verifier.assertFileNotPresent( "target/profile4/touch.txt" );
-        verifier.assertFileNotPresent( "target/profile5/touch.txt" );
-        verifier.resetStreams();
+        itr.executeGoal( "package", cliOptions );
+        itr.verifyErrorFreeLog();
+        itr.assertFilePresent( "target/profile1/touch.txt" );
+        itr.assertFilePresent( "target/profile2/touch.txt" );
+        itr.assertFileNotPresent( "target/profile3/touch.txt" );
+        itr.assertFileNotPresent( "target/profile4/touch.txt" );
+        itr.assertFileNotPresent( "target/profile5/touch.txt" );
+        itr.resetStreams();
     }
 
     /**
@@ -166,22 +166,22 @@ public class MavenITmng3545ProfileDeactivation
 
         File testDir = extractTestResources( getClass(), "/mng-3545-ProfileDeactivation" );
 
-        IntegrationTestRunner verifier;
+        IntegrationTestRunner itr;
 
-        verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
+        itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
 
         List cliOptions = new ArrayList();
 
         // Activate
         cliOptions.add( "-Pprofile4" );
-        verifier.executeGoal( "package", cliOptions );
-        verifier.verifyErrorFreeLog();
-        verifier.assertFileNotPresent( "target/profile1/touch.txt" );
-        verifier.assertFileNotPresent( "target/profile2/touch.txt" );
-        verifier.assertFileNotPresent( "target/profile3/touch.txt" );
-        verifier.assertFilePresent( "target/profile4/touch.txt" );
-        verifier.assertFileNotPresent( "target/profile5/touch.txt" );
-        verifier.resetStreams();
+        itr.executeGoal( "package", cliOptions );
+        itr.verifyErrorFreeLog();
+        itr.assertFileNotPresent( "target/profile1/touch.txt" );
+        itr.assertFileNotPresent( "target/profile2/touch.txt" );
+        itr.assertFileNotPresent( "target/profile3/touch.txt" );
+        itr.assertFilePresent( "target/profile4/touch.txt" );
+        itr.assertFileNotPresent( "target/profile5/touch.txt" );
+        itr.resetStreams();
     }
     
     /**

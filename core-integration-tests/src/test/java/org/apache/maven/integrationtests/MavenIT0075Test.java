@@ -18,14 +18,14 @@ public class MavenIT0075Test
         throws Exception
     {
         File testDir = extractTestResources( getClass(), "/it0075" );
-        IntegrationTestRunner verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
+        IntegrationTestRunner itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
         List cliOptions = new ArrayList();
         cliOptions.add( "-Dactivate=anything" );
-        verifier.executeGoal( "help:active-profiles, package, eclipse:eclipse, clean:clean", cliOptions );
-        verifier.assertFileNotPresent( "sub1/target/maven-it-it0075-sub1-1.0.jar" );
-        verifier.assertFileNotPresent( "sub2/target/maven-it-it0075-sub2-1.0.jar" );
-        verifier.verifyErrorFreeLog();
-        verifier.resetStreams();
+        itr.executeGoal( "help:active-profiles, package, eclipse:eclipse, clean:clean", cliOptions );
+        itr.assertFileNotPresent( "sub1/target/maven-it-it0075-sub1-1.0.jar" );
+        itr.assertFileNotPresent( "sub2/target/maven-it-it0075-sub2-1.0.jar" );
+        itr.verifyErrorFreeLog();
+        itr.resetStreams();
     }
 }
 

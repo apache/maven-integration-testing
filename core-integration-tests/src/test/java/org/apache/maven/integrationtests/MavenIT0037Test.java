@@ -17,13 +17,13 @@ public class MavenIT0037Test
         throws Exception
     {
         File testDir = extractTestResources( getClass(), "/it0037" );
-        IntegrationTestRunner verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
+        IntegrationTestRunner itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
         List cliOptions = new ArrayList();
         cliOptions.add( "-f pom2.xml" );
-        verifier.executeGoal( "package", cliOptions );
-        verifier.assertFilePresent( "target/maven-it-it0037-1.0-build2.jar" );
-        verifier.verifyErrorFreeLog();
-        verifier.resetStreams();
+        itr.executeGoal( "package", cliOptions );
+        itr.assertFilePresent( "target/maven-it-it0037-1.0-build2.jar" );
+        itr.verifyErrorFreeLog();
+        itr.resetStreams();
 
     }
 }

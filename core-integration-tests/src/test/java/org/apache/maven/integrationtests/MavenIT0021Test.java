@@ -18,17 +18,17 @@ public class MavenIT0021Test
         throws Exception
     {
         File testDir = extractTestResources( getClass(), "/it0021" );
-        IntegrationTestRunner verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
-        verifier.deleteArtifact( "org.apache.maven", "maven-core-it-support", "1.0", "jar" );
+        IntegrationTestRunner itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
+        itr.deleteArtifact( "org.apache.maven", "maven-core-it-support", "1.0", "jar" );
         
         InvocationRequest r = new DefaultInvocationRequest()
             .addSystemProperty( "includeProfile", "true" )
             .setGoals( "compile" );
         
-        verifier.invoke( r );
-        verifier.assertArtifactPresent( "org.apache.maven", "maven-core-it-support", "1.0", "jar" );
-        verifier.verifyErrorFreeLog();
-        verifier.resetStreams();
+        itr.invoke( r );
+        itr.assertArtifactPresent( "org.apache.maven", "maven-core-it-support", "1.0", "jar" );
+        itr.verifyErrorFreeLog();
+        itr.resetStreams();
 
     }
 }

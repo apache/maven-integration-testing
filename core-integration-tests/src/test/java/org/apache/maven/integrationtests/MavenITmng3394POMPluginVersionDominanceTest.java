@@ -34,11 +34,11 @@ public class MavenITmng3394POMPluginVersionDominanceTest
         //testShouldUsePluginVersionFromPluginMgmtForLifecycleMojoWhenNotInBuildPlugins 
         File testDir = extractTestResources( getClass(), BASEDIR_PREFIX + "lifecycleMojoVersionInPluginMgmt" );
 
-        IntegrationTestRunner verifier;
+        IntegrationTestRunner itr;
 
-        verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
+        itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
 
-        verifier.executeGoal( "install", Collections.singletonList( "-X" ) );
+        itr.executeGoal( "install", Collections.singletonList( "-X" ) );
 
         /*
          * This is the simplest way to check a build
@@ -46,12 +46,12 @@ public class MavenITmng3394POMPluginVersionDominanceTest
          * an IT test: make the build pass when the test
          * should pass, and make the build fail when the
          * test should fail. There are other methods
-         * supported by the verifier. They can be seen here:
-         * http://maven.apache.org/shared/maven-verifier/apidocs/index.html
+         * supported by the itr. They can be seen here:
+         * http://maven.apache.org/shared/maven-itr/apidocs/index.html
          */
-        verifier.verifyErrorFreeLog();
+        itr.verifyErrorFreeLog();
 
-        List logFile = verifier.loadFile( new File( testDir, "log.txt" ), false );
+        List logFile = itr.loadFile( new File( testDir, "log.txt" ), false );
 
         boolean foundSiteBeta5 = false;
         for ( Iterator it = logFile.iterator(); it.hasNext(); )
@@ -65,10 +65,10 @@ public class MavenITmng3394POMPluginVersionDominanceTest
         }
 
         /*
-         * Reset the streams before executing the verifier
+         * Reset the streams before executing the itr
          * again.
          */
-        verifier.resetStreams();
+        itr.resetStreams();
 
         assertTrue( "No reference to maven-site-plugin, version 2.0-beta-5 found in build log.", foundSiteBeta5 );
     }
@@ -79,15 +79,15 @@ public class MavenITmng3394POMPluginVersionDominanceTest
         //testShouldPreferPluginVersionFromBuildPluginsOverThatInPluginMgmt
         File testDir = extractTestResources( getClass(), BASEDIR_PREFIX + "preferBuildPluginOverPluginMgmt" );
 
-        IntegrationTestRunner verifier;
+        IntegrationTestRunner itr;
 
-        verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
+        itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
 
         InvocationRequest r = new DefaultInvocationRequest()
             .setGoals( "clean" )
             .setAutoclean( false );
 
-        verifier.invoke( r );
+        itr.invoke( r );
 
         /*
          * This is the simplest way to check a build
@@ -95,15 +95,15 @@ public class MavenITmng3394POMPluginVersionDominanceTest
          * an IT test: make the build pass when the test
          * should pass, and make the build fail when the
          * test should fail. There are other methods
-         * supported by the verifier. They can be seen here:
-         * http://maven.apache.org/shared/maven-verifier/apidocs/index.html
+         * supported by the itr. They can be seen here:
+         * http://maven.apache.org/shared/maven-itr/apidocs/index.html
          */
-        verifier.verifyErrorFreeLog();
+        itr.verifyErrorFreeLog();
 
         /*
-         * Reset the streams before executing the verifier
+         * Reset the streams before executing the itr
          * again.
          */
-        verifier.resetStreams();
+        itr.resetStreams();
     }
 }

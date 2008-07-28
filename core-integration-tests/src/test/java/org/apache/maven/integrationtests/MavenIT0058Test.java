@@ -18,13 +18,13 @@ public class MavenIT0058Test
         throws Exception
     {
         File testDir = extractTestResources( getClass(), "/it0058" );
-        IntegrationTestRunner verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
+        IntegrationTestRunner itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
         List cliOptions = new ArrayList();
         cliOptions.add( "--settings ./settings.xml" );
-        verifier.executeGoal( "package", cliOptions );
-        verifier.assertFilePresent( "subproject/target/subproject-1.0.jar" );
-        verifier.verifyErrorFreeLog();
-        verifier.resetStreams();
+        itr.executeGoal( "package", cliOptions );
+        itr.assertFilePresent( "subproject/target/subproject-1.0.jar" );
+        itr.verifyErrorFreeLog();
+        itr.resetStreams();
 
     }
 }

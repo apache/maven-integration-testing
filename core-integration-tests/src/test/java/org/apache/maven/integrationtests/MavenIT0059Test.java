@@ -16,11 +16,11 @@ public class MavenIT0059Test
         throws Exception
     {
         File testDir = extractTestResources( getClass(), "/it0059" );
-        IntegrationTestRunner verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
-        verifier.executeGoal( "package" );
-        verifier.assertFilePresent( "target/maven-it-it0059-1.0.jar" );
+        IntegrationTestRunner itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
+        itr.executeGoal( "package" );
+        itr.assertFilePresent( "target/maven-it-it0059-1.0.jar" );
         // don't verify error free log
-        verifier.resetStreams();
+        itr.resetStreams();
     }
 }
 

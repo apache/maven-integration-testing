@@ -29,32 +29,32 @@ public class MavenITmng3284UsingCachedPluginsTest
         // file.
         File testDir = extractTestResources( getClass(), "/mng3284-usingCachedPlugins" );
 
-        IntegrationTestRunner verifier;
+        IntegrationTestRunner itr;
 
         /*
          * Build Mojo v1
          */
-        verifier = new IntegrationTestRunner( new File( testDir.getAbsolutePath(), "mojo" ).getAbsolutePath() );
-        verifier.executeGoal( "install" );
-        verifier.verifyErrorFreeLog();
-        verifier.resetStreams();
+        itr = new IntegrationTestRunner( new File( testDir.getAbsolutePath(), "mojo" ).getAbsolutePath() );
+        itr.executeGoal( "install" );
+        itr.verifyErrorFreeLog();
+        itr.resetStreams();
 
         /*
          * Build Mojo v2
          */
-        verifier = new IntegrationTestRunner( new File( testDir.getAbsolutePath(), "mojo2" ).getAbsolutePath() );
-        verifier.executeGoal( "install" );
-        verifier.verifyErrorFreeLog();
-        verifier.resetStreams();
+        itr = new IntegrationTestRunner( new File( testDir.getAbsolutePath(), "mojo2" ).getAbsolutePath() );
+        itr.executeGoal( "install" );
+        itr.verifyErrorFreeLog();
+        itr.resetStreams();
 
         /*
          * Run the simple build
          */
-        verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
-        verifier.executeGoal( "install" );
-        verifier.verifyErrorFreeLog();
+        itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
+        itr.executeGoal( "install" );
+        itr.verifyErrorFreeLog();
 
-        List lines = verifier.loadFile( testDir.getAbsolutePath(), "log.txt", false );
+        List lines = itr.loadFile( testDir.getAbsolutePath(), "log.txt", false );
         int foundVersionOne = 0;
         int foundVersionTwo = 0;
         for ( Iterator i = lines.iterator(); i.hasNext(); )
@@ -67,7 +67,7 @@ public class MavenITmng3284UsingCachedPluginsTest
                 foundVersionTwo++;
         }
 
-        verifier.resetStreams();
+        itr.resetStreams();
 
         Assert.assertEquals( "Should be using plugin version 1 only once.", 1,foundVersionOne );
         Assert.assertEquals( "Should be using plugin version 2 only once.", 1,foundVersionTwo );

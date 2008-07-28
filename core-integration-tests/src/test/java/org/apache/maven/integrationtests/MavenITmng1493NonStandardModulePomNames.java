@@ -19,11 +19,11 @@ public class MavenITmng1493NonStandardModulePomNames
     {
         File testDir = extractTestResources( getClass(), "/mng-1493-nonstandardModulePomNames" );
 
-        IntegrationTestRunner verifier;
+        IntegrationTestRunner itr;
 
-        verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
+        itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
 
-        verifier.executeGoal( "initialize" );
+        itr.executeGoal( "initialize" );
 
         /*
          * This is the simplest way to check a build
@@ -31,9 +31,9 @@ public class MavenITmng1493NonStandardModulePomNames
          * an IT test: make the build pass when the test
          * should pass, and make the build fail when the
          * test should fail. There are other methods
-         * supported by the verifier. They can be seen here:
-         * http://maven.apache.org/shared/maven-verifier/apidocs/index.html
+         * supported by the itr. They can be seen here:
+         * http://maven.apache.org/shared/maven-itr/apidocs/index.html
          */
-        verifier.verifyErrorFreeLog();
+        itr.verifyErrorFreeLog();
     }
 }

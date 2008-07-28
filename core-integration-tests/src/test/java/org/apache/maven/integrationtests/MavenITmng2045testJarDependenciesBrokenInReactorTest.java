@@ -25,16 +25,16 @@ public class MavenITmng2045testJarDependenciesBrokenInReactorTest extends Abstra
         throws Exception
     {
         File testDir = extractTestResources( getClass(), "/mng-2045-testJarDependenciesBrokenInReactor" );
-        IntegrationTestRunner verifier;
+        IntegrationTestRunner itr;
 
-        verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
-        verifier.deleteArtifact( "testing", "mng-2045-test", "1.0-SNAPSHOT", "pom" );
-        verifier.deleteArtifact( "testing", "first-project", "1.0-SNAPSHOT", "jar" );
-        verifier.deleteArtifact( "testing", "second-project", "1.0-SNAPSHOT", "jar" );
+        itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
+        itr.deleteArtifact( "testing", "mng-2045-test", "1.0-SNAPSHOT", "pom" );
+        itr.deleteArtifact( "testing", "first-project", "1.0-SNAPSHOT", "jar" );
+        itr.deleteArtifact( "testing", "second-project", "1.0-SNAPSHOT", "jar" );
 
-        verifier.executeGoal( "install" );
-        verifier.verifyErrorFreeLog();
-        verifier.resetStreams();
+        itr.executeGoal( "install" );
+        itr.verifyErrorFreeLog();
+        itr.resetStreams();
 
     }
 }

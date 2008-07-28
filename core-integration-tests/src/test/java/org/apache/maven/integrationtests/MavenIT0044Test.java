@@ -17,13 +17,13 @@ public class MavenIT0044Test
         throws Exception
     {
         File testDir = extractTestResources( getClass(), "/it0044" );
-        IntegrationTestRunner verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
+        IntegrationTestRunner itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
         List cliOptions = new ArrayList();
         cliOptions.add( "--settings settings.xml" );
-        verifier.executeGoal( "org.apache.maven.its.plugins:maven-it-plugin-touch:touch", cliOptions );
-        verifier.assertFilePresent( "target/test.txt" );
-        verifier.verifyErrorFreeLog();
-        verifier.resetStreams();
+        itr.executeGoal( "org.apache.maven.its.plugins:maven-it-plugin-touch:touch", cliOptions );
+        itr.assertFilePresent( "target/test.txt" );
+        itr.verifyErrorFreeLog();
+        itr.resetStreams();
 
     }
 }

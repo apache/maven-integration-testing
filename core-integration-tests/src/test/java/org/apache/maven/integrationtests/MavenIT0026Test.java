@@ -23,17 +23,17 @@ public class MavenIT0026Test
         throws Exception
     {
         File testDir = extractTestResources( getClass(), "/it0026" );
-        IntegrationTestRunner verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
+        IntegrationTestRunner itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
         
         InvocationRequest r = new DefaultInvocationRequest()
             .addSystemProperty( "org.apache.maven.user-settings", "user-settings.xml" )
             .addSystemProperty( "org.apache.maven.global-settings", "global-settings.xml" )
             .setGoals( "org.apache.maven.its.plugins:maven-it-plugin-touch:touch" );
         
-        verifier.invoke(  r );
-        verifier.assertFilePresent( "target/test.txt" );
-        verifier.verifyErrorFreeLog();
-        verifier.resetStreams();
+        itr.invoke(  r );
+        itr.assertFilePresent( "target/test.txt" );
+        itr.verifyErrorFreeLog();
+        itr.resetStreams();
 
     }
 }

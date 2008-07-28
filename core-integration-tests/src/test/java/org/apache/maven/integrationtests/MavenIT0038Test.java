@@ -18,13 +18,13 @@ public class MavenIT0038Test
         throws Exception
     {
         File testDir = extractTestResources( getClass(), "/it0038" );
-        IntegrationTestRunner verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
+        IntegrationTestRunner itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
         List cliOptions = new ArrayList();
         cliOptions.add( "-f project/pom2.xml" );
-        verifier.executeGoal( "package", cliOptions);
-        verifier.assertFilePresent( "project/target/maven-it-it0038-1.0-build2.jar" );
-        verifier.verifyErrorFreeLog();
-        verifier.resetStreams();
+        itr.executeGoal( "package", cliOptions);
+        itr.assertFilePresent( "project/target/maven-it-it0038-1.0-build2.jar" );
+        itr.verifyErrorFreeLog();
+        itr.resetStreams();
 
     }
 }

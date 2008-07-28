@@ -17,15 +17,15 @@ public class MavenIT0045Test
         throws Exception
     {
         File testDir = extractTestResources( getClass(), "/it0045" );
-        IntegrationTestRunner verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
-        verifier.deleteArtifact( "org.apache.maven.its.plugins", "maven-it-plugin-no-project", "1.0", "maven-plugin" );
+        IntegrationTestRunner itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
+        itr.deleteArtifact( "org.apache.maven.its.plugins", "maven-it-plugin-no-project", "1.0", "maven-plugin" );
         List cliOptions = new ArrayList();
         cliOptions.add( "--no-plugin-registry" );
-        verifier.executeGoal( "org.apache.maven.its.plugins:maven-it-plugin-no-project:light-touch", cliOptions );
-        verifier.assertFilePresent( "target/touch.txt" );
-        verifier.assertFileNotPresent( "subproject/target/touch.txt" );
-        verifier.verifyErrorFreeLog();
-        verifier.resetStreams();
+        itr.executeGoal( "org.apache.maven.its.plugins:maven-it-plugin-no-project:light-touch", cliOptions );
+        itr.assertFilePresent( "target/touch.txt" );
+        itr.assertFileNotPresent( "subproject/target/touch.txt" );
+        itr.verifyErrorFreeLog();
+        itr.resetStreams();
 
     }
 }

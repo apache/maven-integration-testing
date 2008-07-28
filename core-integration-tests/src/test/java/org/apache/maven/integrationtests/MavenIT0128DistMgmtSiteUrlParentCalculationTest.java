@@ -15,10 +15,10 @@ public class MavenIT0128DistMgmtSiteUrlParentCalculationTest
         throws Exception
     {
         File testDir = extractTestResources( getClass(), "/it0128-distMgmtSiteUrlParentCalc" );
-        IntegrationTestRunner verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
-        verifier.executeGoal( "integration-test" );
-        verifier.verifyErrorFreeLog();
-        verifier.resetStreams();
+        IntegrationTestRunner itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
+        itr.executeGoal( "integration-test" );
+        itr.verifyErrorFreeLog();
+        itr.resetStreams();
 
     }
 }

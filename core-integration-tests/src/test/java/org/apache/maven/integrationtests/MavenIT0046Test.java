@@ -18,16 +18,16 @@ public class MavenIT0046Test
         throws Exception
     {
         File testDir = extractTestResources( getClass(), "/it0046" );
-        IntegrationTestRunner verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
-        verifier.deleteArtifact( "org.apache.maven.plugins", "maven-it-it-plugin", "1.0", "maven-plugin" );
+        IntegrationTestRunner itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
+        itr.deleteArtifact( "org.apache.maven.plugins", "maven-it-it-plugin", "1.0", "maven-plugin" );
         List cliOptions = new ArrayList();
         cliOptions.add( "--no-plugin-registry --fail-never" );
-        verifier.executeGoal( "org.apache.maven.its.plugins:maven-it-plugin-touch:touch", cliOptions );
-        verifier.assertFilePresent( "target/touch.txt" );
-        verifier.assertFileNotPresent( "subproject/target/touch.txt" );
-        verifier.assertFilePresent( "subproject2/target/touch.txt" );
-        verifier.verifyErrorFreeLog();
-        verifier.resetStreams();
+        itr.executeGoal( "org.apache.maven.its.plugins:maven-it-plugin-touch:touch", cliOptions );
+        itr.assertFilePresent( "target/touch.txt" );
+        itr.assertFileNotPresent( "subproject/target/touch.txt" );
+        itr.assertFilePresent( "subproject2/target/touch.txt" );
+        itr.verifyErrorFreeLog();
+        itr.resetStreams();
 
     }
 }

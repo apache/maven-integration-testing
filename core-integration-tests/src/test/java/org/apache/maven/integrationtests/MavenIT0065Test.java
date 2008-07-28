@@ -15,13 +15,13 @@ public class MavenIT0065Test
         throws Exception
     {
         File testDir = extractTestResources( getClass(), "/it0065" );
-        IntegrationTestRunner verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
-        verifier.deleteArtifact( "org.apache.maven.its.it0065", "plugin", "1.0", "maven-plugin" );
-        verifier.executeGoal( "install" );
-        verifier.assertFilePresent( "subproject/target/child-basedir" );
-        verifier.assertFilePresent( "parent-basedir" );
-        verifier.verifyErrorFreeLog();
-        verifier.resetStreams();
+        IntegrationTestRunner itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
+        itr.deleteArtifact( "org.apache.maven.its.it0065", "plugin", "1.0", "maven-plugin" );
+        itr.executeGoal( "install" );
+        itr.assertFilePresent( "subproject/target/child-basedir" );
+        itr.assertFilePresent( "parent-basedir" );
+        itr.verifyErrorFreeLog();
+        itr.resetStreams();
 
     }
 }

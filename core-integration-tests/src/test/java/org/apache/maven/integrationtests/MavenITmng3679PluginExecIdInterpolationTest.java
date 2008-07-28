@@ -17,10 +17,10 @@ public class MavenITmng3679PluginExecIdInterpolationTest
         throws Exception
     {
         File testDir = extractTestResources( getClass(), "/mng-3679-pluginExecIdInterpolation" );
-        IntegrationTestRunner verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
-        verifier.executeGoal( "validate" );
-        verifier.verifyErrorFreeLog();
-        verifier.resetStreams();       
+        IntegrationTestRunner itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
+        itr.executeGoal( "validate" );
+        itr.verifyErrorFreeLog();
+        itr.resetStreams();       
         assertTrue( new File( testDir, "target/check.txt" ).exists() );
     }
 }

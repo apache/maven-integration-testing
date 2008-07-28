@@ -17,12 +17,12 @@ public class MavenIT0018Test
         throws Exception
     {
         File testDir = extractTestResources( getClass(), "/it0018" );
-        IntegrationTestRunner verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
-        verifier.deleteArtifact( "commons-logging", "commons-logging", "1.0.3", "jar" );
-        verifier.executeGoal( "package" );
-        verifier.assertArtifactPresent( "commons-logging", "commons-logging", "1.0.3", "jar" );
-        verifier.verifyErrorFreeLog();
-        verifier.resetStreams();
+        IntegrationTestRunner itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
+        itr.deleteArtifact( "commons-logging", "commons-logging", "1.0.3", "jar" );
+        itr.executeGoal( "package" );
+        itr.assertArtifactPresent( "commons-logging", "commons-logging", "1.0.3", "jar" );
+        itr.verifyErrorFreeLog();
+        itr.resetStreams();
     }
 }
 

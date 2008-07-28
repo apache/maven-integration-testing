@@ -78,15 +78,15 @@ public class MavenITmng3314OfflineSnapshotsTest
 
         File testDep = new File( testParentDir, "dep" );
 
-        IntegrationTestRunner verifier = new IntegrationTestRunner( testDep.getAbsolutePath() );
+        IntegrationTestRunner itr = new IntegrationTestRunner( testDep.getAbsolutePath() );
 
         // Deploy the dependency to the test repository.
-        verifier.executeGoal( "deploy" );
+        itr.executeGoal( "deploy" );
 
-        verifier.verifyErrorFreeLog();
-        verifier.resetStreams();
+        itr.verifyErrorFreeLog();
+        itr.resetStreams();
 
-        String depPath = verifier.getArtifactPath( "org.apache.maven.its.mng3314", "dep", "1.0-SNAPSHOT", "pom" );
+        String depPath = itr.getArtifactPath( "org.apache.maven.its.mng3314", "dep", "1.0-SNAPSHOT", "pom" );
 
         File dep = new File( depPath );
         dep = dep.getParentFile().getParentFile();
@@ -96,7 +96,7 @@ public class MavenITmng3314OfflineSnapshotsTest
 
         File testProject = new File( testParentDir, "project" );
 
-        verifier = new IntegrationTestRunner( testProject.getAbsolutePath() );
+        itr = new IntegrationTestRunner( testProject.getAbsolutePath() );
 
         // Conditions for this build:
         // 1. dependency is NOT in local repository
@@ -107,7 +107,7 @@ public class MavenITmng3314OfflineSnapshotsTest
         {
             List cliOptions = new ArrayList();
             cliOptions.add( "-o" );
-            verifier.executeGoal( "compile", cliOptions );
+            itr.executeGoal( "compile", cliOptions );
 
             fail( "Dependency should be missing from local repo, and in offline this should make the project build fail." );
         }
@@ -117,7 +117,7 @@ public class MavenITmng3314OfflineSnapshotsTest
         }
         finally
         {
-            verifier.resetStreams();
+            itr.resetStreams();
         }
 
         // move this log file off to a new name to make room for the next build.
@@ -134,12 +134,12 @@ public class MavenITmng3314OfflineSnapshotsTest
         // Expected outcome: build success
         try
         {
-            verifier.executeGoal( "compile" );
+            itr.executeGoal( "compile" );
         }
         finally
         {
-            verifier.verifyErrorFreeLog();
-            verifier.resetStreams();
+            itr.verifyErrorFreeLog();
+            itr.resetStreams();
         }
 
         // move this log file off to a new name to make room for the next build.
@@ -157,12 +157,12 @@ public class MavenITmng3314OfflineSnapshotsTest
         {
             List cliOptions = new ArrayList();
             cliOptions.add( "-o" );
-            verifier.executeGoal( "compile", cliOptions );
+            itr.executeGoal( "compile", cliOptions );
         }
         finally
         {
-            verifier.verifyErrorFreeLog();
-            verifier.resetStreams();
+            itr.verifyErrorFreeLog();
+            itr.resetStreams();
         }
 
     }

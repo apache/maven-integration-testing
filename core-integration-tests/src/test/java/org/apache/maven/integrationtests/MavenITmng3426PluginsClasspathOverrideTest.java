@@ -50,11 +50,11 @@ public class MavenITmng3426PluginsClasspathOverrideTest
         // file.
         File testDir = extractTestResources( getClass(), "/mng3426-overridingPluginDependency" );
 
-        IntegrationTestRunner verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
+        IntegrationTestRunner itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
         List cliOptions = new ArrayList();
         cliOptions.add( "-X" );
-        verifier.executeGoal( "org.codehaus.mojo:castor-maven-plugin:generate", cliOptions );
-        verifier.verifyErrorFreeLog();
+        itr.executeGoal( "org.codehaus.mojo:castor-maven-plugin:generate", cliOptions );
+        itr.verifyErrorFreeLog();
 
         // The generated file header contains the castor version used for code generation
         // "This class was automatically generated with <a href="http://www.castor.org">Castor 1.1.1</a> ..."

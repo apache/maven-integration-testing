@@ -18,13 +18,13 @@ public class MavenIT0008Test
         throws Exception
     {
         File testDir = extractTestResources( getClass(), "/it0008" );
-        IntegrationTestRunner verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
-        verifier.deleteArtifact( "org.apache.maven.its.plugins", "maven-it-plugin-touch", "1.0", "maven-plugin" );
-        verifier.executeGoal( "compile" );
-        verifier.assertFilePresent( "target/touch.txt" );
-        verifier.assertFilePresent( "target/test-basedir-alignment/touch.txt" );
-        verifier.verifyErrorFreeLog();
-        verifier.resetStreams();
+        IntegrationTestRunner itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
+        itr.deleteArtifact( "org.apache.maven.its.plugins", "maven-it-plugin-touch", "1.0", "maven-plugin" );
+        itr.executeGoal( "compile" );
+        itr.assertFilePresent( "target/touch.txt" );
+        itr.assertFilePresent( "target/test-basedir-alignment/touch.txt" );
+        itr.verifyErrorFreeLog();
+        itr.resetStreams();
 
     }
 }

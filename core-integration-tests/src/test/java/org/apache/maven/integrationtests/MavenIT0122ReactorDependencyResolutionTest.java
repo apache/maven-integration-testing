@@ -15,15 +15,15 @@ public class MavenIT0122ReactorDependencyResolutionTest
     public void testit0122() throws Exception
     {
         File testDir = extractTestResources( getClass(), "/it0122-reactorDependencyResolution/plugin" );
-        IntegrationTestRunner verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
-        verifier.executeGoal( "install" );
-        verifier.verifyErrorFreeLog();
-        verifier.resetStreams();
+        IntegrationTestRunner itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
+        itr.executeGoal( "install" );
+        itr.verifyErrorFreeLog();
+        itr.resetStreams();
 
         testDir = extractTestResources( getClass(), "/it0122-reactorDependencyResolution/project" );
-        verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
-        verifier.executeGoal( "org.apache.maven.its.it0122:maven-it-it0122-plugin:1.0:test" );
-        verifier.verifyErrorFreeLog();
-        verifier.resetStreams();
+        itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
+        itr.executeGoal( "org.apache.maven.its.it0122:maven-it-it0122-plugin:1.0:test" );
+        itr.verifyErrorFreeLog();
+        itr.resetStreams();
     }
 }

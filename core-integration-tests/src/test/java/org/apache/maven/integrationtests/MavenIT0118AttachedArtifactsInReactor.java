@@ -11,12 +11,12 @@ public class MavenIT0118AttachedArtifactsInReactor
         throws Exception
     {
         File testDir = extractTestResources( getClass(), "/it0118-attachedartifactinreactor" );
-        IntegrationTestRunner verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
-        verifier.deleteArtifact( "org.apache.maven.its.it0118", "parent", "1.0", "pom" );
-        verifier.deleteArtifact( "org.apache.maven.its.it0118", "one", "1.0", "jar" );
-        verifier.deleteArtifact( "org.apache.maven.its.it0118", "two", "1.0", "pom" );
-        verifier.executeGoal( "package" );
-        verifier.verifyErrorFreeLog();
-        verifier.resetStreams();
+        IntegrationTestRunner itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
+        itr.deleteArtifact( "org.apache.maven.its.it0118", "parent", "1.0", "pom" );
+        itr.deleteArtifact( "org.apache.maven.its.it0118", "one", "1.0", "jar" );
+        itr.deleteArtifact( "org.apache.maven.its.it0118", "two", "1.0", "pom" );
+        itr.executeGoal( "package" );
+        itr.verifyErrorFreeLog();
+        itr.resetStreams();
     }
 }

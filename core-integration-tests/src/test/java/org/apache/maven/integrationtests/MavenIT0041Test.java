@@ -15,14 +15,14 @@ public class MavenIT0041Test
         throws Exception
     {
         File testDir = extractTestResources( getClass(), "/it0041" );
-        IntegrationTestRunner verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
-        verifier.deleteArtifact( "org.apache.maven", "maven-core-it-support", "1.2", "coreit-artifact" );
-        verifier.executeGoal( "package" );
-        verifier.assertFilePresent( "target/maven-it-it0041-1.0-SNAPSHOT.jar" );
-        verifier.assertArtifactPresent( "org.apache.maven", "maven-core-it-support", "1.2", "coreit-artifact" );
-        verifier.assertArtifactPresent( "org.apache.maven", "maven-core-it-support", "1.2", "pom" );
-        verifier.verifyErrorFreeLog();
-        verifier.resetStreams();
+        IntegrationTestRunner itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
+        itr.deleteArtifact( "org.apache.maven", "maven-core-it-support", "1.2", "coreit-artifact" );
+        itr.executeGoal( "package" );
+        itr.assertFilePresent( "target/maven-it-it0041-1.0-SNAPSHOT.jar" );
+        itr.assertArtifactPresent( "org.apache.maven", "maven-core-it-support", "1.2", "coreit-artifact" );
+        itr.assertArtifactPresent( "org.apache.maven", "maven-core-it-support", "1.2", "pom" );
+        itr.verifyErrorFreeLog();
+        itr.resetStreams();
 
     }
 }

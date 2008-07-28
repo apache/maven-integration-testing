@@ -24,9 +24,9 @@ public class MavenITmng3680InvalidDependencyPOMTest
         throws Exception
     {
         File testDir = extractTestResources( getClass(), "/mng-3680-invalidDependencyPOM" );
-        IntegrationTestRunner verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
-        verifier.executeGoal( "compile" );
-        verifier.verifyErrorFreeLog();
-        verifier.resetStreams();
+        IntegrationTestRunner itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
+        itr.executeGoal( "compile" );
+        itr.verifyErrorFreeLog();
+        itr.resetStreams();
     }
 }

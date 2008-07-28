@@ -15,13 +15,13 @@ public class MavenIT0049Test
         throws Exception
     {
         File testDir = extractTestResources( getClass(), "/it0049" );
-        IntegrationTestRunner verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
+        IntegrationTestRunner itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
         //todo: i don't think we need to delete this plugin
-        //verifier.deleteArtifact( "org.apache.maven.its.plugins", "maven-it-plugin-touch", "1.0", "maven-plugin" );
-        verifier.executeGoal( "org.apache.maven.its.plugins:maven-it-plugin-touch:touch" );
-        verifier.assertFilePresent( "target/touchFile.txt" );
-        verifier.verifyErrorFreeLog();
-        verifier.resetStreams();
+        //itr.deleteArtifact( "org.apache.maven.its.plugins", "maven-it-plugin-touch", "1.0", "maven-plugin" );
+        itr.executeGoal( "org.apache.maven.its.plugins:maven-it-plugin-touch:touch" );
+        itr.assertFilePresent( "target/touchFile.txt" );
+        itr.verifyErrorFreeLog();
+        itr.resetStreams();
 
     }
 }

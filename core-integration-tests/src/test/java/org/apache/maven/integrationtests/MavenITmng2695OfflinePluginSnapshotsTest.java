@@ -78,15 +78,15 @@ public class MavenITmng2695OfflinePluginSnapshotsTest
 
         File testPlugin = new File( testParentDir, "plugin" );
 
-        IntegrationTestRunner verifier = new IntegrationTestRunner( testPlugin.getAbsolutePath() );
+        IntegrationTestRunner itr = new IntegrationTestRunner( testPlugin.getAbsolutePath() );
 
         // Deploy the dependency to the test repository.
-        verifier.executeGoal( "deploy" );
+        itr.executeGoal( "deploy" );
 
-        verifier.verifyErrorFreeLog();
-        verifier.resetStreams();
+        itr.verifyErrorFreeLog();
+        itr.resetStreams();
 
-        String pluginPath = verifier.getArtifactPath( "org.apache.maven.its.mng2695", "plugin", "1.0-SNAPSHOT", "pom" );
+        String pluginPath = itr.getArtifactPath( "org.apache.maven.its.mng2695", "plugin", "1.0-SNAPSHOT", "pom" );
 
         File plugin = new File( pluginPath );
         plugin = plugin.getParentFile().getParentFile();
@@ -96,7 +96,7 @@ public class MavenITmng2695OfflinePluginSnapshotsTest
 
         File testProject = new File( testParentDir, "project" );
 
-        verifier = new IntegrationTestRunner( testProject.getAbsolutePath() );
+        itr = new IntegrationTestRunner( testProject.getAbsolutePath() );
 
         // Conditions for this build:
         // 1. plugin is NOT in local repository
@@ -107,7 +107,7 @@ public class MavenITmng2695OfflinePluginSnapshotsTest
         {
             List cliOptions = new ArrayList();
             cliOptions.add( "-o" );
-            verifier.executeGoal( "compile", cliOptions );
+            itr.executeGoal( "compile", cliOptions );
             fail( "Plugin should be missing from local repo, and in offline this should make the project build fail." );
         }
         catch( IntegrationTestException e )
@@ -116,7 +116,7 @@ public class MavenITmng2695OfflinePluginSnapshotsTest
         }
         finally
         {
-            verifier.resetStreams();
+            itr.resetStreams();
         }
 
         // move this log file off to a new name to make room for the next build.
@@ -133,12 +133,12 @@ public class MavenITmng2695OfflinePluginSnapshotsTest
         // Expected outcome: build success
         try
         {
-            verifier.executeGoal( "compile" );
+            itr.executeGoal( "compile" );
         }
         finally
         {
-            verifier.verifyErrorFreeLog();
-            verifier.resetStreams();
+            itr.verifyErrorFreeLog();
+            itr.resetStreams();
         }
 
         // move this log file off to a new name to make room for the next build.
@@ -156,12 +156,12 @@ public class MavenITmng2695OfflinePluginSnapshotsTest
         {
             List cliOptions = new ArrayList();
             cliOptions.add( "-o" );
-            verifier.executeGoal( "compile", cliOptions );
+            itr.executeGoal( "compile", cliOptions );
         }
         finally
         {
-            verifier.verifyErrorFreeLog();
-            verifier.resetStreams();
+            itr.verifyErrorFreeLog();
+            itr.resetStreams();
         }
 
     }

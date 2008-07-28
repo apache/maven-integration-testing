@@ -16,12 +16,12 @@ public class MavenIT0097Test
         throws Exception
     {
         File testDir = extractTestResources( getClass(), "/it0097" );
-        IntegrationTestRunner verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
-        verifier.executeGoal( "package" );
-        verifier.assertFilePresent( "project/project-level2/project-level3/target/it0097.txt" );
-        verifier.assertFilePresent( "project/project-sibling-level2/target/it0097.txt" );
-        verifier.verifyErrorFreeLog();
-        verifier.resetStreams();
+        IntegrationTestRunner itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
+        itr.executeGoal( "package" );
+        itr.assertFilePresent( "project/project-level2/project-level3/target/it0097.txt" );
+        itr.assertFilePresent( "project/project-sibling-level2/target/it0097.txt" );
+        itr.verifyErrorFreeLog();
+        itr.resetStreams();
 
     }
 }

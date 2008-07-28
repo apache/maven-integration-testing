@@ -16,13 +16,13 @@ public class MavenIT0064Test
         throws Exception
     {
         File testDir = extractTestResources( getClass(), "/it0064" );
-        IntegrationTestRunner verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
-        verifier.deleteArtifact( "org.apache.maven.its.plugins", "maven-it-plugin-setter", "1.0", "maven-plugin" );
-        verifier.executeGoal( "org.apache.maven.its.plugins:maven-it-plugin-setter:setter-touch" );
-        verifier.assertFilePresent( "target/fooValue" );
-        verifier.assertFilePresent( "target/barValue.baz" );
-        verifier.verifyErrorFreeLog();
-        verifier.resetStreams();
+        IntegrationTestRunner itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
+        itr.deleteArtifact( "org.apache.maven.its.plugins", "maven-it-plugin-setter", "1.0", "maven-plugin" );
+        itr.executeGoal( "org.apache.maven.its.plugins:maven-it-plugin-setter:setter-touch" );
+        itr.assertFilePresent( "target/fooValue" );
+        itr.assertFilePresent( "target/barValue.baz" );
+        itr.verifyErrorFreeLog();
+        itr.resetStreams();
 
     }
 }

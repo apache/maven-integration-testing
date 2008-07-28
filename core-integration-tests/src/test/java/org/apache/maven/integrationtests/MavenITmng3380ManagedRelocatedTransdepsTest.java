@@ -32,21 +32,21 @@ public class MavenITmng3380ManagedRelocatedTransdepsTest
         // compute test directory
         File testDir = extractTestResources( getClass(), "/mng-3380-managedRelocatedTransdeps" );
 
-        IntegrationTestRunner verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
+        IntegrationTestRunner itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
 
-        deleteArtifacts( verifier );
+        deleteArtifacts( itr );
 
         installDependencies( testDir );
 
         String path = testDir.getAbsolutePath() //
             + "/consumer";
 
-        verifier = new IntegrationTestRunner( path );
-        verifier.executeGoal( "package" );
+        itr = new IntegrationTestRunner( path );
+        itr.executeGoal( "package" );
 
         // verify no errors so far
-        verifier.verifyErrorFreeLog();
-        verifier.resetStreams();
+        itr.verifyErrorFreeLog();
+        itr.resetStreams();
     }
 
     private void installDependencies( File testDir )
@@ -55,207 +55,207 @@ public class MavenITmng3380ManagedRelocatedTransdepsTest
         // install projects
         String path = testDir.getAbsolutePath() //
             + "/other-c";
-        IntegrationTestRunner verifier = new IntegrationTestRunner( path );
-        verifier.executeGoal( "install" );
+        IntegrationTestRunner itr = new IntegrationTestRunner( path );
+        itr.executeGoal( "install" );
 
         path = testDir.getAbsolutePath() //
             + "/other-b";
-        verifier = new IntegrationTestRunner( path );
-        verifier.executeGoal( "install" );
+        itr = new IntegrationTestRunner( path );
+        itr.executeGoal( "install" );
 
         path = testDir.getAbsolutePath() //
             + "/other-a";
-        verifier = new IntegrationTestRunner( path );
-        verifier.executeGoal( "install" );
+        itr = new IntegrationTestRunner( path );
+        itr.executeGoal( "install" );
 
         path = testDir.getAbsolutePath() //
             + "/transdep-old";
-        verifier = new IntegrationTestRunner( path );
-        verifier.executeGoal( "install" );
+        itr = new IntegrationTestRunner( path );
+        itr.executeGoal( "install" );
 
         path = testDir.getAbsolutePath() //
             + "/transdep-new-1";
-        verifier = new IntegrationTestRunner( path );
-        verifier.executeGoal( "install" );
+        itr = new IntegrationTestRunner( path );
+        itr.executeGoal( "install" );
 
         path = testDir.getAbsolutePath() //
             + "/transdep-new-2";
-        verifier = new IntegrationTestRunner( path );
-        verifier.executeGoal( "install" );
+        itr = new IntegrationTestRunner( path );
+        itr.executeGoal( "install" );
 
         path = testDir.getAbsolutePath() //
             + "/direct-dep";
-        verifier = new IntegrationTestRunner( path );
-        verifier.executeGoal( "install" );
+        itr = new IntegrationTestRunner( path );
+        itr.executeGoal( "install" );
     }
 
-    private void deleteArtifacts( IntegrationTestRunner verifier )
+    private void deleteArtifacts( IntegrationTestRunner itr )
         throws Exception
     {
         // delete projects
-        verifier.deleteArtifact( //
+        itr.deleteArtifact( //
                                  "other-groupId", //
                                  "other-artifactId-c", //
                                  "1", //
                                  "jar" );
-        verifier.deleteArtifact( //
+        itr.deleteArtifact( //
                                  "other-groupId", //
                                  "other-artifactId-c", //
                                  "1", //
                                  "pom" );
-        verifier.assertArtifactNotPresent( //
+        itr.assertArtifactNotPresent( //
                                            "other-groupId", //
                                            "other-artifactId-c", //
                                            "1", //
                                            "jar" );
-        verifier.assertArtifactNotPresent( //
+        itr.assertArtifactNotPresent( //
                                            "other-groupId", //
                                            "other-artifactId-c", //
                                            "1", //
                                            "pom" );
 
-        verifier.deleteArtifact( //
+        itr.deleteArtifact( //
                                  "other-groupId", //
                                  "other-artifactId-b", //
                                  "1", //
                                  "jar" );
-        verifier.deleteArtifact( //
+        itr.deleteArtifact( //
                                  "other-groupId", //
                                  "other-artifactId-b", //
                                  "1", //
                                  "pom" );
-        verifier.assertArtifactNotPresent( //
+        itr.assertArtifactNotPresent( //
                                            "other-groupId", //
                                            "other-artifactId-b", //
                                            "1", //
                                            "jar" );
-        verifier.assertArtifactNotPresent( //
+        itr.assertArtifactNotPresent( //
                                            "other-groupId", //
                                            "other-artifactId-b", //
                                            "1", //
                                            "pom" );
 
-        verifier.deleteArtifact( //
+        itr.deleteArtifact( //
                                  "other-groupId", //
                                  "other-artifactId-a", //
                                  "1", //
                                  "jar" );
-        verifier.deleteArtifact( //
+        itr.deleteArtifact( //
                                  "other-groupId", //
                                  "other-artifactId-a", //
                                  "1", //
                                  "pom" );
-        verifier.assertArtifactNotPresent( //
+        itr.assertArtifactNotPresent( //
                                            "other-groupId", //
                                            "other-artifactId-a", //
                                            "1", //
                                            "jar" );
-        verifier.assertArtifactNotPresent( //
+        itr.assertArtifactNotPresent( //
                                            "other-groupId", //
                                            "other-artifactId-a", //
                                            "1", //
                                            "pom" );
 
-        verifier.deleteArtifact( //
+        itr.deleteArtifact( //
                                  "transitive-dependency-old-groupId", //
                                  "transitive-dependency-artifactId", //
                                  "1", //
                                  "jar" );
-        verifier.deleteArtifact( //
+        itr.deleteArtifact( //
                                  "transitive-dependency-old-groupId", //
                                  "transitive-dependency-artifactId", //
                                  "1", //
                                  "pom" );
-        verifier.assertArtifactNotPresent( //
+        itr.assertArtifactNotPresent( //
                                            "transitive-dependency-old-groupId", //
                                            "transitive-dependency-artifactId", //
                                            "1", //
                                            "jar" );
-        verifier.assertArtifactNotPresent( //
+        itr.assertArtifactNotPresent( //
                                            "transitive-dependency-old-groupId", //
                                            "transitive-dependency-artifactId", //
                                            "1", //
                                            "pom" );
 
-        verifier.deleteArtifact( //
+        itr.deleteArtifact( //
                                  "transitive-dependency-new-groupId", //
                                  "transitive-dependency-artifactId", //
                                  "1", //
                                  "jar" );
-        verifier.deleteArtifact( //
+        itr.deleteArtifact( //
                                  "transitive-dependency-new-groupId", //
                                  "transitive-dependency-artifactId", //
                                  "1", //
                                  "pom" );
-        verifier.assertArtifactNotPresent( //
+        itr.assertArtifactNotPresent( //
                                            "transitive-dependency-new-groupId", //
                                            "transitive-dependency-artifactId", //
                                            "1", //
                                            "jar" );
-        verifier.assertArtifactNotPresent( //
+        itr.assertArtifactNotPresent( //
                                            "transitive-dependency-new-groupId", //
                                            "transitive-dependency-artifactId", //
                                            "1", //
                                            "pom" );
 
-        verifier.deleteArtifact( //
+        itr.deleteArtifact( //
                                  "transitive-dependency-new-groupId", //
                                  "transitive-dependency-artifactId", //
                                  "2", //
                                  "jar" );
-        verifier.deleteArtifact( //
+        itr.deleteArtifact( //
                                  "transitive-dependency-new-groupId", //
                                  "transitive-dependency-artifactId", //
                                  "2", //
                                  "pom" );
-        verifier.assertArtifactNotPresent( //
+        itr.assertArtifactNotPresent( //
                                            "transitive-dependency-new-groupId", //
                                            "transitive-dependency-artifactId", //
                                            "2", //
                                            "jar" );
-        verifier.assertArtifactNotPresent( //
+        itr.assertArtifactNotPresent( //
                                            "transitive-dependency-new-groupId", //
                                            "transitive-dependency-artifactId", //
                                            "2", //
                                            "pom" );
 
-        verifier.deleteArtifact( //
+        itr.deleteArtifact( //
                                  "direct-dependency-groupId", //
                                  "direct-dependency-artifactId", //
                                  "1", //
                                  "jar" );
-        verifier.deleteArtifact( //
+        itr.deleteArtifact( //
                                  "direct-dependency-groupId", //
                                  "direct-dependency-artifactId", //
                                  "1", //
                                  "pom" );
-        verifier.assertArtifactNotPresent( //
+        itr.assertArtifactNotPresent( //
                                            "direct-dependency-groupId", //
                                            "direct-dependency-artifactId", //
                                            "1", //
                                            "jar" );
-        verifier.assertArtifactNotPresent( //
+        itr.assertArtifactNotPresent( //
                                            "direct-dependency-groupId", //
                                            "direct-dependency-artifactId", //
                                            "1", //
                                            "pom" );
 
-        verifier.deleteArtifact( //
+        itr.deleteArtifact( //
                                  "root-groupId", //
                                  "root-artifactId", //
                                  "1", //
                                  "jar" );
-        verifier.deleteArtifact( //
+        itr.deleteArtifact( //
                                  "root-groupId", //
                                  "root-artifactId", //
                                  "1", //
                                  "pom" );
-        verifier.assertArtifactNotPresent( //
+        itr.assertArtifactNotPresent( //
                                            "root-groupId", //
                                            "root-artifactId", //
                                            "1", //
                                            "jar" );
-        verifier.assertArtifactNotPresent( //
+        itr.assertArtifactNotPresent( //
                                            "root-groupId", //
                                            "root-artifactId", //
                                            "1", //

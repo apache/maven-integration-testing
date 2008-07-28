@@ -20,15 +20,15 @@ public class MavenITmng3391ImportScopeErrorScenariosTest
         File testDir = extractTestResources( getClass(),
                                                                  "/mng-3391-importScopeErrorScenarios/depMgmt-importPom-noParentCycle" );
 
-        IntegrationTestRunner verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
+        IntegrationTestRunner itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
 
-        verifier.deleteArtifact( "org.apache.maven.its.mng3391.2", "dm-pom", "1", "pom" );
+        itr.deleteArtifact( "org.apache.maven.its.mng3391.2", "dm-pom", "1", "pom" );
 
-        verifier.executeGoal( "install" );
+        itr.executeGoal( "install" );
 
-        verifier.verifyErrorFreeLog();
+        itr.verifyErrorFreeLog();
 
-        verifier.resetStreams();
+        itr.resetStreams();
     }
 
     public void testitMNG3391b()
@@ -37,18 +37,18 @@ public class MavenITmng3391ImportScopeErrorScenariosTest
         File testDir = extractTestResources( getClass(),
                                                                  "/mng-3391-importScopeErrorScenarios/depMgmt-importPom-noParentCycle" );
 
-        IntegrationTestRunner verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
+        IntegrationTestRunner itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
 
-        verifier.deleteArtifact( "org.apache.maven.its.mng3391.2", "dm-pom", "1", "pom" );
+        itr.deleteArtifact( "org.apache.maven.its.mng3391.2", "dm-pom", "1", "pom" );
 
         IntegrationTestRunner v2 = new IntegrationTestRunner( new File( testDir, "dm-pom" ).getAbsolutePath() );
         v2.executeGoal( "install" );
         v2.verifyErrorFreeLog();
         v2.resetStreams();
 
-        verifier.executeGoal( "install" );
-        verifier.verifyErrorFreeLog();
-        verifier.resetStreams();
+        itr.executeGoal( "install" );
+        itr.verifyErrorFreeLog();
+        itr.resetStreams();
     }
 
     public void testitMNG3391c()
@@ -57,15 +57,15 @@ public class MavenITmng3391ImportScopeErrorScenariosTest
         File testDir = extractTestResources( getClass(),
                                                                  "/mng-3391-importScopeErrorScenarios/depMgmt-importPom-parentCycle" );
 
-        IntegrationTestRunner verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
+        IntegrationTestRunner itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
 
-        verifier.deleteArtifact( "org.apache.maven.its.mng3391.1", "dm-pom", "1", "pom" );
+        itr.deleteArtifact( "org.apache.maven.its.mng3391.1", "dm-pom", "1", "pom" );
 
-        verifier.executeGoal( "install" );
+        itr.executeGoal( "install" );
 
-        verifier.verifyErrorFreeLog();
+        itr.verifyErrorFreeLog();
 
-        verifier.resetStreams();
+        itr.resetStreams();
     }
 
     public void testitMNG3391d()
@@ -74,10 +74,10 @@ public class MavenITmng3391ImportScopeErrorScenariosTest
         File testDir = extractTestResources( getClass(),
                                                                  "/mng-3391-importScopeErrorScenarios/depMgmt-importPom-parentCycle" );
 
-        IntegrationTestRunner verifier = new IntegrationTestRunner( new File( testDir, "dm-pom" ).getAbsolutePath() );
-        verifier.executeGoal( "install" );
-        verifier.verifyErrorFreeLog();
-        verifier.resetStreams();
+        IntegrationTestRunner itr = new IntegrationTestRunner( new File( testDir, "dm-pom" ).getAbsolutePath() );
+        itr.executeGoal( "install" );
+        itr.verifyErrorFreeLog();
+        itr.resetStreams();
     }
 
 }

@@ -33,7 +33,7 @@ import org.codehaus.plexus.util.FileUtils;
 public class MavenIT0108SnapshotUpdateTest
     extends AbstractMavenIntegrationTestCase
 {
-    private IntegrationTestRunner verifier;
+    private IntegrationTestRunner itr;
 
     private File artifact;
 
@@ -49,29 +49,29 @@ public class MavenIT0108SnapshotUpdateTest
         super.setUp();
 
         File testDir = extractTestResources( getClass(), "/it0108-snapshotUpdate" );
-        verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
-        localRepoFile = getLocalRepoFile( verifier );
-        deleteLocalArtifact( verifier, localRepoFile );
+        itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
+        localRepoFile = getLocalRepoFile( itr );
+        deleteLocalArtifact( itr, localRepoFile );
 
         repository = new File( testDir, "repository" );
         recreateRemoteRepository( repository );
 
-        // create artifact in repository (TODO: into verifier)
+        // create artifact in repository (TODO: into itr)
         artifact = new File( repository,
                              "org/apache/maven/maven-core-it-support/1.0-SNAPSHOT/maven-core-it-support-1.0-SNAPSHOT.jar" );
         artifact.getParentFile().mkdirs();
         FileUtils.fileWrite( artifact.getAbsolutePath(), "originalArtifact" );
 
-        verifier.assertArtifactNotPresent( "org.apache.maven", "maven-core-it-support", "1.0-SNAPSHOT", "jar" );
+        itr.assertArtifactNotPresent( "org.apache.maven", "maven-core-it-support", "1.0-SNAPSHOT", "jar" );
     }
 
     public void testSnapshotUpdated()
         throws Exception
     {
-        verifier.executeGoal( "package" );
+        itr.executeGoal( "package" );
 
-        verifier.verifyErrorFreeLog();
-        verifier.resetStreams();
+        itr.verifyErrorFreeLog();
+        itr.resetStreams();
 
         assertArtifactContents( "originalArtifact" );
 
@@ -80,12 +80,12 @@ public class MavenIT0108SnapshotUpdateTest
 
         FileUtils.fileWrite( artifact.getAbsolutePath(), "updatedArtifact" );
 
-        verifier.executeGoal( "package" );
+        itr.executeGoal( "package" );
 
         assertArtifactContents( "updatedArtifact" );
 
-        verifier.verifyErrorFreeLog();
-        verifier.resetStreams();
+        itr.verifyErrorFreeLog();
+        itr.resetStreams();
     }
 
     public void testSnapshotUpdatedWithMetadata()
@@ -96,10 +96,10 @@ public class MavenIT0108SnapshotUpdateTest
         FileUtils.fileWrite( metadata.getAbsolutePath(),
                              constructMetadata( "1", System.currentTimeMillis() - TIME_OFFSET, true ) );
 
-        verifier.executeGoal( "package" );
+        itr.executeGoal( "package" );
 
-        verifier.verifyErrorFreeLog();
-        verifier.resetStreams();
+        itr.verifyErrorFreeLog();
+        itr.resetStreams();
 
         assertArtifactContents( "originalArtifact" );
 
@@ -107,12 +107,12 @@ public class MavenIT0108SnapshotUpdateTest
         metadata = new File( repository, "org/apache/maven/maven-core-it-support/1.0-SNAPSHOT/maven-metadata.xml" );
         FileUtils.fileWrite( metadata.getAbsolutePath(), constructMetadata( "2", System.currentTimeMillis(), true ) );
 
-        verifier.executeGoal( "package" );
+        itr.executeGoal( "package" );
 
         assertArtifactContents( "updatedArtifact" );
 
-        verifier.verifyErrorFreeLog();
-        verifier.resetStreams();
+        itr.verifyErrorFreeLog();
+        itr.resetStreams();
     }
 
     public void testSnapshotUpdatedWithLocalMetadata()
@@ -129,10 +129,10 @@ public class MavenIT0108SnapshotUpdateTest
         FileUtils.fileWrite( metadata.getAbsolutePath(),
                              constructMetadata( "1", System.currentTimeMillis() - TIME_OFFSET, true ) );
 
-        verifier.executeGoal( "package" );
+        itr.executeGoal( "package" );
 
-        verifier.verifyErrorFreeLog();
-        verifier.resetStreams();
+        itr.verifyErrorFreeLog();
+        itr.resetStreams();
 
         assertArtifactContents( "originalArtifact" );
         assertFalse( localMetadata.exists() );
@@ -145,12 +145,12 @@ public class MavenIT0108SnapshotUpdateTest
         // update the remote file, but we shouldn't be looking
         artifact.setLastModified( System.currentTimeMillis() );
 
-        verifier.executeGoal( "package" );
+        itr.executeGoal( "package" );
 
         assertArtifactContents( "localArtifact" );
 
-        verifier.verifyErrorFreeLog();
-        verifier.resetStreams();
+        itr.verifyErrorFreeLog();
+        itr.resetStreams();
 
         Calendar cal = Calendar.getInstance();
         cal.add( Calendar.YEAR, -1 );
@@ -161,12 +161,12 @@ public class MavenIT0108SnapshotUpdateTest
                              constructMetadata( "2", System.currentTimeMillis() - 2000, true ) );
         artifact.setLastModified( System.currentTimeMillis() );
 
-        verifier.executeGoal( "package" );
+        itr.executeGoal( "package" );
 
         assertArtifactContents( "originalArtifact" );
 
-        verifier.verifyErrorFreeLog();
-        verifier.resetStreams();
+        itr.verifyErrorFreeLog();
+        itr.resetStreams();
     }
 
     public void testSnapshotUpdatedWithMetadataUsingFileTimestamp()
@@ -178,10 +178,10 @@ public class MavenIT0108SnapshotUpdateTest
                              constructMetadata( "1", System.currentTimeMillis() - TIME_OFFSET, false ) );
         metadata.setLastModified( System.currentTimeMillis() - TIME_OFFSET );
 
-        verifier.executeGoal( "package" );
+        itr.executeGoal( "package" );
 
-        verifier.verifyErrorFreeLog();
-        verifier.resetStreams();
+        itr.verifyErrorFreeLog();
+        itr.resetStreams();
 
         assertArtifactContents( "originalArtifact" );
 
@@ -189,12 +189,12 @@ public class MavenIT0108SnapshotUpdateTest
         metadata = new File( repository, "org/apache/maven/maven-core-it-support/1.0-SNAPSHOT/maven-metadata.xml" );
         FileUtils.fileWrite( metadata.getAbsolutePath(), constructMetadata( "2", System.currentTimeMillis(), false ) );
 
-        verifier.executeGoal( "package" );
+        itr.executeGoal( "package" );
 
         assertArtifactContents( "updatedArtifact" );
 
-        verifier.verifyErrorFreeLog();
-        verifier.resetStreams();
+        itr.verifyErrorFreeLog();
+        itr.resetStreams();
     }
 
     public void testSnapshotLocalMetadataUpdatedOnInstall()
@@ -206,10 +206,10 @@ public class MavenIT0108SnapshotUpdateTest
         localMetadata.delete();
         assertFalse( localMetadata.exists() );
 
-        verifier.executeGoal( "install" );
+        itr.executeGoal( "install" );
 
-        verifier.verifyErrorFreeLog();
-        verifier.resetStreams();
+        itr.verifyErrorFreeLog();
+        itr.resetStreams();
 
         assertLocalMetadataIsToday( localMetadata );
 
@@ -218,17 +218,17 @@ public class MavenIT0108SnapshotUpdateTest
         FileUtils.fileWrite( localMetadata.getAbsolutePath(), constructLocalMetadata(
             "org.apache.maven.its.snapshotUpdate", "maven-it-snapshot-update", cal.getTimeInMillis(), true ) );
 
-        verifier.executeGoal( "install" );
+        itr.executeGoal( "install" );
 
         assertLocalMetadataIsToday( localMetadata );
 
-        verifier.verifyErrorFreeLog();
-        verifier.resetStreams();
+        itr.verifyErrorFreeLog();
+        itr.resetStreams();
     }
 
     private File getMetadataFile( String groupId, String artifactId, String version )
     {
-        return new File( verifier.localRepo, groupId + "/" + artifactId + "/" + version + "/maven-metadata-local.xml" );
+        return new File( itr.localRepo, groupId + "/" + artifactId + "/" + version + "/maven-metadata-local.xml" );
     }
 
     private void assertLocalMetadataIsToday( File localMetadata )
@@ -250,29 +250,29 @@ public class MavenIT0108SnapshotUpdateTest
     private void assertArtifactContents( String s )
         throws IOException
     {
-        verifier.assertArtifactPresent( "org.apache.maven", "maven-core-it-support", "1.0-SNAPSHOT", "jar" );
-        verifier.assertArtifactContents( "org.apache.maven", "maven-core-it-support", "1.0-SNAPSHOT", "jar", s );
+        itr.assertArtifactPresent( "org.apache.maven", "maven-core-it-support", "1.0-SNAPSHOT", "jar" );
+        itr.assertArtifactContents( "org.apache.maven", "maven-core-it-support", "1.0-SNAPSHOT", "jar", s );
     }
 
-    private static File deleteLocalArtifact( IntegrationTestRunner verifier, File localRepoFile )
+    private static File deleteLocalArtifact( IntegrationTestRunner itr, File localRepoFile )
         throws IOException
     {
-        verifier.deleteArtifact( "org.apache.maven", "maven-core-it-support", "1.0-SNAPSHOT", "jar" );
-        // this is to delete metadata - TODO: incorporate into deleteArtifact in verifier
+        itr.deleteArtifact( "org.apache.maven", "maven-core-it-support", "1.0-SNAPSHOT", "jar" );
+        // this is to delete metadata - TODO: incorporate into deleteArtifact in itr
         FileUtils.deleteDirectory( localRepoFile.getParentFile() );
         return localRepoFile;
     }
 
-    private static File getLocalRepoFile( IntegrationTestRunner verifier )
+    private static File getLocalRepoFile( IntegrationTestRunner itr )
     {
         return new File(
-            verifier.getArtifactPath( "org.apache.maven", "maven-core-it-support", "1.0-SNAPSHOT", "jar" ) );
+            itr.getArtifactPath( "org.apache.maven", "maven-core-it-support", "1.0-SNAPSHOT", "jar" ) );
     }
 
     private static void recreateRemoteRepository( File repository )
         throws IOException
     {
-        // create a repository (TODO: into verifier)
+        // create a repository (TODO: into itr)
         FileUtils.deleteDirectory( repository );
         assertFalse( repository.exists() );
         repository.mkdirs();

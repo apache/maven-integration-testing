@@ -81,27 +81,27 @@ public class MavenITmng3052DepRepoAggregationTest
         List cliOptions = new ArrayList();
         cliOptions.add( "-X" );
 
-        IntegrationTestRunner verifier;
+        IntegrationTestRunner itr;
 
         // First, build the two levels of dependencies that will be resolved.
 
         // This one is a transitive dependency, and will be deployed to a
         // repository that is NOT listed in the main project's POM (wombat).
-        verifier = new IntegrationTestRunner( foo.getAbsolutePath() );
-        verifier.executeGoal( "deploy", cliOptions );
-        verifier.verifyErrorFreeLog();
-        verifier.resetStreams();
+        itr = new IntegrationTestRunner( foo.getAbsolutePath() );
+        itr.executeGoal( "deploy", cliOptions );
+        itr.verifyErrorFreeLog();
+        itr.resetStreams();
 
         // This one is a direct dependency that will be deployed to a repository
         // that IS listed in the main project's POM (wombat). It lists its own
         // repository entry that should enable resolution of the transitive
         // dependency it lists (foo, above).
-        verifier = new IntegrationTestRunner( bar.getAbsolutePath() );
-        verifier.executeGoal( "deploy", cliOptions );
-        verifier.verifyErrorFreeLog();
-        verifier.resetStreams();
+        itr = new IntegrationTestRunner( bar.getAbsolutePath() );
+        itr.executeGoal( "deploy", cliOptions );
+        itr.verifyErrorFreeLog();
+        itr.resetStreams();
 
-        String artifactPath = verifier.getArtifactPath( "org.mule", "mule-foo", "1.0-SNAPSHOT", "jar" );
+        String artifactPath = itr.getArtifactPath( "org.mule", "mule-foo", "1.0-SNAPSHOT", "jar" );
         File artifact = new File( artifactPath );
 
         File dir = artifact.getParentFile().getParentFile().getParentFile();
@@ -111,10 +111,10 @@ public class MavenITmng3052DepRepoAggregationTest
         // project (above) was deployed. It should be able to use the
         // repositories declared in the bar POM to find the transitive dependency
         // (foo, top).
-        verifier = new IntegrationTestRunner( wombat.getAbsolutePath() );
-        verifier.executeGoal( "package", cliOptions );
-        verifier.verifyErrorFreeLog();
-        verifier.resetStreams();
+        itr = new IntegrationTestRunner( wombat.getAbsolutePath() );
+        itr.executeGoal( "package", cliOptions );
+        itr.verifyErrorFreeLog();
+        itr.resetStreams();
     }
 
     private void rewritePom( File pomFile,

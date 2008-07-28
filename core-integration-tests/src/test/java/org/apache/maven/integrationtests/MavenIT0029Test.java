@@ -15,13 +15,13 @@ public class MavenIT0029Test
         throws Exception
     {
         File testDir = extractTestResources( getClass(), "/it0029" );
-        IntegrationTestRunner verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
-        verifier.deleteArtifact( "org.apache.maven.it", "maven-it-it0029", "1.0-SNAPSHOT", "jar" );
-        verifier.deleteArtifact( "org.apache.maven.it", "maven-it-it0029-child", "1.0-SNAPSHOT", "jar" );
-        verifier.executeGoal( "install" );
-        verifier.assertFilePresent( "child-project/target/classes/org/apache/maven/it0029/Person.class" );
-        verifier.verifyErrorFreeLog();
-        verifier.resetStreams();
+        IntegrationTestRunner itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
+        itr.deleteArtifact( "org.apache.maven.it", "maven-it-it0029", "1.0-SNAPSHOT", "jar" );
+        itr.deleteArtifact( "org.apache.maven.it", "maven-it-it0029-child", "1.0-SNAPSHOT", "jar" );
+        itr.executeGoal( "install" );
+        itr.assertFilePresent( "child-project/target/classes/org/apache/maven/it0029/Person.class" );
+        itr.verifyErrorFreeLog();
+        itr.resetStreams();
 
     }
 }

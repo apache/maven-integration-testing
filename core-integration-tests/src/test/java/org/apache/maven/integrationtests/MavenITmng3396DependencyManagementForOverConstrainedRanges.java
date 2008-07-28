@@ -41,35 +41,35 @@ public class MavenITmng3396DependencyManagementForOverConstrainedRanges
         String baseDir = "/mng-3396-dependencyManagementForOverConstrainedRanges";
         File testDir = extractTestResources( getClass(), baseDir + "/dependencies" );
 
-        IntegrationTestRunner verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
-        verifier.deleteArtifact( GROUP_ID, "A", "1.0", "pom" );
-        verifier.deleteArtifact( GROUP_ID, "A", "1.0", "jar" );
-        verifier.deleteArtifact( GROUP_ID, "B", "1.0", "pom" );
-        verifier.deleteArtifact( GROUP_ID, "B", "1.0", "jar" );
-        verifier.executeGoal( "install" );
-        verifier.verifyErrorFreeLog();
-        verifier.resetStreams();
+        IntegrationTestRunner itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
+        itr.deleteArtifact( GROUP_ID, "A", "1.0", "pom" );
+        itr.deleteArtifact( GROUP_ID, "A", "1.0", "jar" );
+        itr.deleteArtifact( GROUP_ID, "B", "1.0", "pom" );
+        itr.deleteArtifact( GROUP_ID, "B", "1.0", "jar" );
+        itr.executeGoal( "install" );
+        itr.verifyErrorFreeLog();
+        itr.resetStreams();
 
         testDir = extractTestResources( getClass(), baseDir + "/plugin" );
 
-        verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
-        verifier.deleteArtifact( GROUP_ID, "A", "1.0", "pom" );
-        verifier.deleteArtifact( GROUP_ID, "A", "1.0", "jar" );
-        verifier.deleteArtifact( GROUP_ID, "A", "3.0", "pom" );
-        verifier.deleteArtifact( GROUP_ID, "A", "3.0", "jar" );
-        verifier.deleteArtifact( GROUP_ID, "plugin", "1.0", "pom" );
-        verifier.deleteArtifact( GROUP_ID, "plugin", "1.0", "jar" );
-        verifier.executeGoal( "install" );
-        verifier.verifyErrorFreeLog();
-        verifier.resetStreams();
+        itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
+        itr.deleteArtifact( GROUP_ID, "A", "1.0", "pom" );
+        itr.deleteArtifact( GROUP_ID, "A", "1.0", "jar" );
+        itr.deleteArtifact( GROUP_ID, "A", "3.0", "pom" );
+        itr.deleteArtifact( GROUP_ID, "A", "3.0", "jar" );
+        itr.deleteArtifact( GROUP_ID, "plugin", "1.0", "pom" );
+        itr.deleteArtifact( GROUP_ID, "plugin", "1.0", "jar" );
+        itr.executeGoal( "install" );
+        itr.verifyErrorFreeLog();
+        itr.resetStreams();
 
         testDir = extractTestResources( getClass(), baseDir + "/pluginuser" );
 
-        verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
-        verifier.deleteArtifact( GROUP_ID, "pluginuser", "1.0", "pom" );
-        verifier.deleteArtifact( GROUP_ID, "pluginuser", "1.0", "jar" );
-        verifier.executeGoal( "install" );
-        verifier.verifyErrorFreeLog();
-        verifier.resetStreams();
+        itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
+        itr.deleteArtifact( GROUP_ID, "pluginuser", "1.0", "pom" );
+        itr.deleteArtifact( GROUP_ID, "pluginuser", "1.0", "jar" );
+        itr.executeGoal( "install" );
+        itr.verifyErrorFreeLog();
+        itr.resetStreams();
     }
 }

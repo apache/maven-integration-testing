@@ -19,12 +19,12 @@ public class MavenIT0101Test
         throws Exception
     {
         File testDir = extractTestResources( getClass(), "/it0101" );
-        IntegrationTestRunner verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
+        IntegrationTestRunner itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
         List cliOptions = new ArrayList();
         cliOptions.add( "--settings settings.xml" );
-        verifier.executeGoal( "compile", cliOptions );
-        verifier.verifyErrorFreeLog();
-        verifier.resetStreams();
+        itr.executeGoal( "compile", cliOptions );
+        itr.verifyErrorFreeLog();
+        itr.resetStreams();
     }
 }
 

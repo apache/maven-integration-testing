@@ -32,18 +32,18 @@ public class MavenITmng3106ProfileMultipleActivators
     {
         File testDir = extractTestResources( getClass(), "/mng-3106-ProfileMultipleActivators" );
 
-        IntegrationTestRunner verifier;
+        IntegrationTestRunner itr;
 
-        verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
+        itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
 
         List cliOptions = new ArrayList();
         cliOptions.add( "-Dprofile1.on=true" );
 
-        verifier.executeGoal( "package", cliOptions );
-        verifier.verifyErrorFreeLog();
-        verifier.assertFilePresent( "target/profile1/touch.txt" );
-        verifier.assertFilePresent( "target/profile2/touch.txt" );
-        verifier.resetStreams();
+        itr.executeGoal( "package", cliOptions );
+        itr.verifyErrorFreeLog();
+        itr.assertFilePresent( "target/profile1/touch.txt" );
+        itr.assertFilePresent( "target/profile2/touch.txt" );
+        itr.resetStreams();
 
     }
 

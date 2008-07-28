@@ -15,20 +15,20 @@ public class MavenIT0016Test
         throws Exception
     {
         File testDir = extractTestResources( getClass(), "/it0016" );
-        IntegrationTestRunner verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
-        verifier.executeGoal( "package" );
-        verifier.assertFilePresent( "target/classes/org/apache/maven/it0016/Person.class" );
-        verifier.assertFilePresent( "target/maven-it-it0016-1.0/index.html" );
-        verifier.assertFilePresent( "target/maven-it-it0016-1.0/WEB-INF/classes/org/apache/maven/it0016/Person.class" );
-        verifier.assertFilePresent( "target/maven-it-it0016-1.0/WEB-INF/lib/commons-logging-1.0.3.jar" );
-        verifier.assertFileNotPresent( "target/maven-it-it0016-1.0/WEB-INF/lib/servletapi-2.4-20040521.jar" );
-        verifier.assertFilePresent( "target/maven-it-it0016-1.0.war" );
-        verifier.assertFilePresent( "target/maven-it-it0016-1.0.war!/index.html" );
-        verifier.assertFilePresent(
+        IntegrationTestRunner itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
+        itr.executeGoal( "package" );
+        itr.assertFilePresent( "target/classes/org/apache/maven/it0016/Person.class" );
+        itr.assertFilePresent( "target/maven-it-it0016-1.0/index.html" );
+        itr.assertFilePresent( "target/maven-it-it0016-1.0/WEB-INF/classes/org/apache/maven/it0016/Person.class" );
+        itr.assertFilePresent( "target/maven-it-it0016-1.0/WEB-INF/lib/commons-logging-1.0.3.jar" );
+        itr.assertFileNotPresent( "target/maven-it-it0016-1.0/WEB-INF/lib/servletapi-2.4-20040521.jar" );
+        itr.assertFilePresent( "target/maven-it-it0016-1.0.war" );
+        itr.assertFilePresent( "target/maven-it-it0016-1.0.war!/index.html" );
+        itr.assertFilePresent(
             "target/maven-it-it0016-1.0.war!/WEB-INF/classes/org/apache/maven/it0016/Person.class" );
-        verifier.assertFilePresent( "target/maven-it-it0016-1.0.war!/WEB-INF/lib/commons-logging-1.0.3.jar" );
-        verifier.verifyErrorFreeLog();
-        verifier.resetStreams();
+        itr.assertFilePresent( "target/maven-it-it0016-1.0.war!/WEB-INF/lib/commons-logging-1.0.3.jar" );
+        itr.verifyErrorFreeLog();
+        itr.resetStreams();
 
     }
 }

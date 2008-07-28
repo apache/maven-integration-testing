@@ -24,19 +24,19 @@ public class MavenITmng3220ImportScopeTest
                                                                  "/mng-3220-importedDepMgmt/imported-pom-depMgmt" );
 
         File dmDir = new File( testDir, "dm-pom" );
-        IntegrationTestRunner verifier = new IntegrationTestRunner( dmDir.getAbsolutePath() );
+        IntegrationTestRunner itr = new IntegrationTestRunner( dmDir.getAbsolutePath() );
 
-        verifier.executeGoal( "install" );
+        itr.executeGoal( "install" );
 
-        verifier.verifyErrorFreeLog();
-        verifier.resetStreams();
+        itr.verifyErrorFreeLog();
+        itr.resetStreams();
 
         File projectDir = new File( testDir, "project" );
-        verifier = new IntegrationTestRunner( projectDir.getAbsolutePath() );
+        itr = new IntegrationTestRunner( projectDir.getAbsolutePath() );
 
-        verifier.executeGoal( "package" );
-        verifier.verifyErrorFreeLog();
-        verifier.resetStreams();
+        itr.executeGoal( "package" );
+        itr.verifyErrorFreeLog();
+        itr.resetStreams();
     }
 
     public void testitMNG3220b()
@@ -45,20 +45,20 @@ public class MavenITmng3220ImportScopeTest
         File testDir = extractTestResources( getClass(),
                                                                  "/mng-3220-importedDepMgmt/depMgmt-pom-module-notImported" );
 
-        IntegrationTestRunner verifier = new IntegrationTestRunner( testDir.getAbsolutePath() );
+        IntegrationTestRunner itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
 
         try
         {
-            verifier.executeGoal( "install" );
+            itr.executeGoal( "install" );
             fail( "Should fail to build with missing junit version." );
         }
         catch ( IntegrationTestException e )
         {
         }
 
-        verifier.resetStreams();
+        itr.resetStreams();
 
-        List lines = verifier.loadFile( new File( testDir, "log.txt" ), false );
+        List lines = itr.loadFile( new File( testDir, "log.txt" ), false );
 
         boolean found = false;
         for ( Iterator it = lines.iterator(); it.hasNext(); )

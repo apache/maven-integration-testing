@@ -1,0 +1,39 @@
+<?xml version="1.0"?><project>
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.apache.maven.its.mng2477</groupId>
+  <version>1.0</version>
+  <artifactId>test-project</artifactId>
+  <name>test-project</name>
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>3.8.1</version>
+      <scope>test</scope>
+<!-- later
+      <requiredChecksum value="99129f16442844f6a4a11ae22fbbee40b14d774f" pom="16d74791c801c89b0071b1680ea0bc85c93417bb" />
+-->
+    </dependency>
+  </dependencies>
+  <distributionManagement>
+    <repository>
+      <id>id</id>
+      <url>file:${basedir}/deployment-repository</url>
+    </repository>
+  </distributionManagement>
+  <repositories>
+    <repository>
+      <id>apache.snapshots</id>
+      <url>http://people.apache.org/repo/m2-snapshot-repository</url>
+      <snapshots>
+        <enabled>true</enabled>
+        <signaturePolicy>warn</signaturePolicy>
+      </snapshots>
+      <releases>
+        <enabled>false</enabled>
+        <signaturePolicy>warn</signaturePolicy>
+      </releases>
+    </repository>
+  </repositories>
+</project>
+

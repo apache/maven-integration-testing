@@ -1,0 +1,16 @@
+<?xml version="1.0"?><project>
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.apache.maven.its.mng2477</groupId>
+  <version>1.0</version>
+  <artifactId>test-bad-checksum</artifactId>
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>3.8.1</version>
+      <scope>test</scope>
+      <requiredChecksum value="16d74791c801c89b0071b1680ea0bc85c93417bb" />
+    </dependency>
+  </dependencies>
+</project>
+

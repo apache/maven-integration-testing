@@ -16,7 +16,7 @@ public class MavenIT0016Test
     {
         File testDir = extractTestResources( getClass(), "/it0016" );
         IntegrationTestRunner itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
-        itr.executeGoal( "package" );
+        itr.invoke( "package" );
         itr.assertFilePresent( "target/classes/org/apache/maven/it0016/Person.class" );
         itr.assertFilePresent( "target/maven-it-it0016-1.0/index.html" );
         itr.assertFilePresent( "target/maven-it-it0016-1.0/WEB-INF/classes/org/apache/maven/it0016/Person.class" );

@@ -16,7 +16,7 @@ public class MavenIT0128DistMgmtSiteUrlParentCalculationTest
     {
         File testDir = extractTestResources( getClass(), "/it0128-distMgmtSiteUrlParentCalc" );
         IntegrationTestRunner itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
-        itr.executeGoal( "integration-test" );
+        itr.invoke( "integration-test" );
         itr.verifyErrorFreeLog();
         itr.resetStreams();
 

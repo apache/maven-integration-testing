@@ -33,7 +33,7 @@ public class MavenITmng2254PomEncodingTest
 
         List cliOptions = new ArrayList();
         cliOptions.add( "-N" );
-        itr.executeGoal( "compile" );
+        itr.invoke( "compile" );
 
         itr.verifyErrorFreeLog();
 

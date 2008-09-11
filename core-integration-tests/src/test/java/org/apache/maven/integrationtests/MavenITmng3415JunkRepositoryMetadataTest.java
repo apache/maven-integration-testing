@@ -105,7 +105,7 @@ public class MavenITmng3415JunkRepositoryMetadataTest
 
         setupDummyDependency( testDir, localRepo, true );
 
-        itr.executeGoal( "package" );
+        itr.invoke( "package" );
 
         itr.verifyErrorFreeLog();
         itr.resetStreams();
@@ -186,7 +186,7 @@ public class MavenITmng3415JunkRepositoryMetadataTest
 
         setupDummyDependency( testDir, localRepo, false );
 
-        itr.executeGoal( "package" );
+        itr.invoke( "package" );
 
         itr.verifyErrorFreeLog();
         itr.resetStreams();
@@ -288,12 +288,12 @@ public class MavenITmng3415JunkRepositoryMetadataTest
 
         itr.deleteArtifact( "org.apache.maven.plugins", "maven-find-local-repo-plugin", "1.0-SNAPSHOT", "jar" );
 
-        itr.executeGoal( "install" );
+        itr.invoke( "install" );
 
         itr.verifyErrorFreeLog();
         itr.resetStreams();
 
-        itr.executeGoal( "find-local-repo:find" );
+        itr.invoke( "find-local-repo:find" );
 
         itr.verifyErrorFreeLog();
         itr.resetStreams();

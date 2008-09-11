@@ -42,7 +42,7 @@ public class MavenITmng3380ManagedRelocatedTransdepsTest
             + "/consumer";
 
         itr = new IntegrationTestRunner( path );
-        itr.executeGoal( "package" );
+        itr.invoke( "package" );
 
         // verify no errors so far
         itr.verifyErrorFreeLog();
@@ -56,37 +56,37 @@ public class MavenITmng3380ManagedRelocatedTransdepsTest
         String path = testDir.getAbsolutePath() //
             + "/other-c";
         IntegrationTestRunner itr = new IntegrationTestRunner( path );
-        itr.executeGoal( "install" );
+        itr.invoke( "install" );
 
         path = testDir.getAbsolutePath() //
             + "/other-b";
         itr = new IntegrationTestRunner( path );
-        itr.executeGoal( "install" );
+        itr.invoke( "install" );
 
         path = testDir.getAbsolutePath() //
             + "/other-a";
         itr = new IntegrationTestRunner( path );
-        itr.executeGoal( "install" );
+        itr.invoke( "install" );
 
         path = testDir.getAbsolutePath() //
             + "/transdep-old";
         itr = new IntegrationTestRunner( path );
-        itr.executeGoal( "install" );
+        itr.invoke( "install" );
 
         path = testDir.getAbsolutePath() //
             + "/transdep-new-1";
         itr = new IntegrationTestRunner( path );
-        itr.executeGoal( "install" );
+        itr.invoke( "install" );
 
         path = testDir.getAbsolutePath() //
             + "/transdep-new-2";
         itr = new IntegrationTestRunner( path );
-        itr.executeGoal( "install" );
+        itr.invoke( "install" );
 
         path = testDir.getAbsolutePath() //
             + "/direct-dep";
         itr = new IntegrationTestRunner( path );
-        itr.executeGoal( "install" );
+        itr.invoke( "install" );
     }
 
     private void deleteArtifacts( IntegrationTestRunner itr )

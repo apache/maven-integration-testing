@@ -17,10 +17,10 @@ public class MavenIT0020Test
         File testDir = extractTestResources( getClass(), "/it0020" );
         IntegrationTestRunner itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
         itr.deleteArtifact( "org.apache.maven.its.plugins", "maven-it-it0020", "1.0-SNAPSHOT", "maven-plugin" );
-        itr.executeGoal( "install" );
+        itr.invoke( "install" );
 
         itr = new IntegrationTestRunner( testDir.getAbsolutePath() );        
-        itr.executeGoal( "org.apache.maven.its.it0020:maven-it-it0020:it0020" );
+        itr.invoke( "org.apache.maven.its.it0020:maven-it-it0020:it0020" );
         itr.assertFilePresent( "target/out.txt" );
         itr.verifyErrorFreeLog();
         itr.resetStreams();

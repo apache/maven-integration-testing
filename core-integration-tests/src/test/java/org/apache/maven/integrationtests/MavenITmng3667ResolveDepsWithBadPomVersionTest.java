@@ -66,7 +66,7 @@ public class MavenITmng3667ResolveDepsWithBadPomVersionTest
         File localRepoDir = new File( itr.localRepo );
         FileUtils.copyDirectoryStructure( repoDir, localRepoDir );
 
-        itr.executeGoal( "compile" );
+        itr.invoke( "compile" );
 
         /*
          * This is the simplest way to check a build

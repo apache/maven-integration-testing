@@ -37,7 +37,7 @@ public class MavenIT0120EjbClientDependency
         itr.deleteArtifact( "org.apache.maven.its.it0120", "model", "1.0-SNAPSHOT", "ejb" );
 
 	/* Not "install" or "higher" goal to repeat the bug */
-        itr.executeGoal( "compile" ); 
+        itr.invoke( "compile" ); 
 
 	itr.verifyErrorFreeLog();
         itr.resetStreams();

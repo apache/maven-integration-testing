@@ -16,7 +16,7 @@ public class MavenIT0077Test
         File testDir = extractTestResources( getClass(), "/it0077" );
         IntegrationTestRunner itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
         itr.deleteArtifact( "org.apache.maven.its.it0077", "sub1", "1.0", "test-jar" );
-        itr.executeGoal( "install" );
+        itr.invoke( "install" );
         itr.assertArtifactPresent( "org.apache.maven.its.it0077", "sub1", "1.0", "test-jar" );
         itr.verifyErrorFreeLog();
         itr.resetStreams();

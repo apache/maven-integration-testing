@@ -18,7 +18,7 @@ public class MavenIT0049Test
         IntegrationTestRunner itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
         //todo: i don't think we need to delete this plugin
         //itr.deleteArtifact( "org.apache.maven.its.plugins", "maven-it-plugin-touch", "1.0", "maven-plugin" );
-        itr.executeGoal( "org.apache.maven.its.plugins:maven-it-plugin-touch:touch" );
+        itr.invoke( "org.apache.maven.its.plugins:maven-it-plugin-touch:touch" );
         itr.assertFilePresent( "target/touchFile.txt" );
         itr.verifyErrorFreeLog();
         itr.resetStreams();

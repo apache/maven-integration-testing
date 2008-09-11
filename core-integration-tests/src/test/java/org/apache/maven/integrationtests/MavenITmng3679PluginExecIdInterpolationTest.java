@@ -18,7 +18,7 @@ public class MavenITmng3679PluginExecIdInterpolationTest
     {
         File testDir = extractTestResources( getClass(), "/mng-3679-pluginExecIdInterpolation" );
         IntegrationTestRunner itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
-        itr.executeGoal( "validate" );
+        itr.invoke( "validate" );
         itr.verifyErrorFreeLog();
         itr.resetStreams();       
         assertTrue( new File( testDir, "target/check.txt" ).exists() );

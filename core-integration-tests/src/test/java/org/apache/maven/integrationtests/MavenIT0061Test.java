@@ -18,7 +18,7 @@ public class MavenIT0061Test
     {
         File testDir = extractTestResources( getClass(), "/it0061" );
         IntegrationTestRunner itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
-        itr.executeGoal( "deploy" );
+        itr.invoke( "deploy" );
         itr.assertFilePresent( "target/test-repo/org.apache.maven.its.it0061/jars/maven-it-it0061-1.0.jar" );
         itr.assertFilePresent( "target/test-repo/org.apache.maven.its.it0061/poms/maven-it-it0061-1.0.pom" );
         itr.verifyErrorFreeLog();

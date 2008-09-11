@@ -66,7 +66,7 @@ public class MavenITmng2068ReactorRelativeParentsTest
         itr.deleteArtifact( "samplegroup", "frameworks", "0.0.1", "pom" );
         itr.deleteArtifact( "samplegroup", "core", "1.0.0", "pom" );
 
-        itr.executeGoal( "validate" );
+        itr.invoke( "validate" );
 
         /*
          * This is the simplest way to check a build

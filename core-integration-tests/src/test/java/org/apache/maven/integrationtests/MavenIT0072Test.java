@@ -17,7 +17,7 @@ public class MavenIT0072Test
     {
         File testDir = extractTestResources( getClass(), "/it0072" );
         IntegrationTestRunner itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
-        itr.executeGoal( "package" );
+        itr.invoke( "package" );
         itr.assertFilePresent( "target/maven-it-it0072-1.0-SNAPSHOT.jar" );
         itr.verifyErrorFreeLog();
         itr.resetStreams();

@@ -17,7 +17,7 @@ public class MavenITmng2562Timestamp extends AbstractMavenIntegrationTestCase {
         File testDir = extractTestResources(getClass(),
                 "/mng-2562-timestamp");
         IntegrationTestRunner itr = new IntegrationTestRunner(testDir.getAbsolutePath());
-        itr.executeGoal("verify");
+        itr.invoke("verify");
 
         itr.verifyErrorFreeLog();
         itr.resetStreams();

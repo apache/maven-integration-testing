@@ -24,7 +24,7 @@ public class MavenITmng3475BaseAlignedDir
         File pluginDir = new File( testDir, "plugin" );
         IntegrationTestRunner itr = new IntegrationTestRunner( pluginDir.getAbsolutePath() );
 
-        itr.executeGoal( "install" );
+        itr.invoke( "install" );
 
         itr.verifyErrorFreeLog();
         itr.resetStreams();
@@ -32,7 +32,7 @@ public class MavenITmng3475BaseAlignedDir
         File projectDir = new File( testDir, "project" );
         itr = new IntegrationTestRunner( projectDir.getAbsolutePath() );
 
-        itr.executeGoal( "validate" );
+        itr.invoke( "validate" );
         itr.verifyErrorFreeLog();
         itr.resetStreams();
     }

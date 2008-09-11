@@ -21,7 +21,7 @@ public class MavenIT0091Test
     {
         File testDir = extractTestResources( getClass(), "/it0091" );
         IntegrationTestRunner itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
-        itr.executeGoal( "test" );
+        itr.invoke( "test" );
         itr.assertFilePresent( "target/classes/test.properties" );
         itr.verifyErrorFreeLog();
         itr.resetStreams();

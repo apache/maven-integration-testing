@@ -1,13 +1,10 @@
 package org.apache.maven.integrationtests;
 
-import java.io.File;
-
 import org.apache.maven.it.IntegrationTestRunner;
 
 public class MavenIT0010Test
     extends AbstractMavenIntegrationTestCase
 {
-
     /**
      * Since the artifact resolution does not use the project builder, we must
      * ensure that the full hierarchy of all dependencies is resolved. This
@@ -20,13 +17,11 @@ public class MavenIT0010Test
     public void testit0010()
         throws Exception
     {
-        File testDir = extractTestResources( getClass(), "/it0010" );
-        IntegrationTestRunner itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
-        itr.executeGoal( "compile" );
+        IntegrationTestRunner itr = createTestRunner();
+        itr.invoke( "compile" );
         itr.assertFilePresent( "target/classes/org/apache/maven/it0010/PersonFinder.class" );
         itr.verifyErrorFreeLog();
         itr.resetStreams();
-
     }
 }
 

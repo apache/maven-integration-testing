@@ -54,7 +54,7 @@ public class MavenITmng3645POMSyntaxErrorTest
 
         try
         {
-            itr.executeGoal( "validate" );
+            itr.invoke( "validate" );
 
             fail( "Should fail to validate the POM syntax due to missing dependency element inside dependencyManagement section." );
         }

@@ -32,7 +32,7 @@ public class MavenITmng2045testJarDependenciesBrokenInReactorTest extends Abstra
         itr.deleteArtifact( "testing", "first-project", "1.0-SNAPSHOT", "jar" );
         itr.deleteArtifact( "testing", "second-project", "1.0-SNAPSHOT", "jar" );
 
-        itr.executeGoal( "install" );
+        itr.invoke( "install" );
         itr.verifyErrorFreeLog();
         itr.resetStreams();
 

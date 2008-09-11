@@ -17,7 +17,7 @@ public class MavenIT0068Test
         File testDir = extractTestResources( getClass(), "/it0068" );
         IntegrationTestRunner itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
         itr.deleteArtifact( "org.codehaus.modello", "modello-core", "1.0-alpha-3", "jar" );
-        itr.executeGoal( "generate-sources" );
+        itr.invoke( "generate-sources" );
         itr.assertFilePresent( "target/generated-sources/modello/org/apache/maven/settings/Settings.java" );
         itr.resetStreams();
     }

@@ -18,7 +18,7 @@ public class MavenIT0034Test
         IntegrationTestRunner itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
         itr.deleteArtifact( "org.apache.maven", "maven-core-it-support", "1.4", "jar" );
         itr.deleteArtifact( "junit", "junit", "3.8", "jar" );
-        itr.executeGoal( "package" );
+        itr.invoke( "package" );
         itr.assertArtifactPresent( "junit", "junit", "3.8", "jar" );
         itr.assertArtifactPresent( "org.apache.maven", "maven-core-it-support", "1.4", "jar" );
         itr.verifyErrorFreeLog();

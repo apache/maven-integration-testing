@@ -16,7 +16,7 @@ public class MavenIT0054Test
     {
         File testDir = extractTestResources( getClass(), "/it0054" );
         IntegrationTestRunner itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
-        itr.executeGoal( "package" );
+        itr.invoke( "package" );
         itr.assertFilePresent( "target/classes/org/apache/maven/it0054/Person.class" );
         itr.assertFilePresent( "target/test-classes/org/apache/maven/it0054/PersonTest.class" );
         itr.assertFilePresent( "target/maven-it-it0054-1.0.jar" );

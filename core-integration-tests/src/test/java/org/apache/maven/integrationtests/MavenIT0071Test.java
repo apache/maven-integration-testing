@@ -18,7 +18,7 @@ public class MavenIT0071Test
         File testDir = extractTestResources( getClass(), "/it0071" );
         IntegrationTestRunner itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
         itr.deleteArtifact( "org.apache.maven.plugins", "maven-it-it-plugin", "1.0", "maven-plugin" );
-        itr.executeGoal( "org.apache.maven.its.plugins:maven-it-plugin-touch:touch" );
+        itr.invoke( "org.apache.maven.its.plugins:maven-it-plugin-touch:touch" );
         itr.assertFilePresent( "target/foo2" );
         itr.verifyErrorFreeLog();
         itr.resetStreams();

@@ -18,7 +18,7 @@ public class MavenIT0086Test
         File testDir = extractTestResources( getClass(), "/it0086" );
         IntegrationTestRunner itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
         itr.deleteArtifact( "org.apache.maven.plugins", "maven-it-it-plugin", "1.0", "maven-plugin" );
-        itr.executeGoal( "validate" );
+        itr.invoke( "validate" );
         itr.verifyErrorFreeLog();
         itr.resetStreams();
 

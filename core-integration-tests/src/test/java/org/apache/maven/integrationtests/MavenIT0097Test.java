@@ -17,7 +17,7 @@ public class MavenIT0097Test
     {
         File testDir = extractTestResources( getClass(), "/it0097" );
         IntegrationTestRunner itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
-        itr.executeGoal( "package" );
+        itr.invoke( "package" );
         itr.assertFilePresent( "project/project-level2/project-level3/target/it0097.txt" );
         itr.assertFilePresent( "project/project-sibling-level2/target/it0097.txt" );
         itr.verifyErrorFreeLog();

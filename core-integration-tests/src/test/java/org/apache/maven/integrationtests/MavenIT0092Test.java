@@ -23,7 +23,7 @@ public class MavenIT0092Test
         File testDir = extractTestResources( getClass(), "/it0092" );
         IntegrationTestRunner itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
         itr.deleteArtifact( "org.apache.maven", "maven-core-it-support", "1.0-SNAPSHOT", "jar" );
-        itr.executeGoal( "compile" );
+        itr.invoke( "compile" );
         itr.assertArtifactPresent( "org.apache.maven", "maven-core-it-support", "1.0-SNAPSHOT", "jar" );
         itr.verifyErrorFreeLog();
         itr.resetStreams();

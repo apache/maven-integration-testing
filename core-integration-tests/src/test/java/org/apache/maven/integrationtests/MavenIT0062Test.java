@@ -18,7 +18,7 @@ public class MavenIT0062Test
         File testDir = extractTestResources( getClass(), "/it0062" );
         IntegrationTestRunner itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
         itr.deleteArtifact( "org.apache.maven", "maven-it-it0062-SNAPSHOT", "1.0", "jar" );
-        itr.executeGoal( "deploy" );
+        itr.invoke( "deploy" );
         itr.assertFilePresent( "target/classes/org/apache/maven/it0062/Person.class" );
         itr.assertFilePresent( "target/maven-it-it0062-1.0-SNAPSHOT.jar" );
         itr.verifyErrorFreeLog();

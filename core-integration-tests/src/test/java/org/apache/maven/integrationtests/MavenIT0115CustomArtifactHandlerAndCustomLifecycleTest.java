@@ -40,14 +40,14 @@ public class MavenIT0115CustomArtifactHandlerAndCustomLifecycleTest
 
         // Install the plugin to test for Authz info in the WagonManager
         itr = new IntegrationTestRunner( new File( testDir.getAbsolutePath(), "test-extension" ).getAbsolutePath() );
-        itr.executeGoal( "install" );
+        itr.invoke( "install" );
         itr.verifyErrorFreeLog();
         itr.resetStreams();
 
         // Build the test project that uses the plugin.
         File testProject = new File( testDir.getAbsolutePath(), "test-project" );
         itr = new IntegrationTestRunner( testProject.getAbsolutePath() );
-        itr.executeGoal( "package" );
+        itr.invoke( "package" );
         itr.verifyErrorFreeLog();
         itr.resetStreams();
 

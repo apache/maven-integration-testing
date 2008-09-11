@@ -39,7 +39,7 @@ public class MavenITmng3652UserAgentHeader
         File projectDir = new File( testDir, "test-project" );
 
         IntegrationTestRunner itr = new IntegrationTestRunner( pluginDir.getAbsolutePath() );
-        itr.executeGoal( "install" );
+        itr.invoke( "install" );
         itr.verifyErrorFreeLog();
         itr.resetStreams();
 

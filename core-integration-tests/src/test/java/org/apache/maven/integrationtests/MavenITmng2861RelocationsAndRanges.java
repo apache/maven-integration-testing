@@ -39,7 +39,7 @@ public class MavenITmng2861RelocationsAndRanges
         itr.deleteArtifact( "org.apache.maven.its.mng2861", "B", "1.0-SNAPSHOT", "jar" );
         itr.deleteArtifact( "org.apache.maven.its.mng2861", "C", "1.0-SNAPSHOT", "jar" );
 
-        itr.executeGoal( "install" );
+        itr.invoke( "install" );
 
         itr.verifyErrorFreeLog();
 

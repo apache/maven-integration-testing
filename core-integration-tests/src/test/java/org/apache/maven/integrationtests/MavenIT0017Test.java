@@ -16,7 +16,7 @@ public class MavenIT0017Test
     {
         File testDir = extractTestResources( getClass(), "/it0017" );
         IntegrationTestRunner itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
-        itr.executeGoal( "package" );
+        itr.invoke( "package" );
         itr.assertFilePresent( "target/classes/org/apache/maven/it0017/Person.class" );
         itr.assertFilePresent( "target/maven-it-it0017-1.0.jar" );
         itr.assertFilePresent( "target/maven-it-it0017-1.0.jar!/META-INF/ejb-jar.xml" );

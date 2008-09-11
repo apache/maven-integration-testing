@@ -18,7 +18,7 @@ public class MavenIT0060Test
     {
         File testDir = extractTestResources( getClass(), "/it0060" );
         IntegrationTestRunner itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
-        itr.executeGoal( "test" );
+        itr.invoke( "test" );
         itr.assertFilePresent( "subproject/target/classes/org/apache/maven/it0060/Person.class" );
         itr.assertFilePresent( "subproject/target/test-classes/org/apache/maven/it0060/PersonTest.class" );
         itr.assertFileNotPresent( "subproject/target/test-classes/org/apache/maven/it0060/PersonTwoTest.class" );

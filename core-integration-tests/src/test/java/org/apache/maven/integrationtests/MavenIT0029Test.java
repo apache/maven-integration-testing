@@ -18,7 +18,7 @@ public class MavenIT0029Test
         IntegrationTestRunner itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
         itr.deleteArtifact( "org.apache.maven.it", "maven-it-it0029", "1.0-SNAPSHOT", "jar" );
         itr.deleteArtifact( "org.apache.maven.it", "maven-it-it0029-child", "1.0-SNAPSHOT", "jar" );
-        itr.executeGoal( "install" );
+        itr.invoke( "install" );
         itr.assertFilePresent( "child-project/target/classes/org/apache/maven/it0029/Person.class" );
         itr.verifyErrorFreeLog();
         itr.resetStreams();

@@ -14,7 +14,7 @@ public class MavenIT0002Test
     {
         IntegrationTestRunner itr = createTestRunner();
         itr.deleteArtifact( "org.apache.maven.its", "maven-core-it-support", "1.0", "jar" );
-        itr.invoke( createInvocationRequest( "package" ) );        
+        itr.invoke( "package" );        
         itr.assertFilePresent( "target/classes/org/apache/maven/it0002/Person.class" );
         itr.assertFilePresent( "target/test-classes/org/apache/maven/it0002/PersonTest.class" );
         itr.assertFilePresent( "target/maven-it-it0002-1.0.jar" );

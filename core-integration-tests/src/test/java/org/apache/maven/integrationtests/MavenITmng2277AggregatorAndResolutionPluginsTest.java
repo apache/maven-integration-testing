@@ -51,7 +51,7 @@ public class MavenITmng2277AggregatorAndResolutionPluginsTest
          * the local repo here.
          */
         List cliOptions = new ArrayList();
-        itr.executeGoal( "org.apache.maven.its.plugins:maven-it-plugin-all:aggregator-dependencies" );
+        itr.invoke( "org.apache.maven.its.plugins:maven-it-plugin-all:aggregator-dependencies" );
 
         itr.verifyErrorFreeLog();
     }

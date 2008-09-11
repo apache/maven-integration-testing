@@ -1,7 +1,5 @@
 package org.apache.maven.integrationtests;
 
-import java.io.File;
-
 import org.apache.maven.it.IntegrationTestRunner;
 
 public class MavenIT0004Test
@@ -14,15 +12,13 @@ public class MavenIT0004Test
      */
     public void testit0004()
         throws Exception
-    {
-        File testDir = extractTestResources( getClass(), "/it0004" );
-        IntegrationTestRunner itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
+    {      
+        IntegrationTestRunner itr = createTestRunner();
         itr.deleteArtifact( "org.apache.maven", "maven-it-it0004", "1.0", "pom" );
-        itr.executeGoal( "install:install" );
+        itr.invoke( "install:install" );
         itr.assertArtifactPresent( "org.apache.maven.its.it0004", "maven-it-it0004", "1.0", "pom" );
         itr.verifyErrorFreeLog();
         itr.resetStreams();
-
     }
 }
 

@@ -23,7 +23,7 @@ public class MavenITmng1493NonStandardModulePomNames
 
         itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
 
-        itr.executeGoal( "initialize" );
+        itr.invoke( "initialize" );
 
         /*
          * This is the simplest way to check a build

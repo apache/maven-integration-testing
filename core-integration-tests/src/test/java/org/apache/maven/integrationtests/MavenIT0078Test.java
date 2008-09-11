@@ -18,7 +18,7 @@ public class MavenIT0078Test
     {
         File testDir = extractTestResources( getClass(), "/it0078" );
         IntegrationTestRunner itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
-        itr.executeGoal( "compile" );
+        itr.invoke( "compile" );
         itr.assertFileNotPresent( "target/classes/Test.class" );
         itr.verifyErrorFreeLog();
         itr.resetStreams();

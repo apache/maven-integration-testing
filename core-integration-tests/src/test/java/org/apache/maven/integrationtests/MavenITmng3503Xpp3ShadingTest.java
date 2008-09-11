@@ -60,7 +60,7 @@ public class MavenITmng3503Xpp3ShadingTest
          */
         itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
 
-        itr.executeGoal( "install" );
+        itr.invoke( "install" );
 
         /*
          * This is the simplest way to check a build

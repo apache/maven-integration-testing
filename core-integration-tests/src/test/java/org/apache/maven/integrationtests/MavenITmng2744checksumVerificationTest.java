@@ -33,7 +33,7 @@ public class MavenITmng2744checksumVerificationTest
         itr.deleteArtifact( "org.apache.maven.its.mng2744", "b", "1", "pom" );
         itr.deleteArtifact( "org.apache.maven.its.mng2744", "b", "1", "jar" );
 
-        itr.executeGoal( "compile" );
+        itr.invoke( "compile" );
         itr.verifyErrorFreeLog();
         itr.resetStreams();
     }

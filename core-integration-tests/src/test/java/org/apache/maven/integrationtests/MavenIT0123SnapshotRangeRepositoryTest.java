@@ -17,7 +17,7 @@ public class MavenIT0123SnapshotRangeRepositoryTest
     {
         File testDir = extractTestResources( getClass(), "/it0123-snapshotRangeRepository" );
         IntegrationTestRunner itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
-        itr.executeGoal( "compile" );
+        itr.invoke( "compile" );
         itr.verifyErrorFreeLog();
         itr.resetStreams();
     }

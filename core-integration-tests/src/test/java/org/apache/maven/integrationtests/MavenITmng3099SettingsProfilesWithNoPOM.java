@@ -42,7 +42,7 @@ public class MavenITmng3099SettingsProfilesWithNoPOM
 
         itr = new IntegrationTestRunner( plugin.getAbsolutePath() );
 
-        itr.executeGoal( "install" );
+        itr.invoke( "install" );
 
         /*
          * Reset the streams before executing the itr

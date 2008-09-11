@@ -25,7 +25,7 @@ public class MavenITmng3428PluginDescriptorArtifactsIncompleteTest
         IntegrationTestRunner itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
 
         // First, build the plugin we'll use to test the PluginDescriptor artifact collection.
-        itr.executeGoal( "install" );
+        itr.invoke( "install" );
 
         /*
          * This is the simplest way to check a build
@@ -47,7 +47,7 @@ public class MavenITmng3428PluginDescriptorArtifactsIncompleteTest
         // This should only succeed if commons-cli is part of ${plugin.artifacts}. The
         // commons-cli library is part of Maven's core classpath, so if this mojo succeeds
         // it means the PluginDescriptor.getArtifacts() call returns an unfiltered collection.
-        itr.executeGoal( "tests:test-cli-maven-plugin:1:test" );
+        itr.invoke( "tests:test-cli-maven-plugin:1:test" );
         itr.verifyErrorFreeLog();
         itr.resetStreams();
     }

@@ -26,12 +26,12 @@ public class MavenITmng3581PluginUsesWagonDependency
         File projectDir = new File( testDir, "project" );
 
         IntegrationTestRunner itr = new IntegrationTestRunner( pluginDir.getAbsolutePath() );
-        itr.executeGoal( "install" );
+        itr.invoke( "install" );
         itr.verifyErrorFreeLog();
         itr.resetStreams();
 
         itr = new IntegrationTestRunner( projectDir.getAbsolutePath() );
-        itr.executeGoal( "validate" );
+        itr.invoke( "validate" );
         itr.verifyErrorFreeLog();
         itr.resetStreams();
 

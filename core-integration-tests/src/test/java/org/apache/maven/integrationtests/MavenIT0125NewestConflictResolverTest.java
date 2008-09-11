@@ -17,19 +17,19 @@ public class MavenIT0125NewestConflictResolverTest
     {
         File testDir = extractTestResources( getClass(), "/it0125-newestConflictResolver/dependency" );
         IntegrationTestRunner itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
-        itr.executeGoal( "install" );
+        itr.invoke( "install" );
         itr.verifyErrorFreeLog();
         itr.resetStreams();
 
         testDir = extractTestResources( getClass(), "/it0125-newestConflictResolver/plugin" );
         itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
-        itr.executeGoal( "install" );
+        itr.invoke( "install" );
         itr.verifyErrorFreeLog();
         itr.resetStreams();
 
         testDir = extractTestResources( getClass(), "/it0125-newestConflictResolver/project" );
         itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
-        itr.executeGoal( "verify" );
+        itr.invoke( "verify" );
         itr.verifyErrorFreeLog();
         itr.resetStreams();
     }

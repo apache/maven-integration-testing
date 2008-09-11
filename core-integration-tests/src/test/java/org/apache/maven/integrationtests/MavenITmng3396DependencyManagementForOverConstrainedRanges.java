@@ -46,7 +46,7 @@ public class MavenITmng3396DependencyManagementForOverConstrainedRanges
         itr.deleteArtifact( GROUP_ID, "A", "1.0", "jar" );
         itr.deleteArtifact( GROUP_ID, "B", "1.0", "pom" );
         itr.deleteArtifact( GROUP_ID, "B", "1.0", "jar" );
-        itr.executeGoal( "install" );
+        itr.invoke( "install" );
         itr.verifyErrorFreeLog();
         itr.resetStreams();
 
@@ -59,7 +59,7 @@ public class MavenITmng3396DependencyManagementForOverConstrainedRanges
         itr.deleteArtifact( GROUP_ID, "A", "3.0", "jar" );
         itr.deleteArtifact( GROUP_ID, "plugin", "1.0", "pom" );
         itr.deleteArtifact( GROUP_ID, "plugin", "1.0", "jar" );
-        itr.executeGoal( "install" );
+        itr.invoke( "install" );
         itr.verifyErrorFreeLog();
         itr.resetStreams();
 
@@ -68,7 +68,7 @@ public class MavenITmng3396DependencyManagementForOverConstrainedRanges
         itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
         itr.deleteArtifact( GROUP_ID, "pluginuser", "1.0", "pom" );
         itr.deleteArtifact( GROUP_ID, "pluginuser", "1.0", "jar" );
-        itr.executeGoal( "install" );
+        itr.invoke( "install" );
         itr.verifyErrorFreeLog();
         itr.resetStreams();
     }

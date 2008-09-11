@@ -17,7 +17,7 @@ public class MavenIT0073Test
         File testDir = extractTestResources( getClass(), "/it0073" );
         IntegrationTestRunner itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
         itr.deleteArtifact( "org.apache.maven.its.plugins", "maven-it-plugin-context-passing", "1.0", "maven-plugin" );
-        itr.executeGoal( "org.apache.maven.its.plugins:maven-it-plugin-context-passing:throw, org.apache.maven.its.plugins:maven-it-plugin-context-passing:catch" );
+        itr.invoke( "org.apache.maven.its.plugins:maven-it-plugin-context-passing:throw, org.apache.maven.its.plugins:maven-it-plugin-context-passing:catch" );
         itr.assertFilePresent( "target/thrown-value" );
         itr.verifyErrorFreeLog();
         itr.resetStreams();

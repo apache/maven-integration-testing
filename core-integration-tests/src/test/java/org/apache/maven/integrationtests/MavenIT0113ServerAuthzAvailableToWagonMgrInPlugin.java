@@ -42,7 +42,7 @@ public class MavenIT0113ServerAuthzAvailableToWagonMgrInPlugin
 
         // Install the plugin to test for Authz info in the WagonManager
         itr = new IntegrationTestRunner( new File( testDir.getAbsolutePath(), "maven-it0113-plugin" ).getAbsolutePath() );
-        itr.executeGoal( "install" );
+        itr.invoke( "install" );
         itr.verifyErrorFreeLog();
         itr.resetStreams();
 

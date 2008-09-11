@@ -33,7 +33,7 @@ public class MavenITmng3221InfiniteForking
 
             itr.deleteArtifact( "tests", "maven-forking-report-plugin", "1", "jar" );
 
-            itr.executeGoal( "install" );
+            itr.invoke( "install" );
             itr.verifyErrorFreeLog();
             itr.resetStreams();
 
@@ -75,7 +75,7 @@ public class MavenITmng3221InfiniteForking
 
             itr.deleteArtifact( "tests", "maven-forking-test-plugin", "1", "jar" );
 
-            itr.executeGoal( "install" );
+            itr.invoke( "install" );
             itr.verifyErrorFreeLog();
             itr.resetStreams();
 

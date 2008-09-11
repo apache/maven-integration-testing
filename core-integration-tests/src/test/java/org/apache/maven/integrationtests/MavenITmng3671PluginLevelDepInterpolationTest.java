@@ -51,7 +51,7 @@ public class MavenITmng3671PluginLevelDepInterpolationTest
         // file.
         File testDir = extractTestResources( getClass(), "/mng-3671-pluginLevelDepInterpolation" );
         IntegrationTestRunner itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
-        itr.executeGoal( "compile" );
+        itr.invoke( "compile" );
 
         /*
          * This is the simplest way to check a build

@@ -16,7 +16,7 @@ public class MavenIT0025Test
     {
         File testDir = extractTestResources( getClass(), "/it0025" );
         IntegrationTestRunner itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
-        itr.executeGoal( "process-sources" );
+        itr.invoke( "process-sources" );
         itr.assertFilePresent( "target/test.txt" );
         itr.assertFilePresent( "target/test2.txt" );
         itr.verifyErrorFreeLog();

@@ -16,7 +16,7 @@ public class MavenIT0040Test
     {
         File testDir = extractTestResources( getClass(), "/it0040" );
         IntegrationTestRunner itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
-        itr.executeGoal( "package" );
+        itr.invoke( "package" );
         itr.assertFilePresent( "target/maven-it-it0040-1.0-it.jar" );
         itr.verifyErrorFreeLog();
         itr.resetStreams();

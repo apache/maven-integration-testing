@@ -16,7 +16,7 @@ public class MavenIT0027Test
     {
         File testDir = extractTestResources( getClass(), "/it0027" );
         IntegrationTestRunner itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
-        itr.executeGoal( "org.apache.maven.its.plugins:maven-it-plugin-fork:fork, org.apache.maven.its.plugins:maven-it-plugin-fork:fork-goal" );
+        itr.invoke( "org.apache.maven.its.plugins:maven-it-plugin-fork:fork, org.apache.maven.its.plugins:maven-it-plugin-fork:fork-goal" );
         itr.assertFilePresent( "target/forked/touch.txt" );
         itr.assertFilePresent( "target/forked2/touch.txt" );
         itr.verifyErrorFreeLog();

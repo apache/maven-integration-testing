@@ -43,7 +43,7 @@ public class MavenIT0126TestJarDependency
         itr.deleteArtifact( "org.apache.maven.its.it0126", "model", "1.0-SNAPSHOT", "test-jar" );
         
 	/* Not "install" or "higher" goal to repeat the bug */
-        itr.executeGoal( "compile" ); 
+        itr.invoke( "compile" ); 
         	
 	itr.verifyErrorFreeLog();
         itr.resetStreams();

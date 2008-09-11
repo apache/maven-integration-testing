@@ -19,7 +19,7 @@ public class MavenIT0106Test
     {
         File testDir = extractTestResources( getClass(), "/it0106" );
         IntegrationTestRunner itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
-        itr.executeGoal( "clean" );
+        itr.invoke( "clean" );
         itr.verifyErrorFreeLog();
         itr.resetStreams();
 

@@ -19,7 +19,7 @@ public class MavenIT0018Test
         File testDir = extractTestResources( getClass(), "/it0018" );
         IntegrationTestRunner itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
         itr.deleteArtifact( "commons-logging", "commons-logging", "1.0.3", "jar" );
-        itr.executeGoal( "package" );
+        itr.invoke( "package" );
         itr.assertArtifactPresent( "commons-logging", "commons-logging", "1.0.3", "jar" );
         itr.verifyErrorFreeLog();
         itr.resetStreams();

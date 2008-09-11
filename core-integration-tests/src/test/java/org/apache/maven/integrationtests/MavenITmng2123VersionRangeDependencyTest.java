@@ -52,7 +52,7 @@ public class MavenITmng2123VersionRangeDependencyTest
          */
         List cliOptions = new ArrayList();
         cliOptions.add( "-N" );
-        itr.executeGoal( "install" );
+        itr.invoke( "install" );
 
         /*
          * This is the simplest way to check a build
@@ -75,7 +75,7 @@ public class MavenITmng2123VersionRangeDependencyTest
          * Build the artifact with a fix version of commons-collections
          */
         itr = new IntegrationTestRunner( new File( testDir.getAbsolutePath(), "artifact-fix" ).getAbsolutePath() );
-        itr.executeGoal( "install" );
+        itr.invoke( "install" );
         itr.verifyErrorFreeLog();
         itr.resetStreams();
 
@@ -83,7 +83,7 @@ public class MavenITmng2123VersionRangeDependencyTest
          * Build the artifact with a version range of commons-collections
          */
         itr = new IntegrationTestRunner( new File( testDir.getAbsolutePath(), "artifact-range" ).getAbsolutePath() );
-        itr.executeGoal( "install" );
+        itr.invoke( "install" );
         itr.verifyErrorFreeLog();
         itr.resetStreams();
         
@@ -94,7 +94,7 @@ public class MavenITmng2123VersionRangeDependencyTest
          * On any version >= 2.0.9 it should work
          */
         itr = new IntegrationTestRunner( new File( testDir.getAbsolutePath(), "artifact-combined" ).getAbsolutePath() );
-        itr.executeGoal( "install" );
+        itr.invoke( "install" );
         itr.verifyErrorFreeLog();
         itr.resetStreams();
 

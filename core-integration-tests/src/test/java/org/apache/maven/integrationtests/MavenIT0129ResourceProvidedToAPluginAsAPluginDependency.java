@@ -25,7 +25,7 @@ public class MavenIT0129ResourceProvidedToAPluginAsAPluginDependency
         itr.deleteArtifact( "org.apache.maven.its.it0129", "it0129-parent", "1.0", "pom" );
 
         List cliOptions = new ArrayList();
-        itr.executeGoal( "install" );
+        itr.invoke( "install" );
         itr.verifyErrorFreeLog();
         itr.resetStreams();
 
@@ -33,7 +33,7 @@ public class MavenIT0129ResourceProvidedToAPluginAsAPluginDependency
         testDir = extractTestResources( getClass(), "/it0129-resourcesForAPluginProvidedAsAPluginDependency/test-project" );
         itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
         cliOptions = new ArrayList();
-        itr.executeGoal( "verify" );
+        itr.invoke( "verify" );
         itr.verifyErrorFreeLog();
         itr.resetStreams();
 

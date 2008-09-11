@@ -17,7 +17,7 @@ public class MavenIT0079Test
     {
         File testDir = extractTestResources( getClass(), "/it0079" );
         IntegrationTestRunner itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
-        itr.executeGoal( "deploy" );
+        itr.invoke( "deploy" );
         itr.assertFilePresent(
             "target/test-repo/org/apache/maven/its/it0079/maven-it-it0079/SNAPSHOT/maven-it-it0079-*-1.jar" );
         itr.assertFilePresent(

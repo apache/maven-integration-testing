@@ -32,7 +32,7 @@ public class MavenIT0114ExtensionThatProvidesResources
         itr.deleteArtifact( "org.apache.maven.its.it0114", "it0114-parent", "1.0", "pom" );
         
         List cliOptions = new ArrayList();        
-        itr.executeGoal( "install" );
+        itr.invoke( "install" );
         itr.verifyErrorFreeLog();
         itr.resetStreams();
         
@@ -41,7 +41,7 @@ public class MavenIT0114ExtensionThatProvidesResources
             extractTestResources( getClass(), "/it0114-extensionThatProvidesResources/test-project" );
         itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
         cliOptions = new ArrayList();
-        itr.executeGoal( "verify" );
+        itr.invoke( "verify" );
         itr.verifyErrorFreeLog();
         itr.resetStreams();
         

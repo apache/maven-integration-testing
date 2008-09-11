@@ -19,7 +19,7 @@ public class MavenITmng1491ReactorArtifactIdCollision
 
         try
         {
-            itr.executeGoal( "initialize" );
+            itr.invoke( "initialize" );
 
             itr.verifyErrorFreeLog();
 

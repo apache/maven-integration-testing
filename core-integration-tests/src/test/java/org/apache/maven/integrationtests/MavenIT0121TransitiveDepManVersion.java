@@ -45,7 +45,7 @@ public class MavenIT0121TransitiveDepManVersion
         itr.deleteArtifact( "org.apache.maven.its.it0121", "B", "1.0", "jar" );
         itr.deleteArtifact( "org.apache.maven.its.it0121", "C", "1.0", "pom" );
         itr.deleteArtifact( "org.apache.maven.its.it0121", "D", "1.0", "jar" );
-        itr.executeGoal( "install" );
+        itr.invoke( "install" );
         itr.verifyErrorFreeLog();
         itr.resetStreams();
     }
@@ -57,7 +57,7 @@ public class MavenIT0121TransitiveDepManVersion
         IntegrationTestRunner itrOtherDep = new IntegrationTestRunner( testOtherDepDir.getAbsolutePath() );
         itrOtherDep.deleteArtifact( "org.apache.maven.its.it0121", "D", version, "jar" );
         itrOtherDep.deleteArtifact( "org.apache.maven.its.it0121", "D", version, "pom" );
-        itrOtherDep.executeGoal( "install" );
+        itrOtherDep.invoke( "install" );
         itrOtherDep.verifyErrorFreeLog();
         itrOtherDep.resetStreams();
     }

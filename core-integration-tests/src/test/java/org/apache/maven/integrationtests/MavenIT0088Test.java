@@ -16,7 +16,7 @@ public class MavenIT0088Test
     {
         File testDir = extractTestResources( getClass(), "/it0088" );
         IntegrationTestRunner itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
-        itr.executeGoal( "test" );
+        itr.invoke( "test" );
         itr.assertFilePresent( "target/classes/test.properties" );
         itr.assertFilePresent( "target/mojo-generated.properties" );
         itr.verifyErrorFreeLog();

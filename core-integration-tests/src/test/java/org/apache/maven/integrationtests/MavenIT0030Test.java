@@ -21,7 +21,7 @@ public class MavenIT0030Test
         itr.deleteArtifact( "org.apache.maven.it", "maven-it-it0030-child-hierarchy", "1.0-SNAPSHOT", "jar" );
         itr.deleteArtifact( "org.apache.maven.it", "maven-it-it0030-child-project1", "1.0-SNAPSHOT", "jar" );
         itr.deleteArtifact( "org.apache.maven.it", "maven-it-it0030-child-project2", "1.0-SNAPSHOT", "jar" );
-        itr.executeGoal( "install" );
+        itr.invoke( "install" );
         itr.assertFilePresent( "child-hierarchy/project2/target/classes/org/apache/maven/it0001/Person.class" );
         itr.verifyErrorFreeLog();
         itr.resetStreams();

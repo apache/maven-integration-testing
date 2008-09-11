@@ -39,19 +39,19 @@ public class MavenITmng2972OverridePluginDependency
         itr.deleteArtifact( "org.apache.maven.its.mng2972", "dep", "2.0", "jar" );
 
         itr = new IntegrationTestRunner( new File( testDir.getAbsolutePath(), "dep1" ).getAbsolutePath() );
-        itr.executeGoal( "install" );
+        itr.invoke( "install" );
         itr.verifyErrorFreeLog();
 
         itr = new IntegrationTestRunner( new File( testDir.getAbsolutePath(), "dep2" ).getAbsolutePath() );
-        itr.executeGoal( "install" );
+        itr.invoke( "install" );
         itr.verifyErrorFreeLog();
 
         itr = new IntegrationTestRunner( new File( testDir.getAbsolutePath(), "mojo" ).getAbsolutePath() );
-        itr.executeGoal( "install" );
+        itr.invoke( "install" );
         itr.verifyErrorFreeLog();
 
         itr = new IntegrationTestRunner( new File( testDir.getAbsolutePath(), "user" ).getAbsolutePath() );
-        itr.executeGoal( "validate" );
+        itr.invoke( "validate" );
         itr.verifyErrorFreeLog();
 
         List lines =
@@ -78,7 +78,7 @@ public class MavenITmng2972OverridePluginDependency
          */
 
         itr = new IntegrationTestRunner( new File( testDir.getAbsolutePath(), "user" ).getAbsolutePath() );
-        itr.executeGoal( "org.apache.maven.its.mng2972:mojo:0.0.1-SNAPSHOT:test" );
+        itr.invoke( "org.apache.maven.its.mng2972:mojo:0.0.1-SNAPSHOT:test" );
         itr.verifyErrorFreeLog();
 
         lines = itr.loadFile( new File( testDir.getAbsolutePath(), "user" ).getAbsolutePath(), "log.txt", false );

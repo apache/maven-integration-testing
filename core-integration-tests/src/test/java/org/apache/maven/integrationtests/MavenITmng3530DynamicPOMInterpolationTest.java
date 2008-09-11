@@ -56,7 +56,7 @@ public class MavenITmng3530DynamicPOMInterpolationTest
         // configuration. Once this is installed, we can run a project build that
         // uses it to see how Maven will respond to a modification in the project build directory.
         IntegrationTestRunner itr = new IntegrationTestRunner( pluginDir.getAbsolutePath() );
-        itr.executeGoal( "install" );
+        itr.invoke( "install" );
 
         itr.verifyErrorFreeLog();
         itr.resetStreams();
@@ -65,7 +65,7 @@ public class MavenITmng3530DynamicPOMInterpolationTest
         // the update to the project.build.directory, it will fail the build.
         itr = new IntegrationTestRunner( projectDir.getAbsolutePath() );
 
-        itr.executeGoal( "package" );
+        itr.invoke( "package" );
         itr.verifyErrorFreeLog();
         itr.resetStreams();
     }
@@ -83,7 +83,7 @@ public class MavenITmng3530DynamicPOMInterpolationTest
         // configuration. Once this is installed, we can run a project build that
         // uses it to see how Maven will respond to a modification in the POM property.
         IntegrationTestRunner itr = new IntegrationTestRunner( pluginDir.getAbsolutePath() );
-        itr.executeGoal( "install" );
+        itr.invoke( "install" );
 
         itr.verifyErrorFreeLog();
         itr.resetStreams();
@@ -92,7 +92,7 @@ public class MavenITmng3530DynamicPOMInterpolationTest
         // the update to the myDirectory, it will fail the build.
         itr = new IntegrationTestRunner( projectDir.getAbsolutePath() );
 
-        itr.executeGoal( "package" );
+        itr.invoke( "package" );
         itr.verifyErrorFreeLog();
         itr.resetStreams();
     }
@@ -108,7 +108,7 @@ public class MavenITmng3530DynamicPOMInterpolationTest
         // First, install the plugin which validates that all resource directory
         // specifications have been interpolated.
         IntegrationTestRunner itr = new IntegrationTestRunner( pluginDir.getAbsolutePath() );
-        itr.executeGoal( "install" );
+        itr.invoke( "install" );
 
         itr.verifyErrorFreeLog();
         itr.resetStreams();
@@ -117,7 +117,7 @@ public class MavenITmng3530DynamicPOMInterpolationTest
         // directory, it will fail the build.
         itr = new IntegrationTestRunner( projectDir.getAbsolutePath() );
 
-        itr.executeGoal( "package" );
+        itr.invoke( "package" );
         itr.verifyErrorFreeLog();
         itr.resetStreams();
     }

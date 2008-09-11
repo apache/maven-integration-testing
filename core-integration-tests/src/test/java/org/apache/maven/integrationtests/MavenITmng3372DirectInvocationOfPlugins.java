@@ -4,8 +4,6 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import junit.framework.TestCase;
-
 import org.apache.maven.it.IntegrationTestRunner;
 
 /**
@@ -37,7 +35,7 @@ public class MavenITmng3372DirectInvocationOfPlugins
 
         IntegrationTestRunner itr = new IntegrationTestRunner( plugin.getAbsolutePath() );
         itr.deleteArtifact( "org.apache.maven.its.mng3372", "mng3372-maven-plugin", "1", "jar" );
-        itr.executeGoal( "clean, install" );
+        itr.invoke( "clean, install" );
         itr = new IntegrationTestRunner( project.getAbsolutePath() );
 
         List cliOptions = new ArrayList();

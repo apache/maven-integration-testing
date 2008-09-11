@@ -17,19 +17,19 @@ public class MavenIT0124PomExtensionComponentOverrideTest
     {
         File testDir = extractTestResources( getClass(), "/it0124-pomExtensionComponentOverride/extension" );
         IntegrationTestRunner itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
-        itr.executeGoal( "install" );
+        itr.invoke( "install" );
         itr.verifyErrorFreeLog();
         itr.resetStreams();
 
         testDir = extractTestResources( getClass(), "/it0124-pomExtensionComponentOverride/plugin" );
         itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
-        itr.executeGoal( "install" );
+        itr.invoke( "install" );
         itr.verifyErrorFreeLog();
         itr.resetStreams();
 
         testDir = extractTestResources( getClass(), "/it0124-pomExtensionComponentOverride/project" );
         itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
-        itr.executeGoal( "verify" );
+        itr.invoke( "verify" );
         itr.verifyErrorFreeLog();
         itr.resetStreams();
     }

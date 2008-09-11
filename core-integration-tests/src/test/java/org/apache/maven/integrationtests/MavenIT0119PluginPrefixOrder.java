@@ -18,7 +18,7 @@ public class MavenIT0119PluginPrefixOrder
         // Install the parent POM, extension and the plugin
         itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
 
-        itr.executeGoal( "install" );
+        itr.invoke( "install" );
         itr.verifyErrorFreeLog();
         itr.resetStreams();
         
@@ -26,7 +26,7 @@ public class MavenIT0119PluginPrefixOrder
         // now run the test. Since we have apache and codehaus, i should get the apache one first
         testDir = extractTestResources( getClass(), "/it0119-pluginprefixorder/test-project" );
         itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
-        itr.executeGoal( "it0119:apache" );
+        itr.invoke( "it0119:apache" );
         itr.verifyErrorFreeLog();
 
         

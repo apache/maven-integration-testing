@@ -18,7 +18,7 @@ public class MavenIT0099Test
         File testDir = extractTestResources( getClass(), "/it0099" );
         IntegrationTestRunner itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
         itr.deleteArtifact( "org.apache.maven.it0099", "maven-it-it0099-parent", "1", "pom" );
-        itr.executeGoal( "package" );
+        itr.invoke( "package" );
         itr.verifyErrorFreeLog();
         itr.resetStreams();
 

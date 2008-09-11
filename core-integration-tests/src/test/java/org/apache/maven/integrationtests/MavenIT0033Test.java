@@ -16,7 +16,7 @@ public class MavenIT0033Test
     {
         File testDir = extractTestResources( getClass(), "/it0033" );
         IntegrationTestRunner itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
-        itr.executeGoal( "package" );
+        itr.invoke( "package" );
         itr.assertFilePresent( "target/maven-it-it0033-1.0.ear" );
         itr.assertFilePresent( "target/maven-it-it0033-1.0.ear!/META-INF/application.xml" );
         itr.assertFilePresent( "target/maven-it-it0033-1.0.ear!/META-INF/appserver-application.xml" );

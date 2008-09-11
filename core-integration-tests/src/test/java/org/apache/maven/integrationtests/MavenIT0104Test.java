@@ -16,7 +16,7 @@ public class MavenIT0104Test
     {
         File testDir = extractTestResources( getClass(), "/it0104" );
         IntegrationTestRunner itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
-        itr.executeGoal( "test" );
+        itr.invoke( "test" );
         itr.verifyErrorFreeLog();
         itr.resetStreams();
 

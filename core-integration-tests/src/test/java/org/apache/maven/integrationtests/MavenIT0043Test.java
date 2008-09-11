@@ -21,14 +21,14 @@ public class MavenIT0043Test
 
         itr.deleteArtifact( "org.apache.maven.plugins", "maven-help-plugin", "2.0.2", "jar" );
 
-        itr.executeGoal( "org.apache.maven.plugins:maven-help-plugin:2.0.2:effective-pom" );
+        itr.invoke( "org.apache.maven.plugins:maven-help-plugin:2.0.2:effective-pom" );
         itr.verifyErrorFreeLog();
         itr.resetStreams();
 
         File child2 = new File( testDir, "child2" );
         itr = new IntegrationTestRunner( child2.getAbsolutePath() );
 
-        itr.executeGoal( "org.apache.maven.plugins:maven-help-plugin:2.0.2:effective-pom" );
+        itr.invoke( "org.apache.maven.plugins:maven-help-plugin:2.0.2:effective-pom" );
         itr.verifyErrorFreeLog();
         itr.resetStreams();
 

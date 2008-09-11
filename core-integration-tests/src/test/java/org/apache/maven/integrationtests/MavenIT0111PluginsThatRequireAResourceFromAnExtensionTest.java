@@ -31,19 +31,19 @@ public class MavenIT0111PluginsThatRequireAResourceFromAnExtensionTest
         itr.deleteArtifact( "org.apache.maven.its.it0111", "checkstyle-assembly", "1.0", "jar" );
         List cliOptions = new ArrayList();
         cliOptions.add( "-N" );
-        itr.executeGoal( "install" );
+        itr.invoke( "install" );
         itr.verifyErrorFreeLog();
         itr.resetStreams();
 
         // Install the extension with the resources required for the test
         itr = new IntegrationTestRunner( new File( testDir.getAbsolutePath(), "checkstyle-assembly" ).getAbsolutePath() );
-        itr.executeGoal( "install" );
+        itr.invoke( "install" );
         itr.verifyErrorFreeLog();
         itr.resetStreams();
 
         // Run the whole test
         itr = new IntegrationTestRunner( new File( testDir.getAbsolutePath(), "checkstyle-test" ).getAbsolutePath() );
-        itr.executeGoal( "install" );
+        itr.invoke( "install" );
         itr.verifyErrorFreeLog();
         itr.resetStreams();
     }

@@ -16,7 +16,7 @@ public class MavenIT0084Test
     {
         File testDir = extractTestResources( getClass(), "/it0084" );
         IntegrationTestRunner itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
-        itr.executeGoal( "package" );
+        itr.invoke( "package" );
         itr.assertFilePresent( "test-component-a/target/test-component-a-0.1.jar" );
         itr.assertFilePresent( "test-component-b/target/test-component-b-0.1.jar" );
         itr.assertFilePresent( "test-component-c/target/test-component-c-0.1.war" );

@@ -30,7 +30,7 @@ public class MavenITmng3331ModulePathNormalization
 
         itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
 
-        itr.executeGoal( "initialize" );
+        itr.invoke( "initialize" );
 
         /*
          * This is the simplest way to check a build
@@ -60,7 +60,7 @@ public class MavenITmng3331ModulePathNormalization
 
         itr = new IntegrationTestRunner( new File( testDir, "parent" ).getAbsolutePath() );
 
-        itr.executeGoal( "initialize" );
+        itr.invoke( "initialize" );
 
         /*
          * This is the simplest way to check a build

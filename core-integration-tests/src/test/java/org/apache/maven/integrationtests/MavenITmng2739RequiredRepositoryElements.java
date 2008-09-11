@@ -56,7 +56,7 @@ public class MavenITmng2739RequiredRepositoryElements
 
         try
         {
-            itr.executeGoal( "validate" );
+            itr.invoke( "validate" );
 
             fail( "POM should NOT validate: repository <id/> element is missing in: "
                   + new File( testDir, "pom.xml" ) );
@@ -95,7 +95,7 @@ public class MavenITmng2739RequiredRepositoryElements
 
         try
         {
-            itr.executeGoal( "validate" );
+            itr.invoke( "validate" );
 
             fail( "POM should NOT validate: repository <url/> element is missing in: "
                   + new File( testDir, "pom.xml" ) );

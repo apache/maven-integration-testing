@@ -26,7 +26,7 @@ public class MavenITmng3220ImportScopeTest
         File dmDir = new File( testDir, "dm-pom" );
         IntegrationTestRunner itr = new IntegrationTestRunner( dmDir.getAbsolutePath() );
 
-        itr.executeGoal( "install" );
+        itr.invoke( "install" );
 
         itr.verifyErrorFreeLog();
         itr.resetStreams();
@@ -34,7 +34,7 @@ public class MavenITmng3220ImportScopeTest
         File projectDir = new File( testDir, "project" );
         itr = new IntegrationTestRunner( projectDir.getAbsolutePath() );
 
-        itr.executeGoal( "package" );
+        itr.invoke( "package" );
         itr.verifyErrorFreeLog();
         itr.resetStreams();
     }
@@ -49,7 +49,7 @@ public class MavenITmng3220ImportScopeTest
 
         try
         {
-            itr.executeGoal( "install" );
+            itr.invoke( "install" );
             fail( "Should fail to build with missing junit version." );
         }
         catch ( IntegrationTestException e )

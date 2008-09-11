@@ -16,7 +16,7 @@ public class MavenIT0050Test
     {
         File testDir = extractTestResources( getClass(), "/it0050" );
         IntegrationTestRunner itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
-        itr.executeGoal( "package" );
+        itr.invoke( "package" );
         itr.assertFilePresent( "target/testTouchFile.txt" );
         itr.assertFilePresent( "target/defaultTestTouchFile.txt" );
         itr.verifyErrorFreeLog();

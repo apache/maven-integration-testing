@@ -57,7 +57,7 @@ public class MavenITmng2339BadProjectInterpolationTest
 
         itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
 
-        itr.executeGoal( "initialize" );
+        itr.invoke( "initialize" );
 
         assertTrue( "Touchfile using ${project.version} for ${version} does not exist.",
                     new File( testDir, "target/touch-1.txt" ).exists() );

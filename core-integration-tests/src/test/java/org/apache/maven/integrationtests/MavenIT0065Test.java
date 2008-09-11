@@ -17,7 +17,7 @@ public class MavenIT0065Test
         File testDir = extractTestResources( getClass(), "/it0065" );
         IntegrationTestRunner itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
         itr.deleteArtifact( "org.apache.maven.its.it0065", "plugin", "1.0", "maven-plugin" );
-        itr.executeGoal( "install" );
+        itr.invoke( "install" );
         itr.assertFilePresent( "subproject/target/child-basedir" );
         itr.assertFilePresent( "parent-basedir" );
         itr.verifyErrorFreeLog();

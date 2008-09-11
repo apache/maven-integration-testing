@@ -40,7 +40,7 @@ public class MavenITmng3473PluginReportCrash
         logFile.renameTo( new File( testDir, "log-2.4.1-preinstall.txt" ) );
 
         //should succeed with 2.4.1
-        itr.executeGoal( "org.apache.maven.plugins:maven-help-plugin:2.0.2:effective-pom, site" );
+        itr.invoke( "org.apache.maven.plugins:maven-help-plugin:2.0.2:effective-pom, site" );
 
         // NOTE: Velocity prints an [ERROR] line pertaining to an incorrect macro usage when run in 2.1, so this doesn't work.
 //        itr.verifyErrorFreeLog();

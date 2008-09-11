@@ -14,7 +14,7 @@ public class MavenIT0110PluginDependenciesComeFromPluginReposTest
             extractTestResources( getClass(), "/it0110-pluginDependenciesComeFromPluginRepos" );
         IntegrationTestRunner itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
         itr.deleteArtifact( "org.apache.maven.it", "mail", "1.3.2", "jar" );        
-        itr.executeGoal( "clean" );
+        itr.invoke( "clean" );
         itr.verifyErrorFreeLog();
         itr.resetStreams();
 

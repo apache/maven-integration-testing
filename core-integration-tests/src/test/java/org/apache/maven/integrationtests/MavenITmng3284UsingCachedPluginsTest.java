@@ -35,7 +35,7 @@ public class MavenITmng3284UsingCachedPluginsTest
          * Build Mojo v1
          */
         itr = new IntegrationTestRunner( new File( testDir.getAbsolutePath(), "mojo" ).getAbsolutePath() );
-        itr.executeGoal( "install" );
+        itr.invoke( "install" );
         itr.verifyErrorFreeLog();
         itr.resetStreams();
 
@@ -43,7 +43,7 @@ public class MavenITmng3284UsingCachedPluginsTest
          * Build Mojo v2
          */
         itr = new IntegrationTestRunner( new File( testDir.getAbsolutePath(), "mojo2" ).getAbsolutePath() );
-        itr.executeGoal( "install" );
+        itr.invoke( "install" );
         itr.verifyErrorFreeLog();
         itr.resetStreams();
 
@@ -51,7 +51,7 @@ public class MavenITmng3284UsingCachedPluginsTest
          * Run the simple build
          */
         itr = new IntegrationTestRunner( testDir.getAbsolutePath() );
-        itr.executeGoal( "install" );
+        itr.invoke( "install" );
         itr.verifyErrorFreeLog();
 
         List lines = itr.loadFile( testDir.getAbsolutePath(), "log.txt", false );

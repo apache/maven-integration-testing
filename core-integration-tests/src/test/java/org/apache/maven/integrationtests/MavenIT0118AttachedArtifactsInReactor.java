@@ -15,7 +15,7 @@ public class MavenIT0118AttachedArtifactsInReactor
         itr.deleteArtifact( "org.apache.maven.its.it0118", "parent", "1.0", "pom" );
         itr.deleteArtifact( "org.apache.maven.its.it0118", "one", "1.0", "jar" );
         itr.deleteArtifact( "org.apache.maven.its.it0118", "two", "1.0", "pom" );
-        itr.executeGoal( "package" );
+        itr.invoke( "package" );
         itr.verifyErrorFreeLog();
         itr.resetStreams();
     }

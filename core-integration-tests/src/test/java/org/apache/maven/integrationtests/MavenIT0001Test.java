@@ -1,7 +1,5 @@
 package org.apache.maven.integrationtests;
 
-import java.io.File;
-
 import org.apache.maven.it.IntegrationTestRunner;
 
 public class MavenIT0001Test
@@ -16,7 +14,7 @@ public class MavenIT0001Test
         throws Exception
     {
         IntegrationTestRunner itr = createTestRunner();
-        itr.invoke( createInvocationRequest( "package" ) );        
+        itr.invoke( "package" );        
         itr.assertFilePresent( "target/classes/org/apache/maven/it0001/Person.class" );
         itr.assertFilePresent( "target/test-classes/org/apache/maven/it0001/PersonTest.class" );
         itr.assertFilePresent( "target/maven-it-it0001-1.0.jar" );

@@ -68,7 +68,7 @@ public class MavenITmng3642DynamicResourcesTest
          * recurse. We are only installing the parent pom to
          * the local repo here.
          */
-        itr.executeGoal( "process-test-resources" );
+        itr.invoke( "process-test-resources" );
 
         /*
          * This is the simplest way to check a build

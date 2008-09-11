@@ -40,13 +40,13 @@ public class MavenIT0112ExtensionsThatDragDependencies
 
         // Install the extension with the resources required for the test
         itr = new IntegrationTestRunner( new File( testDir.getAbsolutePath(), "test-extension" ).getAbsolutePath() );
-        itr.executeGoal( "install" );
+        itr.invoke( "install" );
         itr.verifyErrorFreeLog();
         itr.resetStreams();
 
         // Run the whole test
         itr = new IntegrationTestRunner( new File( testDir.getAbsolutePath(), "test-project" ).getAbsolutePath() );
-        itr.executeGoal( "org.apache.maven.plugins:maven-project-info-reports-plugin:2.0.1:scm" );
+        itr.invoke( "org.apache.maven.plugins:maven-project-info-reports-plugin:2.0.1:scm" );
         // ommitted because we always get velocity errors that aren't covered by the itr
 //        itr.verifyErrorFreeLog();
         itr.resetStreams();

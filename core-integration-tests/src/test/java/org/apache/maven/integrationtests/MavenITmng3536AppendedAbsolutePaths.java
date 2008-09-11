@@ -19,7 +19,7 @@ public class MavenITmng3536AppendedAbsolutePaths extends AbstractMavenIntegratio
         File pluginDir = new File( testDir, "plugin" );
         IntegrationTestRunner itr = new IntegrationTestRunner( pluginDir.getAbsolutePath() );
 
-        itr.executeGoal( "install" );
+        itr.invoke( "install" );
 
         itr.verifyErrorFreeLog();
         itr.resetStreams();
@@ -27,7 +27,7 @@ public class MavenITmng3536AppendedAbsolutePaths extends AbstractMavenIntegratio
         File projectDir = new File( testDir, "project" );
         itr = new IntegrationTestRunner( projectDir.getAbsolutePath() );
 
-        itr.executeGoal( "verify" );
+        itr.invoke( "verify" );
         itr.verifyErrorFreeLog();
         itr.resetStreams();
     }

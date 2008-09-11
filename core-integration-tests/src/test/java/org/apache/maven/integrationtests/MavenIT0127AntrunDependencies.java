@@ -39,7 +39,7 @@ public class MavenIT0127AntrunDependencies
         itr.deleteArtifact( "org.apache.maven.its.it0127", "parent", "1.0-SNAPSHOT", "pom" );
         itr.deleteArtifact( "org.apache.maven.its.it0127", "a", "1.0-SNAPSHOT", "jar" );
         itr.deleteArtifact( "org.apache.maven.its.it0127", "b",  "1.0-SNAPSHOT", "jar" );
-        itr.executeGoal( "compile" ); 
+        itr.invoke( "compile" ); 
         itr.verifyErrorFreeLog();
         itr.resetStreams();
     }

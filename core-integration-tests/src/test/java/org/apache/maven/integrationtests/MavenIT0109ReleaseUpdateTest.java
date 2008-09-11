@@ -69,7 +69,7 @@ public class MavenIT0109ReleaseUpdateTest
         itr.assertArtifactNotPresent( GROUPID, ARTIFACTID, OLD_VERSION, TYPE );
         itr.assertArtifactNotPresent( GROUPID, ARTIFACTID, NEW_VERSION, TYPE );
 
-        itr.executeGoal( "package" );
+        itr.invoke( "package" );
 
         itr.assertArtifactNotPresent( GROUPID, ARTIFACTID, OLD_VERSION, TYPE );
         itr.assertArtifactPresent( GROUPID, ARTIFACTID, NEW_VERSION, TYPE );

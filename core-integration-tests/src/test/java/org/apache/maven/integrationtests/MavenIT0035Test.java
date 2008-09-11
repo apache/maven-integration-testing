@@ -19,7 +19,7 @@ public class MavenIT0035Test
         itr.deleteArtifact( "org.apache.maven", "maven-core-it-support", "1.1", "jar" );
         itr.deleteArtifact( "org.apache.maven", "maven-core-it-support", "1.1", "pom" );
         itr.deleteArtifact( "org.apache.maven", "maven-core-it-support-old-location", "1.1", "pom" );
-        itr.executeGoal( "package" );
+        itr.invoke( "package" );
         itr.assertArtifactPresent( "org.apache.maven", "maven-core-it-support", "1.1", "jar" );
         itr.assertArtifactPresent( "org.apache.maven", "maven-core-it-support", "1.1", "pom" );
         itr.assertArtifactPresent( "org.apache.maven", "maven-core-it-support-old-location", "1.1", "pom" );

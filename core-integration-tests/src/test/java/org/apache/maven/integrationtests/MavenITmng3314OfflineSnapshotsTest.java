@@ -81,7 +81,7 @@ public class MavenITmng3314OfflineSnapshotsTest
         IntegrationTestRunner itr = new IntegrationTestRunner( testDep.getAbsolutePath() );
 
         // Deploy the dependency to the test repository.
-        itr.executeGoal( "deploy" );
+        itr.invoke( "deploy" );
 
         itr.verifyErrorFreeLog();
         itr.resetStreams();
@@ -134,7 +134,7 @@ public class MavenITmng3314OfflineSnapshotsTest
         // Expected outcome: build success
         try
         {
-            itr.executeGoal( "compile" );
+            itr.invoke( "compile" );
         }
         finally
         {

@@ -29,11 +29,32 @@ public class MavenITmng2199ParentVersionRangeTest
         super( "[3.2.2,)" );
     }
 
-    public void testValidParentVersionRange()
+    public void testValidParentVersionRangeWithInclusiveUpperBound()
         throws Exception
     {
         Verifier verifier = null;
-        File testDir = ResourceExtractor.simpleExtractResources( getClass(), "/mng-2199/valid" );
+        File testDir = ResourceExtractor.simpleExtractResources( getClass(), "/mng-2199-parent-version-range/valid-inclusive-upper-bound" );
+
+        try
+        {
+            verifier = newVerifier( testDir.getAbsolutePath(), "remote" );
+            verifier.addCliOption( "-U" );
+            verifier.setAutoclean( false );
+
+            verifier.executeGoal( "verify" );
+            verifier.verifyErrorFreeLog();
+        }
+        finally
+        {
+            verifier.resetStreams();
+        }
+    }
+
+    public void testValidParentVersionRangeWithExclusiveUpperBound()
+        throws Exception
+    {
+        Verifier verifier = null;
+        File testDir = ResourceExtractor.simpleExtractResources( getClass(), "/mng-2199-parent-version-range/valid-exclusive-upper-bound" );
 
         try
         {
@@ -54,7 +75,7 @@ public class MavenITmng2199ParentVersionRangeTest
         throws Exception
     {
         Verifier verifier = null;
-        File testDir = ResourceExtractor.simpleExtractResources( getClass(), "/mng-2199/invalid" );
+        File testDir = ResourceExtractor.simpleExtractResources( getClass(), "/mng-2199-parent-version-range/invalid" );
 
         try
         {
@@ -80,7 +101,8 @@ public class MavenITmng2199ParentVersionRangeTest
         throws Exception
     {
         Verifier verifier = null;
-        File testDir = ResourceExtractor.simpleExtractResources( getClass(), "/mng-2199/expression" );
+        File testDir =
+            ResourceExtractor.simpleExtractResources( getClass(), "/mng-2199-parent-version-range/expression" );
 
         try
         {
@@ -93,8 +115,9 @@ public class MavenITmng2199ParentVersionRangeTest
         catch ( final VerificationException e )
         {
             final List<String> lines = verifier.loadFile( new File( testDir, "log.txt" ), false );
-            int msg = indexOf( lines,
-                               ".*Version must be a constant @ org.apache.maven.its.mng2199:expression:\\$\\{project.parent.version\\}.*" );
+            int msg =
+                indexOf( lines,
+                         ".*Version must be a constant @ org.apache.maven.its.mng2199:expression:\\$\\{project.parent.version\\}.*" );
 
             assertTrue( "Expected error message not found.", msg >= 0 );
         }
@@ -108,7 +131,8 @@ public class MavenITmng2199ParentVersionRangeTest
         throws Exception
     {
         Verifier verifier = null;
-        File testDir = ResourceExtractor.simpleExtractResources( getClass(), "/mng-2199/inherited" );
+        File testDir =
+            ResourceExtractor.simpleExtractResources( getClass(), "/mng-2199-parent-version-range/inherited" );
 
         try
         {
@@ -121,8 +145,9 @@ public class MavenITmng2199ParentVersionRangeTest
         catch ( final VerificationException e )
         {
             final List<String> lines = verifier.loadFile( new File( testDir, "log.txt" ), false );
-            int msg = indexOf( lines,
-                               ".*Version must be a constant @ org.apache.maven.its.mng2199:inherited:\\[unknown-version\\].*" );
+            int msg =
+                indexOf( lines,
+                         ".*Version must be a constant @ org.apache.maven.its.mng2199:inherited:\\[unknown-version\\].*" );
 
             assertTrue( "Expected error message not found.", msg >= 0 );
         }
@@ -146,5 +171,4 @@ public class MavenITmng2199ParentVersionRangeTest
 
         return -1;
     }
-
 }

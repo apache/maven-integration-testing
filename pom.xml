@@ -41,6 +41,9 @@ under the License.
     <contributor>
       <name>Mark Ingram</name>
     </contributor>  
+    <contributor>
+      <name>Christian Schulte (MNG-2199)</name>
+    </contributor>    
   </contributors>
 
   <scm>

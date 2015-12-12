@@ -43,6 +43,9 @@ public class MavenITmng2199ParentVersionRangeTest
 
             verifier.executeGoal( "verify" );
             verifier.verifyErrorFreeLog();
+
+            final List<String> lines = verifier.loadFile( new File( testDir, "log.txt" ), false );
+            assertFalse( "Unxpected error message found.", indexOf( lines, ".*Failed to build parent project.*" ) >= 0 );
         }
         finally
         {
@@ -64,6 +67,9 @@ public class MavenITmng2199ParentVersionRangeTest
 
             verifier.executeGoal( "verify" );
             verifier.verifyErrorFreeLog();
+
+            final List<String> lines = verifier.loadFile( new File( testDir, "log.txt" ), false );
+            assertFalse( "Unxpected error message found.", indexOf( lines, ".*Failed to build parent project.*" ) >= 0 );
         }
         finally
         {

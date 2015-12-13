@@ -9,5 +9,5 @@
   </parent>
 
   <artifactId>local-parent-module</artifactId>
-
+  <version>1</version>
 </project>

@@ -62,7 +62,8 @@ public class MavenITmng5581LifecycleMappingDelegate
         verifier.verifyErrorFreeLog();
 
         // run custom "test-only" build phase
-        verifier.executeGoal( "test-only" );
+        // See MNG-5359 for why the default lifecycle needs to be run as well.
+        verifier.executeGoal( "validate test-only" );
         verifier.resetStreams();
         verifier.verifyErrorFreeLog();
         verifier.verifyTextInLog( "maven-surefire-plugin" );

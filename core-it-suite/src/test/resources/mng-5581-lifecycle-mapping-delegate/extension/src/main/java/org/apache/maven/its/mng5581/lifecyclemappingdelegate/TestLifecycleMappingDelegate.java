@@ -12,10 +12,12 @@ package org.apache.maven.its.mng5581.lifecyclemappingdelegate;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import java.util.Set;
 import javax.inject.Named;
 
 import org.apache.maven.execution.MavenSession;
@@ -33,6 +35,15 @@ import org.apache.maven.project.MavenProject;
 
 @Named("test-only")
 public class TestLifecycleMappingDelegate implements LifecycleMappingDelegate {
+
+//    @Override
+    public Set<String> getRequiredLifecycles()
+    {
+        // This delegate requires the default lifecycle to operate.
+        final Set<String> requiredLifecycles = new HashSet<String>();
+        requiredLifecycles.add( "default" );
+        return Collections.unmodifiableSet( requiredLifecycles );
+    }
 
     public Map<String, List<MojoExecution>> calculateLifecycleMappings(MavenSession session, MavenProject project,
             Lifecycle lifecycle, String lifecyclePhase) throws PluginNotFoundException, PluginResolutionException,

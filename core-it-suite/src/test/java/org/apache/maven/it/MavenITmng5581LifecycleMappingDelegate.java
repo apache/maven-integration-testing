@@ -20,7 +20,6 @@ package org.apache.maven.it;
  */
 
 import java.io.File;
-import java.util.Arrays;
 import java.util.List;
 
 import org.apache.maven.it.util.ResourceExtractor;
@@ -63,8 +62,7 @@ public class MavenITmng5581LifecycleMappingDelegate
         verifier.verifyErrorFreeLog();
 
         // run custom "test-only" build phase
-        // See MNG-5359 for why the default lifecycle needs to be run as well.
-        verifier.executeGoals( Arrays.asList( "validate", "test-only" ) );
+        verifier.executeGoal( "test-only" );
         verifier.resetStreams();
         verifier.verifyErrorFreeLog();
         verifier.verifyTextInLog( "maven-surefire-plugin" );

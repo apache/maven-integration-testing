@@ -28,6 +28,7 @@ under the License.
   <version>0.1</version>
 
   <properties>
+    <!-- Upgrade to 3.4 when released. -->
     <maven.version>3.2.1</maven.version>
   </properties>
 

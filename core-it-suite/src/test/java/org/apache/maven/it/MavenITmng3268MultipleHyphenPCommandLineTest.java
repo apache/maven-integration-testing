@@ -33,7 +33,7 @@ public class MavenITmng3268MultipleHyphenPCommandLineTest
     extends AbstractMavenIntegrationTestCase
 {
 
-    public MavenITmng3268MultipleDashPCommandLineTest()
+    public MavenITmng3268MultipleHyphenPCommandLineTest()
     {
         super( "(2.0.9,)" );
     }

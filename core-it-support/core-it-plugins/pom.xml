@@ -81,6 +81,7 @@ under the License.
     <module>mng5805-extension</module>
     <module>mng5805-plugin</module>
     <module>mng5805-plugin-dep</module>
+    <module>mng5958-extension</module>
   </modules>
 
   <scm>

@@ -35,7 +35,8 @@ public class MavenITmng5359CleanPluginExecutionDeclarationInPluginMgmtTest
     public MavenITmng5359CleanPluginExecutionDeclarationInPluginMgmtTest()
     {
         // Might work with versions before 2.0.11, but not verified
-        super( "[2.0.11,3.0-alpha-1),[3.4,)" );
+//        super( "[2.0.11,3.0-alpha-1),[3.4,)" );
+        super( "[2.0.11,3.0-alpha-1)" );
     }
 
     public void testit()

@@ -46,7 +46,7 @@ public class MavenITmng5663NestedImportScopePomResolutionTest
     {
         File testDir = ResourceExtractor.simpleExtractResources( getClass(), "/mng-5663-nested-import-scope-pom-resolution");
 
-        Verifier verifier = newVerifier( testDir.getAbsolutePath() );
+        Verifier verifier = newVerifier( testDir.getAbsolutePath(), "remote" );
         verifier.deleteArtifacts( "org.apache.maven.its.mng5663" );
 
         verifier.filterFile( "pom-template.xml", "pom.xml", "UTF-8", verifier.newDefaultFilterProperties() );

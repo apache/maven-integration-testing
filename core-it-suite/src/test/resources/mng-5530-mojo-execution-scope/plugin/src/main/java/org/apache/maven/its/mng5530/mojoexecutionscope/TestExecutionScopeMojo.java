@@ -24,12 +24,18 @@ import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 
 /**
+ * Test mojo.
+ *
  * @goal test-execution-scope
  */
 public class TestExecutionScopeMojo
     extends AbstractMojo
 {
-    /** @component */
+    /**
+     * Test component.
+     *
+     * @component
+     */
     private TestExecutionScopedComponent executionScopedComponent;
 
     public void execute()

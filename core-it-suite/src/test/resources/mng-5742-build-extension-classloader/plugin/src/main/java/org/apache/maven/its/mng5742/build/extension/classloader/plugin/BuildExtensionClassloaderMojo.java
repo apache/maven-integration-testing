@@ -33,7 +33,11 @@ import org.apache.maven.plugin.MojoFailureException;
 public class BuildExtensionClassloaderMojo
     extends AbstractMojo
 {
-    /** @component */
+    /**
+     * Test component.
+     *
+     * @component
+     */
     private BuildExtensionClassloaderComponent component;
 
     /**

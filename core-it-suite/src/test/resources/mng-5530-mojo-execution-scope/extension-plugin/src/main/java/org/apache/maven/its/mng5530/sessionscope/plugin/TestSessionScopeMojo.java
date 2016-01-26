@@ -32,7 +32,11 @@ import org.apache.maven.plugin.MojoFailureException;
 public class TestSessionScopeMojo
     extends AbstractMojo
 {
-    /** @component */
+    /**
+     * Test component.
+     *
+     * @component
+     */
     private TestMojoExecutionScopedComponent component;
 
     public void execute()

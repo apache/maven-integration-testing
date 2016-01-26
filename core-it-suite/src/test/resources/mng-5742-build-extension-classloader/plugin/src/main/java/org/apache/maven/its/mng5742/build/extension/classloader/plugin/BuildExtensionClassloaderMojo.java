@@ -26,6 +26,8 @@ import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 
 /**
+ * Test mojo.
+ *
  * @goal test
  */
 public class BuildExtensionClassloaderMojo
@@ -34,7 +36,11 @@ public class BuildExtensionClassloaderMojo
     /** @component */
     private BuildExtensionClassloaderComponent component;
 
-    /** @parameter default-value="${project.basedir}" */
+    /**
+     * The project basedir.
+     *
+     * @parameter default-value="${project.basedir}"
+     */
     private File basedir;
 
     public void execute()

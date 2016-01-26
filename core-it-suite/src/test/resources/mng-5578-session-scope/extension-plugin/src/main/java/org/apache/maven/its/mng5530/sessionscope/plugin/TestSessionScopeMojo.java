@@ -25,12 +25,18 @@ import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.project.MavenProject;
 
 /**
+ * Test mojo.
+ *
  * @goal test-session-scope
  */
 public class TestSessionScopeMojo
     extends AbstractMojo
 {
-    /** @parameter expression="${project}" */
+    /**
+     * The Maven project.
+     *
+     * @parameter expression="${project}"
+     */
     private MavenProject project;
 
     public void execute()

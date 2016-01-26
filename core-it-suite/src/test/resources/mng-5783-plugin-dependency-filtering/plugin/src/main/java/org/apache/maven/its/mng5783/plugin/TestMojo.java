@@ -31,15 +31,25 @@ import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 
 /**
+ * Test mojo.
+ *
  * @goal test
  */
 public class TestMojo
     extends AbstractMojo
 {
-    /** @parameter property="project.build.directory" */
+    /**
+     * The build directory of the project.
+     *
+     * @parameter property="project.build.directory"
+     */
     private File outputDirectory;
 
-    /** @parameter property="plugin.artifacts" */
+    /**
+     * The plugin artifacts.
+     *
+     * @parameter property="plugin.artifacts"
+     */
     private List<Artifact> artifacts;
 
     public void execute()

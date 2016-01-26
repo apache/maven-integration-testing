@@ -30,16 +30,26 @@ import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.project.MavenProject;
 
 /**
+ * Test mojo.
+ *
  * @goal test
  * @configurator test
  */
 public class TestMojo
     extends AbstractMojo
 {
-    /** @parameter expression="${project}" */
+    /**
+     * The Maven project.
+     *
+     * @parameter expression="${project}"
+     */
     private MavenProject project;
     
-    /** @parameter */
+    /**
+     * The name to write.
+     *
+     * @parameter
+     */
     private String name;
     
     public void execute()

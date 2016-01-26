@@ -136,6 +136,12 @@ under the License.
       <version>${itPluginVersion}</version>
       <scope>runtime</scope>
     </dependency>
+    <dependency>
+      <groupId>org.apache.maven.its.plugins</groupId>
+      <artifactId>mng-5958-pkg-type-extension</artifactId>
+      <version>${itPluginVersion}</version>
+      <scope>runtime</scope>
+    </dependency>
 
     <dependency>
       <groupId>org.apache.maven.its.plugins</groupId>

@@ -19,7 +19,6 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
@@ -37,7 +36,10 @@ public class MavenITmng4600DependencyOptionalFlagManagementTest
 
     public MavenITmng4600DependencyOptionalFlagManagementTest()
     {
-        super( "[2.0.3,3.0-alpha-1),[3.0-beta-1,)" );
+        // MNG-4600: From my understanding:
+        //             With maven 3, this just doesn't work and this is the correct behaviour.
+        // MNG-5227: As of Maven 3.4, the correct Maven 3 behaviour has been restored.
+        super( "[2.0.3,3.0-alpha-1),[3.0-beta-1,3.4)" );
     }
 
     /**

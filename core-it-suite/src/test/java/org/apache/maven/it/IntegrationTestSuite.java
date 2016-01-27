@@ -130,6 +130,7 @@ public class IntegrationTestSuite
         suite.addTestSuite( MavenITmng5753CustomMojoExecutionConfiguratorTest.class );
         suite.addTestSuite( MavenITmng5716ToolchainsTypeTest.class );
         suite.addTestSuite( MavenITmng5663NestedImportScopePomResolutionTest.class );
+        suite.addTestSuite( MavenITmng5227DependencyOptionalFlagManagementTest.class );
         suite.addTestSuite( MavenITmng2562Timestamp322Test.class );
         suite.addTestSuite( MavenITmng2199ParentVersionRangeTest.class );
         suite.addTestSuite( MavenITmng5640LifecycleParticipantAfterSessionEnd.class );

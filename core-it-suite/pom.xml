@@ -53,7 +53,7 @@
       use for the tests. -->
     <preparedMavenHome>${mavenHome}</preparedMavenHome>
     <!-- default properties used to filter the global settings -->
-    <maven.it.central>http://repo1.maven.org/maven2</maven.it.central>
+    <maven.it.central>http://repo.maven.apache.org/maven2</maven.it.central>
     <proxy.active>false</proxy.active>
     <proxy.host>localhost</proxy.host>
     <proxy.port>80</proxy.port>
@@ -172,6 +172,10 @@
             <property>
               <name>maven.it.global-settings.dir</name>
               <value>${project.build.testOutputDirectory}</value>
+            </property>
+            <property>
+              <name>maven.test.tmpdir</name>
+              <value>${project.build.directory}</value>
             </property>
           </systemProperties>
         </configuration>

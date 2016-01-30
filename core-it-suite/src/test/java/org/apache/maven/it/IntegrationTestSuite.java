@@ -106,6 +106,7 @@ public class IntegrationTestSuite
         // -------------------------------------------------------------------------------------------------------------
         // suite.addTestSuite( MavenIT0108SnapshotUpdateTest.class ); -- MNG-3137
 
+        suite.addTestSuite( MavenITmng4463DependencyManagementImportVersionRanges.class );
         suite.addTestSuite( MavenITmng5359CleanPluginExecutionDeclarationInPluginMgmtTest.class );
         suite.addTestSuite( MavenITmng6189SiteReportPluginsWarningTest.class );
         suite.addTestSuite( MavenITmng6057CheckReactorOrderTest.class );

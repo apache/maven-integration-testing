@@ -101,7 +101,7 @@ public class MavenITmng2199ParentVersionRangeTest
         {
             final List<String> lines = verifier.loadFile( new File( testDir, "log.txt" ), false );
             assertTrue( "Expected error message not found.",
-                        indexOf( lines, ".*(parent)? version range.*does not specify an upper bound.*" ) >= 0 );
+                        indexOf( lines, ".*(parent)?.*version range.*does not specify an upper bound.*" ) >= 0 );
 
         }
         finally

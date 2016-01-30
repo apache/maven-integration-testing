@@ -17,6 +17,7 @@ package org.apache.maven.it;
 
 import java.io.File;
 import java.util.List;
+import java.util.regex.Pattern;
 import org.apache.maven.it.util.ResourceExtractor;
 import static junit.framework.Assert.assertTrue;
 
@@ -34,12 +35,26 @@ public class MavenITmng4463DependencyManagementImportVersionRanges
         super( "[3.4,)" );
     }
 
-    public void testCanImportDependencyManagementUsingVersionRanges()
+    public void testInclusiveUpperBoundResolvesToHighestVersion()
         throws Exception
     {
-        File testDir = ResourceExtractor.simpleExtractResources( getClass(), "/mng-4463" );
+        final File testDir = ResourceExtractor.simpleExtractResources( getClass(), "/mng-4463/inclusive-upper-bound" );
+        final Verifier verifier = newVerifier( testDir.getAbsolutePath(), "remote" );
+        verifier.setAutoclean( false );
+        verifier.deleteDirectory( "target" );
+        verifier.executeGoal( "validate" );
+        verifier.verifyErrorFreeLog();
+        verifier.resetStreams();
 
-        Verifier verifier = newVerifier( testDir.getAbsolutePath(), "remote" );
+        final List<String> artifacts = verifier.loadLines( "target/compile.txt", "UTF-8" );
+        assertTrue( artifacts.toString(), artifacts.contains( "org.apache.maven:maven-plugin-api:jar:3.0" ) );
+    }
+
+    public void testExclusiveUpperBoundResolvesToHighestVersion()
+        throws Exception
+    {
+        final File testDir = ResourceExtractor.simpleExtractResources( getClass(), "/mng-4463/exclusive-upper-bound" );
+        final Verifier verifier = newVerifier( testDir.getAbsolutePath(), "remote" );
         verifier.setAutoclean( false );
         verifier.deleteDirectory( "target" );
         verifier.executeGoal( "validate" );
@@ -48,6 +63,46 @@ public class MavenITmng4463DependencyManagementImportVersionRanges
 
         List<String> artifacts = verifier.loadLines( "target/compile.txt", "UTF-8" );
         assertTrue( artifacts.toString(), artifacts.contains( "org.apache.maven:maven-plugin-api:jar:3.0" ) );
+    }
+
+    public void testFailureWithoutUpperBound()
+        throws Exception
+    {
+        final File testDir = ResourceExtractor.simpleExtractResources( getClass(), "/mng-4463/no-upper-bound" );
+        final Verifier verifier = newVerifier( testDir.getAbsolutePath(), "remote" );
+
+        try
+        {
+            verifier.setAutoclean( false );
+            verifier.deleteDirectory( "target" );
+            verifier.executeGoal( "validate" );
+            fail( "Expected 'VerificationException' not thrown." );
+        }
+        catch ( final VerificationException e )
+        {
+            final List<String> lines = verifier.loadFile( new File( testDir, "log.txt" ), false );
+            assertTrue( "Expected error message not found.",
+                        indexOf( lines, ".*dependency version range.*does not specify an upper bound.*" ) >= 0 );
+        }
+        finally
+        {
+            verifier.resetStreams();
+        }
+    }
+
+    private static int indexOf( final List<String> logLines, final String regex )
+    {
+        final Pattern pattern = Pattern.compile( regex );
+
+        for ( int i = 0, l0 = logLines.size(); i < l0; i++ )
+        {
+            if ( pattern.matcher( logLines.get( i ) ).matches() )
+            {
+                return i;
+            }
+        }
+
+        return -1;
     }
 
 }

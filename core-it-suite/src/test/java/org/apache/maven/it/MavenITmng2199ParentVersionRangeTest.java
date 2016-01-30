@@ -33,7 +33,9 @@ public class MavenITmng2199ParentVersionRangeTest
         throws Exception
     {
         Verifier verifier = null;
-        File testDir = ResourceExtractor.simpleExtractResources( getClass(), "/mng-2199-parent-version-range/valid-inclusive-upper-bound" );
+        File testDir =
+            ResourceExtractor.simpleExtractResources( getClass(),
+                                                      "/mng-2199-parent-version-range/valid-inclusive-upper-bound" );
 
         try
         {
@@ -57,7 +59,9 @@ public class MavenITmng2199ParentVersionRangeTest
         throws Exception
     {
         Verifier verifier = null;
-        File testDir = ResourceExtractor.simpleExtractResources( getClass(), "/mng-2199-parent-version-range/valid-exclusive-upper-bound" );
+        File testDir =
+            ResourceExtractor.simpleExtractResources( getClass(),
+                                                      "/mng-2199-parent-version-range/valid-exclusive-upper-bound" );
 
         try
         {
@@ -69,7 +73,9 @@ public class MavenITmng2199ParentVersionRangeTest
             verifier.verifyErrorFreeLog();
 
             final List<String> lines = verifier.loadFile( new File( testDir, "log.txt" ), false );
-            assertFalse( "Unxpected error message found.", indexOf( lines, ".*Failed to build parent project.*" ) >= 0 );
+            assertFalse( "Unxpected error message found.",
+                         indexOf( lines, ".*Failed to build parent project.*" ) >= 0 );
+
         }
         finally
         {
@@ -94,8 +100,9 @@ public class MavenITmng2199ParentVersionRangeTest
         catch ( final VerificationException e )
         {
             final List<String> lines = verifier.loadFile( new File( testDir, "log.txt" ), false );
-            int msg = indexOf( lines, ".*The requested version range.*does not specify an upper bound.*" );
-            assertTrue( "Expected error message not found.", msg >= 0 );
+            assertTrue( "Expected error message not found.",
+                        indexOf( lines, ".*(parent)? version range.*does not specify an upper bound.*" ) >= 0 );
+
         }
         finally
         {
@@ -167,7 +174,8 @@ public class MavenITmng2199ParentVersionRangeTest
         throws Exception
     {
         Verifier verifier = null;
-        File testDir = ResourceExtractor.simpleExtractResources( getClass(), "/mng-2199-parent-version-range/local-parent" );
+        File testDir = ResourceExtractor.simpleExtractResources( getClass(),
+                                                                 "/mng-2199-parent-version-range/local-parent" );
 
         try
         {
@@ -198,4 +206,5 @@ public class MavenITmng2199ParentVersionRangeTest
 
         return -1;
     }
+
 }

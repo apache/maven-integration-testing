@@ -30,7 +30,7 @@ under the License.
   <name>Maven Integration Test :: MNG-4463</name>
   <description>
     Tests that importing dependency management using version ranges
-    resolves to the highest version.
+    with inclusive upper bound resolves to the highest version.
   </description>
 
   <dependencyManagement>

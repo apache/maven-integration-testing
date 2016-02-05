@@ -39,7 +39,7 @@ public class MavenITmng3259DepsDroppedInMultiModuleBuildTest
      */
     public MavenITmng3259DepsDroppedInMultiModuleBuildTest()
     {
-        super( "(2.0.8,)" );
+        super( "(2.0.8,3.4)" );
     }
 
     public void testitMNG3259 ()

@@ -28,13 +28,20 @@ public class MavenITmng5783PluginDependencyFiltering
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
 
-        // Note that plugin dependencies always include plugin itself and plexus-utils
+        final List<String> dependencies = verifier.loadLines( "target/dependencies.txt", "UTF-8" );
+        assertTrue( contains( dependencies, "org.slf4j:slf4j-api:jar:1.7.5" ) );
+    }
 
-        List<String> dependencies = verifier.loadLines( "target/dependencies.txt", "UTF-8" );
-        assertEquals( 3, dependencies.size() );
-        assertEquals( "mng-5783-plugin-dependency-filtering:mng-5783-plugin-dependency-filtering-plugin:maven-plugin:0.1",
-                      dependencies.get( 0 ) );
-        assertEquals( "org.slf4j:slf4j-api:jar:1.7.5", dependencies.get( 1 ) );
-        assertEquals( "org.codehaus.plexus:plexus-utils:jar:1.1", dependencies.get( 2 ) );
+    private static boolean contains( final List<String> lines, final String pattern )
+    {
+        for ( int i = 0, l0 = lines.size(); i < l0; i++ )
+        {
+            if ( lines.get( i ).contains( pattern ) )
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

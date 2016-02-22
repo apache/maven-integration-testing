@@ -43,13 +43,6 @@ under the License.
     </dependencies>
   </dependencyManagement>
 
-  <dependencies>
-    <dependency>
-      <groupId>org.apache.maven.its.mng5971</groupId>
-      <artifactId>dependency</artifactId>
-    </dependency>
-  </dependencies>
-
   <modules>
     <module>2</module>
   </modules>

@@ -38,10 +38,8 @@ under the License.
     <dependencies>
       <dependency>
         <groupId>org.apache.maven.its.mng5971</groupId>
-        <artifactId>import</artifactId>
+        <artifactId>dependency</artifactId>
         <version>0</version>
-        <type>pom</type>
-        <scope>import</scope>
       </dependency>
     </dependencies>
   </dependencyManagement>

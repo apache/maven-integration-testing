@@ -130,7 +130,7 @@ public class MavenITmng2199ParentVersionRangeTest
             final List<String> lines = verifier.loadFile( new File( testDir, "log.txt" ), false );
             int msg =
                 indexOf( lines,
-                         ".*Version must be a constant @ org.apache.maven.its.mng2199:expression:\\$\\{project.parent.version\\}.*" );
+                         ".*Version must be a constant.*org.apache.maven.its.mng2199:expression.*" );
 
             assertTrue( "Expected error message not found.", msg >= 0 );
         }
@@ -160,7 +160,7 @@ public class MavenITmng2199ParentVersionRangeTest
             final List<String> lines = verifier.loadFile( new File( testDir, "log.txt" ), false );
             int msg =
                 indexOf( lines,
-                         ".*Version must be a constant @ org.apache.maven.its.mng2199:inherited:\\[unknown-version\\].*" );
+                         ".*Version must be a constant.*org.apache.maven.its.mng2199:inherited.*" );
 
             assertTrue( "Expected error message not found.", msg >= 0 );
         }

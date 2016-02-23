@@ -43,11 +43,11 @@ public class MavenITmng5971HierarchicalImportScopeTest
     public void testInheritanceProcessing()
         throws Exception
     {
-        final File testDir = ResourceExtractor.simpleExtractResources( getClass(), "/mng-5971" );
+        final File testDir = ResourceExtractor.simpleExtractResources( getClass(), "/mng-5971/inheritance" );
 
         final Verifier verifier = newVerifier( testDir.getAbsolutePath() );
         verifier.setAutoclean( false );
-        verifier.filterFile( "settings-template.xml", "settings.xml", "UTF-8",
+        verifier.filterFile( "../settings-template.xml", "settings.xml", "UTF-8",
                              (Map) verifier.newDefaultFilterProperties() );
 
         verifier.addCliOption( "-s" );
@@ -70,6 +70,52 @@ public class MavenITmng5971HierarchicalImportScopeTest
 
         final List<String> dependencies3 = verifier.loadLines( "1/2/3/target/compile.txt", "UTF-8" );
         assertTrue( contains( dependencies3, "org.apache.maven.its.mng5971:dependency:jar:3" ) );
+    }
+
+    public void testOverrideProcessing()
+        throws Exception
+    {
+        final File testDir = ResourceExtractor.simpleExtractResources( getClass(), "/mng-5971/override" );
+
+        final Verifier verifier = newVerifier( testDir.getAbsolutePath() );
+        verifier.setAutoclean( false );
+        verifier.filterFile( "../settings-template.xml", "settings.xml", "UTF-8",
+                             (Map) verifier.newDefaultFilterProperties() );
+
+        verifier.addCliOption( "-s" );
+        verifier.addCliOption( "settings.xml" );
+        verifier.executeGoals( Arrays.asList( new String[]
+        {
+            "clean", "verify"
+        } ) );
+        verifier.verifyErrorFreeLog();
+        verifier.resetStreams();
+
+        final List<String> dependencies = verifier.loadLines( "target/compile.txt", "UTF-8" );
+        assertTrue( contains( dependencies, "org.apache.maven.its.mng5971:dependency:jar:3" ) );
+    }
+
+    public void testConflictResolution()
+        throws Exception
+    {
+        final File testDir = ResourceExtractor.simpleExtractResources( getClass(), "/mng-5971/conflict" );
+
+        final Verifier verifier = newVerifier( testDir.getAbsolutePath() );
+        verifier.setAutoclean( false );
+        verifier.filterFile( "../settings-template.xml", "settings.xml", "UTF-8",
+                             (Map) verifier.newDefaultFilterProperties() );
+
+        verifier.addCliOption( "-s" );
+        verifier.addCliOption( "settings.xml" );
+        verifier.executeGoals( Arrays.asList( new String[]
+        {
+            "clean", "verify"
+        } ) );
+        verifier.verifyErrorFreeLog();
+        verifier.resetStreams();
+
+        final List<String> dependencies = verifier.loadLines( "target/compile.txt", "UTF-8" );
+        assertTrue( contains( dependencies, "org.apache.maven.its.mng5971:dependency:jar:3" ) );
     }
 
     private static boolean contains( final List<String> lines, final String pattern )

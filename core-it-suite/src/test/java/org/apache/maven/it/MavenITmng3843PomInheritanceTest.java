@@ -95,11 +95,36 @@ public class MavenITmng3843PomInheritanceTest
         assertPathEquals( basedir, "src/main/java", props.getProperty( "project.build.sourceDirectory" ) );
         assertPathEquals( basedir, "src/test/java", props.getProperty( "project.build.testSourceDirectory" ) );
         assertPathEquals( basedir, "src/main/scripts", props.getProperty( "project.build.scriptSourceDirectory" ) );
-        assertEquals( "1", props.getProperty( "project.build.resources" ) );
-        assertPathEquals( basedir, "src/main/resources", props.getProperty( "project.build.resources.0.directory" ) );
-        assertEquals( "1", props.getProperty( "project.build.testResources" ) );
-        assertPathEquals( basedir, "src/test/resources",
-                          props.getProperty( "project.build.testResources.0.directory" ) );
+
+        if ( matchesVersionRange( "[3.4,)" ) )
+        {
+            assertEquals( "2", props.getProperty( "project.build.resources" ) );
+            assertPathEquals( basedir, "src/main/resources",
+                              props.getProperty( "project.build.resources.0.directory" ) );
+
+            assertPathEquals( basedir, "src/main/filtered-resources",
+                              props.getProperty( "project.build.resources.1.directory" ) );
+
+            assertEquals( "2", props.getProperty( "project.build.testResources" ) );
+            assertPathEquals( basedir, "src/test/resources",
+                              props.getProperty( "project.build.testResources.0.directory" ) );
+
+            assertPathEquals( basedir, "src/test/filtered-resources",
+                              props.getProperty( "project.build.testResources.1.directory" ) );
+
+        }
+        else
+        {
+            assertEquals( "1", props.getProperty( "project.build.resources" ) );
+            assertPathEquals( basedir, "src/main/resources",
+                              props.getProperty( "project.build.resources.0.directory" ) );
+
+            assertEquals( "1", props.getProperty( "project.build.testResources" ) );
+            assertPathEquals( basedir, "src/test/resources",
+                              props.getProperty( "project.build.testResources.0.directory" ) );
+
+        }
+
         assertPathEquals( basedir, "target", props.getProperty( "project.build.directory" ) );
         assertPathEquals( basedir, "target/classes", props.getProperty( "project.build.outputDirectory" ) );
         assertPathEquals( basedir, "target/test-classes", props.getProperty( "project.build.testOutputDirectory" ) );

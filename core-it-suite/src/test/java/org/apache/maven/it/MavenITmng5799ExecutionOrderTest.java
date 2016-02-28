@@ -42,7 +42,7 @@ public class MavenITmng5799ExecutionOrderTest
     {
         final File testDir = ResourceExtractor.simpleExtractResources( getClass(), "/mng-5799" );
 
-        final Verifier verifier = newVerifier( testDir.getAbsolutePath() );
+        final Verifier verifier = newVerifier( testDir.getAbsolutePath(), "remote" );
         verifier.setAutoclean( false );
         verifier.executeGoals( Arrays.asList( new String[]
         {

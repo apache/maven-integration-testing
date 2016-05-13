@@ -102,14 +102,14 @@ public class MavenITmng3843PomInheritanceTest
             assertPathEquals( basedir, "src/main/resources",
                               props.getProperty( "project.build.resources.0.directory" ) );
 
-            assertPathEquals( basedir, "src/main/filtered-resources",
+            assertPathEquals( basedir, "src/main/resources-filtered",
                               props.getProperty( "project.build.resources.1.directory" ) );
 
             assertEquals( "2", props.getProperty( "project.build.testResources" ) );
             assertPathEquals( basedir, "src/test/resources",
                               props.getProperty( "project.build.testResources.0.directory" ) );
 
-            assertPathEquals( basedir, "src/test/filtered-resources",
+            assertPathEquals( basedir, "src/test/resources-filtered",
                               props.getProperty( "project.build.testResources.1.directory" ) );
 
         }

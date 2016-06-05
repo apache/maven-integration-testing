@@ -26,6 +26,8 @@ import org.apache.maven.artifact.versioning.InvalidVersionSpecificationException
 import org.apache.maven.artifact.versioning.VersionRange;
 import org.apache.maven.shared.utils.io.FileUtils;
 
+import static org.fusesource.jansi.Ansi.ansi;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintStream;
@@ -97,8 +99,8 @@ public abstract class AbstractMavenIntegrationTestCase
         }
         else
         {
-            out.println( "WARNING: " + getITName() + ": version range '" + versionRange
-                             + "' supplied but no Maven version - not skipping test." );
+            out.println( ansi().bold().fgYellow().a( "WARNING: " ).reset() + getITName() + ": version range '"
+                + versionRange + "' supplied but no Maven version - not skipping test." );
         }
     }
 
@@ -204,7 +206,8 @@ public abstract class AbstractMavenIntegrationTestCase
 
         if ( skip )
         {
-            out.println( "SKIPPED - Maven version " + getMavenVersion() + " not in range " + versionRange );
+            out.println( ansi().bold().fgYellow().a( "SKIPPED" ).reset() + " - Maven version " + getMavenVersion()
+                + " not in range " + versionRange );
             return;
         }
 
@@ -218,22 +221,24 @@ public abstract class AbstractMavenIntegrationTestCase
         {
             super.runTest();
             milliseconds = System.currentTimeMillis() - milliseconds;
-            out.println( "OK " + formatTime( milliseconds ) );
+            out.println( ansi().bold().fgGreen().a( "OK " ).reset() + formatTime( milliseconds ) );
         }
         catch ( UnsupportedJavaVersionException e )
         {
-            out.println( "SKIPPED - Java version " + e.javaVersion + " not in range " + e.supportedRange );
+            out.println( ansi().bold().fgYellow().a( "SKIPPED" ).reset() + " - Java version " + e.javaVersion
+                + " not in range " + e.supportedRange );
             return;
         }
         catch ( UnsupportedMavenVersionException e )
         {
-            out.println( "SKIPPED - Maven version " + e.mavenVersion + " not in range " + e.supportedRange );
+            out.println( ansi().bold().fgYellow().a( "SKIPPED" ).reset() + " - Maven version " + e.mavenVersion
+                + " not in range " + e.supportedRange );
             return;
         }
         catch ( Throwable t )
         {
             milliseconds = System.currentTimeMillis() - milliseconds;
-            out.println( "FAILURE " + formatTime( milliseconds ) );
+            out.println( ansi().bold().fgRed().a( "FAILURE " ).reset() + formatTime( milliseconds ) );
             throw t;
         }
     }
@@ -295,8 +300,8 @@ public abstract class AbstractMavenIntegrationTestCase
         }
         else
         {
-            out.println( "WARNING: " + getITName() + ": version range '" + versionRange
-                             + "' supplied but no Maven version found - not skipping test." );
+            out.println( ansi().bold().fgYellow().a( "WARNING: " ).reset() + getITName() + ": version range '"
+                + versionRange + "' supplied but no Maven version found - not skipping test." );
         }
     }
 
@@ -352,7 +357,7 @@ public abstract class AbstractMavenIntegrationTestCase
         {
             methodName = methodName.substring( 4 );
         }
-        return className + '(' + methodName + ')';
+        return className + '(' + ansi().bold().a( methodName ).reset()  + ')';
     }
 
     private String pad( int chars )

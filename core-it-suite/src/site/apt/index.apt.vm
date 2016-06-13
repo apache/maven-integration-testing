@@ -54,7 +54,8 @@ mvn clean test -Prun-its -DmavenHome=<maven-under-test>
 mvn clean test -Prun-its -DmavenVersion=2.2.1
 +----
   
-  To run the ITs using embedded Maven 3.x, additionally activate the <<<embedded>>> profile.
+  To run the ITs using embedded mode for Maven 3.x, additionally activate the <<<embedded>>> profile: this will avoid forking
+  a new JVM on each IT and will run significantly faster.
   
   ITs that don't require to fork Maven can also be run from the IDE using the Maven projects from the workspace if the
   Maven dependencies are added to the test class path.

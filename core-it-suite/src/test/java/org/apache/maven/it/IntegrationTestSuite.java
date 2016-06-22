@@ -109,6 +109,7 @@ public class IntegrationTestSuite
         suite.addTestSuite( MavenITmng6330RelativePath.class );
         suite.addTestSuite( MavenITmng6240PluginExtensionAetherProvider.class );
         suite.addTestSuite( MavenITmng6223FindBasedir.class );
+        suite.addTestSuite( MavenITmng5527DependencyManagementImportRelocationsTest.class );
         suite.addTestSuite( MavenITmng6189SiteReportPluginsWarningTest.class );
         suite.addTestSuite( MavenITmng6127PluginExecutionConfigurationInterferenceTest.class );
         suite.addTestSuite( MavenITmng6057CheckReactorOrderTest.class );

@@ -42,7 +42,7 @@ public class MavenITmng5527DependencyManagementImportRelocationsTest
         super( "[3.4,)" );
     }
 
-    public void testCanExcludeDependenciesFromImport()
+    public void testCanRelocateDependencyManagementImport()
         throws Exception
     {
         final File testDir = ResourceExtractor.simpleExtractResources( getClass(), "/mng-5527/relocations" );

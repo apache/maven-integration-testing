@@ -46,7 +46,8 @@ public class MavenITmng6049VersionRangeResultFilterExtensionTest
 
     public MavenITmng6049VersionRangeResultFilterExtensionTest()
     {
-        super( "[3.4.0,)" );
+        // TODO Make inclusive as soon as Maven 3.4.0 is released
+        super( "(3.4.0,)" );
     }
 
     /**

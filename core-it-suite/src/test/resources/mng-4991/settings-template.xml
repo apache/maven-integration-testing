@@ -41,6 +41,41 @@ under the License.
     <profile>
       <id>it-defaults</id>
       <!-- disable central override and use built-in values -->
+
+      <!--
+      As of Maven 3.4, there are no built-in values other than what is declared in the default settings. In order to
+      use the built-in values, those values need to be provided here. It is essential the repositories below match
+      the built-in values prior to Maven 3.4.
+      -->
+      <repositories>
+        <repository>
+          <id>central</id>
+          <name>Central Repository</name>
+          <url>https://repo.maven.apache.org/maven2</url>
+          <layout>default</layout>
+          <snapshots>
+            <enabled>false</enabled>
+          </snapshots>
+          <releases>
+            <updatePolicy>never</updatePolicy>
+          </releases>
+        </repository>
+      </repositories>
+
+      <pluginRepositories>
+        <pluginRepository>
+          <id>central</id>
+          <name>Central Repository</name>
+          <url>https://repo.maven.apache.org/maven2</url>
+          <layout>default</layout>
+          <snapshots>
+            <enabled>false</enabled>
+          </snapshots>
+          <releases>
+            <updatePolicy>never</updatePolicy>
+          </releases>
+        </pluginRepository>
+      </pluginRepositories>
     </profile>
   </profiles>
   <activeProfiles>

@@ -21,8 +21,8 @@
 
 # How I run the ITs from a clean slate. Though I do this with a primed Nexus instance. JvZ.
 
-env LANG=C LC_ALL=C mvn clean install -Prun-its,embedded -Dmaven.repo.local=`pwd`/repo
+env LANG=C LC_ALL=C mvn clean install --show-version -Prun-its,embedded -Dmaven.repo.local=`pwd`/repo
 
 # If behind a proxy try this
 
-# env LANG=C LC_ALL=C mvn clean install -Prun-its,embedded -Dmaven.repo.local=`pwd`/repo -Dproxy.active=true -Dproxy.type=http -Dproxy.host=<host> -Dproxy.port=<port> -Dproxy.user= -Dproxy.pass=
+# env LANG=C LC_ALL=C mvn clean install --show-version -Prun-its,embedded -Dmaven.repo.local=`pwd`/repo -Dproxy.active=true -Dproxy.type=http -Dproxy.host=<host> -Dproxy.port=<port> -Dproxy.user= -Dproxy.pass=

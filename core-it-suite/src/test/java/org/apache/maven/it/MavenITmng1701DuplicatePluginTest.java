@@ -35,7 +35,7 @@ public class MavenITmng1701DuplicatePluginTest
 
     public MavenITmng1701DuplicatePluginTest()
     {
-        super( "[3.0-beta-1,)" );
+        super( "[3.0-beta-1,3.4)" );
     }
 
     /**

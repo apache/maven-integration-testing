@@ -23,7 +23,9 @@ import java.io.File;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+
 import org.apache.maven.it.util.ResourceExtractor;
+
 import static junit.framework.Assert.assertTrue;
 
 /**
@@ -76,29 +78,6 @@ public class MavenITmng5971HierarchicalImportScopeTest
         throws Exception
     {
         final File testDir = ResourceExtractor.simpleExtractResources( getClass(), "/mng-5971/override" );
-
-        final Verifier verifier = newVerifier( testDir.getAbsolutePath() );
-        verifier.setAutoclean( false );
-        verifier.filterFile( "../settings-template.xml", "settings.xml", "UTF-8",
-                             (Map) verifier.newDefaultFilterProperties() );
-
-        verifier.addCliOption( "-s" );
-        verifier.addCliOption( "settings.xml" );
-        verifier.executeGoals( Arrays.asList( new String[]
-        {
-            "clean", "verify"
-        } ) );
-        verifier.verifyErrorFreeLog();
-        verifier.resetStreams();
-
-        final List<String> dependencies = verifier.loadLines( "target/compile.txt", "UTF-8" );
-        assertTrue( contains( dependencies, "org.apache.maven.its.mng5971:dependency:jar:3" ) );
-    }
-
-    public void testConflictResolution()
-        throws Exception
-    {
-        final File testDir = ResourceExtractor.simpleExtractResources( getClass(), "/mng-5971/conflict" );
 
         final Verifier verifier = newVerifier( testDir.getAbsolutePath() );
         verifier.setAutoclean( false );

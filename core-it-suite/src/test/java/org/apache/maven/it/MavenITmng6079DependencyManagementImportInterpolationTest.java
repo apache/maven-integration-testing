@@ -49,7 +49,7 @@ public class MavenITmng6079DependencyManagementImportInterpolationTest
 
         final Verifier verifier = newVerifier( testDir.getAbsolutePath() );
         verifier.setAutoclean( false );
-        verifier.filterFile( "../settings-template.xml", "settings.xml", "UTF-8",
+        verifier.filterFile( "settings-template.xml", "settings.xml", "UTF-8",
                              (Map) verifier.newDefaultFilterProperties() );
 
         verifier.addCliOption( "-s" );

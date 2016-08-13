@@ -47,7 +47,7 @@ public class MavenITmng6079DependencyManagementImportInterpolationTest
     {
         final File testDir = ResourceExtractor.simpleExtractResources( getClass(), "/mng-6079" );
 
-        final Verifier verifier = newVerifier( testDir.getAbsolutePath() );
+        final Verifier verifier = newVerifier( testDir.getAbsolutePath(), "remote" );
         verifier.setAutoclean( false );
         verifier.filterFile( "settings-template.xml", "settings.xml", "UTF-8",
                              (Map) verifier.newDefaultFilterProperties() );

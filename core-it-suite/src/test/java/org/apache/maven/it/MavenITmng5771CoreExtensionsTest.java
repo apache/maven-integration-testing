@@ -5,6 +5,11 @@ import java.util.Properties;
 
 import org.apache.maven.it.util.ResourceExtractor;
 
+/**
+ * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-5771">MNG-5771</a>:
+ * check that Maven loads core extensions and components contributed by <code>.mvn/extensions.xml</code>
+ * are available to regular plugins. 
+ */
 public class MavenITmng5771CoreExtensionsTest
     extends AbstractMavenIntegrationTestCase
 {
@@ -82,29 +87,5 @@ public class MavenITmng5771CoreExtensionsTest
         verifier.resetStreams();
         
         server.stop();
-    }
-
-    /**
-     * check that <code>.mvn/</code> is found when current dir does not contain <code>pom.xml</code>
-     * but path to POM set by <code>--file path/to/pom.xml</code>
-     */
-    public void testCoreExtensionMNG5889File()
-        throws Exception
-    {
-        File testDir = ResourceExtractor.simpleExtractResources( getClass(), "/mng-5771-core-extensions" );
-
-        Verifier verifier = newVerifier( testDir.getAbsolutePath() ); // not client directory
-        verifier.filterFile( "settings-template.xml", "settings.xml", "UTF-8", verifier.newDefaultFilterProperties() );
-
-        verifier = newVerifier( testDir.getAbsolutePath() );
-        verifier.deleteDirectory( "client/target" );
-        verifier.deleteArtifacts( "org.apache.maven.its.it-core-extensions" );
-        verifier.getCliOptions().add( "-s" );
-        verifier.getCliOptions().add( new File( testDir, "settings.xml" ).getAbsolutePath() );
-        verifier.getCliOptions().add( "-f" ); // --file client/pom.xml
-        verifier.getCliOptions().add( new File( testDir, "client/pom.xml" ).getAbsolutePath() );
-        verifier.executeGoal( "validate" );
-        verifier.verifyErrorFreeLog();
-        verifier.resetStreams();
     }
 }

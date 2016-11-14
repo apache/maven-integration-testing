@@ -37,11 +37,28 @@ public class MavenITmng5889CoreExtensionsTest
     {
         super( "[3.4.0,)" );
     }
+
     /**
      * check that <code>.mvn/</code> is found when current dir does not contain <code>pom.xml</code>
      * but path to POM set by <code>--file path/to/pom.xml</code>
      */
-    public void testCoreExtensionFile()
+    public void testCoreExtensionLongOption()
+        throws Exception
+    {
+        runCoreExtensionWithOption( "--file" );
+    }
+
+    /**
+     * check that <code>.mvn/</code> is found when current dir does not contain <code>pom.xml</code>
+     * but path to POM set by <code>-f path/to/pom.xml</code>
+     */
+    public void testCoreExtensionShortOption()
+        throws Exception
+    {
+        runCoreExtensionWithOption( "-f" );
+    }
+
+    private void runCoreExtensionWithOption( String option )
         throws Exception
     {
         File testDir = ResourceExtractor.simpleExtractResources( getClass(), "/mng-5771-core-extensions" );
@@ -54,7 +71,7 @@ public class MavenITmng5889CoreExtensionsTest
         verifier.deleteArtifacts( "org.apache.maven.its.it-core-extensions" );
         verifier.getCliOptions().add( "-s" );
         verifier.getCliOptions().add( new File( testDir, "settings.xml" ).getAbsolutePath() );
-        verifier.getCliOptions().add( "-f" ); // --file client/pom.xml
+        verifier.getCliOptions().add( option ); // -f/--file client/pom.xml
         verifier.getCliOptions().add( new File( testDir, "client/pom.xml" ).getAbsolutePath() );
         verifier.setForkJvm( true ); // force forked JVM since we need the shell script to detect .mvn/ location
         verifier.executeGoal( "validate" );

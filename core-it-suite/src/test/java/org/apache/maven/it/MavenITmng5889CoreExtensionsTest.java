@@ -35,7 +35,7 @@ public class MavenITmng5889CoreExtensionsTest
 {
     public MavenITmng5889CoreExtensionsTest()
     {
-        super( "(3.4.0-alpha,)" );
+        super( "[3.4.0,)" );
     }
     /**
      * check that <code>.mvn/</code> is found when current dir does not contain <code>pom.xml</code>
@@ -56,6 +56,7 @@ public class MavenITmng5889CoreExtensionsTest
         verifier.getCliOptions().add( new File( testDir, "settings.xml" ).getAbsolutePath() );
         verifier.getCliOptions().add( "-f" ); // --file client/pom.xml
         verifier.getCliOptions().add( new File( testDir, "client/pom.xml" ).getAbsolutePath() );
+        verifier.setForkJvm( true ); // force forked JVM since we need the shell script to detect .mvn/ location
         verifier.executeGoal( "validate" );
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();

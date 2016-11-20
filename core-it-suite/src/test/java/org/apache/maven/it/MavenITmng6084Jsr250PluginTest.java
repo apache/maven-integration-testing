@@ -26,7 +26,7 @@ import java.io.File;
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-6084">MNG-6084</a>.
  *
- * @author Jason van Zyl
+ * @author Dan Tran
  */
 public class MavenITmng6084Jsr250PluginTest
     extends AbstractMavenIntegrationTestCase

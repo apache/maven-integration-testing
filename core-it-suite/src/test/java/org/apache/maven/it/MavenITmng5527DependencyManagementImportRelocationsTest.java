@@ -26,8 +26,6 @@ import java.util.Properties;
 
 import org.apache.maven.it.util.ResourceExtractor;
 
-import static junit.framework.Assert.assertEquals;
-
 /**
  * [MNG-5527] Dependency management import should support relocations.
  *

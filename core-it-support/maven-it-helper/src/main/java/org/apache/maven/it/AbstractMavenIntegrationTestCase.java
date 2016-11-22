@@ -203,6 +203,7 @@ public abstract class AbstractMavenIntegrationTestCase
         String line = getTestName();
         out.print( line );
         out.print( pad( RESULT_COLUMN - line.length() ) );
+        out.print( ' ' );
 
         if ( skip )
         {

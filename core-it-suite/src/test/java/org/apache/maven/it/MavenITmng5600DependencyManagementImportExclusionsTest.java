@@ -18,14 +18,13 @@ package org.apache.maven.it;
  * specific language governing permissions and limitations
  * under the License.
  */
+
 import java.io.File;
 import java.util.Arrays;
 import java.util.Map;
 import java.util.Properties;
 
 import org.apache.maven.it.util.ResourceExtractor;
-
-import static junit.framework.Assert.assertEquals;
 
 /**
  * [MNG-5600] Dependency management import should support exclusions.

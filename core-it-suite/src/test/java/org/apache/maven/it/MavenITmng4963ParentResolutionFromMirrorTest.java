@@ -35,11 +35,7 @@ public class MavenITmng4963ParentResolutionFromMirrorTest
 
     public MavenITmng4963ParentResolutionFromMirrorTest()
     {
-        // This test got disabled for Maven >= 3.4 because the test is testing built-in repository behaviour. As of
-        // Maven 3.4 built-in repositories have been moved to the default settings and thus this test is obsolete as of
-        // Maven 3.4 because there is no way to test built-in repositories without declaring them in the settings or the
-        // pom.
-        super( "[2.0.5,3.0-alpha-1),[3.0.3,3.4)" );
+        super( "[2.0.5,3.0-alpha-1),[3.0.3,)" );
     }
 
     /**

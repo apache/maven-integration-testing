@@ -24,19 +24,20 @@ under the License.
 
   <parent>
     <groupId>org.apache.maven.its.mng5971</groupId>
-    <artifactId>1</artifactId>
-    <version>20160220</version>
+    <artifactId>2</artifactId>
+    <version>2</version>
   </parent>
 
-  <artifactId>2</artifactId>
+  <artifactId>3</artifactId>
+  <version>3</version>
   <packaging>pom</packaging>
 
   <dependencyManagement>
     <dependencies>
       <dependency>
-        <groupId>org.apache.maven.its.mng5971</groupId>
+        <groupId>${project.groupId}</groupId>
         <artifactId>import</artifactId>
-        <version>2</version>
+        <version>${project.version}</version>
         <type>pom</type>
         <scope>include</scope>
       </dependency>
@@ -44,6 +45,7 @@ under the License.
   </dependencyManagement>
 
   <modules>
-    <module>3</module>
+    <module>4</module>
   </modules>
+
 </project>

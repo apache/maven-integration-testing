@@ -30,13 +30,13 @@ import java.util.Properties;
  * 
  * @author Benjamin Bentmann
  */
-public class MavenITmng4721OptionalPluginDependencyTest
+public class MavenITmng4721OptionalPluginDependency34Test
     extends AbstractMavenIntegrationTestCase
 {
 
-    public MavenITmng4721OptionalPluginDependencyTest()
+    public MavenITmng4721OptionalPluginDependency34Test()
     {
-        super( "[2.0.3,3.4)" );
+        super( "[3.4,)" );
     }
 
     /**
@@ -58,7 +58,7 @@ public class MavenITmng4721OptionalPluginDependencyTest
         verifier.resetStreams();
 
         Properties props = verifier.loadProperties( "target/pcl.properties" );
-        assertEquals( "1", props.get( "org/apache/maven/plugin/coreit/c.properties.count" ) );
+        assertEquals( "0", props.get( "org/apache/maven/plugin/coreit/c.properties.count" ) );
         assertEquals( "1", props.get( "mng4721a.properties.count" ) );
         assertEquals( "0", props.get( "mng4721b.properties.count" ) );
     }

@@ -37,7 +37,7 @@ public class MavenITmng5227DependencyOptionalFlagManagementTest
 
     public MavenITmng5227DependencyOptionalFlagManagementTest()
     {
-        super( "[3.5,)" );
+        super( "[3.4,)" );
     }
 
     /**

@@ -209,6 +209,7 @@ public class IntegrationTestSuite
         suite.addTestSuite( MavenITmng4729MirrorProxyAuthUsedByProjectBuilderTest.class );
         suite.addTestSuite( MavenITmng4721OptionalPluginDependencyTest.class );
         suite.addTestSuite( MavenITmng4720DependencyManagementExclusionMergeTest.class );
+        suite.addTestSuite( MavenITmng4720DependencyManagementExclusionMerge34Test.class );
         suite.addTestSuite( MavenITmng4696MavenProjectDependencyArtifactsTest.class );
         suite.addTestSuite( MavenITmng4690InterdependentConflictResolutionTest.class );
         suite.addTestSuite( MavenITmng4684DistMngtOverridenByProfileTest.class );

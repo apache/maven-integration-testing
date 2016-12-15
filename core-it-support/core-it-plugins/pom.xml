@@ -84,6 +84,17 @@ under the License.
     <module>mng5958-extension</module>
   </modules>
 
+  <!-- Manage versions to match bootstrap. -->
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.codehaus.plexus</groupId>
+        <artifactId>plexus-utils</artifactId>
+        <version>1.5.5</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
   <scm>
     <connection>scm:svn:http://svn.apache.org/repos/asf/maven/core-integration-testing/trunk/core-it-support/core-it-plugins</connection>
     <developerConnection>scm:svn:https://svn.apache.org/repos/asf/maven/core-integration-testing/trunk/core-it-support/core-it-plugins</developerConnection>

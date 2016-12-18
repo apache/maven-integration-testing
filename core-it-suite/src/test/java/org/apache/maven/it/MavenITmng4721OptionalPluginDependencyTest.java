@@ -36,7 +36,7 @@ public class MavenITmng4721OptionalPluginDependencyTest
 
     public MavenITmng4721OptionalPluginDependencyTest()
     {
-        super( "[2.0.3,3.4)" );
+        super( "[2.0.3,)" );
     }
 
     /**

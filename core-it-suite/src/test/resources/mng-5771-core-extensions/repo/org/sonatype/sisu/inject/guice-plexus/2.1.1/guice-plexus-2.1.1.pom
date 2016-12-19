@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+ ~ Copyright (c) 2010-2011 Sonatype, Inc.
+ ~ All rights reserved. This program and the accompanying materials
+ ~ are made available under the terms of the Eclipse Public License v1.0
+ ~ and Apache License v2.0 which accompanies this distribution.
+ ~ The Eclipse Public License is available at
+ ~   http://www.eclipse.org/legal/epl-v10.html
+ ~ The Apache License v2.0 is available at
+ ~   http://www.apache.org/licenses/LICENSE-2.0.html
+ ~ You may elect to redistribute this code under either of these licenses.
+-->
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <relativePath>../guice-bean</relativePath>
+    <groupId>org.sonatype.sisu.inject</groupId>
+    <artifactId>guice-bean</artifactId>
+    <version>2.1.1</version>
+  </parent>
+
+  <packaging>pom</packaging>
+
+  <artifactId>guice-plexus</artifactId>
+
+  <name>Guice - Plexus</name>
+
+  <modules>
+    <module>guice-plexus-metadata</module>
+    <module>guice-plexus-scanners</module>
+    <module>guice-plexus-converters</module>
+    <module>guice-plexus-locators</module>
+    <module>guice-plexus-binders</module>
+    <module>guice-plexus-shim</module>
+    <module>sisu-inject-plexus</module>
+  </modules>
+
+  <dependencyManagement>
+    <dependencies>
+
+      <dependency>
+        <groupId>org.codehaus.plexus</groupId>
+        <artifactId>plexus-component-annotations</artifactId>
+        <version>1.5.5</version>
+      </dependency>
+      <dependency>
+        <groupId>org.codehaus.plexus</groupId>
+        <artifactId>plexus-classworlds</artifactId>
+        <version>2.4</version>
+      </dependency>
+      <dependency>
+        <groupId>org.codehaus.plexus</groupId>
+        <artifactId>plexus-utils</artifactId>
+        <version>2.0.5</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.sonatype.sisu.inject</groupId>
+        <artifactId>guice-plexus-metadata</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.sonatype.sisu.inject</groupId>
+        <artifactId>guice-plexus-scanners</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.sonatype.sisu.inject</groupId>
+        <artifactId>guice-plexus-converters</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.sonatype.sisu.inject</groupId>
+        <artifactId>guice-plexus-locators</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.sonatype.sisu.inject</groupId>
+        <artifactId>guice-plexus-binders</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.sonatype.sisu.inject</groupId>
+        <artifactId>guice-plexus-shim</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.sonatype.sisu.inject</groupId>
+        <artifactId>guice-plexus-tck</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.sonatype.sisu</groupId>
+        <artifactId>sisu-inject-plexus</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+
+    </dependencies>
+  </dependencyManagement>
+
+</project>

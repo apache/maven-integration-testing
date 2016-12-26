@@ -142,6 +142,7 @@ public class MavenITmng3599useHttpProxyForWebDAVTest
          * for the JAR/POM of the extension and its dependencies when run against a vanilla repo.
          */
         Verifier verifier = newVerifier( testDir.getAbsolutePath() );
+        verifier.setLogFileName( "logHttpPreparation.txt" );
         verifier.executeGoal( "validate" );
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
@@ -186,6 +187,7 @@ public class MavenITmng3599useHttpProxyForWebDAVTest
          * for the JAR/POM of the extension and its dependencies when run against a vanilla repo.
          */
         Verifier verifier = newVerifier( testDir.getAbsolutePath() );
+        verifier.setLogFileName( "logDAVPreparation.txt" );
         verifier.executeGoal( "validate" );
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();

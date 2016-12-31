@@ -67,35 +67,4 @@ public class MavenITmng4720DependencyManagementExclusionMerge34Test
         assertFalse( classpath.toString(), classpath.contains( "d-0.1.jar" ) );
     }
 
-    /**
-     * Verify the effective exclusions applied during transitive dependency resolution when both the regular
-     * dependency section and dependency management declare exclusions for a particular dependency.
-     */
-    public void testitLegacy()
-        throws Exception
-    {
-        File testDir = ResourceExtractor.simpleExtractResources( getClass(), "/mng-4720" );
-
-        Verifier verifier = newVerifier( testDir.getAbsolutePath() );
-        verifier.setAutoclean( false );
-        verifier.deleteArtifacts( "org.apache.maven.its.mng4720" );
-        verifier.addCliOption( "-s" );
-        verifier.addCliOption( "settings.xml" );
-        verifier.addCliOption( "-ldm" );
-        verifier.filterFile( "settings-template.xml", "settings.xml", "UTF-8", verifier.newDefaultFilterProperties() );
-        verifier.executeGoal( "validate" );
-        verifier.verifyErrorFreeLog();
-        verifier.resetStreams();
-
-        List<String> classpath = verifier.loadLines( "target/classpath.txt", "UTF-8" );
-
-        assertTrue( classpath.toString(), classpath.contains( "a-0.1.jar" ) );
-        assertTrue( classpath.toString(), classpath.contains( "c-0.1.jar" ) );
-
-        assertFalse( classpath.toString(), classpath.contains( "b-0.1.jar" ) );
-
-        // should better have been excluded as well, now it's a matter of backward-compat (-ldm)
-        assertTrue( classpath.toString(), classpath.contains( "d-0.1.jar" ) );
-    }
-
 }

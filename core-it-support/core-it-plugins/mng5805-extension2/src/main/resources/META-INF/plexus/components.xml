@@ -28,7 +28,7 @@ under the License.
         <lifecycles>
           <lifecycle>
             <id>default</id>
-            <phases>
+            <lifecyclePhases>
               <validate>
                 <mojos>
                   <mojo>
@@ -48,7 +48,7 @@ under the License.
                   </mojo>
                 </mojos>
               </validate>
-            </phases>
+            </lifecyclePhases>
           </lifecycle>
         </lifecycles>
       </configuration>

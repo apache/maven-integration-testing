@@ -111,6 +111,7 @@ public class IntegrationTestSuite
         suite.addTestSuite( MavenITmng5840ParentVersionRanges.class );
         suite.addTestSuite( MavenITmng5840RelativePathReactorMatching.class );
         suite.addTestSuite( MavenITmng5805PkgTypeMojoConfiguration.class );
+        suite.addTestSuite( MavenITmng5805PkgTypeMojoConfiguration2.class );
         suite.addTestSuite( MavenITmng5783PluginDependencyFiltering.class );
         suite.addTestSuite( MavenITmng5774ConfigurationProcessorsTest.class );
         suite.addTestSuite( MavenITmng5771CoreExtensionsTest.class );

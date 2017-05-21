@@ -113,6 +113,7 @@ public class IntegrationTestSuite
         suite.addTestSuite( MavenITmng5527DependencyManagementImportRelocationsTest.class );
         suite.addTestSuite( MavenITmng4463DependencyManagementImportVersionRanges.class );
         suite.addTestSuite( MavenITmng5359CleanPluginExecutionDeclarationInPluginMgmtTest.class );
+        suite.addTestSuite( MavenITmng6223FindBasedir.class );
         suite.addTestSuite( MavenITmng6189SiteReportPluginsWarningTest.class );
         suite.addTestSuite( MavenITmng6057CheckReactorOrderTest.class );
         suite.addTestSuite( MavenITmng5895CIFriendlyUsageWithPropertyTest.class );
@@ -120,6 +121,7 @@ public class IntegrationTestSuite
         suite.addTestSuite( MavenITmng6173GetProjectsAndDependencyGraphTest.class );
         suite.addTestSuite( MavenITmng6173GetAllProjectsInReactorTest.class );
         suite.addTestSuite( MavenITmng5958LifecyclePhaseBinaryCompat.class );
+        suite.addTestSuite( MavenITmng5935OptionalLostInTranstiveManagedDependenciesTest.class );
         suite.addTestSuite( MavenITmng5898BuildMultimoduleWithEARFailsToResolveWARTest.class );
         suite.addTestSuite( MavenITmng5889FindBasedir.class );
         suite.addTestSuite( MavenITmng5840ParentVersionRanges.class );

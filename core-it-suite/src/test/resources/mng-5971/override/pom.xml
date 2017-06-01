@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License.
+-->
+
+<project>
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>org.apache.maven.its.mng5971</groupId>
+  <artifactId>0</artifactId>
+  <version>20160220</version>
+  <packaging>pom</packaging>
+
+  <name>Maven Integration Test :: MNG-5971</name>
+
+  <description>
+    Tests that imported dependencies will be overridden based on a first declaration wins strategy.
+  </description>
+
+  <dependencyManagement>
+    <dependencies>
+      <!--
+      Imports the same dependency as below with a different version.
+      -->
+      <dependency>
+        <groupId>org.apache.maven.its.mng5971</groupId>
+        <artifactId>import</artifactId>
+        <version>0</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+      <!--
+      Direct declaration overrides what gets imported.
+      -->
+      <dependency>
+        <groupId>org.apache.maven.its.mng5971</groupId>
+        <artifactId>dependency</artifactId>
+        <version>3</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.apache.maven.its.mng5971</groupId>
+      <artifactId>dependency</artifactId>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.its.plugins</groupId>
+        <artifactId>maven-it-plugin-dependency-resolution</artifactId>
+        <version>2.1-SNAPSHOT</version>
+        <configuration>
+          <compileArtifacts>target/compile.txt</compileArtifacts>
+        </configuration>
+        <executions>
+          <execution>
+            <phase>validate</phase>
+            <goals>
+              <goal>compile</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+
+</project>

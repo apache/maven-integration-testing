@@ -106,6 +106,7 @@ public class IntegrationTestSuite
         // -------------------------------------------------------------------------------------------------------------
         // suite.addTestSuite( MavenIT0108SnapshotUpdateTest.class ); -- MNG-3137
 
+        suite.addTestSuite( MavenITmng5965ParallelBuildMultipliesWorkTest.class );
         suite.addTestSuite( MavenITmng6240PluginExtensionAetherProvider.class );
         suite.addTestSuite( MavenITmng6223FindBasedir.class );
         suite.addTestSuite( MavenITmng6189SiteReportPluginsWarningTest.class );
@@ -701,7 +702,6 @@ public class IntegrationTestSuite
         suite.addTestSuite( MavenIT0008SimplePluginTest.class );
         suite.addTestSuite( MavenITmng6209MultipleBuildExtensions.class );
         suite.addTestSuite( MavenITmng6210CoreExtensionsCustomScopesTest.class );
-
         /*
          * Add tests in reverse alpha order above.
          */

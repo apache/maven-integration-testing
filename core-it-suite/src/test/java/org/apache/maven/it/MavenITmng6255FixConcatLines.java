@@ -47,17 +47,6 @@ public class MavenITmng6255FixConcatLines
     }
 
     /**
-     * Check that <code>CR</code> line endings work.
-     * <p>
-     * Currently disabled.
-     */
-    public void disabledJvmConfigFileCR()
-        throws Exception
-    {
-        runWithLineEndings( "\r" );
-    }
-
-    /**
      * Check that <code>LF</code> line endings work.
      */
     public void testJvmConfigFileLF()

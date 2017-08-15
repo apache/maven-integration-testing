@@ -106,14 +106,18 @@ public class IntegrationTestSuite
         // -------------------------------------------------------------------------------------------------------------
         // suite.addTestSuite( MavenIT0108SnapshotUpdateTest.class ); -- MNG-3137
 
-        suite.addTestSuite( MavenITmng6127PluginExecutionConfigurationInterferenceTest.class );
+        suite.addTestSuite( MavenITmng6240PluginExtensionAetherProvider.class );
+        suite.addTestSuite( MavenITmng6223FindBasedir.class );
         suite.addTestSuite( MavenITmng6189SiteReportPluginsWarningTest.class );
+        suite.addTestSuite( MavenITmng6127PluginExecutionConfigurationInterferenceTest.class );
         suite.addTestSuite( MavenITmng6057CheckReactorOrderTest.class );
         suite.addTestSuite( MavenITmng5895CIFriendlyUsageWithPropertyTest.class );
         suite.addTestSuite( MavenITmng6090CIFriendlyTest.class );
+        suite.addTestSuite( MavenITmng6084Jsr250PluginTest.class );
         suite.addTestSuite( MavenITmng6173GetProjectsAndDependencyGraphTest.class );
         suite.addTestSuite( MavenITmng6173GetAllProjectsInReactorTest.class );
         suite.addTestSuite( MavenITmng5958LifecyclePhaseBinaryCompat.class );
+        suite.addTestSuite( MavenITmng5935OptionalLostInTranstiveManagedDependenciesTest.class );
         suite.addTestSuite( MavenITmng5898BuildMultimoduleWithEARFailsToResolveWARTest.class );
         suite.addTestSuite( MavenITmng5889FindBasedir.class );
         suite.addTestSuite( MavenITmng5840ParentVersionRanges.class );
@@ -696,6 +700,8 @@ public class IntegrationTestSuite
         suite.addTestSuite( MavenIT0010DependencyClosureResolutionTest.class );
         suite.addTestSuite( MavenIT0009GoalConfigurationTest.class );
         suite.addTestSuite( MavenIT0008SimplePluginTest.class );
+        suite.addTestSuite( MavenITmng6209MultipleBuildExtensions.class );
+        suite.addTestSuite( MavenITmng6210CoreExtensionsCustomScopesTest.class );
 
         /*
          * Add tests in reverse alpha order above.

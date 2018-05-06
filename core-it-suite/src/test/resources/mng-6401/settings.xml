@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<settings>
+  <proxies>
+    <proxy>
+      <id>my_proxy</id>
+      <active>${env.MAVEN_PROXY_ACTIVE_BOOLEAN}</active>
+      <protocol>http</protocol>
+      <host>${env.MAVEN_PROXY_HOST_STRING}</host>
+      <port>${env.MAVEN_PROXY_PORT_INT}</port>
+      <nonProxyHosts>local.net|some.host.com</nonProxyHosts>
+    </proxy>
+  </proxies>
+</settings>

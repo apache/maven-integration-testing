@@ -54,7 +54,11 @@ public class MavenIT0132PomLifecycleTest
         {
             verifier.assertFilePresent( "target/site-attach-descriptor.txt" );
         }
-        verifier.assertFilePresent( "target/install-install.txt" );
+        if ( matchesVersionRange( "(,3.6.0)" ) )
+        {
+            // MNG-5667
+            verifier.assertFilePresent( "target/install-install.txt" );
+        }
         verifier.assertFilePresent( "target/deploy-deploy.txt" );
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();

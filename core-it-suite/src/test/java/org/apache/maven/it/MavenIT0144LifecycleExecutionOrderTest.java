@@ -95,7 +95,11 @@ public class MavenIT0144LifecycleExecutionOrderTest
             expected.add( "post-integration-test" );
         }
         expected.add( "verify" );
-        expected.add( "install" );
+        if ( matchesVersionRange( "(,3.6.0)" ) )
+        {
+            // MNG-5667
+            expected.add( "install" );
+        }
         expected.add( "deploy" );
 
         expected.add( "pre-site" );

@@ -53,7 +53,11 @@ public class MavenIT0137EarLifecycleTest
         verifier.assertFilePresent( "target/ear-generate-application-xml.txt" );
         verifier.assertFilePresent( "target/resources-resources.txt" );
         verifier.assertFilePresent( "target/ear-ear.txt" );
-        verifier.assertFilePresent( "target/install-install.txt" );
+        if ( matchesVersionRange( "(,3.6.0)" ) )
+        {
+            // MNG-5667
+            verifier.assertFilePresent( "target/install-install.txt" );
+        }
         verifier.assertFilePresent( "target/deploy-deploy.txt" );
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();

@@ -56,7 +56,11 @@ public class MavenIT0133JarLifecycleTest
         verifier.assertFilePresent( "target/compiler-test-compile.txt" );
         verifier.assertFilePresent( "target/surefire-test.txt" );
         verifier.assertFilePresent( "target/jar-jar.txt" );
-        verifier.assertFilePresent( "target/install-install.txt" );
+        if ( matchesVersionRange( "(,3.6.0)" ) )
+        {
+            // MNG-5667
+            verifier.assertFilePresent( "target/install-install.txt" );
+        }
         verifier.assertFilePresent( "target/deploy-deploy.txt" );
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();

@@ -34,5 +34,9 @@ public class TestMojo extends AbstractMojo
         {
             throw new MojoFailureException( "Failed to retrieve package annotation" );
         }
+        else
+        {
+            getLog().info( "MNG-6506 check succeeded" );
+        }
     }
 }

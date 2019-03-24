@@ -52,5 +52,6 @@ public class MavenITmng6506PackageAnnotationTest
         verifier.executeGoal( "verify" );
         verifier.resetStreams();
         verifier.verifyErrorFreeLog();
+        verifier.verifyTextInLog( "MNG-6506 check succeeded" );
     }
 }

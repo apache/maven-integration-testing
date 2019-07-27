@@ -53,6 +53,8 @@ public class MavenITmng4747JavaAgentUsedByPluginTest
         Verifier verifier = newVerifier( testDir.getAbsolutePath() );
         verifier.setAutoclean( false );
         verifier.deleteDirectory( "target" );
+        
+        // Used for M3.3.1-, otherwise .mvn/jvm.config is used
         verifier.setEnvironmentVariable( "MAVEN_OPTS", "-javaagent:agent.jar" );
         verifier.executeGoal( "validate" );
         verifier.verifyErrorFreeLog();
@@ -63,5 +65,4 @@ public class MavenITmng4747JavaAgentUsedByPluginTest
         assertNotNull( props1.get( "Mng4747Agent" ) );
         assertEquals( props1.get( "Mng4747Agent" ), props2.get( "Mng4747Agent" ) );
     }
-
 }

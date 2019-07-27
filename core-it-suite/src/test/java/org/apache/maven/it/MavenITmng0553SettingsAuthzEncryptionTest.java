@@ -227,11 +227,11 @@ public class MavenITmng0553SettingsAuthzEncryptionTest
         String path = home.getAbsolutePath();
         if ( path.indexOf( ' ' ) < 0 )
         {
-            verifier.setEnvironmentVariable( "MAVEN_OPTS", "-Duser.home=" + path );
+            verifier.setSystemProperty( "user.home", path );
         }
         else
         {
-            verifier.setEnvironmentVariable( "MAVEN_OPTS", "\"-Duser.home=" + path + "\"" );
+            verifier.setSystemProperty( "user.home", "\"" + path + "\"" );
         }
     }
 

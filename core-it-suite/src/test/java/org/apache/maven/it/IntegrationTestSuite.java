@@ -111,6 +111,7 @@ public class IntegrationTestSuite
         suite.addTestSuite( MavenITmng6506PackageAnnotationTest.class );
         suite.addTestSuite( MavenITmng6256SpecialCharsAlternatePOMLocation.class );
         suite.addTestSuite( MavenITmng6386BaseUriPropertyTest.class );
+        suite.addTestSuite( MavenITmng6357DependencyOrderNearestFirstTest.class );
         suite.addTestSuite( MavenITmng6330RelativePath.class );
         suite.addTestSuite( MavenITmng5965ParallelBuildMultipliesWorkTest.class );
         suite.addTestSuite( MavenITmng6255FixConcatLines.class );

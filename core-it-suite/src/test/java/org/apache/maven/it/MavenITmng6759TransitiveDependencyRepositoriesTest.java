@@ -31,7 +31,7 @@ public class MavenITmng6759TransitiveDependencyRepositoriesTest extends Abstract
     private final String projectBaseDir = "/mng-6759-transitive-dependency-repositories";
 
     public MavenITmng6759TransitiveDependencyRepositoriesTest() {
-        super( "(,3.6.1],[3.6.3,)" );
+        super( "(,3.6.2),(3.6.2,)" );
     }
 
     /**

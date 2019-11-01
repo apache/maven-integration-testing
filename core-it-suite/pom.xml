@@ -81,7 +81,7 @@ under the License.
     <proxy.pass></proxy.pass>
     <proxy.nonProxyHosts>localhost</proxy.nonProxyHosts>
     <slf4jVersion>1.6.1</slf4jVersion>
-    <jetty9Version>9.0.4.v20130625</jetty9Version>
+    <jetty9Version>9.4.22.v20191022</jetty9Version>
   </properties>
 
   <dependencies>

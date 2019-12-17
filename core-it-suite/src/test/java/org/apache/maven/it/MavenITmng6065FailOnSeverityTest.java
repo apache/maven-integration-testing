@@ -25,27 +25,28 @@ import java.io.File;
 
 /**
  * An integration test to verify that builds fail when logs occur
- * above or equal to the --fail-level cli property.
+ * above or equal to the --fail-on-severity cli property.
  *
  * <a href="https://issues.apache.org/jira/browse/MNG-6065">MNG-6065</a>.
  *
  */
-public class MavenITmng6065LogFailLevelTest
+public class MavenITmng6065FailOnSeverityTest
     extends AbstractMavenIntegrationTestCase
 {
 
-    public MavenITmng6065LogFailLevelTest()
+    public MavenITmng6065FailOnSeverityTest()
     {
-        super( "[3.6.3-SNAPSHOT,)" );
+        super( "[3.7.0-SNAPSHOT,)" );
     }
 
     public void testItShouldFailOnWarnLogMessages()
-        throws Exception
+            throws Exception
     {
-        File testDir = ResourceExtractor.simpleExtractResources( getClass(), "/mng-6065-log-fail-level" );
+        File testDir = ResourceExtractor.simpleExtractResources( getClass(), "/mng-6065-fail-on-severity" );
 
         Verifier verifier = newVerifier( testDir.getAbsolutePath(), false );
-        verifier.addCliOption( "--fail-level" );
+        verifier.setForkJvm( true );
+        verifier.addCliOption( "--fail-on-severity" );
         verifier.addCliOption( "WARN" );
 
         boolean failed = false;
@@ -67,10 +68,11 @@ public class MavenITmng6065LogFailLevelTest
     public void testItShouldSucceedOnWarnLogMessagesWhenFailLevelIsError()
             throws Exception
     {
-        File testDir = ResourceExtractor.simpleExtractResources( getClass(), "/mng-6065-log-fail-level" );
+        File testDir = ResourceExtractor.simpleExtractResources( getClass(), "/mng-6065-fail-on-severity" );
 
         Verifier verifier = newVerifier( testDir.getAbsolutePath(), false );
-        verifier.addCliOption( "--fail-level" );
+        verifier.setForkJvm( true );
+        verifier.addCliOption( "--fail-on-severity" );
         verifier.addCliOption( "ERROR" );
 
         verifier.executeGoal( "compile" );

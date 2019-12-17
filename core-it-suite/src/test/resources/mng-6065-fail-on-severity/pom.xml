@@ -29,7 +29,7 @@ under the License.
 
   <name>Maven Integration Test :: MNG-6065</name>
   <description>
-    An integration test to verify that builds fail when logs occur above or equal to the --fail-level cli property.
+    An integration test to verify that builds fail when logs occur above or equal to the --fail-on-severity cli property.
     An empty project like this will already log warnings about the platform encoding and the empty jar.
   </description>
 </project>

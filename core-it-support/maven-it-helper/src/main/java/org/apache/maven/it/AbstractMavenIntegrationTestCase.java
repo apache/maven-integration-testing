@@ -56,7 +56,7 @@ public abstract class AbstractMavenIntegrationTestCase
     /**
      * The zero-based column index where to print the test result.
      */
-    private static final int RESULT_COLUMN = 60;
+    private static final int RESULT_COLUMN = 120;
 
     private boolean skip;
 

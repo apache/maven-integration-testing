@@ -39,16 +39,16 @@ import java.util.Properties;
  *
  *
  */
-public class MavenITmng5175WagonHttpTest
+public class MavenITmng5175WagonHttpTest2
     extends AbstractMavenIntegrationTestCase
 {
     private Server server;
 
     private int port;
 
-    public MavenITmng5175WagonHttpTest()
+    public MavenITmng5175WagonHttpTest2()
     {
-        super( "[3.0.4,3.7.0-SNAPSHOT)" ); // 3.0.4+
+        super( "[3.7.0-SNAPSHOT,)" ); // 3.7.0+
     }
 
     @Override

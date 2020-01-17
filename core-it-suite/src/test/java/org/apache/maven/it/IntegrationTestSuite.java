@@ -165,6 +165,7 @@ public class IntegrationTestSuite
         suite.addTestSuite( MavenITmng5224InjectedSettings.class );
         suite.addTestSuite( MavenITmng5214DontMapWsdlToJar.class );
         suite.addTestSuite( MavenITmng5175WagonHttpTest.class );
+        suite.addTestSuite( MavenITmng5175WagonHttpTest2.class );
         suite.addTestSuite( MavenITmng5137ReactorResolutionInForkedBuildTest.class );
         suite.addTestSuite( MavenITmng5135AggregatorDepResolutionModuleExtensionTest.class );
         suite.addTestSuite( MavenITmng5096ExclusionAtDependencyWithImpliedClassifierTest.class );

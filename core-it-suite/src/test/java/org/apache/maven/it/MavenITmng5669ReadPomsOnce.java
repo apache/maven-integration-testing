@@ -65,7 +65,11 @@ public class MavenITmng5669ReadPomsOnce
         verifier.resetStreams();
         
         List<String> logTxt = verifier.loadLines( "log.txt", "utf-8" );
-        assertEquals( 168, logTxt.size() );
+        if ( logTxt.get( 0 ).startsWith( "Picked up _JAVA_OPTIONS:" ) )
+        {
+            logTxt.remove( 0 );
+        }
+        assertEquals( logTxt.toString(), 168, logTxt.size() );
         
         // analyze lines. It is a Hashmap, so we can't rely on the order
         Set<String> uniqueBuildingSources = new HashSet<>( 168 );

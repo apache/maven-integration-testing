@@ -21,8 +21,10 @@ package org.apache.maven.it;
 
 import java.io.File;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.apache.maven.it.util.ResourceExtractor;
@@ -46,10 +48,14 @@ public class MavenITmng5669ReadPomsOnce
     public void test()
         throws Exception
     {
-        // prepare JAvaAgent
+        // prepare JavaAgent
         File testDir = ResourceExtractor.simpleExtractResources( getClass(), "/mng-5669-read-poms-once" );
-
         Verifier verifier = newVerifier( testDir.getAbsolutePath(), false );
+        Map<String, String> filterProperties =
+            Collections.singletonMap( "${javaAgentJar}",
+                                      verifier.getArtifactPath( "mng-coreit", "javaagent", "1.0-SNAPSHOT", "jar" ) );
+        verifier.filterFile( ".mvn/jvm.config", ".mvn/jvm.config", null, filterProperties );
+
         verifier.setForkJvm( true ); // pick up agent
         verifier.setMavenDebug( false );
         verifier.setAutoclean( false );

@@ -18,10 +18,9 @@
 @REM
 
 @REM How JvZ runs the ITs from a clean slate if it would be on Windows
-@REM maven.repo.local should match mavenLocalRepo in maven/Jenkinsfile
 
-mvn clean install -Prun-its,embedded -Dmaven.repo.local=%cd%\.repository
+mvn clean install -Prun-its,embedded -Dmaven.repo.local=%cd%\repo
 
 @REM If behind a proxy try this..
 
-@REM mvn clean install -Prun-its,embedded -Dmaven.repo.local=%cd%\.repository -Dproxy.host=<host> -Dproxy.port=<port> -Dproxy.user= -Dproxy.pass= -Dproxy.nonProxyHosts=<hosts>
+@REM mvn clean install -Prun-its,embedded -Dmaven.repo.local=%cd%\repo -Dproxy.host=<host> -Dproxy.port=<port> -Dproxy.user= -Dproxy.pass= -Dproxy.nonProxyHosts=<hosts>

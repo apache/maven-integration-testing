@@ -65,9 +65,13 @@ public class MavenITmng5669ReadPomsOnce
         verifier.resetStreams();
         
         List<String> logTxt = verifier.loadLines( "log.txt", "utf-8" );
-        if ( logTxt.get( 0 ).startsWith( "Picked up JAVA_TOOL_OPTIONS:" ) )
+        for ( String line : logTxt ) 
         {
-            logTxt.remove( 0 );
+            if ( line.startsWith( "Picked up JAVA_TOOL_OPTIONS:" ) )
+            {
+                logTxt.remove( line );
+                break;
+            }
         }
         assertEquals( logTxt.toString(), 168, logTxt.size() );
         

@@ -1,6 +1,6 @@
 .svn
 target
-/repo
+/.repository
 .project
 .classpath
 .settings

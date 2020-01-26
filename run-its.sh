@@ -20,9 +20,10 @@
 #
 
 # How I run the ITs from a clean slate. Though I do this with a primed Nexus instance. JvZ.
+# maven.repo.local should match mavenLocalRepo in maven/Jenkinsfile
 
-mvn clean install -Prun-its,embedded -Dmaven.repo.local=`pwd`/repo
+mvn clean install -Prun-its,embedded -Dmaven.repo.local=`pwd`/.repository
 
 # If behind a proxy try this
 
-# mvn clean install -Prun-its,embedded -Dmaven.repo.local=`pwd`/repo -Dproxy.host=<host> -Dproxy.port=<port> -Dproxy.user= -Dproxy.pass= -Dproxy.nonProxyHosts=<hosts>
+# mvn clean install -Prun-its,embedded -Dmaven.repo.local=`pwd`/.repository -Dproxy.host=<host> -Dproxy.port=<port> -Dproxy.user= -Dproxy.pass= -Dproxy.nonProxyHosts=<hosts>

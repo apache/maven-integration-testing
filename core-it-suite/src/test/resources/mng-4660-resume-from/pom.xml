@@ -37,8 +37,8 @@ under the License.
     </properties>
 
     <modules>
-        <module>module-a</module>
         <module>module-b</module>
+        <module>module-a</module>
     </modules>
 
     <dependencies>

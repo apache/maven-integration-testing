@@ -234,6 +234,7 @@ public class IntegrationTestSuite
         suite.addTestSuite( MavenITmng4679SnapshotUpdateInPluginTest.class );
         suite.addTestSuite( MavenITmng4677DisabledPluginConfigInheritanceTest.class );
         suite.addTestSuite( MavenITmng4666CoreRealmImportTest.class );
+        suite.addTestSuite( MavenITmng4660ResumeFromTest.class );
         suite.addTestSuite( MavenITmng4654ArtifactHandlerForMainArtifactTest.class );
         suite.addTestSuite( MavenITmng4644StrictPomParsingRejectsMisplacedTextTest.class );
         // suite.addTestSuite( MavenITmng4633DualCompilerExecutionsWeaveModeTest.class );

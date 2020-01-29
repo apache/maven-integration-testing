@@ -19,16 +19,6 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.junit.Test;
-
-import static org.junit.Assert.fail;
-
-public class TestCase
+public class Example
 {
-    @Test
-    public void testCase()
-    {
-        final Example example = new Example();
-        fail( "Deliberately fail test case" );
-    }
 }

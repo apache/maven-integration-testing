@@ -1,5 +1,10 @@
 package org.apache.maven.it;
 
+import java.io.File;
+import java.util.Properties;
+
+import org.apache.maven.it.util.ResourceExtractor;
+
 /*
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements.  See the NOTICE file
@@ -19,33 +24,32 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.util.ResourceExtractor;
-
-import java.io.File;
-import java.util.Properties;
-
 /**
- * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-3813">MNG-3813</a>.
- * 
- * @author Benjamin Bentmann
+ * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-6357">MNG-6357</a>.
  *
+ * @author Gabriel Belingueres
  */
-public class MavenITmng3813PluginClassPathOrderingTest
+public class MavenITmng6357DependencyOrderNearestFirstTest
     extends AbstractMavenIntegrationTestCase
 {
 
-    public MavenITmng3813PluginClassPathOrderingTest()
+    public MavenITmng6357DependencyOrderNearestFirstTest()
     {
-        super( "(2.0.8,3.6.2]" );
+        super("(3.6.2,)");
     }
 
     /**
-     * Verify that the ordering of the plugin class path matches the ordering of the dependencies as given in the POM.
+     * Verify that the ordering of the class path matches the ordering of the dependencies as given in the POM, where
+     * artifacts are listed from the nearest to the farest in depth from the root of the dependency tree. Dependencies
+     * at the same depth are listed in the order declared in the POM.<br/>
+     * <br/>
+     * Note: test dependencies used in this test were copied from mng-3813 just to show the new ordering using the same
+     * artifacts.
      */
-    public void testitMNG3813()
+    public void testitMNG6357()
         throws Exception
     {
-        File testDir = ResourceExtractor.simpleExtractResources( getClass(), "/mng-3813" );
+        File testDir = ResourceExtractor.simpleExtractResources( getClass(), "/mng-6357" );
 
         Verifier verifier = newVerifier( testDir.getAbsolutePath() );
         verifier.setAutoclean( false );
@@ -69,13 +73,13 @@ public class MavenITmng3813PluginClassPathOrderingTest
         assertEquals( "8", pclProps.getProperty( resName + ".count" ) );
 
         assertTrue( pclProps.getProperty( resName + ".0" ).endsWith( "/dep-a-0.1.jar!/" + resName ) );
-        assertTrue( pclProps.getProperty( resName + ".1" ).endsWith( "/dep-aa-0.1.jar!/" + resName ) );
-        assertTrue( pclProps.getProperty( resName + ".2" ).endsWith( "/dep-ac-0.1.jar!/" + resName ) );
-        assertTrue( pclProps.getProperty( resName + ".3" ).endsWith( "/dep-ab-0.1.jar!/" + resName ) );
-        assertTrue( pclProps.getProperty( resName + ".4" ).endsWith( "/dep-ad-0.1.jar!/" + resName ) );
-        assertTrue( pclProps.getProperty( resName + ".5" ).endsWith( "/dep-c-0.1.jar!/" + resName ) );
-        assertTrue( pclProps.getProperty( resName + ".6" ).endsWith( "/dep-b-0.1.jar!/" + resName ) );
-        assertTrue( pclProps.getProperty( resName + ".7" ).endsWith( "/dep-d-0.1.jar!/" + resName ) );
+        assertTrue( pclProps.getProperty( resName + ".1" ).endsWith( "/dep-c-0.1.jar!/" + resName ) );
+        assertTrue( pclProps.getProperty( resName + ".2" ).endsWith( "/dep-b-0.1.jar!/" + resName ) );
+        assertTrue( pclProps.getProperty( resName + ".3" ).endsWith( "/dep-d-0.1.jar!/" + resName ) );
+        assertTrue( pclProps.getProperty( resName + ".4" ).endsWith( "/dep-aa-0.1.jar!/" + resName ) );
+        assertTrue( pclProps.getProperty( resName + ".5" ).endsWith( "/dep-ac-0.1.jar!/" + resName ) );
+        assertTrue( pclProps.getProperty( resName + ".6" ).endsWith( "/dep-ab-0.1.jar!/" + resName ) );
+        assertTrue( pclProps.getProperty( resName + ".7" ).endsWith( "/dep-ad-0.1.jar!/" + resName ) );
     }
 
 }

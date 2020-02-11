@@ -9,7 +9,7 @@
   <distributionManagement>
     <repository>
       <id>test</id>
-      <url>http://dummyhost.com/repository</url>
+      <url>https://dummyhost.com/repository</url>
     </repository>
   </distributionManagement>
   

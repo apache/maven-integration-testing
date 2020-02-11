@@ -12,7 +12,7 @@
   <distributionManagement>
     <repository>
       <id>topaz</id>
-      <url>http://gandalf.topazproject.org/maven2/</url>
+      <url>https://gandalf.topazproject.org/maven2/</url>
     </repository>
   </distributionManagement>
 

@@ -87,11 +87,11 @@ under the License.
   </ciManagement>
   <distributionManagement>
     <repository>
-      <url>http://child.url/dist</url>
+      <url>https://child.url/dist</url>
       <id>child.distros</id>
     </repository>
     <snapshotRepository>
-      <url>http://child.url/snaps</url>
+      <url>https://child.url/snaps</url>
       <id>child.snaps</id>
     </snapshotRepository>
     <site>
@@ -149,7 +149,7 @@ under the License.
   <repositories>
     <repository>
       <id>child-remote-repo</id>
-      <url>http://child.url/remote</url>
+      <url>https://child.url/remote</url>
     </repository>
   </repositories>
 

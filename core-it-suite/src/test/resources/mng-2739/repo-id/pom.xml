@@ -10,7 +10,7 @@
   <description>Test missing repository id</description>
   <repositories>
     <repository>
-      <url>http://maven.apache.org/</url>
+      <url>https://maven.apache.org/</url>
     </repository>
   </repositories>
 </project>

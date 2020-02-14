@@ -142,6 +142,7 @@ public class IntegrationTestSuite
         suite.addTestSuite( MavenITmng5768CliExecutionIdTest.class );
         suite.addTestSuite( MavenITmng5742BuildExtensionClassloaderTest.class );
         suite.addTestSuite( MavenITmng5578SessionScopeTest.class );
+        suite.addTestSuite( MavenITmng5760ResumeFromWithoutArgsTest.class );
         suite.addTestSuite( MavenITmng5753CustomMojoExecutionConfiguratorTest.class );
         suite.addTestSuite( MavenITmng5716ToolchainsTypeTest.class );
         suite.addTestSuite( MavenITmng5663NestedImportScopePomResolutionTest.class );

@@ -40,7 +40,7 @@ public class MavenITmng4660ResumeFromTest extends AbstractMavenIntegrationTestCa
      * Test that the --resume-from flag resolves dependencies inside the same Maven project
      * without having them installed first.
      */
-    public void testIt() throws Exception
+    public void testShouldResolveDependenciesFromEarlierBuild() throws Exception
     {
         final File testDir = ResourceExtractor.simpleExtractResources( getClass(), "/mng-4660-resume-from" );
 

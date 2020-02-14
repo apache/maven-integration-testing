@@ -33,7 +33,7 @@ public class MavenITmng4660ResumeFromTest extends AbstractMavenIntegrationTestCa
     public MavenITmng4660ResumeFromTest()
     {
         // TODO Update version range once bug has been fixed!
-        super( "[3.6.3,)" );
+        super( "[3.7.0-SNAPSHOT,)" );
     }
 
     /**

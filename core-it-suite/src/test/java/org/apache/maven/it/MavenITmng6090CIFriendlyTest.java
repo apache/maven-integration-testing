@@ -19,7 +19,6 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
@@ -61,7 +60,7 @@ public class MavenITmng6090CIFriendlyTest
         
         verifier.addCliOption( "-Drevision=1.2" );
         verifier.setLogFileName( "install-log.txt" );
-        verifier.executeGoals( Arrays.asList( "clean", "install" ) );
+        verifier.executeGoal( "verify" );
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
 

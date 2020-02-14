@@ -49,7 +49,7 @@ public class MavenITmng4660ResumeFromTest extends AbstractMavenIntegrationTestCa
 
         try
         {
-            verifier1.executeGoal("verify");
+            verifier1.executeGoal( "verify" );
             fail( "Expected this invocation to fail" ); // See TestCase.java
         }
         catch ( final VerificationException ve )

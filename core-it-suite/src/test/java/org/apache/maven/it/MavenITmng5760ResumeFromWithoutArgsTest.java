@@ -75,4 +75,28 @@ public class MavenITmng5760ResumeFromWithoutArgsTest
         }
         verifier.verifyTextInLog( "Building Maven Integration Test :: MNG-5760 - Module B" );
     }
+
+    public void testItShouldFailTheBuildWhenNoArgsRFIsUsedWhileThereIsNoCacheFile()
+            throws Exception
+    {
+        File testDir = ResourceExtractor.simpleExtractResources( getClass(), "/mng-5760-resume-from-without-args" );
+
+        Verifier verifier = newVerifier( testDir.getAbsolutePath() );
+
+        // First let's make sure we don't have a cache file
+        verifier.executeGoal( "clean" );
+
+        // Then resume the build without args
+        verifier.addCliOption( "-rf" );
+        try
+        {
+            verifier.executeGoal( "validate" );
+            fail("Should have failed because of having no --resume-from cache file in the build directory");
+        }
+        catch ( VerificationException e ) {
+            // expected, as we fail on module-b
+        }
+        verifier.verifyTextInLog( "--resume-from without args expects a file called resume-from-cache in the build "
+                + "directory with the last failed project descriptor." );
+    }
 }

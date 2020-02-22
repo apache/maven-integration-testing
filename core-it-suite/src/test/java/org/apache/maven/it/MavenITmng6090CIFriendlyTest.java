@@ -60,7 +60,7 @@ public class MavenITmng6090CIFriendlyTest
         
         verifier.addCliOption( "-Drevision=1.2" );
         verifier.setLogFileName( "install-log.txt" );
-        verifier.executeGoal( "verify" );
+        verifier.executeGoals( Arrays.asList( "clean", "install" ) );
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
 

@@ -86,11 +86,6 @@ under the License.
     <module>mng6759-plugin-resolves-project-dependencies</module>
   </modules>
 
-  <scm>
-    <connection>scm:svn:http://svn.apache.org/repos/asf/maven/core-integration-testing/trunk/core-it-support/core-it-plugins</connection>
-    <developerConnection>scm:svn:https://svn.apache.org/repos/asf/maven/core-integration-testing/trunk/core-it-support/core-it-plugins</developerConnection>
-    <url>http://svn.apache.org/viewvc/maven/core-integration-testing/trunk/core-it-support/core-it-plugins</url>
-  </scm>
   <distributionManagement>
     <repository>
       <id>maven.it</id>

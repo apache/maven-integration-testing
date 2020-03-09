@@ -38,8 +38,9 @@ public class MavenITmng4660ResumeFromTest extends AbstractMavenIntegrationTestCa
     /**
      * Test that the --resume-from flag resolves dependencies inside the same Maven project
      * without having them installed first.
+     * This test case uses the target/classes folder of module-a.
      */
-    public void testShouldResolveDependenciesFromEarlierBuild() throws Exception
+    public void testShouldResolveUnpackagedArtifactFromEarlierBuild() throws Exception
     {
         final File testDir = ResourceExtractor.simpleExtractResources( getClass(), "/mng-4660-resume-from" );
 
@@ -49,7 +50,44 @@ public class MavenITmng4660ResumeFromTest extends AbstractMavenIntegrationTestCa
 
         try
         {
-            verifier1.executeGoal( "verify" );
+            verifier1.executeGoal( "test" ); // The test goal will not create a packaged artifact
+            fail( "Expected this invocation to fail" ); // See TestCase.java
+        }
+        catch ( final VerificationException ve )
+        {
+            verifier1.verifyTextInLog( "Deliberately fail test case" );
+        }
+        finally
+        {
+            verifier1.resetStreams();
+        }
+
+        final Verifier verifier2 = newVerifier( testDir.getAbsolutePath() );
+        verifier2.setAutoclean( false );
+        verifier2.addCliOption( "--resume-from" );
+        verifier2.addCliOption( ":module-b" );
+        verifier2.executeGoal( "compile" ); // to prevent the unit test from failing (again)
+
+        verifier2.verifyErrorFreeLog();
+        verifier2.resetStreams();
+    }
+
+    /**
+     * Test that the --resume-from flag resolves dependencies inside the same Maven project
+     * without having them installed first.
+     * This test case uses the packaged artifact of module-a.
+     */
+    public void testShouldResolvePackagedArtifactFromEarlierBuild() throws Exception
+    {
+        final File testDir = ResourceExtractor.simpleExtractResources( getClass(), "/mng-4660-resume-from" );
+
+        final Verifier verifier1 = newVerifier( testDir.getAbsolutePath() );
+        verifier1.deleteDirectory( "target" );
+        verifier1.deleteArtifacts( "org.apache.maven.its.mng4660" );
+
+        try
+        {
+            verifier1.executeGoal( "verify" ); // The verify goal will create a packaged artifact
             fail( "Expected this invocation to fail" ); // See TestCase.java
         }
         catch ( final VerificationException ve )

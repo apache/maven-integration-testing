@@ -63,10 +63,8 @@ public class MavenITmng4660OutdatedPackagedArtifact extends AbstractMavenIntegra
         final Verifier verifier2 = newVerifier( testDir.getAbsolutePath() );
 
         final Path resourcesDirectory = Files.createDirectories( Paths.get( testDir.toString(), "module-a", "src", "main", "resources" ) );
-        System.err.println( "Created directory " + resourcesDirectory.toAbsolutePath().toString() );
         final Path fileToWrite = resourcesDirectory.resolve( "example.properties" );
         FileUtils.fileWrite( fileToWrite.toString(), "x=42" );
-        System.err.println( "Wrote file " + fileToWrite.toAbsolutePath().toString() );
 
         verifier2.setAutoclean( false );
         verifier2.addCliOption( "--projects" );

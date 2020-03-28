@@ -30,6 +30,12 @@ under the License.
 
     <packaging>pom</packaging>
 
+    <name>Maven Integration Test :: MNG-4660</name>
+    <description>
+        Test that the --resume-from flag resolves dependencies inside the same Maven project
+        without having them installed first.
+    </description>
+
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
@@ -49,14 +55,5 @@ under the License.
             <scope>test</scope>
         </dependency>
     </dependencies>
-
-    <build>
-        <plugins>
-            <plugin>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.8.1</version>
-            </plugin>
-        </plugins>
-    </build>
 
 </project>

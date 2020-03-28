@@ -58,7 +58,6 @@ public class MavenITmng4660OutdatedPackagedArtifact extends AbstractMavenIntegra
         verifier1.verifyErrorFreeLog();
         verifier1.resetStreams();
 
-
         // 2. Create a properties file with some content and compile only that module (module A).
         final Verifier verifier2 = newVerifier( testDir.getAbsolutePath() );
 

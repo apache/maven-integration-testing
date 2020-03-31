@@ -55,22 +55,24 @@ public class MavenITmng4660OutdatedPackagedArtifact extends AbstractMavenIntegra
 
         verifier1.executeGoal( "package" );
 
+        Path module1Jar = testDir.toPath().resolve( "module-a/target/module-a-1.0.jar" ).toAbsolutePath();
         verifier1.verifyErrorFreeLog();
+        verifier1.assertFilePresent( module1Jar.toString() );
         verifier1.resetStreams();
 
         // 2. Create a properties file with some content and compile only that module (module A).
         final Verifier verifier2 = newVerifier( testDir.getAbsolutePath() );
-
-        final Path resourcesDirectory = Files.createDirectories( Paths.get( testDir.toString(), "module-a", "src", "main", "resources" ) );
-        final Path fileToWrite = resourcesDirectory.resolve( "example.properties" );
-        FileUtils.fileWrite( fileToWrite.toString(), "x=42" );
+        verifier2.deleteDirectory( "module-a/target/classes" );
 
         verifier2.setAutoclean( false );
         verifier2.addCliOption( "--projects" );
         verifier2.addCliOption( ":module-a" );
         verifier2.executeGoal( "compile" );
 
+        Path module1Class = testDir.toPath().resolve( "module-a/target/classes/org/apache/maven/it/Example.class" )
+                        .toAbsolutePath();
         verifier2.verifyErrorFreeLog();
+        verifier2.assertFilePresent( module1Class.toString() );
         verifier2.resetStreams();
 
         // 3. Resume project build from module B, that depends on module A we just touched. Its packaged artifact
@@ -82,7 +84,19 @@ public class MavenITmng4660OutdatedPackagedArtifact extends AbstractMavenIntegra
         verifier3.executeGoal( "compile" );
 
         verifier3.verifyErrorFreeLog();
-        verifier3.verifyTextInLog( "Packaged artifact is not up-to-date" );
+        try
+        {
+            verifier3.verifyTextInLog( "Packaged artifact is not up-to-date" );
+        }
+        catch ( VerificationException e )
+        {
+            String message = e.getMessage() + System.lineSeparator();
+            message += "  " + module1Jar.getFileName() + " > " + Files.getLastModifiedTime( module1Jar )
+                            + System.lineSeparator();
+            message += "  " + module1Class.getFileName() + " > " + Files.getLastModifiedTime( module1Class )
+                            + System.lineSeparator();
+            throw new VerificationException( message, e.getCause() );
+        }
         verifier3.resetStreams();
     }
 }

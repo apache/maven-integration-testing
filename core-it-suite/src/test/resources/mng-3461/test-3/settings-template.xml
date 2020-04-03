@@ -44,12 +44,12 @@ under the License.
   <mirrors>
     <mirror>
       <id>central</id>
-      <url>http://maven.apache.org/null</url>
+      <url>https://maven.apache.org/null</url>
       <!--
       The explicit mismatch with maven-core-it should be dominant over the wildcard, even if the wildcard
       is given first.
       -->
-      <mirrorOf>*,!maven-core-it</mirrorOf>
+      <mirrorOf>*,!maven-core-it,!central</mirrorOf>
     </mirror>
   </mirrors>
 </settings>

@@ -20,6 +20,7 @@ package org.apache.maven.it;
  */
 
 import org.apache.maven.it.util.ResourceExtractor;
+import org.apache.maven.shared.utils.io.FileUtils;
 
 import java.io.File;
 import java.util.Arrays;
@@ -60,9 +61,37 @@ public class MavenITmng6656BuildConsumer
         verifier.setAutoclean( false );
         verifier.addCliOption( "-Dchangelist=JIRA101" );
 
-        // install is useless in this IT suite as it doesn't write the pomfile to the local repo
         verifier.executeGoals( Arrays.asList( "validate" ) );
-        
         verifier.verifyErrorFreeLog();
     }
+    
+    public void testPublishedPoms()
+                    throws Exception
+    {
+        File testDir = ResourceExtractor.simpleExtractResources( getClass(), "/mng-6656-buildconsumer" );
+
+        Verifier verifier = newVerifier( testDir.getAbsolutePath(), false );
+        verifier.setMavenDebug( false );
+        verifier.setAutoclean( false );
+        verifier.addCliOption( "-Dchangelist=MNG6656" );
+
+        verifier.executeGoals( Arrays.asList( "install" ) );
+        verifier.verifyErrorFreeLog();
+
+        // use original resource files to ensure correct EOLs
+        File resourcesDir = new File( "src/test/resources/mng-6656-buildconsumer" );
+        String content;
+        content = FileUtils.fileRead( new File( resourcesDir, "expected/parent.pom") ); 
+        verifier.assertArtifactContents( "org.sonatype.mavenbook.multi", "parent", "0.9-MNG6656-SNAPSHOT", "pom", content );
+
+        content = FileUtils.fileRead( new File( resourcesDir, "expected/simple-parent.pom") ); 
+        verifier.assertArtifactContents( "org.sonatype.mavenbook.multi", "simple-parent", "0.9-MNG6656-SNAPSHOT", "pom", content );
+
+        content = FileUtils.fileRead( new File( resourcesDir, "expected/simple-weather.pom") ); 
+        verifier.assertArtifactContents( "org.sonatype.mavenbook.multi", "simple-weather", "0.9-MNG6656-SNAPSHOT", "pom", content );
+
+        content = FileUtils.fileRead( new File( resourcesDir, "expected/simple-webapp.pom") ); 
+        verifier.assertArtifactContents( "org.sonatype.mavenbook.multi", "simple-webapp", "0.9-MNG6656-SNAPSHOT", "pom", content );
+    }
+
 }

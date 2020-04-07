@@ -78,7 +78,8 @@ public class MavenITmng4660OutdatedPackagedArtifact extends AbstractMavenIntegra
                 .toAbsolutePath();
 
         verifier2.assertFilePresent( module1PropertiesFile.toString() );
-        assertThat( Files.getLastModifiedTime( module1PropertiesFile ), greaterThan ( Files.getLastModifiedTime( module1Jar ) ) );
+        assertThat( Files.getLastModifiedTime( module1PropertiesFile ),
+                greaterThan ( Files.getLastModifiedTime( module1Jar ) ) );
 
         Path module1Class = testDir.toPath().resolve( "module-a/target/classes/org/apache/maven/it/Example.class" )
                         .toAbsolutePath();
@@ -102,9 +103,9 @@ public class MavenITmng4660OutdatedPackagedArtifact extends AbstractMavenIntegra
         catch ( VerificationException e )
         {
             String message = e.getMessage() + System.lineSeparator();
-            message += "  " + module1Jar.getFileName() + " > " + Files.getLastModifiedTime( module1Jar )
+            message += "  " + module1Jar.getFileName() + " -> " + Files.getLastModifiedTime( module1Jar )
                             + System.lineSeparator();
-            message += "  " + module1Class.getFileName() + " > " + Files.getLastModifiedTime( module1Class )
+            message += "  " + module1PropertiesFile.getFileName() + " -> " + Files.getLastModifiedTime( module1PropertiesFile )
                             + System.lineSeparator();
             throw new VerificationException( message, e.getCause() );
         }

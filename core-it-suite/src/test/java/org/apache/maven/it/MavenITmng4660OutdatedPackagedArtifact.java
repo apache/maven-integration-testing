@@ -63,6 +63,11 @@ public class MavenITmng4660OutdatedPackagedArtifact extends AbstractMavenIntegra
         verifier1.assertFilePresent( module1Jar.toString() );
         verifier1.resetStreams();
 
+        // Simulating the delay between two invocations. It also makes sure we're not hit by tests that run so fast,
+        // that the difference in file modification time (see below) is too small to observe. Some combinations of OS
+        // and filesystem return that value with "just" second precision, which is not detailed enough.
+        Thread.sleep(1_000);
+
         // 2. Create a properties file with some content and compile only that module (module A).
         final Verifier verifier2 = newVerifier( testDir.getAbsolutePath() );
         final Path resourcesDirectory = Files.createDirectories( Paths.get( testDir.toString(), "module-a", "src", "main", "resources" ) );

@@ -27,6 +27,9 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import static org.junit.Assert.assertThat;
+import static org.hamcrest.Matchers.greaterThan;
+
 /**
  * This is a test case for a new check introduced with <a href="https://issues.apache.org/jira/browse/MNG-4660">MNG-4660</a>.
  * That check verifies if a packaged artifact within the Reactor is up-to-date with the outputDirectory of the same project.
@@ -62,12 +65,20 @@ public class MavenITmng4660OutdatedPackagedArtifact extends AbstractMavenIntegra
 
         // 2. Create a properties file with some content and compile only that module (module A).
         final Verifier verifier2 = newVerifier( testDir.getAbsolutePath() );
-        verifier2.deleteDirectory( "module-a/target/classes" );
+        final Path resourcesDirectory = Files.createDirectories( Paths.get( testDir.toString(), "module-a", "src", "main", "resources" ) );
+        final Path fileToWrite = resourcesDirectory.resolve( "example.properties" );
+        FileUtils.fileWrite( fileToWrite.toString(), "x=42" );
 
         verifier2.setAutoclean( false );
         verifier2.addCliOption( "--projects" );
         verifier2.addCliOption( ":module-a" );
         verifier2.executeGoal( "compile" );
+
+        Path module1PropertiesFile = testDir.toPath().resolve( "module-a/target/classes/example.properties" )
+                .toAbsolutePath();
+
+        verifier2.assertFilePresent( module1PropertiesFile.toString() );
+        assertThat( Files.getLastModifiedTime( module1PropertiesFile ), greaterThan ( Files.getLastModifiedTime( module1Jar ) ) );
 
         Path module1Class = testDir.toPath().resolve( "module-a/target/classes/org/apache/maven/it/Example.class" )
                         .toAbsolutePath();

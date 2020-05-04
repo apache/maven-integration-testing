@@ -92,6 +92,12 @@ under the License.
       <!-- NOTE: Use compile scope for transitivity. -->
     </dependency>
     <dependency>
+      <groupId>org.hamcrest</groupId>
+      <artifactId>hamcrest-all</artifactId>
+      <version>1.3</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
       <groupId>org.codehaus.plexus</groupId>
       <artifactId>plexus-utils</artifactId>
       <version>1.5.8</version>
@@ -374,7 +380,7 @@ under the License.
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-antrun-plugin</artifactId>
-            <version>1.3</version>
+            <version>3.0.0</version>
             <executions>
               <execution>
                 <id>unpack-maven-distro</id>
@@ -383,7 +389,7 @@ under the License.
                   <goal>run</goal>
                 </goals>
                 <configuration>
-                  <tasks>
+                  <target>
                     <delete dir="${mavenHome}" />
                     <unzip src="${project.build.directory}/maven-bin.zip"
                       dest="${mavenHome}">
@@ -392,7 +398,7 @@ under the License.
                     </unzip>
                     <chmod dir="${mavenHome}/bin" perm="ugo+rx"
                       includes="mvn,mvnDebug" />
-                  </tasks>
+                  </target>
                 </configuration>
               </execution>
             </executions>
@@ -421,7 +427,7 @@ under the License.
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-antrun-plugin</artifactId>
-            <version>1.6</version>
+            <version>3.0.0</version>
             <executions>
               <execution>
                 <id>unpack-maven-distro</id>
@@ -430,7 +436,7 @@ under the License.
                   <goal>run</goal>
                 </goals>
                 <configuration>
-                  <tasks>
+                  <target>
                     <delete dir="${mavenHome}" />
                     <unzip src="${mavenDistro}" dest="${mavenHome}">
                       <regexpmapper from="^([^/]+)/(.*)$"
@@ -438,7 +444,7 @@ under the License.
                     </unzip>
                     <chmod dir="${mavenHome}/bin" perm="ugo+rx"
                       includes="mvn,mvnDebug" />
-                  </tasks>
+                  </target>
                 </configuration>
               </execution>
             </executions>
@@ -463,7 +469,7 @@ under the License.
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-antrun-plugin</artifactId>
-            <version>1.3</version>
+            <version>3.0.0</version>
             <executions>
               <execution>
                 <id>copy-maven-distro</id>
@@ -472,14 +478,14 @@ under the License.
                   <goal>run</goal>
                 </goals>
                 <configuration>
-                  <tasks>
+                  <target>
                     <delete dir="${preparedMavenHome}" />
                     <copy todir="${preparedMavenHome}" overwrite="true">
                       <fileset dir="${mavenHome}" />
                     </copy>
                     <chmod dir="${preparedMavenHome}/bin" perm="ugo+rx"
                       includes="mvn,mvnDebug" />
-                  </tasks>
+                  </target>
                 </configuration>
               </execution>
             </executions>

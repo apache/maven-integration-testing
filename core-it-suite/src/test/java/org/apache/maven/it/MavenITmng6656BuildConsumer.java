@@ -78,19 +78,17 @@ public class MavenITmng6656BuildConsumer
         verifier.executeGoals( Arrays.asList( "install" ) );
         verifier.verifyErrorFreeLog();
 
-        // use original resource files to ensure correct EOLs
-        File resourcesDir = new File( "src/test/resources/mng-6656-buildconsumer" );
         String content;
-        content = FileUtils.fileRead( new File( resourcesDir, "expected/parent.pom") ); 
+        content = FileUtils.fileRead( new File( testDir, "expected/parent.pom") ); 
         verifier.assertArtifactContents( "org.sonatype.mavenbook.multi", "parent", "0.9-MNG6656-SNAPSHOT", "pom", content );
 
-        content = FileUtils.fileRead( new File( resourcesDir, "expected/simple-parent.pom") ); 
+        content = FileUtils.fileRead( new File( testDir, "expected/simple-parent.pom") ); 
         verifier.assertArtifactContents( "org.sonatype.mavenbook.multi", "simple-parent", "0.9-MNG6656-SNAPSHOT", "pom", content );
 
-        content = FileUtils.fileRead( new File( resourcesDir, "expected/simple-weather.pom") ); 
+        content = FileUtils.fileRead( new File( testDir, "expected/simple-weather.pom") ); 
         verifier.assertArtifactContents( "org.sonatype.mavenbook.multi", "simple-weather", "0.9-MNG6656-SNAPSHOT", "pom", content );
 
-        content = FileUtils.fileRead( new File( resourcesDir, "expected/simple-webapp.pom") ); 
+        content = FileUtils.fileRead( new File( testDir, "expected/simple-webapp.pom") ); 
         verifier.assertArtifactContents( "org.sonatype.mavenbook.multi", "simple-webapp", "0.9-MNG6656-SNAPSHOT", "pom", content );
     }
 

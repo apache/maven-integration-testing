@@ -121,6 +121,7 @@ public class IntegrationTestSuite
         suite.addTestSuite( MavenITmng6255FixConcatLines.class );
         suite.addTestSuite( MavenITmng6240PluginExtensionAetherProvider.class );
         suite.addTestSuite( MavenITmng6223FindBasedir.class );
+        suite.addTestSuite( MavenITmng5600DependencyManagementImportExclusionsTest.class );
         suite.addTestSuite( MavenITmng6210CoreExtensionsCustomScopesTest.class );
         suite.addTestSuite( MavenITmng6189SiteReportPluginsWarningTest.class );
         suite.addTestSuite( MavenITmng6173GetProjectsAndDependencyGraphTest.class );

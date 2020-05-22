@@ -23,16 +23,7 @@ import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.Reader;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.List;
-import java.util.Properties;
-import java.util.stream.StreamSupport;
-
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertThat;
 
 /**
  * This is a collection of test cases for <a href="https://issues.apache.org/jira/browse/MNG-5760">MNG-5760</a>,
@@ -80,33 +71,6 @@ public class MavenITmng5760ResumeFeatureTest extends AbstractMavenIntegrationTes
         }
     }
 
-    public void testShouldCreateResumptionFile() throws Exception
-    {
-        final Verifier verifier = newVerifier( testDir.getAbsolutePath() );
-        verifier.addCliOption( "-Dmodule-b.fail=true" );
-
-        try
-        {
-            verifier.executeGoal( "test" );
-            fail( "Expected this invocation to fail" );
-        }
-        catch ( final VerificationException ve )
-        {
-            final Path resumeProperties = Paths.get(testDir.getAbsolutePath(), "target", "resume.properties");
-            verifier.assertFilePresent( resumeProperties.toAbsolutePath().toString() );
-
-
-            Properties expected = new Properties();
-            expected.put( "resumeFrom", "org.apache.maven.its.mng5760:module-b");
-
-            verifyFileContainsProperties( resumeProperties, expected );
-        }
-        finally
-        {
-            verifier.resetStreams();
-        }
-    }
-
     public void testShouldSkipSuccessfulProjects() throws Exception
     {
         final Verifier verifier = newVerifier( testDir.getAbsolutePath() );
@@ -120,15 +84,24 @@ public class MavenITmng5760ResumeFeatureTest extends AbstractMavenIntegrationTes
         }
         catch ( final VerificationException ve )
         {
-            final Path resumeProperties = Paths.get(testDir.getAbsolutePath(), "target", "resume.properties");
-            verifier.assertFilePresent( resumeProperties.toAbsolutePath().toString() );
+            // Expected to fail.
+        }
+        finally
+        {
+            verifier.resetStreams();
+        }
 
+        verifier.getCliOptions().clear();
 
-            Properties expected = new Properties();
-            expected.put( "resumeFrom", "org.apache.maven.its.mng5760:module-a");
-            expected.put( "excludedProjects", "org.apache.maven.its.mng5760:module-b, org.apache.maven.its.mng5760:module-c");
-
-            verifyFileContainsProperties( resumeProperties, expected );
+        // Let module-b and module-c fail, if they would have been built...
+        verifier.addCliOption( "-Dmodule-b.fail=true" );
+        verifier.addCliOption( "-Dmodule-c.fail=true" );
+        // ... but adding -r should exclude those two from the build because the previous Maven invocation
+        // marked them as successfully built.
+        verifier.addCliOption( "-r" );
+        try
+        {
+            verifier.executeGoal( "test" );
         }
         finally
         {
@@ -155,31 +128,5 @@ public class MavenITmng5760ResumeFeatureTest extends AbstractMavenIntegrationTes
                 throw new VerificationException( "Text found in log: " + text );
             }
         }
-    }
-
-    /**
-     * Throws an exception if the specified {@link Properties} are not present in the file. Checks for both key and
-     * value of the expected properties to be present.
-     * @param path Path the a file
-     * @param expectedProperties Expected properties inside the specified file
-     * @throws VerificationException When the specified file could not be read.
-     */
-    private void verifyFileContainsProperties( Path path, Properties expectedProperties )
-            throws VerificationException
-    {
-        Properties foundProperties = new Properties();
-        try ( Reader reader = Files.newBufferedReader( path ) )
-        {
-            foundProperties.load( reader );
-        }
-        catch ( IOException e )
-        {
-            throw new VerificationException( "Could not verify contents of " + path.toString(), e );
-        }
-
-        expectedProperties.forEach( ( key, value ) -> {
-            assertThat( foundProperties.containsKey( key ), is( true ) );
-            assertThat( foundProperties.get( key ), is( value ) );
-        });
     }
 }

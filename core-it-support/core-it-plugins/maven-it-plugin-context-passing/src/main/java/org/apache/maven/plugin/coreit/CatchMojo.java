@@ -23,9 +23,10 @@ import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
 
 /**
  * "Catch" a parameter "thrown" by the ThrowMojo through the plugin context, and
@@ -66,32 +67,13 @@ public class CatchMojo
         
         File outfile = new File( outDir, value );
 
-        Writer writer = null;
-        try
+        try ( Writer writer = Files.newBufferedWriter( outfile.toPath(), Charset.defaultCharset() ) )
         {
-            writer = new FileWriter( outfile );
-            
             writer.write( value );
-            
-            writer.flush();
         }
         catch ( IOException e )
         {
             throw new MojoExecutionException( "Cannot write output file: " + outfile, e );
-        }
-        finally
-        {
-            if ( writer != null )
-            {
-                try
-                {
-                    writer.close();
-                }
-                catch ( IOException e )
-                {
-                    // ignore
-                }
-            }
         }
     }
 

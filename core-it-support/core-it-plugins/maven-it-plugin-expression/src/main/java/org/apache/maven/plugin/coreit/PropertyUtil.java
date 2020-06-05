@@ -20,12 +20,12 @@ package org.apache.maven.plugin.coreit;
  */
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.lang.reflect.Array;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
+import java.nio.file.Files;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -211,26 +211,11 @@ class PropertyUtil
     public static void write( Properties props, File file )
         throws IOException
     {
-        OutputStream out = null;
-        try
+        file.getParentFile().mkdirs();
+
+        try ( OutputStream out = Files.newOutputStream( file.toPath() ) )
         {
-            file.getParentFile().mkdirs();
-            out = new FileOutputStream( file );
             props.store( out, "MAVEN-CORE-IT-LOG" );
-        }
-        finally
-        {
-            if ( out != null )
-            {
-                try
-                {
-                    out.close();
-                }
-                catch ( IOException e )
-                {
-                    // just ignore
-                }
-            }
         }
     }
 

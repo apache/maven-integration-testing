@@ -23,10 +23,12 @@ import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.project.MavenProject;
 
+import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileOutputStream;
-import java.io.OutputStreamWriter;
 import java.io.IOException;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.StandardOpenOption;
 
 /**
  * @goal touch
@@ -75,14 +77,19 @@ public class TouchMojo
              }
              
              File touch = new File( dir, file );
+             if ( !Files.exists( touch.toPath() ) )
+             {
+                 Files.createFile( touch.toPath() );
+             }
 
              // NOTE: Using append mode to track execution count
-             OutputStreamWriter w = new OutputStreamWriter( new FileOutputStream( touch, true ), "UTF-8" );
-             
-             w.write( file );
-             w.write( "\n" );
-             
-             w.close();
+             try ( BufferedWriter w = Files.newBufferedWriter( touch.toPath(), Charset.forName( "UTF-8" ),
+                                                              StandardOpenOption.APPEND ) )
+             {
+                 w.write( file );
+                 w.write( "\n" );
+             }
+
         }
         catch ( IOException e )
         {

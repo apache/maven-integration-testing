@@ -123,7 +123,7 @@ public class CollectMojo
             }
 
             collector.collect( artifacts, origin, localRepository, remoteRepositories, metadataSource, null,
-                               Collections.EMPTY_LIST );
+                               Collections.emptyList() );
         }
         catch ( Exception e )
         {

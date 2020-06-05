@@ -24,9 +24,9 @@ import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.nio.file.Files;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -132,30 +132,14 @@ public class CheckMojo
 
         getLog().info( "[MAVEN-CORE-IT-LOG] Creating output file " + outputFile );
 
-        OutputStream out = null;
-        try
+        try ( OutputStream out = Files.newOutputStream( outputFile.toPath() ) )
         {
             outputFile.getParentFile().mkdirs();
-            out = new FileOutputStream( outputFile );
             componentProperties.store( out, "MAVEN-CORE-IT-LOG" );
         }
         catch ( IOException e )
         {
             throw new MojoExecutionException( "Output file could not be created: " + outputFile, e );
-        }
-        finally
-        {
-            if ( out != null )
-            {
-                try
-                {
-                    out.close();
-                }
-                catch ( IOException e )
-                {
-                    // just ignore
-                }
-            }
         }
 
         getLog().info( "[MAVEN-CORE-IT-LOG] Created output file " + outputFile );

@@ -74,7 +74,7 @@ public class AggregateTestMojo
      * @parameter default-value="${reactorProjects}"
      * @readonly
      */
-    private List reactorProjects;
+    private List<MavenProject> reactorProjects;
 
     /**
      * Runs this mojo.
@@ -86,10 +86,8 @@ public class AggregateTestMojo
     {
         try
         {
-            for ( Object reactorProject : reactorProjects )
+            for ( MavenProject project : reactorProjects )
             {
-                MavenProject project = (MavenProject) reactorProject;
-
                 writeArtifacts( filter( projectArtifacts, project ), project.getArtifacts() );
                 writeClassPath( filter( testClassPath, project ), project.getTestClasspathElements() );
                 writeClassPathChecksums( filter( testClassPathChecksums, project ),

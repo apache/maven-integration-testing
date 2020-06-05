@@ -153,11 +153,10 @@ public class CoreItTouchMojo
 
              getLog().info( "Touching file: " + touch.getAbsolutePath() );
 
-             FileWriter w = new FileWriter( touch );
-
-             w.write( file );
-
-             w.close();
+             try ( FileWriter w = new FileWriter( touch ) )
+             {
+                 w.write( file );
+             }
         }
         
         catch ( IOException e )

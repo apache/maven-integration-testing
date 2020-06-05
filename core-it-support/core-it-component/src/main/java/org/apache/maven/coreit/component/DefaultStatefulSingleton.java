@@ -20,8 +20,9 @@ package org.apache.maven.coreit.component;
  */
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
+import java.nio.file.Files;
 import java.util.Properties;
 
 /**
@@ -48,7 +49,7 @@ public class DefaultStatefulSingleton
     {
         propertiesFile.getParentFile().mkdirs();
 
-        try ( FileOutputStream os = new FileOutputStream( propertiesFile ) )
+        try ( OutputStream os = Files.newOutputStream( propertiesFile.toPath() ) )
         {
             properties.store( os, "MAVEN-CORE-IT" );
         }

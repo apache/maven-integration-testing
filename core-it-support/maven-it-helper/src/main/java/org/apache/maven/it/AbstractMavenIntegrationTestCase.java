@@ -89,7 +89,7 @@ public abstract class AbstractMavenIntegrationTestCase
         }
         catch ( InvalidVersionSpecificationException e )
         {
-            throw (RuntimeException) new IllegalArgumentException( "Invalid version range: " + versionRangeStr, e );
+            throw new IllegalArgumentException( "Invalid version range: " + versionRangeStr, e );
         }
 
         ArtifactVersion version = getMavenVersion();
@@ -180,7 +180,7 @@ public abstract class AbstractMavenIntegrationTestCase
         }
         catch ( InvalidVersionSpecificationException e )
         {
-            throw (RuntimeException) new IllegalArgumentException( "Invalid version range: " + versionRangeStr, e );
+            throw new IllegalArgumentException( "Invalid version range: " + versionRangeStr, e );
         }
 
         ArtifactVersion version = getMavenVersion();
@@ -276,7 +276,7 @@ public abstract class AbstractMavenIntegrationTestCase
         }
         catch ( InvalidVersionSpecificationException e )
         {
-            throw (RuntimeException) new IllegalArgumentException( "Invalid version range: " + versionRange, e );
+            throw new IllegalArgumentException( "Invalid version range: " + versionRange, e );
         }
 
         ArtifactVersion version = getJavaVersion();
@@ -303,7 +303,7 @@ public abstract class AbstractMavenIntegrationTestCase
         }
         catch ( InvalidVersionSpecificationException e )
         {
-            throw (RuntimeException) new IllegalArgumentException( "Invalid version range: " + versionRange, e );
+            throw new IllegalArgumentException( "Invalid version range: " + versionRange, e );
         }
 
         ArtifactVersion version = getMavenVersion();
@@ -339,7 +339,7 @@ public abstract class AbstractMavenIntegrationTestCase
         }
         catch ( InvalidVersionSpecificationException e )
         {
-            throw (RuntimeException) new IllegalArgumentException( "Invalid version range: " + versionRange, e );
+            throw new IllegalArgumentException( "Invalid version range: " + versionRange, e );
         }
 
         ArtifactVersion version = getMavenVersion();

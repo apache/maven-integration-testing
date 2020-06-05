@@ -27,9 +27,10 @@ import org.apache.maven.project.MavenProject;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.OutputStreamWriter;
+import java.io.OutputStream;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
 import java.security.DigestInputStream;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -74,7 +75,7 @@ public abstract class AbstractDependencyMojo
      * @param artifacts The list of artifacts to write to the file, may be <code>null</code>.
      * @throws MojoExecutionException If the output file could not be written.
      */
-    protected void writeArtifacts( String pathname, Collection artifacts )
+    protected void writeArtifacts( String pathname, Collection<Artifact> artifacts )
         throws MojoExecutionException
     {
         if ( pathname == null || pathname.length() <= 0 )
@@ -86,18 +87,15 @@ public abstract class AbstractDependencyMojo
 
         getLog().info( "[MAVEN-CORE-IT-LOG] Dumping artifact list: " + file );
 
-        BufferedWriter writer = null;
-        try
-        {
-            file.getParentFile().mkdirs();
+        file.getParentFile().mkdirs();
 
-            writer = new BufferedWriter( new OutputStreamWriter( new FileOutputStream( file ), "UTF-8" ) );
+        try ( BufferedWriter writer = Files.newBufferedWriter( file.toPath(), Charset.forName( "UTF-8" ) ) )
+        {
 
             if ( artifacts != null )
             {
-                for ( Object artifact1 : artifacts )
+                for ( Artifact artifact : artifacts )
                 {
-                    Artifact artifact = (Artifact) artifact1;
                     String id = getId( artifact );
                     writer.write( id );
                     String optional = "";
@@ -114,20 +112,6 @@ public abstract class AbstractDependencyMojo
         catch ( IOException e )
         {
             throw new MojoExecutionException( "Failed to write artifact list", e );
-        }
-        finally
-        {
-            if ( writer != null )
-            {
-                try
-                {
-                    writer.close();
-                }
-                catch ( IOException e )
-                {
-                    // just ignore
-                }
-            }
         }
     }
 
@@ -157,12 +141,10 @@ public abstract class AbstractDependencyMojo
 
         getLog().info( "[MAVEN-CORE-IT-LOG] Dumping class path: " + file );
 
-        BufferedWriter writer = null;
-        try
-        {
-            file.getParentFile().mkdirs();
+        file.getParentFile().mkdirs();
 
-            writer = new BufferedWriter( new OutputStreamWriter( new FileOutputStream( file ), "UTF-8" ) );
+        try ( BufferedWriter writer = Files.newBufferedWriter( file.toPath(), Charset.forName( "UTF-8" ) ) )
+        {
 
             if ( classPath != null )
             {
@@ -178,20 +160,6 @@ public abstract class AbstractDependencyMojo
         catch ( IOException e )
         {
             throw new MojoExecutionException( "Failed to write class path list", e );
-        }
-        finally
-        {
-            if ( writer != null )
-            {
-                try
-                {
-                    writer.close();
-                }
-                catch ( IOException e )
-                {
-                    // just ignore
-                }
-            }
         }
     }
 
@@ -245,32 +213,15 @@ public abstract class AbstractDependencyMojo
             }
         }
 
-        FileOutputStream os = null;
-        try
+        file.getParentFile().mkdirs();
+
+        try ( OutputStream os = Files.newOutputStream( file.toPath() ) )
         {
-            file.getParentFile().mkdirs();
-
-            os = new FileOutputStream( file );
-
             checksums.store( os, "MAVEN-CORE-IT" );
         }
         catch ( IOException e )
         {
             throw new MojoExecutionException( "Failed to write class path checksums", e );
-        }
-        finally
-        {
-            if ( os != null )
-            {
-                try
-                {
-                    os.close();
-                }
-                catch ( IOException e )
-                {
-                    // just ignore
-                }
-            }
         }
     }
 

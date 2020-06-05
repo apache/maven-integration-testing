@@ -28,8 +28,9 @@ import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
+import java.nio.file.Files;
 import java.util.List;
 import java.util.Properties;
 
@@ -139,7 +140,7 @@ public class ResolveMojo
             {
                 propertiesFile.getParentFile().mkdirs();
 
-                try ( FileOutputStream fos = new FileOutputStream( propertiesFile ) )
+                try ( OutputStream fos = Files.newOutputStream( propertiesFile.toPath() ) )
                 {
                     props.store( fos, "MAVEN-CORE-IT" );
                 }

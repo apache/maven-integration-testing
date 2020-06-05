@@ -85,7 +85,7 @@ class ExpressionUtil
      */
     private static Map evaluate( String prefix, List segments, Object context )
     {
-        Map values = Collections.EMPTY_MAP;
+        Map values = Collections.emptyMap();
 
         if ( segments.isEmpty() )
         {
@@ -93,7 +93,7 @@ class ExpressionUtil
         }
         else if ( context != null )
         {
-            Map targets = Collections.EMPTY_MAP;
+            Map<String, Object> targets = Collections.emptyMap();
             String segment = (String) segments.get( 0 );
             if ( context.getClass().isArray() && Character.isDigit( segment.charAt( 0 ) ) )
             {
@@ -142,9 +142,10 @@ class ExpressionUtil
             }
 
             values = new LinkedHashMap();
-            for ( Object key : targets.keySet() )
+            for ( Map.Entry<String, Object> entry : targets.entrySet() )
             {
-                Object target = targets.get( key );
+                String key = entry.getKey();
+                Object target = entry.getValue();
                 values.putAll(
                     evaluate( concat( prefix, String.valueOf( key ) ), segments.subList( 1, segments.size() ),
                               target ) );

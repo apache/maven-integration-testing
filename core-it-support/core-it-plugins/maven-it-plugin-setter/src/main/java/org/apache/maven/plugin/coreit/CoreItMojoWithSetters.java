@@ -127,11 +127,10 @@ public class CoreItMojoWithSetters
 
              File touch = new File( dir, file );
 
-             FileWriter w = new FileWriter( touch );
-
-             w.write( file );
-
-             w.close();
+             try ( FileWriter w = new FileWriter( touch ) )
+             {
+                 w.write( file );
+             }
         }
         catch ( IOException e )
         {

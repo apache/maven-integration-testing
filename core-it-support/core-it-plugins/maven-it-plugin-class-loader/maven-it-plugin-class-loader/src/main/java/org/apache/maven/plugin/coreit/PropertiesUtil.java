@@ -20,9 +20,9 @@ package org.apache.maven.plugin.coreit;
  */
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.nio.file.Files;
 import java.util.Properties;
 
 import org.apache.maven.plugin.MojoExecutionException;
@@ -39,30 +39,14 @@ class PropertiesUtil
     public static void write( File outputFile, Properties props )
         throws MojoExecutionException
     {
-        OutputStream out = null;
-        try
+        outputFile.getParentFile().mkdirs();
+        try ( OutputStream out = Files.newOutputStream( outputFile.toPath() ) )
         {
-            outputFile.getParentFile().mkdirs();
-            out = new FileOutputStream( outputFile );
             props.store( out, "MAVEN-CORE-IT-LOG" );
         }
         catch ( IOException e )
         {
             throw new MojoExecutionException( "Output file could not be created: " + outputFile, e );
-        }
-        finally
-        {
-            if ( out != null )
-            {
-                try
-                {
-                    out.close();
-                }
-                catch ( IOException e )
-                {
-                    // just ignore
-                }
-            }
         }
     }
 

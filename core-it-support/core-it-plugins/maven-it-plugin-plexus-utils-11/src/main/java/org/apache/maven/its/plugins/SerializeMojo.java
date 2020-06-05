@@ -28,7 +28,6 @@ import java.io.Writer;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
-import org.codehaus.plexus.util.IOUtil;
 import org.codehaus.plexus.util.xml.Xpp3Dom;
 import org.codehaus.plexus.util.xml.pull.MXSerializer;
 import org.codehaus.plexus.util.xml.pull.XmlSerializer;
@@ -49,12 +48,11 @@ public class SerializeMojo
     public void execute()
         throws MojoExecutionException, MojoFailureException
     {
-        Writer writer = null;
+
+        file.getParentFile().mkdirs();
         XmlSerializer s = new MXSerializer();
-        try
+        try ( Writer writer = new OutputStreamWriter( new FileOutputStream( file ), "UTF-8" ) )
         {
-            file.getParentFile().mkdirs();
-            writer = new OutputStreamWriter( new FileOutputStream( file ), "UTF-8" );
             s.setOutput( writer );
 
             Xpp3Dom dom = new Xpp3Dom( "root" );
@@ -64,10 +62,6 @@ public class SerializeMojo
         catch ( IOException e )
         {
             throw new MojoExecutionException( e.getMessage(), e );
-        }
-        finally
-        {
-            IOUtil.close( writer );
         }
     }
 }

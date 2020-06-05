@@ -48,7 +48,7 @@ public class InstallArtifactsMojo
      * @readonly
      * @parameter default-value="${project.runtimeArtifacts}"
      */
-    private List artifacts;
+    private List<Artifact> artifacts;
 
     /**
      * @component
@@ -86,10 +86,8 @@ public class InstallArtifactsMojo
         ArtifactRepository artifactRepository =
             artifactRepositoryFactory.createDeploymentArtifactRepository( "appassembler", "file://"
                 + assembleDirectory.getAbsolutePath() + "/" + repositoryName, artifactRepositoryLayout, false );
-        for ( Object artifact1 : artifacts )
+        for ( Artifact artifact : artifacts )
         {
-            Artifact artifact = (Artifact) artifact1;
-
             installArtifact( artifactRepository, artifact );
         }
     }

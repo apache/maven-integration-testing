@@ -121,32 +121,15 @@ public class DumpVersionMojo
 
         getLog().info( "[MAVEN-CORE-IT-LOG] Creating output file " + propertiesFile );
 
-        OutputStream out = null;
-        try
+        propertiesFile.getParentFile().mkdirs();
+        try ( OutputStream out = new FileOutputStream( propertiesFile ) )
         {
-            propertiesFile.getParentFile().mkdirs();
-            out = new FileOutputStream( propertiesFile );
             wagonProperties.store( out, "MAVEN-CORE-IT-LOG" );
         }
         catch ( IOException e )
         {
             throw new MojoExecutionException( "Output file could not be created: " + propertiesFile, e );
         }
-        finally
-        {
-            if ( out != null )
-            {
-                try
-                {
-                    out.close();
-                }
-                catch ( IOException e )
-                {
-                    // just ignore
-                }
-            }
-        }
-
         getLog().info( "[MAVEN-CORE-IT-LOG] Created output file " + propertiesFile );
     }
 

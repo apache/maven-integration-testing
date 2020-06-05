@@ -23,12 +23,11 @@ import org.apache.maven.plugin.MojoExecutionException;
 import org.codehaus.plexus.configuration.PlexusConfiguration;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.lang.reflect.Array;
+import java.nio.file.Files;
 import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Date;
@@ -52,30 +51,14 @@ class PropertiesUtil
 
         if ( inputFile.exists() )
         {
-            InputStream is = null;
-            try
+            try ( InputStream is = Files.newInputStream( inputFile.toPath() ) )
             {
-                is = new FileInputStream( inputFile );
                 props.load( is );
             }
             catch ( IOException e )
             {
                 throw new MojoExecutionException( "Input file " + inputFile + " could not be read: " + e.getMessage(),
                                                   e );
-            }
-            finally
-            {
-                if ( is != null )
-                {
-                    try
-                    {
-                        is.close();
-                    }
-                    catch ( IOException e )
-                    {
-                        // just ignore
-                    }
-                }
             }
         }
 
@@ -85,31 +68,15 @@ class PropertiesUtil
     public static void write( File outputFile, Properties props )
         throws MojoExecutionException
     {
-        OutputStream os = null;
-        try
+        outputFile.getParentFile().mkdirs();
+        try ( OutputStream os = Files.newOutputStream( outputFile.toPath() ) )
         {
-            outputFile.getParentFile().mkdirs();
-            os = new FileOutputStream( outputFile );
             props.store( os, "MAVEN-CORE-IT-LOG" );
         }
         catch ( IOException e )
         {
             throw new MojoExecutionException( "Output file " + outputFile + " could not be created: " + e.getMessage(),
                                               e );
-        }
-        finally
-        {
-            if ( os != null )
-            {
-                try
-                {
-                    os.close();
-                }
-                catch ( IOException e )
-                {
-                    // just ignore
-                }
-            }
         }
     }
 

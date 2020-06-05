@@ -174,11 +174,11 @@ public abstract class AbstractLoadMojo
                 // test ClassLoader.getResources()
                 try
                 {
-                    List urls = Collections.list( classLoader.getResources( path ) );
+                    List<URL> urls = Collections.list( classLoader.getResources( path ) );
                     if ( !urls.equals( Collections.list( childClassLoader.getResources( path ) ) ) )
                     {
                         getLog().error( "[MAVEN-CORE-IT-LOG] Detected class loader defect while getting " + path );
-                        urls = Collections.EMPTY_LIST;
+                        urls = Collections.emptyList();
                     }
                     loaderProperties.setProperty( path + ".count", "" + urls.size() );
                     for ( int j = 0; j < urls.size(); j++ )

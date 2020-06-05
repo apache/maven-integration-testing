@@ -53,7 +53,7 @@ public class InjectMojo
      * @parameter default-value="${plugin.artifacts}"
      * @readonly
      */
-    private Collection pluginArtifacts;
+    private Collection<Artifact> pluginArtifacts;
 
     /**
      * The current Maven project.
@@ -97,9 +97,8 @@ public class InjectMojo
             dependencyArtifacts = new LinkedHashSet();
         }
 
-        for ( Object pluginArtifact : pluginArtifacts )
+        for ( Artifact artifact : pluginArtifacts )
         {
-            Artifact artifact = (Artifact) pluginArtifact;
 
             String artifactKey = artifact.getGroupId() + ':' + artifact.getArtifactId();
 

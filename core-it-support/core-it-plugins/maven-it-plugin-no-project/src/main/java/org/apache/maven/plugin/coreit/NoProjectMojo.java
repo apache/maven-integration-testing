@@ -67,11 +67,10 @@ public class NoProjectMojo
              
              getLog().info( "Touching: " + touch );
      
-             FileWriter w = new FileWriter( touch );
-             
-             w.write( file );
-             
-             w.close();
+             try ( FileWriter w = new FileWriter( touch ) )
+             {
+                 w.write( file );
+             }
         }
         catch ( IOException e )
         {

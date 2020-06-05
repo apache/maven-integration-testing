@@ -24,9 +24,9 @@ import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.nio.file.Files;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
@@ -112,32 +112,16 @@ public class DumpRepoLayoutsMojo
 
         getLog().info( "[MAVEN-CORE-IT-LOG] Creating output file " + layoutsFile );
 
-        OutputStream out = null;
-        try
+        layoutsFile.getParentFile().mkdirs();
+
+        try ( OutputStream out = Files.newOutputStream( layoutsFile.toPath() ) )
         {
-            layoutsFile.getParentFile().mkdirs();
-            out = new FileOutputStream( layoutsFile );
             layoutProperties.store( out, "MAVEN-CORE-IT-LOG" );
         }
         catch ( IOException e )
         {
             throw new MojoExecutionException( "Output file could not be created: " + layoutsFile, e );
         }
-        finally
-        {
-            if ( out != null )
-            {
-                try
-                {
-                    out.close();
-                }
-                catch ( IOException e )
-                {
-                    // just ignore
-                }
-            }
-        }
-
         getLog().info( "[MAVEN-CORE-IT-LOG] Created output file " + layoutsFile );
     }
 

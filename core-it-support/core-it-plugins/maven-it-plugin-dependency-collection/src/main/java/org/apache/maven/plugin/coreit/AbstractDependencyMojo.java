@@ -26,9 +26,9 @@ import org.apache.maven.project.MavenProject;
 
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.OutputStreamWriter;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
 import java.util.Collection;
 
 /**
@@ -58,7 +58,7 @@ public abstract class AbstractDependencyMojo
      * @param artifacts The list of artifacts to write to the file, may be <code>null</code>.
      * @throws MojoExecutionException If the output file could not be written.
      */
-    protected void writeArtifacts( String pathname, Collection artifacts )
+    protected void writeArtifacts( String pathname, Collection<Artifact> artifacts )
         throws MojoExecutionException
     {
         if ( pathname == null || pathname.length() <= 0 )
@@ -70,18 +70,15 @@ public abstract class AbstractDependencyMojo
 
         getLog().info( "[MAVEN-CORE-IT-LOG] Dumping artifact list: " + file );
 
-        BufferedWriter writer = null;
-        try
-        {
-            file.getParentFile().mkdirs();
+        file.getParentFile().mkdirs();
 
-            writer = new BufferedWriter( new OutputStreamWriter( new FileOutputStream( file ), "UTF-8" ) );
+        try ( BufferedWriter writer = Files.newBufferedWriter( file.toPath(), Charset.forName( "UTF-8" ) ) )
+        {
 
             if ( artifacts != null )
             {
-                for ( Object artifact1 : artifacts )
+                for ( Artifact artifact : artifacts )
                 {
-                    Artifact artifact = (Artifact) artifact1;
                     writer.write( artifact.getId() );
                     String optional = "";
                     if ( artifact.isOptional() )
@@ -97,20 +94,6 @@ public abstract class AbstractDependencyMojo
         catch ( IOException e )
         {
             throw new MojoExecutionException( "Failed to write artifact list", e );
-        }
-        finally
-        {
-            if ( writer != null )
-            {
-                try
-                {
-                    writer.close();
-                }
-                catch ( IOException e )
-                {
-                    // just ignore
-                }
-            }
         }
     }
 

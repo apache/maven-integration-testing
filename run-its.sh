@@ -24,8 +24,8 @@
 if [ -z "$MAVENCODEBASE" ] ; then
  echo Please export MAVENCODEBASE
 else
- mvn verify -P local-it -f "$MAVENCODEBASE"
- mvn clean test -Prun-its,embdedded -Dmaven.repo.local=`pwd`/repo  -DmavenDistro="$MAVENCODEBASE\apache-maven\target\apache-maven-bin.zip" -DwrapperDistroDir="$MAVENCODEBASE\apache-maven\target" -DmavenWrapper="$MAVENCODEBASE\maven-wrapper\target\maven-wrapper.jar"
+ mvn verify -DdistributionFileName=${project.artifactId} -f "$MAVENCODEBASE"
+ mvn clean install -Prun-its,embedded -Dmaven.repo.local=`pwd`/repo  -DmavenDistro="$MAVENCODEBASE\apache-maven\target\apache-maven-bin.zip" -DwrapperDistroDir="$MAVENCODEBASE\apache-maven\target" -DmavenWrapper="$MAVENCODEBASE\maven-wrapper\target\maven-wrapper.jar"
 fi
 
 

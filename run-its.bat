@@ -23,8 +23,8 @@ if  "%MAVENCODEBASE%" == "" (
  @ECHO ON
 ) else (
  @ECHO ON
- mvn verify -Plocal-it -f "%MAVENCODEBASE%"
- mvn clean install -Prun-its,embdedded -Dmaven.repo.local="%cd%\repo"  -DmavenDistro="%MAVENCODEBASE%\apache-maven\target\apache-maven-bin.zip" -DwrapperDistroDir="%MAVENCODEBASE%\apache-maven\target" -DmavenWrapper="%MAVENCODEBASE%\maven-wrapper\target\maven-wrapper.jar"
+ mvn verify -DdistributionFileName=${project.artifactId} -f "%MAVENCODEBASE%"
+ mvn clean install -Prun-its,embedded -Dmaven.repo.local="%cd%\repo"  -DmavenDistro="%MAVENCODEBASE%\apache-maven\target\apache-maven-bin.zip" -DwrapperDistroDir="%MAVENCODEBASE%\apache-maven\target" -DmavenWrapper="%MAVENCODEBASE%\maven-wrapper\target\maven-wrapper.jar"
 )
 
 @REM If behind a proxy try this..

@@ -108,6 +108,7 @@ public class IntegrationTestSuite
         // suite.addTestSuite( MavenIT0108SnapshotUpdateTest.class ); -- MNG-3137
         
         suite.addTestSuite( MavenITmng6656BuildConsumer.class );
+        suite.addTestSuite( MavenITmng5868NoDuplicateAttachedArtifacts.class );
         suite.addTestSuite( MavenITmng5937MavenWrapper.class );
         suite.addTestSuite( MavenITmng4660ResumeFromTest.class );
         suite.addTestSuite( MavenITmng4660OutdatedPackagedArtifact.class );

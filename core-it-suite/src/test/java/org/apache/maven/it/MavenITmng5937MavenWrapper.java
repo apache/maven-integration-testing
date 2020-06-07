@@ -23,7 +23,6 @@ import java.io.BufferedWriter;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -33,6 +32,7 @@ import java.util.Map;
 
 import org.codehaus.plexus.archiver.zip.ZipUnArchiver;
 import org.codehaus.plexus.logging.console.ConsoleLogger;
+import org.codehaus.plexus.util.StringUtils;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-5937">MNG-5937</a>.
@@ -41,7 +41,7 @@ import org.codehaus.plexus.logging.console.ConsoleLogger;
 public class MavenITmng5937MavenWrapper
     extends AbstractMavenIntegrationTestCase
 {
-    private final Path wrapperDistro;
+    private Path wrapperDistro;
     
     private final Map<String,String> envVars;
     
@@ -49,31 +49,10 @@ public class MavenITmng5937MavenWrapper
     
     private ZipUnArchiver zipUnArchiver = new ZipUnArchiver();
     
-    public MavenITmng5937MavenWrapper() throws Exception
+    public MavenITmng5937MavenWrapper()
+        throws Exception
     {
         super( "[3.7.0,)" );
-        
-        String mavenDist = System.getProperty( "maven.distro" );
-        if ( mavenDist == null )
-        {
-            throw new IllegalStateException( "Missing maven.distro to test maven-wrapper" );
-        }
-        
-        Verifier distInstaller = newVerifier( baseDir.toAbsolutePath().toFile().toString() );
-        distInstaller.setSystemProperty( "file", mavenDist );
-        distInstaller.setSystemProperty( "groupId", "org.apache.maven" );
-        distInstaller.setSystemProperty( "artifactId", "apache-maven" );
-        distInstaller.setSystemProperty( "version", getMavenVersion().toString() );
-        distInstaller.setSystemProperty( "classifier", "bin" );
-        distInstaller.setSystemProperty( "packaging", "zip" );
-        distInstaller.executeGoal( "org.apache.maven.plugins:maven-install-plugin:2.5.2:install-file" );
-        
-        String distroValue = System.getProperty( "maven.wrapper.distrodir" );
-        if ( distroValue == null )
-        {
-            throw new IllegalStateException( "Missing maven.wrapper.distrodir to test maven-wrapper" );
-        }
-        wrapperDistro = Paths.get( distroValue );
         
         String localRepo = System.getProperty("maven.repo.local");
         
@@ -87,6 +66,32 @@ public class MavenITmng5937MavenWrapper
             // if JAVA_HOME is not set, ForkedLauncher sets it to java.home, which is the JRE home
             envVars.put( "JAVA_HOME", javaHome );
         }
+    }
+
+    public void setUp()
+        throws Exception
+    {
+        String mavenDist = System.getProperty( "maven.distro" );
+        if ( StringUtils.isEmpty( mavenDist ) )
+        {
+            throw new IllegalStateException( "Missing maven.distro=${mavenDistro} parameter to test maven-wrapper: see run ITs instructions" );
+        }
+        
+        Verifier distInstaller = newVerifier( baseDir.toAbsolutePath().toFile().toString() );
+        distInstaller.setSystemProperty( "file", mavenDist );
+        distInstaller.setSystemProperty( "groupId", "org.apache.maven" );
+        distInstaller.setSystemProperty( "artifactId", "apache-maven" );
+        distInstaller.setSystemProperty( "version", getMavenVersion().toString() );
+        distInstaller.setSystemProperty( "classifier", "bin" );
+        distInstaller.setSystemProperty( "packaging", "zip" );
+        distInstaller.executeGoal( "org.apache.maven.plugins:maven-install-plugin:2.5.2:install-file" );
+        
+        String distroValue = System.getProperty( "maven.wrapper.distrodir" );
+        if ( StringUtils.isEmpty( distroValue ) )
+        {
+            throw new IllegalStateException( "Missing maven.wrapper.distrodir=${wrapperDistroDir} parameter to test maven-wrapper: see run ITs instructions" );
+        }
+        wrapperDistro = Paths.get( distroValue );
     }
 
     public void testitMNG5937Bin()

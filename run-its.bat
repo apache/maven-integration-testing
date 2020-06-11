@@ -16,16 +16,30 @@
 @REM specific language governing permissions and limitations
 @REM under the License.
 @REM
-
 @ECHO OFF
 if  "%MAVENCODEBASE%" == "" (
- echo Please set MAVENCODEBASE
- @ECHO ON
+ @ECHO Please set MAVENCODEBASE
 ) else (
- @ECHO ON
- mvn verify -Plocal-it -f "%MAVENCODEBASE%"
- mvn clean install -Prun-its,embdedded -Dmaven.repo.local="%cd%\repo"  -DmavenDistro="%MAVENCODEBASE%\apache-maven\target\apache-maven-bin.zip" -DwrapperDistroDir="%MAVENCODEBASE%\apache-maven\target" -DmavenWrapper="%MAVENCODEBASE%\maven-wrapper\target\maven-wrapper.jar"
+ CALL :normalizePath %MAVENCODEBASE%
+
+ CALL :maven && CALL :maven-integration-testing
+ 
 )
+
+@goto :eof
 
 @REM If behind a proxy try this..
 @REM mvn clean install -Prun-its,embedded -Dmaven.repo.local=%cd%\repo -Dproxy.host=<host> -Dproxy.port=<port> -Dproxy.user= -Dproxy.pass= -Dproxy.nonProxyHosts=<hosts>
+
+:: ========== FUNCTIONS ==========
+
+:maven 
+ CALL mvn verify -DdistributionFileName=${project.artifactId} -f "%MAVENCODEBASE%" ||  exit /B
+
+:maven-integration-testing
+ CALL mvn clean install -Prun-its,embedded -Dmaven.repo.local="%cd%\repo"  -DmavenDistro="%MAVENCODEBASE%\apache-maven\target\apache-maven-bin.zip" -DwrapperDistroDir="%MAVENCODEBASE%\apache-maven\target" -DmavenWrapper="%MAVENCODEBASE%\maven-wrapper\target\maven-wrapper.jar"  ||  exit /B
+
+:normalizePath
+  setlocal
+  SET MAVENCODEBASE=%~dpfn1
+  endlocal

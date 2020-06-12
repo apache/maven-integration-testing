@@ -34,10 +34,10 @@ CALL :maven && CALL :maven-integration-testing
 :: ========== FUNCTIONS ==========
 
 :maven 
- CALL mvn verify -DdistributionFileName=${project.artifactId} -f "%_MAVENCODEBASE%" ||  exit /B
+ CALL mvn verify -DdistributionFileName=${project.artifactId} -f "%_MAVENCODEBASE%" || exit /B
 
 :maven-integration-testing
- CALL mvn clean install -Prun-its,embedded -Dmaven.repo.local="%cd%\repo"  -DmavenDistro="%_MAVENCODEBASE%\apache-maven\target\apache-maven-bin.zip" -DwrapperDistroDir="%_MAVENCODEBASE%\apache-maven\target" -DmavenWrapper="%_MAVENCODEBASE%\maven-wrapper\target\maven-wrapper.jar"  ||  exit /B
+ CALL mvn clean install -Prun-its,embedded -Dmaven.repo.local="%cd%\repo" -DmavenDistro="%_MAVENCODEBASE%\apache-maven\target\apache-maven-bin.zip" -DwrapperDistroDir="%_MAVENCODEBASE%\apache-maven\target" -DmavenWrapper="%_MAVENCODEBASE%\maven-wrapper\target\maven-wrapper.jar" || exit /B
 
 :normalizePath
  SET _MAVENCODEBASE=%~dpfn1

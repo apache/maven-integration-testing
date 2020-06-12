@@ -17,16 +17,16 @@
 @REM under the License.
 @REM
 @ECHO OFF
-if  "%MAVENCODEBASE%" == "" (
- @ECHO Please set MAVENCODEBASE
-) else (
- CALL :normalizePath %MAVENCODEBASE%
-
- CALL :maven && CALL :maven-integration-testing
- 
+@IF  "%MAVENCODEBASE%"=="" (
+ @ECHO Please SET MAVENCODEBASE / $env:MAVENCODEBASE
+ @GOTO :eof
 )
 
-@goto :eof
+CALL :normalizePath %MAVENCODEBASE%
+
+CALL :maven && CALL :maven-integration-testing
+
+@GOTO :eof
 
 @REM If behind a proxy try this..
 @REM mvn clean install -Prun-its,embedded -Dmaven.repo.local=%cd%\repo -Dproxy.host=<host> -Dproxy.port=<port> -Dproxy.user= -Dproxy.pass= -Dproxy.nonProxyHosts=<hosts>
@@ -34,12 +34,10 @@ if  "%MAVENCODEBASE%" == "" (
 :: ========== FUNCTIONS ==========
 
 :maven 
- CALL mvn verify -DdistributionFileName=${project.artifactId} -f "%MAVENCODEBASE%" ||  exit /B
+ CALL mvn verify -DdistributionFileName=${project.artifactId} -f "%_MAVENCODEBASE%" ||  exit /B
 
 :maven-integration-testing
- CALL mvn clean install -Prun-its,embedded -Dmaven.repo.local="%cd%\repo"  -DmavenDistro="%MAVENCODEBASE%\apache-maven\target\apache-maven-bin.zip" -DwrapperDistroDir="%MAVENCODEBASE%\apache-maven\target" -DmavenWrapper="%MAVENCODEBASE%\maven-wrapper\target\maven-wrapper.jar"  ||  exit /B
+ CALL mvn clean install -Prun-its,embedded -Dmaven.repo.local="%cd%\repo"  -DmavenDistro="%_MAVENCODEBASE%\apache-maven\target\apache-maven-bin.zip" -DwrapperDistroDir="%_MAVENCODEBASE%\apache-maven\target" -DmavenWrapper="%_MAVENCODEBASE%\maven-wrapper\target\maven-wrapper.jar"  ||  exit /B
 
 :normalizePath
-  setlocal
-  SET MAVENCODEBASE=%~dpfn1
-  endlocal
+ SET _MAVENCODEBASE=%~dpfn1

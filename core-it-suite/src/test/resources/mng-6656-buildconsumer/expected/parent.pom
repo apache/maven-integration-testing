@@ -22,5 +22,7 @@ under the License.
   <version>0.9-MNG6656-SNAPSHOT</version>
   <packaging>pom</packaging>
   <name>Multi Chapter Parent Project</name>
+
+  <!-- Optimized from https://github.com/sonatype/maven-example-en/tree/master/examples/ch-multi -->
   
 </project>

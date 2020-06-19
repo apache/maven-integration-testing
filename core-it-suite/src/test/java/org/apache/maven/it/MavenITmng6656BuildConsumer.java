@@ -51,20 +51,16 @@ public class MavenITmng6656BuildConsumer
         super( "[3.7.0,)" );
     }
 
-    public void testValidOmittedVersions()
-        throws Exception
-    {
-        File testDir = ResourceExtractor.simpleExtractResources( getClass(), "/mng-6656-buildconsumer" );
-
-        Verifier verifier = newVerifier( testDir.getAbsolutePath(), false );
-        verifier.setMavenDebug( false );
-        verifier.setAutoclean( false );
-        verifier.addCliOption( "-Dchangelist=JIRA101" );
-
-        verifier.executeGoals( Arrays.asList( "validate" ) );
-        verifier.verifyErrorFreeLog();
-    }
-    
+    /**
+     * Verifies:
+     * <ul>
+     *   <li>preserve license</li>
+     *   <li>consistent line separators</li>
+     *   <li>resolved project versions (at least 2 levels deep) in parent and dependencies</li>
+     *   <li>removal of modules in aggregators</li>
+     * </ul>
+     * @throws Exception
+     */
     public void testPublishedPoms()
                     throws Exception
     {
@@ -78,19 +74,17 @@ public class MavenITmng6656BuildConsumer
         verifier.executeGoals( Arrays.asList( "install" ) );
         verifier.verifyErrorFreeLog();
 
-        // use original resource files to ensure correct EOLs
-        File resourcesDir = new File( "src/test/resources/mng-6656-buildconsumer" );
         String content;
-        content = FileUtils.fileRead( new File( resourcesDir, "expected/parent.pom") ); 
+        content = FileUtils.fileRead( new File( testDir, "expected/parent.pom") ); 
         verifier.assertArtifactContents( "org.sonatype.mavenbook.multi", "parent", "0.9-MNG6656-SNAPSHOT", "pom", content );
 
-        content = FileUtils.fileRead( new File( resourcesDir, "expected/simple-parent.pom") ); 
+        content = FileUtils.fileRead( new File( testDir, "expected/simple-parent.pom") ); 
         verifier.assertArtifactContents( "org.sonatype.mavenbook.multi", "simple-parent", "0.9-MNG6656-SNAPSHOT", "pom", content );
 
-        content = FileUtils.fileRead( new File( resourcesDir, "expected/simple-weather.pom") ); 
+        content = FileUtils.fileRead( new File( testDir, "expected/simple-weather.pom") ); 
         verifier.assertArtifactContents( "org.sonatype.mavenbook.multi", "simple-weather", "0.9-MNG6656-SNAPSHOT", "pom", content );
 
-        content = FileUtils.fileRead( new File( resourcesDir, "expected/simple-webapp.pom") ); 
+        content = FileUtils.fileRead( new File( testDir, "expected/simple-webapp.pom") ); 
         verifier.assertArtifactContents( "org.sonatype.mavenbook.multi", "simple-webapp", "0.9-MNG6656-SNAPSHOT", "pom", content );
     }
 

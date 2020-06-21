@@ -69,45 +69,53 @@ public class MavenITmng5760ResumeFeatureTest extends AbstractMavenIntegrationTes
         {
             verifier.resetStreams();
         }
-    }
 
-    public void testShouldSkipSuccessfulProjects() throws Exception
-    {
-        final Verifier verifier = newVerifier( testDir.getAbsolutePath() );
-        verifier.addCliOption( "-Dmodule-a.fail=true" );
-        verifier.addCliOption( "--fail-at-end");
-
-        try
-        {
-            verifier.executeGoal( "test" );
-            fail( "Expected this invocation to fail" );
-        }
-        catch ( final VerificationException ve )
-        {
-            // Expected to fail.
-        }
-        finally
-        {
-            verifier.resetStreams();
-        }
-
+        // New build with -r should resume the build from module-b, skipping module-a since it has succeeded already.
         verifier.getCliOptions().clear();
-
-        // Let module-b and module-c fail, if they would have been built...
-        verifier.addCliOption( "-Dmodule-b.fail=true" );
-        verifier.addCliOption( "-Dmodule-c.fail=true" );
-        // ... but adding -r should exclude those two from the build because the previous Maven invocation
-        // marked them as successfully built.
         verifier.addCliOption( "-r" );
-        try
-        {
-            verifier.executeGoal( "test" );
-        }
-        finally
-        {
-            verifier.resetStreams();
-        }
+        verifier.executeGoal( "test" );
+        verifyTextNotInLog( verifier, "Building module-a 1.0" );
+        verifier.verifyTextInLog( "Building module-b 1.0" );
+        verifier.verifyTextInLog( "Building module-c 1.0" );
     }
+
+//    public void testShouldSkipSuccessfulProjects() throws Exception
+//    {
+//        final Verifier verifier = newVerifier( testDir.getAbsolutePath() );
+//        verifier.addCliOption( "-Dmodule-a.fail=true" );
+//        verifier.addCliOption( "--fail-at-end");
+//
+//        try
+//        {
+//            verifier.executeGoal( "test" );
+//            fail( "Expected this invocation to fail" );
+//        }
+//        catch ( final VerificationException ve )
+//        {
+//            // Expected to fail.
+//        }
+//        finally
+//        {
+//            verifier.resetStreams();
+//        }
+//
+//        verifier.getCliOptions().clear();
+//
+//        // Let module-b and module-c fail, if they would have been built...
+//        verifier.addCliOption( "-Dmodule-b.fail=true" );
+//        verifier.addCliOption( "-Dmodule-c.fail=true" );
+//        // ... but adding -r should exclude those two from the build because the previous Maven invocation
+//        // marked them as successfully built.
+//        verifier.addCliOption( "-r" );
+//        try
+//        {
+//            verifier.executeGoal( "test" );
+//        }
+//        finally
+//        {
+//            verifier.resetStreams();
+//        }
+//    }
 
     /**
      * Throws an exception if the text <strong>is</strong> present in the log.

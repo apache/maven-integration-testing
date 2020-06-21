@@ -40,11 +40,15 @@ import java.util.List;
  * @author Martin Kanters
  */
 public class MavenITmng5760ResumeFeatureTest extends AbstractMavenIntegrationTestCase {
-    private final File testDir;
+    private final File parentDependentTestDir;
+    private final File parentIndependentTestDir;
 
     public MavenITmng5760ResumeFeatureTest() throws IOException {
         super( "[3.7.0,)" );
-        this.testDir = ResourceExtractor.simpleExtractResources( getClass(), "/mng-5760-resume-feature" );
+        this.parentDependentTestDir = ResourceExtractor.simpleExtractResources( getClass(),
+                "/mng-5760-resume-feature/parent-dependent" );
+        this.parentIndependentTestDir = ResourceExtractor.simpleExtractResources( getClass(),
+                "/mng-5760-resume-feature/parent-independent" );
     }
 
     /**
@@ -52,7 +56,7 @@ public class MavenITmng5760ResumeFeatureTest extends AbstractMavenIntegrationTes
      */
     public void testShouldSuggestToResumeWithoutArgs() throws Exception
     {
-        final Verifier verifier = newVerifier( testDir.getAbsolutePath() );
+        final Verifier verifier = newVerifier( parentDependentTestDir.getAbsolutePath() );
         verifier.addCliOption( "-Dmodule-b.fail=true" );
 
         try
@@ -81,7 +85,7 @@ public class MavenITmng5760ResumeFeatureTest extends AbstractMavenIntegrationTes
 
     public void testShouldSkipSuccessfulProjects() throws Exception
     {
-        final Verifier verifier = newVerifier( testDir.getAbsolutePath() );
+        final Verifier verifier = newVerifier( parentDependentTestDir.getAbsolutePath() );
         verifier.addCliOption( "-Dmodule-a.fail=true" );
         verifier.addCliOption( "--fail-at-end");
 
@@ -115,6 +119,36 @@ public class MavenITmng5760ResumeFeatureTest extends AbstractMavenIntegrationTes
         {
             verifier.resetStreams();
         }
+    }
+
+    public void testShouldSkipSuccessfulModulesWhenTheFirstModuleFailed() throws Exception
+    {
+        // In this multi-module project, the submodules are not dependent on the parent.
+        // This results in the parent to be built last, and module-a to be built first.
+        // This enables us to let the first module in the reactor (module-a) fail.
+        final Verifier verifier = newVerifier( parentIndependentTestDir.getAbsolutePath() );
+        verifier.addCliOption( "-Dmodule-a.fail=true" );
+        verifier.addCliOption( "--fail-at-end");
+
+        try
+        {
+            verifier.executeGoal( "test" );
+            fail( "Expected this invocation to fail" );
+        }
+        catch ( final VerificationException ve )
+        {
+            verifier.verifyTextInLog( "mvn <args> -r" );
+        }
+        finally
+        {
+            verifier.resetStreams();
+        }
+
+        verifier.getCliOptions().clear();
+        verifier.addCliOption( "-r" );
+        verifier.executeGoal( "test" );
+        verifier.verifyTextInLog( "Building module-a 1.0" );
+        verifyTextNotInLog( verifier, "Building module-b 1.0" );
     }
 
     /**

@@ -42,6 +42,7 @@ import java.util.List;
 public class MavenITmng5760ResumeFeatureTest extends AbstractMavenIntegrationTestCase {
     private final File parentDependentTestDir;
     private final File parentIndependentTestDir;
+    private final File noProjectTestDir;
 
     public MavenITmng5760ResumeFeatureTest() throws IOException {
         super( "[3.7.0,)" );
@@ -49,6 +50,8 @@ public class MavenITmng5760ResumeFeatureTest extends AbstractMavenIntegrationTes
                 "/mng-5760-resume-feature/parent-dependent" );
         this.parentIndependentTestDir = ResourceExtractor.simpleExtractResources( getClass(),
                 "/mng-5760-resume-feature/parent-independent" );
+        this.noProjectTestDir = ResourceExtractor.simpleExtractResources( getClass(),
+                "/mng-5760-resume-feature/no-project" );
     }
 
     /**
@@ -149,6 +152,26 @@ public class MavenITmng5760ResumeFeatureTest extends AbstractMavenIntegrationTes
         verifier.executeGoal( "test" );
         verifier.verifyTextInLog( "Building module-a 1.0" );
         verifyTextNotInLog( verifier, "Building module-b 1.0" );
+    }
+
+    public void testShouldNotCrashWithoutProject() throws Exception
+    {
+        // There is no Maven project available in the test directory.
+        // As reported in JIRA this would previously break with a NullPointerException.
+        // (see https://issues.apache.org/jira/browse/MNG-5760?focusedCommentId=17143795&page=com.atlassian.jira.plugin.system.issuetabpanels:comment-tabpanel#comment-17143795)
+        final Verifier verifier = newVerifier( noProjectTestDir.getAbsolutePath() );
+        try
+        {
+            verifier.executeGoal( "resources:resources" );
+        }
+        catch ( final VerificationException ve )
+        {
+            verifier.verifyTextInLog( "Goal requires a project to execute but there is no POM in this directory" );
+        }
+        finally
+        {
+            verifier.resetStreams();
+        }
     }
 
     /**

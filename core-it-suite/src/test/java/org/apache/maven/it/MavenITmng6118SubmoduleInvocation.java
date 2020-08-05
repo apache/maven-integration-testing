@@ -39,19 +39,20 @@ import java.io.IOException;
  */
 public class MavenITmng6118SubmoduleInvocation extends AbstractMavenIntegrationTestCase
 {
-    private final File testDir;
+    private static final String RESOURCE_PATH = "/mng-6118-submodule-invocation-full-reactor";
 
-    public MavenITmng6118SubmoduleInvocation() throws IOException, VerificationException
+    public MavenITmng6118SubmoduleInvocation()
     {
         super( "[3.7.0,)" );
-        this.testDir = ResourceExtractor.simpleExtractResources( getClass(), "/mng-6118-submodule-invocation-full-reactor" );
     }
 
     /**
      * Performs a <code>cd app && mvn compile</code> invocation. Verifies that inter-module dependencies are resolved.
      */
-    public void testInSubModule() throws VerificationException
+    public void testInSubModule() throws IOException, VerificationException
     {
+        File testDir = ResourceExtractor.simpleExtractResources( getClass(), RESOURCE_PATH );
+
         // Compile the whole project first.
         Verifier verifier = newVerifier( testDir.getAbsolutePath() );
         verifier.executeGoal( "compile" );
@@ -59,20 +60,24 @@ public class MavenITmng6118SubmoduleInvocation extends AbstractMavenIntegrationT
         final File submoduleDirectory = new File( testDir, "app" );
         verifier = newVerifier( submoduleDirectory.getAbsolutePath() );
         verifier.setAutoclean( false );
+        verifier.setLogFileName( "log-insubmodule.txt" );
         verifier.executeGoal( "compile" );
     }
 
     /**
      * Performs a <code>mvn -f app/pom.xml compile</code> invocation. Verifies that inter-module dependencies are resolved.
      */
-    public void testWithFile() throws VerificationException
+    public void testWithFile() throws IOException, VerificationException
     {
+        File testDir = ResourceExtractor.simpleExtractResources( getClass(), RESOURCE_PATH );
+
         // Compile the whole project first.
         Verifier verifier = newVerifier( testDir.getAbsolutePath() );
         verifier.executeGoal( "compile" );
 
         verifier = newVerifier( testDir.getAbsolutePath() );
         verifier.setAutoclean( false );
+        verifier.setLogFileName( "log-withfile.txt" );
         verifier.addCliOption( "-f app/pom.xml" );
         verifier.executeGoal( "compile" );
     }
@@ -80,11 +85,14 @@ public class MavenITmng6118SubmoduleInvocation extends AbstractMavenIntegrationT
     /**
      * Performs a <code>mvn -f app/pom.xml -am compile</code> invocation. Verifies that dependent modules are also built.
      */
-    public void testWithFileAndAlsoMake() throws VerificationException
+    public void testWithFileAndAlsoMake() throws IOException, VerificationException
     {
+        File testDir = ResourceExtractor.simpleExtractResources( getClass(), RESOURCE_PATH );
+
         Verifier verifier = newVerifier( testDir.getAbsolutePath() );
         verifier.addCliOption( "-am" );
         verifier.addCliOption( "-f app/pom.xml" );
+        verifier.setLogFileName( "log-withfilealsomake.txt" );
         verifier.executeGoal( "compile" );
         verifier.verifyTextInLog( "Building Maven Integration Test :: MNG-6118 :: Library 1.0" );
     }
@@ -92,11 +100,14 @@ public class MavenITmng6118SubmoduleInvocation extends AbstractMavenIntegrationT
     /**
      * Performs a <code>cd app && mvn compile -am</code> invocation. Verifies that dependent modules are also built.
      */
-    public void testInSubModuleWithAlsoMake() throws VerificationException
+    public void testInSubModuleWithAlsoMake() throws IOException, VerificationException
     {
+        File testDir = ResourceExtractor.simpleExtractResources( getClass(), RESOURCE_PATH );
+
         File submoduleDirectory = new File( testDir, "app" );
         Verifier verifier = newVerifier( submoduleDirectory.getAbsolutePath() );
         verifier.addCliOption( "-am" );
+        verifier.setLogFileName( "log-insubmodulealsomake.txt" );
         verifier.executeGoal( "compile" );
         verifier.verifyTextInLog( "Building Maven Integration Test :: MNG-6118 :: Library 1.0" );
     }

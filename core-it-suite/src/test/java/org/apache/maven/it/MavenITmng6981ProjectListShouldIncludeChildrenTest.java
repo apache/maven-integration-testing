@@ -20,7 +20,7 @@ public class MavenITmng6981ProjectListShouldIncludeChildrenTest
             throws Exception
     {
         final File testDir = ResourceExtractor.simpleExtractResources( getClass(), RESOURCE_PATH );
-        Verifier verifier = new Verifier( testDir.getAbsolutePath() );
+        Verifier verifier = newVerifier( testDir.getAbsolutePath() );
 
         verifier.addCliOption( "-pl" );
         verifier.addCliOption( ":module-a" );
@@ -35,7 +35,7 @@ public class MavenITmng6981ProjectListShouldIncludeChildrenTest
             throws Exception
     {
         final File testDir = ResourceExtractor.simpleExtractResources( getClass(), RESOURCE_PATH );
-        Verifier verifier = new Verifier( testDir.getAbsolutePath() );
+        Verifier verifier = newVerifier( testDir.getAbsolutePath() );
 
         verifier.addCliOption( "-f" );
         verifier.addCliOption( "module-a" );

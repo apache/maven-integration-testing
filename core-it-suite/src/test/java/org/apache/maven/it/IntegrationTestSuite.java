@@ -107,6 +107,7 @@ public class IntegrationTestSuite
         // -------------------------------------------------------------------------------------------------------------
         // suite.addTestSuite( MavenIT0108SnapshotUpdateTest.class ); -- MNG-3137
 
+        suite.addTestSuite( MavenITmng6981ProjectListShouldIncludeChildrenTest.class );
         suite.addTestSuite( MavenITmng6972AllowAccessToGraphPackageTest.class );
         suite.addTestSuite( MavenITmng6772NestedImportScopeRepositoryOverride.class );
         suite.addTestSuite( MavenITmng6759TransitiveDependencyRepositoriesTest.class );

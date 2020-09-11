@@ -109,6 +109,7 @@ public class IntegrationTestSuite
 
         suite.addTestSuite( MavenITmng6118SubmoduleInvocation.class );
         suite.addTestSuite( MavenITmng6972AllowAccessToGraphPackageTest.class );
+        suite.addTestSuite( MavenITmng6772NestedImportScopeRepositoryOverride.class );
         suite.addTestSuite( MavenITmng6759TransitiveDependencyRepositoriesTest.class );
         suite.addTestSuite( MavenITmng6720FailFastTest.class );
         suite.addTestSuite( MavenITmng6656BuildConsumer.class );

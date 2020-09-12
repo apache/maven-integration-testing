@@ -29,7 +29,7 @@ public class MavenITmng6981ProjectListShouldIncludeChildrenTest
     }
 
     /**
-     * Since --pl's behavior is changed, make sure the alternative for building a pom without it's children still works.
+     * Since --pl's behavior is changed, make sure the alternative for building a pom without its children still works.
      */
     public void testFileSwitchAllowsExcludeOfChildren()
             throws Exception

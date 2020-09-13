@@ -360,6 +360,7 @@ public class IntegrationTestSuite
         suite.addTestSuite( MavenITmng4270ArtifactHandlersFromPluginDepsTest.class );
         suite.addTestSuite( MavenITmng4269BadReactorResolutionFromOutDirTest.class );
         suite.addTestSuite( MavenITmng4262MakeLikeReactorDottedPathTest.class );
+        suite.addTestSuite( MavenITmng4262MakeLikeReactorDottedPath370Test.class );
         suite.addTestSuite( MavenITmng4254SelectableWagonProvidersTest.class );
         suite.addTestSuite( MavenITmng4238ArtifactHandlerExtensionUsageTest.class );
         suite.addTestSuite( MavenITmng4235HttpAuthDeploymentChecksumsTest.class );

@@ -64,6 +64,14 @@ public class MavenITmng4262MakeLikeReactorDottedPathTest
         verifier.resetStreams();
 
         verifier.assertFilePresent( "target/touch.txt" );
+        if ( matchesVersionRange( "[,3.7.0)" ) )
+        {
+            verifier.assertFileNotPresent( "../sub-a/target/touch.txt" );
+        }
+        else if ( matchesVersionRange( "[3.7.0,)" ) )
+        {
+            verifier.assertFilePresent( "../sub-a/target/touch.txt" );
+        }
     }
 
     /**

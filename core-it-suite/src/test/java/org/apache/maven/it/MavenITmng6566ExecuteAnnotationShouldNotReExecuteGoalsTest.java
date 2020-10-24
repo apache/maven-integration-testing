@@ -24,6 +24,9 @@ import org.apache.maven.it.util.ResourceExtractor;
 import java.io.File;
 import java.util.List;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.is;
+
 public class MavenITmng6566ExecuteAnnotationShouldNotReExecuteGoalsTest
     extends AbstractMavenIntegrationTestCase
 {
@@ -49,7 +52,7 @@ public class MavenITmng6566ExecuteAnnotationShouldNotReExecuteGoalsTest
         verifier.verifyErrorFreeLog();
     }
 
-    public void testCompileIsForkedInDirectPluginInvocation()
+    public void testRunsCompileGoalOnceWithDirectPluginInvocation()
             throws Exception
     {
         File consumerDir = new File( testDir, "consumer" );
@@ -59,11 +62,12 @@ public class MavenITmng6566ExecuteAnnotationShouldNotReExecuteGoalsTest
         verifier.executeGoal( PLUGIN_KEY + ":run" );
         verifier.resetStreams();
         verifier.verifyErrorFreeLog();
-        verifier.verifyTextInLog( ">>> plugin:1.0-SNAPSHOT:run (default-cli) > compile @ consumer >>>" );
+
+        assertCompiledOnce( verifier );
         verifier.verifyTextInLog( "MNG-6566 plugin goal executed" );
     }
 
-    public void testCompileIsNotForkedInPhaseExecution()
+    public void testRunsCompileGoalOnceWithPhaseExecution()
             throws Exception
     {
         File consumerDir = new File( testDir, "consumer" );
@@ -73,29 +77,23 @@ public class MavenITmng6566ExecuteAnnotationShouldNotReExecuteGoalsTest
         verifier.executeGoal( "compile" );
         verifier.resetStreams();
         verifier.verifyErrorFreeLog();
-        verifyTextNotInLog( verifier, ">>> plugin:1.0-SNAPSHOT:run (default) > compile @ consumer >>>" );
-        verifier.verifyTextInLog( "--- maven-compiler-plugin:3.1:compile (default-compile) @ consumer ---" );
+
+        assertCompiledOnce( verifier );
         verifier.verifyTextInLog( "MNG-6566 plugin goal executed" );
     }
 
-    /**
-     * Throws an exception if the text <strong>is</strong> present in the log.
-     *
-     * @param verifier the verifier to use
-     * @param text the text to assert present
-     * @throws VerificationException if text is not found in log
-     */
-    private void verifyTextNotInLog( Verifier verifier, String text )
+    private void assertCompiledOnce( Verifier verifier )
             throws VerificationException
     {
         List<String> lines = verifier.loadFile( verifier.getBasedir(), verifier.getLogFileName(), false );
-
+        int counter = 0;
         for ( String line : lines )
         {
-            if ( Verifier.stripAnsi( line ).contains( text ) )
+            if ( line.contains( "maven-compiler-plugin:") && line.contains( ":compile" ) )
             {
-                throw new VerificationException( "Text found in log: " + text );
+                counter++;
             }
         }
+        assertThat( "Compile goal was expected to run once", counter, is( 1 ) );
     }
 }

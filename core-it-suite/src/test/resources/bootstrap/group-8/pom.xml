@@ -104,5 +104,10 @@ under the License.
       <artifactId>plexus-container-default</artifactId>
       <version>1.5.5</version>
     </dependency>
+    <dependency>
+      <groupId>org.ow2.asm</groupId>
+	  <artifactId>asm</artifactId>
+      <version>6.2</version>
+    </dependency>
   </dependencies>
 </project>

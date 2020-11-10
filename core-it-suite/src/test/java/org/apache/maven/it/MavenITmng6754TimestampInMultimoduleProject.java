@@ -55,11 +55,14 @@ public class MavenITmng6754TimestampInMultimoduleProject
         verifier.executeGoal( "deploy" );
         verifier.verifyErrorFreeLog();
 
+        final String parentLastUpdated = getLastUpdatedFromMetadata( getMetadataPath( repoDir, "parent" ) );
         final String aLastUpdated = getLastUpdatedFromMetadata( getMetadataPath( repoDir, "child-a" ) );
         final String bLastUpdated = getLastUpdatedFromMetadata( getMetadataPath( repoDir, "child-b" ) );
 
         assertEquals( "Expect child modules to be deployed with the same lastUpdated in maven-metadata.xml",
                 aLastUpdated, bLastUpdated );
+        assertEquals( "Expect parent modules to be deployed with the same lastUpdated in maven-metadata.xml as their children",
+                aLastUpdated, parentLastUpdated );
     }
 
     private Path getMetadataPath( final Path repoDir, final String moduleName )

@@ -62,19 +62,24 @@ public class MavenITmng6754TimestampInMultimoduleProject
         final String aLastUpdatedLocal = getLastUpdatedFromMetadata( getLocalMetadataPath( baseDir, "child-a" ) );
         final String bLastUpdatedLocal = getLastUpdatedFromMetadata( getLocalMetadataPath( baseDir, "child-b" ) );
 
-        assertEquals( "Installed child modules should have equal lastUpdated in maven-metadata-local.xml",
-                aLastUpdatedLocal, bLastUpdatedLocal );
-        assertEquals( "Installed parent module should have equal lastUpdated in maven-metadata-local.xml as their children",
-                aLastUpdatedLocal, parentLastUpdatedLocal );
-
         final String parentLastUpdatedRemote = getLastUpdatedFromMetadata( getRemoteMetadataPath( repoDir, "parent" ) );
         final String aLastUpdatedRemote = getLastUpdatedFromMetadata( getRemoteMetadataPath( repoDir, "child-a" ) );
         final String bLastUpdatedRemote = getLastUpdatedFromMetadata( getRemoteMetadataPath( repoDir, "child-b" ) );
 
+        assertEquals( "Installed child modules should have equal lastUpdated in maven-metadata-local.xml",
+                aLastUpdatedLocal, bLastUpdatedLocal );
+        assertEquals( "Installed parent module should have equal lastUpdated in maven-metadata-local.xml as their children",
+                aLastUpdatedLocal, parentLastUpdatedLocal );
         assertEquals( "Deployed child modules should have equal lastUpdated in maven-metadata.xml",
                 aLastUpdatedRemote, bLastUpdatedRemote );
         assertEquals( "Deployed parent module should have equal lastUpdated in maven-metadata.xml as their children",
                 aLastUpdatedRemote, parentLastUpdatedRemote );
+        assertEquals( "Installed parent module should have equal lastUpdated as deployed counterparts",
+                parentLastUpdatedLocal, parentLastUpdatedRemote );
+        assertEquals( "Installed child-a module should have equal lastUpdated as deployed counterparts",
+                aLastUpdatedLocal, aLastUpdatedRemote );
+        assertEquals( "Installed child-b module should have equal lastUpdated as deployed counterparts",
+                bLastUpdatedLocal, bLastUpdatedRemote );
     }
 
     private Path getLocalMetadataPath( final Path projectDir, final String moduleName )

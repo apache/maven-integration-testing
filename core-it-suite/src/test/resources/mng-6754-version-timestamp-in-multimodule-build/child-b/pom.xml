@@ -30,6 +30,7 @@ under the License.
         <version>1.0</version>
     </parent>
     <artifactId>child-b</artifactId>
+    <name>Maven Integration Test :: Child B</name>
     <dependencies>
         <dependency>
             <groupId>junit</groupId>

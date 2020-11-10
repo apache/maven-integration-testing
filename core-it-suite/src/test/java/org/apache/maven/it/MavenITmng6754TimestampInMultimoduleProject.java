@@ -31,6 +31,8 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static java.util.Arrays.asList;
+
 public class MavenITmng6754TimestampInMultimoduleProject
         extends AbstractMavenIntegrationTestCase
 {
@@ -49,23 +51,40 @@ public class MavenITmng6754TimestampInMultimoduleProject
     {
         final File testDir = ResourceExtractor.simpleExtractResources( getClass(), RESOURCE_PATH );
         final Verifier verifier = newVerifier( testDir.getAbsolutePath() );
-        final Path repoDir = Paths.get( verifier.getBasedir() ).resolve( "repo" );
+        final Path baseDir = Paths.get( System.getProperty("maven.repo.local") );
+        final Path repoDir = baseDir.resolve( "repo" );
         verifier.addCliOption( "-Drepodir=" + repoDir.toString() );
 
-        verifier.executeGoal( "deploy" );
+        verifier.executeGoals( asList( "install", "deploy" ) );
         verifier.verifyErrorFreeLog();
 
-        final String parentLastUpdated = getLastUpdatedFromMetadata( getMetadataPath( repoDir, "parent" ) );
-        final String aLastUpdated = getLastUpdatedFromMetadata( getMetadataPath( repoDir, "child-a" ) );
-        final String bLastUpdated = getLastUpdatedFromMetadata( getMetadataPath( repoDir, "child-b" ) );
+        final String parentLastUpdatedLocal = getLastUpdatedFromMetadata( getLocalMetadataPath( baseDir, "parent" ) );
+        final String aLastUpdatedLocal = getLastUpdatedFromMetadata( getLocalMetadataPath( baseDir, "child-a" ) );
+        final String bLastUpdatedLocal = getLastUpdatedFromMetadata( getLocalMetadataPath( baseDir, "child-b" ) );
 
-        assertEquals( "Expect child modules to be deployed with the same lastUpdated in maven-metadata.xml",
-                aLastUpdated, bLastUpdated );
-        assertEquals( "Expect parent modules to be deployed with the same lastUpdated in maven-metadata.xml as their children",
-                aLastUpdated, parentLastUpdated );
+        assertEquals( "Installed child modules should have equal lastUpdated in maven-metadata-local.xml",
+                aLastUpdatedLocal, bLastUpdatedLocal );
+        assertEquals( "Installed parent module should have equal lastUpdated in maven-metadata-local.xml as their children",
+                aLastUpdatedLocal, parentLastUpdatedLocal );
+
+        final String parentLastUpdatedRemote = getLastUpdatedFromMetadata( getRemoteMetadataPath( repoDir, "parent" ) );
+        final String aLastUpdatedRemote = getLastUpdatedFromMetadata( getRemoteMetadataPath( repoDir, "child-a" ) );
+        final String bLastUpdatedRemote = getLastUpdatedFromMetadata( getRemoteMetadataPath( repoDir, "child-b" ) );
+
+        assertEquals( "Deployed child modules should have equal lastUpdated in maven-metadata.xml",
+                aLastUpdatedRemote, bLastUpdatedRemote );
+        assertEquals( "Deployed parent module should have equal lastUpdated in maven-metadata.xml as their children",
+                aLastUpdatedRemote, parentLastUpdatedRemote );
     }
 
-    private Path getMetadataPath( final Path repoDir, final String moduleName )
+    private Path getLocalMetadataPath( final Path projectDir, final String moduleName )
+    {
+        final Path mng6754Path = Paths.get( "org", "apache", "maven", "its", "mng6754" );
+        final Path modulePath = projectDir.resolve( mng6754Path.resolve( moduleName ) );
+        return modulePath.resolve( "maven-metadata-local.xml" );
+    }
+
+    private Path getRemoteMetadataPath( final Path repoDir, final String moduleName )
     {
         final Path mng6754Path = Paths.get( "org", "apache", "maven", "its", "mng6754" );
         final Path modulePath = repoDir.resolve( mng6754Path.resolve( moduleName ) );

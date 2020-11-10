@@ -49,7 +49,7 @@ public class MavenITmng6754TimestampInMultimoduleProject
     {
         final File testDir = ResourceExtractor.simpleExtractResources( getClass(), RESOURCE_PATH );
         final Verifier verifier = newVerifier( testDir.getAbsolutePath() );
-        final Path repoDir = Files.createTempDirectory( "mng6754" ).resolve( "repo" );
+        final Path repoDir = Paths.get( verifier.getBasedir() ).resolve( "repo" );
         verifier.addCliOption( "-Drepodir=" + repoDir.toString() );
 
         verifier.executeGoal( "deploy" );

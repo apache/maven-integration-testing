@@ -42,8 +42,7 @@ public class MavenITmng6754TimestampInMultimoduleProject
 
     public MavenITmng6754TimestampInMultimoduleProject()
     {
-//        super( "[3.7.0,)" );
-        super( "[3.6.0,)" );
+        super( "[3.7.0,)" );
     }
 
     public void testArtifactsHaveSameTimestamp()

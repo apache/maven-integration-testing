@@ -26,12 +26,12 @@ import org.apache.maven.plugins.annotations.Execute;
 import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
 
-@Mojo( name = "run" )
+@Mojo( name = "require-compile-phase" )
 @Execute( phase = LifecyclePhase.COMPILE )
-public class RunMojo extends AbstractMojo
+public class RequiresCompilePhaseMojo extends AbstractMojo
 {
     public void execute() throws MojoExecutionException, MojoFailureException
     {
-        getLog().info( "MNG-6566 plugin run goal executed" );
+        getLog().info( "MNG-6566 plugin require-compile-phase goal executed" );
     }
 }

@@ -35,7 +35,7 @@ under the License.
         <executions>
           <execution>
             <goals>
-              <goal>run</goal>
+              <goal>require-compile-phase</goal>
             </goals>
             <phase>compile</phase>
           </execution>

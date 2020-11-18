@@ -52,6 +52,9 @@ public class MavenITmng6566ExecuteAnnotationShouldNotReExecuteGoalsTest
         verifier.verifyErrorFreeLog();
     }
 
+    /**
+     * This test uses the <pre>run</pre> goal of the test plugin which requires the 'compile' phase.
+     */
     public void testRunsCompileGoalOnceWithDirectPluginInvocation()
             throws Exception
     {
@@ -64,9 +67,12 @@ public class MavenITmng6566ExecuteAnnotationShouldNotReExecuteGoalsTest
         verifier.verifyErrorFreeLog();
 
         assertCompiledOnce( verifier );
-        verifier.verifyTextInLog( "MNG-6566 plugin goal executed" );
+        verifier.verifyTextInLog( "MNG-6566 plugin run goal executed" );
     }
 
+    /**
+     * This test uses the <pre>run</pre> goal of the test plugin which requires the 'compile' phase.
+     */
     public void testRunsCompileGoalOnceWithPhaseExecution()
             throws Exception
     {
@@ -79,8 +85,12 @@ public class MavenITmng6566ExecuteAnnotationShouldNotReExecuteGoalsTest
         verifier.verifyErrorFreeLog();
 
         assertCompiledOnce( verifier );
-        verifier.verifyTextInLog( "MNG-6566 plugin goal executed" );
+        verifier.verifyTextInLog( "MNG-6566 plugin run goal executed" );
     }
+
+    /**
+     * This test uses the <pre>clean</pre> goal of the test plugin which requires the 'clean' phase.
+     */
 
     private void assertCompiledOnce( Verifier verifier )
             throws VerificationException

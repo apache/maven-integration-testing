@@ -32,6 +32,6 @@ public class RunMojo extends AbstractMojo
 {
     public void execute() throws MojoExecutionException, MojoFailureException
     {
-        getLog().info( "MNG-6566 plugin goal executed" );
+        getLog().info( "MNG-6566 plugin run goal executed" );
     }
 }

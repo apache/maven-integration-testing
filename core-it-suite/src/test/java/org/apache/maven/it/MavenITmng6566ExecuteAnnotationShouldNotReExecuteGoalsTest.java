@@ -46,7 +46,7 @@ public class MavenITmng6566ExecuteAnnotationShouldNotReExecuteGoalsTest
         testDir = ResourceExtractor.simpleExtractResources( getClass(), RESOURCE_PATH );
 
         File pluginDir = new File( testDir, "plugin" );
-        Verifier verifier = newVerifier( pluginDir.getAbsolutePath() );
+        Verifier verifier = newVerifier( pluginDir.getAbsolutePath(), "remote" );
         verifier.executeGoal( "install" );
         verifier.resetStreams();
         verifier.verifyErrorFreeLog();

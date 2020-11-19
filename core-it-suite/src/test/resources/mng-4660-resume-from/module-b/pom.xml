@@ -39,6 +39,12 @@ under the License.
           <artifactId>module-a</artifactId>
           <version>1.0</version>
       </dependency>
+        <dependency>
+            <groupId>org.apache.maven.its.mng4660</groupId>
+            <artifactId>module-a</artifactId>
+            <version>1.0</version>
+            <type>test-jar</type>
+        </dependency>
     </dependencies>
 
   <build>

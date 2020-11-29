@@ -25,19 +25,16 @@ import org.apache.maven.shared.utils.io.FileUtils;
 import java.io.File;
 
 /**
- * This is a test case for <a href="https://issues.apache.org/jira/browse/MNG-4660">MNG-4660</a>.
- *
- * @author Maarten Mulders
- * @author Martin Kanters
+ * This is a test case for <a href="https://issues.apache.org/jira/browse/MNG-7024">MNG-7024</a>.
  */
-public class MavenITmng7024SubfolderExecution extends AbstractMavenIntegrationTestCase {
-    public MavenITmng7024SubfolderExecution()
+public class MavenITmng7024SubdirExecution extends AbstractMavenIntegrationTestCase {
+    public MavenITmng7024SubdirExecution()
     {
         super( "[4.0.0-alpha-1,)" );
     }
 
     /**
-     * Executing from a subfolder, however this folder is NOT part of the rootreactor, hence should not try to bind
+     * Executing from a subdirectory, however this folder is NOT part of the rootreactor, hence should not try to bind
      */
     public void testShouldIgnoreModuleA() throws Exception
     {

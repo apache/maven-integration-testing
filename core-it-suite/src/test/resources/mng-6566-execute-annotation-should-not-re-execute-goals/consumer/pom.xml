@@ -42,5 +42,13 @@ under the License.
         </executions>
       </plugin>
     </plugins>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>0.1-stub-SNAPSHOT</version>
+        </plugin>
+      </plugins>
+    </pluginManagement>
   </build>
 </project>

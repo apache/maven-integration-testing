@@ -92,7 +92,7 @@ public class MavenITmng6566ExecuteAnnotationShouldNotReExecuteGoalsTest
         int counter = 0;
         for ( String line : lines )
         {
-            if ( line.contains( "maven-compiler-plugin:") && line.contains( ":compile" ) )
+            if ( line.contains( "maven-compiler-plugin:0.1-stub-SNAPSHOT:compile") )
             {
                 counter++;
             }

@@ -37,7 +37,7 @@ public class MavenITmng6566ExecuteAnnotationShouldNotReExecuteGoalsTest
 
     public MavenITmng6566ExecuteAnnotationShouldNotReExecuteGoalsTest()
     {
-        super( "[3.6.3,)" );
+        super( "[4.0.0-alpha-1,)" );
     }
 
     public void setUp()

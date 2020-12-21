@@ -26,14 +26,14 @@ import java.io.File;
 import java.util.Arrays;
 
 /**
- * With the build-consumer the pom.xml will be adjusted during the process.
+ * With the build-consumer the POM will be adjusted during the process.
  * <ul>
- *   <li>CLI-friendly versions will be resolved</li>
+ *   <li>CI-friendly versions will be resolved</li>
  *   <li>parents can omit the version if the relative path points to the correct parent</li>
  *   <li>dependencies can omit the version if it is part of the reactor</li>
  * </ul>
  * 
- * During install the pom will be cleaned up
+ * During install the POM will be cleaned up
  * <ul>
  *   <li>the modules will be removed</li>
  *   <li>the relativePath will be removed</li>
@@ -48,7 +48,7 @@ public class MavenITmng6957BuildConsumer
 
     public MavenITmng6957BuildConsumer()
     {
-        super( "[3.7.0,)" );
+        super( "[4.0.0-alpha-1,)" );
     }
 
     /**

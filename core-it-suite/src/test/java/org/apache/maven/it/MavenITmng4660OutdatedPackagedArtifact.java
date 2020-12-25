@@ -112,9 +112,13 @@ public class MavenITmng4660OutdatedPackagedArtifact extends AbstractMavenIntegra
         verifier3.verifyErrorFreeLog();
         try
         {
-            Path path = Paths.get( "module-a", "target", "classes", "example.properties" );
-            verifier3.verifyTextInLog( "File '" + path.toString() + "' is more recent than the packaged artifact for 'module-a'; "
-                    + "using 'module-a/target/classes' instead" );
+            verifier3.verifyTextInLog( "File '"
+                    + Paths.get( "module-a", "target", "classes", "example.properties" )
+                    + "' is more recent than the packaged artifact for 'module-a'; "
+                    + "using '"
+                    + Paths.get( "module-a", "target","classes" )
+                    + "' instead"
+            );
         }
         catch ( VerificationException e )
         {

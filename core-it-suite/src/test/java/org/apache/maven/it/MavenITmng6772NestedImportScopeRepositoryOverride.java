@@ -1,7 +1,5 @@
 package org.apache.maven.it;
 
-import java.io.File;
-
 /*
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements.  See the NOTICE file
@@ -21,7 +19,16 @@ import java.io.File;
  * under the License.
  */
 
+import java.io.File;
+import java.nio.file.Files;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.apache.maven.it.util.ResourceExtractor;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.endsWith;
+import static org.hamcrest.Matchers.startsWith;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-6772">MNG-6772</a>:
@@ -39,7 +46,7 @@ public class MavenITmng6772NestedImportScopeRepositoryOverride
 
     public MavenITmng6772NestedImportScopeRepositoryOverride()
     {
-        super( "(,4.0.0-alpha-1),[4.0.0-alpha-1,)" );
+        super( "[3.0,)" );
     }
 
     // This will test the behavior using ProjectModelResolver
@@ -54,8 +61,34 @@ public class MavenITmng6772NestedImportScopeRepositoryOverride
 
         verifier.filterFile( "pom-template.xml", "pom.xml", "UTF-8", verifier.newDefaultFilterProperties() );
 
-        verifier.executeGoal( "validate" );
-        verifier.verifyErrorFreeLog();
+        try 
+        {
+            verifier.executeGoal( "validate" );
+            fail( "Shouldn't be able to find b-0.1.pom in Central " );
+        }
+        catch( VerificationException e )
+        {
+        }
+
+        List<String> logLines = Files.readAllLines( testDir.toPath().resolve( verifier.getLogFileName() ) );
+
+        List<String> downloadLines = new ArrayList<>( 3 );
+        for ( String line : logLines )
+        {
+            if ( line.startsWith( "[INFO] Downloading from central:" ) )
+            {
+                downloadLines.add( line );
+            }
+        }
+
+        assertEquals( 2, downloadLines.size() );
+
+        assertThat( downloadLines.get( 0 ), endsWith( "/a-0.1.pom" ) );
+        assertThat( downloadLines.get( 0 ), startsWith( "[INFO] Downloading from central: file" ) );
+
+        assertThat( downloadLines.get( 1 ), endsWith( "/b-0.1.pom" ) );
+        assertThat( downloadLines.get( 1 ), startsWith( "[INFO] Downloading from central: http" ) );
+
         verifier.resetStreams();
     }
 
@@ -71,8 +104,38 @@ public class MavenITmng6772NestedImportScopeRepositoryOverride
 
         verifier.filterFile( "pom-template.xml", "pom.xml", "UTF-8", verifier.newDefaultFilterProperties() );
 
-        verifier.executeGoal( "compile" );
-        verifier.verifyErrorFreeLog();
+        try 
+        {
+            verifier.executeGoal( "compile" );
+            fail( "Shouldn't be able to find b-0.1.pom in Central " );
+        }
+        catch( VerificationException e )
+        {
+        }
+
+        List<String> logLines = Files.readAllLines( testDir.toPath().resolve( verifier.getLogFileName() ) );
+
+        List<String> downloadLines = new ArrayList<>( 3 );
+        for ( String line : logLines )
+        {
+            if ( line.startsWith( "[INFO] Downloading from central:" ) )
+            {
+                downloadLines.add( line );
+            }
+        }
+
+        assertEquals( 3, downloadLines.size() );
+
+        assertThat( downloadLines.get( 0 ), endsWith( "/dependency-0.1.pom" ) );
+        assertThat( downloadLines.get( 0 ), startsWith( "[INFO] Downloading from central: file" ) );
+
+        // this might be a bug, shouldn't it be using the repository defined in dependency-0.1.pom, even though it is a BOM
+        assertThat( downloadLines.get( 1 ), endsWith( "/a-0.1.pom" ) );
+        assertThat( downloadLines.get( 1 ), startsWith( "[INFO] Downloading from central: file" ) );
+
+        assertThat( downloadLines.get( 2 ), endsWith( "/b-0.1.pom" ) );
+        assertThat( downloadLines.get( 2 ), startsWith( "[INFO] Downloading from central: http" ) );
+
         verifier.resetStreams();
     }
 

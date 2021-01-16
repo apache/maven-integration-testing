@@ -71,6 +71,11 @@ public class MavenITmng5937MavenWrapper
     public void setUp()
         throws Exception
     {
+        if ( isSkipped() )
+        {
+            return;
+        }
+
         String mavenDist = System.getProperty( "maven.distro" );
         if ( StringUtils.isEmpty( mavenDist ) )
         {

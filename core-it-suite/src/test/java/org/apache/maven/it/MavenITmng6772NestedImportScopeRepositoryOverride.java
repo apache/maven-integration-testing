@@ -155,7 +155,7 @@ public class MavenITmng6772NestedImportScopeRepositoryOverride
             verifier.getCliOptions().add( '"' + path + '"' );
         }
 
-        verifier.getCliOptions().add( "--global-settings" );
+        verifier.getCliOptions().add( "--settings" );
         if ( path.indexOf( ' ' ) < 0 )
         {
             verifier.getCliOptions().add( path );

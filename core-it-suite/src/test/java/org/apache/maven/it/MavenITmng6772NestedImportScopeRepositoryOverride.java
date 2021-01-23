@@ -56,7 +56,7 @@ public class MavenITmng6772NestedImportScopeRepositoryOverride
         final File testDir = ResourceExtractor.simpleExtractResources( getClass(), "/mng-6772-override-in-project" );
 
         final Verifier verifier = newVerifier( testDir.getAbsolutePath(), null );
-        overrideGlobalSettings( testDir, verifier );
+        overrideSettings( testDir, verifier );
         verifier.deleteArtifacts( "org.apache.maven.its.mng6772" );
 
         verifier.filterFile( "pom-template.xml", "pom.xml", "UTF-8", verifier.newDefaultFilterProperties() );
@@ -99,7 +99,7 @@ public class MavenITmng6772NestedImportScopeRepositoryOverride
         final File testDir = ResourceExtractor.simpleExtractResources( getClass(), "/mng-6772-override-in-dependency" );
 
         final Verifier verifier = newVerifier( testDir.getAbsolutePath(), null );
-        overrideGlobalSettings( testDir, verifier );
+        overrideSettings( testDir, verifier );
         verifier.deleteArtifacts( "org.apache.maven.its.mng6772" );
 
         verifier.filterFile( "pom-template.xml", "pom.xml", "UTF-8", verifier.newDefaultFilterProperties() );
@@ -140,10 +140,21 @@ public class MavenITmng6772NestedImportScopeRepositoryOverride
     }
 
     // central must not be defined in any settings.xml or super POM will never be in play.
-    private void overrideGlobalSettings( final File testDir, final Verifier verifier )
+    private void overrideSettings( final File testDir, final Verifier verifier )
     {
         final File settingsFile = new File( testDir, "settings-override.xml" );
         final String path = settingsFile.getAbsolutePath();
+
+        verifier.getCliOptions().add( "--global-settings" );
+        if ( path.indexOf( ' ' ) < 0 )
+        {
+            verifier.getCliOptions().add( path );
+        }
+        else
+        {
+            verifier.getCliOptions().add( '"' + path + '"' );
+        }
+
         verifier.getCliOptions().add( "--global-settings" );
         if ( path.indexOf( ' ' ) < 0 )
         {

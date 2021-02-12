@@ -23,6 +23,7 @@ import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -43,6 +44,7 @@ public class MavenITmng5760ResumeFeatureTest extends AbstractMavenIntegrationTes
     private final File parentDependentTestDir;
     private final File parentIndependentTestDir;
     private final File noProjectTestDir;
+    private final File fourModulesTestDir;
 
     public MavenITmng5760ResumeFeatureTest() throws IOException {
         super( "[4.0.0-alpha-1,)" );
@@ -52,6 +54,8 @@ public class MavenITmng5760ResumeFeatureTest extends AbstractMavenIntegrationTes
                 "/mng-5760-resume-feature/parent-independent" );
         this.noProjectTestDir = ResourceExtractor.simpleExtractResources( getClass(),
                 "/mng-5760-resume-feature/no-project" );
+        this.fourModulesTestDir = ResourceExtractor.simpleExtractResources( getClass(),
+                "/mng-5760-resume-feature/four-modules" );
     }
 
     /**
@@ -168,6 +172,112 @@ public class MavenITmng5760ResumeFeatureTest extends AbstractMavenIntegrationTes
         catch ( final VerificationException ve )
         {
             verifier.verifyTextInLog( "Goal requires a project to execute but there is no POM in this directory" );
+        }
+        finally
+        {
+            verifier.resetStreams();
+        }
+    }
+
+    public void testFailureWithParallelBuild() throws Exception
+    {
+        Verifier verifier = newVerifier( fourModulesTestDir.getAbsolutePath() );
+        verifier.addCliOption( "-T2" );
+        verifier.addCliOption( "-Dmodule-a.delay=1000" );
+        verifier.addCliOption( "-Dmodule-a.fail=true" );
+        verifier.addCliOption( "-Dmodule-c.fail=true" );
+
+        verifier.executeGoal( "org.apache.maven.plugins:maven-clean-plugin:clean" );
+        verifier.deleteArtifact( "org.apache.maven.its.mng5760", "module-a", "1.0", "jar" );
+        verifier.deleteArtifact( "org.apache.maven.its.mng5760", "module-b", "1.0", "jar" );
+        verifier.deleteArtifact( "org.apache.maven.its.mng5760", "module-c", "1.0", "jar" );
+        verifier.deleteArtifact( "org.apache.maven.its.mng5760", "module-d", "1.0", "jar" );
+
+        try
+        {
+            verifier.executeGoal( "install" );
+            fail( "Expected this invocation to fail" );
+        }
+        catch ( final VerificationException ve )
+        {
+            // Expected to fail.
+            verifier.assertArtifactNotPresent( "org.apache.maven.its.mng5760", "module-a", "1.0", "jar" );
+            verifier.assertArtifactPresent( "org.apache.maven.its.mng5760", "module-b", "1.0", "jar" );
+            verifier.assertArtifactNotPresent( "org.apache.maven.its.mng5760", "module-c", "1.0", "jar" );
+            verifier.assertArtifactNotPresent( "org.apache.maven.its.mng5760", "module-d", "1.0", "jar" );
+        }
+        finally
+        {
+            verifier.resetStreams();
+        }
+
+        // Let module-b and module-c fail, if they would have been built...
+        verifier = newVerifier( fourModulesTestDir.getAbsolutePath() );
+        verifier.addCliOption( "-T2" );
+        verifier.addCliOption( "-Dmodule-b.fail=true" );
+        // ... but adding -r should exclude those two from the build because the previous Maven invocation
+        // marked them as successfully built.
+        verifier.addCliOption( "-r" );
+        try
+        {
+            verifier.executeGoal( "install" );
+            verifier.assertArtifactPresent( "org.apache.maven.its.mng5760", "module-a", "1.0", "jar" );
+            verifier.assertArtifactPresent( "org.apache.maven.its.mng5760", "module-b", "1.0", "jar" );
+            verifier.assertArtifactPresent( "org.apache.maven.its.mng5760", "module-c", "1.0", "jar" );
+            verifier.assertArtifactPresent( "org.apache.maven.its.mng5760", "module-d", "1.0", "jar" );
+        }
+        finally
+        {
+            verifier.resetStreams();
+        }
+    }
+
+    public void testFailureAfterSkipWithParallelBuild() throws Exception
+    {
+        Verifier verifier = newVerifier( fourModulesTestDir.getAbsolutePath() );
+        verifier.addCliOption( "-T2" );
+        verifier.addCliOption( "-Dmodule-b.delay=2000" );
+        verifier.addCliOption( "-Dmodule-d.fail=true" );
+
+        verifier.executeGoal( "org.apache.maven.plugins:maven-clean-plugin:clean" );
+        verifier.deleteArtifact( "org.apache.maven.its.mng5760", "module-a", "1.0", "jar" );
+        verifier.deleteArtifact( "org.apache.maven.its.mng5760", "module-b", "1.0", "jar" );
+        verifier.deleteArtifact( "org.apache.maven.its.mng5760", "module-c", "1.0", "jar" );
+        verifier.deleteArtifact( "org.apache.maven.its.mng5760", "module-d", "1.0", "jar" );
+
+        try
+        {
+            verifier.executeGoals( Arrays.asList( "org.apache.maven.plugins:maven-clean-plugin:clean", "install" ) );
+            fail( "Expected this invocation to fail" );
+        }
+        catch ( final VerificationException ve )
+        {
+            // Expected to fail.
+            verifier.assertArtifactPresent( "org.apache.maven.its.mng5760", "module-a", "1.0", "jar" );
+            verifier.assertArtifactPresent( "org.apache.maven.its.mng5760", "module-b", "1.0", "jar" );
+            verifier.assertArtifactNotPresent( "org.apache.maven.its.mng5760", "module-c", "1.0", "jar" );
+            verifier.assertArtifactNotPresent( "org.apache.maven.its.mng5760", "module-d", "1.0", "jar" );
+        }
+        finally
+        {
+            verifier.resetStreams();
+        }
+
+        // Let module-b and module-c fail, if they would have been built...
+        verifier = newVerifier( fourModulesTestDir.getAbsolutePath() );
+        verifier.addCliOption( "-T2" );
+        verifier.addCliOption( "-Dmodule-a.fail=true" );
+        verifier.addCliOption( "-Dmodule-b.fail=true" );
+        // ... but adding -r should exclude those two from the build because the previous Maven invocation
+        // marked them as successfully built.
+        verifier.addCliOption( "-r" );
+        try
+        {
+            verifier.executeGoal( "install" );
+            verifier.assertArtifactPresent( "org.apache.maven.its.mng5760", "module-a", "1.0", "jar" );
+            verifier.assertArtifactPresent( "org.apache.maven.its.mng5760", "module-b", "1.0", "jar" );
+            verifier.assertArtifactPresent( "org.apache.maven.its.mng5760", "module-c", "1.0", "jar" );
+            verifier.assertArtifactPresent( "org.apache.maven.its.mng5760", "module-d", "1.0", "jar" );
         }
         finally
         {

@@ -44,6 +44,8 @@ public class MavenITmng6511OptionalProjectSelectionTest extends AbstractMavenInt
 
     public void testSelectExistingOptionalProfile() throws VerificationException
     {
+        newVerifier( testDir.getAbsolutePath() ).executeGoal( "clean" );
+
         Verifier verifier = newVerifier( testDir.getAbsolutePath() );
         verifier.setLogFileName( "log-select-existing.txt" );
         verifier.addCliOption( "-pl ?existing-module" );
@@ -54,6 +56,8 @@ public class MavenITmng6511OptionalProjectSelectionTest extends AbstractMavenInt
 
     public void testSelectExistingOptionalProfileByArtifactId() throws VerificationException
     {
+        newVerifier( testDir.getAbsolutePath() ).executeGoal( "clean" );
+
         Verifier verifier = newVerifier( testDir.getAbsolutePath() );
         verifier.setLogFileName( "log-select-existing-artifact-id.txt" );
         verifier.addCliOption( "-pl ?:existing-module" );
@@ -64,6 +68,8 @@ public class MavenITmng6511OptionalProjectSelectionTest extends AbstractMavenInt
 
     public void testSelectNonExistingOptionalProfile() throws VerificationException
     {
+        newVerifier( testDir.getAbsolutePath() ).executeGoal( "clean" );
+
         Verifier verifier = newVerifier( testDir.getAbsolutePath() );
         verifier.setLogFileName( "log-select-non-existing.txt" );
         verifier.addCliOption( "-pl ?non-existing-module" );
@@ -74,6 +80,8 @@ public class MavenITmng6511OptionalProjectSelectionTest extends AbstractMavenInt
 
     public void testDeselectExistingOptionalProfile() throws VerificationException
     {
+        newVerifier( testDir.getAbsolutePath() ).executeGoal( "clean" );
+
         Verifier verifier = newVerifier( testDir.getAbsolutePath() );
         verifier.setLogFileName( "log-deselect-existing.txt" );
         verifier.addCliOption( "-pl !?existing-module" );
@@ -84,6 +92,8 @@ public class MavenITmng6511OptionalProjectSelectionTest extends AbstractMavenInt
 
     public void testDeselectNonExistingOptionalProfile() throws VerificationException
     {
+        newVerifier( testDir.getAbsolutePath() ).executeGoal( "clean" );
+
         Verifier verifier = newVerifier( testDir.getAbsolutePath() );
         verifier.setLogFileName( "log-deselect-non-existing.txt" );
         verifier.addCliOption( "-pl !?non-existing-module" );

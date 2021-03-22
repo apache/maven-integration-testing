@@ -38,11 +38,14 @@ public class MavenITmng7112ProjectsWithNonRecursiveTest
             throws IOException, VerificationException
     {
         final File projectDir = ResourceExtractor.simpleExtractResources( getClass(), PROJECT_PATH );
+        newVerifier( projectDir.getAbsolutePath() ).executeGoal( "clean" );
+
         final Verifier verifier = newVerifier( projectDir.getAbsolutePath() );
 
         verifier.addCliOption( "-pl" );
         verifier.addCliOption( ":aggregator-a,:aggregator-b" );
         verifier.addCliOption( "-N" );
+        verifier.setLogFileName( "selected-non-recursive.txt" );
         verifier.executeGoal( "validate" );
 
         verifier.assertFileNotPresent( "target/touch.txt" );
@@ -50,5 +53,26 @@ public class MavenITmng7112ProjectsWithNonRecursiveTest
         verifier.assertFileNotPresent( "aggregator-a/module-a/target/touch.txt" );
         verifier.assertFilePresent( "aggregator-b/target/touch.txt" );
         verifier.assertFileNotPresent( "aggregator-b/module-b/target/touch.txt" );
+    }
+
+    public void testAggregatesCanBeDeselectedNonRecursively()
+            throws IOException, VerificationException
+    {
+        final File projectDir = ResourceExtractor.simpleExtractResources( getClass(), PROJECT_PATH );
+        newVerifier( projectDir.getAbsolutePath() ).executeGoal( "clean" );
+
+        final Verifier verifier = newVerifier( projectDir.getAbsolutePath() );
+
+        verifier.addCliOption( "-pl" );
+        verifier.addCliOption( "!:aggregator-a,!:aggregator-b" );
+        verifier.addCliOption( "-N" );
+        verifier.setLogFileName( "excluded-non-recursive.txt" );
+        verifier.executeGoal( "validate" );
+
+        verifier.assertFilePresent( "target/touch.txt" );
+        verifier.assertFileNotPresent( "aggregator-a/target/touch.txt" );
+        verifier.assertFilePresent( "aggregator-a/module-a/target/touch.txt" );
+        verifier.assertFileNotPresent( "aggregator-b/target/touch.txt" );
+        verifier.assertFilePresent( "aggregator-b/module-b/target/touch.txt" );
     }
 }

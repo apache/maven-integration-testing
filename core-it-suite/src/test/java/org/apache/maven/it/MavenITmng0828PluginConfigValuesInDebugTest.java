@@ -66,7 +66,7 @@ public class MavenITmng0828PluginConfigValuesInDebugTest
         checkLog( log, "[DEBUG]   (f) aliasDefaultExpressionParam = test" );
         checkLog( log, "[DEBUG]   (f) basedir = " + testDir.getCanonicalPath() );
         checkLog( log,
-                  "[DEBUG]   (f) beanParam = org.apache.maven.plugin.coreit.Bean[fieldParam=field, setterParam=setter, setterCalled=true]" );
+                  "[DEBUG]   (f) beanParam = org.apache.maven.plugin.coreit.Bean[fieldParam=field, setterParam=setter, setterCalled=true, setCalled=false]" );
         checkLog( log, "[DEBUG]   (f) booleanParam = true" );
         checkLog( log, "[DEBUG]   (f) byteParam = 42" );
         checkLog( log, "[DEBUG]   (f) byteParam = 42" );

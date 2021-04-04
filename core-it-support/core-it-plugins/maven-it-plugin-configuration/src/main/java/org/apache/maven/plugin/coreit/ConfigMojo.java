@@ -246,6 +246,7 @@ public class ConfigMojo
      *
      * @parameter
      */
+
     private Bean beanParam;
 
     /**
@@ -335,6 +336,7 @@ public class ConfigMojo
         {
             PropertiesUtil.serialize( props, "beanParam.fieldParam", beanParam.fieldParam );
             PropertiesUtil.serialize( props, "beanParam.setterParam", beanParam.setterParam );
+            PropertiesUtil.serialize( props, "beanParam.setCalled", beanParam.setCalled );
             PropertiesUtil.serialize( props, "beanParam.setterCalled", beanParam.setterCalled );
         }
     }

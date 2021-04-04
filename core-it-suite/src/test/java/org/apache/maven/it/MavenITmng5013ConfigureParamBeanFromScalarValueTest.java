@@ -19,7 +19,6 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
@@ -54,7 +53,8 @@ public class MavenITmng5013ConfigureParamBeanFromScalarValueTest
 
         Properties props = verifier.loadProperties( "target/config.properties" );
         assertEquals( "PASSED", props.getProperty( "beanParam.fieldParam" ) );
-        assertEquals( "true", props.getProperty( "beanParam.setterCalled" ) );
+        assertEquals( "true", props.getProperty( "beanParam.setCalled" ) );
+        assertEquals( "false", props.getProperty( "beanParam.setterCalled" ) );
     }
 
 }

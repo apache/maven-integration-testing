@@ -19,7 +19,6 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
@@ -95,6 +94,7 @@ public class MavenITmng3864PerExecPluginConfigTest
 
         assertEquals( "field", props.getProperty( "beanParam.fieldParam" ) );
         assertEquals( "setter", props.getProperty( "beanParam.setterParam" ) );
+        assertEquals( "false", props.getProperty( "beanParam.setCalled" ) );
         assertEquals( "true", props.getProperty( "beanParam.setterCalled" ) );
 
         assertEquals( "4", props.getProperty( "domParam.children" ) );

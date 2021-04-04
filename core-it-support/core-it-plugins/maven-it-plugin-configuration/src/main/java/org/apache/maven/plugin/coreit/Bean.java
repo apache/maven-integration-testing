@@ -32,12 +32,20 @@ public class Bean
 
     String setterParam;
 
+    /**
+     * default method of bean was called
+     */
+    boolean setCalled;
+
+    /**
+     * setter method of ben was called
+     */
     boolean setterCalled;
 
     public void set( String value )
     {
         fieldParam = value;
-        setterCalled = true;
+        setCalled = true;
     }
 
     public void setSetterParam( String value )
@@ -49,7 +57,7 @@ public class Bean
     public String toString()
     {
         return getClass().getName() + "[fieldParam=" + fieldParam + ", setterParam=" + setterParam
-                + ", setterCalled=" + setterCalled + "]";
+                + ", setterCalled=" + setterCalled + ", setCalled=" + setCalled + "]";
     }
 
 }

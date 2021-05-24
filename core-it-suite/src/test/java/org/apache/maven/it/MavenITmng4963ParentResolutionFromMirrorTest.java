@@ -55,6 +55,10 @@ public class MavenITmng4963ParentResolutionFromMirrorTest
         verifier.addCliOption( "-s" );
         verifier.addCliOption( "settings.xml" );
         verifier.filterFile( "settings-template.xml", "settings.xml", "UTF-8", verifier.newDefaultFilterProperties() );
+        if ( matchesVersionRange( "[4.0.0-alpha-1,)" ) )
+        {
+            verifier.addCliOption( "-Pit-defaults-4.0.0" );
+        }
         verifier.executeGoal( "validate" );
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();

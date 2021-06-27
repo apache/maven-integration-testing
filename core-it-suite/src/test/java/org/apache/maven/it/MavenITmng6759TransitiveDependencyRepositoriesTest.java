@@ -44,7 +44,6 @@ public class MavenITmng6759TransitiveDependencyRepositoriesTest extends Abstract
 
         Verifier verifier = newVerifier( testDir.getAbsolutePath() );
 
-        verifier.addCliOption( "-Dcustom.repo.uri=" + customRepoUri );
         verifier.executeGoal( "package"  );
         verifier.verifyErrorFreeLog();
     }

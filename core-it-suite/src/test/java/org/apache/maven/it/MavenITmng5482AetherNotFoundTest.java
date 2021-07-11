@@ -90,7 +90,16 @@ public class MavenITmng5482AetherNotFoundTest
         assertTrue( "ClassNotFoundException message was not found in output.", msg >= 0 );
 
         int url = indexOf( lines, ".*http://cwiki.apache.org/confluence/display/MAVEN/AetherClassNotFound.*" );
-        assertTrue( "Url to ClassNotFoundAether was not found in output.", url >= 0 );
+
+        boolean versionWithMng5693 = matchesVersionRange( "[3.6.1,)"); // no more link to cwiki
+        if ( versionWithMng5693 )
+        {
+            assertFalse( "Url to ClassNotFoundAether was found in output.", url >= 0 );
+        }
+        else
+        {
+            assertTrue( "Url to ClassNotFoundAether was not found in output.", url >= 0 );
+        }
     }
 
     private int indexOf( List<String> logLines, String regex )

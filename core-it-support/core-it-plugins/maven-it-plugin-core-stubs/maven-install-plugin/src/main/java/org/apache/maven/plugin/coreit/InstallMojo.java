@@ -54,7 +54,7 @@ public class InstallMojo
      *
      * @parameter
      */
-    private String pathname = "target/install-install.txt";
+    private final String pathname = "target/install-install.txt";
 
     /**
      * Runs this mojo.

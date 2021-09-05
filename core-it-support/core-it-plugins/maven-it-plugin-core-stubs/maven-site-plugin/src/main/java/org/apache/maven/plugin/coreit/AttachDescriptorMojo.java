@@ -54,7 +54,7 @@ public class AttachDescriptorMojo
      *
      * @parameter
      */
-    private String pathname = "target/site-attach-descriptor.txt";
+    private final String pathname = "target/site-attach-descriptor.txt";
 
     /**
      * Runs this mojo.

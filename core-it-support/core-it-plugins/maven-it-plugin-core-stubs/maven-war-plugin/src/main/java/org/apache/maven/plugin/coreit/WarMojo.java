@@ -54,7 +54,7 @@ public class WarMojo
      *
      * @parameter
      */
-    private String pathname = "target/war-war.txt";
+    private final String pathname = "target/war-war.txt";
 
     /**
      * Runs this mojo.

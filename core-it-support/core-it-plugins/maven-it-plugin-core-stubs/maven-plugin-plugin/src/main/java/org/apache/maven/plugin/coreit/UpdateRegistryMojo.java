@@ -54,7 +54,7 @@ public class UpdateRegistryMojo
      *
      * @parameter
      */
-    private String pathname = "target/plugin-update-registry.txt";
+    private final String pathname = "target/plugin-update-registry.txt";
 
     /**
      * Runs this mojo.

@@ -54,7 +54,7 @@ public class AddPluginArtifactMetadataMojo
      *
      * @parameter
      */
-    private String pathname = "target/plugin-add-plugin-artifact-metadata.txt";
+    private final String pathname = "target/plugin-add-plugin-artifact-metadata.txt";
 
     /**
      * Runs this mojo.

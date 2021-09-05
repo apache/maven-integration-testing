@@ -54,7 +54,7 @@ public class TestMojo
      *
      * @parameter
      */
-    private String pathname = "target/surefire-test.txt";
+    private final String pathname = "target/surefire-test.txt";
 
     /**
      * Runs this mojo.

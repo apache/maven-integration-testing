@@ -29,7 +29,7 @@ import org.codehaus.plexus.util.xml.pull.XmlSerializer;
 public class Xpp3Dom
 {
 
-    private String root;
+    private final String root;
 
     public Xpp3Dom( String root )
     {

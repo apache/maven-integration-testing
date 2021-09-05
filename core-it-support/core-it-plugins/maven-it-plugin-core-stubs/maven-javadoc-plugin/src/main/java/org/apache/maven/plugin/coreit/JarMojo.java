@@ -54,7 +54,7 @@ public class JarMojo
      *
      * @parameter
      */
-    private String pathname = "target/javadoc-jar.txt";
+    private final String pathname = "target/javadoc-jar.txt";
 
     /**
      * Runs this mojo.

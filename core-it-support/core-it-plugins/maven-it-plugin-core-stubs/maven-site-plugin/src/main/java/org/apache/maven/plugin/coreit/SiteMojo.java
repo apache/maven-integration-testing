@@ -54,7 +54,7 @@ public class SiteMojo
      *
      * @parameter
      */
-    private String pathname = "target/site-site.txt";
+    private final String pathname = "target/site-site.txt";
 
     /**
      * Runs this mojo.

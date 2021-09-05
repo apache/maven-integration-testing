@@ -63,7 +63,7 @@ public class InfoReport
      *
      * @parameter default-value="info.properties"
      */
-    private String infoFile = "info.properties";
+    private final String infoFile = "info.properties";
 
     /**
      * The path to the output directory of the site.

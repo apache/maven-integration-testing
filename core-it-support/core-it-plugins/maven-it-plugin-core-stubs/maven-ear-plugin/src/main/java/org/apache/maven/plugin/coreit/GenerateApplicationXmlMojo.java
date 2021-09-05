@@ -54,7 +54,7 @@ public class GenerateApplicationXmlMojo
      *
      * @parameter
      */
-    private String pathname = "target/ear-generate-application-xml.txt";
+    private final String pathname = "target/ear-generate-application-xml.txt";
 
     /**
      * Runs this mojo.

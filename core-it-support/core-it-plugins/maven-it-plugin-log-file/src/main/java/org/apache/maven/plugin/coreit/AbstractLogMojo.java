@@ -57,7 +57,7 @@ public abstract class AbstractLogMojo
     /**
      * The character encoding of the log file.
      */
-    private String encoding = "UTF-8";
+    private final String encoding = "UTF-8";
 
     /**
      * Gets the absolute path to the log file.

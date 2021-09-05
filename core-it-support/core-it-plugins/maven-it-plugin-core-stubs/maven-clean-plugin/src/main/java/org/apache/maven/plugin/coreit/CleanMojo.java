@@ -54,7 +54,7 @@ public class CleanMojo
      *
      * @parameter
      */
-    private String pathname = "target/clean-clean.txt";
+    private final String pathname = "target/clean-clean.txt";
 
     /**
      * Runs this mojo.

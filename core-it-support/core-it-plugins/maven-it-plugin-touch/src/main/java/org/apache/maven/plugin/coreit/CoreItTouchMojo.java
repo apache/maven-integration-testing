@@ -72,12 +72,12 @@ public class CoreItTouchMojo
     /**
      * @parameter alias="pluginFile"
      */
-    private String pluginItem = "foo";
+    private final String pluginItem = "foo";
 
     /**
      * @parameter
      */
-    private String goalItem = "bar";
+    private final String goalItem = "bar";
 
     /**
      * Touch a file named after artifact absolute file name, replacing '/' and ':' by '_' and adding ".txt".
@@ -91,7 +91,7 @@ public class CoreItTouchMojo
      *
      * @parameter property="fail"
      */
-    private boolean fail = false;
+    private final boolean fail = false;
 
     public void execute()
         throws MojoExecutionException

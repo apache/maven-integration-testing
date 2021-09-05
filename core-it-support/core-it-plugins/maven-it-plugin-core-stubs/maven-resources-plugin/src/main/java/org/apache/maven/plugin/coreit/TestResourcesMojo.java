@@ -54,7 +54,7 @@ public class TestResourcesMojo
      *
      * @parameter
      */
-    private String pathname = "target/resources-test-resources.txt";
+    private final String pathname = "target/resources-test-resources.txt";
 
     /**
      * Runs this mojo.

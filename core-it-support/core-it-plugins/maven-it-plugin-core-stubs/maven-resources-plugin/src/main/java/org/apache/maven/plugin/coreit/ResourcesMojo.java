@@ -55,7 +55,7 @@ public class ResourcesMojo
      *
      * @parameter
      */
-    private String pathname = "target/resources-resources.txt";
+    private final String pathname = "target/resources-resources.txt";
 
     /**
      * An optional message line to write to the output file (using UTF-8 encoding). If given, the output file will be

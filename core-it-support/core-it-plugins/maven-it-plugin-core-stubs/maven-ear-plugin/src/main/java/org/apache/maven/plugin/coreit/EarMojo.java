@@ -54,7 +54,7 @@ public class EarMojo
      *
      * @parameter
      */
-    private String pathname = "target/ear-ear.txt";
+    private final String pathname = "target/ear-ear.txt";
 
     /**
      * Runs this mojo.

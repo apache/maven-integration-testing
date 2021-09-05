@@ -32,7 +32,7 @@ public class CoreItToolchain
     implements Toolchain, ToolchainPrivate
 {
 
-    private ToolchainModel model;
+    private final ToolchainModel model;
 
     public CoreItToolchain( ToolchainModel model )
     {

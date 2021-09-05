@@ -54,7 +54,7 @@ public class EjbMojo
      *
      * @parameter
      */
-    private String pathname = "target/ejb-ejb.txt";
+    private final String pathname = "target/ejb-ejb.txt";
 
     /**
      * Runs this mojo.

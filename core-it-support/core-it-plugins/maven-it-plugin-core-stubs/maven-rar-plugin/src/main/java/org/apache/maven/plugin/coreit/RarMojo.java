@@ -54,7 +54,7 @@ public class RarMojo
      *
      * @parameter
      */
-    private String pathname = "target/rar-rar.txt";
+    private final String pathname = "target/rar-rar.txt";
 
     /**
      * Runs this mojo.

@@ -54,7 +54,7 @@ public class DeployMojo
      *
      * @parameter
      */
-    private String pathname = "target/site-deploy.txt";
+    private final String pathname = "target/site-deploy.txt";
 
     /**
      * Runs this mojo.

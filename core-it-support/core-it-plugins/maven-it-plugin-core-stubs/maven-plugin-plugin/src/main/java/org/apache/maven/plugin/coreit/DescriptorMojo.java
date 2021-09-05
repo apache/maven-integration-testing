@@ -54,7 +54,7 @@ public class DescriptorMojo
      *
      * @parameter
      */
-    private String pathname = "target/plugin-descriptor.txt";
+    private final String pathname = "target/plugin-descriptor.txt";
 
     /**
      * Runs this mojo.

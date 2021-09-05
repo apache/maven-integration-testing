@@ -57,7 +57,7 @@ public class GenerateMojo
      *
      * @parameter default-value="en"
      */
-    private String language = "en";
+    private final String language = "en";
 
     /**
      * A flag whether to ignore errors from reports and continue the generation.

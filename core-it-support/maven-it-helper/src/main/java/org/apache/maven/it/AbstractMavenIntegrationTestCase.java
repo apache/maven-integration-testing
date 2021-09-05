@@ -50,7 +50,7 @@ public abstract class AbstractMavenIntegrationTestCase
     /**
      * Save System.out for progress reports etc.
      */
-    private static PrintStream out = System.out;
+    private static final PrintStream OUT = System.out;
 
     /**
      * The format for elapsed time.
@@ -71,9 +71,9 @@ public abstract class AbstractMavenIntegrationTestCase
 
     private ArtifactVersion mavenVersion;
 
-    private VersionRange versionRange;
+    private final VersionRange versionRange;
 
-    private String matchPattern;
+    private final String matchPattern;
 
     private static final String DEFAULT_MATCH_PATTERN = "(.*?)-(RC[0-9]+|SNAPSHOT|RC[0-9]+-SNAPSHOT)";
 
@@ -104,7 +104,7 @@ public abstract class AbstractMavenIntegrationTestCase
         }
         else
         {
-            out.println( "WARNING: " + getITName() + ": version range '" + versionRange
+            OUT.println( "WARNING: " + getITName() + ": version range '" + versionRange
                              + "' supplied but no Maven version - not skipping test." );
         }
     }
@@ -195,7 +195,7 @@ public abstract class AbstractMavenIntegrationTestCase
         }
         else
         {
-            out.println( "WARNING: " + getITName() + ": version range '" + versionRange
+            OUT.println( "WARNING: " + getITName() + ": version range '" + versionRange
                              + "' supplied but no Maven version found - returning true for match check." );
 
             return true;
@@ -224,31 +224,31 @@ public abstract class AbstractMavenIntegrationTestCase
             {
                 mng++;
             }
-            out.print( AnsiSupport.bold( testName.substring( 0, mng ) ) );
-            out.print( ' ' );
-            out.print( testName.substring( mng ) );
+            OUT.print( AnsiSupport.bold( testName.substring( 0, mng ) ) );
+            OUT.print( ' ' );
+            OUT.print( testName.substring( mng ) );
         }
         else
         {
             int index = testName.indexOf( ' ' );
             if ( index == -1 )
             {
-                out.print( testName );
+                OUT.print( testName );
             }
             else
             {
-                out.print( AnsiSupport.bold( testName.substring( 0, index ) ) );
-                out.print( testName.substring( index ) );
+                OUT.print( AnsiSupport.bold( testName.substring( 0, index ) ) );
+                OUT.print( testName.substring( index ) );
             }
-            out.print( '.' );
+            OUT.print( '.' );
         }
 
-        out.print( pad( RESULT_COLUMN - testName.length() ) );
-        out.print( ' ' );
+        OUT.print( pad( RESULT_COLUMN - testName.length() ) );
+        OUT.print( ' ' );
 
         if ( skip )
         {
-            out.println( AnsiSupport.warning( "SKIPPED" ) + " - Maven version " + getMavenVersion() + " not in range "
+            OUT.println( AnsiSupport.warning( "SKIPPED" ) + " - Maven version " + getMavenVersion() + " not in range "
                 + versionRange );
             return;
         }
@@ -268,23 +268,23 @@ public abstract class AbstractMavenIntegrationTestCase
             {
                 throw invert;
             }
-            out.println( AnsiSupport.success( "OK" ) + " " + formatTime( milliseconds ) );
+            OUT.println( AnsiSupport.success( "OK" ) + " " + formatTime( milliseconds ) );
         }
         catch ( UnsupportedJavaVersionException e )
         {
-            out.println( AnsiSupport.warning( "SKIPPED" ) + " - Java version " + e.javaVersion + " not in range "
+            OUT.println( AnsiSupport.warning( "SKIPPED" ) + " - Java version " + e.javaVersion + " not in range "
                 + e.supportedRange );
             return;
         }
         catch ( UnsupportedMavenVersionException e )
         {
-            out.println( AnsiSupport.warning( "SKIPPED" ) + " - Maven version " + e.mavenVersion + " not in range "
+            OUT.println( AnsiSupport.warning( "SKIPPED" ) + " - Maven version " + e.mavenVersion + " not in range "
                 + e.supportedRange );
             return;
         }
         catch ( BrokenMavenVersionException e )
         {
-            out.println( AnsiSupport.error( "UNEXPECTED OK" ) + " - Maven version " + e.mavenVersion
+            OUT.println( AnsiSupport.error( "UNEXPECTED OK" ) + " - Maven version " + e.mavenVersion
                 + " expected to fail " + formatTime( milliseconds ) );
             fail( "Expected failure when with Maven version " + e.mavenVersion );
         }
@@ -293,12 +293,12 @@ public abstract class AbstractMavenIntegrationTestCase
             milliseconds = System.currentTimeMillis() - milliseconds;
             if ( invert != null )
             {
-                out.println( AnsiSupport.success( "EXPECTED FAIL" ) + " - Maven version " + invert.mavenVersion
+                OUT.println( AnsiSupport.success( "EXPECTED FAIL" ) + " - Maven version " + invert.mavenVersion
                     + " expected to fail " + formatTime( milliseconds ) );
             }
             else
             {
-                out.println( AnsiSupport.error( "FAILURE" ) + " " + formatTime( milliseconds ) );
+                OUT.println( AnsiSupport.error( "FAILURE" ) + " " + formatTime( milliseconds ) );
                 throw t;
             }
         }
@@ -361,7 +361,7 @@ public abstract class AbstractMavenIntegrationTestCase
         }
         else
         {
-            out.println( "WARNING: " + getITName() + ": version range '" + versionRange
+            OUT.println( "WARNING: " + getITName() + ": version range '" + versionRange
                              + "' supplied but no Maven version found - not skipping test." );
         }
     }
@@ -397,7 +397,7 @@ public abstract class AbstractMavenIntegrationTestCase
         }
         else
         {
-            out.println( "WARNING: " + getITName() + ": version range '" + versionRange
+            OUT.println( "WARNING: " + getITName() + ": version range '" + versionRange
                              + "' supplied but no Maven version found - not marking test as expected to fail." );
         }
     }

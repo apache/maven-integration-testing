@@ -54,7 +54,7 @@ public class CompileMojo
      *
      * @parameter
      */
-    private String pathname = "target/compiler-compile.txt";
+    private final String pathname = "target/compiler-compile.txt";
 
     /**
      * Runs this mojo.

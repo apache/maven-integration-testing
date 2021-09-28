@@ -57,7 +57,8 @@ public class MavenIT0138PluginLifecycleTest
         verifier.assertFilePresent( "target/compiler-test-compile.txt" );
         verifier.assertFilePresent( "target/surefire-test.txt" );
         verifier.assertFilePresent( "target/jar-jar.txt" );
-        verifier.assertFilePresent( "target/plugin-add-plugin-artifact-metadata.txt" );
+        // maven-plugin lifecycle has this extra mojo removed (as Resolver handles group level metadata now)
+        // verifier.assertFilePresent( "target/plugin-add-plugin-artifact-metadata.txt" );
         verifier.assertFilePresent( "target/install-install.txt" );
         if ( matchesVersionRange( "(,2.2.0)" ) )
         {

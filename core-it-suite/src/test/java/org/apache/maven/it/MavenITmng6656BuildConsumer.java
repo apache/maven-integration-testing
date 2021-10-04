@@ -24,6 +24,8 @@ import org.apache.maven.shared.utils.io.FileUtils;
 
 import java.io.File;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * With the build-consumer the pom.xml will be adjusted during the process.
@@ -71,21 +73,26 @@ public class MavenITmng6656BuildConsumer
         verifier.setAutoclean( false );
         verifier.addCliOption( "-Dchangelist=MNG6656" );
 
-        verifier.executeGoals( Arrays.asList( "install" ) );
+        verifier.executeGoals( Collections.singletonList("install") );
         verifier.verifyErrorFreeLog();
 
-        String content;
-        content = FileUtils.fileRead( new File( testDir, "expected/parent.pom") );
-        verifier.assertArtifactContents( "org.sonatype.mavenbook.multi", "parent", "0.9-MNG6656-SNAPSHOT", "pom", content );
+        List<String> generated;
+        List<String> expected;
+        generated = FileUtils.loadFile( new File( testDir, "expected/parent.pom") );
+        expected = FileUtils.loadFile( new File( verifier.getArtifactPath( "org.sonatype.mavenbook.multi", "parent", "0.9-MNG6656-SNAPSHOT", "pom" ) ) );
+        assertEquals( expected, generated );
 
-        content = FileUtils.fileRead( new File( testDir, "expected/simple-parent.pom") );
-        verifier.assertArtifactContents( "org.sonatype.mavenbook.multi", "simple-parent", "0.9-MNG6656-SNAPSHOT", "pom", content );
+        generated = FileUtils.loadFile( new File( testDir, "expected/simple-parent.pom") );
+        expected = FileUtils.loadFile( new File( verifier.getArtifactPath( "org.sonatype.mavenbook.multi", "simple-parent", "0.9-MNG6656-SNAPSHOT", "pom" ) ) );
+        assertEquals( expected, generated );
 
-        content = FileUtils.fileRead( new File( testDir, "expected/simple-weather.pom") );
-        verifier.assertArtifactContents( "org.sonatype.mavenbook.multi", "simple-weather", "0.9-MNG6656-SNAPSHOT", "pom", content );
+        generated = FileUtils.loadFile( new File( testDir, "expected/simple-weather.pom") );
+        expected = FileUtils.loadFile( new File( verifier.getArtifactPath( "org.sonatype.mavenbook.multi", "simple-weather", "0.9-MNG6656-SNAPSHOT", "pom" ) ) );
+        assertEquals( expected, generated );
 
-        content = FileUtils.fileRead( new File( testDir, "expected/simple-webapp.pom") );
-        verifier.assertArtifactContents( "org.sonatype.mavenbook.multi", "simple-webapp", "0.9-MNG6656-SNAPSHOT", "pom", content );
+        generated = FileUtils.loadFile( new File( testDir, "expected/simple-webapp.pom") );
+        expected = FileUtils.loadFile( new File( verifier.getArtifactPath( "org.sonatype.mavenbook.multi", "simple-webapp", "0.9-MNG6656-SNAPSHOT", "pom" ) ) );
+        assertEquals( expected, generated );
     }
 
 }

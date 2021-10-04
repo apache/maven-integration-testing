@@ -23,7 +23,6 @@ import org.apache.maven.it.util.ResourceExtractor;
 import org.apache.maven.shared.utils.io.FileUtils;
 
 import java.io.File;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 

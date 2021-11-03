@@ -43,7 +43,8 @@ public class MavenITmng6562WarnDefaultBindings
         verifier.setAutoclean( false );
         verifier.setLogFileName( phase + ".txt" );
         verifier.setForkJvm( true ); // required due to --fos-on-severity
-        verifier.addCliOption( "-fos=WARN" ); // ALSO NO WARNINGS
+        verifier.addCliOption( "-fos" );
+        verifier.addCliOption( "WARN" ); // ALSO NO WARNINGS
         verifier.executeGoals( Arrays.asList( phase ) );
         verifier.resetStreams();
 
@@ -61,7 +62,8 @@ public class MavenITmng6562WarnDefaultBindings
         verifier.setAutoclean( false );
         verifier.setLogFileName( phase + ".txt" );
         verifier.setForkJvm( true ); // required due to --fos-on-severity
-        verifier.addCliOption( "-fos=WARN" ); // ALSO NO WARNINGS
+        verifier.addCliOption( "-fos" );
+        verifier.addCliOption( "WARN" ); // ALSO NO WARNINGS
         verifier.executeGoals( Arrays.asList( phase ) );
         verifier.resetStreams();
 

@@ -44,6 +44,7 @@ public class MavenITmng7371ParentPomAlwaysPom
         verifier.filterFile( "pom-template.xml", "pom.xml", "UTF-8", verifier.newDefaultFilterProperties() );
         verifier.executeGoals( Arrays.asList( "clean", "package" ) );
         verifier.verifyErrorFreeLog();
+        // BUT: Maven should warn about parent-a not having packaging=pom!!!
         verifier.resetStreams();
     }
 }

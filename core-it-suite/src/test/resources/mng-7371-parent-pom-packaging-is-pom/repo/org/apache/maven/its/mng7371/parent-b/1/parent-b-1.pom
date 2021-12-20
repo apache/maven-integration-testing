@@ -22,7 +22,7 @@ under the License.
 <project>
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>org.apache.maven.its.mng6772</groupId>
+    <groupId>org.apache.maven.its.mng7371</groupId>
     <artifactId>parent-b</artifactId>
     <version>1</version>
     <packaging>pom</packaging>

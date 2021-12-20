@@ -38,9 +38,11 @@ public class MavenITmng7371ParentPomAlwaysPom
     public void testMissingJarInParallelBuild() throws IOException, VerificationException
     {
         final File testDir = ResourceExtractor.simpleExtractResources( getClass(), PROJECT_PATH );
+        final File settingsFile = new File( testDir, "settings.xml" );
         final Verifier verifier = newVerifier( testDir.getAbsolutePath(), null );
+        verifier.addCliOption( "-s settings.xml" );
         verifier.filterFile( "pom-template.xml", "pom.xml", "UTF-8", verifier.newDefaultFilterProperties() );
-        verifier.executeGoal( "validate" );
+        verifier.executeGoals( Arrays.asList( "clean", "package" ) );
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
     }

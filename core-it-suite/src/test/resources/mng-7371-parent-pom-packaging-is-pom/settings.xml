@@ -19,14 +19,5 @@ specific language governing permissions and limitations
 under the License.
 -->
 
-<project>
-    <modelVersion>4.0.0</modelVersion>
-
-    <parent>
-        <groupId>org.apache.maven.its.mng7371</groupId>
-        <artifactId>parent-b</artifactId>
-        <version>1</version>
-    </parent>
-    <artifactId>b</artifactId>
-
-</project>
+<settings>
+</settings>

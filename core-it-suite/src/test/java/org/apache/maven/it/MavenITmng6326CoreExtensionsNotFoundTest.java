@@ -36,7 +36,7 @@ public class MavenITmng6326CoreExtensionsNotFoundTest
 {
     public MavenITmng6326CoreExtensionsNotFoundTest()
     {
-        super( "(3.2.5,)" );
+        super( "[3.8.5,)" );
     }
 
     public void testCoreExtensionsNotFound()

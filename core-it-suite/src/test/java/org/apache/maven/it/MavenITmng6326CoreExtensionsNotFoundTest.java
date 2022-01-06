@@ -55,7 +55,7 @@ public class MavenITmng6326CoreExtensionsNotFoundTest
             try
             {
                 verifier.verifyTextInLog( "[ERROR] Error executing Maven." );
-                verifier.verifyTextInLog( "Extension org.apache.maven.its.it-core-extensions:maven-it-unknown-extensions:0.1 or one of its dependencies could not be resolved: org.apache.maven.its.it-core-extensions:maven-it-unknown-extensions:jar:0.1 was not found in" );
+                verifier.verifyTextInLog( "Extension org.apache.maven.its.it-core-extensions:maven-it-unknown-extensions:0.1 or one of its dependencies could not be resolved" );
             }
             catch ( VerificationException e2 )
             {

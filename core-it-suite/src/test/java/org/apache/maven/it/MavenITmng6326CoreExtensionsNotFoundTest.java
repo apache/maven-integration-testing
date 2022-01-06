@@ -25,7 +25,7 @@ import org.apache.maven.it.util.ResourceExtractor;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-6326">MNG-6326</a>:
- * check that Maven fails if it can not load core extensions contributed by <code>.mvn/extensions.xml</code>.
+ * check that Maven fails if it cannot load core extensions contributed by <code>.mvn/extensions.xml</code>.
  */
 public class MavenITmng6326CoreExtensionsNotFoundTest
     extends AbstractMavenIntegrationTestCase
@@ -49,7 +49,7 @@ public class MavenITmng6326CoreExtensionsNotFoundTest
         catch ( VerificationException e )
         {
             verifier.verifyTextInLog( "[ERROR] Error executing Maven." );
-            verifier.verifyTextInLog( "Plugin org.apache.maven.its.it-core-extensions:maven-it-unknown-extensions:0.1 or one of its dependencies could not be resolved: org.apache.maven.its.it-core-extensions:maven-it-unknown-extensions:jar:0.1 was not found in" );
+            verifier.verifyTextInLog( "Extension org.apache.maven.its.it-core-extensions:maven-it-unknown-extensions:0.1 or one of its dependencies could not be resolved: org.apache.maven.its.it-core-extensions:maven-it-unknown-extensions:jar:0.1 was not found in" );
         }
     }
 

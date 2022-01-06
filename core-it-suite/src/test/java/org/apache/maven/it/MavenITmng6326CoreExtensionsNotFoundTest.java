@@ -19,7 +19,12 @@ package org.apache.maven.it;
  * under the License.
  */
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 import org.apache.maven.it.util.ResourceExtractor;
 
@@ -48,8 +53,24 @@ public class MavenITmng6326CoreExtensionsNotFoundTest
         }
         catch ( VerificationException e )
         {
-            verifier.verifyTextInLog( "[ERROR] Error executing Maven." );
-            verifier.verifyTextInLog( "Extension org.apache.maven.its.it-core-extensions:maven-it-unknown-extensions:0.1 or one of its dependencies could not be resolved: org.apache.maven.its.it-core-extensions:maven-it-unknown-extensions:jar:0.1 was not found in" );
+            try
+            {
+                verifier.verifyTextInLog( "[ERROR] Error executing Maven." );
+                verifier.verifyTextInLog( "Extension org.apache.maven.its.it-core-extensions:maven-it-unknown-extensions:0.1 or one of its dependencies could not be resolved: org.apache.maven.its.it-core-extensions:maven-it-unknown-extensions:jar:0.1 was not found in" );
+            }
+            catch ( VerificationException e2 )
+            {
+                try ( BufferedReader r = Files.newBufferedReader(
+                        Paths.get( verifier.getBasedir(), verifier.getLogFileName() ), StandardCharsets.UTF_8 ) )
+                {
+                    System.err.println( r.readLine() );
+                }
+                catch ( IOException e3 )
+                {
+                    // ignore
+                }
+                throw e2;
+            }
         }
     }
 

@@ -19,10 +19,9 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
@@ -60,18 +59,16 @@ public class MavenITmng6326CoreExtensionsNotFoundTest
             }
             catch ( VerificationException e2 )
             {
-                try ( BufferedReader r = Files.newBufferedReader(
-                        Paths.get( verifier.getBasedir(), verifier.getLogFileName() ), StandardCharsets.UTF_8 ) )
-                {
-                    System.err.println( r.readLine() );
-                }
-                catch ( IOException e3 )
-                {
-                    // ignore
-                }
-                throw e2;
+                throw new VerificationException( e2.getMessage() + "\nLog:" + getLogContent( verifier ) );
             }
         }
+    }
+
+    private String getLogContent( Verifier verifier ) throws IOException
+    {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        Files.copy( Paths.get( verifier.getBasedir(), verifier.getLogFileName() ), baos );
+        return baos.toString();
     }
 
 }

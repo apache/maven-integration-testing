@@ -107,6 +107,7 @@ public class IntegrationTestSuite
         // -------------------------------------------------------------------------------------------------------------
         // suite.addTestSuite( MavenIT0108SnapshotUpdateTest.class ); -- MNG-3137
         suite.addTestSuite( MavenITmng6326CoreExtensionsNotFoundTest.class );
+        suite.addTestSuite( MavenITmng5561PluginRelocationLosesConfigurationTest.class );
         suite.addTestSuite( MavenITmng7335MissingJarInParallelBuild.class );
         suite.addTestSuite( MavenITmng4463DependencyManagementImportVersionRanges.class );
         suite.addTestSuite( MavenITmng7112ProjectsWithNonRecursiveTest.class );

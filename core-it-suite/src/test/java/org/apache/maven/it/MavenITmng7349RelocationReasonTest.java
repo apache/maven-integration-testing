@@ -20,6 +20,7 @@ package org.apache.maven.it;
  */
 
 import java.io.File;
+import java.util.List;
 
 import org.apache.maven.it.util.ResourceExtractor;
 
@@ -57,6 +58,18 @@ public class MavenITmng7349RelocationReasonTest
         verifier.executeGoal( "verify" );
         verifier.resetStreams();
         verifier.verifyErrorFreeLog();
-        verifier.verifyTextInLog( "Test relocation reason" );
+        try {
+            verifier.verifyTextInLog("Test relocation reason");
+        } catch (VerificationException e) {
+            List<String> lines = verifier.loadLines( verifier.getLogFileName(), "UTF-8" );
+            StringBuilder sb = new StringBuilder();
+            for (String line : lines) {
+                if (sb.length() > 0) {
+                    sb.append("\n");
+                }
+                sb.append(line);
+            }
+            throw new VerificationException(e.getMessage() + "\n" + sb, e);
+        }
     }
 }

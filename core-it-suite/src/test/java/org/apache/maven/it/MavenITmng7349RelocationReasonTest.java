@@ -39,18 +39,12 @@ public class MavenITmng7349RelocationReasonTest
     {
         File testDir = ResourceExtractor.simpleExtractResources( getClass(),
                     "/mng-7349-relocation-warning" );
-        File oldPluginWithRelocationDir = new File( testDir, "old-plugin-with-relocation" );
-        File newPluginDir = new File( testDir, "new-plugin" );
+        File artifactsDir = new File( testDir, "artifacts" );
         File projectDir = new File( testDir, "project" );
 
         Verifier verifier;
 
-        verifier = newVerifier( oldPluginWithRelocationDir.getAbsolutePath() );
-        verifier.executeGoal( "install" );
-        verifier.resetStreams();
-        verifier.verifyErrorFreeLog();
-
-        verifier = newVerifier( newPluginDir.getAbsolutePath() );
+        verifier = newVerifier( artifactsDir.getAbsolutePath() );
         verifier.executeGoal( "install" );
         verifier.resetStreams();
         verifier.verifyErrorFreeLog();

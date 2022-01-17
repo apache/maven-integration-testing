@@ -36,7 +36,7 @@ public class MavenITmng7349RelocationReasonTest
             throws Exception
     {
         File testDir = ResourceExtractor.simpleExtractResources( getClass(),
-                    "/mng-7349-relocation-reason" );
+                    "/mng-7349-relocation-warning" );
         File oldPluginWithRelocationDir = new File( testDir, "old-plugin-with-relocation" );
         File newPluginDir = new File( testDir, "new-plugin" );
         File projectDir = new File( testDir, "project" );

@@ -20,6 +20,7 @@ package org.apache.maven.it;
  */
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.maven.it.util.ResourceExtractor;
@@ -58,18 +59,24 @@ public class MavenITmng7349RelocationReasonTest
         verifier.executeGoal( "verify" );
         verifier.resetStreams();
         verifier.verifyErrorFreeLog();
-        try {
-            verifier.verifyTextInLog("Test relocation reason");
-        } catch (VerificationException e) {
-            List<String> lines = verifier.loadLines( verifier.getLogFileName(), "UTF-8" );
-            StringBuilder sb = new StringBuilder();
-            for (String line : lines) {
-                if (sb.length() > 0) {
-                    sb.append("\n");
-                }
-                sb.append(line);
+        List<String> lines = verifier.loadLines( verifier.getLogFileName(), "UTF-8" );
+        List<String> relocated = new ArrayList<>();
+        StringBuilder sb = new StringBuilder();
+        for (String line : lines) {
+            if (sb.length() > 0) {
+                sb.append("\n");
             }
-            throw new VerificationException(e.getMessage() + "\n" + sb, e);
+            sb.append(line);
+            if (line.contains("has been relocated")) {
+                relocated.add(line);
+            }
+        }
+        if (relocated.size() != 2 ) {
+            throw new VerificationException("Expected 2 relocations, but found multiple.\nBuild output:\n" + sb);
+        }
+        if (!relocated.get(0).contains("Test relocation reason for old-dep")
+                || !relocated.get(1).contains("Test relocation reason for old-plugin")) {
+            throw new VerificationException("Expected the relocation messages to be logged.\nBuild output:\n" + sb);
         }
     }
 }

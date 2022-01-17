@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>org.apache.maven.its.mng7349</groupId>
-  <artifactId>echo-maven-plugin</artifactId>
+  <artifactId>old-plugin</artifactId>
   <version>1.0.0-SNAPSHOT</version>
   <packaging>maven-plugin</packaging>
 
@@ -16,9 +16,9 @@
 
   <distributionManagement>
     <relocation>
-      <groupId>org.apache.maven.its.mng7349.plugins</groupId>
-      <artifactId>enhanced-echo-maven-plugin</artifactId>
-      <message>Test relocation reason</message>
+      <groupId>org.apache.maven.its.mng7349</groupId>
+      <artifactId>new-plugin</artifactId>
+      <message>Test relocation reason for old-plugin</message>
     </relocation>
   </distributionManagement>
 

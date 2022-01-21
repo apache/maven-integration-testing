@@ -68,8 +68,8 @@ public class MavenITmng7349RelocationReasonTest
         if (relocated.size() != 2 ) {
             throw new VerificationException("Expected 2 relocations, but found multiple.\nBuild output:\n" + sb);
         }
-        if (!relocated.get(0).contains("Test relocation reason for old-dep")
-                || !relocated.get(1).contains("Test relocation reason for old-plugin")) {
+        if (!relocated.get(0).contains("The artifact org.apache.maven.its.mng7349:old-dep:jar:1.0.0-SNAPSHOT has been relocated to org.apache.maven.its.mng7349:new-dep:jar:1.0.0-SNAPSHOT: Test relocation reason for old-dep")
+                || !relocated.get(1).contains("The artifact org.apache.maven.its.mng7349:old-plugin:jar:1.0.0-SNAPSHOT has been relocated to org.apache.maven.its.mng7349:new-plugin:jar:1.0.0-SNAPSHOT: Test relocation reason for old-plugin")) {
             throw new VerificationException("Expected the relocation messages to be logged.\nBuild output:\n" + sb);
         }
     }

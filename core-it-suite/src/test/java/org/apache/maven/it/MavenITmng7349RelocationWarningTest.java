@@ -23,11 +23,11 @@ import java.io.File;
 
 import org.apache.maven.it.util.ResourceExtractor;
 
-public class MavenITmng7349RelocationReasonTest
+public class MavenITmng7349RelocationWarningTest
     extends AbstractMavenIntegrationTestCase
 {
 
-    public MavenITmng7349RelocationReasonTest()
+    public MavenITmng7349RelocationWarningTest()
     {
         super( "[3.8.5,)" );
     }

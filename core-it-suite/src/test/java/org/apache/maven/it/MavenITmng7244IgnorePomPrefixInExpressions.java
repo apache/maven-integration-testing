@@ -24,41 +24,34 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
-public class MavenITmng7244FailBuildOnDeprecatedPomPlaceholders extends AbstractMavenIntegrationTestCase
+public class MavenITmng7244IgnorePomPrefixInExpressions extends AbstractMavenIntegrationTestCase
 {
-    private static final String PROJECT_PATH = "/mng-7244-fail-build-on-deprecated-pom-placeholders";
+    private static final String PROJECT_PATH = "/mng-7244-ignore-pom-prefix-in-expressions";
 
-    public MavenITmng7244FailBuildOnDeprecatedPomPlaceholders()
+    public MavenITmng7244IgnorePomPrefixInExpressions()
     {
         super( "[4.0.0-alpha-1,)" );
     }
 
-    public void testFailBuildOnDeprecatedPomPlaceholders() throws IOException, VerificationException
+    public void testIgnorePomPrefixInExpressions() throws IOException, VerificationException
     {
         final File projectDir = ResourceExtractor.simpleExtractResources( getClass(), PROJECT_PATH );
         final Verifier verifier = newVerifier( projectDir.getAbsolutePath() );
-        final String expectedMessageStatus = "[ERROR]";
-        final String expectedMessage =
-                "The expression ${pom.version} is no longer supported. Please use ${project.version} instead.";
 
-        try
-        {
-            verifier.executeGoal( "validate" );
-        }
-        catch ( VerificationException ex )
-        {
-            List<String> loadedLines = verifier.loadLines( "log.txt", "UTF-8" );
+        verifier.executeGoal( "validate" );
 
-            boolean containsExpectedError = false;
-            for ( String line : loadedLines )
+        verifyLogDoesNotContainUnexpectedWarning( verifier );
+    }
+
+    private void verifyLogDoesNotContainUnexpectedWarning( Verifier verifier ) throws IOException
+    {
+        List<String> loadedLines = verifier.loadLines( "log.txt", "UTF-8" );
+        for ( String line : loadedLines )
+        {
+            if ( line.startsWith( "[WARNING]" ) && line.contains( "The expression ${pom.version} is deprecated." ) )
             {
-                if ( line.startsWith( expectedMessageStatus ) && line.contains( expectedMessage ) )
-                {
-                    containsExpectedError = true;
-                    break;
-                }
+                fail("Log contained unexpected deprecation warning");
             }
-            assertTrue( containsExpectedError );
         }
     }
 }

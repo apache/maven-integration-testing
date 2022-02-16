@@ -2,7 +2,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.apache.maven.its.mng7244</groupId>
-    <artifactId>deprecated-pom-placeholders</artifactId>
+    <artifactId>deprecated-pom-placeholders-should-be-ignored</artifactId>
     <version>1.0</version>
 
     <properties>

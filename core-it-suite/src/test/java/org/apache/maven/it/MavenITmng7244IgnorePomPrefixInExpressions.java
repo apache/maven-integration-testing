@@ -50,7 +50,7 @@ public class MavenITmng7244IgnorePomPrefixInExpressions extends AbstractMavenInt
         {
             if ( line.startsWith( "[WARNING]" ) && line.contains( "The expression ${pom.version} is deprecated." ) )
             {
-                fail("Log contained unexpected deprecation warning");
+                fail( "Log contained unexpected deprecation warning" );
             }
         }
     }

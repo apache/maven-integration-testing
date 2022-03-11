@@ -51,7 +51,7 @@ public class MavenITmng5669ReadPomsOnce
     private static final int EXPECTED_LOG_SIZE_DFS = 168;
 
     /**
-     * "Modern" resolver w/ BDS and w/ skipper: it does not resolver unnecessary things.
+     * "Modern" resolver w/ BFS and w/ skipper: it does not resolve unnecessary things.
      */
     private static final int EXPECTED_LOG_SIZE_BFS = 145;
 

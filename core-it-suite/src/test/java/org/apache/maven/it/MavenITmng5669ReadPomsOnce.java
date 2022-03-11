@@ -45,6 +45,16 @@ public class MavenITmng5669ReadPomsOnce
         super( "[4.0.0-alpha-1,)" );
     }
 
+    /**
+     * "Original" resolver w/ DFS and w/o skipper: it did resolve things that were actually later unused.
+     */
+    private static final int EXPECTED_LOG_SIZE_DFS = 168;
+
+    /**
+     * "Modern" resolver w/ BDS and w/ skipper: it does not resolver unnecessary things.
+     */
+    private static final int EXPECTED_LOG_SIZE_BFS = 145;
+
     public void testWithoutBuildConsumer()
         throws Exception
     {
@@ -74,10 +84,11 @@ public class MavenITmng5669ReadPomsOnce
                 break;
             }
         }
-        assertEquals( logTxt.toString(), 168, logTxt.size() );
+        final int expectedLogSize = EXPECTED_LOG_SIZE_BFS;
+        assertEquals( logTxt.toString(), expectedLogSize, logTxt.size() );
 
         // analyze lines. It is a Hashmap, so we can't rely on the order
-        Set<String> uniqueBuildingSources = new HashSet<>( 168 );
+        Set<String> uniqueBuildingSources = new HashSet<>( expectedLogSize );
         final String buildSourceKey = "org.apache.maven.model.building.source=";
         final int keyLength = buildSourceKey.length();
         for ( String line : logTxt )
@@ -95,7 +106,7 @@ public class MavenITmng5669ReadPomsOnce
             }
             uniqueBuildingSources.add( line.substring( start + keyLength, end ) );
         }
-        assertEquals( uniqueBuildingSources.size(), 167 /* is 168 minus superpom */ );
+        assertEquals( uniqueBuildingSources.size(), expectedLogSize - 1 /* is 168 minus superpom */ );
     }
 
     public void testWithBuildConsumer()
@@ -128,11 +139,13 @@ public class MavenITmng5669ReadPomsOnce
                 break;
             }
         }
-        assertEquals( logTxt.toString(), 168 + 4 /* reactor poms are read twice: file + raw (=XMLFilters) */,
+        final int expectedLogSize = EXPECTED_LOG_SIZE_BFS;
+
+        assertEquals( logTxt.toString(), expectedLogSize + 4 /* reactor poms are read twice: file + raw (=XMLFilters) */,
                       logTxt.size() );
 
         // analyze lines. It is a Hashmap, so we can't rely on the order
-        Set<String> uniqueBuildingSources = new HashSet<>( 168 );
+        Set<String> uniqueBuildingSources = new HashSet<>( expectedLogSize );
         final String buildSourceKey = "org.apache.maven.model.building.source=";
         final int keyLength = buildSourceKey.length();
         for ( String line : logTxt )
@@ -150,7 +163,7 @@ public class MavenITmng5669ReadPomsOnce
             }
             uniqueBuildingSources.add( line.substring( start + keyLength, end ) );
         }
-        assertEquals( uniqueBuildingSources.size(), 167 /* is 168 minus superpom */ );
+        assertEquals( uniqueBuildingSources.size(), expectedLogSize - 1 /* is 168 minus superpom */ );
     }
 
 }

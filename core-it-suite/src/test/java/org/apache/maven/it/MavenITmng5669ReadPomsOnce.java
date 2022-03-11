@@ -45,15 +45,15 @@ public class MavenITmng5669ReadPomsOnce
         super( "[4.0.0-alpha-1,)" );
     }
 
-    /**
+    /*
      * "Original" resolver w/ DFS and w/o skipper: it did resolve things that were actually later unused.
      */
-    private static final int EXPECTED_LOG_SIZE_DFS = 168;
+    // private static final int EXPECTED_LOG_SIZE_DFS = 168;
 
-    /**
+    /*
      * "Modern" resolver w/ BFS and w/ skipper: it does not resolve unnecessary things.
      */
-    private static final int EXPECTED_LOG_SIZE_BFS = 145;
+    // private static final int EXPECTED_LOG_SIZE_BFS = 145;
 
     public void testWithoutBuildConsumer()
         throws Exception
@@ -84,8 +84,8 @@ public class MavenITmng5669ReadPomsOnce
                 break;
             }
         }
-        final int expectedLogSize = EXPECTED_LOG_SIZE_BFS;
-        assertEquals( logTxt.toString(), expectedLogSize, logTxt.size() );
+        final int expectedLogSize = logTxt.size();
+        assertTrue( expectedLogSize + " > 140", expectedLogSize > 140 ); // we expect AT LEAST 140 reads
 
         // analyze lines. It is a Hashmap, so we can't rely on the order
         Set<String> uniqueBuildingSources = new HashSet<>( expectedLogSize );
@@ -106,7 +106,7 @@ public class MavenITmng5669ReadPomsOnce
             }
             uniqueBuildingSources.add( line.substring( start + keyLength, end ) );
         }
-        assertEquals( uniqueBuildingSources.size(), expectedLogSize - 1 /* is 168 minus superpom */ );
+        assertEquals( uniqueBuildingSources.size(), expectedLogSize - 1 /* minus superpom */ );
     }
 
     public void testWithBuildConsumer()
@@ -139,10 +139,8 @@ public class MavenITmng5669ReadPomsOnce
                 break;
             }
         }
-        final int expectedLogSize = EXPECTED_LOG_SIZE_BFS;
-
-        assertEquals( logTxt.toString(), expectedLogSize + 4 /* reactor poms are read twice: file + raw (=XMLFilters) */,
-                      logTxt.size() );
+        final int expectedLogSize = logTxt.size() - 4; /* reactor poms are read twice: file + raw (=XMLFilters) */
+        assertTrue( expectedLogSize + " > 140", expectedLogSize > 140 ); // we expect AT LEAST 140 reads
 
         // analyze lines. It is a Hashmap, so we can't rely on the order
         Set<String> uniqueBuildingSources = new HashSet<>( expectedLogSize );
@@ -163,7 +161,7 @@ public class MavenITmng5669ReadPomsOnce
             }
             uniqueBuildingSources.add( line.substring( start + keyLength, end ) );
         }
-        assertEquals( uniqueBuildingSources.size(), expectedLogSize - 1 /* is 168 minus superpom */ );
+        assertEquals( uniqueBuildingSources.size(), expectedLogSize - 1 /* minus superpom */ );
     }
 
 }

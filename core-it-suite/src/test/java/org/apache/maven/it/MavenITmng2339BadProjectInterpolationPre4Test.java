@@ -33,7 +33,7 @@ public class MavenITmng2339BadProjectInterpolationPre4Test
 {
     public MavenITmng2339BadProjectInterpolationPre4Test()
     {
-        super( "(2.0.8,4.0.0-alpha-1-SNAPSHOT)" ); // 2.0.9+
+        super( "(2.0.8,4.0.0-alpha-1)" ); // 2.0.9+
     }
 
     // test that -Dversion=1.0 is still available for interpolation.

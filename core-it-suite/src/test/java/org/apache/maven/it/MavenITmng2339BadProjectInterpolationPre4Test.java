@@ -25,32 +25,51 @@ import java.io.File;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-2339">MNG-2339</a>.
- * Part of this test has moved to {@link MavenITmng2339BadProjectInterpolationPre4Test} as it will no longer work
- * in Maven 4.
+ *
+ *
  */
-public class MavenITmng2339BadProjectInterpolationTest
+public class MavenITmng2339BadProjectInterpolationPre4Test
     extends AbstractMavenIntegrationTestCase
 {
-    public MavenITmng2339BadProjectInterpolationTest()
+    public MavenITmng2339BadProjectInterpolationPre4Test()
     {
-        super( "(2.0.8,)" ); // 2.0.9+
+        super( "(2.0.8,4.0.0-alpha-1-SNAPSHOT)" ); // 2.0.9+
     }
 
-    public void testitMNG2339a()
+    // test that -Dversion=1.0 is still available for interpolation.
+    public void testitMNG2339b()
         throws Exception
     {
-        File testDir = ResourceExtractor.simpleExtractResources( getClass(), "/mng-2339/a" );
+        File testDir = ResourceExtractor.simpleExtractResources( getClass(), "/mng-2339/b" );
 
         Verifier verifier;
 
         verifier = newVerifier( testDir.getAbsolutePath() );
         verifier.setAutoclean( false );
+        verifier.deleteDirectory( "target" );
 
-        verifier.addCliOption( "-Dversion=foo" );
-        verifier.executeGoal( "validate" );
+        verifier.setLogFileName( "log-pom-specified.txt" );
+        verifier.executeGoal( "initialize" );
+
+        assertTrue( "Touchfile using ${project.version} does not exist.",
+                    new File( testDir, "target/touch-1.txt" ).exists() );
 
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
+
+        verifier = newVerifier( testDir.getAbsolutePath() );
+        verifier.setAutoclean( false );
+        verifier.deleteDirectory( "target" );
+
+        verifier.addCliOption( "-Dversion=2" );
+        verifier.setLogFileName( "log-cli-specified.txt" );
+        verifier.executeGoal( "initialize" );
+
+        verifier.verifyErrorFreeLog();
+        verifier.resetStreams();
+
+        assertTrue( "Touchfile using CLI-specified ${project.version} does not exist.",
+                    new File( testDir, "target/touch-2.txt" ).exists() );
     }
 
 }

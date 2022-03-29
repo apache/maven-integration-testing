@@ -25,8 +25,6 @@ import java.io.File;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-2339">MNG-2339</a>.
- *
- *
  */
 public class MavenITmng2339BadProjectInterpolationPre4Test
     extends AbstractMavenIntegrationTestCase

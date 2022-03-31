@@ -611,7 +611,6 @@ public class IntegrationTestSuite
         suite.addTestSuite( MavenITmng2387InactiveProxyTest.class );
         suite.addTestSuite( MavenITmng2363BasedirAwareFileActivatorTest.class );
         suite.addTestSuite( MavenITmng2362DeployedPomEncodingTest.class );
-        suite.addTestSuite( MavenITmng2339BadProjectInterpolationPre4Test.class );
         suite.addTestSuite( MavenITmng2339BadProjectInterpolationTest.class );
         suite.addTestSuite( MavenITmng2318LocalParentResolutionTest.class );
         suite.addTestSuite( MavenITmng2309ProfileInjectionOrderTest.class );

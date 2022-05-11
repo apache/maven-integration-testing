@@ -42,6 +42,9 @@ public class MavenITmng7470ResolverTransportTest
             verifier.addCliOption( new File( testDir, "settings.xml" ).getAbsolutePath() );
             verifier.addCliOption( "-Pmaven-core-it-repo" );
             verifier.addCliOption( "-Dmaven.resolver.transport=wagon" );
+            // Maven will fail if project dependencies cannot be resolved.
+            // As dependency exists ONLY in HTTP repo, it MUST be reached using selected transport and
+            // successfully resolved from it.
             verifier.executeGoal( "verify" );
             verifier.verifyErrorFreeLog();
             verifier.resetStreams();
@@ -77,6 +80,9 @@ public class MavenITmng7470ResolverTransportTest
             verifier.addCliOption( new File( testDir, "settings.xml" ).getAbsolutePath() );
             verifier.addCliOption( "-Pmaven-core-it-repo" );
             verifier.addCliOption( "-Dmaven.resolver.transport=native" );
+            // Maven will fail if project dependencies cannot be resolved.
+            // As dependency exists ONLY in HTTP repo, it MUST be reached using selected transport and
+            // successfully resolved from it.
             verifier.executeGoal( "verify" );
             verifier.verifyErrorFreeLog();
             verifier.resetStreams();

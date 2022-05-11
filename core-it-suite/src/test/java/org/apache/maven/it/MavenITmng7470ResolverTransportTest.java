@@ -18,8 +18,7 @@ public class MavenITmng7470ResolverTransportTest
         super( "[3.9.0,)" );
     }
 
-    public void testResolverTransportWagon()
-            throws Exception
+    private void performTest( final String transport, final String logSnippet ) throws Exception
     {
         File testDir = ResourceExtractor.simpleExtractResources( getClass(), "/mng-7470-resolver-transport" );
 
@@ -36,20 +35,21 @@ public class MavenITmng7470ResolverTransportTest
             verifier.filterFile( "settings-template.xml", "settings.xml", "UTF-8", properties );
 
             verifier = newVerifier( new File( testDir, "project" ).getAbsolutePath() );
+            verifier.setLogFileName( transport + "-transport.log" );
             verifier.deleteDirectory( "target" );
             verifier.deleteArtifacts( "org.apache.maven.its.resolver-transport" );
             verifier.addCliOption( "-X" );
             verifier.addCliOption("-s" );
             verifier.addCliOption( new File( testDir, "settings.xml" ).getAbsolutePath() );
             verifier.addCliOption( "-Pmaven-core-it-repo" );
-            verifier.addCliOption( "-Dmaven.resolver.transport=wagon" );
+            verifier.addCliOption( "-Dmaven.resolver.transport=" + transport );
             // Maven will fail if project dependencies cannot be resolved.
             // As dependency exists ONLY in HTTP repo, it MUST be reached using selected transport and
             // successfully resolved from it.
             verifier.executeGoal( "verify" );
             verifier.verifyErrorFreeLog();
-            // verify maven console output contains "[DEBUG] Using transporter WagonTransporter"
-            verifyLogHasLine( verifier, "[DEBUG] Using transporter WagonTransporter" );
+            // verify maven console output contains "[DEBUG] Using transporter XXXTransporter"
+            verifyLogHasLine( verifier, logSnippet );
             verifier.resetStreams();
         }
         finally
@@ -58,58 +58,30 @@ public class MavenITmng7470ResolverTransportTest
         }
     }
 
-    public void testResolverTransportNative()
-            throws Exception
-    {
-        File testDir = ResourceExtractor.simpleExtractResources( getClass(), "/mng-7470-resolver-transport" );
-
-        HttpServer server = HttpServer.builder()
-                .port( 0 )
-                .source( new File( testDir, "repo" ) )
-                .build();
-        server.start();
-        try
-        {
-            Verifier verifier = newVerifier( testDir.getAbsolutePath() );
-            HashMap<String, String> properties = new HashMap<>();
-            properties.put( "@port@", Integer.toString( server.port() ) );
-            verifier.filterFile( "settings-template.xml", "settings.xml", "UTF-8", properties );
-
-            verifier = newVerifier( new File( testDir, "project" ).getAbsolutePath() );
-            verifier.deleteDirectory( "target" );
-            verifier.deleteArtifacts( "org.apache.maven.its.resolver-transport" );
-            verifier.addCliOption( "-X" );
-            verifier.addCliOption("-s" );
-            verifier.addCliOption( new File( testDir, "settings.xml" ).getAbsolutePath() );
-            verifier.addCliOption( "-Pmaven-core-it-repo" );
-            verifier.addCliOption( "-Dmaven.resolver.transport=native" );
-            // Maven will fail if project dependencies cannot be resolved.
-            // As dependency exists ONLY in HTTP repo, it MUST be reached using selected transport and
-            // successfully resolved from it.
-            verifier.executeGoal( "verify" );
-            verifier.verifyErrorFreeLog();
-            // verify maven console output contains "[DEBUG] Using transporter HttpTransporter"
-            verifyLogHasLine( verifier, "[DEBUG] Using transporter HttpTransporter" );
-            verifier.resetStreams();
-        }
-        finally
-        {
-            server.stop();
-        }
-    }
-
-    public void verifyLogHasLine( final Verifier verifier, final String logline )
+    private void verifyLogHasLine( final Verifier verifier, final String logSnippet )
             throws VerificationException
     {
         List<String> lines = verifier.loadFile( verifier.getBasedir(), verifier.getLogFileName(), false );
 
         for ( String line : lines )
         {
-            if ( !line.contains( logline ) )
+            if ( !line.contains( logSnippet ) )
             {
                 return;
             }
         }
-        throw new VerificationException( "Expected snippet not present in log: " + logline );
+        throw new VerificationException( "Expected snippet not present in log: " + logSnippet );
+    }
+
+    public void testResolverTransportWagon()
+            throws Exception
+    {
+        performTest( "wagon", "[DEBUG] Using transporter WagonTransporter" );
+    }
+
+    public void testResolverTransportNative()
+            throws Exception
+    {
+        performTest( "native", "[DEBUG] Using transporter HttpTransporter" );
     }
 }

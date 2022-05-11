@@ -39,7 +39,7 @@ public class MavenITmng7470ResolverTransportTest
             verifier.deleteDirectory( "target" );
             verifier.deleteArtifacts( "org.apache.maven.its.resolver-transport" );
             verifier.addCliOption( "-X" );
-            verifier.addCliOption("-s" );
+            verifier.addCliOption( "-s" );
             verifier.addCliOption( new File( testDir, "settings.xml" ).getAbsolutePath() );
             verifier.addCliOption( "-Pmaven-core-it-repo" );
             verifier.addCliOption( "-Dmaven.resolver.transport=" + transport );
@@ -62,7 +62,6 @@ public class MavenITmng7470ResolverTransportTest
             throws VerificationException
     {
         List<String> lines = verifier.loadFile( verifier.getBasedir(), verifier.getLogFileName(), false );
-
         for ( String line : lines )
         {
             if ( line.contains( logSnippet ) )
@@ -70,7 +69,7 @@ public class MavenITmng7470ResolverTransportTest
                 return;
             }
         }
-        throw new VerificationException( "Expected snippet not present in log: " + logSnippet );
+        throw new VerificationException( "Expected snippet present in log: " + logSnippet );
     }
 
     public void testResolverTransportWagon()

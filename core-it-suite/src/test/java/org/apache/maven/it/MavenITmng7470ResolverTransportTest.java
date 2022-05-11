@@ -39,7 +39,7 @@ public class MavenITmng7470ResolverTransportTest
             verifier.deleteArtifacts( "org.apache.maven.its.resolver-transport.wagon" );
             verifier.addCliOption( "-X" );
             verifier.addCliOption("-s" );
-            verifier.addCliOption(new File( testDir, "settings.xml" ).getAbsolutePath() );
+            verifier.addCliOption( new File( testDir, "settings.xml" ).getAbsolutePath() );
             verifier.addCliOption( "-Pmaven-core-it-repo" );
             verifier.addCliOption( "-Dmaven.resolver.transport=wagon" );
             verifier.executeGoal( "verify" );
@@ -74,7 +74,7 @@ public class MavenITmng7470ResolverTransportTest
             verifier.deleteArtifacts( "org.apache.maven.its.resolver-transport.native" );
             verifier.addCliOption( "-X" );
             verifier.addCliOption("-s" );
-            verifier.addCliOption(new File( testDir, "settings.xml" ).getAbsolutePath() );
+            verifier.addCliOption( new File( testDir, "settings.xml" ).getAbsolutePath() );
             verifier.addCliOption( "-Pmaven-core-it-repo" );
             verifier.addCliOption( "-Dmaven.resolver.transport=native" );
             verifier.executeGoal( "verify" );

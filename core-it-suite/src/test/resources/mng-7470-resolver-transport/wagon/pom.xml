@@ -32,11 +32,25 @@ under the License.
     Verify that Maven transport Wagon works.
   </description>
 
-  <dependencies>
-    <dependency>
-      <groupId>org.apache.maven.its.resolver-transport.wagon</groupId>
-      <artifactId>dependency</artifactId>
-      <version>1.0</version>
-    </dependency>
-  </dependencies>
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.resolver</groupId>
+        <artifactId>resolver-demo-maven-plugin</artifactId>
+        <version>1.7.3</version>
+        <executions>
+          <execution>
+            <id>resolve</id>
+            <phase>validate</phase>
+            <goals>
+              <goal>resolve-artifact</goal>
+            </goals>
+            <configuration>
+              <artifactCoords>org.apache.maven.its.resolver-transport.wagon:dependency:1.0</artifactCoords>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
 </project>

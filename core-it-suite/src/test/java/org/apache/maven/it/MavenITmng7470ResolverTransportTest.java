@@ -36,7 +36,7 @@ public class MavenITmng7470ResolverTransportTest
 
             verifier = newVerifier( new File( testDir, "wagon" ).getAbsolutePath() );
             verifier.deleteDirectory( "target" );
-            verifier.deleteArtifacts( "org.apache.maven.its.resolver-transport.wagon" );
+            verifier.deleteArtifacts( "org.apache.maven.its.resolver-transport" );
             verifier.addCliOption( "-X" );
             verifier.addCliOption("-s" );
             verifier.addCliOption( new File( testDir, "settings.xml" ).getAbsolutePath() );
@@ -74,7 +74,7 @@ public class MavenITmng7470ResolverTransportTest
 
             verifier = newVerifier( new File( testDir, "native" ).getAbsolutePath() );
             verifier.deleteDirectory( "target" );
-            verifier.deleteArtifacts( "org.apache.maven.its.resolver-transport.native" );
+            verifier.deleteArtifacts( "org.apache.maven.its.resolver-transport" );
             verifier.addCliOption( "-X" );
             verifier.addCliOption("-s" );
             verifier.addCliOption( new File( testDir, "settings.xml" ).getAbsolutePath() );

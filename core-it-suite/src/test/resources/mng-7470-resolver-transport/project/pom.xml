@@ -22,14 +22,14 @@ under the License.
 <project>
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>org.apache.maven.its.resolver-transport.wagon</groupId>
-  <artifactId>artifact</artifactId>
+  <groupId>org.apache.maven.its.resolver-transport</groupId>
+  <artifactId>project</artifactId>
   <version>0.1</version>
   <packaging>jar</packaging>
 
-  <name>Maven Integration Test :: resolver-transport :: wagon</name>
+  <name>Maven Integration Test :: resolver-transport</name>
   <description>
-    Verify that Maven transport Wagon works.
+    Verify that Maven transport works.
   </description>
 
   <build>
@@ -46,7 +46,7 @@ under the License.
               <goal>resolve-artifact</goal>
             </goals>
             <configuration>
-              <artifactCoords>org.apache.maven.its.resolver-transport.wagon:dependency:1.0</artifactCoords>
+              <artifactCoords>org.apache.maven.its.resolver-transport:dependency:1.0</artifactCoords>
             </configuration>
           </execution>
         </executions>

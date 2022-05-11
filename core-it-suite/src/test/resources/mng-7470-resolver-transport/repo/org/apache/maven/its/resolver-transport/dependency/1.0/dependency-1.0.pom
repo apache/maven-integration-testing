@@ -22,13 +22,13 @@ under the License.
 <project>
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>org.apache.maven.its.resolver-transport.wagon</groupId>
+    <groupId>org.apache.maven.its.resolver-transport</groupId>
     <artifactId>dependency</artifactId>
     <version>1.0</version>
     <packaging>jar</packaging>
 
-    <name>Maven Integration Test :: resolver-transport :: wagon</name>
+    <name>Maven Integration Test :: resolver-transport :: dependency</name>
     <description>
-        Dependency pulled with Wagon transport.
+        Dependency pulled with transport.
     </description>
 </project>

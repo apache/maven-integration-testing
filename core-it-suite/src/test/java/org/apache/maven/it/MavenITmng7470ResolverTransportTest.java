@@ -34,7 +34,7 @@ public class MavenITmng7470ResolverTransportTest
             properties.put( "@port@", Integer.toString( server.port() ) );
             verifier.filterFile( "settings-template.xml", "settings.xml", "UTF-8", properties );
 
-            verifier = newVerifier( new File( testDir, "wagon" ).getAbsolutePath() );
+            verifier = newVerifier( new File( testDir, "project" ).getAbsolutePath() );
             verifier.deleteDirectory( "target" );
             verifier.deleteArtifacts( "org.apache.maven.its.resolver-transport" );
             verifier.addCliOption( "-X" );
@@ -72,7 +72,7 @@ public class MavenITmng7470ResolverTransportTest
             properties.put( "@port@", Integer.toString( server.port() ) );
             verifier.filterFile( "settings-template.xml", "settings.xml", "UTF-8", properties );
 
-            verifier = newVerifier( new File( testDir, "native" ).getAbsolutePath() );
+            verifier = newVerifier( new File( testDir, "project" ).getAbsolutePath() );
             verifier.deleteDirectory( "target" );
             verifier.deleteArtifacts( "org.apache.maven.its.resolver-transport" );
             verifier.addCliOption( "-X" );

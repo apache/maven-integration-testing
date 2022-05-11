@@ -2,7 +2,6 @@ package org.apache.maven.it;
 
 import java.io.File;
 import java.util.HashMap;
-import java.util.List;
 
 import org.apache.maven.it.util.ResourceExtractor;
 
@@ -49,27 +48,13 @@ public class MavenITmng7470ResolverTransportTest
             verifier.executeGoal( "verify" );
             verifier.verifyErrorFreeLog();
             // verify maven console output contains "[DEBUG] Using transporter XXXTransporter"
-            verifyLogHasLine( verifier, logSnippet );
+            verifier.verifyTextInLog( logSnippet );
             verifier.resetStreams();
         }
         finally
         {
             server.stop();
         }
-    }
-
-    private void verifyLogHasLine( final Verifier verifier, final String logSnippet )
-            throws VerificationException
-    {
-        List<String> lines = verifier.loadFile( verifier.getBasedir(), verifier.getLogFileName(), false );
-        for ( String line : lines )
-        {
-            if ( line.contains( logSnippet ) )
-            {
-                return;
-            }
-        }
-        throw new VerificationException( "Expected snippet present in log: " + logSnippet );
     }
 
     public void testResolverTransportWagon()

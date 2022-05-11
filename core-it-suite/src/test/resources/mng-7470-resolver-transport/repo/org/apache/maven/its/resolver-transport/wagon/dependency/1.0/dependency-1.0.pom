@@ -29,6 +29,6 @@ under the License.
 
     <name>Maven Integration Test :: resolver-transport :: wagon</name>
     <description>
-        Verify that Maven transport Wagon works.
+        Dependency pulled with Wagon transport.
     </description>
 </project>

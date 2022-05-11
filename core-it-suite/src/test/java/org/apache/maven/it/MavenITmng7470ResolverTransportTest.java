@@ -65,7 +65,7 @@ public class MavenITmng7470ResolverTransportTest
 
         for ( String line : lines )
         {
-            if ( !line.contains( logSnippet ) )
+            if ( line.contains( logSnippet ) )
             {
                 return;
             }

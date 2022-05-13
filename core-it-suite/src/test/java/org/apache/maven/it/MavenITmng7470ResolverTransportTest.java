@@ -70,6 +70,7 @@ public class MavenITmng7470ResolverTransportTest
             verifier.setLogFileName( transport + "-transport.log" );
         }
         verifier.deleteDirectory( "target" );
+        verifier.deleteArtifacts( "org.apache.maven.resolver.resolver-demo-maven-plugin" );
         verifier.deleteArtifacts( "org.apache.maven.its.resolver-transport" );
         verifier.addCliOption( "-X" );
         verifier.addCliOption( "-s" );

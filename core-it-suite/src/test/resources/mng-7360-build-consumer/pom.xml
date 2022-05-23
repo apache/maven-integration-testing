@@ -22,48 +22,17 @@
 
     <groupId>org.apache.maven.its.mng7360</groupId>
     <artifactId>parent</artifactId>
-    <version>1.0</version>
-
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <jdk.version>11</jdk.version>
-        <compiler.fork>false</compiler.fork>
-        <maven.compiler.source>${jdk.version}</maven.compiler.source>
-        <maven.compiler.target>${jdk.version}</maven.compiler.target>
-    </properties>
+    <version>1.0-SNAPSHOT</version>
 
     <build>
         <pluginManagement>
             <plugins>
                 <plugin>
-                    <groupId>org.codehaus.mojo</groupId>
-                    <artifactId>flatten-maven-plugin</artifactId>
-                    <version>1.2.5</version>
-                    <executions>
-                        <execution>
-                            <id>default-cli</id>
-                            <phase>process-resources</phase>
-                            <goals>
-                                <goal>flatten</goal>
-                            </goals>
-                            <configuration>
-                                <outputDirectory>${project.build.directory}</outputDirectory>
-                                <flattenedPomFilename>${project.artifactId}-${project.version}.pom</flattenedPomFilename>
-                                <updatePomFile>true</updatePomFile>
-                                <pomElements>
-                                    <build>keep</build>
-                                    <dependencyManagement>keep</dependencyManagement>
-                                    <description>keep</description>
-                                    <name>keep</name>
-                                    <parent>expand</parent>
-                                    <pluginManagement>keep</pluginManagement>
-                                    <profiles>remove</profiles>
-                                    <properties>keep</properties>
-                                </pomElements>
-                            </configuration>
-                        </execution>
-                    </executions>
+                    <groupId>foo</groupId>
+                    <artifactId>bar</artifactId>
+                    <configuration>
+                        <parent>expand</parent>
+                    </configuration>
                 </plugin>
             </plugins>
         </pluginManagement>

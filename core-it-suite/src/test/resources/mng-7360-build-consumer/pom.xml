@@ -28,8 +28,9 @@
         <pluginManagement>
             <plugins>
                 <plugin>
-                    <groupId>foo</groupId>
-                    <artifactId>bar</artifactId>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>flatten-maven-plugin</artifactId>
+                    <version>1.2.5</version>
                     <configuration>
                         <parent>expand</parent>
                     </configuration>
@@ -39,3 +40,4 @@
     </build>
 
 </project>
+

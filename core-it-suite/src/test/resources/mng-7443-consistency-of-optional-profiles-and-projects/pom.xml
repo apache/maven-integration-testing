@@ -22,7 +22,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.apache.maven.its.mng7443</groupId>
-    <artifactId>Consistent logging of optional projects and profiles selectors</artifactId>
+    <artifactId>consistent-logging-of-optional-projects-and-profiles-selectors</artifactId>
     <version>1.0</version>
 
 </project>

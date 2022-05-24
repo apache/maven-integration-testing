@@ -24,10 +24,10 @@ import java.io.File;
 import org.apache.maven.it.util.ResourceExtractor;
 
 /**
- * This test suite tests whether other modules in the same multi module project can be selected when invoking Maven from a submodule.
- * Related JIRA issue: <a href="https://issues.apache.org/jira/browse/MNG-7390">MNG-7390</a>.
+ * This test suite tests whether the consumer pom feature can load a project with a {@link parent} tag inside the plugin configuration.
+ * Related JIRA issue: <a href="https://issues.apache.org/jira/browse/MNG-7360">MNG-7360</a>.
  *
- * @author Martin Kanters
+ * @author Guillaume Nodet
  */
 public class MavenITmng7360BuildConsumer extends AbstractMavenIntegrationTestCase
 {

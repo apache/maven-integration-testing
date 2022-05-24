@@ -24,7 +24,8 @@ import java.io.File;
 import org.apache.maven.it.util.ResourceExtractor;
 
 /**
- * This test suite tests whether the consumer pom feature can load a project with a {@link parent} tag inside the plugin configuration.
+ * This test suite tests whether the consumer pom feature can load a project with a {@code parent} tag 
+ * inside the plugin configuration.
  * Related JIRA issue: <a href="https://issues.apache.org/jira/browse/MNG-7360">MNG-7360</a>.
  *
  * @author Guillaume Nodet

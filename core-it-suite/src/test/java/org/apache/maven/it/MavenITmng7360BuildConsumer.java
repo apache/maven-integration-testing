@@ -20,7 +20,6 @@ package org.apache.maven.it;
  */
 
 import java.io.File;
-import java.util.Arrays;
 
 import org.apache.maven.it.util.ResourceExtractor;
 

@@ -31,7 +31,7 @@ public class MavenITmng7443ConsistencyOfOptionalProjectsAndProfilesTest extends 
 {
     public MavenITmng7443ConsistencyOfOptionalProjectsAndProfilesTest()
     {
-        super( "[4.0.0,)" );
+        super( "[4.0.0-alpha-1,)" );
     }
 
     public void testConsistentLoggingOfOptionalProfilesAndProjects() throws IOException, VerificationException
@@ -52,12 +52,15 @@ public class MavenITmng7443ConsistencyOfOptionalProjectsAndProfilesTest extends 
 
         for ( String logLine : logLines )
         {
-            if ( logLine.equals( "[INFO] The requested optional projects [:does-not-exist] do not exist." ) )
+            if ( logLine.contains( "The requested optional projects" )
+                    && logLine.contains( ":does-not-exist" )
+                    && logLine.contains( "do not exist" ) )
             {
                 projectSelectorMissingCounter++;
             }
-            if ( logLine.equals(
-                    "[INFO] The requested optional profiles [does-not-exist-either] could not be activated or deactivated because they do not exist." ) )
+            if ( logLine.contains( "The requested optional profiles" )
+                    && logLine.contains( "does-not-exist-either" )
+                    && logLine.contains( "do not exist" ) )
             {
                 profileSelectorMissingCounter++;
             }

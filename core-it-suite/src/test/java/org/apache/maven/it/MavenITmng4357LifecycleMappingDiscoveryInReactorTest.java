@@ -19,7 +19,6 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
@@ -27,7 +26,7 @@ import java.util.Properties;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-4357">MNG-4357</a>.
- * 
+ *
  * @author Benjamin Bentmann
  */
 public class MavenITmng4357LifecycleMappingDiscoveryInReactorTest
@@ -42,6 +41,8 @@ public class MavenITmng4357LifecycleMappingDiscoveryInReactorTest
     /**
      * Test that different projects in a reactor build can use different versions of the same extension.
      * This should still hold true if the two versions of the extension provide the same set of components.
+     *
+     * @throws Exception in case of failure
      */
     public void testit()
         throws Exception
@@ -62,11 +63,11 @@ public class MavenITmng4357LifecycleMappingDiscoveryInReactorTest
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
 
-        verifier.assertFilePresent( "mod-a/target/old.txt" );
-        verifier.assertFileNotPresent( "mod-a/target/new.txt" );
+        verifier.verifyFilePresent( "mod-a/target/old.txt" );
+        verifier.verifyFileNotPresent( "mod-a/target/new.txt" );
 
-        verifier.assertFileNotPresent( "mod-b/target/old.txt" );
-        verifier.assertFilePresent( "mod-b/target/new.txt" );
+        verifier.verifyFileNotPresent( "mod-b/target/old.txt" );
+        verifier.verifyFilePresent( "mod-b/target/new.txt" );
     }
 
 }

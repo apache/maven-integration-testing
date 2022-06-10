@@ -19,7 +19,6 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
@@ -27,9 +26,9 @@ import java.util.Properties;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-885">MNG-885</a>.
- * 
+ *
  * @author John Casey
- * @version $Id$
+ *
  */
 public class MavenIT0072InterpolationWithDottedPropertyTest
     extends AbstractMavenIntegrationTestCase
@@ -42,6 +41,8 @@ public class MavenIT0072InterpolationWithDottedPropertyTest
     /**
      * Verifies that property references with dotted notation work within
      * POM interpolation.
+     *
+     * @throws Exception in case of failure
      */
     public void testit0072()
         throws Exception

@@ -19,16 +19,15 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-731">MNG-731</a>.
- * 
+ *
  * @author John Casey
- * @version $Id$
+ *
  */
 public class MavenITmng0731LegacyRepoLayoutTest
     extends AbstractMavenIntegrationTestCase
@@ -44,6 +43,8 @@ public class MavenITmng0731LegacyRepoLayoutTest
      * Verify that deployment of artifacts to a legacy-layout repository
      * results in a groupId directory of 'the.full.group.id' instead of
      * 'the/full/group/id'.
+     *
+     * @throws Exception in case of failure
      */
     public void testitMNG731()
         throws Exception
@@ -54,8 +55,8 @@ public class MavenITmng0731LegacyRepoLayoutTest
         verifier.setAutoclean( false );
         verifier.deleteDirectory( "target" );
         verifier.executeGoal( "validate" );
-        verifier.assertFilePresent( "target/test-repo/org.apache.maven.its.it0061/jars/maven-it-it0061-1.0.jar" );
-        verifier.assertFilePresent( "target/test-repo/org.apache.maven.its.it0061/poms/maven-it-it0061-1.0.pom" );
+        verifier.verifyFilePresent( "target/test-repo/org.apache.maven.its.it0061/jars/maven-it-it0061-1.0.jar" );
+        verifier.verifyFilePresent( "target/test-repo/org.apache.maven.its.it0061/poms/maven-it-it0061-1.0.pom" );
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
     }

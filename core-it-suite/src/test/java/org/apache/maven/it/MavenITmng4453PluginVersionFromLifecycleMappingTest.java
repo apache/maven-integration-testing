@@ -19,14 +19,13 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-4453">MNG-4453</a>.
- * 
+ *
  * @author Benjamin Bentmann
  */
 public class MavenITmng4453PluginVersionFromLifecycleMappingTest
@@ -41,6 +40,8 @@ public class MavenITmng4453PluginVersionFromLifecycleMappingTest
     /**
      * Verify that plugin versions given by the lifecycle mapping are respected, even if those differ from the version
      * defined in the plugin management section inherited from the super POM.
+     *
+     * @throws Exception in case of failure
      */
     public void testit()
         throws Exception
@@ -54,7 +55,7 @@ public class MavenITmng4453PluginVersionFromLifecycleMappingTest
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
 
-        verifier.assertFilePresent( "target/resources-resources.txt" );
+        verifier.verifyFilePresent( "target/resources-resources.txt" );
     }
 
 }

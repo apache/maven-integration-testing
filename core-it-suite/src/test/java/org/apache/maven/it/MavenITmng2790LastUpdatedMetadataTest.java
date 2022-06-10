@@ -29,9 +29,9 @@ import org.apache.maven.shared.utils.io.FileUtils;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-2790">MNG-2790</a>.
- * 
+ *
  * @author Benjamin Bentmann
- * @version $Id$
+ *
  */
 public class MavenITmng2790LastUpdatedMetadataTest
     extends AbstractMavenIntegrationTestCase
@@ -44,6 +44,8 @@ public class MavenITmng2790LastUpdatedMetadataTest
 
     /**
      * Verify that the field lastUpdated of existing local repo metadata is updated upon install of new a snapshot.
+     *
+     * @throws Exception in case of failure
      */
     public void testitMNG2790()
         throws Exception
@@ -71,7 +73,7 @@ public class MavenITmng2790LastUpdatedMetadataTest
         Date artifactLastUpdated1 = getLastUpdated( metadataArtifactFile );
 
         // sanity check: timestamps shouldn't differ by more than 10 min from now (i.e. timezone is UTC)
-        assertTrue( artifactVersionLastUpdated1 + " ~ " + now, 
+        assertTrue( artifactVersionLastUpdated1 + " ~ " + now,
             Math.abs( artifactVersionLastUpdated1.getTime() - now.getTime() ) < 10 * 60 * 1000 );
         assertTrue( artifactLastUpdated1 + " ~ " + now,
             Math.abs( artifactLastUpdated1.getTime() - now.getTime() ) < 10 * 60 * 1000 );
@@ -92,9 +94,9 @@ public class MavenITmng2790LastUpdatedMetadataTest
         Date artifactLastUpdated2 = getLastUpdated( metadataArtifactFile );
 
         // check that new timestamps are strictly later than from original install
-        assertTrue( artifactVersionLastUpdated1 + " < " + artifactVersionLastUpdated2, 
+        assertTrue( artifactVersionLastUpdated1 + " < " + artifactVersionLastUpdated2,
             artifactVersionLastUpdated2.after( artifactVersionLastUpdated1 ) );
-        assertTrue( artifactLastUpdated1 + " < " + artifactLastUpdated2, 
+        assertTrue( artifactLastUpdated1 + " < " + artifactLastUpdated2,
             artifactLastUpdated2.after( artifactLastUpdated1 ) );
     }
 

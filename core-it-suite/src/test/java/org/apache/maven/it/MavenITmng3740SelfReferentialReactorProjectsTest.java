@@ -21,7 +21,6 @@ package org.apache.maven.it;
 
 import java.io.File;
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 /**
@@ -31,9 +30,9 @@ import org.apache.maven.it.util.ResourceExtractor;
  * doesn't result in a StackOverflowError as a result of trying to calculate
  * a concrete state for its project references, which includes itself because of
  * this plugin configuration in the POM.
- * 
+ *
  * @author jdcasey
- * 
+ *
  */
 public class MavenITmng3740SelfReferentialReactorProjectsTest
     extends AbstractMavenIntegrationTestCase
@@ -56,11 +55,11 @@ public class MavenITmng3740SelfReferentialReactorProjectsTest
         verifier.executeGoal( "install" );
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
-        
+
         verifier = newVerifier( v2.getAbsolutePath() );
         verifier.executeGoal( "package" );
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
-        
+
     }
 }

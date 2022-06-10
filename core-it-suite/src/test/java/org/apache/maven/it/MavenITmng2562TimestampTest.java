@@ -20,7 +20,6 @@ package org.apache.maven.it;
  */
 
 import org.apache.maven.it.util.ResourceExtractor;
-import org.apache.maven.it.Verifier;
 
 import java.io.File;
 import java.util.Date;
@@ -29,13 +28,13 @@ import java.text.SimpleDateFormat;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-2562">MNG-2562</a>.
- * 
- * @version $Id$
+ *
+ *
  */
 public class MavenITmng2562TimestampTest
     extends AbstractMavenIntegrationTestCase
 {
-    
+
     public MavenITmng2562TimestampTest()
     {
         super( "[2.1.0-M1,3.2.2)" ); // 2.1.0+ only

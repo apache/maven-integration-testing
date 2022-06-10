@@ -19,16 +19,15 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-3701">MNG-3701</a>.
- * 
+ *
  * @author Benjamin Bentmann
- * @version $Id$
+ *
  */
 public class MavenITmng3701ImplicitProfileIdTest
     extends AbstractMavenIntegrationTestCase
@@ -42,6 +41,8 @@ public class MavenITmng3701ImplicitProfileIdTest
     /**
      * Verify that profiles without explicit id get a default id and in particular don't cause NPEs when
      * they are active by default.
+     *
+     * @throws Exception in case of failure
      */
     public void testitMNG3701()
         throws Exception

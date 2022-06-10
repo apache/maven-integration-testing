@@ -7,10 +7,10 @@ import java.util.ArrayList;
  * Hello world!
  *
  */
-public class Diamond 
+public class Diamond
 {
     public static void main( String[] args )
     {
-	    List<String> stuff = new ArrayList<>();
+        List<String> stuff = new ArrayList<>();
     }
 }

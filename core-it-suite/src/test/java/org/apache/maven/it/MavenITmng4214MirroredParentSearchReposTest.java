@@ -19,14 +19,13 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-4214">MNG-4214</a>.
- * 
+ *
  * @author Benjamin Bentmann
  */
 public class MavenITmng4214MirroredParentSearchReposTest
@@ -42,6 +41,8 @@ public class MavenITmng4214MirroredParentSearchReposTest
      * Test parent POMs can be resolved from repos with different enabled policies that are matched by a single mirror.
      * In other words, check that the one mirror is properly configured with a merged view of the potentially different
      * policies from the original repos.
+     *
+     * @throws Exception in case of failure
      */
     public void testit()
         throws Exception
@@ -59,7 +60,7 @@ public class MavenITmng4214MirroredParentSearchReposTest
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
 
-        verifier.assertArtifactPresent( "org.apache.maven.its.mng4214", "parent", "0.1", "pom" );
+        verifier.verifyArtifactPresent( "org.apache.maven.its.mng4214", "parent", "0.1", "pom" );
     }
 
 }

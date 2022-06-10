@@ -19,7 +19,6 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
@@ -27,7 +26,7 @@ import java.util.List;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-5137">MNG-5137</a>.
- * 
+ *
  * @author Benjamin Bentmann
  */
 public class MavenITmng5137ReactorResolutionInForkedBuildTest
@@ -43,6 +42,8 @@ public class MavenITmng5137ReactorResolutionInForkedBuildTest
      * Verify that reactor resolution also works within a forked multi-module lifecycle, i.e. a lifecycle fork caused
      * by an aggregator mojo. Here, reactor resolution needs to search the forked project instances for build output,
      * not the project instances from the main build.
+     *
+     * @throws Exception in case of failure
      */
     public void testit()
         throws Exception
@@ -55,7 +56,7 @@ public class MavenITmng5137ReactorResolutionInForkedBuildTest
         verifier.deleteDirectory( "producer/target" );
         verifier.deleteDirectory( "consumer/target" );
         verifier.deleteArtifacts( "org.apache.maven.its.mng5137" );
-        verifier.executeGoal( 
+        verifier.executeGoal(
                 "org.apache.maven.its.plugins:maven-it-plugin-fork:2.1-SNAPSHOT:fork-lifecycle-aggregator" );
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();

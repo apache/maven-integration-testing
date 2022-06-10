@@ -19,7 +19,6 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
@@ -27,7 +26,7 @@ import java.util.Properties;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-4544">MNG-4544</a>.
- * 
+ *
  * @author Benjamin Bentmann
  */
 public class MavenITmng4544ActiveComponentCollectionThreadSafeTest
@@ -41,6 +40,8 @@ public class MavenITmng4544ActiveComponentCollectionThreadSafeTest
 
     /**
      * Test that concurrent access to active component collections is thread-safe.
+     *
+     * @throws Exception in case of failure
      */
     public void testit()
         throws Exception

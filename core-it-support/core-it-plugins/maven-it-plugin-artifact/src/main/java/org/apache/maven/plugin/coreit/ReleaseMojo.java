@@ -27,12 +27,12 @@ import org.apache.maven.project.MavenProject;
 
 /**
  * Marks the project's artifact as a release.
- * 
+ *
  * @goal release
  * @phase package
- * 
+ *
  * @author Benjamin Bentmann
- * @version $Id$
+ *
  */
 public class ReleaseMojo
     extends AbstractMojo
@@ -40,7 +40,7 @@ public class ReleaseMojo
 
     /**
      * The current Maven project.
-     * 
+     *
      * @parameter default-value="${project}"
      * @readonly
      * @required

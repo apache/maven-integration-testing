@@ -31,7 +31,7 @@ public class MavenITmng5389LifecycleParticipantAfterSessionEnd
         super( "[3.2.1,)" );
     }
 
-    public void test()
+    public void testit()
         throws Exception
     {
         File testDir =
@@ -53,6 +53,6 @@ public class MavenITmng5389LifecycleParticipantAfterSessionEnd
         verifier.resetStreams();
         verifier.verifyErrorFreeLog();
 
-        verifier.assertFilePresent( "target/afterSessionEnd.txt" );
+        verifier.verifyFilePresent( "target/afterSessionEnd.txt" );
     }
 }

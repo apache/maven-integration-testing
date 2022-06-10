@@ -34,7 +34,7 @@ import java.util.Properties;
  * Builds the remote POMs of user-specified artifacts. This mimics in part the Maven Remote Resources Plugin.
  *
  * @author Benjamin Bentmann
- * @version $Id$
+ *
  * @goal remote-pom
  */
 public class BuildRemotePomMojo
@@ -83,7 +83,7 @@ public class BuildRemotePomMojo
     /**
      * Runs this mojo.
      *
-     * @throws MojoFailureException If the artifact file has not been set.
+     * @throws MojoExecutionException If the artifact file has not been set.
      */
     public void execute()
         throws MojoExecutionException

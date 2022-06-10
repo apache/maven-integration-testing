@@ -19,15 +19,14 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
 
 /**
- * 
+ *
  * @author Benjamin Bentmann
- * @version $Id$
+ *
  */
 public class MavenIT0138PluginLifecycleTest
     extends AbstractMavenIntegrationTestCase
@@ -40,6 +39,8 @@ public class MavenIT0138PluginLifecycleTest
 
     /**
      * Test default binding of goals for "maven-plugin" lifecycle.
+     *
+     * @throws Exception in case of failure
      */
     public void testit0138()
         throws Exception
@@ -50,20 +51,20 @@ public class MavenIT0138PluginLifecycleTest
         verifier.deleteDirectory( "target" );
         verifier.setAutoclean( false );
         verifier.executeGoal( "deploy" );
-        verifier.assertFilePresent( "target/plugin-descriptor.txt" );
-        verifier.assertFilePresent( "target/resources-resources.txt" );
-        verifier.assertFilePresent( "target/compiler-compile.txt" );
-        verifier.assertFilePresent( "target/resources-test-resources.txt" );
-        verifier.assertFilePresent( "target/compiler-test-compile.txt" );
-        verifier.assertFilePresent( "target/surefire-test.txt" );
-        verifier.assertFilePresent( "target/jar-jar.txt" );
-        verifier.assertFilePresent( "target/plugin-add-plugin-artifact-metadata.txt" );
-        verifier.assertFilePresent( "target/install-install.txt" );
+        verifier.verifyFilePresent( "target/plugin-descriptor.txt" );
+        verifier.verifyFilePresent( "target/resources-resources.txt" );
+        verifier.verifyFilePresent( "target/compiler-compile.txt" );
+        verifier.verifyFilePresent( "target/resources-test-resources.txt" );
+        verifier.verifyFilePresent( "target/compiler-test-compile.txt" );
+        verifier.verifyFilePresent( "target/surefire-test.txt" );
+        verifier.verifyFilePresent( "target/jar-jar.txt" );
+        verifier.verifyFilePresent( "target/plugin-add-plugin-artifact-metadata.txt" );
+        verifier.verifyFilePresent( "target/install-install.txt" );
         if ( matchesVersionRange( "(,2.2.0)" ) )
         {
-            verifier.assertFilePresent( "target/plugin-update-registry.txt" );
+            verifier.verifyFilePresent( "target/plugin-update-registry.txt" );
         }
-        verifier.assertFilePresent( "target/deploy-deploy.txt" );
+        verifier.verifyFilePresent( "target/deploy-deploy.txt" );
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
     }

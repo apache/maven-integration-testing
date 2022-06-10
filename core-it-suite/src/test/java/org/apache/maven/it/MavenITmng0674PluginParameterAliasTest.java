@@ -19,7 +19,6 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
@@ -28,9 +27,9 @@ import java.util.Properties;
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-674">MNG-674</a> and
  * <a href="https://issues.apache.org/jira/browse/MNG-4997">MNG-4997</a>.
- * 
+ *
  * @author John Casey
- * @version $Id$
+ *
  */
 public class MavenITmng0674PluginParameterAliasTest
     extends AbstractMavenIntegrationTestCase
@@ -43,6 +42,8 @@ public class MavenITmng0674PluginParameterAliasTest
 
     /**
      * Test parameter alias usage for lifecycle-bound goal execution.
+     *
+     * @throws Exception in case of failure
      */
     public void testitLifecycle()
         throws Exception
@@ -65,6 +66,8 @@ public class MavenITmng0674PluginParameterAliasTest
 
     /**
      * Test parameter alias usage for direct goal execution from CLI.
+     *
+     * @throws Exception in case of failure
      */
     public void testitCli()
         throws Exception

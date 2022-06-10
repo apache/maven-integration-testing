@@ -19,7 +19,6 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
@@ -27,9 +26,9 @@ import java.util.Properties;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-4009">MNG-4009</a>.
- * 
+ *
  * @author Benjamin Bentmann
- * @version $Id$
+ *
  */
 public class MavenITmng4009InheritProfileEffectsTest
     extends AbstractMavenIntegrationTestCase
@@ -42,6 +41,8 @@ public class MavenITmng4009InheritProfileEffectsTest
 
     /**
      * Verify that the effects of profiles on a parent are inherited by children.
+     *
+     * @throws Exception in case of failure
      */
     public void testitMNG4009()
         throws Exception

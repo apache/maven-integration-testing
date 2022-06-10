@@ -1,5 +1,5 @@
  -----
- Maven Core Integration Tests
+ Maven Core Integration Tests Suite
  -----
  Hervé Boutemy
  -----
@@ -26,46 +26,12 @@
 ~~ NOTE: For help with the syntax of this file, see:
 ~~ http://maven.apache.org/doxia/references/apt-format.html
 
-Maven Core Integration Tests
+Maven Core Integration Tests Suite
 
-  This module provides the {{{./testapidocs/org/apache/maven/it/package-summary.html}effective Integration Tests suite}},
+  This module provides the {{{./testapidocs/org/apache/maven/it/package-summary.html}effective Core Integration Tests suite}},
   starting with {{{./bootstrap.html}bootstrap}}.
 
-* Running the ITs
-
-  By default, the project just packages the tests in an artifact. To actually run them, activate the <<<run-its>>> profile:
-  
-+----
-mvn clean test -Prun-its
-+----
-  
-  This will subject the Maven version running the build to the integration tests.
-  
-  If you would like to test a different Maven distribution, you can use the <<<mavenHome>>> system property to specify the
-  path of the Maven distribution to test:
-  
-+----
-mvn clean test -Prun-its -DmavenHome=<maven-under-test>
-+----
-  
-  Alternatively, you can just specify the version of a previously installed/deployed Maven distribution which will be
-  downloaded, unpacked and tested:
-  
-+----
-mvn clean test -Prun-its -DmavenVersion=2.2.1
-+----
-  
-  To run the ITs using embedded Maven 3.x, additionally activate the <<<embedded>>> profile.
-  
-  ITs that don't require to fork Maven can also be run from the IDE using the Maven projects from the workspace if the
-  Maven dependencies are added to the test class path.
-  
-  If you're behind a proxy, use the system properties <<<proxy.host>>>, <<<proxy.port>>>, <<<proxy.user>>>, <<<proxy.pass>>>
-  and <<<proxy.nonProxyHosts>>> to specify the required proxy setup for the ITs. Alternatively, set the system property
-  <<<maven.it.central>>> to a URL of a local repository manager (anonymous authentication only) that proxies the required
-  artifacts.
-
-* Results
+* Core ITs Suite Results
 
   ITs results are displayed on the console and can be published in the site through Surefire Report.
 
@@ -76,3 +42,35 @@ mvn -Preporting site
   Currently deployed {{{./surefire-report.html}Surefire Report}} was generated with following environment:
 
 %{snippet|file=${project.build.directory}/info.txt}
+
+
+* Core ITs Suite and Dependencies (incl. Plugins)
+
+ A good IT does not depend on external repos like Central, it uses dedicated test plugins and test repositories.
+ The {{{https://github.com/apache/maven-integration-testing/blob/master/core-it-suite/src/test/resources-filtered/settings.xml}default <<<settings.xml>>>}}
+ used by ITs helps to enforce this by pointing <<<central>>> at <<<file:target/null>>>,
+ which obviously can't resolve anything. This setup using a file-based dummy repo also helps execution time,
+ because this repo produces (expected) <<<404>>>s much faster than a HTTP-based repo.
+
+ The one place where access to Central is desired is in the <<<MavenITBootstrapTest>>>
+ ({{{./xref-test/org/apache/maven/it/MavenITBootstrapTest.html}src}},
+ {{{./testapidocs/org/apache/maven/it/MavenITBootstrapTest.html}javadoc}}),
+ which doesn't really test anything but just primes the local repo with any artifacts the ITs will need:
+ you can see {{{./bootstrap.html}here}} the list of plugins and artifacts that are fetched during bootstrap.
+
+ So some care needs to be taken when introducing new dependencies into the ITs themselves or {{{../core-it-support/}the support plugins}}.
+ Many times the failures that we encounter are discrepancies between actual artifact consumption required and
+ what is populated during bootstrapping. When forgetting, typical failures (as seen in ASF CI) will give following traces in log:
+
+-------
+[ERROR] testit(org.apache.maven.it.MavenITmng...)  Time elapsed: 0.145 s  <<< ERROR!
+...
+[ERROR] Failed to execute goal ... (...) on project ...: ... Could not find artifact ... in central (file:target/null) -> [Help 1]
+-------
+
+** Using Local Repository Manager
+
+ If you are using a local repository manager, configured in your <<<~/.m2/settings.xml>>> as a mirror of <<<central>>>, it will invalidate previous setup:
+ working Core ITs Suite can work on your laptop but fail on ASF CI because of missing artifact.
+
+ Comment out your mirror configuration to enable the expected local failure, then be able to debug and fix the issue.

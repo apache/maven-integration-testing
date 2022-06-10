@@ -19,14 +19,13 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-2135">MNG-2135</a>.
- * 
+ *
  * @author Benjamin Bentmann
  */
 public class MavenITmng2135PluginBuildInReactorTest
@@ -40,6 +39,8 @@ public class MavenITmng2135PluginBuildInReactorTest
 
     /**
      * Test that the reactor can handle builds where one module provides a Maven plugin that another module uses.
+     *
+     * @throws Exception in case of failure
      */
     public void testit()
         throws Exception
@@ -55,7 +56,7 @@ public class MavenITmng2135PluginBuildInReactorTest
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
 
-        verifier.assertFilePresent( "project/target/touch.txt" );
+        verifier.verifyFilePresent( "project/target/touch.txt" );
     }
 
 }

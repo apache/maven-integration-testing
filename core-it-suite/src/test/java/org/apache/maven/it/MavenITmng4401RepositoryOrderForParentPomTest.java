@@ -19,14 +19,13 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-4401">MNG-4401</a>.
- * 
+ *
  * @author Benjamin Bentmann
  */
 public class MavenITmng4401RepositoryOrderForParentPomTest
@@ -41,6 +40,8 @@ public class MavenITmng4401RepositoryOrderForParentPomTest
     /**
      * Verify that the implicit default repo (central) is tried after explicitly declared repos during parent POM
      * resolution.
+     *
+     * @throws Exception in case of failure
      */
     public void testit()
         throws Exception
@@ -58,8 +59,8 @@ public class MavenITmng4401RepositoryOrderForParentPomTest
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
 
-        verifier.assertFilePresent( "target/passed.txt" );
-        verifier.assertFileNotPresent( "target/failed.txt" );
+        verifier.verifyFilePresent( "target/passed.txt" );
+        verifier.verifyFileNotPresent( "target/failed.txt" );
     }
 
 }

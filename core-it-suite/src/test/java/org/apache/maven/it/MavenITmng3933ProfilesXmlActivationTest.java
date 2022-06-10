@@ -28,9 +28,9 @@ import org.apache.maven.shared.utils.Os;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-3933">MNG-3933</a>.
- * 
+ *
  * @author Benjamin Bentmann
- * @version $Id$
+ *
  */
 public class MavenITmng3933ProfilesXmlActivationTest
     extends AbstractMavenIntegrationTestCase
@@ -45,6 +45,8 @@ public class MavenITmng3933ProfilesXmlActivationTest
     /**
      * Test that profiles from an external profiles.xml are properly activated. This is really a different story
      * than profiles in the settings.xml or the POM.
+     *
+     * @throws Exception in case of failure
      */
     public void testitMNG3933()
         throws Exception
@@ -90,9 +92,9 @@ public class MavenITmng3933ProfilesXmlActivationTest
             }
         }
 
-        assertEquals( null, props.getProperty( "project.properties.sysPropertyMissing" ) );
-        assertEquals( null, props.getProperty( "project.properties.envPropertyMissing" ) );
-        assertEquals( null, props.getProperty( "project.properties.filePropertyMissing" ) );
+        assertNull( props.getProperty( "project.properties.sysPropertyMissing" ) );
+        assertNull( props.getProperty( "project.properties.envPropertyMissing" ) );
+        assertNull( props.getProperty( "project.properties.filePropertyMissing" ) );
     }
 
 }

@@ -19,7 +19,6 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
@@ -27,9 +26,9 @@ import java.util.Properties;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-3819">MNG-3819</a>.
- * 
+ *
  * @author Benjamin Bentmann
- * @version $Id$
+ *
  */
 public class MavenITmng3819PluginDepPlexusUtilsTest
     extends AbstractMavenIntegrationTestCase
@@ -37,13 +36,15 @@ public class MavenITmng3819PluginDepPlexusUtilsTest
 
     public MavenITmng3819PluginDepPlexusUtilsTest()
     {
-        super( "(2.0.1,)" );
+        super( "(2.0.1,4.0.0-alpha-1)" );
     }
 
     /**
      * Verify that plexus-utils:1.1 is present on plugin class path if plexus-utils is not explicitly declared in
      * plugin POM for backward-compat with Maven 2.0.5- (due to MNG-2892, plexus-utils is no longer part of the core
      * class realm in Maven 2.0.6+).
+     *
+     * @throws Exception in case of failure
      */
     public void testitMNG3819()
         throws Exception

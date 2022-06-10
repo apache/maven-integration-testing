@@ -19,7 +19,6 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
@@ -27,7 +26,7 @@ import java.util.Properties;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-4834">MNG-4834</a>.
- * 
+ *
  * @author Benjamin Bentmann
  */
 public class MavenITmng4834ParentProjectResolvedFromRemoteReposTest
@@ -42,6 +41,8 @@ public class MavenITmng4834ParentProjectResolvedFromRemoteReposTest
     /**
      * Verify that MavenProject.getParent() can (lazily) resolve the parent from repositories contributed by the
      * settings.
+     *
+     * @throws Exception in case of failure
      */
     public void testit()
         throws Exception

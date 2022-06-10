@@ -19,7 +19,6 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
@@ -27,9 +26,9 @@ import java.util.Properties;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-479">MNG-479</a>.
- * 
+ *
  * @author Benjamin Bentmann
- * @version $Id$
+ *
  */
 public class MavenITmng0479OverrideCentralRepoTest
     extends AbstractMavenIntegrationTestCase
@@ -41,6 +40,8 @@ public class MavenITmng0479OverrideCentralRepoTest
 
     /**
      *  Verify that using the same repo id allows to override "central". This test checks the effective model.
+     *
+     * @throws Exception in case of failure
      */
     public void testitModel()
         throws Exception
@@ -70,7 +71,7 @@ public class MavenITmng0479OverrideCentralRepoTest
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
 
-        verifier.assertFilePresent( "target/expression.properties" );
+        verifier.verifyFilePresent( "target/expression.properties" );
         Properties props = verifier.loadProperties( "target/expression.properties" );
 
         int count = Integer.parseInt( props.getProperty( "project.repositories", "0" ) );
@@ -115,6 +116,8 @@ public class MavenITmng0479OverrideCentralRepoTest
 
     /**
      *  Verify that using the same repo id allows to override "central". This test checks the actual repo access.
+     *
+     * @throws Exception in case of failure
      */
     public void testitResolution()
         throws Exception
@@ -132,13 +135,13 @@ public class MavenITmng0479OverrideCentralRepoTest
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
 
-        verifier.assertFilePresent( "target/touch.txt" );
-        verifier.assertArtifactPresent( "org.apache.maven.its.mng0479", "parent", "0.1-SNAPSHOT", "pom" );
-        verifier.assertArtifactPresent( "org.apache.maven.its.mng0479", "a", "0.1-SNAPSHOT", "jar" );
-        verifier.assertArtifactPresent( "org.apache.maven.its.mng0479", "a", "0.1-SNAPSHOT", "pom" );
-        verifier.assertArtifactPresent( "org.apache.maven.its.mng0479", "a-parent", "0.1-SNAPSHOT", "pom" );
-        verifier.assertArtifactPresent( "org.apache.maven.its.mng0479", "b", "0.1-SNAPSHOT", "jar" );
-        verifier.assertArtifactPresent( "org.apache.maven.its.mng0479", "b", "0.1-SNAPSHOT", "pom" );
+        verifier.verifyFilePresent( "target/touch.txt" );
+        verifier.verifyArtifactPresent( "org.apache.maven.its.mng0479", "parent", "0.1-SNAPSHOT", "pom" );
+        verifier.verifyArtifactPresent( "org.apache.maven.its.mng0479", "a", "0.1-SNAPSHOT", "jar" );
+        verifier.verifyArtifactPresent( "org.apache.maven.its.mng0479", "a", "0.1-SNAPSHOT", "pom" );
+        verifier.verifyArtifactPresent( "org.apache.maven.its.mng0479", "a-parent", "0.1-SNAPSHOT", "pom" );
+        verifier.verifyArtifactPresent( "org.apache.maven.its.mng0479", "b", "0.1-SNAPSHOT", "jar" );
+        verifier.verifyArtifactPresent( "org.apache.maven.its.mng0479", "b", "0.1-SNAPSHOT", "pom" );
 
         verifier = newVerifier( new File( testDir, "test-2" ).getAbsolutePath() );
         verifier.setAutoclean( false );
@@ -158,7 +161,7 @@ public class MavenITmng0479OverrideCentralRepoTest
         }
         verifier.resetStreams();
 
-        verifier.assertArtifactNotPresent( "org.apache.maven.its.mng0479", "parent", "0.1", "pom" );
+        verifier.verifyArtifactNotPresent( "org.apache.maven.its.mng0479", "parent", "0.1", "pom" );
 
         verifier = newVerifier( new File( testDir, "test-3" ).getAbsolutePath() );
         verifier.setAutoclean( false );
@@ -178,8 +181,8 @@ public class MavenITmng0479OverrideCentralRepoTest
         }
         verifier.resetStreams();
 
-        verifier.assertArtifactNotPresent( "org.apache.maven.its.mng0479", "a", "0.1", "jar" );
-        verifier.assertArtifactNotPresent( "org.apache.maven.its.mng0479", "a", "0.1", "pom" );
+        verifier.verifyArtifactNotPresent( "org.apache.maven.its.mng0479", "a", "0.1", "jar" );
+        verifier.verifyArtifactNotPresent( "org.apache.maven.its.mng0479", "a", "0.1", "pom" );
 
         verifier = newVerifier( new File( testDir, "test-4" ).getAbsolutePath() );
         verifier.setAutoclean( false );
@@ -199,8 +202,8 @@ public class MavenITmng0479OverrideCentralRepoTest
         }
         verifier.resetStreams();
 
-        verifier.assertArtifactNotPresent( "org.apache.maven.its.mng0479", "b", "0.1", "jar" );
-        verifier.assertArtifactNotPresent( "org.apache.maven.its.mng0479", "b", "0.1", "pom" );
+        verifier.verifyArtifactNotPresent( "org.apache.maven.its.mng0479", "b", "0.1", "jar" );
+        verifier.verifyArtifactNotPresent( "org.apache.maven.its.mng0479", "b", "0.1", "pom" );
     }
 
 }

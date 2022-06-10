@@ -62,7 +62,7 @@ public class BuildLocalPomMojo
     /**
      * Runs this mojo.
      *
-     * @throws MojoFailureException If the artifact file has not been set.
+     * @throws MojoExecutionException If the artifact file has not been set.
      */
     public void execute()
         throws MojoExecutionException

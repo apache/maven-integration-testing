@@ -19,7 +19,6 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
@@ -27,7 +26,7 @@ import java.util.Collections;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-1144">MNG-1144</a>.
- * 
+ *
  * @author Benjamin Bentmann
  */
 public class MavenITmng1144MultipleDefaultGoalsTest
@@ -41,6 +40,8 @@ public class MavenITmng1144MultipleDefaultGoalsTest
 
     /**
      * Test that multiple goals can be specified as default goal using whitespace as delimiter.
+     *
+     * @throws Exception in case of failure
      */
     public void testit()
         throws Exception
@@ -54,8 +55,8 @@ public class MavenITmng1144MultipleDefaultGoalsTest
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
 
-        verifier.assertFilePresent( "target/clean-clean.txt" );
-        verifier.assertFilePresent( "target/resources-resources.txt" );
+        verifier.verifyFilePresent( "target/clean-clean.txt" );
+        verifier.verifyFilePresent( "target/resources-resources.txt" );
     }
 
 }

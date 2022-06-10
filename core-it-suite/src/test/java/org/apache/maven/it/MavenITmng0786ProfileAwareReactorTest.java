@@ -19,16 +19,15 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-786">MNG-786</a>.
- * 
+ *
  * @author John Casey
- * @version $Id$
+ *
  */
 public class MavenITmng0786ProfileAwareReactorTest
     extends AbstractMavenIntegrationTestCase
@@ -41,6 +40,8 @@ public class MavenITmng0786ProfileAwareReactorTest
     /**
      * Verify that direct invocation of a mojo from the command line still
      * results in the processing of modules included via profiles.
+     *
+     * @throws Exception in case of failure
      */
     public void testitMNG0786()
         throws Exception
@@ -54,8 +55,8 @@ public class MavenITmng0786ProfileAwareReactorTest
         verifier.setSystemProperty( "expression.outputFile", "target/expression.properties" );
         verifier.setSystemProperty( "activate", "anything" );
         verifier.executeGoal( "org.apache.maven.its.plugins:maven-it-plugin-expression:2.1-SNAPSHOT:eval" );
-        verifier.assertFilePresent( "sub1/target/expression.properties" );
-        verifier.assertFilePresent( "sub2/target/expression.properties" );
+        verifier.verifyFilePresent( "sub1/target/expression.properties" );
+        verifier.verifyFilePresent( "sub2/target/expression.properties" );
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
     }

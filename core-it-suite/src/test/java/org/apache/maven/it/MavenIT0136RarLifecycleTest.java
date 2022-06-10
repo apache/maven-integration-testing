@@ -19,15 +19,14 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
 
 /**
- * 
+ *
  * @author Benjamin Bentmann
- * @version $Id$
+ *
  */
 public class MavenIT0136RarLifecycleTest
     extends AbstractMavenIntegrationTestCase
@@ -40,6 +39,8 @@ public class MavenIT0136RarLifecycleTest
 
     /**
      * Test default binding of goals for "rar" lifecycle.
+     *
+     * @throws Exception in case of failure
      */
     public void testit0136()
         throws Exception
@@ -50,14 +51,14 @@ public class MavenIT0136RarLifecycleTest
         verifier.deleteDirectory( "target" );
         verifier.setAutoclean( false );
         verifier.executeGoal( "deploy" );
-        verifier.assertFilePresent( "target/resources-resources.txt" );
-        verifier.assertFilePresent( "target/compiler-compile.txt" );
-        verifier.assertFilePresent( "target/resources-test-resources.txt" );
-        verifier.assertFilePresent( "target/compiler-test-compile.txt" );
-        verifier.assertFilePresent( "target/surefire-test.txt" );
-        verifier.assertFilePresent( "target/rar-rar.txt" );
-        verifier.assertFilePresent( "target/install-install.txt" );
-        verifier.assertFilePresent( "target/deploy-deploy.txt" );
+        verifier.verifyFilePresent( "target/resources-resources.txt" );
+        verifier.verifyFilePresent( "target/compiler-compile.txt" );
+        verifier.verifyFilePresent( "target/resources-test-resources.txt" );
+        verifier.verifyFilePresent( "target/compiler-test-compile.txt" );
+        verifier.verifyFilePresent( "target/surefire-test.txt" );
+        verifier.verifyFilePresent( "target/rar-rar.txt" );
+        verifier.verifyFilePresent( "target/install-install.txt" );
+        verifier.verifyFilePresent( "target/deploy-deploy.txt" );
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
     }

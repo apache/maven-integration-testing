@@ -19,7 +19,6 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
@@ -42,6 +41,8 @@ public class MavenITmng3099SettingsProfilesWithNoPomTest
      * Verify that (active) profiles from the settings are effective even if no POM is in use (e.g archetype:create).
      * In more detail, this means the plugin can be resolved from the repositories given in the settings and the plugin
      * can access properties defined by the profiles.
+     *
+     * @throws Exception in case of failure
      */
     public void testit()
         throws Exception
@@ -59,8 +60,8 @@ public class MavenITmng3099SettingsProfilesWithNoPomTest
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
 
-        verifier.assertFilePresent( "target/PASSED.txt" );
-        verifier.assertFileNotPresent( "target/touch.txt" );
+        verifier.verifyFilePresent( "target/PASSED.txt" );
+        verifier.verifyFileNotPresent( "target/touch.txt" );
     }
 
 }

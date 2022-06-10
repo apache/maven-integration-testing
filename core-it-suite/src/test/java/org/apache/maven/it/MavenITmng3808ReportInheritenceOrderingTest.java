@@ -26,9 +26,9 @@ import org.apache.maven.it.util.ResourceExtractor;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-3808">MNG-3808</a>.
- * 
+ *
  * @author Brett Porter
- * @version $Id$
+ *
  */
 public class MavenITmng3808ReportInheritenceOrderingTest
     extends AbstractMavenIntegrationTestCase
@@ -41,6 +41,8 @@ public class MavenITmng3808ReportInheritenceOrderingTest
 
     /**
      * Test that 3 executions are run in the correct order.
+     *
+     * @throws Exception in case of failure
      */
     public void testitMNG3808()
         throws Exception
@@ -55,7 +57,7 @@ public class MavenITmng3808ReportInheritenceOrderingTest
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
 
-        verifier.assertFilePresent( "target/model.properties" );
+        verifier.verifyFilePresent( "target/model.properties" );
         Properties props = verifier.loadProperties( "target/model.properties" );
         assertEquals( "maven-it-plugin-log-file", props.getProperty( "project.reporting.plugins.0.artifactId" ) );
         assertEquals( "maven-it-plugin-expression", props.getProperty( "project.reporting.plugins.1.artifactId" ) );

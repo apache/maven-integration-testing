@@ -19,7 +19,6 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
@@ -27,9 +26,9 @@ import java.util.List;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-666">MNG-666</a>.
- * 
+ *
  * @author John Casey
- * @version $Id$
+ *
  */
 public class MavenITmng0666IgnoreLegacyPomTest
     extends AbstractMavenIntegrationTestCase
@@ -42,6 +41,8 @@ public class MavenITmng0666IgnoreLegacyPomTest
     /**
      * Verify that maven-1 POMs will be ignored but not stop the resolution
      * process.
+     *
+     * @throws Exception in case of failure
      */
     public void testitMNG666()
         throws Exception
@@ -59,7 +60,7 @@ public class MavenITmng0666IgnoreLegacyPomTest
         // don't verify error free log
         verifier.resetStreams();
 
-        verifier.assertArtifactPresent( "org.apache.maven.its.it0059", "test", "3.8.1", "jar" );
+        verifier.verifyArtifactPresent( "org.apache.maven.its.it0059", "test", "3.8.1", "jar" );
 
         List<String> artifacts = verifier.loadLines( "target/artifacts.txt", "UTF-8" );
         assertTrue( artifacts.toString(), artifacts.contains( "org.apache.maven.its.it0059:test:jar:3.8.1" ) );

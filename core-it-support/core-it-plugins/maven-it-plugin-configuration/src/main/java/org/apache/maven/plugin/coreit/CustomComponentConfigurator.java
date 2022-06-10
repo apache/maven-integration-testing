@@ -20,6 +20,7 @@ package org.apache.maven.plugin.coreit;
  */
 
 import org.codehaus.classworlds.ClassRealm;
+import org.codehaus.plexus.component.annotations.Component;
 import org.codehaus.plexus.component.configurator.AbstractComponentConfigurator;
 import org.codehaus.plexus.component.configurator.ComponentConfigurationException;
 import org.codehaus.plexus.component.configurator.ConfigurationListener;
@@ -30,14 +31,15 @@ import org.codehaus.plexus.configuration.PlexusConfiguration;
 /**
  * A custom component configurator. Does not do much special compared to the basic one, but is sufficient to check
  * general support of the specific API.
- * 
+ *
  * @author Benjamin Bentmann
- * @plexus.component role="org.codehaus.plexus.component.configurator.ComponentConfigurator" role-hint="coreit"
  */
+@Component ( role = org.codehaus.plexus.component.configurator.ComponentConfigurator.class, hint = "coreit" )
 public class CustomComponentConfigurator
     extends AbstractComponentConfigurator
 {
 
+    @Override
     public void configureComponent( Object component, PlexusConfiguration configuration,
                                     ExpressionEvaluator expressionEvaluator, ClassRealm containerRealm,
                                     ConfigurationListener listener )

@@ -19,14 +19,13 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-4087">MNG-4087</a>.
- * 
+ *
  * @author Benjamin Bentmann
  */
 public class MavenITmng4087PercentEncodedFileUrlTest
@@ -40,6 +39,8 @@ public class MavenITmng4087PercentEncodedFileUrlTest
 
     /**
      * Test that deployment to a file:// repository decodes percent-encoded characters.
+     *
+     * @throws Exception in case of failure
      */
     public void testit()
         throws Exception
@@ -55,8 +56,8 @@ public class MavenITmng4087PercentEncodedFileUrlTest
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
 
-        verifier.assertFileNotPresent( "target/%72%65%70%6F" );
-        verifier.assertFilePresent( "target/repo" );
+        verifier.verifyFileNotPresent( "target/%72%65%70%6F" );
+        verifier.verifyFilePresent( "target/repo" );
     }
 
 }

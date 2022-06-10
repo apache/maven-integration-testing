@@ -19,7 +19,6 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
@@ -27,7 +26,7 @@ import java.util.List;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-4359">MNG-4359</a>.
- * 
+ *
  * @author Benjamin Bentmann
  */
 public class MavenITmng4359LocallyReachableParentOutsideOfReactorTest
@@ -42,6 +41,8 @@ public class MavenITmng4359LocallyReachableParentOutsideOfReactorTest
     /**
      * Verify that locally reachable parent POMs of projects in the reactor can be resolved during dependency
      * resolution even if a parent itself is not part of the reactor.
+     *
+     * @throws Exception in case of failure
      */
     public void testit()
         throws Exception

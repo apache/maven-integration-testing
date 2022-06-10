@@ -41,6 +41,8 @@ public class MavenITmng4368TimestampAwareArtifactInstallerTest
     /**
      * Verify that the artifact installer copies POMs to the local repo even if they have an older timestamp as the
      * copy in the local repo.
+     *
+     * @throws Exception in case of failure
      */
     public void testitPomPackaging()
         throws Exception
@@ -68,7 +70,7 @@ public class MavenITmng4368TimestampAwareArtifactInstallerTest
 
         String pom = FileUtils.fileRead( installedPom, "UTF-8" );
         assertTrue( pom.indexOf( "Branch-A" ) > 0 );
-        assertTrue( !pom.contains( "Branch-B" ) );
+        assertFalse( pom.contains( "Branch-B" ) );
 
         assertEquals( aPom.length(), bPom.length() );
         assertTrue( aPom.lastModified() > bPom.lastModified() );
@@ -82,13 +84,15 @@ public class MavenITmng4368TimestampAwareArtifactInstallerTest
         verifier.resetStreams();
 
         pom = FileUtils.fileRead( installedPom, "UTF-8" );
-        assertTrue( !pom.contains( "Branch-A" ) );
+        assertFalse( pom.contains( "Branch-A" ) );
         assertTrue( pom.indexOf( "Branch-B" ) > 0 );
     }
 
     /**
      * Verify that the artifact installer copies files to the local repo only if their timestamp differs from the copy
      * already in the local repo.
+     *
+     * @throws Exception in case of failure
      */
     public void testitJarPackaging()
         throws Exception
@@ -120,7 +124,7 @@ public class MavenITmng4368TimestampAwareArtifactInstallerTest
 
         String data = FileUtils.fileRead( installedArtifact, "UTF-8" );
         assertTrue( data.indexOf( "Branch-A" ) > 0 );
-        assertTrue( !data.contains( "Branch-B" ) );
+        assertFalse( data.contains( "Branch-B" ) );
 
         assertEquals( aArtifact.length(), bArtifact.length() );
         assertTrue( aArtifact.lastModified() > bArtifact.lastModified() );
@@ -134,7 +138,7 @@ public class MavenITmng4368TimestampAwareArtifactInstallerTest
         verifier.resetStreams();
 
         data = FileUtils.fileRead( installedArtifact, "UTF-8" );
-        assertTrue( !data.contains( "Branch-A" ) );
+        assertFalse( data.contains( "Branch-A" ) );
         assertTrue( data.indexOf( "Branch-B" ) > 0 );
 
         long lastModified = installedArtifact.lastModified();
@@ -150,7 +154,7 @@ public class MavenITmng4368TimestampAwareArtifactInstallerTest
         verifier.resetStreams();
 
         data = FileUtils.fileRead( installedArtifact, "UTF-8" );
-        assertTrue( !data.contains( "Branch-B" ) );
+        assertFalse( data.contains( "Branch-B" ) );
         assertTrue( data.indexOf( "Branch-C" ) > 0 );
     }
 

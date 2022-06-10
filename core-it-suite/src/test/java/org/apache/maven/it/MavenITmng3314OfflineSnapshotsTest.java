@@ -19,7 +19,6 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
@@ -43,6 +42,8 @@ public class MavenITmng3314OfflineSnapshotsTest
 
     /**
      * Verify that snapshot dependencies which are scheduled for an update don't fail the build when in offline mode.
+     *
+     * @throws Exception in case of failure
      */
     public void testitMNG3314 ()
         throws Exception
@@ -58,7 +59,7 @@ public class MavenITmng3314OfflineSnapshotsTest
             verifier.addCliOption( "--settings" );
             verifier.addCliOption( "settings.xml" );
             verifier.executeGoal( "validate" );
-            verifier.assertFilePresent( "target/compile.txt" );
+            verifier.verifyFilePresent( "target/compile.txt" );
             verifier.verifyErrorFreeLog();
             verifier.resetStreams();
         }
@@ -71,7 +72,7 @@ public class MavenITmng3314OfflineSnapshotsTest
             verifier.addCliOption( "--settings" );
             verifier.addCliOption( "settings.xml" );
             verifier.executeGoal( "validate" );
-            verifier.assertFilePresent( "target/compile.txt" );
+            verifier.verifyFilePresent( "target/compile.txt" );
             verifier.verifyErrorFreeLog();
             verifier.resetStreams();
         }

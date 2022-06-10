@@ -19,7 +19,6 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
@@ -27,7 +26,7 @@ import java.util.List;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-4842">MNG-4842</a>.
- * 
+ *
  * @author Benjamin Bentmann
  */
 public class MavenITmng4842ParentResolutionOfDependencyPomTest
@@ -43,6 +42,8 @@ public class MavenITmng4842ParentResolutionOfDependencyPomTest
      * Verify that resolution of parent POMs for dependency POMs treats the remote repositories of the current
      * resolution request as dominant when merging with any repositories declared in the dependency POM. This
      * variant of the test checks dependency resolution by the core.
+     *
+     * @throws Exception in case of failure
      */
     public void testitCore()
         throws Exception
@@ -63,13 +64,15 @@ public class MavenITmng4842ParentResolutionOfDependencyPomTest
         List<String> compile = verifier.loadLines( "target/compile.txt", "UTF-8" );
 
         assertTrue( compile.toString(), compile.contains( "dep-0.1.jar" ) );
-        verifier.assertArtifactPresent( "org.apache.maven.its.mng4842", "parent", "0.1", "pom" );
+        verifier.verifyArtifactPresent( "org.apache.maven.its.mng4842", "parent", "0.1", "pom" );
     }
 
     /**
      * Verify that resolution of parent POMs for dependency POMs treats the remote repositories of the current
      * resolution request as dominant when merging with any repositories declared in the dependency POM. This
      * variant of the test checks manual dependency resolution by a plugin.
+     *
+     * @throws Exception in case of failure
      */
     public void testitPlugin()
         throws Exception
@@ -87,7 +90,7 @@ public class MavenITmng4842ParentResolutionOfDependencyPomTest
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
 
-        verifier.assertArtifactPresent( "org.apache.maven.its.mng4842", "parent", "0.1", "pom" );
+        verifier.verifyArtifactPresent( "org.apache.maven.its.mng4842", "parent", "0.1", "pom" );
     }
 
 }

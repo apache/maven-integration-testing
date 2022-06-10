@@ -19,7 +19,6 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
@@ -28,8 +27,8 @@ import java.util.Arrays;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-2054">MNG-2054</a>.
- * 
- * @version $Id$
+ *
+ *
  */
 public class MavenITmng2054PluginExecutionInheritanceTest
     extends AbstractMavenIntegrationTestCase
@@ -42,6 +41,8 @@ public class MavenITmng2054PluginExecutionInheritanceTest
 
     /**
      * Test that plugin executions from &gt;1 step of inheritance don't run multiple times.
+     *
+     * @throws Exception in case of failure
      */
     public void testitMNG2054()
         throws Exception

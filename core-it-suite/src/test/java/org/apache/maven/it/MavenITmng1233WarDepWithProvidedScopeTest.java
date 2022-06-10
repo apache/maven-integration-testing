@@ -19,7 +19,6 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
@@ -27,9 +26,9 @@ import java.util.Collection;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-1233">MNG-1233</a>.
- * 
+ *
  * @author Brett Porter
- * @version $Id$
+ *
  */
 public class MavenITmng1233WarDepWithProvidedScopeTest
     extends AbstractMavenIntegrationTestCase
@@ -41,6 +40,8 @@ public class MavenITmng1233WarDepWithProvidedScopeTest
 
     /**
      * Verify that overriding a transitive compile time dependency as provided in a WAR ensures it is not included.
+     *
+     * @throws Exception in case of failure
      */
     public void testitMNG1233()
         throws Exception
@@ -59,15 +60,15 @@ public class MavenITmng1233WarDepWithProvidedScopeTest
         verifier.resetStreams();
 
         Collection<String> compileArtifacts = verifier.loadLines( "target/compile.txt", "UTF-8" );
-        assertTrue( compileArtifacts.toString(), 
+        assertTrue( compileArtifacts.toString(),
             compileArtifacts.contains( "org.apache.maven.its.it0083:direct-dep:jar:0.1" ) );
-        assertTrue( compileArtifacts.toString(), 
+        assertTrue( compileArtifacts.toString(),
             compileArtifacts.contains( "org.apache.maven.its.it0083:trans-dep:jar:0.1" ) );
 
         Collection<String> runtimeArtifacts = verifier.loadLines( "target/runtime.txt", "UTF-8" );
-        assertTrue( runtimeArtifacts.toString(), 
+        assertTrue( runtimeArtifacts.toString(),
             runtimeArtifacts.contains( "org.apache.maven.its.it0083:direct-dep:jar:0.1" ) );
-        assertFalse( runtimeArtifacts.toString(), 
+        assertFalse( runtimeArtifacts.toString(),
             runtimeArtifacts.contains( "org.apache.maven.its.it0083:trans-dep:jar:0.1" ) );
     }
 

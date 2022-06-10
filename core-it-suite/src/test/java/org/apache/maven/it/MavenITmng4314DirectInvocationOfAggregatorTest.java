@@ -19,7 +19,6 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
@@ -27,7 +26,7 @@ import java.util.Arrays;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-4314">MNG-4314</a>.
- * 
+ *
  * @author Benjamin Bentmann
  */
 public class MavenITmng4314DirectInvocationOfAggregatorTest
@@ -41,6 +40,8 @@ public class MavenITmng4314DirectInvocationOfAggregatorTest
 
     /**
      * Verify that aggregator mojos invoked from the CLI run only once, namely at the top-level project.
+     *
+     * @throws Exception in case of failure
      */
     public void testit()
         throws Exception
@@ -53,14 +54,14 @@ public class MavenITmng4314DirectInvocationOfAggregatorTest
         verifier.deleteDirectory( "consumer/target" );
         verifier.deleteDirectory( "dependency/target" );
         verifier.deleteArtifacts( "org.apache.maven.its.mng4314" );
-        verifier.executeGoals( Arrays.asList( new String[] { "validate", 
+        verifier.executeGoals( Arrays.asList( new String[] { "validate",
             "org.apache.maven.its.plugins:maven-it-plugin-all:2.1-SNAPSHOT:aggregator-dependencies" } ) );
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
 
-        verifier.assertFilePresent( "target/touch.txt" );
-        verifier.assertFileNotPresent( "consumer/target/touch.txt" );
-        verifier.assertFileNotPresent( "dependency/target/touch.txt" );
+        verifier.verifyFilePresent( "target/touch.txt" );
+        verifier.verifyFileNotPresent( "consumer/target/touch.txt" );
+        verifier.verifyFileNotPresent( "dependency/target/touch.txt" );
     }
 
 }

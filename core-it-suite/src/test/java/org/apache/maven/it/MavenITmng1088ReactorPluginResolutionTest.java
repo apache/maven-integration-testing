@@ -19,16 +19,15 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-1088">MNG-1088</a>.
- * 
+ *
  * @author Brett Porter
- * @version $Id$
+ *
  */
 public class MavenITmng1088ReactorPluginResolutionTest
     extends AbstractMavenIntegrationTestCase
@@ -43,6 +42,8 @@ public class MavenITmng1088ReactorPluginResolutionTest
      * Test that the plugin manager falls back to resolution from the repository if a plugin is part of the reactor
      * (i.e. an active project artifact) but the lifecycle has not been executed far enough to produce a file for
      * the plugin (i.e. a phase before "compile").
+     *
+     * @throws Exception in case of failure
      */
     public void testitMNG1088()
         throws Exception
@@ -61,7 +62,7 @@ public class MavenITmng1088ReactorPluginResolutionTest
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
 
-        verifier.assertFilePresent( "client/target/touch.txt" );
+        verifier.verifyFilePresent( "client/target/touch.txt" );
     }
 
 }

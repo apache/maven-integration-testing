@@ -28,7 +28,7 @@ import java.util.Properties;
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-3951">MNG-3951</a>.
  *
  * @author Benjamin Bentmann
- * @version $Id$
+ *
  */
 public class MavenITmng3951AbsolutePathsTest
     extends AbstractMavenIntegrationTestCase
@@ -42,6 +42,8 @@ public class MavenITmng3951AbsolutePathsTest
     /**
      * Test that the paths retrieved from the core are always absolute, in particular the drive-relative paths on
      * Windows must be properly resolved.
+     *
+     * @throws Exception in case of failure
      */
     public void testitMNG3951()
         throws Exception
@@ -67,7 +69,7 @@ public class MavenITmng3951AbsolutePathsTest
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
 
-        verifier.assertFilePresent( "target/path.properties" );
+        verifier.verifyFilePresent( "target/path.properties" );
         Properties props = verifier.loadProperties( "target/path.properties" );
 
         assertCanonicalFileEquals( new File( testDir, "tmp" ).getAbsoluteFile(), new File( props.getProperty( "fileParams.0" ) ) );

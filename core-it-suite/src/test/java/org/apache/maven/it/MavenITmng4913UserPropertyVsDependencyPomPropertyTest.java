@@ -19,7 +19,6 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
@@ -27,7 +26,7 @@ import java.util.List;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-4913">MNG-4913</a>.
- * 
+ *
  * @author Benjamin Bentmann
  */
 public class MavenITmng4913UserPropertyVsDependencyPomPropertyTest
@@ -41,6 +40,8 @@ public class MavenITmng4913UserPropertyVsDependencyPomPropertyTest
 
     /**
      * Verify that user properties from the CLI do not override POM properties of transitive dependencies.
+     *
+     * @throws Exception in case of failure
      */
     public void testit()
         throws Exception

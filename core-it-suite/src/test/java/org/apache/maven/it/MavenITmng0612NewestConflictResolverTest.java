@@ -19,16 +19,15 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-612">MNG-612</a>.
- * 
+ *
  * @author Mark Hobson
- * @version $Id$
+ *
  */
 public class MavenITmng0612NewestConflictResolverTest
     extends AbstractMavenIntegrationTestCase
@@ -40,6 +39,8 @@ public class MavenITmng0612NewestConflictResolverTest
 
     /**
      * Test that ensures the newest-wins conflict resolver is used.
+     *
+     * @throws Exception in case of failure
      */
     public void testitMNG612()
         throws Exception

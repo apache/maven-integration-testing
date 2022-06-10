@@ -19,7 +19,6 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
@@ -28,9 +27,9 @@ import java.util.Properties;
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-3924">MNG-3924</a> and
  * <a href="https://issues.apache.org/jira/browse/MNG-3662">MNG-3662</a>
- * 
+ *
  * @author Benjamin Bentmann
- * @version $Id$
+ *
  */
 public class MavenITmng3924XmlMarkupInterpolationTest
     extends AbstractMavenIntegrationTestCase
@@ -43,6 +42,8 @@ public class MavenITmng3924XmlMarkupInterpolationTest
 
     /**
      * Test that interpolation of properties that resolve to XML markup doesn't crash the project builder.
+     *
+     * @throws Exception in case of failure
      */
     public void testitMNG3924()
         throws Exception

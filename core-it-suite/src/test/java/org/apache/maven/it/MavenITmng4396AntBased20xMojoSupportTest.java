@@ -19,14 +19,13 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-4396">MNG-4396</a>.
- * 
+ *
  * @author Benjamin Bentmann
  */
 public class MavenITmng4396AntBased20xMojoSupportTest
@@ -41,6 +40,8 @@ public class MavenITmng4396AntBased20xMojoSupportTest
     /**
      * Verify that plugins whose mojos are implemented as Ant scripts and use the Maven 2.0.x Ant support can be
      * invoked.
+     *
+     * @throws Exception in case of failure
      */
     public void testit()
         throws Exception
@@ -54,7 +55,7 @@ public class MavenITmng4396AntBased20xMojoSupportTest
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
 
-        verifier.assertFilePresent( "target/ant.txt" );
+        verifier.verifyFilePresent( "target/ant.txt" );
     }
 
 }

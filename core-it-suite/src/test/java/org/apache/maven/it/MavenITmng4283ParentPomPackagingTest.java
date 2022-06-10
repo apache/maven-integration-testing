@@ -19,14 +19,13 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-4283">MNG-4283</a>.
- * 
+ *
  * @author Benjamin Bentmann
  */
 public class MavenITmng4283ParentPomPackagingTest
@@ -40,6 +39,8 @@ public class MavenITmng4283ParentPomPackagingTest
 
     /**
      * Test that the model builder fails when a parent POM has not "pom" packaging.
+     *
+     * @throws Exception in case of failure
      */
     public void testit()
         throws Exception

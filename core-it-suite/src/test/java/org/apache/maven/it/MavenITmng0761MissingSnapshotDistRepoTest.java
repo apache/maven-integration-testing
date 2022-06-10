@@ -19,16 +19,15 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-761">MNG-761</a>.
- * 
+ *
  * @author Brett Porter
- * @version $Id$
+ *
  */
 public class MavenITmng0761MissingSnapshotDistRepoTest
     extends AbstractMavenIntegrationTestCase
@@ -42,6 +41,8 @@ public class MavenITmng0761MissingSnapshotDistRepoTest
     /**
      * Test that a deployment of a snapshot falls back to a non-snapshot repository if no snapshot repository is
      * specified.
+     *
+     * @throws Exception in case of failure
      */
     public void testitMNG761()
         throws Exception
@@ -56,7 +57,7 @@ public class MavenITmng0761MissingSnapshotDistRepoTest
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
 
-        verifier.assertFilePresent( "target/repo/org/apache/maven/its/mng0761/test/1.0-SNAPSHOT/test-1.0-*.jar" );
+        verifier.verifyFilePresent( "target/repo/org/apache/maven/its/mng0761/test/1.0-SNAPSHOT/test-1.0-*.jar" );
     }
 
 }

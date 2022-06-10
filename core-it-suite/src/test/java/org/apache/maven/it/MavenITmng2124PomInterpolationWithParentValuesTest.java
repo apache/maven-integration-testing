@@ -19,7 +19,6 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
@@ -38,6 +37,8 @@ public class MavenITmng2124PomInterpolationWithParentValuesTest
 
     /**
      * Test that ${parent.artifactId} resolves correctly. [MNG-2124]
+     *
+     * @throws Exception in case of failure
      */
     public void testitMNG2124()
         throws Exception
@@ -51,9 +52,9 @@ public class MavenITmng2124PomInterpolationWithParentValuesTest
         verifier.executeGoal( "initialize" );
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
-        
+
         Properties props = verifier.loadProperties( "target/parent.properties" );
-        assertEquals( "parent, child, parent, child", props.getProperty( "project.description" ) );
+        assertEquals( "parent, child", props.getProperty( "project.description" ) );
     }
 
 }

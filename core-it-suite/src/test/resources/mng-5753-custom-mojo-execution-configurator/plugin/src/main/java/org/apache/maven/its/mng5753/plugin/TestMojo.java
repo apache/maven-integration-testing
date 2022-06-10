@@ -28,23 +28,23 @@ import java.io.Writer;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.project.MavenProject;
+import org.apache.maven.plugins.annotations.Component;
+import org.apache.maven.plugins.annotations.Mojo;
+import org.apache.maven.plugins.annotations.Parameter;
 
-/**
- * @goal test
- * @configurator test
- */
+@Mojo( name = "test", configurator = "test" )
 public class TestMojo
     extends AbstractMojo
 {
-    /** @parameter expression="${project}" */
+    @Parameter( defaultValue = "${project}", readonly = true )
     private MavenProject project;
-    
-    /** @parameter */
+
+    @Parameter
     private String name;
-    
+
     public void execute()
         throws MojoExecutionException
-    {        
+    {
         try
         {
             File file = new File( project.getBasedir(), "configuration.txt" );
@@ -63,6 +63,6 @@ public class TestMojo
         {
             throw new MojoExecutionException( e.getMessage(), e );
         }
-        
+
     }
 }

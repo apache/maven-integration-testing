@@ -19,16 +19,15 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-1908">MNG-1908</a>.
- * 
+ *
  * @author Brett Porter
- * @version $Id$
+ *
  */
 public class MavenITmng1908LegacySnapshotUpdateTest
     extends AbstractMavenIntegrationTestCase
@@ -39,9 +38,11 @@ public class MavenITmng1908LegacySnapshotUpdateTest
         // legacy layout no longer supported in Maven 3.x (see MNG-4204)
         super( "[2.0,3.0-alpha-3)" );
     }
-    
+
     /**
      * Test that legacy repositories with legacy snapshots (i.e. without metadata) download correctly.
+     *
+     * @throws Exception in case of failure
      */
     public void testitMNG1908()
         throws Exception
@@ -58,7 +59,7 @@ public class MavenITmng1908LegacySnapshotUpdateTest
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
 
-        verifier.assertArtifactPresent( "org.apache.maven.its.mng1908", "artifact", "1.0-SNAPSHOT", "jar" );
+        verifier.verifyArtifactPresent( "org.apache.maven.its.mng1908", "artifact", "1.0-SNAPSHOT", "jar" );
     }
 
 }

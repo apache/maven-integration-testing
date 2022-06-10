@@ -19,16 +19,15 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-985">MNG-985</a>.
- * 
+ *
  * @author John Casey
- * @version $Id$
+ *
  */
 public class MavenITmng0985NonExecutedPluginMngtGoalsTest
     extends AbstractMavenIntegrationTestCase
@@ -42,6 +41,8 @@ public class MavenITmng0985NonExecutedPluginMngtGoalsTest
      * Test that plugins in pluginManagement aren't included in the build
      * unless they are referenced by groupId/artifactId within the plugins
      * section of a pom.
+     *
+     * @throws Exception in case of failure
      */
     public void testitMNG0985()
         throws Exception
@@ -51,7 +52,7 @@ public class MavenITmng0985NonExecutedPluginMngtGoalsTest
         verifier.setAutoclean( false );
         verifier.deleteDirectory( "target" );
         verifier.executeGoal( "initialize" );
-        verifier.assertFileNotPresent( "target/unexpected.txt" );
+        verifier.verifyFileNotPresent( "target/unexpected.txt" );
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
     }

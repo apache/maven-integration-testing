@@ -25,7 +25,7 @@ import java.io.File;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-5481">MNG-5418</a>.
- * 
+ *
  * @author Olivier Lamy
  */
 public class MavenITmng5418FileProjectPropertiesActivatorTest
@@ -39,6 +39,8 @@ public class MavenITmng5418FileProjectPropertiesActivatorTest
 
     /**
      * Test that the file-based profile activator resolves project properties.
+     *
+     * @throws Exception in case of failure
      */
     public void testit()
         throws Exception
@@ -52,10 +54,10 @@ public class MavenITmng5418FileProjectPropertiesActivatorTest
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
 
-        verifier.assertFilePresent( "target/path1.txt" );
-        verifier.assertFilePresent( "target/file1.txt" );
-        verifier.assertFilePresent( "target/missing1.txt" );
-        verifier.assertFileNotPresent( "target/missing2.txt" );
+        verifier.verifyFilePresent( "target/path1.txt" );
+        verifier.verifyFilePresent( "target/file1.txt" );
+        verifier.verifyFilePresent( "target/missing1.txt" );
+        verifier.verifyFileNotPresent( "target/missing2.txt" );
 
     }
 

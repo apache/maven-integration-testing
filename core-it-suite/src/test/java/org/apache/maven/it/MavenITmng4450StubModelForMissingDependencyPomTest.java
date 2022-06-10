@@ -19,7 +19,6 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
@@ -27,7 +26,7 @@ import java.util.Properties;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-4450">MNG-4450</a>.
- * 
+ *
  * @author Benjamin Bentmann
  */
 public class MavenITmng4450StubModelForMissingDependencyPomTest
@@ -41,6 +40,8 @@ public class MavenITmng4450StubModelForMissingDependencyPomTest
 
     /**
      * Verify that building missing POMs for dependencies fails gracefully with a stub model.
+     *
+     * @throws Exception in case of failure
      */
     public void testit()
         throws Exception
@@ -60,9 +61,9 @@ public class MavenITmng4450StubModelForMissingDependencyPomTest
         Properties props = verifier.loadProperties( "target/pom.properties" );
 
         // NOTE: Some Maven versions generate faulty packaging for the stub model (always "pom"), not our business here
-        assertEquals( "org.apache.maven.its.mng4450:missing:jar:0.1", 
+        assertEquals( "org.apache.maven.its.mng4450:missing:jar:0.1",
             props.getProperty( "org.apache.maven.its.mng4450:missing:jar:0.1.project.id" ).replaceAll( "pom", "jar" ) );
-        assertEquals( "org.apache.maven.its.mng4450:missing:jar:0.1", 
+        assertEquals( "org.apache.maven.its.mng4450:missing:jar:0.1",
             props.getProperty( "org.apache.maven.its.mng4450:missing:jar:0.1.artifact.id" ).replaceAll( "pom", "jar" ) );
     }
 

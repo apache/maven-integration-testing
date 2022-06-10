@@ -19,7 +19,6 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
@@ -35,6 +34,8 @@ public class MavenIT0030DepPomDepMngtInheritanceTest
     /**
      * Test for injection of dependencyManagement through parents of
      * dependency poms.
+     *
+     * @throws Exception in case of failure
      */
     public void testit0030()
         throws Exception
@@ -46,7 +47,7 @@ public class MavenIT0030DepPomDepMngtInheritanceTest
         verifier.deleteArtifact( "org.apache.maven.it", "maven-it-it0030-child-project1", "1.0-SNAPSHOT", "jar" );
         verifier.deleteArtifact( "org.apache.maven.it", "maven-it-it0030-child-project2", "1.0-SNAPSHOT", "jar" );
         verifier.executeGoal( "install" );
-        verifier.assertFilePresent( "child-hierarchy/project2/target/classes/org/apache/maven/it0001/Person.class" );
+        verifier.verifyFilePresent( "child-hierarchy/project2/target/classes/org/apache/maven/it0001/Person.class" );
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
 

@@ -19,24 +19,29 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
+import org.eclipse.jetty.security.ConstraintMapping;
+import org.eclipse.jetty.security.ConstraintSecurityHandler;
+import org.eclipse.jetty.security.HashLoginService;
+import org.eclipse.jetty.server.NetworkConnector;
+import org.eclipse.jetty.server.Server;
+import org.eclipse.jetty.server.handler.DefaultHandler;
+import org.eclipse.jetty.server.handler.HandlerList;
+import org.eclipse.jetty.server.handler.ResourceHandler;
+import org.eclipse.jetty.servlet.ServletContextHandler;
+import org.eclipse.jetty.util.security.Constraint;
+import org.eclipse.jetty.util.security.Password;
 
 import java.io.File;
 import java.util.Properties;
 
-import org.mortbay.jetty.Server;
-import org.mortbay.jetty.handler.DefaultHandler;
-import org.mortbay.jetty.handler.HandlerList;
-import org.mortbay.jetty.handler.ResourceHandler;
-import org.mortbay.jetty.security.Constraint;
-import org.mortbay.jetty.security.ConstraintMapping;
-import org.mortbay.jetty.security.HashUserRealm;
-import org.mortbay.jetty.security.SecurityHandler;
+import static org.eclipse.jetty.servlet.ServletContextHandler.SECURITY;
+import static org.eclipse.jetty.servlet.ServletContextHandler.SESSIONS;
+import static org.eclipse.jetty.util.security.Constraint.__BASIC_AUTH;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-4561">MNG-4561</a>.
- * 
+ *
  * @author Benjamin Bentmann
  */
 public class MavenITmng4561MirroringOfPluginRepoTest
@@ -51,6 +56,8 @@ public class MavenITmng4561MirroringOfPluginRepoTest
     /**
      * Test that repositories contributed by plugin POMs during transitive dependency resolution are subject to
      * mirror, proxy and authentication configuration.
+     *
+     * @throws Exception in case of failure
      */
     public void testit()
         throws Exception
@@ -66,12 +73,14 @@ public class MavenITmng4561MirroringOfPluginRepoTest
         constraintMapping.setConstraint( constraint );
         constraintMapping.setPathSpec( "/*" );
 
-        HashUserRealm userRealm = new HashUserRealm( "TestRealm" );
-        userRealm.put( "testuser", "testtest" );
-        userRealm.addUserToRole( "testuser", "user" );
+        HashLoginService userRealm = new HashLoginService( "TestRealm" );
+        userRealm.putUser( "testuser", new Password( "testtest" ), new String[] { "user" } );
 
-        SecurityHandler securityHandler = new SecurityHandler();
-        securityHandler.setUserRealm( userRealm );
+        Server server = new Server( 0 );
+        ServletContextHandler ctx = new ServletContextHandler( server, "/", SESSIONS | SECURITY );
+        ConstraintSecurityHandler securityHandler = (ConstraintSecurityHandler) ctx.getSecurityHandler();
+        securityHandler.setLoginService( userRealm );
+        securityHandler.setAuthMethod( __BASIC_AUTH );
         securityHandler.setConstraintMappings( new ConstraintMapping[] { constraintMapping } );
 
         ResourceHandler repoHandler = new ResourceHandler();
@@ -82,18 +91,23 @@ public class MavenITmng4561MirroringOfPluginRepoTest
         handlerList.addHandler( repoHandler );
         handlerList.addHandler( new DefaultHandler() );
 
-        Server server = new Server( 0 );
         server.setHandler( handlerList );
         server.start();
 
+        Verifier verifier = newVerifier( testDir.getAbsolutePath() );
         try
         {
-            Verifier verifier = newVerifier( testDir.getAbsolutePath() );
+            if ( server.isFailed() )
+            {
+                fail( "Couldn't bind the server socket to a free port!" );
+            }
+            int port = ( (NetworkConnector) server.getConnectors()[0] ).getLocalPort();
+            System.out.println( "Bound server socket to the port " + port );
             verifier.setAutoclean( false );
             verifier.deleteDirectory( "target" );
             verifier.deleteArtifacts( "org.apache.maven.its.mng4561" );
             Properties filterProps = verifier.newDefaultFilterProperties();
-            filterProps.setProperty( "@port@", Integer.toString( server.getConnectors()[0].getLocalPort() ) );
+            filterProps.setProperty( "@port@", Integer.toString( port ) );
             verifier.filterFile( "settings-template.xml", "settings.xml", "UTF-8", filterProps );
             verifier.addCliOption( "-s" );
             verifier.addCliOption( "settings.xml" );
@@ -101,14 +115,14 @@ public class MavenITmng4561MirroringOfPluginRepoTest
             verifier.verifyErrorFreeLog();
             verifier.resetStreams();
 
-            verifier.assertArtifactPresent( "org.apache.maven.its.mng4561", "plugin-dep", "0.1", "jar" );
-            verifier.assertArtifactPresent( "org.apache.maven.its.mng4561", "plugin-dep", "0.1", "pom" );
-            verifier.assertFilePresent( "target/touch.txt" );
+            verifier.verifyArtifactPresent( "org.apache.maven.its.mng4561", "plugin-dep", "0.1", "jar" );
+            verifier.verifyArtifactPresent( "org.apache.maven.its.mng4561", "plugin-dep", "0.1", "pom" );
+            verifier.verifyFilePresent( "target/touch.txt" );
         }
         finally
         {
             server.stop();
+            server.join();
         }
     }
-
 }

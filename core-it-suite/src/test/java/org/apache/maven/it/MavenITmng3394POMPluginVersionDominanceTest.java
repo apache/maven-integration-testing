@@ -19,7 +19,6 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
@@ -46,7 +45,7 @@ public class MavenITmng3394POMPluginVersionDominanceTest
     public void testitMNG3394a ()
         throws Exception
     {
-        //testShouldUsePluginVersionFromPluginMgmtForLifecycleMojoWhenNotInBuildPlugins 
+        //testShouldUsePluginVersionFromPluginMgmtForLifecycleMojoWhenNotInBuildPlugins
         File testDir = ResourceExtractor.simpleExtractResources( getClass(), BASEDIR_PREFIX + "lifecycleMojoVersionInPluginMgmt" );
 
         Verifier verifier = newVerifier( testDir.getAbsolutePath() );
@@ -56,7 +55,7 @@ public class MavenITmng3394POMPluginVersionDominanceTest
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
 
-        verifier.assertFilePresent( "target/resources-resources.txt" );
+        verifier.verifyFilePresent( "target/resources-resources.txt" );
     }
 
     public void testitMNG3394b()
@@ -73,7 +72,7 @@ public class MavenITmng3394POMPluginVersionDominanceTest
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
 
-        verifier.assertFilePresent( "target/clean-clean.txt" );
+        verifier.verifyFilePresent( "target/clean-clean.txt" );
     }
 
 }

@@ -19,14 +19,13 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-4925">MNG-4925</a>.
- * 
+ *
  * @author Benjamin Bentmann
  */
 public class MavenITmng4925ContainerLookupRealmDuringMojoExecTest
@@ -41,6 +40,8 @@ public class MavenITmng4925ContainerLookupRealmDuringMojoExecTest
     /**
      * Verify that the container's lookup realm is set to the plugin realm during a mojo execution as otherwise
      * string-based lookups can fail to load the proper type.
+     *
+     * @throws Exception in case of failure
      */
     public void testit()
         throws Exception
@@ -58,7 +59,7 @@ public class MavenITmng4925ContainerLookupRealmDuringMojoExecTest
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
 
-        verifier.assertFilePresent( "target/touch.txt" );
+        verifier.verifyFilePresent( "target/touch.txt" );
     }
 
 }

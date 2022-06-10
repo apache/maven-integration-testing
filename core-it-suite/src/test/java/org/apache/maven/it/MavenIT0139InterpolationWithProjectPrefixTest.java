@@ -19,16 +19,15 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
 import java.util.Properties;
 
 /**
- * 
+ *
  * @author Benjamin Bentmann
- * @version $Id$
+ *
  */
 public class MavenIT0139InterpolationWithProjectPrefixTest
     extends AbstractMavenIntegrationTestCase
@@ -40,6 +39,8 @@ public class MavenIT0139InterpolationWithProjectPrefixTest
 
     /**
      * Test that expressions of the form ${project.*} resolve correctly to POM values.
+     *
+     * @throws Exception in case of failure
      */
     public void testit0139()
         throws Exception
@@ -53,7 +54,7 @@ public class MavenIT0139InterpolationWithProjectPrefixTest
         verifier.executeGoal( "initialize" );
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
-        
+
         Properties props = verifier.loadProperties( "target/interpolated.properties" );
         String prefix = "project.properties.";
 

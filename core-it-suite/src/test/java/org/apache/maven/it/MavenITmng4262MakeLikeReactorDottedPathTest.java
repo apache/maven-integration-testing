@@ -21,12 +21,11 @@ package org.apache.maven.it;
 
 import java.io.File;
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-4262">MNG-4262</a>.
- * 
+ *
  * @author Benjamin Bentmann
  */
 public class MavenITmng4262MakeLikeReactorDottedPathTest
@@ -35,7 +34,7 @@ public class MavenITmng4262MakeLikeReactorDottedPathTest
 
     public MavenITmng4262MakeLikeReactorDottedPathTest()
     {
-        super( "[3.0-alpha-3,)" ); 
+        super( "[3.0-alpha-3,4.0.0-alpha-1)" );
     }
 
     private void clean( Verifier verifier )
@@ -47,6 +46,8 @@ public class MavenITmng4262MakeLikeReactorDottedPathTest
 
     /**
      * Verify that the project list can select the root project by its relative path ".".
+     *
+     * @throws Exception in case of failure
      */
     public void testitMakeRoot()
         throws Exception
@@ -63,12 +64,14 @@ public class MavenITmng4262MakeLikeReactorDottedPathTest
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
 
-        verifier.assertFilePresent( "target/touch.txt" );
-        verifier.assertFileNotPresent( "../sub-a/target/touch.txt" );
+        verifier.verifyFilePresent( "target/touch.txt" );
+        verifier.verifyFileNotPresent( "../sub-a/target/touch.txt" );
     }
 
     /**
-     * Verify that the project list can select a sub module by a relative path like "../<something>".
+     * Verify that the project list can select a sub module by a relative path like {@code "../<something>"}.
+     *
+     * @throws Exception in case of failure
      */
     public void testitMakeModule()
         throws Exception
@@ -85,8 +88,8 @@ public class MavenITmng4262MakeLikeReactorDottedPathTest
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
 
-        verifier.assertFileNotPresent( "target/touch.txt" );
-        verifier.assertFilePresent( "../sub-a/target/touch.txt" );
+        verifier.verifyFileNotPresent( "target/touch.txt" );
+        verifier.verifyFilePresent( "../sub-a/target/touch.txt" );
     }
 
 }

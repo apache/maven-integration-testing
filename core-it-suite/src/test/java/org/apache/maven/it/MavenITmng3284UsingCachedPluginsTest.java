@@ -21,7 +21,6 @@ package org.apache.maven.it;
 
 import java.io.File;
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 /**
@@ -34,12 +33,14 @@ public class MavenITmng3284UsingCachedPluginsTest
 
     public MavenITmng3284UsingCachedPluginsTest()
     {
-        super( "[2.1.0-M2,)" ); 
+        super( "[2.1.0-M2,)" );
     }
 
     /**
      * Verify that the effective plugin versions used for a project are not influenced by other instances of this
      * plugin in the reactor, i.e. each module gets exactly the plugin version it declares.
+     *
+     * @throws Exception in case of failure
      */
     public void testitMNG3284()
         throws Exception
@@ -71,14 +72,14 @@ public class MavenITmng3284UsingCachedPluginsTest
         verifier.deleteDirectory( "mod-b/target" );
         verifier.addCliOption( "--settings" );
         verifier.addCliOption( "settings.xml" );
-        verifier.executeGoal( "validate" ); 
+        verifier.executeGoal( "validate" );
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
 
-        verifier.assertFilePresent( "mod-a/target/version-0.1.txt" );
-        verifier.assertFileNotPresent( "mod-a/target/version-0.2.txt" );
-        verifier.assertFilePresent( "mod-b/target/version-0.2.txt" );
-        verifier.assertFileNotPresent( "mod-b/target/version-0.1.txt" );
+        verifier.verifyFilePresent( "mod-a/target/version-0.1.txt" );
+        verifier.verifyFileNotPresent( "mod-a/target/version-0.2.txt" );
+        verifier.verifyFilePresent( "mod-b/target/version-0.2.txt" );
+        verifier.verifyFileNotPresent( "mod-b/target/version-0.1.txt" );
     }
 
 }

@@ -19,7 +19,6 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
@@ -27,7 +26,7 @@ import java.util.Properties;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-4966">MNG-4966</a>.
- * 
+ *
  * @author Benjamin Bentmann
  */
 public class MavenITmng4966AbnormalUrlPreservationTest
@@ -41,6 +40,8 @@ public class MavenITmng4966AbnormalUrlPreservationTest
 
     /**
      * Verify that URLs in the effective model retain successive slashes which are significant in certain domains.
+     *
+     * @throws Exception in case of failure
      */
     public void testit()
         throws Exception

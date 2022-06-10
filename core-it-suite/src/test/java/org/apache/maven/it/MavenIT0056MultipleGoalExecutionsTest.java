@@ -19,7 +19,6 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
@@ -35,6 +34,8 @@ public class MavenIT0056MultipleGoalExecutionsTest
     /**
      * Test that multiple executions of a goal with different
      * parameter values will succeed.
+     *
+     * @throws Exception in case of failure
      */
     public void testit0056()
         throws Exception
@@ -48,8 +49,8 @@ public class MavenIT0056MultipleGoalExecutionsTest
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
 
-        verifier.assertFilePresent( "target/first-exec.txt" );
-        verifier.assertFilePresent( "target/second-exec.txt" );
+        verifier.verifyFilePresent( "target/first-exec.txt" );
+        verifier.verifyFilePresent( "target/second-exec.txt" );
     }
 
 }

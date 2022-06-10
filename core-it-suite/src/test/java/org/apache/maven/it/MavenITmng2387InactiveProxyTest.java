@@ -19,22 +19,23 @@ package org.apache.maven.it;
  * under the License.
  */
 
+import org.apache.maven.it.util.ResourceExtractor;
+import org.eclipse.jetty.server.Handler;
+import org.eclipse.jetty.server.NetworkConnector;
+import org.eclipse.jetty.server.Server;
+import org.eclipse.jetty.server.handler.DefaultHandler;
+import org.eclipse.jetty.server.handler.HandlerList;
+import org.eclipse.jetty.server.handler.ResourceHandler;
+
 import java.io.File;
 import java.net.InetAddress;
 import java.util.Properties;
 
-import org.apache.maven.it.util.ResourceExtractor;
-import org.mortbay.jetty.Handler;
-import org.mortbay.jetty.Server;
-import org.mortbay.jetty.handler.DefaultHandler;
-import org.mortbay.jetty.handler.HandlerList;
-import org.mortbay.jetty.handler.ResourceHandler;
-
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-2387">MNG-2387</a>.
- * 
+ *
  * @author Brett Porter
- * @version $Id$
+ *
  */
 public class MavenITmng2387InactiveProxyTest
     extends AbstractMavenIntegrationTestCase
@@ -54,7 +55,8 @@ public class MavenITmng2387InactiveProxyTest
         super( "[2.0.11,2.1.0-M1),[2.1.0,)" ); // 2.0.11+, 2.1.0+
     }
 
-    public void setUp()
+    @Override
+    protected void setUp()
         throws Exception
     {
         testDir = ResourceExtractor.simpleExtractResources( getClass(), "/mng-2387" );
@@ -68,8 +70,12 @@ public class MavenITmng2387InactiveProxyTest
         server = new Server( 0 );
         server.setHandler( handlers );
         server.start();
-
-        port = server.getConnectors()[0].getLocalPort();
+        if ( server.isFailed() )
+        {
+            fail( "Couldn't bind the server socket to a free port!" );
+        }
+        port = ( (NetworkConnector) server.getConnectors()[0] ).getLocalPort();
+        System.out.println( "Bound server socket to the HTTP port " + port );
 
         resourceHandler = new ResourceHandler();
         resourceHandler.setResourceBase( new File( testDir, "proxy" ).getAbsolutePath() );
@@ -80,37 +86,42 @@ public class MavenITmng2387InactiveProxyTest
         proxyServer = new Server( 0 );
         proxyServer.setHandler( handlers );
         proxyServer.start();
-
-        proxyPort = proxyServer.getConnectors()[0].getLocalPort();
+        if ( proxyServer.isFailed() )
+        {
+            fail( "Couldn't bind the server socket to a free port!" );
+        }
+        proxyPort = ( (NetworkConnector) proxyServer.getConnectors()[0] ).getLocalPort();
+        System.out.println( "Bound server socket to the HTTPS port " + port );
     }
 
+    @Override
     protected void tearDown()
         throws Exception
     {
-        super.tearDown();
-
         if ( server != null )
         {
             server.stop();
-            server = null;
+            server.join();
         }
         if ( proxyServer != null )
         {
             proxyServer.stop();
-            proxyServer = null;
+            proxyServer.join();
         }
     }
 
     /**
      * Test that no proxy is used if none of the configured proxies is actually set as active.
+     *
+     * @throws Exception in case of failure
      */
     public void testit()
         throws Exception
     {
         Verifier verifier = newVerifier( testDir.getAbsolutePath() );
-        
-        Properties properties = verifier.newDefaultFilterProperties();        
-        properties.setProperty( "@host@", InetAddress.getLocalHost().getCanonicalHostName() );
+
+        Properties properties = verifier.newDefaultFilterProperties();
+        properties.setProperty( "@host@", InetAddress.getLoopbackAddress().getCanonicalHostName() );
         properties.setProperty( "@port@", Integer.toString( port ) );
         properties.setProperty( "@proxyPort@", Integer.toString( proxyPort ) );
         verifier.filterFile( "settings-template.xml", "settings.xml", "UTF-8", properties );
@@ -123,7 +134,6 @@ public class MavenITmng2387InactiveProxyTest
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
 
-        verifier.assertArtifactPresent( "org.apache.maven.its.mng2387", "a", "0.1", "jar" );
+        verifier.verifyArtifactPresent( "org.apache.maven.its.mng2387", "a", "0.1", "jar" );
     }
-
 }

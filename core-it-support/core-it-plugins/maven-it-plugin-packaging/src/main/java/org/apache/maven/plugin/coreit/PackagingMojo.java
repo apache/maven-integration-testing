@@ -27,9 +27,9 @@ import java.io.IOException;
 
 /**
  * Creates an empty file to prove this goal was executed.
- * 
+ *
  * @author <a href="brett@apache.org">Brett Porter</a>
- * @version $Id$
+ *
  * @goal package
  */
 public class PackagingMojo

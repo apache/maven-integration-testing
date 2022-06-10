@@ -19,16 +19,15 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-3838">MNG-3838</a>.
- * 
+ *
  * @author Benjamin Bentmann
- * @version $Id$
+ *
  */
 public class MavenITmng3838EqualPluginDepsTest
     extends AbstractMavenIntegrationTestCase
@@ -40,6 +39,8 @@ public class MavenITmng3838EqualPluginDepsTest
 
     /**
      * Verify that using the same dependency for different plugins doesn't blow up the project builder.
+     *
+     * @throws Exception in case of failure
      */
     public void testitMNG3838()
         throws Exception

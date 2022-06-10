@@ -20,11 +20,12 @@ package org.apache.maven.it;
  */
 
 import org.apache.maven.it.util.ResourceExtractor;
-import org.mortbay.jetty.Handler;
-import org.mortbay.jetty.Server;
-import org.mortbay.jetty.handler.DefaultHandler;
-import org.mortbay.jetty.handler.HandlerList;
-import org.mortbay.jetty.handler.ResourceHandler;
+import org.eclipse.jetty.server.Handler;
+import org.eclipse.jetty.server.NetworkConnector;
+import org.eclipse.jetty.server.Server;
+import org.eclipse.jetty.server.handler.DefaultHandler;
+import org.eclipse.jetty.server.handler.HandlerList;
+import org.eclipse.jetty.server.handler.ResourceHandler;
 
 import java.io.File;
 import java.io.IOException;
@@ -34,11 +35,9 @@ import java.util.Properties;
 public class MavenIT0146InstallerSnapshotNaming
     extends AbstractMavenIntegrationTestCase
 {
-
     private Server server;
 
     private int port;
-
 
     private final File testDir;
 
@@ -49,10 +48,10 @@ public class MavenIT0146InstallerSnapshotNaming
         testDir = ResourceExtractor.simpleExtractResources( getClass(), "/it0146" );
     }
 
-    public void setUp()
+    @Override
+    protected void setUp()
         throws Exception
     {
-
         ResourceHandler resourceHandler = new ResourceHandler();
         resourceHandler.setResourceBase( new File( testDir, "repo" ).getAbsolutePath() );
         HandlerList handlers = new HandlerList();
@@ -61,36 +60,33 @@ public class MavenIT0146InstallerSnapshotNaming
         server = new Server( 0 );
         server.setHandler( handlers );
         server.start();
-
-        port = server.getConnectors()[0].getLocalPort();
-
+        if ( server.isFailed() )
+        {
+            fail( "Couldn't bind the server socket to a free port!" );
+        }
+        port = ( (NetworkConnector) server.getConnectors()[0] ).getLocalPort();
+        System.out.println( "Bound server socket to the port " + port );
     }
 
 
+    @Override
     protected void tearDown()
         throws Exception
     {
-        super.tearDown();
-
         if ( server != null )
         {
             server.stop();
-            server = null;
+            server.join();
         }
-
     }
 
-    /**
-     *
-     */
     public void testitRemoteDownloadTimestampedName()
         throws Exception
     {
-
         Verifier verifier = newVerifier( testDir.getAbsolutePath() );
 
         Properties properties = verifier.newDefaultFilterProperties();
-        properties.setProperty( "@host@", InetAddress.getLocalHost().getCanonicalHostName() );
+        properties.setProperty( "@host@", InetAddress.getLoopbackAddress().getCanonicalHostName() );
         properties.setProperty( "@port@", Integer.toString( port ) );
 
         verifier.filterFile( "settings-template.xml", "settings.xml", "UTF-8", properties );
@@ -108,15 +104,13 @@ public class MavenIT0146InstallerSnapshotNaming
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
 
-        verifier.assertFilePresent( "target/appassembler/repo/dep-0.1-20110726.105319-1.jar" );
-
+        verifier.verifyFilePresent( "target/appassembler/repo/dep-0.1-20110726.105319-1.jar" );
     }
 
 
     public void testitNonTimestampedNameWithInstalledSNAPSHOT()
         throws Exception
     {
-
         Verifier verifier = newVerifier( testDir.getAbsolutePath() );
         verifier.deleteArtifacts( "org.apache.maven.its.it0146" );
         verifier.addCliOption( "-f" );
@@ -131,7 +125,7 @@ public class MavenIT0146InstallerSnapshotNaming
         verifier = newVerifier( testDir.getAbsolutePath() );
 
         Properties properties = verifier.newDefaultFilterProperties();
-        properties.setProperty( "@host@", InetAddress.getLocalHost().getCanonicalHostName() );
+        properties.setProperty( "@host@", InetAddress.getLoopbackAddress().getCanonicalHostName() );
         properties.setProperty( "@port@", Integer.toString( port ) );
 
         verifier.filterFile( "settings-template.xml", "settings.xml", "UTF-8", properties );
@@ -149,7 +143,6 @@ public class MavenIT0146InstallerSnapshotNaming
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
 
-        verifier.assertFilePresent( "target/appassembler/repo/dep-0.1-SNAPSHOT.jar" );
-
+        verifier.verifyFilePresent( "target/appassembler/repo/dep-0.1-SNAPSHOT.jar" );
     }
 }

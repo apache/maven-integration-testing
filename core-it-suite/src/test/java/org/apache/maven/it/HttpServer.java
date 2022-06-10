@@ -5,10 +5,15 @@ import org.eclipse.jetty.security.ConstraintMapping;
 import org.eclipse.jetty.security.ConstraintSecurityHandler;
 import org.eclipse.jetty.security.HashLoginService;
 import org.eclipse.jetty.security.authentication.BasicAuthenticator;
+import org.eclipse.jetty.server.Connector;
+import org.eclipse.jetty.server.NetworkConnector;
 import org.eclipse.jetty.server.Request;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.ServerConnector;
 import org.eclipse.jetty.server.handler.AbstractHandler;
+import org.eclipse.jetty.util.log.Log;
+import org.eclipse.jetty.util.log.Logger;
+import org.eclipse.jetty.util.log.StdErrLog;
 import org.eclipse.jetty.util.security.Constraint;
 import org.eclipse.jetty.util.security.Password;
 import org.eclipse.jetty.util.thread.QueuedThreadPool;
@@ -34,6 +39,14 @@ import java.util.Collections;
  */
 public class HttpServer
 {
+    static {
+        Log.initialized();
+        Logger rootLogger = Log.getRootLogger();
+        if ( rootLogger instanceof StdErrLog )
+        {
+            ( (StdErrLog) rootLogger ).setLevel( StdErrLog.LEVEL_WARN );
+        }
+    }
 
     private final Server server;
 
@@ -58,29 +71,39 @@ public class HttpServer
         // server.join();
     }
 
+	public boolean isFailed()
+    {
+        return server.isFailed();
+    }
+
     public void stop()
         throws Exception
     {
         server.stop();
     }
 
+    public void join()
+        throws Exception
+    {
+        server.join();
+    }
+
     public int port()
     {
-        return ( (ServerConnector) server.getConnectors()[0] ).getLocalPort();
+        return ( (NetworkConnector) server.getConnectors()[0] ).getLocalPort();
     }
 
     private Server server( int port )
     {
-
         QueuedThreadPool threadPool = new QueuedThreadPool();
         threadPool.setMaxThreads( 500 );
         Server server = new Server( threadPool );
+        server.setConnectors( new Connector[]{ new ServerConnector( server ) } );
         server.addBean( new ScheduledExecutorScheduler() );
 
-        ServerConnector http = new ServerConnector( server );
-        http.setPort( port );
-        http.setIdleTimeout( 30000 );
-        server.addConnector( http );
+        ServerConnector connector = (ServerConnector) server.getConnectors()[0];
+        connector.setIdleTimeout( 30_000L );
+        connector.setPort( port );
 
         StreamSourceHandler handler = new StreamSourceHandler( source );
 

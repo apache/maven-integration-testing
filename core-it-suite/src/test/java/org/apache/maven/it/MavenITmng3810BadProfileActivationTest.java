@@ -20,16 +20,14 @@ package org.apache.maven.it;
  */
 
 import java.io.File;
-import java.util.Properties;
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-3810">MNG-3810</a>.
- * 
+ *
  * @author Brett Porter
- * @version $Id$
+ *
  */
 public class MavenITmng3810BadProfileActivationTest
     extends AbstractMavenIntegrationTestCase
@@ -58,9 +56,6 @@ public class MavenITmng3810BadProfileActivationTest
             verifier.verifyTextInLog( "The property name is required to activate the profile" );
         }
         verifier.resetStreams();
-
-        Properties props = verifier.loadProperties( "target/profile.properties" );
-        assertNull( props.getProperty( "project.properties.pomProperty" ) );
     }
 
 }

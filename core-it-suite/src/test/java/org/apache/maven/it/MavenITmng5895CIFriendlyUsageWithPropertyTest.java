@@ -19,18 +19,17 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
 
 /**
- * The usage of a <code>${revision}</code> for the version in the pom file and furthermore 
+ * The usage of a <code>${revision}</code> for the version in the pom file and furthermore
  * defining the property in the pom file and overwrite it via command line.
  * <a href="https://issues.apache.org/jira/browse/MNG-5895">MNG-5895</a>.
- * 
+ *
  * This will result in a failure without the fix for this issue.
- * 
+ *
  * @author Karl Heinz Marbaise khmarbaise@apache.org
  */
 public class MavenITmng5895CIFriendlyUsageWithPropertyTest
@@ -45,11 +44,13 @@ public class MavenITmng5895CIFriendlyUsageWithPropertyTest
     }
 
     /**
-     * Check that the resulting run will not fail in case 
+     * Check that the resulting run will not fail in case
      * of defining the property via command line which is
-     * already defined inside the pom. 
+     * already defined inside the pom.
+     *
+     * @throws Exception in case of failure
      */
-    public void testitShouldResolveTheDependencies()
+    public void testitShouldResolveTheDependenciesWithoutBuildConsumer()
         throws Exception
     {
         File testDir = ResourceExtractor.simpleExtractResources( getClass(), "/mng-5895-ci-friendly-usage-with-property" );
@@ -60,6 +61,26 @@ public class MavenITmng5895CIFriendlyUsageWithPropertyTest
 
         //verifier.setLogFileName( "log-only.txt" );
         verifier.addCliOption( "-Drevision=1.2" );
+        verifier.addCliOption( "-Dmaven.experimental.buildconsumer=false" );
+        verifier.executeGoal( "clean" );
+        verifier.executeGoal( "package" );
+        verifier.verifyErrorFreeLog();
+        verifier.resetStreams();
+
+    }
+
+    public void testitShouldResolveTheDependenciesWithBuildConsumer()
+                    throws Exception
+    {
+        File testDir = ResourceExtractor.simpleExtractResources( getClass(), "/mng-5895-ci-friendly-usage-with-property" );
+
+        Verifier verifier = newVerifier( testDir.getAbsolutePath(), false );
+        verifier.setMavenDebug( false );
+        verifier.setAutoclean( false );
+
+        verifier.setLogFileName( "log-bc.txt" );
+        verifier.addCliOption( "-Drevision=1.2" );
+        verifier.addCliOption( "-Dmaven.experimental.buildconsumer=true" );
         verifier.executeGoal( "clean" );
         verifier.executeGoal( "package" );
         verifier.verifyErrorFreeLog();

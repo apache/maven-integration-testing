@@ -31,7 +31,7 @@ import java.util.Properties;
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-3940">MNG-3940</a>.
  *
  * @author Benjamin Bentmann
- * @version $Id$
+ *
  */
 public class MavenITmng3940EnvVarInterpolationTest
     extends AbstractMavenIntegrationTestCase
@@ -45,6 +45,8 @@ public class MavenITmng3940EnvVarInterpolationTest
     /**
      * Test that interpolation of environment variables respects the casing rules of the underlying OS (especially
      * Windows).
+     *
+     * @throws Exception in case of failure
      */
     public void testitMNG3940()
         throws Exception
@@ -72,7 +74,7 @@ public class MavenITmng3940EnvVarInterpolationTest
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
 
-        verifier.assertFilePresent( "target/PASSED.properties" );
+        verifier.verifyFilePresent( "target/PASSED.properties" );
         Properties props = verifier.loadProperties( "target/PASSED.properties" );
         assertEquals( "PASSED", props.getProperty( "project.properties.envTest" ) );
     }

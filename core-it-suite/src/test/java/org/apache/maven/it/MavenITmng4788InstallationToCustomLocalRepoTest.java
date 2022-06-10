@@ -19,14 +19,13 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-4788">MNG-4788</a>.
- * 
+ *
  * @author Benjamin Bentmann
  */
 public class MavenITmng4788InstallationToCustomLocalRepoTest
@@ -40,6 +39,8 @@ public class MavenITmng4788InstallationToCustomLocalRepoTest
 
     /**
      * Verify that plugins can install artifacts to a custom local repo (i.e. custom base dir and custom layout).
+     *
+     * @throws Exception in case of failure
      */
     public void testit()
         throws Exception
@@ -53,8 +54,8 @@ public class MavenITmng4788InstallationToCustomLocalRepoTest
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
 
-        verifier.assertFilePresent( "target/local-repo/test-0.1-SNAPSHOT.jar" );
-        verifier.assertFileNotPresent( "target/local-repo/org/apache/maven/its/mng4788/test/0.1-SNAPSHOT/test-0.1-SNAPSHOT.jar" );
+        verifier.verifyFilePresent( "target/local-repo/test-0.1-SNAPSHOT.jar" );
+        verifier.verifyFileNotPresent( "target/local-repo/org/apache/maven/its/mng4788/test/0.1-SNAPSHOT/test-0.1-SNAPSHOT.jar" );
     }
 
 }

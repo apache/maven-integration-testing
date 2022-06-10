@@ -19,14 +19,13 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-4338">MNG-4338</a>.
- * 
+ *
  * @author Benjamin Bentmann
  */
 public class MavenITmng4338OptionalMojosTest
@@ -35,12 +34,14 @@ public class MavenITmng4338OptionalMojosTest
 
     public MavenITmng4338OptionalMojosTest()
     {
-        super( ALL_MAVEN_VERSIONS );
+        super( "[3.0,4.0.0-alpha-1)" );
     }
 
     /**
-     * Test that the <optional-mojos> element in custom lifecycle mappings is recognized and does not cause
+     * Test that the {@code <optional-mojos>} element in custom lifecycle mappings is recognized and does not cause
      * a configuration failure when loading the lifecycle.
+     *
+     * @throws Exception in case of failure
      */
     public void testit()
         throws Exception

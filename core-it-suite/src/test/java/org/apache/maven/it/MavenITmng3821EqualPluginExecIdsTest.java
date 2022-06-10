@@ -19,22 +19,21 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-3821">MNG-3821</a>.
- * 
+ *
  * @author Benjamin Bentmann
- * @version $Id$
+ *
  */
 public class MavenITmng3821EqualPluginExecIdsTest
     extends AbstractMavenIntegrationTestCase
 {
 
-    public MavenITmng3821EqualPluginExecIdsTest() 
+    public MavenITmng3821EqualPluginExecIdsTest()
     {
         super( ALL_MAVEN_VERSIONS );
     }
@@ -42,6 +41,8 @@ public class MavenITmng3821EqualPluginExecIdsTest
     /**
      * Verify that using the same id for executions/reportsets of different plugins doesn't blow up the project
      * builder.
+     *
+     * @throws Exception in case of failure
      */
     public void testitMNG3821()
         throws Exception

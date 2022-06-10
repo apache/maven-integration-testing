@@ -19,7 +19,6 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
@@ -29,7 +28,7 @@ import java.util.List;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-3183">MNG-3183</a>.
- * 
+ *
  * @author Benjamin Bentmann
  */
 public class MavenITmng3183LoggingToFileTest
@@ -43,6 +42,8 @@ public class MavenITmng3183LoggingToFileTest
 
     /**
      * Test that the CLI parameter -l can be used to direct logging to a file.
+     *
+     * @throws Exception in case of failure
      */
     public void testit()
         throws Exception

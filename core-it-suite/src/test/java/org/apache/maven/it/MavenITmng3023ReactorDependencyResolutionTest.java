@@ -26,10 +26,10 @@ import org.apache.maven.it.util.ResourceExtractor;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-3023">MNG-3023</a>
- * 
+ *
  * @author Mark Hobson
  * @author jdcasey
- * @version $Id$
+ *
  */
 public class MavenITmng3023ReactorDependencyResolutionTest
     extends AbstractMavenIntegrationTestCase
@@ -42,11 +42,13 @@ public class MavenITmng3023ReactorDependencyResolutionTest
 
     /**
      * Test that reactor projects are included in dependency resolution.
-     * 
+     *
      * In this pass, the dependency artifact should be missing from the local repository, and since the 'compile' phase
      * has not been called, i.e. the output directory for the compiled classes has not been created yet, the
      * dependency project artifact should not have a file associated with it. Therefore, the dependency artifact
      * should fail to resolve, and the build should fail.
+     *
+     * @throws Exception in case of failure
      */
     public void testitMNG3023A() throws Exception
     {
@@ -56,10 +58,10 @@ public class MavenITmng3023ReactorDependencyResolutionTest
         Verifier verifier = newVerifier( testDir.getAbsolutePath() );
         verifier.setAutoclean( false );
         verifier.setLogFileName( "log-a.txt" );
-        
+
         verifier.deleteDirectory( "dependency/dependency-classes" );
         verifier.deleteArtifacts( "org.apache.maven.its.mng3023" );
-        
+
         try
         {
             verifier.executeGoal( "validate" );
@@ -77,11 +79,13 @@ public class MavenITmng3023ReactorDependencyResolutionTest
 
     /**
      * Test that reactor projects are included in dependency resolution.
-     * 
+     *
      * I this pass, the dependency artifact should have the file $(basedir)/dependency/dependency-classes
      * (a directory) associated with it, since the 'compile' phase has run. This location should be
      * present in the compile classpath output from the maven-it-plugin-dependency-resolution:compile
      * mojo execution.
+     *
+     * @throws Exception in case of failure
      */
     public void testitMNG3023B()
         throws Exception
@@ -95,7 +99,7 @@ public class MavenITmng3023ReactorDependencyResolutionTest
         new File( testDir, "dependency/dependency-classes" ).mkdirs();
         verifier.deleteDirectory( "consumer/target" );
         verifier.deleteArtifacts( "org.apache.maven.its.mng3023" );
-        
+
         verifier.executeGoal( "initialize" );
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
@@ -107,15 +111,17 @@ public class MavenITmng3023ReactorDependencyResolutionTest
 
     /**
      * Test that reactor projects are included in dependency resolution.
-     * 
+     *
      * I this pass, the dependency should have been installed, so the dependency artifact should have
-     * a file of .../dependency-1.jar associated with it, since the 'install' phase has run. This 
-     * location should be present in the compile classpath output from the 
+     * a file of .../dependency-1.jar associated with it, since the 'install' phase has run. This
+     * location should be present in the compile classpath output from the
      * maven-it-plugin-dependency-resolution:compile mojo execution.
-     * 
+     *
      * Afterwards, the projects are cleaned and a separate Maven call to the 'initialize' phase should succeed, since
      * the dependency artifact has been installed locally. This second execution should use the jar file
      * from the local repository in its classpath output.
+     *
+     * @throws Exception in case of failure
      */
     public void testitMNG3023C()
         throws Exception
@@ -124,9 +130,9 @@ public class MavenITmng3023ReactorDependencyResolutionTest
 
         Verifier verifier = newVerifier( testDir.getAbsolutePath() );
         verifier.setAutoclean( false );
-        
+
         verifier.deleteArtifacts( "org.apache.maven.its.mng3023" );
-        
+
         verifier.deleteDirectory( "consumer/target" );
         verifier.setLogFileName( "log-c-1.txt" );
         verifier.executeGoal( "generate-sources" );
@@ -143,7 +149,7 @@ public class MavenITmng3023ReactorDependencyResolutionTest
         verifier.executeGoal( "validate" );
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
-        
+
         compileClassPath = verifier.loadLines( "consumer/target/compile.classpath", "UTF-8" );
         assertTrue( compileClassPath.toString(), compileClassPath.contains( "dependency-1.jar" ) );
         assertFalse( compileClassPath.toString(), compileClassPath.contains( "dependency-classes" ) );

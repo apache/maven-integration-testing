@@ -19,7 +19,6 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
@@ -27,7 +26,7 @@ import java.util.Properties;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-4580">MNG-4580</a>.
- * 
+ *
  * @author Benjamin Bentmann
  */
 public class MavenITmng4580ProjectLevelPluginDepUsedForCliInvocInReactorTest
@@ -43,6 +42,8 @@ public class MavenITmng4580ProjectLevelPluginDepUsedForCliInvocInReactorTest
      * Verify that project-level plugin dependencies of sub modules are still considered when a plugin is invoked
      * directly from command line at the reactor root. In other words, the plugin realm used for a mojo execution
      * should match the plugin dependencies as given by the current project.
+     *
+     * @throws Exception in case of failure
      */
     public void testit()
         throws Exception

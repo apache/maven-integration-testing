@@ -19,28 +19,24 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
+import org.eclipse.jetty.server.NetworkConnector;
+import org.eclipse.jetty.server.Request;
+import org.eclipse.jetty.server.Server;
+import org.eclipse.jetty.server.handler.AbstractHandler;
+import org.eclipse.jetty.server.handler.DefaultHandler;
+import org.eclipse.jetty.server.handler.HandlerList;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Properties;
-
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import org.mortbay.jetty.Server;
-import org.mortbay.jetty.handler.AbstractHandler;
-import org.mortbay.jetty.handler.DefaultHandler;
-import org.mortbay.jetty.handler.HandlerList;
+import java.io.File;
+import java.util.Deque;
+import java.util.Properties;
+import java.util.concurrent.ConcurrentLinkedDeque;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-4771">MNG-4771</a>.
- * 
+ *
  * @author Benjamin Bentmann
  */
 public class MavenITmng4771PluginPrefixResolutionDoesntTouchDisabledRepoTest
@@ -55,18 +51,21 @@ public class MavenITmng4771PluginPrefixResolutionDoesntTouchDisabledRepoTest
     /**
      * Verify that repositories which have both releases and snapshots disabled aren't touched when looking for
      * plugin prefix mappings.
+     *
+     * @throws Exception in case of failure
      */
     public void testit()
         throws Exception
     {
         File testDir = ResourceExtractor.simpleExtractResources( getClass(), "/mng-4771" );
 
-        final List<String> requestedUris = Collections.synchronizedList( new ArrayList<String>() );
+        final Deque<String> requestedUris = new ConcurrentLinkedDeque<>();
 
         AbstractHandler logHandler = new AbstractHandler()
         {
-            public void handle( String target, HttpServletRequest request, HttpServletResponse response, int dispatch )
-                throws IOException, ServletException
+            @Override
+            public void handle( String target, Request baseRequest, HttpServletRequest request,
+                                HttpServletResponse response )
             {
                 requestedUris.add( request.getRequestURI() );
             }
@@ -83,10 +82,16 @@ public class MavenITmng4771PluginPrefixResolutionDoesntTouchDisabledRepoTest
         Verifier verifier = newVerifier( testDir.getAbsolutePath() );
         try
         {
+            if ( server.isFailed() )
+            {
+                fail( "Couldn't bind the server socket to a free port!" );
+            }
+            int port = ( (NetworkConnector) server.getConnectors()[0] ).getLocalPort();
+            System.out.println( "Bound server socket to the port " + port );
             verifier.setAutoclean( false );
             verifier.deleteDirectory( "target" );
             Properties filterProps = verifier.newDefaultFilterProperties();
-            filterProps.setProperty( "@port@", Integer.toString( server.getConnectors()[0].getLocalPort() ) );
+            filterProps.setProperty( "@port@", Integer.toString( port ) );
             verifier.filterFile( "settings-template.xml", "settings.xml", "UTF-8", filterProps );
             verifier.addCliOption( "-U" );
             verifier.addCliOption( "-s" );
@@ -97,15 +102,15 @@ public class MavenITmng4771PluginPrefixResolutionDoesntTouchDisabledRepoTest
         }
         catch ( VerificationException e )
         {
-            assertTrue( true );
+            // expected
         }
         finally
         {
             verifier.resetStreams();
             server.stop();
+            server.join();
         }
 
         assertTrue( requestedUris.toString(), requestedUris.isEmpty() );
     }
-
 }

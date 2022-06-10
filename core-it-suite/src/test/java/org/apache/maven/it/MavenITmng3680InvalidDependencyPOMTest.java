@@ -22,12 +22,11 @@ package org.apache.maven.it;
 import java.io.File;
 import java.util.List;
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-3680">MNG-3680</a>.
- * 
+ *
  * @author jdcasey
  */
 public class MavenITmng3680InvalidDependencyPOMTest
@@ -41,12 +40,14 @@ public class MavenITmng3680InvalidDependencyPOMTest
 
     /**
      * Verify that dependencies with invalid POMs can still be used without failing the build.
+     *
+     * @throws Exception in case of failure
      */
     public void testitMNG3680 ()
         throws Exception
     {
         File testDir = ResourceExtractor.simpleExtractResources( getClass(), "/mng-3680" );
-        
+
         Verifier verifier = newVerifier( testDir.getAbsolutePath() );
         verifier.setAutoclean( false );
         verifier.deleteDirectory( "target" );

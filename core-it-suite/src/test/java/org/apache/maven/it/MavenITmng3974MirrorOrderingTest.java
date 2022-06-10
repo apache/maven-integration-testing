@@ -19,16 +19,15 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-3974">MNG-3974</a>.
- * 
+ *
  * @author Benjamin Bentmann
- * @version $Id$
+ *
  */
 public class MavenITmng3974MirrorOrderingTest
     extends AbstractMavenIntegrationTestCase
@@ -42,6 +41,8 @@ public class MavenITmng3974MirrorOrderingTest
     /**
      * Test that mirror definitions are properly evaluated. In particular, the first matching mirror definition
      * from the settings should win, i.e. ordering of mirror definitions matters.
+     *
+     * @throws Exception in case of failure
      */
     public void testitFirstMatchWins()
         throws Exception
@@ -58,8 +59,8 @@ public class MavenITmng3974MirrorOrderingTest
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
 
-        verifier.assertArtifactPresent( "org.apache.maven.its.mng3974", "a", "0.1", "jar" );
-        verifier.assertArtifactPresent( "org.apache.maven.its.mng3974", "b", "0.1", "jar" );
+        verifier.verifyArtifactPresent( "org.apache.maven.its.mng3974", "a", "0.1", "jar" );
+        verifier.verifyArtifactPresent( "org.apache.maven.its.mng3974", "b", "0.1", "jar" );
     }
 
 }

@@ -19,15 +19,14 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
 
 /**
- * 
+ *
  * @author Benjamin Bentmann
- * @version $Id$
+ *
  */
 public class MavenIT0137EarLifecycleTest
     extends AbstractMavenIntegrationTestCase
@@ -40,6 +39,8 @@ public class MavenIT0137EarLifecycleTest
 
     /**
      * Test default binding of goals for "ear" lifecycle.
+     *
+     * @throws Exception in case of failure
      */
     public void testit0137()
         throws Exception
@@ -50,11 +51,11 @@ public class MavenIT0137EarLifecycleTest
         verifier.deleteDirectory( "target" );
         verifier.setAutoclean( false );
         verifier.executeGoal( "deploy" );
-        verifier.assertFilePresent( "target/ear-generate-application-xml.txt" );
-        verifier.assertFilePresent( "target/resources-resources.txt" );
-        verifier.assertFilePresent( "target/ear-ear.txt" );
-        verifier.assertFilePresent( "target/install-install.txt" );
-        verifier.assertFilePresent( "target/deploy-deploy.txt" );
+        verifier.verifyFilePresent( "target/ear-generate-application-xml.txt" );
+        verifier.verifyFilePresent( "target/resources-resources.txt" );
+        verifier.verifyFilePresent( "target/ear-ear.txt" );
+        verifier.verifyFilePresent( "target/install-install.txt" );
+        verifier.verifyFilePresent( "target/deploy-deploy.txt" );
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
     }

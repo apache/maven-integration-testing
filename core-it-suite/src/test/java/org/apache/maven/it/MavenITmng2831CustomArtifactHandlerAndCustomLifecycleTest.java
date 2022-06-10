@@ -19,15 +19,14 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-2831">MNG-2831</a>.
- * 
- * @version $Id$
+ *
+ *
  */
 public class MavenITmng2831CustomArtifactHandlerAndCustomLifecycleTest
     extends AbstractMavenIntegrationTestCase
@@ -40,6 +39,8 @@ public class MavenITmng2831CustomArtifactHandlerAndCustomLifecycleTest
 
     /**
      * Test the use of a custom lifecycle from a plugin that is defined as a build extension.
+     *
+     * @throws Exception in case of failure
      */
     public void testitMNG2831()
         throws Exception
@@ -53,7 +54,7 @@ public class MavenITmng2831CustomArtifactHandlerAndCustomLifecycleTest
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
 
-        verifier.assertFilePresent( "target/test-1.0-it.jar" );
+        verifier.verifyFilePresent( "target/test-1.0-it.jar" );
     }
 
 }

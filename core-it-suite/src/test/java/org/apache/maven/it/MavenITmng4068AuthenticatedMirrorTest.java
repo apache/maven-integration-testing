@@ -19,25 +19,31 @@ package org.apache.maven.it;
  * under the License.
  */
 
+import org.apache.maven.it.util.ResourceExtractor;
+import org.eclipse.jetty.security.ConstraintMapping;
+import org.eclipse.jetty.security.ConstraintSecurityHandler;
+import org.eclipse.jetty.security.HashLoginService;
+import org.eclipse.jetty.server.NetworkConnector;
+import org.eclipse.jetty.server.Server;
+import org.eclipse.jetty.server.handler.DefaultHandler;
+import org.eclipse.jetty.server.handler.HandlerList;
+import org.eclipse.jetty.server.handler.ResourceHandler;
+import org.eclipse.jetty.servlet.ServletContextHandler;
+import org.eclipse.jetty.util.security.Constraint;
+import org.eclipse.jetty.util.security.Password;
+
 import java.io.File;
 import java.util.Properties;
 
-import org.apache.maven.it.Verifier;
-import org.apache.maven.it.util.ResourceExtractor;
-import org.mortbay.jetty.Server;
-import org.mortbay.jetty.handler.DefaultHandler;
-import org.mortbay.jetty.handler.HandlerList;
-import org.mortbay.jetty.handler.ResourceHandler;
-import org.mortbay.jetty.security.Constraint;
-import org.mortbay.jetty.security.ConstraintMapping;
-import org.mortbay.jetty.security.HashUserRealm;
-import org.mortbay.jetty.security.SecurityHandler;
+import static org.eclipse.jetty.servlet.ServletContextHandler.SECURITY;
+import static org.eclipse.jetty.servlet.ServletContextHandler.SESSIONS;
+import static org.eclipse.jetty.util.security.Constraint.__BASIC_AUTH;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-4068">MNG-4068</a>.
- * 
+ *
  * @author Benjamin Bentmann
- * @version $Id$
+ *
  */
 public class MavenITmng4068AuthenticatedMirrorTest
     extends AbstractMavenIntegrationTestCase
@@ -54,11 +60,10 @@ public class MavenITmng4068AuthenticatedMirrorTest
         super( ALL_MAVEN_VERSIONS );
     }
 
-    public void setUp()
+    @Override
+    protected void setUp()
         throws Exception
     {
-        super.setUp();
-
         testDir = ResourceExtractor.simpleExtractResources( getClass(), "/mng-4068" );
 
         Constraint constraint = new Constraint();
@@ -70,12 +75,14 @@ public class MavenITmng4068AuthenticatedMirrorTest
         constraintMapping.setConstraint( constraint );
         constraintMapping.setPathSpec( "/*" );
 
-        HashUserRealm userRealm = new HashUserRealm( "TestRealm" );
-        userRealm.put( "testuser", "testtest" );
-        userRealm.addUserToRole( "testuser", "user" );
+        HashLoginService userRealm = new HashLoginService( "TestRealm" );
+        userRealm.putUser( "testuser", new Password( "testtest" ), new String[] { "user" } );
 
-        SecurityHandler securityHandler = new SecurityHandler();
-        securityHandler.setUserRealm( userRealm );
+        server = new Server( 0 );
+        ServletContextHandler ctx = new ServletContextHandler( server, "/", SESSIONS | SECURITY );
+        ConstraintSecurityHandler securityHandler = (ConstraintSecurityHandler) ctx.getSecurityHandler();
+        securityHandler.setLoginService( userRealm );
+        securityHandler.setAuthMethod( __BASIC_AUTH );
         securityHandler.setConstraintMappings( new ConstraintMapping[] { constraintMapping } );
 
         ResourceHandler repoHandler = new ResourceHandler();
@@ -86,28 +93,32 @@ public class MavenITmng4068AuthenticatedMirrorTest
         handlerList.addHandler( repoHandler );
         handlerList.addHandler( new DefaultHandler() );
 
-        server = new Server( 0 );
         server.setHandler( handlerList );
         server.start();
-
-        port = server.getConnectors()[0].getLocalPort();
+        if ( server.isFailed() )
+        {
+            fail( "Couldn't bind the server socket to a free port!" );
+        }
+        port = ( (NetworkConnector) server.getConnectors()[0] ).getLocalPort();
+        System.out.println( "Bound server socket to the port " + port );
     }
 
+    @Override
     protected void tearDown()
         throws Exception
     {
         if ( server != null )
         {
             server.stop();
-            server = null;
+            server.join();
         }
-
-        super.tearDown();
     }
 
     /**
      * Test that downloading of release/snapshot artifacts from an authenticated mirror works. This basically boils down
      * to using the proper id for the mirrored repository when looking up the credentials.
+     *
+     * @throws Exception in case of failure
      */
     public void testit()
         throws Exception
@@ -125,8 +136,8 @@ public class MavenITmng4068AuthenticatedMirrorTest
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
 
-        verifier.assertArtifactPresent( "org.apache.maven.its.mng4068", "a", "0.1", "jar" );
-        verifier.assertArtifactPresent( "org.apache.maven.its.mng4068", "b", "0.1-SNAPSHOT", "jar" );
+        verifier.verifyArtifactPresent( "org.apache.maven.its.mng4068", "a", "0.1", "jar" );
+        verifier.verifyArtifactPresent( "org.apache.maven.its.mng4068", "b", "0.1-SNAPSHOT", "jar" );
     }
 
 }

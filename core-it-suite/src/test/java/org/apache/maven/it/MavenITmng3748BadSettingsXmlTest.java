@@ -22,18 +22,16 @@ package org.apache.maven.it;
 import java.io.File;
 import java.util.List;
 
-import org.apache.maven.it.VerificationException;
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-3748">MNG-3748</a>.
- * 
+ *
  * Verifies that the settings.xml file is parsed using strict mode, such that invalid
  * xml will cause an error (specifically, when repositories are not contained within a profile declaration)
  *
  * @author jdcasey
- * 
+ *
  */
 public class MavenITmng3748BadSettingsXmlTest
     extends AbstractMavenIntegrationTestCase
@@ -50,7 +48,7 @@ public class MavenITmng3748BadSettingsXmlTest
         File testDir = ResourceExtractor.simpleExtractResources( getClass(), "/mng-3748" );
 
         Verifier verifier = newVerifier( testDir.getAbsolutePath() );
-        verifier.setAutoclean( false );     
+        verifier.setAutoclean( false );
         verifier.addCliOption( "-s" );
         verifier.addCliOption( "settings.xml" );
 
@@ -61,7 +59,7 @@ public class MavenITmng3748BadSettingsXmlTest
             {
                 verifier.executeGoal( "validate" );
                 verifier.verifyErrorFreeLog();
-                
+
                 fail( "build should fail if settings.xml contains unrecognized elements." );
             }
             catch ( VerificationException e )
@@ -86,7 +84,7 @@ public class MavenITmng3748BadSettingsXmlTest
             }
             assertTrue( foundWarning );
         }
-        
+
         verifier.resetStreams();
     }
 

@@ -19,7 +19,6 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
@@ -29,9 +28,9 @@ import java.util.List;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-3998">MNG-3998</a>.
- * 
+ *
  * @author Benjamin Bentmann
- * @version $Id$
+ *
  */
 public class MavenITmng3998PluginExecutionConfigTest
     extends AbstractMavenIntegrationTestCase
@@ -44,6 +43,8 @@ public class MavenITmng3998PluginExecutionConfigTest
 
     /**
      * Test that multiple plugin executions do not lose their configuration when plugin management is used.
+     *
+     * @throws Exception in case of failure
      */
     public void testitMNG3998()
         throws Exception

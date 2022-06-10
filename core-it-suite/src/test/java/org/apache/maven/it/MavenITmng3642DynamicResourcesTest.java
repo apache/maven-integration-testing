@@ -21,17 +21,16 @@ package org.apache.maven.it;
 
 import java.io.File;
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-3642">MNG-3642</a>.
  *
- * @todo Fill in a better description of what this test verifies!
- * 
+ * todo Fill in a better description of what this test verifies!
+ *
  * @author <a href="mailto:brianf@apache.org">Brian Fox</a>
  * @author jdcasey
- * 
+ *
  */
 public class MavenITmng3642DynamicResourcesTest
     extends AbstractMavenIntegrationTestCase
@@ -86,10 +85,10 @@ public class MavenITmng3642DynamicResourcesTest
          */
         verifier.resetStreams();
 
-		File first = new File( testDir, "target/test-classes/one.txt" );
-		assertTrue( "First resource file was not present: " + first, first.exists() );
-		
-		File second = new File( testDir, "target/test-classes/two.txt" );
-		assertTrue( "Second resource file was not present: " + second, second.exists() );
+        File first = new File( testDir, "target/test-classes/one.txt" );
+        assertTrue( "First resource file was not present: " + first, first.exists() );
+
+        File second = new File( testDir, "target/test-classes/two.txt" );
+        assertTrue( "Second resource file was not present: " + second, second.exists() );
     }
 }

@@ -19,16 +19,15 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-522">MNG-522</a>.
- * 
+ *
  * @author John Casey
- * @version $Id$
+ *
  */
 public class MavenITmng0522InheritedPluginMgmtConfigTest
     extends AbstractMavenIntegrationTestCase
@@ -40,6 +39,8 @@ public class MavenITmng0522InheritedPluginMgmtConfigTest
 
     /**
      * Test for injection of inherited plugin management into plugin configuration.
+     *
+     * @throws Exception in case of failure
      */
     public void testitMNG522()
         throws Exception
@@ -53,8 +54,8 @@ public class MavenITmng0522InheritedPluginMgmtConfigTest
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
 
-        verifier.assertFilePresent( "target/plugin-mngt-config-1.txt" );
-        verifier.assertFilePresent( "target/plugin-mngt-config-2.txt" );
+        verifier.verifyFilePresent( "target/plugin-mngt-config-1.txt" );
+        verifier.verifyFilePresent( "target/plugin-mngt-config-2.txt" );
     }
 
 }

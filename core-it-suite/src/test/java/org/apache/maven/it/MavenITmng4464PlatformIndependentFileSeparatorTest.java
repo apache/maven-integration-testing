@@ -19,7 +19,6 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
@@ -27,7 +26,7 @@ import java.util.Properties;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-4464">MNG-4464</a>.
- * 
+ *
  * @author Benjamin Bentmann
  */
 public class MavenITmng4464PlatformIndependentFileSeparatorTest
@@ -42,6 +41,8 @@ public class MavenITmng4464PlatformIndependentFileSeparatorTest
     /**
      * Test that Maven recognizes both the forward and the backward slash as file separators, regardless of the
      * underlying filesystem (i.e. even on Unix).
+     *
+     * @throws Exception in case of failure
      */
     public void testit()
         throws Exception
@@ -56,7 +57,7 @@ public class MavenITmng4464PlatformIndependentFileSeparatorTest
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
 
-        verifier.assertFilePresent( "../sub/target/path.properties" );
+        verifier.verifyFilePresent( "../sub/target/path.properties" );
         Properties props = verifier.loadProperties( "../sub/target/path.properties" );
         assertPath( props, "project.build.resources.0.directory", "src/main/res" );
         assertPath( props, "project.build.testResources.0.directory", "src/test/res" );

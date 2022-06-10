@@ -19,14 +19,13 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-4335">MNG-4335</a>.
- * 
+ *
  * @author Benjamin Bentmann
  */
 public class MavenITmng4335SettingsOfflineModeTest
@@ -40,6 +39,8 @@ public class MavenITmng4335SettingsOfflineModeTest
 
     /**
      * Test that offline mode is enabled when specified in the settings.xml
+     *
+     * @throws Exception in case of failure
      */
     public void testit()
         throws Exception

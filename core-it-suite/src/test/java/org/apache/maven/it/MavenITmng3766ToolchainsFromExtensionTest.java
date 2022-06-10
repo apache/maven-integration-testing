@@ -19,7 +19,6 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
@@ -27,7 +26,7 @@ import java.util.Properties;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-3766">MNG-3766</a>.
- * 
+ *
  * @author Benjamin Bentmann
  */
 public class MavenITmng3766ToolchainsFromExtensionTest
@@ -41,12 +40,14 @@ public class MavenITmng3766ToolchainsFromExtensionTest
 
     /**
      * Test toolchain discovery from build extensions.
+     *
+     * @throws Exception in case of failure
      */
     public void testit()
         throws Exception
     {
         File testDir = ResourceExtractor.simpleExtractResources( getClass(), "/mng-3766" );
-       
+
         Verifier verifier = newVerifier( testDir.getAbsolutePath() );
         verifier.setAutoclean( false );
         verifier.deleteDirectory( "target" );
@@ -56,7 +57,7 @@ public class MavenITmng3766ToolchainsFromExtensionTest
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
 
-        verifier.assertFilePresent( "target/tool.properties" );
+        verifier.verifyFilePresent( "target/tool.properties" );
         Properties toolProps = verifier.loadProperties( "target/tool.properties" );
         assertEquals( "toolname", toolProps.getProperty( "tool.toolname", "" ) );
     }

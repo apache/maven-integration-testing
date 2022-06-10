@@ -22,14 +22,13 @@ package org.apache.maven.it;
 import java.io.File;
 import java.util.Properties;
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-1323">MNG-1323</a>.
- * 
+ *
  * @author Benjamin Bentmann
- * @version $Id$
+ *
  */
 public class MavenITmng1323AntrunDependenciesTest
     extends AbstractMavenIntegrationTestCase
@@ -43,6 +42,8 @@ public class MavenITmng1323AntrunDependenciesTest
     /**
      * Verify that project-level plugin dependencies actually apply to the current project only and not the entire
      * reactor.
+     *
+     * @throws Exception in case of failure
      */
     public void testitMNG1323()
         throws Exception
@@ -59,7 +60,7 @@ public class MavenITmng1323AntrunDependenciesTest
         verifier.filterFile( "settings-template.xml", "settings.xml", "UTF-8", verifier.newDefaultFilterProperties() );
         verifier.addCliOption( "--settings" );
         verifier.addCliOption( "settings.xml" );
-        verifier.executeGoal( "validate" ); 
+        verifier.executeGoal( "validate" );
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
 

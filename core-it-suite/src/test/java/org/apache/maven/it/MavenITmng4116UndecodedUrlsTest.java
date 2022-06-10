@@ -22,14 +22,13 @@ package org.apache.maven.it;
 import java.io.File;
 import java.util.Properties;
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-4116">MNG-4116</a>.
- * 
+ *
  * @author Benjamin Bentmann
- * @version $Id$
+ *
  */
 public class MavenITmng4116UndecodedUrlsTest
     extends AbstractMavenIntegrationTestCase
@@ -42,6 +41,8 @@ public class MavenITmng4116UndecodedUrlsTest
 
     /**
      * Test that the project builder does not decode URLs (which must be done by the transport layer instead).
+     *
+     * @throws Exception in case of failure
      */
     public void testitMNG4116()
         throws Exception
@@ -56,27 +57,27 @@ public class MavenITmng4116UndecodedUrlsTest
 
         Properties props = verifier.loadProperties( "target/pom.properties" );
 
-        assertEquals( "http://maven.apache.org/spacy%20path", 
+        assertEquals( "http://maven.apache.org/spacy%20path",
             props.getProperty( "project.url" ) );
 
-        assertEquals( "http://svn.apache.org/viewvc/spacy%20path", 
+        assertEquals( "http://svn.apache.org/viewvc/spacy%20path",
             props.getProperty( "project.scm.url" ) );
-        assertEquals( "scm:svn:svn+ssh://svn.apache.org/spacy%20path", 
+        assertEquals( "scm:svn:svn+ssh://svn.apache.org/spacy%20path",
             props.getProperty( "project.scm.connection" ) );
-        assertEquals( "scm:svn:svn+ssh://svn.apache.org/spacy%20path", 
+        assertEquals( "scm:svn:svn+ssh://svn.apache.org/spacy%20path",
             props.getProperty( "project.scm.developerConnection" ) );
 
-        assertEquals( "http://ci.apache.org/spacy%20path", 
+        assertEquals( "http://ci.apache.org/spacy%20path",
             props.getProperty( "project.ciManagement.url" ) );
 
-        assertEquals( "http://issues.apache.org/spacy%20path", 
+        assertEquals( "http://issues.apache.org/spacy%20path",
             props.getProperty( "project.issueManagement.url" ) );
 
-        assertEquals( "scm:svn:svn+ssh://dist.apache.org/spacy%20path", 
+        assertEquals( "scm:svn:svn+ssh://dist.apache.org/spacy%20path",
             props.getProperty( "project.distributionManagement.repository.url" ) );
-        assertEquals( "scm:svn:svn+ssh://snap.apache.org/spacy%20path", 
+        assertEquals( "scm:svn:svn+ssh://snap.apache.org/spacy%20path",
             props.getProperty( "project.distributionManagement.snapshotRepository.url" ) );
-        assertEquals( "scm:svn:svn+ssh://site.apache.org/spacy%20path", 
+        assertEquals( "scm:svn:svn+ssh://site.apache.org/spacy%20path",
             props.getProperty( "project.distributionManagement.site.url" ) );
     }
 

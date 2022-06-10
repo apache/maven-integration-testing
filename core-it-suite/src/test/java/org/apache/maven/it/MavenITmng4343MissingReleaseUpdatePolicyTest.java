@@ -19,54 +19,60 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.Deque;
 import java.util.Properties;
+import java.util.concurrent.ConcurrentLinkedDeque;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.mortbay.jetty.Handler;
-import org.mortbay.jetty.Request;
-import org.mortbay.jetty.Server;
-import org.mortbay.jetty.handler.AbstractHandler;
+import org.hamcrest.CoreMatchers;
+import org.eclipse.jetty.server.Handler;
+import org.eclipse.jetty.server.NetworkConnector;
+import org.eclipse.jetty.server.Request;
+import org.eclipse.jetty.server.Server;
+import org.eclipse.jetty.server.handler.AbstractHandler;
+
+import static org.hamcrest.CoreMatchers.hasItem;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-4343">MNG-4343</a>.
- * 
+ *
  * @author Benjamin Bentmann
- * @version $Id$
+ *
  */
 public class MavenITmng4343MissingReleaseUpdatePolicyTest
     extends AbstractMavenIntegrationTestCase
 {
-
     private Server server;
 
-    private List<String> requestedUris;
+    private Deque<String> requestedUris;
 
     private volatile boolean blockAccess;
+
+    private int port;
 
     public MavenITmng4343MissingReleaseUpdatePolicyTest()
     {
         super( "[3.0-alpha-3,)" );
     }
 
+    @Override
     protected void setUp()
         throws Exception
     {
         Handler repoHandler = new AbstractHandler()
         {
-            public void handle( String target, HttpServletRequest request, HttpServletResponse response, int dispatch )
-                throws IOException, ServletException
+            @Override
+            public void handle( String target, Request baseRequest, HttpServletRequest request,
+                                HttpServletResponse response )
+                throws IOException
             {
                 System.out.println( "Handling " + request.getMethod() + " " + request.getRequestURL() );
 
@@ -82,9 +88,9 @@ public class MavenITmng4343MissingReleaseUpdatePolicyTest
                 else
                 {
                     PrintWriter writer = response.getWriter();
-    
+
                     response.setStatus( HttpServletResponse.SC_OK );
-    
+
                     if ( request.getRequestURI().endsWith( ".pom" ) )
                     {
                         writer.println( "<project>" );
@@ -111,24 +117,31 @@ public class MavenITmng4343MissingReleaseUpdatePolicyTest
         server = new Server( 0 );
         server.setHandler( repoHandler );
         server.start();
-
-        requestedUris = Collections.synchronizedList( new ArrayList<String>() );
+        if ( server.isFailed() )
+        {
+            fail( "Couldn't bind the server socket to a free port!" );
+        }
+        port = ( (NetworkConnector) server.getConnectors()[0] ).getLocalPort();
+        System.out.println( "Bound server socket to the port " + port );
+        requestedUris = new ConcurrentLinkedDeque<>();
     }
 
+    @Override
     protected void tearDown()
         throws Exception
     {
         if ( server != null )
         {
             server.stop();
-            server = null;
+            server.join();
         }
-        requestedUris = null;
     }
 
     /**
      * Verify that checking for *missing* release artifacts respects the update policy that is configured in the
      * release section for the respective repository, in this case "always".
+     *
+     * @throws Exception in case of failure
      */
     public void testitAlways()
         throws Exception
@@ -143,7 +156,7 @@ public class MavenITmng4343MissingReleaseUpdatePolicyTest
 
         Properties filterProps = verifier.newDefaultFilterProperties();
         filterProps.setProperty( "@updates@", "always" );
-        filterProps.setProperty( "@port@", Integer.toString( server.getConnectors()[0].getLocalPort() ) );
+        filterProps.setProperty( "@port@", Integer.toString( port ) );
         verifier.filterFile( "settings-template.xml", "settings.xml", "UTF-8", filterProps );
 
         blockAccess = true;
@@ -160,7 +173,7 @@ public class MavenITmng4343MissingReleaseUpdatePolicyTest
             // expected
         }
 
-        assertTrue( requestedUris.toString(), 
+        assertTrue( requestedUris.toString(),
             requestedUris.contains( "/dep/0.1/dep-0.1.jar" ) || requestedUris.contains( "/dep/0.1/dep-0.1.pom" ) );
         requestedUris.clear();
 
@@ -172,8 +185,8 @@ public class MavenITmng4343MissingReleaseUpdatePolicyTest
 
         assertTrue( requestedUris.toString(), requestedUris.contains( "/dep/0.1/dep-0.1.jar" ) );
         assertTrue( requestedUris.toString(), requestedUris.contains( "/dep/0.1/dep-0.1.pom" ) );
-        verifier.assertArtifactPresent( "org.apache.maven.its.mng4343", "dep", "0.1", "jar" );
-        verifier.assertArtifactPresent( "org.apache.maven.its.mng4343", "dep", "0.1", "pom" );
+        verifier.verifyArtifactPresent( "org.apache.maven.its.mng4343", "dep", "0.1", "jar" );
+        verifier.verifyArtifactPresent( "org.apache.maven.its.mng4343", "dep", "0.1", "pom" );
 
         verifier.resetStreams();
     }
@@ -181,6 +194,8 @@ public class MavenITmng4343MissingReleaseUpdatePolicyTest
     /**
      * Verify that checking for *missing* release artifacts respects the update policy that is configured in the
      * release section for the respective repository, in this case "never", unless overriden from the CLI via -U.
+     *
+     * @throws Exception in case of failure
      */
     public void testitNever()
         throws Exception
@@ -195,7 +210,7 @@ public class MavenITmng4343MissingReleaseUpdatePolicyTest
 
         Properties filterProps = verifier.newDefaultFilterProperties();
         filterProps.setProperty( "@updates@", "never" );
-        filterProps.setProperty( "@port@", Integer.toString( server.getConnectors()[0].getLocalPort() ) );
+        filterProps.setProperty( "@port@", Integer.toString( port ) );
         verifier.filterFile( "settings-template.xml", "settings.xml", "UTF-8", filterProps );
 
         blockAccess = true;
@@ -212,7 +227,7 @@ public class MavenITmng4343MissingReleaseUpdatePolicyTest
             // expected
         }
 
-        assertTrue( requestedUris.toString(), 
+        assertTrue( requestedUris.toString(),
             requestedUris.contains( "/dep/0.1/dep-0.1.jar" ) || requestedUris.contains( "/dep/0.1/dep-0.1.pom" ) );
         requestedUris.clear();
 
@@ -230,19 +245,20 @@ public class MavenITmng4343MissingReleaseUpdatePolicyTest
             // expected
         }
 
-        assertEquals( new ArrayList<String>(), requestedUris );
-        verifier.assertArtifactNotPresent( "org.apache.maven.its.mng4343", "dep", "0.1", "jar" );
-        verifier.assertArtifactNotPresent( "org.apache.maven.its.mng4343", "dep", "0.1", "pom" );
+        //noinspection unchecked
+        assertThat( requestedUris, CoreMatchers.<String>hasItems() );
+        verifier.verifyArtifactNotPresent( "org.apache.maven.its.mng4343", "dep", "0.1", "jar" );
+        verifier.verifyArtifactNotPresent( "org.apache.maven.its.mng4343", "dep", "0.1", "pom" );
 
         verifier.setLogFileName( "log-never-3.txt" );
         verifier.addCliOption( "-U" );
         verifier.executeGoal( "validate" );
         verifier.verifyErrorFreeLog();
 
-        assertTrue( requestedUris.toString(), requestedUris.contains( "/dep/0.1/dep-0.1.jar" ) );
-        assertTrue( requestedUris.toString(), requestedUris.contains( "/dep/0.1/dep-0.1.pom" ) );
-        verifier.assertArtifactPresent( "org.apache.maven.its.mng4343", "dep", "0.1", "jar" );
-        verifier.assertArtifactPresent( "org.apache.maven.its.mng4343", "dep", "0.1", "pom" );
+        assertThat( requestedUris, hasItem( "/dep/0.1/dep-0.1.jar" ) );
+        assertThat( requestedUris, hasItem( "/dep/0.1/dep-0.1.pom" ) );
+        verifier.verifyArtifactPresent( "org.apache.maven.its.mng4343", "dep", "0.1", "jar" );
+        verifier.verifyArtifactPresent( "org.apache.maven.its.mng4343", "dep", "0.1", "pom" );
 
         requestedUris.clear();
 
@@ -251,7 +267,8 @@ public class MavenITmng4343MissingReleaseUpdatePolicyTest
         verifier.executeGoal( "validate" );
         verifier.verifyErrorFreeLog();
 
-        assertEquals( new ArrayList<String>(), requestedUris );
+        //noinspection unchecked
+        assertThat( requestedUris, CoreMatchers.<String>hasItems() );
 
         verifier.resetStreams();
     }

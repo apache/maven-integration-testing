@@ -21,13 +21,12 @@ package org.apache.maven.it;
 
 import java.io.File;
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-3545">MNG-3545</a>:
  * it tests activation and deactivation of profiles.
- * 
+ *
  */
 public class MavenITmng3545ProfileDeactivationTest
     extends AbstractMavenIntegrationTestCase
@@ -40,7 +39,8 @@ public class MavenITmng3545ProfileDeactivationTest
 
     /**
      * Test build with two active by default profiles
-     * 
+     *
+     * @throws Exception in case of failure
      */
     public void testBasicBuildWithDefaultProfiles()
         throws Exception
@@ -56,17 +56,18 @@ public class MavenITmng3545ProfileDeactivationTest
 
         verifier.verifyErrorFreeLog();
         // profile 1 and 2 are active by default
-        verifier.assertFilePresent( "target/profile1/touch.txt" );
-        verifier.assertFilePresent( "target/profile2/touch.txt" );
-        verifier.assertFileNotPresent( "target/profile3/touch.txt" );
-        verifier.assertFileNotPresent( "target/profile4/touch.txt" );
-        verifier.assertFileNotPresent( "target/profile5/touch.txt" );
+        verifier.verifyFilePresent( "target/profile1/touch.txt" );
+        verifier.verifyFilePresent( "target/profile2/touch.txt" );
+        verifier.verifyFileNotPresent( "target/profile3/touch.txt" );
+        verifier.verifyFileNotPresent( "target/profile4/touch.txt" );
+        verifier.verifyFileNotPresent( "target/profile5/touch.txt" );
         verifier.resetStreams();
     }
 
     /**
      * Test command line deactivation of active by default profiles.
-     * 
+     *
+     * @throws Exception in case of failure
      */
     public void testDeactivateDefaultProfilesHyphen()
         throws Exception
@@ -85,8 +86,8 @@ public class MavenITmng3545ProfileDeactivationTest
         verifier.executeGoal( "validate" );
 
         verifier.verifyErrorFreeLog();
-        verifier.assertFileNotPresent( "target/profile1/touch.txt" );
-        verifier.assertFileNotPresent( "target/profile2/touch.txt" );
+        verifier.verifyFileNotPresent( "target/profile1/touch.txt" );
+        verifier.verifyFileNotPresent( "target/profile2/touch.txt" );
         verifier.resetStreams();
     }
 
@@ -107,15 +108,16 @@ public class MavenITmng3545ProfileDeactivationTest
         verifier.executeGoal( "validate" );
 
         verifier.verifyErrorFreeLog();
-        verifier.assertFileNotPresent( "target/profile1/touch.txt" );
-        verifier.assertFileNotPresent( "target/profile2/touch.txt" );
+        verifier.verifyFileNotPresent( "target/profile1/touch.txt" );
+        verifier.verifyFileNotPresent( "target/profile2/touch.txt" );
         verifier.resetStreams();
     }
 
     /**
      * Test command line deactivation of a profile that was activated
      * by a property
-     * 
+     *
+     * @throws Exception in case of failure
      */
     public void testDeactivateActivatedByProp()
         throws Exception
@@ -134,18 +136,19 @@ public class MavenITmng3545ProfileDeactivationTest
         verifier.executeGoal( "validate" );
 
         verifier.verifyErrorFreeLog();
-        verifier.assertFilePresent( "target/profile1/touch.txt" );
-        verifier.assertFilePresent( "target/profile2/touch.txt" );
-        verifier.assertFileNotPresent( "target/profile3/touch.txt" );
-        verifier.assertFileNotPresent( "target/profile4/touch.txt" );
-        verifier.assertFileNotPresent( "target/profile5/touch.txt" );
+        verifier.verifyFilePresent( "target/profile1/touch.txt" );
+        verifier.verifyFilePresent( "target/profile2/touch.txt" );
+        verifier.verifyFileNotPresent( "target/profile3/touch.txt" );
+        verifier.verifyFileNotPresent( "target/profile4/touch.txt" );
+        verifier.verifyFileNotPresent( "target/profile5/touch.txt" );
         verifier.resetStreams();
     }
 
     /**
      * Test that deactivating from the command line takes priority over
      * activating from the command line.
-     * 
+     *
+     * @throws Exception in case of failure
      */
     public void testActivateThenDeactivate()
         throws Exception
@@ -164,18 +167,19 @@ public class MavenITmng3545ProfileDeactivationTest
         verifier.executeGoal( "validate" );
 
         verifier.verifyErrorFreeLog();
-        verifier.assertFilePresent( "target/profile1/touch.txt" );
-        verifier.assertFilePresent( "target/profile2/touch.txt" );
-        verifier.assertFileNotPresent( "target/profile3/touch.txt" );
-        verifier.assertFileNotPresent( "target/profile4/touch.txt" );
-        verifier.assertFileNotPresent( "target/profile5/touch.txt" );
+        verifier.verifyFilePresent( "target/profile1/touch.txt" );
+        verifier.verifyFilePresent( "target/profile2/touch.txt" );
+        verifier.verifyFileNotPresent( "target/profile3/touch.txt" );
+        verifier.verifyFileNotPresent( "target/profile4/touch.txt" );
+        verifier.verifyFileNotPresent( "target/profile5/touch.txt" );
         verifier.resetStreams();
     }
 
     /**
      * Test that default profiles are deactivated when another profile is
      * activated.
-     * 
+     *
+     * @throws Exception in case of failure
      */
     public void testDefaultProfileAutoDeactivation()
         throws Exception
@@ -193,11 +197,11 @@ public class MavenITmng3545ProfileDeactivationTest
         verifier.executeGoal( "validate" );
 
         verifier.verifyErrorFreeLog();
-        verifier.assertFileNotPresent( "target/profile1/touch.txt" );
-        verifier.assertFileNotPresent( "target/profile2/touch.txt" );
-        verifier.assertFileNotPresent( "target/profile3/touch.txt" );
-        verifier.assertFilePresent( "target/profile4/touch.txt" );
-        verifier.assertFileNotPresent( "target/profile5/touch.txt" );
+        verifier.verifyFileNotPresent( "target/profile1/touch.txt" );
+        verifier.verifyFileNotPresent( "target/profile2/touch.txt" );
+        verifier.verifyFileNotPresent( "target/profile3/touch.txt" );
+        verifier.verifyFilePresent( "target/profile4/touch.txt" );
+        verifier.verifyFileNotPresent( "target/profile5/touch.txt" );
         verifier.resetStreams();
     }
 

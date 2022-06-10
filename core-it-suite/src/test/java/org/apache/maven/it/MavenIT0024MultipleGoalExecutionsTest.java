@@ -19,16 +19,15 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-172">MNG-172</a>.
- * 
+ *
  * @author John Casey
- * @version $Id$
+ *
  */
 public class MavenIT0024MultipleGoalExecutionsTest
     extends AbstractMavenIntegrationTestCase
@@ -41,6 +40,8 @@ public class MavenIT0024MultipleGoalExecutionsTest
     /**
      * Test usage of &lt;executions/&gt; inside a plugin rather than &lt;goals/&gt;
      * that are directly inside the plugin.
+     *
+     * @throws Exception in case of failure
      */
     public void testit0024()
         throws Exception
@@ -54,7 +55,7 @@ public class MavenIT0024MultipleGoalExecutionsTest
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
 
-        verifier.assertFilePresent( "target/plugin-exec-configuration.txt" );
+        verifier.verifyFilePresent( "target/plugin-exec-configuration.txt" );
     }
 
 }

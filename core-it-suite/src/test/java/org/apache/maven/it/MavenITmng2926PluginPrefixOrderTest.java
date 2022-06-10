@@ -21,14 +21,13 @@ package org.apache.maven.it;
 
 import java.io.File;
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-2926">MNG-2926</a>
- * 
+ *
  * @author Brian Fox
- * @version $Id$
+ *
  */
 public class MavenITmng2926PluginPrefixOrderTest
     extends AbstractMavenIntegrationTestCase
@@ -42,6 +41,8 @@ public class MavenITmng2926PluginPrefixOrderTest
     /**
      * Verify that when resolving plugin prefixes the group org.apache.maven.plugins is searched before
      * org.codehaus.mojo and that custom groups from the settings are searched before these standard ones.
+     *
+     * @throws Exception in case of failure
      */
     public void testitMNG2926()
         throws Exception
@@ -65,7 +66,7 @@ public class MavenITmng2926PluginPrefixOrderTest
         verifier = newVerifier( testDir.getAbsolutePath() );
         verifier.setAutoclean( false );
         verifier.setLogFileName( "log-default.txt" );
-        verifier.filterFile( "settings-default-template.xml", "settings-default.xml", "UTF-8", 
+        verifier.filterFile( "settings-default-template.xml", "settings-default.xml", "UTF-8",
             verifier.newDefaultFilterProperties() );
         verifier.addCliOption( "--settings" );
         verifier.addCliOption( "settings-default.xml" );
@@ -76,7 +77,7 @@ public class MavenITmng2926PluginPrefixOrderTest
         verifier = newVerifier( testDir.getAbsolutePath() );
         verifier.setAutoclean( false );
         verifier.setLogFileName( "log-custom.txt" );
-        verifier.filterFile( "settings-custom-template.xml", "settings-custom.xml", "UTF-8", 
+        verifier.filterFile( "settings-custom-template.xml", "settings-custom.xml", "UTF-8",
             verifier.newDefaultFilterProperties() );
         verifier.addCliOption( "--settings" );
         verifier.addCliOption( "settings-custom.xml" );

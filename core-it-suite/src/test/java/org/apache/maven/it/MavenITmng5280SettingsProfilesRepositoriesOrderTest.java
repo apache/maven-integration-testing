@@ -19,6 +19,14 @@ package org.apache.maven.it;
  * under the License.
  */
 
+import org.apache.maven.it.util.ResourceExtractor;
+import org.eclipse.jetty.server.NetworkConnector;
+import org.eclipse.jetty.server.Request;
+import org.eclipse.jetty.server.Server;
+import org.eclipse.jetty.server.handler.AbstractHandler;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -27,67 +35,59 @@ import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.util.Properties;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import org.apache.maven.it.util.ResourceExtractor;
-import org.mortbay.jetty.Request;
-import org.mortbay.jetty.Server;
-import org.mortbay.jetty.handler.AbstractHandler;
-
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-5280">MNG-5280</a>.
- * 
+ *
  * @author Anders Hammar
  */
 public class MavenITmng5280SettingsProfilesRepositoriesOrderTest
     extends AbstractMavenIntegrationTestCase
 {
-
     private File testDir;
 
     private Server server;
-
-    int httpPort;
 
     public MavenITmng5280SettingsProfilesRepositoriesOrderTest()
     {
         super( "[3.1-A,)" );
     }
 
-    public void setUp()
+    @Override
+    protected void setUp()
         throws Exception
     {
-        super.setUp();
-
         testDir = ResourceExtractor.simpleExtractResources( getClass(), "/mng-5280" );
-
         server = new Server( 0 );
-        server.start();
-
-        httpPort = server.getConnectors()[0].getLocalPort();
     }
 
+    @Override
     protected void tearDown()
         throws Exception
     {
         if ( server != null )
         {
             server.stop();
-            server = null;
+            server.join();
         }
-
-        super.tearDown();
     }
 
     /**
      * Verify that the repositories are used in the reversed order of definition in settings.xml.
+     *
+     * @throws Exception in case of failure
      */
     public void testRepositoriesOrder()
         throws Exception
     {
         RepoHandler repoHandler = new RepoHandler();
         server.setHandler( repoHandler );
+        server.start();
+        if ( server.isFailed() )
+        {
+            fail( "Couldn't bind the server socket to a free port!" );
+        }
+        int httpPort = ( (NetworkConnector) server.getConnectors()[0] ).getLocalPort();
+        System.out.println( "Bound server socket to the port " + httpPort );
 
         Verifier verifier = newVerifier( testDir.getAbsolutePath() );
 
@@ -109,12 +109,21 @@ public class MavenITmng5280SettingsProfilesRepositoriesOrderTest
 
     /**
      * Verify that the plugin repositories are used in the reversed order of definition in settings.xml.
+     *
+     * @throws Exception in case of failure
      */
     public void testPluginRepositoriesOrder()
         throws Exception
     {
         PluginRepoHandler pluginRepoHandler = new PluginRepoHandler();
         server.setHandler( pluginRepoHandler );
+        server.start();
+        if ( server.isFailed() )
+        {
+            fail( "Couldn't bind the server socket to a free port!" );
+        }
+        int httpPort = ( (NetworkConnector) server.getConnectors()[0] ).getLocalPort();
+        System.out.println( "Bound server socket to the port " + httpPort );
 
         Verifier verifier = newVerifier( testDir.getAbsolutePath() );
 
@@ -133,14 +142,15 @@ public class MavenITmng5280SettingsProfilesRepositoriesOrderTest
         assertTrue( pluginRepoHandler.pluginRequestedFromRepo1Last );
     }
 
-    private class RepoHandler
+    private static final class RepoHandler
         extends AbstractHandler
     {
-        boolean artifactRequestedFromRepo1Last = false;
+        private volatile boolean artifactRequestedFromRepo1Last;
 
-        boolean artifactRequestedFromRepo2 = false;
+        private volatile boolean artifactRequestedFromRepo2;
 
-        public void handle( String target, HttpServletRequest request, HttpServletResponse response, int dispatch )
+        public void handle( String target, Request baseRequest, HttpServletRequest request,
+                            HttpServletResponse response )
             throws IOException
         {
             String uri = request.getRequestURI();
@@ -157,7 +167,7 @@ public class MavenITmng5280SettingsProfilesRepositoriesOrderTest
                     writer.println( "  <artifactId>fake-artifact</artifactId>" );
                     writer.println( "  <version>1.0</version>" );
                     writer.println( "</project>" );
-                    
+
                     response.setStatus( HttpServletResponse.SC_OK );
                 }
                 else if ( uri.endsWith( ".jar" ) )
@@ -193,11 +203,12 @@ public class MavenITmng5280SettingsProfilesRepositoriesOrderTest
     private class PluginRepoHandler
         extends AbstractHandler
     {
-        boolean pluginRequestedFromRepo1Last = false;
+        private volatile boolean pluginRequestedFromRepo1Last;
 
-        boolean pluginRequestedFromRepo2 = false;
+        private volatile boolean pluginRequestedFromRepo2;
 
-        public void handle( String target, HttpServletRequest request, HttpServletResponse response, int dispatch )
+        public void handle( String target, Request baseRequest, HttpServletRequest request,
+                            HttpServletResponse response )
             throws IOException
         {
             String uri = request.getRequestURI();

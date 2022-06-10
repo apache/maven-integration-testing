@@ -19,7 +19,6 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
@@ -28,13 +27,15 @@ public class MavenIT0051ReleaseProfileTest
     extends AbstractMavenIntegrationTestCase
 {
 
-    public MavenIT0051ReleaseProfileTest()                                                                                                                          
-    {                                                                                                                                                 
-        super( "(2.0.2,)" );
-    }    
+    public MavenIT0051ReleaseProfileTest()
+    {
+        super( "(2.0.2,4.0.0-alpha-1)" );
+    }
 
     /**
      * Test source attachment when -DperformRelease=true is specified.
+     *
+     * @throws Exception in case of failure
      */
     public void testit0051()
         throws Exception
@@ -49,8 +50,8 @@ public class MavenIT0051ReleaseProfileTest
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
 
-        verifier.assertFilePresent( "target/source-jar.txt" );
-        verifier.assertFilePresent( "target/javadoc-jar.txt" );
+        verifier.verifyFilePresent( "target/source-jar.txt" );
+        verifier.verifyFilePresent( "target/javadoc-jar.txt" );
     }
 
 }

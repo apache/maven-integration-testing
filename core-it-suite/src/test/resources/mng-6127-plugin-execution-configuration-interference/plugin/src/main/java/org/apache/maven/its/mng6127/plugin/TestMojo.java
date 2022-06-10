@@ -63,18 +63,34 @@ public class TestMojo
     {
         File file = new File( project.getBasedir(), "configuration.txt" );
         file.getParentFile().mkdirs();
-        
-        try ( Writer w = new OutputStreamWriter( new FileOutputStream( file, true ), "UTF-8" ); )
+
+        Writer w = null;
+
+        try
         {
+            w = new OutputStreamWriter( new FileOutputStream( file, true ), "UTF-8" );
             if ( name != null )
             {
-                w.write( name );
+                w.write( "name=" + name + ", " );
             }
-            w.write( secondName );
+            w.write( "secondName=" + secondName );
         }
         catch ( IOException e )
         {
             throw new MojoExecutionException( e.getMessage(), e );
+        }
+        finally
+        {
+            if ( w != null )
+            {
+                try
+                {
+                    w.close();
+                }
+                catch ( IOException e )
+                {
+                }
+            }
         }
     }
 }

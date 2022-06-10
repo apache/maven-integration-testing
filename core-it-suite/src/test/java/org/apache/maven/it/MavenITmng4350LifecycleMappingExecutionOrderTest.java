@@ -19,7 +19,6 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
@@ -28,7 +27,7 @@ import java.util.List;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-4350">MNG-4350</a>.
- * 
+ *
  * @author Benjamin Bentmann
  */
 public class MavenITmng4350LifecycleMappingExecutionOrderTest
@@ -44,6 +43,8 @@ public class MavenITmng4350LifecycleMappingExecutionOrderTest
      * Test that multiple goals bound to the same phase by a lifecycle mapping execute in the order given by
      * the lifecycle mapping. In particular, the order of plugin declarations in the POM should have no influence
      * on the lifecycle mappings specified by the packaging.
+     *
+     * @throws Exception in case of failure
      */
     public void testit()
         throws Exception

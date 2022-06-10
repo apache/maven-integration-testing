@@ -19,25 +19,21 @@ package org.apache.maven.it;
  * under the License.
  */
 
+import org.apache.maven.it.util.ResourceExtractor;
+import org.eclipse.jetty.server.Handler;
+import org.eclipse.jetty.server.NetworkConnector;
+import org.eclipse.jetty.server.Request;
+import org.eclipse.jetty.server.Server;
+import org.eclipse.jetty.server.handler.AbstractHandler;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import org.apache.maven.it.Verifier;
-import org.apache.maven.it.util.ResourceExtractor;
-import org.mortbay.jetty.Handler;
-import org.mortbay.jetty.Request;
-import org.mortbay.jetty.Server;
-import org.mortbay.jetty.handler.AbstractHandler;
-
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-3652">MNG-3652</a>.
- * 
- * @version $Id$
  */
 public class MavenITmng3652UserAgentHeaderTest
     extends AbstractMavenIntegrationTestCase
@@ -47,7 +43,7 @@ public class MavenITmng3652UserAgentHeaderTest
     private int port;
 
     private String userAgent;
-    
+
     private String customHeader;
 
     public MavenITmng3652UserAgentHeaderTest()
@@ -55,20 +51,23 @@ public class MavenITmng3652UserAgentHeaderTest
         super( "[2.1.0-M1,3.0-alpha-1),[3.0-beta-3,)" ); // 2.1.0-M1+
     }
 
-    public void setUp()
+    @Override
+    protected void setUp()
         throws Exception
     {
         Handler handler = new AbstractHandler()
         {
-            public void handle( String target, HttpServletRequest request, HttpServletResponse response, int dispatch )
-                throws IOException, ServletException
+            @Override
+            public void handle( String target, Request baseRequest, HttpServletRequest request,
+                                HttpServletResponse response )
+                throws IOException
             {
                 System.out.println( "Handling URL: '" + request.getRequestURL() + "'" );
-                
+
                 userAgent = request.getHeader( "User-Agent" );
-                
+
                 customHeader = request.getHeader( "Custom-Header" );
-                
+
                 System.out.println( "Got User-Agent: '" + userAgent + "'" );
 
                 response.setContentType( "text/plain" );
@@ -83,24 +82,29 @@ public class MavenITmng3652UserAgentHeaderTest
         server = new Server( 0 );
         server.setHandler( handler );
         server.start();
-
-        port = server.getConnectors()[0].getLocalPort();
+        if ( server.isFailed() )
+        {
+            fail( "Couldn't bind the server socket to a free port!" );
+        }
+        port = ( (NetworkConnector) server.getConnectors()[0] ).getLocalPort();
+        System.out.println( "Bound server socket to the port " + port );
     }
 
+    @Override
     protected void tearDown()
         throws Exception
     {
-        super.tearDown();
-
         if ( server != null)
         {
             server.stop();
-            server = null;
+            server.join();
         }
     }
 
     /**
      * Test that the user agent header is configured in the wagon manager.
+     *
+     * @throws Exception in case of failure
      */
     public void testmng3652_UnConfiguredHttp()
         throws Exception
@@ -135,10 +139,10 @@ public class MavenITmng3652UserAgentHeaderTest
         // NOTE: system property for maven.version may not exist if you use -Dtest
         // surefire parameter to run this single test. Therefore, the plugin writes
         // the maven version into the check file.
-        String mavenVersion = getMavenUAVersion( (String) lines.get( 0 ) );
-        String javaVersion = (String) lines.get( 1 );
-        String os = (String) lines.get( 2 ) + " " + (String) lines.get( 3 );
-        String artifactVersion = (String) lines.get( 4 );
+        String mavenVersion = getMavenUAVersion( lines.get( 0 ) );
+        String javaVersion = lines.get( 1 );
+        String os = lines.get( 2 ) + " " + lines.get( 3 );
+        String artifactVersion = lines.get( 4 );
 
         if ( matchesVersionRange( "(,3.0-beta-3)" ) )
         {
@@ -184,10 +188,10 @@ public class MavenITmng3652UserAgentHeaderTest
         // NOTE: system property for maven.version may not exist if you use -Dtest
         // surefire parameter to run this single test. Therefore, the plugin writes
         // the maven version into the check file.
-        String mavenVersion = getMavenUAVersion( (String) lines.get( 0 ) );
-        String javaVersion = (String) lines.get( 1 );
-        String os = (String) lines.get( 2 ) + " " + (String) lines.get( 3 );
-        String artifactVersion = (String) lines.get( 4 );
+        String mavenVersion = getMavenUAVersion( lines.get( 0 ) );
+        String javaVersion = lines.get( 1 );
+        String os = lines.get( 2 ) + " " + lines.get( 3 );
+        String artifactVersion = lines.get( 4 );
 
         String userAgent = this.userAgent;
         assertNotNull( userAgent );
@@ -238,10 +242,10 @@ public class MavenITmng3652UserAgentHeaderTest
         // NOTE: system property for maven.version may not exist if you use -Dtest
         // surefire parameter to run this single test. Therefore, the plugin writes
         // the maven version into the check file.
-        String mavenVersion = getMavenUAVersion( (String) lines.get( 0 ) );
-        String javaVersion = (String) lines.get( 1 );
-        String os = (String) lines.get( 2 ) + " " + (String) lines.get( 3 );
-        String artifactVersion = (String) lines.get( 4 );
+        String mavenVersion = getMavenUAVersion( lines.get( 0 ) );
+        String javaVersion = lines.get( 1 );
+        String os = lines.get( 2 ) + " " + lines.get( 3 );
+        String artifactVersion = lines.get( 4 );
 
         String userAgent = this.userAgent;
         assertNotNull( userAgent );

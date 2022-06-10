@@ -19,16 +19,15 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-294">MNG-294</a>.
- * 
+ *
  * @author John Casey
- * @version $Id$
+ *
  */
 public class MavenITmng0294MergeGlobalAndUserSettingsTest
     extends AbstractMavenIntegrationTestCase
@@ -41,6 +40,8 @@ public class MavenITmng0294MergeGlobalAndUserSettingsTest
 
     /**
      * Test merging of global- and user-level settings.xml files.
+     *
+     * @throws Exception in case of failure
      */
     public void testitMNG294()
         throws Exception
@@ -70,7 +71,7 @@ public class MavenITmng0294MergeGlobalAndUserSettingsTest
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
 
-        verifier.assertFilePresent( "target/test.txt" );
+        verifier.verifyFilePresent( "target/test.txt" );
     }
 
 }

@@ -19,7 +19,6 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
@@ -37,6 +36,8 @@ public class MavenIT0010DependencyClosureResolutionTest
      * Since the artifact resolution does not use the project builder, we must
      * ensure that the full hierarchy of all dependencies is resolved. This
      * includes the dependencies of the parent-pom's of dependencies.
+     *
+     * @throws Exception in case of failure
      */
     public void testit0010()
         throws Exception
@@ -54,9 +55,9 @@ public class MavenIT0010DependencyClosureResolutionTest
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
 
-        verifier.assertArtifactPresent( "org.apache.maven.its.it0010", "a", "0.1", "jar" );
-        verifier.assertArtifactPresent( "org.apache.maven.its.it0010", "b", "0.2", "jar" );
-        verifier.assertArtifactPresent( "org.apache.maven.its.it0010", "parent", "1.0", "pom" );
+        verifier.verifyArtifactPresent( "org.apache.maven.its.it0010", "a", "0.1", "jar" );
+        verifier.verifyArtifactPresent( "org.apache.maven.its.it0010", "b", "0.2", "jar" );
+        verifier.verifyArtifactPresent( "org.apache.maven.its.it0010", "parent", "1.0", "pom" );
 
         List<String> artifacts = verifier.loadLines( "target/compile.txt", "UTF-8" );
         assertTrue( artifacts.toString(), artifacts.contains( "org.apache.maven.its.it0010:a:jar:0.1" ) );

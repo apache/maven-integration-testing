@@ -19,29 +19,26 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
+import org.eclipse.jetty.server.NetworkConnector;
+import org.eclipse.jetty.server.Request;
+import org.eclipse.jetty.server.Server;
+import org.eclipse.jetty.server.handler.AbstractHandler;
+import org.eclipse.jetty.server.handler.DefaultHandler;
+import org.eclipse.jetty.server.handler.HandlerList;
+import org.eclipse.jetty.server.handler.ResourceHandler;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Properties;
 
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import org.mortbay.jetty.Server;
-import org.mortbay.jetty.handler.AbstractHandler;
-import org.mortbay.jetty.handler.DefaultHandler;
-import org.mortbay.jetty.handler.HandlerList;
-import org.mortbay.jetty.handler.ResourceHandler;
-
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-4500">MNG-4500</a>.
- * 
+ *
  * @author Benjamin Bentmann
  */
 public class MavenITmng4500NoUpdateOfTimestampedSnapshotsTest
@@ -56,6 +53,8 @@ public class MavenITmng4500NoUpdateOfTimestampedSnapshotsTest
     /**
      * Test that timestamped snapshots are treated as immutable, i.e. Maven should never check for updates of them
      * once downloaded from a remote repo regardless of the update policy.
+     *
+     * @throws Exception in case of failure
      */
     public void testit()
         throws Exception
@@ -69,8 +68,9 @@ public class MavenITmng4500NoUpdateOfTimestampedSnapshotsTest
 
         AbstractHandler logHandler = new AbstractHandler()
         {
-            public void handle( String target, HttpServletRequest request, HttpServletResponse response, int dispatch )
-                throws IOException, ServletException
+            @Override
+            public void handle( String target, Request baseRequest, HttpServletRequest request,
+                                HttpServletResponse response )
             {
                 requestedUris.add( request.getRequestURI() );
             }
@@ -86,16 +86,22 @@ public class MavenITmng4500NoUpdateOfTimestampedSnapshotsTest
 
         Server server = new Server( 0 );
         server.setHandler( handlerList );
-        server.start();
 
         Verifier verifier = newVerifier( testDir.getAbsolutePath() );
         try
         {
+            server.start();
+            if ( server.isFailed() )
+            {
+                fail( "Couldn't bind the server socket to a free port!" );
+            }
+            int port = ( (NetworkConnector) server.getConnectors()[0] ).getLocalPort();
+            System.out.println( "Bound server socket to the port " + port );
             verifier.setAutoclean( false );
             verifier.deleteDirectory( "target" );
             verifier.deleteArtifacts( "org.apache.maven.its.mng4500" );
             Properties filterProps = verifier.newDefaultFilterProperties();
-            filterProps.setProperty( "@port@", Integer.toString( server.getConnectors()[0].getLocalPort() ) );
+            filterProps.setProperty( "@port@", Integer.toString( port ) );
             verifier.filterFile( "settings-template.xml", "settings.xml", "UTF-8", filterProps );
             verifier.addCliOption( "-s" );
             verifier.addCliOption( "settings.xml" );
@@ -124,7 +130,7 @@ public class MavenITmng4500NoUpdateOfTimestampedSnapshotsTest
         {
             verifier.resetStreams();
             server.stop();
+            server.join();
         }
     }
-
 }

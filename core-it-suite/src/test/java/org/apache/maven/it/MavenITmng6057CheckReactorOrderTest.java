@@ -19,7 +19,6 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
@@ -30,7 +29,7 @@ import java.util.List;
  * Using a <code>${revision}</code> in the version will change the reactor order before fixing
  * <a href="https://issues.apache.org/jira/browse/MNG-6057">MNG-6057</a>. Without the fix for this issue the order of
  * the reactor is changed in that way that the parent is ordered to the last position instead of the first position.
- * 
+ *
  * @author Karl Heinz Marbaise khmarbaise@apache.org
  */
 public class MavenITmng6057CheckReactorOrderTest
@@ -46,6 +45,8 @@ public class MavenITmng6057CheckReactorOrderTest
 
     /**
      * Verify that the result shows the reactor order as expected.
+     *
+     * @throws Exception in case of failure
      */
     public void testitReactorShouldResultInExpectedOrder()
         throws Exception
@@ -69,14 +70,14 @@ public class MavenITmng6057CheckReactorOrderTest
         assertEquals( 3, resultingLines.size() );
 
         // We expect those lines in the following exact order.
-        assertEquals( "[INFO] base-project", resultingLines.get( 0 ) );
-        assertEquals( "[INFO] module-1", resultingLines.get( 1 ) );
-        assertEquals( "[INFO] module-2", resultingLines.get( 2 ) );
+        assertTrue( resultingLines.get( 0 ).startsWith( "[INFO] base-project" ) );
+        assertTrue( resultingLines.get( 1 ).startsWith( "[INFO] module-1" ) );
+        assertTrue( resultingLines.get( 2 ).startsWith( "[INFO] module-2" ) );
     }
 
     /**
      * Extract the lines at the beginning of the Maven output:
-     * 
+     *
      * <pre>
      * [INFO] Reactor Build Order:
      * [INFO]
@@ -94,7 +95,7 @@ public class MavenITmng6057CheckReactorOrderTest
         {
             if ( start )
             {
-                if ( line.startsWith( "[INFO] ----------------------------" ) )
+                if ( line.startsWith( "[INFO] -------------" ) )
                 {
                     start = false;
                 }

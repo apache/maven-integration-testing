@@ -22,14 +22,13 @@ package org.apache.maven.it;
 import java.io.File;
 import java.util.Properties;
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-2605">MNG-2605</a>.
- * 
+ *
  * @author Benjamin Bentmann
- * @version $Id$
+ *
  */
 public class MavenITmng2605BogusProfileActivationTest
     extends AbstractMavenIntegrationTestCase
@@ -43,6 +42,8 @@ public class MavenITmng2605BogusProfileActivationTest
     /**
      * Test that profiles are not accidentally activated when they have no activation element at all and
      * the user did not request their activation via id.
+     *
+     * @throws Exception in case of failure
      */
     public void testitMNG2605()
         throws Exception

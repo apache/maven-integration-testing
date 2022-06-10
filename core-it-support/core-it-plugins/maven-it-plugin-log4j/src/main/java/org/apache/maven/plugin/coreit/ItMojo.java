@@ -32,11 +32,11 @@ import org.apache.maven.plugin.MojoExecutionException;
 
 /**
  * Resolves an artifact and has an (unused) dependency on log4j.
- * 
+ *
  * @goal it
- * 
+ *
  * @author Benjamin Bentmann
- * @version $Id$
+ *
  */
 public class ItMojo
     extends AbstractMojo
@@ -83,9 +83,9 @@ public class ItMojo
 
     /**
      * Runs this mojo.
-     * 
+     *
      * @throws MojoExecutionException If the output file could not be created.
-     * @throws MojoFailureException If the output file has not been set.
+     * or if the output file has not been set.
      */
     public void execute()
         throws MojoExecutionException

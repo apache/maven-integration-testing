@@ -19,13 +19,12 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
 
 /**
- * 
+ *
  * @author Benjamin Bentmann
  */
 public class MavenIT0145ReactorWithIncludesExcludesTest
@@ -40,6 +39,8 @@ public class MavenIT0145ReactorWithIncludesExcludesTest
 
     /**
      * Test the old-style reactor mode with includes/excludes to locate projects.
+     *
+     * @throws Exception in case of failure
      */
     public void testitDefaultIncludesExcludes()
         throws Exception
@@ -57,13 +58,15 @@ public class MavenIT0145ReactorWithIncludesExcludesTest
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
 
-        verifier.assertFileNotPresent( "target/touch.txt" );
-        verifier.assertFilePresent( "mod-a/target/touch-a.txt" );
-        verifier.assertFilePresent( "mod-b/target/touch-b.txt" );
+        verifier.verifyFileNotPresent( "target/touch.txt" );
+        verifier.verifyFilePresent( "mod-a/target/touch-a.txt" );
+        verifier.verifyFilePresent( "mod-b/target/touch-b.txt" );
     }
 
     /**
      * Test the old-style reactor mode with includes/excludes to locate projects.
+     *
+     * @throws Exception in case of failure
      */
     public void testitCustomIncludes()
         throws Exception
@@ -82,13 +85,15 @@ public class MavenIT0145ReactorWithIncludesExcludesTest
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
 
-        verifier.assertFileNotPresent( "target/touch.txt" );
-        verifier.assertFilePresent( "mod-a/target/touch-a.txt" );
-        verifier.assertFileNotPresent( "mod-b/target/touch-b.txt" );
+        verifier.verifyFileNotPresent( "target/touch.txt" );
+        verifier.verifyFilePresent( "mod-a/target/touch-a.txt" );
+        verifier.verifyFileNotPresent( "mod-b/target/touch-b.txt" );
     }
 
     /**
      * Test the old-style reactor mode with includes/excludes to locate projects.
+     *
+     * @throws Exception in case of failure
      */
     public void testitCustomExcludes()
         throws Exception
@@ -107,9 +112,9 @@ public class MavenIT0145ReactorWithIncludesExcludesTest
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
 
-        verifier.assertFilePresent( "target/touch.txt" );
-        verifier.assertFileNotPresent( "mod-a/target/touch-a.txt" );
-        verifier.assertFilePresent( "mod-b/target/touch-b.txt" );
+        verifier.verifyFilePresent( "target/touch.txt" );
+        verifier.verifyFileNotPresent( "mod-a/target/touch-a.txt" );
+        verifier.verifyFilePresent( "mod-b/target/touch-b.txt" );
     }
 
 }

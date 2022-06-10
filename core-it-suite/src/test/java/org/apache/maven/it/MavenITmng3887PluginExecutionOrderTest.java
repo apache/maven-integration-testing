@@ -19,7 +19,6 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
@@ -28,9 +27,9 @@ import java.util.List;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-3887">MNG-3887</a>.
- * 
+ *
  * @author Benjamin Bentmann
- * @version $Id$
+ *
  */
 public class MavenITmng3887PluginExecutionOrderTest
     extends AbstractMavenIntegrationTestCase
@@ -43,7 +42,9 @@ public class MavenITmng3887PluginExecutionOrderTest
 
     /**
      * Test that multiple plugin executions bound to the same phase are executed in the order given by the POM when no
-     * <pluginManagement> is involved.
+     * {@code <pluginManagement>} is involved.
+     *
+     * @throws Exception in case of failure
      */
     public void testitWithoutPluginMngt()
         throws Exception
@@ -53,7 +54,9 @@ public class MavenITmng3887PluginExecutionOrderTest
 
     /**
      * Test that multiple plugin executions bound to the same phase are executed in the order given by the POM when
-     * <pluginManagement> is involved.
+     * {@code <pluginManagement>} is involved.
+     *
+     * @throws Exception in case of failure
      */
     public void testitWithPluginMngt()
         throws Exception

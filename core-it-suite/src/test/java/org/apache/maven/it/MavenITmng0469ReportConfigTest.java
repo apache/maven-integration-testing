@@ -19,17 +19,18 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
 import java.util.Properties;
 
+import static org.junit.Assert.assertNotEquals;
+
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-469">MNG-469</a>.
- * 
+ *
  * @author Benjamin Bentmann
- * @version $Id$
+ *
  */
 public class MavenITmng0469ReportConfigTest
     extends AbstractMavenIntegrationTestCase
@@ -41,7 +42,9 @@ public class MavenITmng0469ReportConfigTest
     }
 
     /**
-     * Test that <reporting> configuration also affects build plugins unless <build> configuration is also given.
+     * Test that {@code <reporting>} configuration also affects build plugins unless {@code <build>} configuration is also given.
+     *
+     * @throws Exception in case of failure
      */
     public void testitReportConfigOverridesBuildDefaults()
         throws Exception
@@ -62,7 +65,9 @@ public class MavenITmng0469ReportConfigTest
     }
 
     /**
-     * Test that <build> configuration dominates <reporting> configuration for build goals.
+     * Test that {@code <build>} configuration dominates {@code <reporting>} configuration for build goals.
+     *
+     * @throws Exception in case of failure
      */
     public void testitBuildConfigDominantDuringBuild()
         throws Exception
@@ -73,14 +78,16 @@ public class MavenITmng0469ReportConfigTest
         verifier.deleteDirectory( "target" );
         verifier.setAutoclean( false );
         verifier.executeGoal( "org.apache.maven.its.plugins:maven-it-plugin-configuration:2.1-SNAPSHOT:config" );
-        verifier.assertFilePresent( "target/build.txt" );
-        verifier.assertFileNotPresent( "target/reporting.txt" );
+        verifier.verifyFilePresent( "target/build.txt" );
+        verifier.verifyFileNotPresent( "target/reporting.txt" );
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
     }
 
     /**
-     * Test that <build> configuration does not affect report goals.
+     * Test that {@code <build>} configuration does not affect report goals.
+     *
+     * @throws Exception in case of failure
      */
     public void testitBuildConfigIrrelevantForReports()
         throws Exception
@@ -93,14 +100,14 @@ public class MavenITmng0469ReportConfigTest
         if ( matchesVersionRange( "(,3.0-alpha-1)" ) )
         {
             verifier.executeGoal( "org.apache.maven.its.plugins:maven-it-plugin-site:2.1-SNAPSHOT:generate" );
-            verifier.assertFilePresent( "target/site/info.properties" );
+            verifier.verifyFilePresent( "target/site/info.properties" );
         }
         else
         {
             verifier.executeGoal( "validate" );
             Properties props = verifier.loadProperties( "target/config.properties" );
             assertEquals( "maven-it-plugin-site", props.getProperty( "project.reporting.plugins.0.artifactId" ) );
-            assertFalse( "fail.properties".equals( props.getProperty( "project.reporting.plugins.0.configuration.children.infoFile.0.value" ) ) );
+            assertNotEquals( "fail.properties", props.getProperty( "project.reporting.plugins.0.configuration.children.infoFile.0.value" ) );
         }
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();

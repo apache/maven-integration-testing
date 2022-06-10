@@ -19,16 +19,15 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-3217">MNG-3217</a>.
- * 
+ *
  * @author Benjamin Bentmann
- * @version $Id$
+ *
  */
 public class MavenITmng3217InterPluginDependencyTest
     extends AbstractMavenIntegrationTestCase
@@ -42,6 +41,8 @@ public class MavenITmng3217InterPluginDependencyTest
     /**
      * Verify that the dependency of plugin A on some plugin B does not influence the build of another module in the
      * reactor that uses a different version of plugin B for normal build tasks.
+     *
+     * @throws Exception in case of failure
      */
     public void testitMNG3217()
         throws Exception
@@ -60,8 +61,8 @@ public class MavenITmng3217InterPluginDependencyTest
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
 
-        verifier.assertFilePresent( "sub-1/target/touch-1.txt" );
-        verifier.assertFilePresent( "sub-2/target/touch-2.txt" );
+        verifier.verifyFilePresent( "sub-1/target/touch-1.txt" );
+        verifier.verifyFilePresent( "sub-2/target/touch-2.txt" );
     }
 
 }

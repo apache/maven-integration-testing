@@ -19,7 +19,6 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
@@ -27,8 +26,8 @@ import java.util.Properties;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-2293">MNG-2293</a>.
- * 
- * @version $Id$
+ *
+ *
  */
 public class MavenITmng2293CustomPluginParamImplTest
     extends AbstractMavenIntegrationTestCase
@@ -41,6 +40,8 @@ public class MavenITmng2293CustomPluginParamImplTest
 
     /**
      * Verify that default implementation of an implementation for a complex object works as expected.
+     *
+     * @throws Exception in case of failure
      */
     public void testitMNG2293()
         throws Exception

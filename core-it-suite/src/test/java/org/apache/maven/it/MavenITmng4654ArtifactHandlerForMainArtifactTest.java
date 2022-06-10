@@ -19,14 +19,13 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-4654">MNG-4654</a>.
- * 
+ *
  * @author Benjamin Bentmann
  */
 public class MavenITmng4654ArtifactHandlerForMainArtifactTest
@@ -41,6 +40,8 @@ public class MavenITmng4654ArtifactHandlerForMainArtifactTest
     /**
      * Test that the artifact handler for the project main artifact is selected via the handler's type/roleHint
      * and not via the handler's packaging (the packaging only applies to the legacy repo layout).
+     *
+     * @throws Exception in case of failure
      */
     public void testit()
         throws Exception
@@ -58,8 +59,8 @@ public class MavenITmng4654ArtifactHandlerForMainArtifactTest
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
 
-        verifier.assertFileNotPresent( "target/repo/org/apache/maven/its/mng4654/test/1.0/test-1.0.mng4654" );
-        verifier.assertFilePresent( "target/repo/org/apache/maven/its/mng4654/test/1.0/test-1.0.jar" );
+        verifier.verifyFileNotPresent( "target/repo/org/apache/maven/its/mng4654/test/1.0/test-1.0.mng4654" );
+        verifier.verifyFilePresent( "target/repo/org/apache/maven/its/mng4654/test/1.0/test-1.0.jar" );
     }
 
 }

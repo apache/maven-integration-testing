@@ -19,14 +19,13 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-4317">MNG-4317</a>.
- * 
+ *
  * @author Benjamin Bentmann
  */
 public class MavenITmng4317PluginVersionResolutionFromMultiReposTest
@@ -41,6 +40,8 @@ public class MavenITmng4317PluginVersionResolutionFromMultiReposTest
     /**
      * Verify that the g:a level metadata files from different repositories are properly merged when trying to resolve
      * a version for some plugin that was invoked with g:a:goal.
+     *
+     * @throws Exception in case of failure
      */
     public void testit()
         throws Exception
@@ -58,7 +59,7 @@ public class MavenITmng4317PluginVersionResolutionFromMultiReposTest
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
 
-        verifier.assertFilePresent( "target/touch.txt" );
+        verifier.verifyFilePresent( "target/touch.txt" );
     }
 
 }

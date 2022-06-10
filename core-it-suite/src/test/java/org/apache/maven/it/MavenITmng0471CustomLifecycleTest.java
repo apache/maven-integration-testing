@@ -19,7 +19,6 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
@@ -28,9 +27,9 @@ import java.util.List;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-471">MNG-471</a>.
- * 
+ *
  * @author Brett Porter
- * @version $Id$
+ *
  */
 public class MavenITmng0471CustomLifecycleTest
     extends AbstractMavenIntegrationTestCase
@@ -42,6 +41,8 @@ public class MavenITmng0471CustomLifecycleTest
 
     /**
      * Test @execute with a custom lifecycle, including configuration
+     *
+     * @throws Exception in case of failure
      */
     public void testitMNG471()
         throws Exception
@@ -57,8 +58,8 @@ public class MavenITmng0471CustomLifecycleTest
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
 
-        verifier.assertFilePresent( "target/forked/touch.txt" );
-        verifier.assertFilePresent( "target/forked2/touch.txt" );
+        verifier.verifyFilePresent( "target/forked/touch.txt" );
+        verifier.verifyFilePresent( "target/forked2/touch.txt" );
     }
 
 }

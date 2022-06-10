@@ -27,7 +27,7 @@ import java.util.Properties;
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-3807">MNG-3807</a>.
  *
- * @version $Id$
+ *
  */
 public class MavenITmng3807PluginConfigExpressionEvaluationTest
     extends AbstractMavenIntegrationTestCase
@@ -41,6 +41,8 @@ public class MavenITmng3807PluginConfigExpressionEvaluationTest
     /**
      * Verify that plugin configurations are subject to the parameter expression evaluator, in particular composite
      * parameter types.
+     *
+     * @throws Exception in case of failure
      */
     public void testit()
         throws Exception
@@ -72,7 +74,7 @@ public class MavenITmng3807PluginConfigExpressionEvaluationTest
     {
         assertNotNull( value );
         assertTrue( value.length() > 0 );
-        assertTrue( value, !value.contains( "${" ) );
+        assertFalse( value, value.contains( "${" ) );
     }
 
 }

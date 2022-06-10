@@ -19,7 +19,6 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
@@ -27,7 +26,7 @@ import java.util.Properties;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-4053">MNG-4053</a>.
- * 
+ *
  * @author Benjamin Bentmann
  */
 public class MavenITmng4053PluginConfigAttributesTest
@@ -42,6 +41,8 @@ public class MavenITmng4053PluginConfigAttributesTest
     /**
      * Verify that attributes in plugin configuration elements are not erroneously duplicated to other elements when
      * no plugin management is used.
+     *
+     * @throws Exception in case of failure
      */
     public void testitWithoutPluginMngt()
         throws Exception
@@ -52,6 +53,8 @@ public class MavenITmng4053PluginConfigAttributesTest
     /**
      * Verify that attributes in plugin configuration elements are not erroneously duplicated to other elements when
      * plugin management is used.
+     *
+     * @throws Exception in case of failure
      */
     public void testitWithPluginMngt()
         throws Exception
@@ -62,6 +65,8 @@ public class MavenITmng4053PluginConfigAttributesTest
     /**
      * Verify that attributes in plugin configuration elements are not erroneously duplicated to other elements when
      * plugin management and a profile are used.
+     *
+     * @throws Exception in case of failure
      */
     public void testitWithPluginMngtAndProfile()
         throws Exception
@@ -88,8 +93,8 @@ public class MavenITmng4053PluginConfigAttributesTest
         assertEquals( "2", props.getProperty( "domParam.children.copy.0.attributes" ) );
 
         assertEquals( "target", props.getProperty( "domParam.children.copy.0.children.fileset.0.attributes.dir" ) );
-        assertEquals( null, props.getProperty( "domParam.children.copy.0.children.fileset.0.attributes.todir" ) );
-        assertEquals( null, props.getProperty( "domParam.children.copy.0.children.fileset.0.attributes.overwrite" ) );
+        assertNull( props.getProperty( "domParam.children.copy.0.children.fileset.0.attributes.todir" ) );
+        assertNull( props.getProperty( "domParam.children.copy.0.children.fileset.0.attributes.overwrite" ) );
         assertEquals( "1", props.getProperty( "domParam.children.copy.0.children.fileset.0.attributes" ) );
     }
 

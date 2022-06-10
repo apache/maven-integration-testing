@@ -19,15 +19,16 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
 import java.util.Properties;
 
+import static org.junit.Assert.assertNotEquals;
+
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-4528">MNG-4528</a>.
- * 
+ *
  * @author Benjamin Bentmann
  */
 public class MavenITmng4528ExcludeWagonsFromMavenCoreArtifactsTest
@@ -45,6 +46,8 @@ public class MavenITmng4528ExcludeWagonsFromMavenCoreArtifactsTest
      * hack to compensate for the historic slip of Maven core artifacts depending on wagon providers. Those old
      * wagon providers conflict with the usually newer wagons bundled with the core distro and cause grief under
      * a class loader hierarchy where wagons are loaded from the plugin realm (if available) like in Maven 3.
+     *
+     * @throws Exception in case of failure
      */
     public void testit()
         throws Exception
@@ -60,7 +63,7 @@ public class MavenITmng4528ExcludeWagonsFromMavenCoreArtifactsTest
 
         Properties props = verifier.loadProperties( "target/wagon.properties" );
         String version = props.getProperty( "version", "" );
-        assertFalse( "Bad wagon version used: " + version, version.equals( "1.0-alpha-6" ) );
+        assertNotEquals( "Bad wagon version used: " + version, "1.0-alpha-6", version );
     }
 
 }

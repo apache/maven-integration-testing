@@ -37,7 +37,7 @@ import java.util.Properties;
  * Resolves user-specified artifacts. This mimics in part the Maven Dependency Plugin and the Maven Surefire Plugin.
  *
  * @author Benjamin Bentmann
- * @version $Id$
+ *
  * @goal resolve
  */
 public class ResolveMojo
@@ -93,7 +93,7 @@ public class ResolveMojo
     /**
      * Runs this mojo.
      *
-     * @throws MojoFailureException If the artifact could not be resolved
+     * @throws MojoExecutionException If the artifact could not be resolved
      */
     public void execute()
         throws MojoExecutionException

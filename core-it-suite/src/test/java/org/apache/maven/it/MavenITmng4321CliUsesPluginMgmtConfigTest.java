@@ -19,14 +19,13 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-4321">MNG-4321</a>.
- * 
+ *
  * @author Benjamin Bentmann
  */
 public class MavenITmng4321CliUsesPluginMgmtConfigTest
@@ -42,6 +41,8 @@ public class MavenITmng4321CliUsesPluginMgmtConfigTest
      * Test that configuration from plugin management also applies to goals that are invoked directly from the
      * CLI even when the invoked plugin is neither explicitly present in the build/plugins section nor part of
      * the lifecycle mappings for the project's packaging.
+     *
+     * @throws Exception in case of failure
      */
     public void testit()
         throws Exception
@@ -55,7 +56,7 @@ public class MavenITmng4321CliUsesPluginMgmtConfigTest
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
 
-        verifier.assertFilePresent( "target/passed.log" );
+        verifier.verifyFilePresent( "target/passed.log" );
     }
 
 }

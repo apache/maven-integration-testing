@@ -74,7 +74,7 @@ public class CheckThreadSafetyMojo
     /**
      * Runs this mojo.
      *
-     * @throws MojoFailureException If the output file could not be created.
+     * @throws MojoExecutionException If the output file could not be created.
      */
     public void execute()
         throws MojoExecutionException

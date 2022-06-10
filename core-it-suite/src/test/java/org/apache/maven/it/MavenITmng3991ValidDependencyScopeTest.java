@@ -19,14 +19,13 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-3991">MNG-3991</a>.
- * 
+ *
  * @author Benjamin Bentmann
  */
 public class MavenITmng3991ValidDependencyScopeTest
@@ -41,6 +40,8 @@ public class MavenITmng3991ValidDependencyScopeTest
 
     /**
      * Test that invalid dependency scopes cause a validation error during building.
+     *
+     * @throws Exception in case of failure
      */
     public void testit()
         throws Exception

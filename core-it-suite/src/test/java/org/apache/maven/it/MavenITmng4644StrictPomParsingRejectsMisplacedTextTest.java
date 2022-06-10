@@ -19,15 +19,13 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.VerificationException;
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-4644">MNG-4644</a>.
- * 
+ *
  * @author Benjamin Bentmann
  */
 public class MavenITmng4644StrictPomParsingRejectsMisplacedTextTest
@@ -41,6 +39,8 @@ public class MavenITmng4644StrictPomParsingRejectsMisplacedTextTest
 
     /**
      * Verify that misplaced text inside the project element of a POM causes a parser error during reactor builds.
+     *
+     * @throws Exception in case of failure
      */
     public void testit()
         throws Exception

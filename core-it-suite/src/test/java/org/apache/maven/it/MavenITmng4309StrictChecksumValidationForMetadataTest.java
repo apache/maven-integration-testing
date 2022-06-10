@@ -26,7 +26,7 @@ import org.apache.maven.shared.utils.io.FileUtils;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-4309">MNG-4309</a>.
- * 
+ *
  * @author Benjamin Bentmann
  */
 public class MavenITmng4309StrictChecksumValidationForMetadataTest
@@ -41,6 +41,8 @@ public class MavenITmng4309StrictChecksumValidationForMetadataTest
     /**
      * Verify that strict checksum verification applies to metadata as well and in particular fails the build
      * during deployment when the previous metadata is corrupt.
+     *
+     * @throws Exception in case of failure
      */
     public void testit()
         throws Exception

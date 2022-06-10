@@ -19,7 +19,6 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
@@ -27,15 +26,15 @@ import java.util.Collection;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-505">MNG-505</a>.
- * 
+ *
  * @author Brett Porter
- * @version $Id$
+ *
  */
 public class MavenITmng0505VersionRangeTest
     extends AbstractMavenIntegrationTestCase
 {
     /**
-     * Oleg 2009.04.30: the same functionality but simpler - no multiple ranges - syntax 
+     * Oleg 2009.04.30: the same functionality but simpler - no multiple ranges - syntax
      * is tested in MNG-4150
      */
     public MavenITmng0505VersionRangeTest()
@@ -45,6 +44,8 @@ public class MavenITmng0505VersionRangeTest
 
     /**
      * Test version range support.
+     *
+     * @throws Exception in case of failure
      */
     public void testitMNG505()
         throws Exception

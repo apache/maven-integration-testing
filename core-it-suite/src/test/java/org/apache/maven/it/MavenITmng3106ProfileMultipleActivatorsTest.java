@@ -21,14 +21,13 @@ package org.apache.maven.it;
 
 import java.io.File;
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-3106">MNG-3106</a>:
- * it tests that profiles with multiple activators are activated 
+ * it tests that profiles with multiple activators are activated
  * when any of the activators are on.
- * 
+ *
  */
 public class MavenITmng3106ProfileMultipleActivatorsTest
     extends AbstractMavenIntegrationTestCase
@@ -40,9 +39,10 @@ public class MavenITmng3106ProfileMultipleActivatorsTest
 
     /**
      * Test build with two profiles, each with more than one activator.
-     * The profiles should be activated even though only one of the activators 
+     * The profiles should be activated even though only one of the activators
      * returns true.
-     * 
+     *
+     * @throws Exception in case of failure
      */
     public void testProfilesWithMultipleActivators()
         throws Exception
@@ -58,8 +58,8 @@ public class MavenITmng3106ProfileMultipleActivatorsTest
         verifier.executeGoal( "validate" );
 
         verifier.verifyErrorFreeLog();
-        verifier.assertFilePresent( "target/profile1/touch.txt" );
-        verifier.assertFilePresent( "target/profile2/touch.txt" );
+        verifier.verifyFilePresent( "target/profile1/touch.txt" );
+        verifier.verifyFilePresent( "target/profile2/touch.txt" );
         verifier.resetStreams();
     }
 

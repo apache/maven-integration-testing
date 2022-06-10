@@ -19,7 +19,6 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
@@ -28,9 +27,9 @@ import java.util.List;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-4000">MNG-4000</a>.
- * 
+ *
  * @author Benjamin Bentmann
- * @version $Id$
+ *
  */
 public class MavenITmng4000MultiPluginExecutionsTest
     extends AbstractMavenIntegrationTestCase
@@ -42,8 +41,10 @@ public class MavenITmng4000MultiPluginExecutionsTest
     }
 
     /**
-     * Test that plugin executions without id are not lost among other plugin executions when no <pluginManagement>
+     * Test that plugin executions without id are not lost among other plugin executions when no {@code <pluginManagement>}
      * is present.
+     *
+     * @throws Exception in case of failure
      */
     public void testitWithoutPluginMngt()
         throws Exception
@@ -63,8 +64,10 @@ public class MavenITmng4000MultiPluginExecutionsTest
     }
 
     /**
-     * Test that plugin executions without id are not lost among other plugin executions when <pluginManagement>
+     * Test that plugin executions without id are not lost among other plugin executions when {@code <pluginManagement>}
      * is present.
+     *
+     * @throws Exception in case of failure
      */
     public void testitWithPluginMngt()
         throws Exception

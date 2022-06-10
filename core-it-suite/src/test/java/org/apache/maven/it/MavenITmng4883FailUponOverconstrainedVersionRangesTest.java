@@ -19,14 +19,13 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-4883">MNG-4883</a>.
- * 
+ *
  * @author Benjamin Bentmann
  */
 public class MavenITmng4883FailUponOverconstrainedVersionRangesTest
@@ -40,6 +39,8 @@ public class MavenITmng4883FailUponOverconstrainedVersionRangesTest
 
     /**
      * Verify that dependency resolution fails if version ranges with an empty intersection are encountered.
+     *
+     * @throws Exception in case of failure
      */
     public void testit()
         throws Exception

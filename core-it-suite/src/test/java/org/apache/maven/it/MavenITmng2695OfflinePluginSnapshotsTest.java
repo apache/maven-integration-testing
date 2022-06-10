@@ -19,7 +19,6 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
@@ -43,6 +42,8 @@ public class MavenITmng2695OfflinePluginSnapshotsTest
 
     /**
      * Verify that snapshot plugins which are scheduled for an update don't fail the build when in offline mode.
+     *
+     * @throws Exception in case of failure
      */
     public void testitMNG2695()
         throws Exception
@@ -60,8 +61,8 @@ public class MavenITmng2695OfflinePluginSnapshotsTest
             verifier.addCliOption( "--settings" );
             verifier.addCliOption( "settings.xml" );
             verifier.executeGoal( "validate" );
-            verifier.assertFilePresent( "target/a.txt" );
-            verifier.assertFilePresent( "target/b.txt" );
+            verifier.verifyFilePresent( "target/a.txt" );
+            verifier.verifyFilePresent( "target/b.txt" );
             verifier.verifyErrorFreeLog();
             verifier.resetStreams();
         }
@@ -76,8 +77,8 @@ public class MavenITmng2695OfflinePluginSnapshotsTest
             verifier.addCliOption( "settings.xml" );
             verifier.addCliOption( "--offline" );
             verifier.executeGoal( "validate" );
-            verifier.assertFilePresent( "target/a.txt" );
-            verifier.assertFilePresent( "target/b.txt" );
+            verifier.verifyFilePresent( "target/a.txt" );
+            verifier.verifyFilePresent( "target/b.txt" );
             verifier.verifyErrorFreeLog();
             verifier.resetStreams();
         }

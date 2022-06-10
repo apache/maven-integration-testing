@@ -25,7 +25,7 @@ import java.io.File;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-4052">MNG-4052</a>.
- * 
+ *
  * @author Benjamin Bentmann
  */
 public class MavenITmng4052ReactorAwareImportScopeTest
@@ -42,6 +42,8 @@ public class MavenITmng4052ReactorAwareImportScopeTest
      * like a POM that imports another POM. To clarify, this is not about the kind of dependency where one
      * project needs another project's output for compilation/testing but about the case where one project's
      * effective model requires another project's model for its construction.
+     *
+     * @throws Exception in case of failure
      */
     public void testit()
         throws Exception

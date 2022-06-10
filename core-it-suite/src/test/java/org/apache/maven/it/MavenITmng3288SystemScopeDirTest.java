@@ -25,7 +25,7 @@ import org.apache.maven.it.util.ResourceExtractor;
 
 /**
  * This is a test for <a href="https://issues.apache.org/jira/browse/MNG-3288">MNG-3288</a>.
- * 
+ *
  * @author Benjamin Bentmann
  */
 public class MavenITmng3288SystemScopeDirTest
@@ -38,6 +38,8 @@ public class MavenITmng3288SystemScopeDirTest
 
     /**
      * Test the use of a system scoped dependency to a directory instead of a JAR which should fail early.
+     *
+     * @throws Exception in case of failure
      */
     public void testitMNG3288()
         throws Exception

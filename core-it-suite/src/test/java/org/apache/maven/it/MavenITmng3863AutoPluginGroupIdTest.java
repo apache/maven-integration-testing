@@ -19,17 +19,15 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
-import org.apache.maven.it.VerificationException;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-3863">MNG-3863</a>.
- * 
+ *
  * @author Benjamin Bentmann
- * @version $Id$
+ *
  */
 public class MavenITmng3863AutoPluginGroupIdTest
     extends AbstractMavenIntegrationTestCase
@@ -42,6 +40,8 @@ public class MavenITmng3863AutoPluginGroupIdTest
 
     /**
      * Verify that the group id "org.apache.maven.plugins" is *not* automatically assumed for dependencies.
+     *
+     * @throws Exception in case of failure
      */
     public void testitMNG3853()
         throws Exception

@@ -19,16 +19,15 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-607">MNG-607</a>.
- * 
+ *
  * @author John Casey
- * @version $Id$
+ *
  */
 public class MavenIT0039ReleasePomInReactorTest
     extends AbstractMavenIntegrationTestCase
@@ -42,6 +41,8 @@ public class MavenIT0039ReleasePomInReactorTest
      * Test reactor for projects that have release-pom.xml in addition to
      * pom.xml. The release-pom.xml file should be chosen above pom.xml for
      * these projects in the build.
+     *
+     * @throws Exception in case of failure
      */
     public void testit0039()
         throws Exception
@@ -57,10 +58,10 @@ public class MavenIT0039ReleasePomInReactorTest
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
 
-        verifier.assertFilePresent( "project/target/passed.log" );
-        verifier.assertFileNotPresent( "project/target/failed.log" );
-        verifier.assertFilePresent( "project2/target/passed.log" );
-        verifier.assertFileNotPresent( "project2/target/failed.log" );
+        verifier.verifyFilePresent( "project/target/passed.log" );
+        verifier.verifyFileNotPresent( "project/target/failed.log" );
+        verifier.verifyFilePresent( "project2/target/passed.log" );
+        verifier.verifyFileNotPresent( "project2/target/failed.log" );
     }
 
 }

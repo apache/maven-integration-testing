@@ -19,16 +19,15 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-496">MNG-496</a>.
- * 
+ *
  * @author John Casey
- * @version $Id$
+ *
  */
 public class MavenITmng0496IgnoreUnknownPluginParametersTest
     extends AbstractMavenIntegrationTestCase
@@ -41,6 +40,8 @@ public class MavenITmng0496IgnoreUnknownPluginParametersTest
     /**
      * Test that unused configuration parameters from the POM don't cause the
      * mojo to fail...they will show up as warnings in the -X output instead.
+     *
+     * @throws Exception in case of failure
      */
     public void testitMNG496()
         throws Exception
@@ -51,7 +52,7 @@ public class MavenITmng0496IgnoreUnknownPluginParametersTest
         verifier.setAutoclean( false );
         verifier.deleteDirectory( "target" );
         verifier.executeGoal( "org.apache.maven.its.plugins:maven-it-plugin-log-file:2.1-SNAPSHOT:reset" );
-        verifier.assertFilePresent( "target/file.txt" );
+        verifier.verifyFilePresent( "target/file.txt" );
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
     }

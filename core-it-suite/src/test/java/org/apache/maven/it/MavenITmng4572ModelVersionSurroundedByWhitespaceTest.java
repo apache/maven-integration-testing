@@ -19,14 +19,13 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-4572">MNG-4572</a>.
- * 
+ *
  * @author Benjamin Bentmann
  */
 public class MavenITmng4572ModelVersionSurroundedByWhitespaceTest
@@ -40,6 +39,8 @@ public class MavenITmng4572ModelVersionSurroundedByWhitespaceTest
 
     /**
      * Test that the model parser doesn't choke when the modelVersion is surrounded by whitespace.
+     *
+     * @throws Exception in case of failure
      */
     public void testit()
         throws Exception

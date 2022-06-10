@@ -19,7 +19,6 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
@@ -27,9 +26,9 @@ import java.util.Properties;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-2174">MNG-2174</a>.
- * 
+ *
  * @author Benjamin Bentmann
- * @version $Id$
+ *
  */
 public class MavenITmng2174PluginDepsManagedByParentProfileTest
     extends AbstractMavenIntegrationTestCase
@@ -43,6 +42,8 @@ public class MavenITmng2174PluginDepsManagedByParentProfileTest
     /**
      * Verify that plugin dependencies defined by plugin management of a parent profile are not lost when the
      * parent's main plugin management section is also present.
+     *
+     * @throws Exception in case of failure
      */
     public void testitMNG2174()
         throws Exception

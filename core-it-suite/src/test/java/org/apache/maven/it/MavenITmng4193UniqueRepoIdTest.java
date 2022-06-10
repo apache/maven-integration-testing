@@ -19,14 +19,13 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-4193">MNG-4193</a>.
- * 
+ *
  * @author Benjamin Bentmann
  */
 public class MavenITmng4193UniqueRepoIdTest
@@ -40,6 +39,8 @@ public class MavenITmng4193UniqueRepoIdTest
 
     /**
      * Test that duplicate repository id cause a validation error during building.
+     *
+     * @throws Exception in case of failure
      */
     public void testit()
         throws Exception

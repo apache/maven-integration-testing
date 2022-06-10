@@ -19,7 +19,6 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
@@ -27,9 +26,9 @@ import java.util.List;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-507">MNG-507</a>.
- * 
+ *
  * @author Brett Porter
- * @version $Id$
+ *
  */
 public class MavenITmng0507ArtifactRelocationTest
     extends AbstractMavenIntegrationTestCase
@@ -41,6 +40,8 @@ public class MavenITmng0507ArtifactRelocationTest
 
     /**
      * Test artifact relocation.
+     *
+     * @throws Exception in case of failure
      */
     public void testitMNG507()
         throws Exception
@@ -58,10 +59,10 @@ public class MavenITmng0507ArtifactRelocationTest
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
 
-        verifier.assertArtifactPresent( "org.apache.maven", "maven-core-it-support", "1.1", "jar" );
-        verifier.assertArtifactPresent( "org.apache.maven", "maven-core-it-support", "1.1", "pom" );
-        verifier.assertArtifactPresent( "org.apache.maven", "maven-core-it-support-old-location", "1.1", "pom" );
-        verifier.assertArtifactNotPresent( "org.apache.maven", "maven-core-it-support-old-location", "1.1", "jar" );
+        verifier.verifyArtifactPresent( "org.apache.maven", "maven-core-it-support", "1.1", "jar" );
+        verifier.verifyArtifactPresent( "org.apache.maven", "maven-core-it-support", "1.1", "pom" );
+        verifier.verifyArtifactPresent( "org.apache.maven", "maven-core-it-support-old-location", "1.1", "pom" );
+        verifier.verifyArtifactNotPresent( "org.apache.maven", "maven-core-it-support-old-location", "1.1", "jar" );
 
         List<String> artifacts = verifier.loadLines( "target/artifacts.txt", "UTF-8" );
         assertTrue( artifacts.toString(), artifacts.contains( "org.apache.maven:maven-core-it-support:jar:1.1" ) );

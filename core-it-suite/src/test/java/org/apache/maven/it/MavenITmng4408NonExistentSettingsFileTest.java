@@ -19,14 +19,13 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-4408">MNG-4408</a>.
- * 
+ *
  * @author Benjamin Bentmann
  */
 public class MavenITmng4408NonExistentSettingsFileTest
@@ -40,6 +39,8 @@ public class MavenITmng4408NonExistentSettingsFileTest
 
     /**
      * Verify that the build fails when the user specifies a non-existing user settings file on the CLI.
+     *
+     * @throws Exception in case of failure
      */
     public void testitUserSettings()
         throws Exception
@@ -69,6 +70,8 @@ public class MavenITmng4408NonExistentSettingsFileTest
 
     /**
      * Verify that the build fails when the user specifies a non-existing global settings file on the CLI.
+     *
+     * @throws Exception in case of failure
      */
     public void testitGlobalSettings()
         throws Exception

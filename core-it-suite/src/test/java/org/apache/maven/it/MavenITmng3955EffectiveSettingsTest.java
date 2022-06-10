@@ -22,14 +22,13 @@ package org.apache.maven.it;
 import java.io.File;
 import java.util.Properties;
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-3955">MNG-3955</a>.
- * 
+ *
  * @author Benjamin Bentmann
- * @version $Id$
+ *
  */
 public class MavenITmng3955EffectiveSettingsTest
     extends AbstractMavenIntegrationTestCase
@@ -43,6 +42,8 @@ public class MavenITmng3955EffectiveSettingsTest
     /**
      * Test that plugin parameter expressions referring to the settings reflect the actual core state, especially
      * if settings have been overridden by CLI parameters.
+     *
+     * @throws Exception in case of failure
      */
     public void testitMNG3955()
         throws Exception
@@ -62,7 +63,7 @@ public class MavenITmng3955EffectiveSettingsTest
         Properties props = verifier.loadProperties( "target/settings.properties" );
         assertEquals( "true", props.getProperty( "settings.offline" ) );
         assertEquals( "false", props.getProperty( "settings.interactiveMode" ) );
-        assertEquals( new File( verifier.getLocalRepository() ).getAbsoluteFile(), 
+        assertEquals( new File( verifier.getLocalRepository() ).getAbsoluteFile(),
             new File( props.getProperty( "settings.localRepository" ) ).getAbsoluteFile() );
     }
 

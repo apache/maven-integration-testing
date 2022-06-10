@@ -21,14 +21,13 @@ package org.apache.maven.it;
 
 import java.io.File;
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-1349">MNG-1349</a>.
- * 
+ *
  * @author Benjamin Bentmann
- * @version $Id$
+ *
  */
 public class MavenITmng1349ChecksumFormatsTest
     extends AbstractMavenIntegrationTestCase
@@ -41,6 +40,8 @@ public class MavenITmng1349ChecksumFormatsTest
 
     /**
      * Tests that different checksum formats are supported.
+     *
+     * @throws Exception in case of failure
      */
     public void testitMNG1349()
         throws Exception
@@ -57,23 +58,23 @@ public class MavenITmng1349ChecksumFormatsTest
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
 
-        verifier.assertArtifactPresent( "org.apache.maven.its.mng1349", "md5-a", "0.1", "jar" );
-        verifier.assertArtifactPresent( "org.apache.maven.its.mng1349", "md5-a", "0.1", "pom" );
+        verifier.verifyArtifactPresent( "org.apache.maven.its.mng1349", "md5-a", "0.1", "jar" );
+        verifier.verifyArtifactPresent( "org.apache.maven.its.mng1349", "md5-a", "0.1", "pom" );
 
-        verifier.assertArtifactPresent( "org.apache.maven.its.mng1349", "md5-b", "0.1", "jar" );
-        verifier.assertArtifactPresent( "org.apache.maven.its.mng1349", "md5-b", "0.1", "pom" );
+        verifier.verifyArtifactPresent( "org.apache.maven.its.mng1349", "md5-b", "0.1", "jar" );
+        verifier.verifyArtifactPresent( "org.apache.maven.its.mng1349", "md5-b", "0.1", "pom" );
 
-        verifier.assertArtifactPresent( "org.apache.maven.its.mng1349", "md5-c", "0.1", "jar" );
-        verifier.assertArtifactPresent( "org.apache.maven.its.mng1349", "md5-c", "0.1", "pom" );
+        verifier.verifyArtifactPresent( "org.apache.maven.its.mng1349", "md5-c", "0.1", "jar" );
+        verifier.verifyArtifactPresent( "org.apache.maven.its.mng1349", "md5-c", "0.1", "pom" );
 
-        verifier.assertArtifactPresent( "org.apache.maven.its.mng1349", "sha1-a", "0.1", "jar" );
-        verifier.assertArtifactPresent( "org.apache.maven.its.mng1349", "sha1-a", "0.1", "pom" );
+        verifier.verifyArtifactPresent( "org.apache.maven.its.mng1349", "sha1-a", "0.1", "jar" );
+        verifier.verifyArtifactPresent( "org.apache.maven.its.mng1349", "sha1-a", "0.1", "pom" );
 
-        verifier.assertArtifactPresent( "org.apache.maven.its.mng1349", "sha1-b", "0.1", "jar" );
-        verifier.assertArtifactPresent( "org.apache.maven.its.mng1349", "sha1-b", "0.1", "pom" );
+        verifier.verifyArtifactPresent( "org.apache.maven.its.mng1349", "sha1-b", "0.1", "jar" );
+        verifier.verifyArtifactPresent( "org.apache.maven.its.mng1349", "sha1-b", "0.1", "pom" );
 
-        verifier.assertArtifactPresent( "org.apache.maven.its.mng1349", "sha1-c", "0.1", "jar" );
-        verifier.assertArtifactPresent( "org.apache.maven.its.mng1349", "sha1-c", "0.1", "pom" );
+        verifier.verifyArtifactPresent( "org.apache.maven.its.mng1349", "sha1-c", "0.1", "jar" );
+        verifier.verifyArtifactPresent( "org.apache.maven.its.mng1349", "sha1-c", "0.1", "pom" );
     }
 
 }

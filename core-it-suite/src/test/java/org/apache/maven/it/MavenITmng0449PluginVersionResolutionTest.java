@@ -19,16 +19,15 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-449">MNG-449</a>.
- * 
+ *
  * @author Benjamin Bentmann
- * @version $Id$
+ *
  */
 public class MavenITmng0449PluginVersionResolutionTest
     extends AbstractMavenIntegrationTestCase
@@ -42,6 +41,8 @@ public class MavenITmng0449PluginVersionResolutionTest
     /**
      * Verify that versions for plugins are automatically resolved if not given in the POM by checking first LATEST and
      * then RELEASE in the repo metadata when the plugin is invoked from the lifecycle.
+     *
+     * @throws Exception in case of failure
      */
     public void testitLifecycleInvocation()
         throws Exception
@@ -70,20 +71,22 @@ public class MavenITmng0449PluginVersionResolutionTest
         // Maven 3.x prefers RELEASE over LATEST (see MNG-4206)
         if ( matchesVersionRange( "(,3.0-alpha-3)" ) )
         {
-            verifier.assertFileNotPresent( "target/touch-release.txt" );
-            verifier.assertFilePresent( "target/touch-snapshot.txt" );
+            verifier.verifyFileNotPresent( "target/touch-release.txt" );
+            verifier.verifyFilePresent( "target/touch-snapshot.txt" );
         }
         else
         {
-            verifier.assertFilePresent( "target/touch-release.txt" );
-            verifier.assertFileNotPresent( "target/touch-snapshot.txt" );
+            verifier.verifyFilePresent( "target/touch-release.txt" );
+            verifier.verifyFileNotPresent( "target/touch-snapshot.txt" );
         }
-        verifier.assertFilePresent( "target/package.txt" );
+        verifier.verifyFilePresent( "target/package.txt" );
     }
 
     /**
      * Verify that versions for plugins are automatically resolved if not given in the POM by checking LATEST and
      * RELEASE in the repo metadata when the plugin is invoked directly from the command line.
+     *
+     * @throws Exception in case of failure
      */
     public void testitCliInvocation()
         throws Exception
@@ -112,13 +115,13 @@ public class MavenITmng0449PluginVersionResolutionTest
         // Maven 3.x prefers RELEASE over LATEST (see MNG-4206)
         if ( matchesVersionRange( "(,3.0-alpha-3)" ) )
         {
-            verifier.assertFileNotPresent( "target/touch-release.txt" );
-            verifier.assertFilePresent( "target/touch-snapshot.txt" );
+            verifier.verifyFileNotPresent( "target/touch-release.txt" );
+            verifier.verifyFilePresent( "target/touch-snapshot.txt" );
         }
         else
         {
-            verifier.assertFilePresent( "target/touch-release.txt" );
-            verifier.assertFileNotPresent( "target/touch-snapshot.txt" );
+            verifier.verifyFilePresent( "target/touch-release.txt" );
+            verifier.verifyFileNotPresent( "target/touch-snapshot.txt" );
         }
     }
 

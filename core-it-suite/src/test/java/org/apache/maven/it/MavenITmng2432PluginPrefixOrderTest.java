@@ -21,14 +21,13 @@ package org.apache.maven.it;
 
 import java.io.File;
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-2432">MNG-2432</a>
- * 
+ *
  * @author Benjamin Bentmann
- * @version $Id$
+ *
  */
 public class MavenITmng2432PluginPrefixOrderTest
     extends AbstractMavenIntegrationTestCase
@@ -42,6 +41,8 @@ public class MavenITmng2432PluginPrefixOrderTest
     /**
      * Verify that when resolving plugin prefixes the plugins from the POM are searched before the plugin groups
      * from the settings.
+     *
+     * @throws Exception in case of failure
      */
     public void testitMNG2432()
         throws Exception
@@ -60,8 +61,8 @@ public class MavenITmng2432PluginPrefixOrderTest
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
 
-        verifier.assertFileNotPresent( "target/touch-settings.txt" );
-        verifier.assertFilePresent( "target/touch-pom.txt" );
+        verifier.verifyFileNotPresent( "target/touch-settings.txt" );
+        verifier.verifyFilePresent( "target/touch-pom.txt" );
     }
 
 }

@@ -19,7 +19,6 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
@@ -27,7 +26,7 @@ import java.util.Properties;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-4367">MNG-4367</a>.
- * 
+ *
  * @author Benjamin Bentmann
  */
 public class MavenITmng4367LayoutAwareMirrorSelectionTest
@@ -40,8 +39,10 @@ public class MavenITmng4367LayoutAwareMirrorSelectionTest
     }
 
     /**
-     * Test that mirror selection considers the repo layout if specified for the mirror. If <mirrorOfLayouts> is
+     * Test that mirror selection considers the repo layout if specified for the mirror. If {@code <mirrorOfLayouts>} is
      * unspecified, should match any layout.
+     *
+     * @throws Exception in case of failure
      */
     public void testitNoLayout()
         throws Exception
@@ -65,11 +66,13 @@ public class MavenITmng4367LayoutAwareMirrorSelectionTest
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
 
-        verifier.assertArtifactPresent( "org.apache.maven.its.mng4367", "dep", "0.1", "jar" );
+        verifier.verifyArtifactPresent( "org.apache.maven.its.mng4367", "dep", "0.1", "jar" );
     }
 
     /**
      * Test that mirror selection considers the repo layout if specified for the mirror.
+     *
+     * @throws Exception in case of failure
      */
     public void testitSpecificLayouts()
         throws Exception
@@ -93,11 +96,13 @@ public class MavenITmng4367LayoutAwareMirrorSelectionTest
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
 
-        verifier.assertArtifactPresent( "org.apache.maven.its.mng4367", "dep", "0.1", "jar" );
+        verifier.verifyArtifactPresent( "org.apache.maven.its.mng4367", "dep", "0.1", "jar" );
     }
 
     /**
      * Test that mirror selection considers the repo layout if specified for the mirror.
+     *
+     * @throws Exception in case of failure
      */
     public void testitNonMatchingLayout()
         throws Exception
@@ -121,7 +126,7 @@ public class MavenITmng4367LayoutAwareMirrorSelectionTest
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
 
-        verifier.assertArtifactPresent( "org.apache.maven.its.mng4367", "dep", "0.1", "jar" );
+        verifier.verifyArtifactPresent( "org.apache.maven.its.mng4367", "dep", "0.1", "jar" );
     }
 
 }

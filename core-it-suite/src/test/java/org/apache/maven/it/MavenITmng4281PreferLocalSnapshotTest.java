@@ -19,7 +19,6 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
@@ -27,7 +26,7 @@ import java.util.Properties;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-4281">MNG-4281</a>.
- * 
+ *
  * @author Benjamin Bentmann
  */
 public class MavenITmng4281PreferLocalSnapshotTest
@@ -41,6 +40,8 @@ public class MavenITmng4281PreferLocalSnapshotTest
 
     /**
      * Test that remote snapshots are not preferred over snapshots that have just been locally built.
+     *
+     * @throws Exception in case of failure
      */
     public void testit()
         throws Exception
@@ -56,8 +57,8 @@ public class MavenITmng4281PreferLocalSnapshotTest
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
 
-        verifier.assertArtifactPresent( "org.apache.maven.its.mng4281", "dependency", "0.1-SNAPSHOT", "jar" );
-        verifier.assertArtifactPresent( "org.apache.maven.its.mng4281", "dependency", "0.1-SNAPSHOT", "pom" );
+        verifier.verifyArtifactPresent( "org.apache.maven.its.mng4281", "dependency", "0.1-SNAPSHOT", "jar" );
+        verifier.verifyArtifactPresent( "org.apache.maven.its.mng4281", "dependency", "0.1-SNAPSHOT", "pom" );
 
         verifier = newVerifier( new File( testDir, "project" ).getAbsolutePath() );
         verifier.setAutoclean( false );

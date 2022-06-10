@@ -19,7 +19,6 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
@@ -27,9 +26,9 @@ import java.util.Properties;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-3906">MNG-3906</a>.
- * 
+ *
  * @author Benjamin Bentmann
- * @version $Id$
+ *
  */
 public class MavenITmng3906MergedPluginClassPathOrderingTest
     extends AbstractMavenIntegrationTestCase
@@ -42,6 +41,8 @@ public class MavenITmng3906MergedPluginClassPathOrderingTest
 
     /**
      * Test that project-level plugin dependencies are properly merged during inheritance.
+     *
+     * @throws Exception in case of failure
      */
     public void testitMNG3906()
         throws Exception
@@ -66,7 +67,7 @@ public class MavenITmng3906MergedPluginClassPathOrderingTest
 
         assertEquals( "5", pclProps.getProperty( resName + ".count" ) );
 
-        assertTrue( pclProps.getProperty( resName + ".0" ), 
+        assertTrue( pclProps.getProperty( resName + ".0" ),
             pclProps.getProperty( resName + ".0" ).endsWith( "/c-0.1.jar!/" + resName ) );
         assertTrue( pclProps.getProperty( resName + ".1" ),
             pclProps.getProperty( resName + ".1" ).endsWith( "/a-0.2.jar!/" + resName ) );

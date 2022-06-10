@@ -19,16 +19,15 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-598">MNG-598</a>.
- * 
+ *
  * @author Brett Porter
- * @version $Id$
+ *
  */
 public class MavenIT0041ArtifactTypeFromPluginExtensionTest
     extends AbstractMavenIntegrationTestCase
@@ -40,6 +39,8 @@ public class MavenIT0041ArtifactTypeFromPluginExtensionTest
 
     /**
      * Test the use of a new type from a plugin
+     *
+     * @throws Exception in case of failure
      */
     public void testit0041()
         throws Exception
@@ -55,8 +56,8 @@ public class MavenIT0041ArtifactTypeFromPluginExtensionTest
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
 
-        verifier.assertArtifactPresent( "org.apache.maven", "maven-core-it-support", "1.2", "coreit-artifact" );
-        verifier.assertArtifactPresent( "org.apache.maven", "maven-core-it-support", "1.2", "pom" );
+        verifier.verifyArtifactPresent( "org.apache.maven", "maven-core-it-support", "1.2", "coreit-artifact" );
+        verifier.verifyArtifactPresent( "org.apache.maven", "maven-core-it-support", "1.2", "pom" );
     }
 
 }

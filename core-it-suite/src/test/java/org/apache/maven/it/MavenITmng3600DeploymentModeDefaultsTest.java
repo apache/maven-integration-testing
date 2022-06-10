@@ -19,7 +19,6 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
@@ -27,8 +26,8 @@ import java.util.Properties;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-3600">MNG-3600</a>.
- * 
- * @version $Id$
+ *
+ *
  */
 public class MavenITmng3600DeploymentModeDefaultsTest
     extends AbstractMavenIntegrationTestCase
@@ -52,7 +51,7 @@ public class MavenITmng3600DeploymentModeDefaultsTest
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
 
-        verifier.assertFilePresent( "wagon.properties" );
+        verifier.verifyFilePresent( "wagon.properties" );
         Properties props = verifier.loadProperties( "wagon.properties" );
         assertNull( props.get( "directory.mode" ) );
         assertNull( props.get( "file.mode" ) );
@@ -73,7 +72,7 @@ public class MavenITmng3600DeploymentModeDefaultsTest
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
 
-        verifier.assertFilePresent( "wagon.properties" );
+        verifier.verifyFilePresent( "wagon.properties" );
         Properties props = verifier.loadProperties( "wagon.properties" );
         assertNull( props.get( "directory.mode" ) );
         assertNull( props.get( "file.mode" ) );
@@ -94,7 +93,7 @@ public class MavenITmng3600DeploymentModeDefaultsTest
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
 
-        verifier.assertFilePresent( "wagon.properties" );
+        verifier.verifyFilePresent( "wagon.properties" );
         Properties props = verifier.loadProperties( "wagon.properties" );
         assertEquals( "700", props.get( "directory.mode" ) );
         assertEquals( "600", props.get( "file.mode" ) );

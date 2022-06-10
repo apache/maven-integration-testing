@@ -28,7 +28,7 @@ import java.util.Properties;
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-3944">MNG-3944</a>.
  *
  * @author Benjamin Bentmann
- * @version $Id$
+ *
  */
 public class MavenITmng3944BasedirInterpolationTest
     extends AbstractMavenIntegrationTestCase
@@ -41,6 +41,8 @@ public class MavenITmng3944BasedirInterpolationTest
 
     /**
      * Test that interpolation of ${basedir} works for a POM that is not named "pom.xml"
+     *
+     * @throws Exception in case of failure
      */
     public void testitMNG3944()
         throws Exception
@@ -56,7 +58,7 @@ public class MavenITmng3944BasedirInterpolationTest
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
 
-        verifier.assertFilePresent( "target/basedir.properties" );
+        verifier.verifyFilePresent( "target/basedir.properties" );
         Properties props = verifier.loadProperties( "target/basedir.properties" );
         assertCanonicalFileEquals( testDir, new File( props.getProperty( "project.properties.prop0" ) ) );
         assertCanonicalFileEquals( testDir, new File( props.getProperty( "project.properties.prop1" ) ) );

@@ -22,58 +22,63 @@ package org.apache.maven.it;
 import org.apache.maven.it.util.ResourceExtractor;
 import org.apache.maven.it.utils.DeployedResource;
 import org.codehaus.plexus.util.StringUtils;
-import org.mortbay.jetty.Handler;
-import org.mortbay.jetty.Request;
-import org.mortbay.jetty.Server;
-import org.mortbay.jetty.handler.AbstractHandler;
-import org.mortbay.jetty.handler.HandlerList;
-import org.mortbay.jetty.security.B64Code;
-import org.mortbay.jetty.security.Constraint;
-import org.mortbay.jetty.security.ConstraintMapping;
-import org.mortbay.jetty.security.HashUserRealm;
-import org.mortbay.jetty.security.SecurityHandler;
+import org.eclipse.jetty.security.ConstraintMapping;
+import org.eclipse.jetty.security.ConstraintSecurityHandler;
+import org.eclipse.jetty.security.HashLoginService;
+import org.eclipse.jetty.server.Handler;
+import org.eclipse.jetty.server.NetworkConnector;
+import org.eclipse.jetty.server.Request;
+import org.eclipse.jetty.server.Server;
+import org.eclipse.jetty.server.handler.AbstractHandler;
+import org.eclipse.jetty.server.handler.HandlerList;
+import org.eclipse.jetty.servlet.ServletContextHandler;
+import org.eclipse.jetty.util.B64Code;
+import org.eclipse.jetty.util.security.Constraint;
+import org.eclipse.jetty.util.security.Password;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
+import java.nio.charset.StandardCharsets;
 import java.util.Collections;
-import java.util.List;
+import java.util.Deque;
+import java.util.concurrent.ConcurrentLinkedDeque;
+
+import static org.eclipse.jetty.servlet.ServletContextHandler.SECURITY;
+import static org.eclipse.jetty.servlet.ServletContextHandler.SESSIONS;
+import static org.eclipse.jetty.util.security.Constraint.__BASIC_AUTH;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-4470">MNG-4470</a>.
  *
  * @author Benjamin Bentmann
- * @version $Id$
+ *
  */
 public class MavenITmng4470AuthenticatedDeploymentToProxyTest
     extends AbstractMavenIntegrationTestCase
 {
-
     private Server server;
 
     private int port;
 
     private volatile boolean deployed;
 
-    List<DeployedResource> deployedResources = new ArrayList<>();
+    private final Deque<DeployedResource> deployedResources = new ConcurrentLinkedDeque<>();
 
     public MavenITmng4470AuthenticatedDeploymentToProxyTest()
     {
         super( "[2.0.3,3.0-alpha-1),[3.0-alpha-6,)" );
     }
 
-    public void setUp()
+    @Override
+    protected void setUp()
         throws Exception
     {
-        super.setUp();
-
         Handler proxyHandler = new AbstractHandler()
         {
-            public void handle( String target, HttpServletRequest request, HttpServletResponse response, int dispatch )
-                throws IOException, ServletException
+            @Override
+            public void handle( String target, Request baseRequest, HttpServletRequest request,
+                                HttpServletResponse response )
             {
                 System.out.println( "Handling " + request.getMethod() + " " + request.getRequestURL() );
 
@@ -81,7 +86,7 @@ public class MavenITmng4470AuthenticatedDeploymentToProxyTest
                 if ( auth != null )
                 {
                     auth = auth.substring( auth.indexOf( ' ' ) + 1 ).trim();
-                    auth = B64Code.decode( auth );
+                    auth = B64Code.decode( auth, StandardCharsets.US_ASCII.name() );
                 }
                 System.out.println( "Proxy-Authorization: " + auth );
 
@@ -105,9 +110,9 @@ public class MavenITmng4470AuthenticatedDeploymentToProxyTest
 
         Handler repoHandler = new AbstractHandler()
         {
-
-            public void handle( String target, HttpServletRequest request, HttpServletResponse response, int dispatch )
-                throws IOException, ServletException
+            @Override
+            public void handle( String target, Request baseRequest, HttpServletRequest request,
+                                HttpServletResponse response )
             {
                 System.out.println( "Handling " + request.getMethod() + " " + request.getRequestURL() );
 
@@ -143,42 +148,47 @@ public class MavenITmng4470AuthenticatedDeploymentToProxyTest
         constraintMapping.setConstraint( constraint );
         constraintMapping.setPathSpec( "/*" );
 
-        HashUserRealm userRealm = new HashUserRealm( "TestRealm" );
-        userRealm.put( "testuser", "testtest" );
-        userRealm.addUserToRole( "testuser", "deployer" );
+        HashLoginService userRealm = new HashLoginService( "TestRealm" );
+        userRealm.putUser( "testuser", new Password( "testtest" ), new String[] { "deployer" } );
 
-        SecurityHandler securityHandler = new SecurityHandler();
-        securityHandler.setUserRealm( userRealm );
-        securityHandler.setConstraintMappings( new ConstraintMapping[]{ constraintMapping } );
+        server = new Server( 0 );
+        ServletContextHandler ctx = new ServletContextHandler( server, "/", SESSIONS | SECURITY );
+        ConstraintSecurityHandler securityHandler = (ConstraintSecurityHandler) ctx.getSecurityHandler();
+        securityHandler.setLoginService( userRealm );
+        securityHandler.setAuthMethod( __BASIC_AUTH );
+        securityHandler.setConstraintMappings( new ConstraintMapping[] { constraintMapping } );
 
         HandlerList handlerList = new HandlerList();
         handlerList.addHandler( proxyHandler );
         handlerList.addHandler( securityHandler );
         handlerList.addHandler( repoHandler );
 
-        server = new Server( 0 );
         server.setHandler( handlerList );
         server.start();
-
-        port = server.getConnectors()[0].getLocalPort();
-
+        if ( server.isFailed() )
+        {
+            fail( "Couldn't bind the server socket to a free port!" );
+        }
+        port = ( (NetworkConnector) server.getConnectors()[0] ).getLocalPort();
+        System.out.println( "Bound server socket to the port " + port );
         deployed = false;
     }
 
+    @Override
     protected void tearDown()
         throws Exception
     {
         if ( server != null )
         {
             server.stop();
-            server = null;
+            server.join();
         }
-
-        super.tearDown();
     }
 
     /**
      * Test that deployment (of a release) to a proxy that requires authentication works.
+     *
+     * @throws Exception in case of failure
      */
     public void testitRelease()
         throws Exception
@@ -188,6 +198,8 @@ public class MavenITmng4470AuthenticatedDeploymentToProxyTest
 
     /**
      * Test that deployment (of a snapshot) to a proxy that requires authentication works.
+     *
+     * @throws Exception in case of failure
      */
     public void testitSnapshot()
         throws Exception
@@ -198,9 +210,6 @@ public class MavenITmng4470AuthenticatedDeploymentToProxyTest
     private void testit( String project )
         throws Exception
     {
-
-        deployedResources = new ArrayList<>();
-
         File testDir = ResourceExtractor.simpleExtractResources( getClass(), "/mng-4470/" + project );
 
         Verifier verifier = newVerifier( testDir.getAbsolutePath() );
@@ -224,5 +233,4 @@ public class MavenITmng4470AuthenticatedDeploymentToProxyTest
 
         assertTrue( deployed );
     }
-
 }

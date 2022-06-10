@@ -19,7 +19,6 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
@@ -29,9 +28,9 @@ import java.util.List;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-3916">MNG-3916</a>.
- * 
+ *
  * @author Benjamin Bentmann
- * @version $Id$
+ *
  */
 public class MavenITmng3916PluginExecutionInheritanceTest
     extends AbstractMavenIntegrationTestCase
@@ -45,6 +44,8 @@ public class MavenITmng3916PluginExecutionInheritanceTest
     /**
      * Test that plugin executions are properly merged during inheritance, even if the child plugin section has no
      * version.
+     *
+     * @throws Exception in case of failure
      */
     public void testitMNG3916()
         throws Exception

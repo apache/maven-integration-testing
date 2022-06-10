@@ -19,15 +19,14 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
 
 /**
- * 
+ *
  * @author Benjamin Bentmann
- * @version $Id$
+ *
  */
 public class MavenIT0132PomLifecycleTest
     extends AbstractMavenIntegrationTestCase
@@ -40,6 +39,8 @@ public class MavenIT0132PomLifecycleTest
 
     /**
      * Test default binding of goals for "pom" lifecycle.
+     *
+     * @throws Exception in case of failure
      */
     public void testit0132()
         throws Exception
@@ -52,10 +53,10 @@ public class MavenIT0132PomLifecycleTest
         verifier.executeGoal( "deploy" );
         if ( matchesVersionRange( "(2.0.1,3.0-alpha-1)" ) )
         {
-            verifier.assertFilePresent( "target/site-attach-descriptor.txt" );
+            verifier.verifyFilePresent( "target/site-attach-descriptor.txt" );
         }
-        verifier.assertFilePresent( "target/install-install.txt" );
-        verifier.assertFilePresent( "target/deploy-deploy.txt" );
+        verifier.verifyFilePresent( "target/install-install.txt" );
+        verifier.verifyFilePresent( "target/deploy-deploy.txt" );
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
     }

@@ -19,29 +19,34 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
+import org.eclipse.jetty.server.Connector;
+import org.eclipse.jetty.server.HttpConfiguration;
+import org.eclipse.jetty.server.HttpConnectionFactory;
+import org.eclipse.jetty.server.NetworkConnector;
+import org.eclipse.jetty.server.Request;
+import org.eclipse.jetty.server.SecureRequestCustomizer;
+import org.eclipse.jetty.server.Server;
+import org.eclipse.jetty.server.ServerConnector;
+import org.eclipse.jetty.server.SslConnectionFactory;
+import org.eclipse.jetty.server.handler.AbstractHandler;
+import org.eclipse.jetty.util.ssl.SslContextFactory;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 import java.util.Properties;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import org.mortbay.jetty.Connector;
-import org.mortbay.jetty.Request;
-import org.mortbay.jetty.Server;
-import org.mortbay.jetty.handler.AbstractHandler;
-import org.mortbay.jetty.security.SslSocketConnector;
+import static org.eclipse.jetty.http.HttpVersion.HTTP_1_1;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-4428">MNG-4428</a>.
- * 
+ *
  * @author Benjamin Bentmann
- * @version $Id$
+ *
  */
 public class MavenITmng4428FollowHttpRedirectTest
     extends AbstractMavenIntegrationTestCase
@@ -54,6 +59,8 @@ public class MavenITmng4428FollowHttpRedirectTest
 
     /**
      * Verify that redirects from HTTP to HTTP are getting followed.
+     *
+     * @throws Exception in case of failure
      */
     public void testitHttpToHttp()
         throws Exception
@@ -63,6 +70,8 @@ public class MavenITmng4428FollowHttpRedirectTest
 
     /**
      * Verify that redirects from HTTPS to HTTPS are getting followed.
+     *
+     * @throws Exception in case of failure
      */
     public void testitHttpsToHttps()
         throws Exception
@@ -72,6 +81,8 @@ public class MavenITmng4428FollowHttpRedirectTest
 
     /**
      * Verify that redirects from HTTP to HTTPS are getting followed.
+     *
+     * @throws Exception in case of failure
      */
     public void testitHttpToHttps()
         throws Exception
@@ -83,6 +94,8 @@ public class MavenITmng4428FollowHttpRedirectTest
 
     /**
      * Verify that redirects from HTTPS to HTTP are getting followed.
+     *
+     * @throws Exception in case of failure
      */
     public void testitHttpsToHttp()
         throws Exception
@@ -95,6 +108,8 @@ public class MavenITmng4428FollowHttpRedirectTest
     /**
      * Verify that redirects using a relative location URL are getting followed. While a relative URL violates the
      * HTTP spec, popular HTTP clients do support them so we better do, too.
+     *
+     * @throws Exception in case of failure
      */
     public void testitRelativeLocation()
         throws Exception
@@ -125,20 +140,25 @@ public class MavenITmng4428FollowHttpRedirectTest
         String keyPwd = "key-passwd";
 
         Server server = new Server( 0 );
-        server.addConnector( newHttpsConnector( storePath, storePwd, keyPwd ) );
+        addHttpsConnector( server, storePath, storePwd, keyPwd );
         Connector from = server.getConnectors()[ fromHttp ? 0 : 1 ];
         Connector to = server.getConnectors()[ toHttp ? 0 : 1 ];
-        server.setHandler( new RedirectHandler( toHttp ? "http" : "https", relativeLocation ? null : to ) );
-        server.start();
+        server.setHandler(
+                new RedirectHandler( toHttp ? "http" : "https", relativeLocation ? null : (NetworkConnector) to ) );
 
         try
         {
+            server.start();
+            if ( server.isFailed() )
+            {
+                fail( "Couldn't bind the server socket to a free port!" );
+            }
             verifier.setAutoclean( false );
             verifier.deleteArtifacts( "org.apache.maven.its.mng4428" );
             verifier.deleteDirectory( "target" );
             Properties filterProps = verifier.newDefaultFilterProperties();
             filterProps.setProperty( "@protocol@", fromHttp ? "http" : "https" );
-            filterProps.setProperty( "@port@", Integer.toString( from.getLocalPort() ) );
+            filterProps.setProperty( "@port@", Integer.toString( ( (NetworkConnector) from ).getLocalPort() ) );
             verifier.filterFile( "settings-template.xml", "settings.xml", "UTF-8", filterProps );
             verifier.addCliOption( "-X --settings" );
             verifier.addCliOption( "settings.xml" );
@@ -152,36 +172,42 @@ public class MavenITmng4428FollowHttpRedirectTest
         finally
         {
             server.stop();
+            server.join();
         }
 
         List<String> cp = verifier.loadLines( "target/classpath.txt", "UTF-8" );
         assertTrue( cp.toString(), cp.contains( "dep-0.1.jar" ) );
     }
 
-    private Connector newHttpsConnector( String keystore, String storepwd, String keypwd )
+    private void addHttpsConnector( Server server, String keyStorePath, String keyStorePassword, String keyPassword )
     {
-        SslSocketConnector connector = new SslSocketConnector();
-        connector.setPort( 0 );
-        connector.setKeystore( keystore );
-        connector.setPassword( storepwd );
-        connector.setKeyPassword( keypwd );
-        return connector;
+        SslContextFactory sslContextFactory = new SslContextFactory( keyStorePath );
+        sslContextFactory.setKeyStorePassword( keyStorePassword );
+        sslContextFactory.setKeyManagerPassword( keyPassword );
+        HttpConfiguration httpConfiguration = new HttpConfiguration();
+        httpConfiguration.setSecureScheme( "https" );
+        HttpConfiguration httpsConfiguration = new HttpConfiguration( httpConfiguration );
+        httpsConfiguration.addCustomizer( new SecureRequestCustomizer() );
+        ServerConnector httpsConnector = new ServerConnector( server,
+                new SslConnectionFactory( sslContextFactory, HTTP_1_1.asString() ),
+                new HttpConnectionFactory( httpsConfiguration ) );
+        server.addConnector( httpsConnector );
     }
 
     static class RedirectHandler extends AbstractHandler
     {
-
         private final String protocol;
 
-        private final Connector connector;
+        private final NetworkConnector connector;
 
-        public RedirectHandler( String protocol, Connector connector )
+        RedirectHandler( String protocol, NetworkConnector connector )
         {
             this.protocol = protocol;
             this.connector = connector;
         }
 
-        public void handle( String target, HttpServletRequest request, HttpServletResponse response, int dispatch )
+        public void handle( String target, Request baseRequest, HttpServletRequest request,
+                            HttpServletResponse response )
             throws IOException
         {
             System.out.println( "Handling " + request.getMethod() + " " + request.getRequestURL() );
@@ -228,7 +254,5 @@ public class MavenITmng4428FollowHttpRedirectTest
 
             ( (Request) request ).setHandled( true );
         }
-
     }
-
 }

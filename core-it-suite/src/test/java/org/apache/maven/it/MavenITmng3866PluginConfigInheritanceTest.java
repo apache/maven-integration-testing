@@ -19,7 +19,6 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
@@ -27,9 +26,9 @@ import java.util.Properties;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-3866">MNG-3866</a>.
- * 
+ *
  * @author Benjamin Bentmann
- * @version $Id$
+ *
  */
 public class MavenITmng3866PluginConfigInheritanceTest
     extends AbstractMavenIntegrationTestCase
@@ -43,6 +42,8 @@ public class MavenITmng3866PluginConfigInheritanceTest
     /**
      * Verify that inheritance merges plugin definitions based on groupId:artifactId, i.e. plugin version is
      * irrelevant for merging.
+     *
+     * @throws Exception in case of failure
      */
     public void testitMNG3866()
         throws Exception

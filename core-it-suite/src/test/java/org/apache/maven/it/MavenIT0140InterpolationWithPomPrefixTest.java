@@ -19,27 +19,30 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
 import java.util.Properties;
 
 /**
- * 
+ * <a href="https://issues.apache.org/jira/browse/MNG-7244">MNG-7244</a> removes the deprecation of
+ * <code>pom.X</code>.
+ * See {@link MavenITmng7244IgnorePomPrefixInExpressions}.
+ *
  * @author Benjamin Bentmann
- * @version $Id$
  */
 public class MavenIT0140InterpolationWithPomPrefixTest
     extends AbstractMavenIntegrationTestCase
 {
     public MavenIT0140InterpolationWithPomPrefixTest()
     {
-        super( ALL_MAVEN_VERSIONS );
+        super( "[2.0,4.0.0-alpha-1)" );
     }
 
     /**
      * Test that expressions of the form ${pom.*} resolve correctly to POM values.
+     *
+     * @throws Exception in case of failure
      */
     public void testit0140()
         throws Exception
@@ -53,7 +56,7 @@ public class MavenIT0140InterpolationWithPomPrefixTest
         verifier.executeGoal( "initialize" );
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
-        
+
         Properties props = verifier.loadProperties( "target/interpolated.properties" );
         String prefix = "project.properties.";
 

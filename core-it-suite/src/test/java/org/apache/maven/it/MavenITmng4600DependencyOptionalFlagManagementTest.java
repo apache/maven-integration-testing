@@ -19,7 +19,6 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
@@ -28,7 +27,7 @@ import java.util.Properties;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-4600">MNG-4600</a>.
- * 
+ *
  * @author Benjamin Bentmann
  */
 public class MavenITmng4600DependencyOptionalFlagManagementTest
@@ -43,6 +42,8 @@ public class MavenITmng4600DependencyOptionalFlagManagementTest
     /**
      * Verify that a dependency's optional flag is not subject to dependency management. This part of the test checks
      * the effective model.
+     *
+     * @throws Exception in case of failure
      */
     public void testitModel()
         throws Exception
@@ -64,6 +65,8 @@ public class MavenITmng4600DependencyOptionalFlagManagementTest
     /**
      * Verify that a transitive dependency's optional flag is not subject to dependency management of the root artifat.
      * This part of the test checks the artifact collector.
+     *
+     * @throws Exception in case of failure
      */
     public void testitResolution()
         throws Exception

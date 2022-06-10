@@ -21,23 +21,22 @@ package org.apache.maven.it;
 
 import org.apache.maven.it.util.ResourceExtractor;
 import org.apache.maven.shared.utils.io.FileUtils;
-import org.mortbay.jetty.Handler;
-import org.mortbay.jetty.Request;
-import org.mortbay.jetty.Server;
-import org.mortbay.jetty.handler.AbstractHandler;
+import org.eclipse.jetty.server.Handler;
+import org.eclipse.jetty.server.NetworkConnector;
+import org.eclipse.jetty.server.Request;
+import org.eclipse.jetty.server.Server;
+import org.eclipse.jetty.server.handler.AbstractHandler;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Deque;
 import java.util.Properties;
+import java.util.concurrent.ConcurrentLinkedDeque;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-3415">MNG-3415</a>.
- *
- * @version $Id$
  */
 public class MavenITmng3415JunkRepositoryMetadataTest
     extends AbstractMavenIntegrationTestCase
@@ -55,9 +54,9 @@ public class MavenITmng3415JunkRepositoryMetadataTest
     /**
      * This test simply verifies that when a metadata transfer fails (network error, etc.)
      * no metadata file is written to the local repository.
-     * <p/>
+     * <p>
      * Steps executed to verify this test:
-     * <p/>
+     * </p>
      * 0. Find the local repository directory:
      * a. build the maven-find-local-repo-plugin, then run it, to spit out the path of the
      * local repository in use by default. Read the output file to get this path.
@@ -74,6 +73,8 @@ public class MavenITmng3415JunkRepositoryMetadataTest
      * repository afterwards.
      * 3. Build the test project the second time
      * a. See (2.a) and (2.b) above; the same criteria applies here.
+     *
+     * @throws Exception in case of failure
      */
     public void testitTransferFailed()
         throws Exception
@@ -125,9 +126,9 @@ public class MavenITmng3415JunkRepositoryMetadataTest
     /**
      * This test simply verifies that when metadata doesn't exist on the remote
      * repository, a basic metadata file is written to the local repository.
-     * <p/>
+     * <p>
      * Steps executed to verify this test:
-     * <p/>
+     * </p>
      * 0. Find the local repository directory:
      * a. build the maven-find-local-repo-plugin, then run it, to spit out the path of the
      * local repository in use by default. Read the output file to get this path.
@@ -144,6 +145,8 @@ public class MavenITmng3415JunkRepositoryMetadataTest
      * a. Verify that the remote repository is NOT checked for the metadata file again
      * b. Verify that the file used for updateInterval calculations was NOT changed from
      * the first build.
+     *
+     * @throws Exception in case of failure
      */
     public void testShouldNotRepeatedlyUpdateOnResourceNotFoundException()
         throws Exception
@@ -158,11 +161,12 @@ public class MavenITmng3415JunkRepositoryMetadataTest
         verifier.setAutoclean( false );
         verifier.deleteArtifacts( "org.apache.maven.its.mng3415" );
 
-        final List<String> requestUris = new ArrayList<>();
+        final Deque<String> requestUris = new ConcurrentLinkedDeque<>();
 
         Handler repoHandler = new AbstractHandler()
         {
-            public void handle( String target, HttpServletRequest request, HttpServletResponse response, int dispatch )
+            @Override
+            public void handle( String target, Request baseRequest, HttpServletRequest request, HttpServletResponse response )
             {
                 System.out.println( "Handling " + request.getMethod() + " " + request.getRequestURL() );
 
@@ -176,11 +180,17 @@ public class MavenITmng3415JunkRepositoryMetadataTest
 
         Server server = new Server( 0 );
         server.setHandler( repoHandler );
-        server.start();
 
         try
         {
-            int port = server.getConnectors()[0].getLocalPort();
+            server.start();
+            if ( server.isFailed() )
+            {
+                fail( "Couldn't bind the server socket to a free port!" );
+            }
+
+            int port = ( (NetworkConnector) server.getConnectors()[0] ).getLocalPort();
+            System.out.println( "Bound server socket to the port " + port );
 
             Properties filterProps = verifier.newDefaultFilterProperties();
             filterProps.put( "@protocol@", "http" );
@@ -225,11 +235,11 @@ public class MavenITmng3415JunkRepositoryMetadataTest
         finally
         {
             server.stop();
+            server.join();
         }
     }
 
     private void assertMetadataMissing( Verifier verifier )
-        throws IOException
     {
         File metadata = getMetadataFile( verifier );
 
@@ -238,7 +248,7 @@ public class MavenITmng3415JunkRepositoryMetadataTest
     }
 
     private void setupDummyDependency( Verifier verifier, File testDir, boolean resetUpdateInterval )
-        throws VerificationException, IOException
+        throws IOException
     {
         String gid = "org.apache.maven.its.mng3415";
         String aid = "missing";
@@ -258,7 +268,6 @@ public class MavenITmng3415JunkRepositoryMetadataTest
     }
 
     private File getMetadataFile( Verifier verifier )
-        throws IOException
     {
         String gid = "org.apache.maven.its.mng3415";
         String aid = "missing";
@@ -291,5 +300,4 @@ public class MavenITmng3415JunkRepositoryMetadataTest
 
         return new File( verifier.getArtifactMetadataPath( gid, aid, version, name ) );
     }
-
 }

@@ -19,14 +19,13 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-2098">MNG-2098</a>.
- * 
+ *
  * @author Benjamin Bentmann
  */
 public class MavenITmng2098VersionRangeSatisfiedFromWrongRepoTest
@@ -43,6 +42,8 @@ public class MavenITmng2098VersionRangeSatisfiedFromWrongRepoTest
      * with the newest metadata does not provide the selected version. In particular, the repository with the
      * newest metadata must not be the only repository used during artifact resolution, all repositories must
      * be considered.
+     *
+     * @throws Exception in case of failure
      */
     public void testit()
         throws Exception
@@ -59,7 +60,7 @@ public class MavenITmng2098VersionRangeSatisfiedFromWrongRepoTest
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
 
-        verifier.assertArtifactPresent( "org.apache.maven.its.mng2098", "dep", "0.1", "jar" );
+        verifier.verifyArtifactPresent( "org.apache.maven.its.mng2098", "dep", "0.1", "jar" );
     }
 
 }

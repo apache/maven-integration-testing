@@ -19,7 +19,6 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
@@ -27,9 +26,9 @@ import java.util.List;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-2871">MNG-2871</a>.
- * 
+ *
  * @author Benjamin Bentmann
- * @version $Id$
+ *
  */
 public class MavenITmng2871PrePackageSubartifactResolutionTest
     extends AbstractMavenIntegrationTestCase
@@ -43,6 +42,8 @@ public class MavenITmng2871PrePackageSubartifactResolutionTest
     /**
      * Verify that dependencies on not-yet-packaged sub artifacts in build phases prior to package can be satisfied
      * from a module's output directory, i.e. with the loose class files.
+     *
+     * @throws Exception in case of failure
      */
     public void testitMNG2871()
         throws Exception
@@ -57,7 +58,7 @@ public class MavenITmng2871PrePackageSubartifactResolutionTest
 
         List<String> compileClassPath = verifier.loadLines( "consumer/target/compile.txt", "UTF-8" );
         assertEquals( 2, compileClassPath.size() );
-        assertEquals( new File( testDir, "ejbs/target/classes" ).getCanonicalFile(), 
+        assertEquals( new File( testDir, "ejbs/target/classes" ).getCanonicalFile(),
             new File( compileClassPath.get( 1 ).toString() ).getCanonicalFile() );
     }
 

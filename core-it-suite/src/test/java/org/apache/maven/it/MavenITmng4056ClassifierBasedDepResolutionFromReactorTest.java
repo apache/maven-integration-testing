@@ -19,7 +19,6 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
@@ -27,7 +26,7 @@ import java.util.List;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-4056">MNG-4056</a>.
- * 
+ *
  * @author Benjamin Bentmann
  */
 public class MavenITmng4056ClassifierBasedDepResolutionFromReactorTest
@@ -42,6 +41,8 @@ public class MavenITmng4056ClassifierBasedDepResolutionFromReactorTest
     /**
      * Test that attached artifacts can be resolved from the reactor cache even if the dependency declaration
      * in the consumer module does not use the proper artifact type but merely specifies the classifier.
+     *
+     * @throws Exception in case of failure
      */
     public void testit()
         throws Exception
@@ -61,26 +62,26 @@ public class MavenITmng4056ClassifierBasedDepResolutionFromReactorTest
         {
             // artifact type unchanged to match type as declared in dependency
 
-            assertTrue( artifacts.toString(), 
+            assertTrue( artifacts.toString(),
                 artifacts.contains( "org.apache.maven.its.mng4056:producer:jar:tests:0.1" ) );
-            assertTrue( artifacts.toString(), 
+            assertTrue( artifacts.toString(),
                 artifacts.contains( "org.apache.maven.its.mng4056:producer:jar:sources:0.1" ) );
-            assertTrue( artifacts.toString(), 
+            assertTrue( artifacts.toString(),
                 artifacts.contains( "org.apache.maven.its.mng4056:producer:jar:javadoc:0.1" ) );
-            assertTrue( artifacts.toString(), 
+            assertTrue( artifacts.toString(),
                 artifacts.contains( "org.apache.maven.its.mng4056:producer:jar:client:0.1" ) );
         }
         else
         {
             // artifact type updated to match type of active artifact
 
-            assertTrue( artifacts.toString(), 
+            assertTrue( artifacts.toString(),
                 artifacts.contains( "org.apache.maven.its.mng4056:producer:test-jar:tests:0.1" ) );
-            assertTrue( artifacts.toString(), 
+            assertTrue( artifacts.toString(),
                 artifacts.contains( "org.apache.maven.its.mng4056:producer:java-source:sources:0.1" ) );
-            assertTrue( artifacts.toString(), 
+            assertTrue( artifacts.toString(),
                 artifacts.contains( "org.apache.maven.its.mng4056:producer:javadoc:javadoc:0.1" ) );
-            assertTrue( artifacts.toString(), 
+            assertTrue( artifacts.toString(),
                 artifacts.contains( "org.apache.maven.its.mng4056:producer:ejb-client:client:0.1" ) );
         }
 

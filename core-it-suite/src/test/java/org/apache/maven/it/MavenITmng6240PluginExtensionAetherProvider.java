@@ -46,6 +46,8 @@ public class MavenITmng6240PluginExtensionAetherProvider
      * two instances (one of SnapshotMetadataGeneratorFactory and VersionsMetadataGeneratorFactory). When there are
      * more, the Deploy Plugin will perform the download / upload of artifact metadata multiple times. This can be
      * verified easily from the logs.
+     *
+     * @throws Exception in case of failure
      */
     public void testPluginExtensionDependingOnMavenAetherProvider()
         throws Exception
@@ -74,7 +76,7 @@ public class MavenITmng6240PluginExtensionAetherProvider
                 count++;
             }
         }
-        assertTrue( count == 2 ); // 1 from download, 1 from upload
+        assertEquals( 2, count ); // 1 from download, 1 from upload
 
     }
 

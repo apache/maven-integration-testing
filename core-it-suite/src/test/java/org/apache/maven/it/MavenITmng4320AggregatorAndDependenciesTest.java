@@ -19,7 +19,6 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
@@ -27,7 +26,7 @@ import java.util.List;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-4320">MNG-4320</a>.
- * 
+ *
  * @author Benjamin Bentmann
  */
 public class MavenITmng4320AggregatorAndDependenciesTest
@@ -42,6 +41,8 @@ public class MavenITmng4320AggregatorAndDependenciesTest
     /**
      * Verify that for aggregator mojos invoked from the CLI that require dependency resolution the dependencies
      * of all projects in the reactor are resolved and not only the dependencies of the top-level project.
+     *
+     * @throws Exception in case of failure
      */
     public void testit()
         throws Exception

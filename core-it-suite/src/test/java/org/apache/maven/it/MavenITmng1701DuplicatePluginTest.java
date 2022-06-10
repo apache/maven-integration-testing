@@ -40,6 +40,8 @@ public class MavenITmng1701DuplicatePluginTest
 
     /**
      * Verify that duplicate plugin declarations cause a warning.
+     *
+     * @throws Exception in case of failure
      */
     public void testit()
         throws Exception
@@ -48,22 +50,37 @@ public class MavenITmng1701DuplicatePluginTest
 
         Verifier verifier = newVerifier( testDir.getAbsolutePath() );
         verifier.setAutoclean( false );
-        verifier.executeGoal( "validate" );
-        verifier.verifyErrorFreeLog();
+        try {
+            verifier.executeGoal( "validate" );
+        }
+        catch ( VerificationException e )
+        {
+            // expected with Maven 4+
+        }
         verifier.resetStreams();
-        
+
+        String logLevel;
+        if ( matchesVersionRange( "(,4.0.0-alpha-1)" ) )
+        {
+            logLevel = "WARNING";
+        }
+        else
+        {
+            logLevel = "ERROR";
+        }
+
         List<String> lines = verifier.loadLines( verifier.getLogFileName(), "UTF-8" );
-        boolean foundWarning = false;
+        boolean foundMessage = false;
         for ( String line : lines )
         {
-            if ( line.startsWith( "[WARNING]" )
+            if ( line.startsWith(  "[" + logLevel + "]" )
                 && line.indexOf( "duplicate declaration of plugin org.apache.maven.its.plugins:maven-it-plugin-expression" ) > 0 )
             {
-                foundWarning = true;
+                foundMessage = true;
             }
         }
-        
-        assertTrue( "Duplicate plugin warning wasn't generated.", foundWarning );
+
+        assertTrue( "Duplicate plugin message wasn't generated.", foundMessage );
     }
 
 }

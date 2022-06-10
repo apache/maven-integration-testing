@@ -19,7 +19,6 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
@@ -34,6 +33,8 @@ public class MavenIT0012PomInterpolationTest
 
     /**
      * Test simple POM interpolation
+     *
+     * @throws Exception in case of failure
      */
     public void testit0012()
         throws Exception
@@ -44,8 +45,8 @@ public class MavenIT0012PomInterpolationTest
         verifier.deleteDirectory( "target" );
         verifier.deleteDirectory( "child-project/target" );
         verifier.executeGoal( "org.apache.maven.its.plugins:maven-it-plugin-touch:touch" );
-        verifier.assertFilePresent( "target/touch-3.8.1.txt" );
-        verifier.assertFilePresent( "child-project/target/child-touch-3.0.3.txt" );
+        verifier.verifyFilePresent( "target/touch-3.8.1.txt" );
+        verifier.verifyFilePresent( "child-project/target/child-touch-3.0.3.txt" );
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
     }

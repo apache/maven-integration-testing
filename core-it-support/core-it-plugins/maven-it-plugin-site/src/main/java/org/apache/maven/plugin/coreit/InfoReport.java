@@ -19,13 +19,12 @@ package org.apache.maven.plugin.coreit;
  * under the License.
  */
 
+import org.apache.maven.doxia.sink.Sink;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.reporting.MavenReport;
 import org.apache.maven.reporting.MavenReportException;
-
-import org.codehaus.doxia.sink.Sink;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -36,11 +35,11 @@ import java.util.Properties;
 
 /**
  * Creates a properties file in the site output directory.
- * 
+ *
  * @goal info
- * 
+ *
  * @author Benjamin Bentmann
- * @version $Id$
+ *
  */
 public class InfoReport
     extends AbstractMojo
@@ -49,7 +48,7 @@ public class InfoReport
 
     /**
      * The base directory of the current Maven project.
-     * 
+     *
      * @parameter default-value="${basedir}"
      * @required
      * @readonly
@@ -60,14 +59,14 @@ public class InfoReport
      * The path to the properties file, relative to the output directory of the site. The keys
      * <code>locale.language</code>, <code>locale.country</code> and <code>locale.variant</code> indicate the report's
      * locale.
-     * 
+     *
      * @parameter default-value="info.properties"
      */
     private String infoFile = "info.properties";
 
     /**
      * The path to the output directory of the site.
-     * 
+     *
      * @parameter default-value="${project.reporting.outputDirectory}"
      */
     private File outputDirectory;
@@ -79,7 +78,7 @@ public class InfoReport
 
     /**
      * Runs this mojo.
-     * 
+     *
      * @throws MojoExecutionException If the output file could not be created.
      * @throws MojoFailureException If the output file has not been set.
      */
@@ -141,7 +140,7 @@ public class InfoReport
 
     /**
      * Runs this report.
-     * 
+     *
      * @throws MavenReportException If the report could not be created.
      */
     public void generate( Sink sink, Locale locale )

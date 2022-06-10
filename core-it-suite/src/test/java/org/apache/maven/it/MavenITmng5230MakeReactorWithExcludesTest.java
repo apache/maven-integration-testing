@@ -19,7 +19,6 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
@@ -34,7 +33,7 @@ public class MavenITmng5230MakeReactorWithExcludesTest
 
     public MavenITmng5230MakeReactorWithExcludesTest()
     {
-        super( "[3.2,)" ); 
+        super( "[3.2,)" );
     }
 
      private void clean( Verifier verifier )
@@ -49,6 +48,8 @@ public class MavenITmng5230MakeReactorWithExcludesTest
 
     /**
      * Verify that project list exclusion by itself is not built
+     *
+     * @throws Exception in case of failure
      */
     public void testitMakeWithExclude()
         throws Exception
@@ -66,15 +67,17 @@ public class MavenITmng5230MakeReactorWithExcludesTest
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
 
-        verifier.assertFilePresent( "target/touch.txt" );
-        verifier.assertFilePresent( "mod-a/target/touch.txt" );
-        verifier.assertFileNotPresent( "mod-b/target/touch.txt" );
-        verifier.assertFilePresent( "mod-c/target/touch.txt" );
-        verifier.assertFilePresent( "mod-d/target/touch.txt" );
+        verifier.verifyFilePresent( "target/touch.txt" );
+        verifier.verifyFilePresent( "mod-a/target/touch.txt" );
+        verifier.verifyFileNotPresent( "mod-b/target/touch.txt" );
+        verifier.verifyFilePresent( "mod-c/target/touch.txt" );
+        verifier.verifyFilePresent( "mod-d/target/touch.txt" );
     }
 
     /**
      * Verify that that exclusion happens on upstream projects.
+     *
+     * @throws Exception in case of failure
      */
     public void testitMakeUpstreamExclude()
         throws Exception
@@ -92,15 +95,17 @@ public class MavenITmng5230MakeReactorWithExcludesTest
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
 
-        verifier.assertFilePresent( "target/touch.txt" );
-        verifier.assertFileNotPresent( "mod-a/target/touch.txt" );
-        verifier.assertFilePresent( "mod-b/target/touch.txt" );
-        verifier.assertFileNotPresent( "mod-c/target/touch.txt" );
-        verifier.assertFileNotPresent( "mod-d/target/touch.txt" );
+        verifier.verifyFilePresent( "target/touch.txt" );
+        verifier.verifyFileNotPresent( "mod-a/target/touch.txt" );
+        verifier.verifyFilePresent( "mod-b/target/touch.txt" );
+        verifier.verifyFileNotPresent( "mod-c/target/touch.txt" );
+        verifier.verifyFileNotPresent( "mod-d/target/touch.txt" );
     }
 
     /**
      * Verify that project list and all their downstream projects are built.
+     *
+     * @throws Exception in case of failure
      */
     public void testitMakeDownstreamExclude()
         throws Exception
@@ -118,15 +123,17 @@ public class MavenITmng5230MakeReactorWithExcludesTest
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
 
-        verifier.assertFileNotPresent( "target/touch.txt" );
-        verifier.assertFileNotPresent( "mod-a/target/touch.txt" );
-        verifier.assertFilePresent( "mod-b/target/touch.txt" );
-        verifier.assertFileNotPresent( "mod-c/target/touch.txt" );
-        verifier.assertFileNotPresent( "mod-d/target/touch.txt" );
+        verifier.verifyFileNotPresent( "target/touch.txt" );
+        verifier.verifyFileNotPresent( "mod-a/target/touch.txt" );
+        verifier.verifyFilePresent( "mod-b/target/touch.txt" );
+        verifier.verifyFileNotPresent( "mod-c/target/touch.txt" );
+        verifier.verifyFileNotPresent( "mod-d/target/touch.txt" );
     }
 
     /**
      * Verify  project exclusion when also building upstream and downstream projects are built.
+     *
+     * @throws Exception in case of failure
      */
     public void testitMakeBothExclude()
         throws Exception
@@ -145,15 +152,17 @@ public class MavenITmng5230MakeReactorWithExcludesTest
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
 
-        verifier.assertFilePresent( "target/touch.txt" );
-        verifier.assertFileNotPresent( "mod-a/target/touch.txt" );
-        verifier.assertFilePresent( "mod-b/target/touch.txt" );
-        verifier.assertFilePresent( "mod-c/target/touch.txt" );
-        verifier.assertFileNotPresent( "mod-d/target/touch.txt" );
+        verifier.verifyFilePresent( "target/touch.txt" );
+        verifier.verifyFileNotPresent( "mod-a/target/touch.txt" );
+        verifier.verifyFilePresent( "mod-b/target/touch.txt" );
+        verifier.verifyFilePresent( "mod-c/target/touch.txt" );
+        verifier.verifyFileNotPresent( "mod-d/target/touch.txt" );
     }
 
     /**
      * Verify that using the basedir for exclusion with an exclemation in the project list matches projects with non-default POM files.
+     *
+     * @throws Exception in case of failure
      */
     public void testitMatchesByBasedirExclamationExclude()
         throws Exception
@@ -163,7 +172,7 @@ public class MavenITmng5230MakeReactorWithExcludesTest
         Verifier verifier = newVerifier( testDir.getAbsolutePath() );
         verifier.setAutoclean( false );
         clean( verifier );
-        verifier.assertFileNotPresent( "mod-d/pom.xml" );
+        verifier.verifyFileNotPresent( "mod-d/pom.xml" );
         verifier.addCliOption( "-pl" );
         verifier.addCliOption( "!mod-d" );
         verifier.setLogFileName( "log-basedir-exclamation.txt" );
@@ -171,15 +180,17 @@ public class MavenITmng5230MakeReactorWithExcludesTest
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
 
-        verifier.assertFilePresent( "target/touch.txt" );
-        verifier.assertFilePresent( "mod-a/target/touch.txt" );
-        verifier.assertFilePresent( "mod-b/target/touch.txt" );
-        verifier.assertFilePresent( "mod-c/target/touch.txt" );
-        verifier.assertFileNotPresent( "mod-d/target/touch.txt" );
+        verifier.verifyFilePresent( "target/touch.txt" );
+        verifier.verifyFilePresent( "mod-a/target/touch.txt" );
+        verifier.verifyFilePresent( "mod-b/target/touch.txt" );
+        verifier.verifyFilePresent( "mod-c/target/touch.txt" );
+        verifier.verifyFileNotPresent( "mod-d/target/touch.txt" );
     }
 
     /**
      * Verify that using the basedir for exclusion with a minus in the project list matches projects with non-default POM files.
+     *
+     * @throws Exception in case of failure
      */
     public void testitMatchesByBasedirMinusExclude()
         throws Exception
@@ -189,7 +200,7 @@ public class MavenITmng5230MakeReactorWithExcludesTest
         Verifier verifier = newVerifier( testDir.getAbsolutePath() );
         verifier.setAutoclean( false );
         clean( verifier );
-        verifier.assertFileNotPresent( "mod-d/pom.xml" );
+        verifier.verifyFileNotPresent( "mod-d/pom.xml" );
         verifier.addCliOption( "-pl" );
         verifier.addCliOption( "-mod-d" );
         verifier.setLogFileName( "log-basedir-minus.txt" );
@@ -197,16 +208,18 @@ public class MavenITmng5230MakeReactorWithExcludesTest
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
 
-        verifier.assertFilePresent( "target/touch.txt" );
-        verifier.assertFilePresent( "mod-a/target/touch.txt" );
-        verifier.assertFilePresent( "mod-b/target/touch.txt" );
-        verifier.assertFilePresent( "mod-c/target/touch.txt" );
-        verifier.assertFileNotPresent( "mod-d/target/touch.txt" );
+        verifier.verifyFilePresent( "target/touch.txt" );
+        verifier.verifyFilePresent( "mod-a/target/touch.txt" );
+        verifier.verifyFilePresent( "mod-b/target/touch.txt" );
+        verifier.verifyFilePresent( "mod-c/target/touch.txt" );
+        verifier.verifyFileNotPresent( "mod-d/target/touch.txt" );
     }
 
-    
+
     /**
      * Verify that the project list can also specify project ids for exclusion
+     *
+     * @throws Exception in case of failure
      */
     public void testitMatchesByIdExclude()
         throws Exception
@@ -223,15 +236,17 @@ public class MavenITmng5230MakeReactorWithExcludesTest
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
 
-        verifier.assertFilePresent( "target/touch.txt" );
-        verifier.assertFilePresent( "mod-a/target/touch.txt" );
-        verifier.assertFileNotPresent( "mod-b/target/touch.txt" );
-        verifier.assertFilePresent( "mod-c/target/touch.txt" );
-        verifier.assertFilePresent( "mod-d/target/touch.txt" );
+        verifier.verifyFilePresent( "target/touch.txt" );
+        verifier.verifyFilePresent( "mod-a/target/touch.txt" );
+        verifier.verifyFileNotPresent( "mod-b/target/touch.txt" );
+        verifier.verifyFilePresent( "mod-c/target/touch.txt" );
+        verifier.verifyFilePresent( "mod-d/target/touch.txt" );
     }
 
     /**
-     * Verify that the project list exclude can also specify aritfact ids.
+     * Verify that the project list exclude can also specify artifact ids.
+     *
+     * @throws Exception in case of failure
      */
     public void testitMatchesByArtifactIdExclude()
         throws Exception
@@ -248,15 +263,17 @@ public class MavenITmng5230MakeReactorWithExcludesTest
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
 
-        verifier.assertFilePresent( "target/touch.txt" );
-        verifier.assertFilePresent( "mod-a/target/touch.txt" );
-        verifier.assertFileNotPresent( "mod-b/target/touch.txt" );
-        verifier.assertFilePresent( "mod-c/target/touch.txt" );
-        verifier.assertFilePresent( "mod-d/target/touch.txt" );
+        verifier.verifyFilePresent( "target/touch.txt" );
+        verifier.verifyFilePresent( "mod-a/target/touch.txt" );
+        verifier.verifyFileNotPresent( "mod-b/target/touch.txt" );
+        verifier.verifyFilePresent( "mod-c/target/touch.txt" );
+        verifier.verifyFilePresent( "mod-d/target/touch.txt" );
     }
-    
+
      /**
      * Verify that reactor is resumed from specified project with exclude
+     *
+     * @throws Exception in case of failure
      */
     public void testitResumeFromExclude()
         throws Exception
@@ -275,10 +292,10 @@ public class MavenITmng5230MakeReactorWithExcludesTest
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
 
-        verifier.assertFileNotPresent( "target/touch.txt" );
-        verifier.assertFileNotPresent( "mod-a/target/touch.txt" );
-        verifier.assertFilePresent( "mod-b/target/touch.txt" );
-        verifier.assertFileNotPresent( "mod-c/target/touch.txt" );
-        verifier.assertFilePresent( "mod-d/target/touch.txt" );
+        verifier.verifyFileNotPresent( "target/touch.txt" );
+        verifier.verifyFileNotPresent( "mod-a/target/touch.txt" );
+        verifier.verifyFilePresent( "mod-b/target/touch.txt" );
+        verifier.verifyFileNotPresent( "mod-c/target/touch.txt" );
+        verifier.verifyFilePresent( "mod-d/target/touch.txt" );
     }
 }

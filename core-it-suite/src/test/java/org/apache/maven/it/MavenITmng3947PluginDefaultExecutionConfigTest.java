@@ -19,16 +19,15 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-3947">MNG-3947</a>.
- * 
+ *
  * @author Benjamin Bentmann
- * @version $Id$
+ *
  */
 public class MavenITmng3947PluginDefaultExecutionConfigTest
     extends AbstractMavenIntegrationTestCase
@@ -42,6 +41,8 @@ public class MavenITmng3947PluginDefaultExecutionConfigTest
     /**
      * Test that the configuration for a plugin execution with the identifier "default" does not pollute the
      * configuration of standalone plugin executions from the CLI.
+     *
+     * @throws Exception in case of failure
      */
     public void testitMNG3947()
         throws Exception
@@ -55,8 +56,8 @@ public class MavenITmng3947PluginDefaultExecutionConfigTest
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
 
-        verifier.assertFileNotPresent( "target/failed.txt" );
-        verifier.assertFilePresent( "target/resources-resources.txt" );
+        verifier.verifyFileNotPresent( "target/failed.txt" );
+        verifier.verifyFilePresent( "target/resources-resources.txt" );
     }
 
 }

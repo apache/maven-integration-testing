@@ -19,14 +19,13 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-4586">MNG-4586</a>.
- * 
+ *
  * @author Benjamin Bentmann
  */
 public class MavenITmng4586PluginPrefixResolutionFromVersionlessPluginMngtTest
@@ -41,6 +40,8 @@ public class MavenITmng4586PluginPrefixResolutionFromVersionlessPluginMngtTest
     /**
      * Verify that plugin prefixes can be resolved from the POM's plugin management even if the POM
      * does not specify the plugin version.
+     *
+     * @throws Exception in case of failure
      */
     public void testit()
         throws Exception
@@ -58,7 +59,7 @@ public class MavenITmng4586PluginPrefixResolutionFromVersionlessPluginMngtTest
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
 
-        verifier.assertFilePresent( "target/touch.txt" );
+        verifier.verifyFilePresent( "target/touch.txt" );
     }
 
 }

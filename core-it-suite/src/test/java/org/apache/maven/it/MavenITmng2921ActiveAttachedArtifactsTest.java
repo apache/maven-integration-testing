@@ -19,7 +19,6 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
@@ -29,9 +28,9 @@ import java.util.Collection;
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-2921">MNG-2921</a>. It naturally includes the
  * test for the related issue <a href="https://issues.apache.org/jira/browse/MNG-2877">MNG-2877</a> whose original test was
  * too weak to prevent this issue.
- * 
+ *
  * @author Benjamin Bentmann
- * @version $Id$
+ *
  */
 public class MavenITmng2921ActiveAttachedArtifactsTest
     extends AbstractMavenIntegrationTestCase
@@ -49,6 +48,8 @@ public class MavenITmng2921ActiveAttachedArtifactsTest
      * packaged. MNG-2871 on the other hand is about dependencies that haven't been packaged yet but merely exist
      * as loose class files in a module's output directory. In other words, this test is concerned with the situation
      * during the lifecycle phase "package" while MNG-2871 is concerned with earlier phases like "test".
+     *
+     * @throws Exception in case of failure
      */
     public void testitMNG2921()
         throws Exception

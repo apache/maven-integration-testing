@@ -19,14 +19,13 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-4960">MNG-4960</a>.
- * 
+ *
  * @author Benjamin Bentmann
  */
 public class MavenITmng4960MakeLikeReactorResumeTest
@@ -41,6 +40,8 @@ public class MavenITmng4960MakeLikeReactorResumeTest
     /**
      * Verify that the make-like reactor mode doesn't omit the selected projects when building their prerequisites
      * as well and resuming from one of them.
+     *
+     * @throws Exception in case of failure
      */
     public void testitFromUpstream()
         throws Exception
@@ -62,14 +63,16 @@ public class MavenITmng4960MakeLikeReactorResumeTest
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
 
-        verifier.assertFilePresent( "mod-a/target/touch.txt" );
-        verifier.assertFilePresent( "mod-b/target/touch.txt" );
-        verifier.assertFileNotPresent( "target/touch.txt" );
+        verifier.verifyFilePresent( "mod-a/target/touch.txt" );
+        verifier.verifyFilePresent( "mod-b/target/touch.txt" );
+        verifier.verifyFileNotPresent( "target/touch.txt" );
     }
 
     /**
      * Verify that the make-like reactor mode omits the selected project when building its dependents
      * as well and resuming from one of them.
+     *
+     * @throws Exception in case of failure
      */
     public void testitFromDownstream()
         throws Exception
@@ -91,9 +94,9 @@ public class MavenITmng4960MakeLikeReactorResumeTest
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
 
-        verifier.assertFileNotPresent( "mod-a/target/touch.txt" );
-        verifier.assertFilePresent( "mod-b/target/touch.txt" );
-        verifier.assertFileNotPresent( "target/touch.txt" );
+        verifier.verifyFileNotPresent( "mod-a/target/touch.txt" );
+        verifier.verifyFilePresent( "mod-b/target/touch.txt" );
+        verifier.verifyFileNotPresent( "target/touch.txt" );
     }
 
 }

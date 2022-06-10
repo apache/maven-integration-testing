@@ -40,6 +40,8 @@ public class MavenITmng4279WagonProviderFailoverTest
     /**
      * Test that wagon provider selection fails gracefully and uses protocol for roleHint if protocol-provider roleHint
      * isn't available.
+     *
+     * @throws Exception in case of failure
      */
     public void testit()
         throws Exception
@@ -52,11 +54,11 @@ public class MavenITmng4279WagonProviderFailoverTest
         verifier.addCliOption( "-s" );
         verifier.addCliOption( "settings.xml" );
         verifier.executeGoal( "validate" );
-        
+
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
 
-        verifier.assertFilePresent( "target/wagon.properties" );
+        verifier.verifyFilePresent( "target/wagon.properties" );
     }
 
 }

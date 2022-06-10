@@ -19,16 +19,15 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-1052">MNG-1052</a>.
- * 
+ *
  * @author John Casey
- * @version $Id$
+ *
  */
 public class MavenITmng1052PluginMngtConfigTest
     extends AbstractMavenIntegrationTestCase
@@ -42,6 +41,8 @@ public class MavenITmng1052PluginMngtConfigTest
      * Test that configuration for a lifecycle-bound plugin is injected from
      * PluginManagement section even when it's not explicitly defined in the
      * plugins section.
+     *
+     * @throws Exception in case of failure
      */
     public void testitMNG1052()
         throws Exception
@@ -51,8 +52,8 @@ public class MavenITmng1052PluginMngtConfigTest
         verifier.setAutoclean( false );
         verifier.deleteDirectory( "target" );
         verifier.executeGoal( "process-resources" );
-        verifier.assertFilePresent( "target/plugin-management.txt" );
-        verifier.assertFileNotPresent( "target/resources-resources.txt" );
+        verifier.verifyFilePresent( "target/plugin-management.txt" );
+        verifier.verifyFileNotPresent( "target/resources-resources.txt" );
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
     }

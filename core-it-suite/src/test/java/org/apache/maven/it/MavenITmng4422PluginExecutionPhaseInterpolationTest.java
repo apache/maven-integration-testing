@@ -19,14 +19,13 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-4422">MNG-4422</a>.
- * 
+ *
  * @author Benjamin Bentmann
  */
 public class MavenITmng4422PluginExecutionPhaseInterpolationTest
@@ -40,6 +39,8 @@ public class MavenITmng4422PluginExecutionPhaseInterpolationTest
 
     /**
      * Test that the phase of plugin executions can be interpolated.
+     *
+     * @throws Exception in case of failure
      */
     public void testit()
         throws Exception
@@ -53,7 +54,7 @@ public class MavenITmng4422PluginExecutionPhaseInterpolationTest
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
 
-        verifier.assertFilePresent( "target/touch.txt" );
+        verifier.verifyFilePresent( "target/touch.txt" );
     }
 
 }

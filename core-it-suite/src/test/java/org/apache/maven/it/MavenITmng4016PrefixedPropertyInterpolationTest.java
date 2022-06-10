@@ -19,7 +19,6 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
@@ -27,9 +26,9 @@ import java.util.Properties;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-4016">MNG-4016</a>.
- * 
+ *
  * @author Benjamin Bentmann
- * @version $Id$
+ *
  */
 public class MavenITmng4016PrefixedPropertyInterpolationTest
     extends AbstractMavenIntegrationTestCase
@@ -43,6 +42,8 @@ public class MavenITmng4016PrefixedPropertyInterpolationTest
     /**
      * Test that expressions with the special prefixes "project.", "pom." and "env." can be interpolated from
      * properties that include the prefix.
+     *
+     * @throws Exception in case of failure
      */
     public void testitMNG4016()
         throws Exception
@@ -56,7 +57,7 @@ public class MavenITmng4016PrefixedPropertyInterpolationTest
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
 
-        verifier.assertFilePresent( "target/model.properties" );
+        verifier.verifyFilePresent( "target/model.properties" );
         Properties props = verifier.loadProperties( "target/model.properties" );
         assertEquals( "PASSED-1", props.getProperty( "project.properties.projectProperty" ) );
         assertEquals( "PASSED-2", props.getProperty( "project.properties.pomProperty" ) );

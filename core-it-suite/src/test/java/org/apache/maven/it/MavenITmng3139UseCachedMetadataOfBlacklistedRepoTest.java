@@ -19,7 +19,6 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
@@ -27,9 +26,9 @@ import java.util.Collections;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-3139">MNG-3139</a>.
- * 
+ *
  * @author Benjamin Bentmann
- * @version $Id$
+ *
  */
 public class MavenITmng3139UseCachedMetadataOfBlacklistedRepoTest
     extends AbstractMavenIntegrationTestCase
@@ -42,6 +41,8 @@ public class MavenITmng3139UseCachedMetadataOfBlacklistedRepoTest
 
     /**
      * Test that locally cached metadata of blacklisted repositories is consulted to resolve metaversions.
+     *
+     * @throws Exception in case of failure
      */
     public void testitMNG3139()
         throws Exception
@@ -67,7 +68,7 @@ public class MavenITmng3139UseCachedMetadataOfBlacklistedRepoTest
         verifier = newVerifier( testDir.getAbsolutePath() );
         verifier.setAutoclean( false );
 
-        verifier.filterFile( "settings-template.xml", "settings.xml", "UTF-8", 
+        verifier.filterFile( "settings-template.xml", "settings.xml", "UTF-8",
             Collections.singletonMap( "@baseurl@", "http://localhost:63412" ) );
         verifier.setLogFileName( "log2.txt" );
         verifier.addCliOption( "--settings" );

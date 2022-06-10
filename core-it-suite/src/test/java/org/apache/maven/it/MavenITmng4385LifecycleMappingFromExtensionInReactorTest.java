@@ -19,14 +19,13 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-4385">MNG-4385</a>.
- * 
+ *
  * @author Benjamin Bentmann
  */
 public class MavenITmng4385LifecycleMappingFromExtensionInReactorTest
@@ -41,6 +40,8 @@ public class MavenITmng4385LifecycleMappingFromExtensionInReactorTest
     /**
      * Test that custom lifecycle mappings contributed by build extensions of one project do not leak into other
      * projects in the reactor.
+     *
+     * @throws Exception in case of failure
      */
     public void testit()
         throws Exception
@@ -58,6 +59,10 @@ public class MavenITmng4385LifecycleMappingFromExtensionInReactorTest
         catch( VerificationException e )
         {
             // expected, should fail
+            String msg = e.getMessage();
+
+            assertTrue( "Failure should be due to unknown packaging", msg.contains( "Unknown packaging: it-packaging" ));
+            assertTrue( "Failure should be due to sub-b project", msg.contains( "The project org.apache.maven.its.mng4385:sub-b:0.1" ));
         }
         verifier.resetStreams();
     }

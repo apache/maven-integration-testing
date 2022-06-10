@@ -19,14 +19,13 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-4410">MNG-4410</a>.
- * 
+ *
  * @author Benjamin Bentmann
  */
 public class MavenITmng4410UsageHelpTest
@@ -40,6 +39,8 @@ public class MavenITmng4410UsageHelpTest
 
     /**
      * Verify that "mvn --help" outputs the usage help and stops the execution after that.
+     *
+     * @throws Exception in case of failure
      */
     public void testit()
         throws Exception
@@ -53,7 +54,6 @@ public class MavenITmng4410UsageHelpTest
         verifier.resetStreams();
 
         verifier.verifyTextInLog( "--version" );
-        verifier.verifyTextInLog( "--define" );
         verifier.verifyTextInLog( "--debug" );
         verifier.verifyTextInLog( "--batch-mode" );
     }

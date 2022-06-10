@@ -19,7 +19,6 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
@@ -38,6 +37,8 @@ public class MavenIT0008SimplePluginTest
      * be downloaded from a remote repository before it can be executed. This
      * test also checks to make sure that mojo parameters are aligned to the
      * project basedir when their type is "java.io.File".
+     *
+     * @throws Exception in case of failure
      */
     public void testit0008()
         throws Exception
@@ -48,8 +49,8 @@ public class MavenIT0008SimplePluginTest
         verifier.deleteDirectory( "target" );
         verifier.deleteArtifact( "org.apache.maven.its.plugins", "maven-it-plugin-touch", "1.0", "maven-plugin" );
         verifier.executeGoal( "process-sources" );
-        verifier.assertFilePresent( "target/touch.txt" );
-        verifier.assertFilePresent( "target/test-basedir-alignment/touch.txt" );
+        verifier.verifyFilePresent( "target/touch.txt" );
+        verifier.verifyFilePresent( "target/test-basedir-alignment/touch.txt" );
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
     }

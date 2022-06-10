@@ -19,7 +19,6 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
@@ -27,9 +26,9 @@ import java.util.Properties;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-2228">MNG-2228</a>.
- * 
+ *
  * @author Benjamin Bentmann
- * @version $Id$
+ *
  */
 public class MavenITmng2228ComponentInjectionTest
     extends AbstractMavenIntegrationTestCase
@@ -43,6 +42,8 @@ public class MavenITmng2228ComponentInjectionTest
     /**
      * Verify that components injected into plugins are actually assignment-compatible with the corresponding mojo
      * fields in case the field type is both provided by a plugin dependency and by a build extension.
+     *
+     * @throws Exception in case of failure
      */
     public void testitMNG2228()
         throws Exception

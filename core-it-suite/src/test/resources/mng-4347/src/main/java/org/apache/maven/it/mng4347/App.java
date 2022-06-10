@@ -19,11 +19,11 @@ package org.apache.maven.it.mng4347;
  * under the License.
  */
 
-public class App 
+public class App
 {
     public static void main( String[] args )
     {
-			  Importing.main( args );
+        Importing.main( args );
         System.out.println( "Hello World!" );
     }
 }

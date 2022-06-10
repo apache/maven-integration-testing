@@ -19,7 +19,6 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
@@ -27,9 +26,9 @@ import java.util.Properties;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-3904">MNG-3904</a>.
- * 
+ *
  * @author Benjamin Bentmann
- * @version $Id$
+ *
  */
 public class MavenITmng3904NestedBuildDirInterpolationTest
     extends AbstractMavenIntegrationTestCase
@@ -43,6 +42,8 @@ public class MavenITmng3904NestedBuildDirInterpolationTest
     /**
      * Test that properties which refer to build directories which in turn refer to other build directories are
      * properly interpolated.
+     *
+     * @throws Exception in case of failure
      */
     public void testitMNG3904()
         throws Exception
@@ -57,11 +58,11 @@ public class MavenITmng3904NestedBuildDirInterpolationTest
         verifier.resetStreams();
 
         Properties props = verifier.loadProperties( "target/pom.properties" );
-        assertCanonicalFileEquals( new File( testDir, "target/classes/dir0" ), 
+        assertCanonicalFileEquals( new File( testDir, "target/classes/dir0" ),
             new File( props.getProperty( "project.properties.dir0" ) ) );
-        assertCanonicalFileEquals( new File( testDir, "src/test/dir1" ), 
+        assertCanonicalFileEquals( new File( testDir, "src/test/dir1" ),
             new File( props.getProperty( "project.properties.dir1" ) ) );
-        assertCanonicalFileEquals( new File( testDir, "target/site/dir2" ), 
+        assertCanonicalFileEquals( new File( testDir, "target/site/dir2" ),
             new File( props.getProperty( "project.properties.dir2" ) ) );
     }
 

@@ -19,7 +19,6 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
@@ -28,9 +27,9 @@ import java.util.List;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-823">MNG-823</a>.
- * 
+ *
  * @author John Casey
- * @version $Id$
+ *
  */
 public class MavenITmng0823MojoContextPassingTest
     extends AbstractMavenIntegrationTestCase
@@ -42,6 +41,8 @@ public class MavenITmng0823MojoContextPassingTest
 
     /**
      * Tests context passing between mojos in the same plugin.
+     *
+     * @throws Exception in case of failure
      */
     public void testitMNG0823()
         throws Exception
@@ -54,7 +55,7 @@ public class MavenITmng0823MojoContextPassingTest
         List<String> goals = Arrays.asList( new String[]{"org.apache.maven.its.plugins:maven-it-plugin-context-passing:throw",
             "org.apache.maven.its.plugins:maven-it-plugin-context-passing:catch"} );
         verifier.executeGoals( goals );
-        verifier.assertFilePresent( "target/thrown-value" );
+        verifier.verifyFilePresent( "target/thrown-value" );
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
     }

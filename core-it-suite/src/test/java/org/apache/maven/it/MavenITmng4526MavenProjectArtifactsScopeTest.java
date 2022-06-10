@@ -19,7 +19,6 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
@@ -27,7 +26,7 @@ import java.util.List;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-4526">MNG-4526</a>.
- * 
+ *
  * @author Benjamin Bentmann
  */
 public class MavenITmng4526MavenProjectArtifactsScopeTest
@@ -42,6 +41,8 @@ public class MavenITmng4526MavenProjectArtifactsScopeTest
     /**
      * Test that MavenProject.getArtifacts() only holds artifacts matching the scope requested by a mojo. This
      * must also be the case when previously already artifacts from a wider scope were resolved.
+     *
+     * @throws Exception in case of failure
      */
     public void testit()
         throws Exception
@@ -60,17 +61,17 @@ public class MavenITmng4526MavenProjectArtifactsScopeTest
         verifier.resetStreams();
 
         List<String> artifacts;
-        
+
         artifacts = verifier.loadLines( "target/compile.txt", "UTF-8" );
         assertTrue( artifacts.toString(), artifacts.contains( "org.apache.maven.its.mng4526:a:jar:0.1" ) );
         assertFalse( artifacts.toString(), artifacts.contains( "org.apache.maven.its.mng4526:b:jar:0.1" ) );
         assertFalse( artifacts.toString(), artifacts.contains( "org.apache.maven.its.mng4526:c:jar:0.1" ) );
-        
+
         artifacts = verifier.loadLines( "target/runtime.txt", "UTF-8" );
         assertTrue( artifacts.toString(), artifacts.contains( "org.apache.maven.its.mng4526:a:jar:0.1" ) );
         assertTrue( artifacts.toString(), artifacts.contains( "org.apache.maven.its.mng4526:b:jar:0.1" ) );
         assertFalse( artifacts.toString(), artifacts.contains( "org.apache.maven.its.mng4526:c:jar:0.1" ) );
-        
+
         artifacts = verifier.loadLines( "target/test.txt", "UTF-8" );
         assertTrue( artifacts.toString(), artifacts.contains( "org.apache.maven.its.mng4526:a:jar:0.1" ) );
         assertTrue( artifacts.toString(), artifacts.contains( "org.apache.maven.its.mng4526:b:jar:0.1" ) );

@@ -19,15 +19,14 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-3535">MNG-3535</a>.
- * 
- * @version $Id$
+ *
+ *
  */
 public class MavenITmng3535SelfReferentialPropertiesTest
     extends AbstractMavenIntegrationTestCase
@@ -70,7 +69,7 @@ public class MavenITmng3535SelfReferentialPropertiesTest
         try
         {
             verifier.executeGoal( "verify" );
-            
+
             verifier.verifyErrorFreeLog();
             fail( "There is a self-referential property in this build; it should fail." );
         }
@@ -78,7 +77,7 @@ public class MavenITmng3535SelfReferentialPropertiesTest
         {
             // should fail this verification, because there truly is a self-referential property.
         }
-        
+
         verifier.resetStreams();
     }
 }

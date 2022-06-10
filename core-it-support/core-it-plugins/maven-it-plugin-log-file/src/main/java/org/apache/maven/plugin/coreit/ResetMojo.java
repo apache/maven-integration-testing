@@ -23,12 +23,12 @@ import org.apache.maven.plugin.MojoExecutionException;
 
 /**
  * Clears the contents of the log file by creating a new empty log file.
- * 
+ *
  * @goal reset
  * @phase initialize
- * 
+ *
  * @author Benjamin Bentmann
- * @version $Id$
+ *
  */
 public class ResetMojo
     extends AbstractLogMojo
@@ -36,7 +36,7 @@ public class ResetMojo
 
     /**
      * Runs this mojo.
-     * 
+     *
      * @throws MojoExecutionException If the output file could not be created.
      */
     public void execute()

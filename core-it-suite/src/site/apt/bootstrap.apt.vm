@@ -28,12 +28,14 @@
 
 Maven Core Integration Tests Bootstrap
 
-  Core IT Bootstrapping downloads from central repository every dependency (artifacts, plugins) required to let
-  ITs run without downloading anything later.
+  Core IT Bootstrapping downloads from Central repository every dependency (artifacts, plugins) required to let
+  Core ITs Suite run without downloading anything later (see {{{./index.html#Core_ITs_Suite_and_Dependencies_.28incl._Plugins.29}Core ITs Suite and dependencies}} rationale).
+  
+  Content to download is defined in {{{https://github.com/apache/maven-integration-testing/tree/master/core-it-suite/src/test/resources/bootstrap}a series of bootstrap projects}}:
 
-%{toc|section=1}
+%{toc|section=1|fromDepth=2}
 
-* Base Plugins Dependencies
+* Base Plugins And Their Dependencies
 
 %{snippet|file=${project.build.directory}/test-classes/bootstrap/target/resolve-plugins.txt}
 
@@ -64,3 +66,31 @@ Maven Core Integration Tests Bootstrap
 * Group 7 Dependencies
 
 %{snippet|file=${project.build.directory}/test-classes/bootstrap/group-7/target/resolve.txt}
+
+* Group 8 Dependencies
+
+%{snippet|file=${project.build.directory}/test-classes/bootstrap/group-8/target/resolve.txt}
+
+* Group 9 Dependencies
+
+%{snippet|file=${project.build.directory}/test-classes/bootstrap/group-9/target/resolve.txt}
+
+* Group 10 Dependencies
+
+%{snippet|file=${project.build.directory}/test-classes/bootstrap/group-10/target/resolve.txt}
+
+* Group 11 Dependencies
+
+%{snippet|file=${project.build.directory}/test-classes/bootstrap/group-11/target/resolve.txt}
+
+* Group 12 Dependencies
+
+%{snippet|file=${project.build.directory}/test-classes/bootstrap/group-12/target/resolve.txt}
+
+* Group 13 Dependencies
+
+%{snippet|file=${project.build.directory}/test-classes/bootstrap/group-13/target/resolve.txt}
+
+* Group 14 Dependencies
+
+%{snippet|file=${project.build.directory}/test-classes/bootstrap/group-14/target/resolve.txt}

@@ -19,14 +19,13 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-2363">MNG-2363</a>.
- * 
+ *
  * @author Benjamin Bentmann
  */
 public class MavenITmng2363BasedirAwareFileActivatorTest
@@ -41,6 +40,8 @@ public class MavenITmng2363BasedirAwareFileActivatorTest
     /**
      * Test that the file-based profile activator resolves relative paths against the current project's base directory
      * and also interpolates ${basedir} if explicitly given, just like usual for other parts of the POM.
+     *
+     * @throws Exception in case of failure
      */
     public void testit()
         throws Exception
@@ -56,20 +57,20 @@ public class MavenITmng2363BasedirAwareFileActivatorTest
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
 
-        verifier.assertFilePresent( "target/parent1.txt" );
-        verifier.assertFilePresent( "target/parent2.txt" );
-        verifier.assertFileNotPresent( "target/file1.txt" );
-        verifier.assertFileNotPresent( "target/file2.txt" );
+        verifier.verifyFilePresent( "target/parent1.txt" );
+        verifier.verifyFilePresent( "target/parent2.txt" );
+        verifier.verifyFileNotPresent( "target/file1.txt" );
+        verifier.verifyFileNotPresent( "target/file2.txt" );
 
-        verifier.assertFileNotPresent( "sub-a/target/parent1.txt" );
-        verifier.assertFileNotPresent( "sub-a/target/parent2.txt" );
-        verifier.assertFilePresent( "sub-a/target/file1.txt" );
-        verifier.assertFileNotPresent( "sub-a/target/file2.txt" );
+        verifier.verifyFileNotPresent( "sub-a/target/parent1.txt" );
+        verifier.verifyFileNotPresent( "sub-a/target/parent2.txt" );
+        verifier.verifyFilePresent( "sub-a/target/file1.txt" );
+        verifier.verifyFileNotPresent( "sub-a/target/file2.txt" );
 
-        verifier.assertFileNotPresent( "sub-b/target/parent1.txt" );
-        verifier.assertFileNotPresent( "sub-b/target/parent2.txt" );
-        verifier.assertFileNotPresent( "sub-b/target/file1.txt" );
-        verifier.assertFilePresent( "sub-b/target/file2.txt" );
+        verifier.verifyFileNotPresent( "sub-b/target/parent1.txt" );
+        verifier.verifyFileNotPresent( "sub-b/target/parent2.txt" );
+        verifier.verifyFileNotPresent( "sub-b/target/file1.txt" );
+        verifier.verifyFilePresent( "sub-b/target/file2.txt" );
     }
 
 }

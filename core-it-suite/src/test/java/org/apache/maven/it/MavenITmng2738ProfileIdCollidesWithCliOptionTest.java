@@ -19,14 +19,13 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-2738">MNG-2738</a>.
- * 
+ *
  * @author Benjamin Bentmann
  */
 public class MavenITmng2738ProfileIdCollidesWithCliOptionTest
@@ -41,6 +40,8 @@ public class MavenITmng2738ProfileIdCollidesWithCliOptionTest
     /**
      * Verify that the CLI parsing properly handles activation of profiles whose id happens to match a short command
      * line option.
+     *
+     * @throws Exception in case of failure
      */
     public void testit()
         throws Exception
@@ -55,7 +56,7 @@ public class MavenITmng2738ProfileIdCollidesWithCliOptionTest
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
 
-        verifier.assertFilePresent( "target/touch.txt" );
+        verifier.verifyFilePresent( "target/touch.txt" );
     }
 
 }

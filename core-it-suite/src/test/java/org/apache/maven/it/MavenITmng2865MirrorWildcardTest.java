@@ -19,7 +19,6 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
@@ -27,9 +26,9 @@ import java.util.Properties;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-2865">MNG-2865</a>.
- * 
+ *
  * @author Benjamin Bentmann
- * @version $Id$
+ *
  */
 public class MavenITmng2865MirrorWildcardTest
     extends AbstractMavenIntegrationTestCase
@@ -42,6 +41,8 @@ public class MavenITmng2865MirrorWildcardTest
 
     /**
      * Test that the mirror wildcard * matches any repo, in particular file:// repos.
+     *
+     * @throws Exception in case of failure
      */
     public void testitFileRepo()
         throws Exception
@@ -51,6 +52,8 @@ public class MavenITmng2865MirrorWildcardTest
 
     /**
      * Test that the mirror wildcard * matches any repo, in particular http://localhost repos.
+     *
+     * @throws Exception in case of failure
      */
     public void testitLocalhostRepo()
         throws Exception
@@ -60,6 +63,8 @@ public class MavenITmng2865MirrorWildcardTest
 
     /**
      * Test that the mirror wildcard * matches any repo, in particular external repos.
+     *
+     * @throws Exception in case of failure
      */
     public void testitExternalRepo()
         throws Exception
@@ -69,6 +74,8 @@ public class MavenITmng2865MirrorWildcardTest
 
     /**
      * Test that the mirror wildcard * matches any repo, in particular central.
+     *
+     * @throws Exception in case of failure
      */
     public void testitCentralRepo()
         throws Exception
@@ -92,7 +99,7 @@ public class MavenITmng2865MirrorWildcardTest
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
 
-        verifier.assertArtifactPresent( "org.apache.maven.its.mng2865", "a", "0.1", "jar" );
+        verifier.verifyArtifactPresent( "org.apache.maven.its.mng2865", "a", "0.1", "jar" );
     }
 
 }

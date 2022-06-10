@@ -19,14 +19,13 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-4086">MNG-4086</a>.
- * 
+ *
  * @author Benjamin Bentmann
  */
 public class MavenITmng4086ExplicitPluginMetaversionTest
@@ -42,6 +41,8 @@ public class MavenITmng4086ExplicitPluginMetaversionTest
     /**
      * Verify that the plugin metaversion RELEASE can be explicitly used and especially is resolved
      * to a proper version before the plugin manager creates the key for the plugin realm.
+     *
+     * @throws Exception in case of failure
      */
     public void testitRelease()
         throws Exception
@@ -60,13 +61,15 @@ public class MavenITmng4086ExplicitPluginMetaversionTest
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
 
-        verifier.assertFileNotPresent( "target/touch-latest.txt" );
-        verifier.assertFilePresent( "target/touch-release.txt" );
+        verifier.verifyFileNotPresent( "target/touch-latest.txt" );
+        verifier.verifyFilePresent( "target/touch-release.txt" );
     }
 
     /**
      * Verify that the plugin metaversion LATEST can be explicitly used and especially is resolved
      * to a proper version before the plugin manager creates the key for the plugin realm.
+     *
+     * @throws Exception in case of failure
      */
     public void testitLatest()
         throws Exception
@@ -85,8 +88,8 @@ public class MavenITmng4086ExplicitPluginMetaversionTest
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
 
-        verifier.assertFileNotPresent( "target/touch-release.txt" );
-        verifier.assertFilePresent( "target/touch-latest.txt" );
+        verifier.verifyFileNotPresent( "target/touch-release.txt" );
+        verifier.verifyFilePresent( "target/touch-latest.txt" );
     }
 
 }

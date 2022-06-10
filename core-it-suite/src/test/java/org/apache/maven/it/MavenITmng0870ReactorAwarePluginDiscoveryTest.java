@@ -21,14 +21,13 @@ package org.apache.maven.it;
 
 import java.io.File;
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-870">MNG-870</a>.
- * 
+ *
  * @author Benjamin Bentmann
- * @version $Id$
+ *
  */
 public class MavenITmng0870ReactorAwarePluginDiscoveryTest
     extends AbstractMavenIntegrationTestCase
@@ -42,6 +41,8 @@ public class MavenITmng0870ReactorAwarePluginDiscoveryTest
     /**
      * Test that the reactor can resolve plugins that have just been built by a previous module and are not yet
      * installed to the local repo.
+     *
+     * @throws Exception in case of failure
      */
     public void testitMNG0870()
         throws Exception
@@ -59,7 +60,7 @@ public class MavenITmng0870ReactorAwarePluginDiscoveryTest
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
 
-        verifier.assertFilePresent( "project/target/touch.txt" );
+        verifier.verifyFilePresent( "project/target/touch.txt" );
     }
 
 }

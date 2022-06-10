@@ -19,7 +19,6 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
@@ -27,7 +26,7 @@ import java.util.List;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-5135">MNG-5135</a>.
- * 
+ *
  * @author Benjamin Bentmann
  */
 public class MavenITmng5135AggregatorDepResolutionModuleExtensionTest
@@ -41,6 +40,8 @@ public class MavenITmng5135AggregatorDepResolutionModuleExtensionTest
 
     /**
      * Verify that dependency resolution for aggregator mojos considers the extensions that apply to a given module.
+     *
+     * @throws Exception in case of failure
      */
     public void testit()
         throws Exception

@@ -23,12 +23,12 @@ import org.apache.maven.plugin.MojoExecutionException;
 
 /**
  * Appends a string to the log file.
- * 
+ *
  * @goal log-string
  * @phase initialize
- * 
+ *
  * @author Benjamin Bentmann
- * @version $Id$
+ *
  */
 public class LogStringMojo
     extends AbstractLogMojo
@@ -36,14 +36,14 @@ public class LogStringMojo
 
     /**
      * The string to append to the log file.
-     * 
+     *
      * @parameter property="log.string"
      */
     private String string;
 
     /**
      * Runs this mojo.
-     * 
+     *
      * @throws MojoExecutionException If the output file could not be created.
      */
     public void execute()

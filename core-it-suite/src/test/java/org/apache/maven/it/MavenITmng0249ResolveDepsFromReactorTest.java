@@ -19,7 +19,6 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
@@ -27,9 +26,9 @@ import java.util.List;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-249">MNG-249</a>.
- * 
+ *
  * @author Brett Porter
- * @version $Id$
+ *
  */
 public class MavenITmng0249ResolveDepsFromReactorTest
     extends AbstractMavenIntegrationTestCase
@@ -41,6 +40,8 @@ public class MavenITmng0249ResolveDepsFromReactorTest
 
     /**
      * Test that the reactor can establish the artifact location of known projects for dependencies.
+     *
+     * @throws Exception in case of failure
      */
     public void testitMNG0249()
         throws Exception

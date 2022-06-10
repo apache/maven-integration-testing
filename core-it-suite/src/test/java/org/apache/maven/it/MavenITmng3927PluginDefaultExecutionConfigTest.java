@@ -19,16 +19,15 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-3927">MNG-3927</a>.
- * 
+ *
  * @author Benjamin Bentmann
- * @version $Id$
+ *
  */
 public class MavenITmng3927PluginDefaultExecutionConfigTest
     extends AbstractMavenIntegrationTestCase
@@ -42,6 +41,8 @@ public class MavenITmng3927PluginDefaultExecutionConfigTest
     /**
      * Test that the configuration for a plugin execution without an identifier does not pollute the configuration
      * of default plugin executions introduced by the packaging.
+     *
+     * @throws Exception in case of failure
      */
     public void testitMNG3927()
         throws Exception
@@ -55,8 +56,8 @@ public class MavenITmng3927PluginDefaultExecutionConfigTest
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
 
-        verifier.assertFileNotPresent( "target/failed.txt" );
-        verifier.assertFilePresent( "target/resources-resources.txt" );
+        verifier.verifyFileNotPresent( "target/failed.txt" );
+        verifier.verifyFilePresent( "target/resources-resources.txt" );
     }
 
 }

@@ -28,6 +28,7 @@ import org.apache.maven.wagon.TransferFailedException;
 import org.apache.maven.wagon.authentication.AuthenticationException;
 import org.apache.maven.wagon.authorization.AuthorizationException;
 import org.apache.maven.wagon.resource.Resource;
+import org.codehaus.plexus.component.annotations.Component;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -40,9 +41,8 @@ import java.util.Properties;
 
 /**
  * Shamelessly copied from ScpExternalWagon in this same project...
- *
- * @plexus.component role="org.apache.maven.wagon.Wagon" role-hint="http-coreit" instantiation-strategy="per-lookup"
  */
+@Component( role = org.apache.maven.wagon.Wagon.class,  hint = "http-coreit", instantiationStrategy = "per-lookup" )
 public class CoreItHttpWagon
     extends AbstractWagon
 {
@@ -122,7 +122,21 @@ public class CoreItHttpWagon
     {
         try
         {
-            inputData.setInputStream( new ByteArrayInputStream( "<metadata />".getBytes( "UTF-8" ) ) );
+            String resName = inputData.getResource().getName();
+            InputStream is = null;
+            if ( resName.endsWith( ".sha1" ) )
+            {
+                is = new ByteArrayInputStream( "c96e29be962f9d8123b584b8f51d66b347d268d4".getBytes( "UTF-8" ) );
+            }
+            else if ( resName.endsWith( ".md5" ) )
+            {
+                is = new ByteArrayInputStream( "d2b637ab8965308490bc6482c860dfc5".getBytes( "UTF-8" ) );
+            }
+            else
+            {
+                is = new ByteArrayInputStream( "<metadata />".getBytes( "UTF-8" ) );
+            }
+            inputData.setInputStream( is );
         }
         catch ( IOException e )
         {
@@ -170,7 +184,6 @@ public class CoreItHttpWagon
     public void openConnection()
         throws ConnectionException, AuthenticationException
     {
-        // TODO Auto-generated method stub
-
+        // ignore
     }
 }

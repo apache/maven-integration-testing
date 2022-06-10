@@ -19,7 +19,6 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 import org.codehaus.plexus.util.Os;
 
@@ -28,7 +27,7 @@ import java.util.Properties;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-4625">MNG-4625</a>.
- * 
+ *
  * @author Benjamin Bentmann
  */
 public class MavenITmng4625SettingsXmlInterpolationWithXmlMarkupTest
@@ -43,6 +42,8 @@ public class MavenITmng4625SettingsXmlInterpolationWithXmlMarkupTest
     /**
      * Verify that interpolation of the settings.xml doesn't fail if an expression's value contains
      * XML special characters.
+     *
+     * @throws Exception in case of failure
      */
     public void testit()
         throws Exception
@@ -59,7 +60,7 @@ public class MavenITmng4625SettingsXmlInterpolationWithXmlMarkupTest
         if( Os.isFamily( Os.FAMILY_WINDOWS ) && !System.getProperties().contains( "CLASSWORLDS_LAUNCHER" ) )
         {
             verifier.setSystemProperty( "test.prop", "\"&x=y<>\"" );
-            verifier.setForkJvm( true ); // force forked JVM, since the workaround expects forked run 
+            verifier.setForkJvm( true ); // force forked JVM, since the workaround expects forked run
         }
         else
         {

@@ -14,7 +14,7 @@
       <scope>test</scope>
     </dependency>
   </dependencies>
-  
+
   <build>
     <plugins>
       <plugin>
@@ -24,7 +24,7 @@
           <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>${pom.version}</version>
+            <version>${project.version}</version>
           </dependency>
         </dependencies>
       </plugin>

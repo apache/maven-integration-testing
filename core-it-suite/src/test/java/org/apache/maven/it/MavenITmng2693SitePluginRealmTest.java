@@ -19,7 +19,6 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
@@ -27,7 +26,7 @@ import java.util.Properties;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-2693">MNG-2693</a>.
- * 
+ *
  * @author Benjamin Bentmann
  */
 public class MavenITmng2693SitePluginRealmTest
@@ -41,6 +40,8 @@ public class MavenITmng2693SitePluginRealmTest
 
     /**
      * Verify that a plugin class/resource can be loaded from the plugin realm, also during the site lifecycle.
+     *
+     * @throws Exception in case of failure
      */
     public void testit()
         throws Exception

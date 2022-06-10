@@ -19,7 +19,6 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
@@ -27,7 +26,7 @@ import java.util.Properties;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-4361">MNG-4361</a>.
- * 
+ *
  * @author Benjamin Bentmann
  */
 public class MavenITmng4361ForceDependencySnapshotUpdateTest
@@ -42,6 +41,8 @@ public class MavenITmng4361ForceDependencySnapshotUpdateTest
     /**
      * Verify that snapshot updates of dependencies can be forced from the command line via "-U". In more detail,
      * this means updating the JAR and its accompanying hierarchy of POMs.
+     *
+     * @throws Exception in case of failure
      */
     public void testit()
         throws Exception
@@ -62,7 +63,7 @@ public class MavenITmng4361ForceDependencySnapshotUpdateTest
         verifier.executeGoal( "validate" );
         verifier.verifyErrorFreeLog();
 
-        assertEquals( null, verifier.loadProperties( "target/checksum.properties" ).getProperty( "b-0.1-SNAPSHOT.jar" ) );
+        assertNull( verifier.loadProperties( "target/checksum.properties" ).getProperty( "b-0.1-SNAPSHOT.jar" ) );
 
         filterProps.setProperty( "@repo@", "repo-2" );
         verifier.filterFile( "settings-template.xml", "settings.xml", "UTF-8", filterProps );

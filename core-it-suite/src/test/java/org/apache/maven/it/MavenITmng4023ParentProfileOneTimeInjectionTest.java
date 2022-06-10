@@ -19,7 +19,6 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
@@ -27,9 +26,9 @@ import java.util.Properties;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-4023">MNG-4023</a>.
- * 
+ *
  * @author Benjamin Bentmann
- * @version $Id$
+ *
  */
 public class MavenITmng4023ParentProfileOneTimeInjectionTest
     extends AbstractMavenIntegrationTestCase
@@ -44,6 +43,8 @@ public class MavenITmng4023ParentProfileOneTimeInjectionTest
      * Verify that profiles in a parent are only injected once during a reactor build that include the parent
      * itself. The parent being part of the reactor makes it subject to project caching and proper use of the
      * cache is crucial here.
+     *
+     * @throws Exception in case of failure
      */
     public void testitMNG4023()
         throws Exception
@@ -60,7 +61,7 @@ public class MavenITmng4023ParentProfileOneTimeInjectionTest
         Properties props = verifier.loadProperties( "sub/target/config.properties" );
         assertEquals( "1", props.getProperty( "stringParams" ) );
         assertEquals( "test", props.getProperty( "stringParams.0" ) );
-        assertEquals( null, props.getProperty( "stringParams.1" ) );
+        assertNull( props.getProperty( "stringParams.1" ) );
     }
 
 }

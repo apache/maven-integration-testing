@@ -20,19 +20,18 @@ package org.apache.maven.it;
  */
 
 import org.apache.maven.it.util.ResourceExtractor;
-import org.apache.maven.it.Verifier;
 
 import java.io.File;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-3536">MNG-3536</a>.
- * 
- * @version $Id$
+ *
+ *
  */
 public class MavenITmng3536AppendedAbsolutePathsTest
     extends AbstractMavenIntegrationTestCase
 {
-    
+
     public MavenITmng3536AppendedAbsolutePathsTest()
     {
         super( "[2.1.0-M1,)"); // 2.1.0+ only

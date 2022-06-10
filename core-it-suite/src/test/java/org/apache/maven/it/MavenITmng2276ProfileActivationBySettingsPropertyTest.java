@@ -19,7 +19,6 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
@@ -27,7 +26,7 @@ import java.util.Properties;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-2276">MNG-2276</a>.
- * 
+ *
  * @author Benjamin Bentmann
  */
 public class MavenITmng2276ProfileActivationBySettingsPropertyTest
@@ -41,6 +40,8 @@ public class MavenITmng2276ProfileActivationBySettingsPropertyTest
 
     /**
      * Test that profiles in the POM can be activated by properties declared in active profiles from the settings.
+     *
+     * @throws Exception in case of failure
      */
     public void testitActivation()
         throws Exception
@@ -64,6 +65,8 @@ public class MavenITmng2276ProfileActivationBySettingsPropertyTest
 
     /**
      * Tests that system properties defined on the CLI are dominant over settings properties during profile activation.
+     *
+     * @throws Exception in case of failure
      */
     public void testitCliWins()
         throws Exception

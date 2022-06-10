@@ -25,7 +25,7 @@ import java.io.File;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-5503">MNG-5418</a>.
- * 
+ *
  * @author jvz
  */
 public class MavenITmng5503ZipInReactorTest
@@ -40,6 +40,8 @@ public class MavenITmng5503ZipInReactorTest
     /**
      * Test that zip attached in the assembly plugin is found in the reactor. Simply running verify is sufficient to know that
      * it is found with this project setup.
+     *
+     * @throws Exception in case of failure
      */
     public void testit()
         throws Exception

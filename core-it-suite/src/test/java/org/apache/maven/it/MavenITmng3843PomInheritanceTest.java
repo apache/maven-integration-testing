@@ -26,11 +26,13 @@ import java.util.Collection;
 import java.util.Properties;
 import java.util.TreeSet;
 
+import static org.junit.Assert.assertNotEquals;
+
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-3843">MNG-3843</a>.
  *
  * @author Benjamin Bentmann
- * @version $Id$
+ *
  */
 public class MavenITmng3843PomInheritanceTest
     extends AbstractMavenIntegrationTestCase
@@ -43,6 +45,8 @@ public class MavenITmng3843PomInheritanceTest
 
     /**
      * Test various inheritance scenarios.
+     *
+     * @throws Exception in case of failure
      */
     public void testitMNG3843()
         throws Exception
@@ -95,11 +99,25 @@ public class MavenITmng3843PomInheritanceTest
         assertPathEquals( basedir, "src/main/java", props.getProperty( "project.build.sourceDirectory" ) );
         assertPathEquals( basedir, "src/test/java", props.getProperty( "project.build.testSourceDirectory" ) );
         assertPathEquals( basedir, "src/main/scripts", props.getProperty( "project.build.scriptSourceDirectory" ) );
-        assertEquals( "1", props.getProperty( "project.build.resources" ) );
+        if ( matchesVersionRange( "[4.0.0-alpha-1,)" ) )
+        {
+            assertEquals( "2", props.getProperty( "project.build.resources" ) );
+            assertEquals( "2", props.getProperty( "project.build.testResources" ) );
+        }
+        else
+        {
+            assertEquals( "1", props.getProperty( "project.build.resources" ) );
+            assertEquals( "1", props.getProperty( "project.build.testResources" ) );
+        }
         assertPathEquals( basedir, "src/main/resources", props.getProperty( "project.build.resources.0.directory" ) );
-        assertEquals( "1", props.getProperty( "project.build.testResources" ) );
         assertPathEquals( basedir, "src/test/resources",
                           props.getProperty( "project.build.testResources.0.directory" ) );
+        if ( matchesVersionRange( "[4.0.0-alpha-1,)" ) )
+        {
+            assertPathEquals( basedir, "src/main/resources-filtered", props.getProperty( "project.build.resources.1.directory" ) );
+            assertPathEquals( basedir, "src/test/resources-filtered",
+                              props.getProperty( "project.build.testResources.1.directory" ) );
+        }
         assertPathEquals( basedir, "target", props.getProperty( "project.build.directory" ) );
         assertPathEquals( basedir, "target/classes", props.getProperty( "project.build.outputDirectory" ) );
         assertPathEquals( basedir, "target/test-classes", props.getProperty( "project.build.testOutputDirectory" ) );
@@ -123,7 +141,7 @@ public class MavenITmng3843PomInheritanceTest
         assertEquals( "child-1", props.getProperty( "project.artifactId" ) );
         assertEquals( "0.1", props.getProperty( "project.version" ) );
         assertEquals( "jar", props.getProperty( "project.packaging" ) );
-        assertFalse( "parent-name".equals( props.getProperty( "project.name" ) ) );
+        assertNotEquals( "parent-name", props.getProperty( "project.name" ) );
         assertEquals( "parent-description", props.getProperty( "project.description", "" ) );
         assertUrlCommon( "http://parent.url", props.getProperty( "project.url", "" ) );
         assertEquals( "2008", props.getProperty( "project.inceptionYear", "" ) );

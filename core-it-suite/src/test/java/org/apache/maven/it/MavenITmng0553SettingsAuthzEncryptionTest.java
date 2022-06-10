@@ -19,7 +19,6 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
@@ -27,18 +26,25 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Properties;
 
-import org.mortbay.jetty.Server;
-import org.mortbay.jetty.handler.DefaultHandler;
-import org.mortbay.jetty.handler.HandlerList;
-import org.mortbay.jetty.handler.ResourceHandler;
-import org.mortbay.jetty.security.Constraint;
-import org.mortbay.jetty.security.ConstraintMapping;
-import org.mortbay.jetty.security.HashUserRealm;
-import org.mortbay.jetty.security.SecurityHandler;
+import org.eclipse.jetty.security.ConstraintSecurityHandler;
+import org.eclipse.jetty.security.HashLoginService;
+import org.eclipse.jetty.server.NetworkConnector;
+import org.eclipse.jetty.server.Server;
+import org.eclipse.jetty.server.handler.DefaultHandler;
+import org.eclipse.jetty.server.handler.HandlerList;
+import org.eclipse.jetty.server.handler.ResourceHandler;
+import org.eclipse.jetty.util.security.Constraint;
+import org.eclipse.jetty.security.ConstraintMapping;
+import org.eclipse.jetty.util.security.Password;
+import org.eclipse.jetty.servlet.ServletContextHandler;
+
+import static org.eclipse.jetty.servlet.ServletContextHandler.SECURITY;
+import static org.eclipse.jetty.servlet.ServletContextHandler.SESSIONS;
+import static org.eclipse.jetty.util.security.Constraint.__BASIC_AUTH;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-553">MNG-553</a>.
- * 
+ *
  * @author Benjamin Bentmann
  */
 public class MavenITmng0553SettingsAuthzEncryptionTest
@@ -56,28 +62,27 @@ public class MavenITmng0553SettingsAuthzEncryptionTest
         super( "[2.1.0,3.0-alpha-1),[3.0-alpha-3,)" );
     }
 
-    public void setUp()
+    @Override
+    protected void setUp()
         throws Exception
     {
-        super.setUp();
-
         testDir = ResourceExtractor.simpleExtractResources( getClass(), "/mng-0553" );
 
-        Constraint constraint = new Constraint();
-        constraint.setName( Constraint.__BASIC_AUTH );
-        constraint.setRoles( new String[] { "user" } );
+        Constraint constraint = new Constraint( __BASIC_AUTH, "user" );
         constraint.setAuthenticate( true );
 
         ConstraintMapping constraintMapping = new ConstraintMapping();
         constraintMapping.setConstraint( constraint );
         constraintMapping.setPathSpec( "/*" );
 
-        HashUserRealm userRealm = new HashUserRealm( "TestRealm" );
-        userRealm.put( "testuser", "testtest" );
-        userRealm.addUserToRole( "testuser", "user" );
+        HashLoginService userRealm = new HashLoginService( "TestRealm" );
+        userRealm.putUser( "testuser", new Password( "testtest" ), new String[] { "user" } );
 
-        SecurityHandler securityHandler = new SecurityHandler();
-        securityHandler.setUserRealm( userRealm );
+        server = new Server( 0 );
+        ServletContextHandler ctx = new ServletContextHandler( server, "/", SESSIONS | SECURITY );
+        ConstraintSecurityHandler securityHandler = (ConstraintSecurityHandler) ctx.getSecurityHandler();
+        securityHandler.setLoginService( userRealm );
+        securityHandler.setAuthMethod( __BASIC_AUTH );
         securityHandler.setConstraintMappings( new ConstraintMapping[] { constraintMapping } );
 
         ResourceHandler repoHandler = new ResourceHandler();
@@ -88,27 +93,31 @@ public class MavenITmng0553SettingsAuthzEncryptionTest
         handlerList.addHandler( repoHandler );
         handlerList.addHandler( new DefaultHandler() );
 
-        server = new Server( 0 );
         server.setHandler( handlerList );
         server.start();
-
-        port = server.getConnectors()[0].getLocalPort();
+        if ( server.isFailed() )
+        {
+            fail( "Couldn't bind the server socket to a free port!" );
+        }
+        port = ( (NetworkConnector) server.getConnectors()[0] ).getLocalPort();
+        System.out.println( "Bound server socket to the port " + port );
     }
 
+    @Override
     protected void tearDown()
         throws Exception
     {
         if ( server != null )
         {
             server.stop();
-            server = null;
+            server.join();
         }
-
-        super.tearDown();
     }
 
     /**
      * Test that the encrypted auth infos given in the settings.xml are decrypted.
+     *
+     * @throws Exception in case of failure
      */
     public void testitBasic()
         throws Exception
@@ -121,7 +130,7 @@ public class MavenITmng0553SettingsAuthzEncryptionTest
         Verifier verifier = newVerifier( testDir.getAbsolutePath() );
         verifier.setAutoclean( false );
         verifier.deleteArtifacts( "org.apache.maven.its.mng0553" );
-        verifier.assertArtifactNotPresent( "org.apache.maven.its.mng0553", "a", "0.1-SNAPSHOT", "jar" );
+        verifier.verifyArtifactNotPresent( "org.apache.maven.its.mng0553", "a", "0.1-SNAPSHOT", "jar" );
         verifier.filterFile( "settings-template.xml", "settings.xml", "UTF-8", filterProps );
         setUserHome( verifier, new File( testDir, "userhome" ) );
         verifier.addCliOption( "--settings" );
@@ -130,12 +139,14 @@ public class MavenITmng0553SettingsAuthzEncryptionTest
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
 
-        verifier.assertArtifactPresent( "org.apache.maven.its.mng0553", "a", "0.1-SNAPSHOT", "jar" );
+        verifier.verifyArtifactPresent( "org.apache.maven.its.mng0553", "a", "0.1-SNAPSHOT", "jar" );
     }
 
     /**
      * Test that the encrypted auth infos given in the settings.xml are decrypted when the master password resides
      * in an external file.
+     *
+     * @throws Exception in case of failure
      */
     public void testitRelocation()
         throws Exception
@@ -151,13 +162,13 @@ public class MavenITmng0553SettingsAuthzEncryptionTest
         Verifier verifier = newVerifier( testDir.getAbsolutePath() );
         verifier.setAutoclean( false );
         verifier.deleteArtifacts( "org.apache.maven.its.mng0553" );
-        verifier.assertArtifactNotPresent( "org.apache.maven.its.mng0553", "a", "0.1-SNAPSHOT", "jar" );
+        verifier.verifyArtifactNotPresent( "org.apache.maven.its.mng0553", "a", "0.1-SNAPSHOT", "jar" );
 
         // NOTE: The tilde ~ in the file name is essential part of the test
         verifier.filterFile( "security-template.xml", "settings~security.xml", "UTF-8", filterProps );
         verifier.filterFile( "settings-template.xml", "settings.xml", "UTF-8", filterProps );
 
-        verifier.getSystemProperties().setProperty( "settings.security", 
+        verifier.getSystemProperties().setProperty( "settings.security",
             new File( testDir, "settings~security.xml" ).getAbsolutePath() );
         verifier.addCliOption( "--settings" );
         verifier.addCliOption( "settings.xml" );
@@ -166,11 +177,13 @@ public class MavenITmng0553SettingsAuthzEncryptionTest
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
 
-        verifier.assertArtifactPresent( "org.apache.maven.its.mng0553", "a", "0.1-SNAPSHOT", "jar" );
+        verifier.verifyArtifactPresent( "org.apache.maven.its.mng0553", "a", "0.1-SNAPSHOT", "jar" );
     }
 
     /**
      * Test that the CLI supports generation of encrypted (master) passwords.
+     *
+     * @throws Exception in case of failure
      */
     public void testitEncryption()
         throws Exception
@@ -215,7 +228,7 @@ public class MavenITmng0553SettingsAuthzEncryptionTest
                 return line;
             }
         }
-        
+
         return null;
     }
 
@@ -232,5 +245,4 @@ public class MavenITmng0553SettingsAuthzEncryptionTest
             verifier.setEnvironmentVariable( "MAVEN_OPTS", "\"-Duser.home=" + path + "\"" );
         }
     }
-
 }

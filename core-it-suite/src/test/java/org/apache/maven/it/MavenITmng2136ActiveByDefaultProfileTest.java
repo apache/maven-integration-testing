@@ -19,7 +19,6 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
@@ -27,8 +26,8 @@ import java.util.Properties;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-2136">MNG-2136</a>.
- * 
- * @version $Id$
+ *
+ *
  */
 public class MavenITmng2136ActiveByDefaultProfileTest
     extends AbstractMavenIntegrationTestCase
@@ -41,6 +40,8 @@ public class MavenITmng2136ActiveByDefaultProfileTest
     /**
      * Test that &lt;activeByDefault/&gt; calculations for profile activation only
      * use profiles defined in the POM. [MNG-2136]
+     *
+     * @throws Exception in case of failure
      */
     public void testitMNG2136()
         throws Exception
@@ -59,7 +60,7 @@ public class MavenITmng2136ActiveByDefaultProfileTest
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
 
-        verifier.assertFilePresent( "target/expression.properties" );
+        verifier.verifyFilePresent( "target/expression.properties" );
         Properties props = verifier.loadProperties( "target/expression.properties" );
         assertNull( props.getProperty( "project.properties.it0102.testOutput" ) );
         assertEquals( "Success", props.getProperty( "project.properties.testOutput" ) );

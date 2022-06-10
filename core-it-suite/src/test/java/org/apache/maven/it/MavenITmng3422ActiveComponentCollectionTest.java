@@ -19,17 +19,18 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
 import java.util.Properties;
 
+import static org.junit.Assert.assertNotEquals;
+
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-3422">MNG-3422</a>.
- * 
+ *
  * @author Benjamin Bentmann
- * @version $Id$
+ *
  */
 public class MavenITmng3422ActiveComponentCollectionTest
     extends AbstractMavenIntegrationTestCase
@@ -42,6 +43,8 @@ public class MavenITmng3422ActiveComponentCollectionTest
 
     /**
      * Verify that active collections of core components are properly injected into plugins.
+     *
+     * @throws Exception in case of failure
      */
     public void testitMNG3422()
         throws Exception
@@ -56,8 +59,8 @@ public class MavenITmng3422ActiveComponentCollectionTest
         verifier.resetStreams();
 
         Properties props = verifier.loadProperties( "target/layout.properties" );
-        assertFalse( "0".equals( props.getProperty( "layouts", "0" ) ) );
-        assertFalse( "".equals( props.getProperty( "layouts.default", "" ) ) );
+        assertNotEquals( "0", props.getProperty( "layouts", "0" ) );
+        assertNotEquals( "", props.getProperty( "layouts.default", "" ) );
     }
 
 }

@@ -19,7 +19,7 @@ under the License.
 Maven Core Integration Tests
 ========
 
-<http://maven.apache.org/core-its/>
+<https://maven.apache.org/core-its/>
 
 If you want to run the integration tests against a custom build of Maven use the following command:
 
@@ -32,5 +32,11 @@ or if behind a proxy
 ```
 mvn clean install -Prun-its -Dmaven.repo.local=`pwd`/repo -DmavenDistro=/path/to/apache-maven-dist.zip -Dproxy.active=true -Dproxy.type=http -Dproxy.host=... -Dproxy.port=... -Dproxy.user=... -Dproxy.pass=...
 ```
+
+Using the script 
+
+Build Maven core with the profile `-PversionlessMavenDist`
+
+Now Run the script: `sh ./run-its.sh` 
 
 Maven Developers List: dev@maven.apache.org

@@ -19,7 +19,6 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
@@ -27,7 +26,7 @@ import java.util.List;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-4779">MNG-4779</a>.
- * 
+ *
  * @author Benjamin Bentmann
  */
 public class MavenITmng4779MultipleDepsWithVersionRangeFromLocalRepoTest
@@ -42,6 +41,8 @@ public class MavenITmng4779MultipleDepsWithVersionRangeFromLocalRepoTest
     /**
      * Test that dependency resolution doesn't error out when a dependency with a range satisfied from the local repo
      * is seen more than once during the collection.
+     *
+     * @throws Exception in case of failure
      */
     public void testit()
         throws Exception

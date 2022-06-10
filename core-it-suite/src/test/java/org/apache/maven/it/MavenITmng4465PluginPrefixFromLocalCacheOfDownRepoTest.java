@@ -26,7 +26,7 @@ import org.apache.maven.it.util.ResourceExtractor;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-4465">MNG-4465</a>.
- * 
+ *
  * @author Benjamin Bentmann
  */
 public class MavenITmng4465PluginPrefixFromLocalCacheOfDownRepoTest
@@ -41,6 +41,8 @@ public class MavenITmng4465PluginPrefixFromLocalCacheOfDownRepoTest
     /**
      * Verify that locally cached metadata of non-accessible remote repos is still considered when resolving
      * plugin prefixes.
+     *
+     * @throws Exception in case of failure
      */
     public void testit()
         throws Exception
@@ -61,14 +63,14 @@ public class MavenITmng4465PluginPrefixFromLocalCacheOfDownRepoTest
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
 
-        verifier.assertFilePresent( "target/touch.properties" );
+        verifier.verifyFilePresent( "target/touch.properties" );
 
         // phase 2: re-try with the remote repo being inaccessible (due to bad URL)
 
         verifier = newVerifier( testDir.getAbsolutePath() );
         verifier.setAutoclean( false );
         verifier.deleteDirectory( "target" );
-        verifier.filterFile( "settings-template.xml", "settings.xml", "UTF-8", 
+        verifier.filterFile( "settings-template.xml", "settings.xml", "UTF-8",
             Collections.singletonMap( "@baseurl@", "bad://localhost:63412" ) );
         verifier.setLogFileName( "log2.txt" );
         verifier.addCliOption( "-s" );
@@ -77,7 +79,7 @@ public class MavenITmng4465PluginPrefixFromLocalCacheOfDownRepoTest
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
 
-        verifier.assertFilePresent( "target/touch.properties" );
+        verifier.verifyFilePresent( "target/touch.properties" );
     }
 
 }

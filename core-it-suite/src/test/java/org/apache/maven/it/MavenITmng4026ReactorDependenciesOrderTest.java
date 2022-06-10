@@ -19,7 +19,6 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
@@ -27,9 +26,9 @@ import java.util.List;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-4026">MNG-4026</a>.
- * 
+ *
  * @author Benjamin Bentmann
- * @version $Id$
+ *
  */
 public class MavenITmng4026ReactorDependenciesOrderTest
     extends AbstractMavenIntegrationTestCase
@@ -44,6 +43,8 @@ public class MavenITmng4026ReactorDependenciesOrderTest
     /**
      * Verify that the project class path is properly ordered during a reactor build, i.e. when dependencies are
      * resolved as active project artifacts from the reactor.
+     *
+     * @throws Exception in case of failure
      */
     public void testitMNG4026()
         throws Exception

@@ -19,16 +19,15 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-377">MNG-377</a>.
- * 
+ *
  * @author John Casey
- * @version $Id$
+ *
  */
 public class MavenITmng0377PluginLookupFromPrefixTest
     extends AbstractMavenIntegrationTestCase
@@ -41,6 +40,8 @@ public class MavenITmng0377PluginLookupFromPrefixTest
     /**
      * Test usage of plugins.xml mapping file on the repository to resolve plugin artifactId from it's prefix using the
      * pluginGroups in the provided settings.xml.
+     *
+     * @throws Exception in case of failure
      */
     public void testitMNG377()
         throws Exception
@@ -59,7 +60,7 @@ public class MavenITmng0377PluginLookupFromPrefixTest
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
 
-        verifier.assertFilePresent( "target/file.txt" );
+        verifier.verifyFilePresent( "target/file.txt" );
     }
 
 }

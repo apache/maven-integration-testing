@@ -19,7 +19,6 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
@@ -27,9 +26,9 @@ import java.util.Properties;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-3714">MNG-3714</a>.
- * 
+ *
  * @author Brett Porter
- * @version $Id$
+ *
  */
 public class MavenITmng3714ToolchainsCliOptionTest
     extends AbstractMavenIntegrationTestCase
@@ -41,6 +40,8 @@ public class MavenITmng3714ToolchainsCliOptionTest
 
     /**
      * Test --toolchains CLI option
+     *
+     * @throws Exception in case of failure
      */
     public void testitMNG3714()
         throws Exception
@@ -52,7 +53,7 @@ public class MavenITmng3714ToolchainsCliOptionTest
         new File( javaHome, "bin" ).mkdirs();
         new File( javaHome, "bin/javac").createNewFile();
         new File( javaHome, "bin/javac.exe").createNewFile();
-        
+
         Verifier verifier = newVerifier( testDir.getAbsolutePath() );
         Properties properties = verifier.newDefaultFilterProperties();
         properties.setProperty( "@javaHome@", javaHome.getAbsolutePath() );
@@ -66,7 +67,7 @@ public class MavenITmng3714ToolchainsCliOptionTest
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
 
-        verifier.assertFilePresent( "target/toolchains.properties" );
+        verifier.verifyFilePresent( "target/toolchains.properties" );
         Properties results = verifier.loadProperties( "target/toolchains.properties" );
         String tool = results.getProperty( "tool.1", "" );
         if ( tool.endsWith( ".exe" ) )
@@ -75,7 +76,7 @@ public class MavenITmng3714ToolchainsCliOptionTest
         }
         assertEquals( new File( javaHome, "bin/javac" ).getAbsolutePath(), tool );
 
-        verifier.assertFilePresent( "target/tool.properties" );
+        verifier.verifyFilePresent( "target/tool.properties" );
         Properties toolProps = verifier.loadProperties( "target/tool.properties" );
         String path = toolProps.getProperty( "tool.javac", "" );
         assertEquals( results.getProperty( "tool.1", "" ), path );

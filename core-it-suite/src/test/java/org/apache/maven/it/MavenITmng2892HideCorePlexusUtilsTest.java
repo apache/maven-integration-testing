@@ -19,7 +19,6 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
@@ -27,9 +26,9 @@ import java.util.Properties;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-2892">MNG-2892</a>.
- * 
+ *
  * @author Benjamin Bentmann
- * @version $Id$
+ *
  */
 public class MavenITmng2892HideCorePlexusUtilsTest
     extends AbstractMavenIntegrationTestCase
@@ -43,6 +42,8 @@ public class MavenITmng2892HideCorePlexusUtilsTest
     /**
      * Verify that plugins can use their own version of plexus-utils and are not bound to the version bundled in the
      * core.
+     *
+     * @throws Exception in case of failure
      */
     public void testitMNG2892()
         throws Exception

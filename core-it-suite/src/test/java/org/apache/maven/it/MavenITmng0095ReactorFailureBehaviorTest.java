@@ -19,16 +19,15 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-95">MNG-95</a>.
- * 
+ *
  * @author John Casey
- * @version $Id$
+ *
  */
 public class MavenITmng0095ReactorFailureBehaviorTest
     extends AbstractMavenIntegrationTestCase
@@ -40,7 +39,9 @@ public class MavenITmng0095ReactorFailureBehaviorTest
 
     /**
      * Test fail-fast reactor behavior. Forces an exception to be thrown in
-     * the first module and checks that the second & third module is not built and the overall build fails, too.
+     * the first module and checks that the second &amp; third module is not built and the overall build fails, too.
+     *
+     * @throws Exception in case of failure
      */
     public void testitFailFast()
         throws Exception
@@ -66,15 +67,17 @@ public class MavenITmng0095ReactorFailureBehaviorTest
         }
         verifier.resetStreams();
 
-        verifier.assertFilePresent( "target/touch.txt" );
-        verifier.assertFileNotPresent( "subproject1/target/touch.txt" );
-        verifier.assertFileNotPresent( "subproject2/target/touch.txt" );
-        verifier.assertFileNotPresent( "subproject3/target/touch.txt" );
+        verifier.verifyFilePresent( "target/touch.txt" );
+        verifier.verifyFileNotPresent( "subproject1/target/touch.txt" );
+        verifier.verifyFileNotPresent( "subproject2/target/touch.txt" );
+        verifier.verifyFileNotPresent( "subproject3/target/touch.txt" );
     }
 
     /**
      * Test fail-never reactor behavior. Forces an exception to be thrown in
-     * the first module, but checks that the second & third module is built and the overall build succeeds.
+     * the first module, but checks that the second &amp; third module is built and the overall build succeeds.
+     *
+     * @throws Exception in case of failure
      */
     public void testitFailNever()
         throws Exception
@@ -92,16 +95,18 @@ public class MavenITmng0095ReactorFailureBehaviorTest
         verifier.executeGoal( "org.apache.maven.its.plugins:maven-it-plugin-touch:touch" );
         verifier.resetStreams();
 
-        verifier.assertFilePresent( "target/touch.txt" );
-        verifier.assertFileNotPresent( "subproject1/target/touch.txt" );
-        verifier.assertFilePresent( "subproject2/target/touch.txt" );
-        verifier.assertFilePresent( "subproject3/target/touch.txt" );
+        verifier.verifyFilePresent( "target/touch.txt" );
+        verifier.verifyFileNotPresent( "subproject1/target/touch.txt" );
+        verifier.verifyFilePresent( "subproject2/target/touch.txt" );
+        verifier.verifyFilePresent( "subproject3/target/touch.txt" );
     }
 
     /**
      * Test fail-at-end reactor behavior. Forces an exception to be thrown in
      * the first module and checks that the second module is still built but the overall build finally fails
      * and the third module (which depends on the failed module) is skipped.
+     *
+     * @throws Exception in case of failure
      */
     public void testitFailAtEnd()
         throws Exception
@@ -127,10 +132,10 @@ public class MavenITmng0095ReactorFailureBehaviorTest
         }
         verifier.resetStreams();
 
-        verifier.assertFilePresent( "target/touch.txt" );
-        verifier.assertFileNotPresent( "subproject1/target/touch.txt" );
-        verifier.assertFilePresent( "subproject2/target/touch.txt" );
-        verifier.assertFileNotPresent( "subproject3/target/touch.txt" );
+        verifier.verifyFilePresent( "target/touch.txt" );
+        verifier.verifyFileNotPresent( "subproject1/target/touch.txt" );
+        verifier.verifyFilePresent( "subproject2/target/touch.txt" );
+        verifier.verifyFileNotPresent( "subproject3/target/touch.txt" );
     }
 
 }

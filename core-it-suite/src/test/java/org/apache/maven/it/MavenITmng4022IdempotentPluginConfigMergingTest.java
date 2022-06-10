@@ -19,7 +19,6 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
@@ -27,7 +26,7 @@ import java.util.Properties;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-4022">MNG-4022</a>.
- * 
+ *
  * @author Benjamin Bentmann
  */
 public class MavenITmng4022IdempotentPluginConfigMergingTest
@@ -42,6 +41,8 @@ public class MavenITmng4022IdempotentPluginConfigMergingTest
     /**
      * Test that merging of equal plugin configuration is idempotent. This is especially interesting for lists with
      * empty elements.
+     *
+     * @throws Exception in case of failure
      */
     public void testit()
         throws Exception

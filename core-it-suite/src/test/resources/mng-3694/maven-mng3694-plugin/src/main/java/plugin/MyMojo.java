@@ -30,24 +30,24 @@ import org.apache.maven.project.MavenProject;
 public class MyMojo
     extends AbstractMojo
 {
-	
-	/**
-	 * Not used, just an offset to place reactorProjects in the middle.
-	 * @parameter default-value="${project.build.directory}"
-	 */
-	private String outputDirectory;
-	
+
+    /**
+     * Not used, just an offset to place reactorProjects in the middle.
+     * @parameter default-value="${project.build.directory}"
+     */
+    private String outputDirectory;
+
     /**
      * @parameter expression="${reactorProjects}"
      * @required
      */
     private List reactorProjects;
 
-	/**
-	 * Not used, just an offset to place reactorProjects in the middle.
-	 * @parameter default-value="${project.build.directory}"
-	 */
-	private String outputDirectory2;
+    /**
+     * Not used, just an offset to place reactorProjects in the middle.
+     * @parameter default-value="${project.build.directory}"
+     */
+    private String outputDirectory2;
 
     public void execute()
         throws MojoExecutionException
@@ -55,15 +55,15 @@ public class MyMojo
         for ( Iterator it = reactorProjects.iterator(); it.hasNext(); )
         {
             MavenProject project = (MavenProject) it.next();
-            
+
             String basedir = project.getBasedir().getAbsolutePath();
             List compileSourceRoots = project.getCompileSourceRoots();
-            
+
             System.out.println( " Compile-source roots for project: " + project + " are: " + project.getCompileSourceRoots() );
             for ( Iterator srcIt = compileSourceRoots.iterator(); srcIt.hasNext(); )
             {
                 String srcRoot = (String) srcIt.next();
-                
+
                 if ( !srcRoot.startsWith( basedir ) )
                 {
                     throw new MojoExecutionException( "Source root: " + srcRoot + " doesn't begin with project basedir: " + basedir );

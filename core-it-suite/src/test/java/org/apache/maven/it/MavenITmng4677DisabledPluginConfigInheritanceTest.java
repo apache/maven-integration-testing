@@ -19,7 +19,6 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
@@ -28,7 +27,7 @@ import java.util.List;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-4677">MNG-4677</a>.
- * 
+ *
  * @author Benjamin Bentmann
  */
 public class MavenITmng4677DisabledPluginConfigInheritanceTest
@@ -42,6 +41,8 @@ public class MavenITmng4677DisabledPluginConfigInheritanceTest
 
     /**
      * Verify that the plugin-level configuration is not inherited if inherited=false is set.
+     *
+     * @throws Exception in case of failure
      */
     public void testit()
         throws Exception

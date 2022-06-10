@@ -19,7 +19,6 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
@@ -27,8 +26,8 @@ import java.util.Properties;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-1415">MNG-1415</a>.
- * 
- * @version $Id$
+ *
+ *
  */
 public class MavenITmng1415QuotedSystemPropertiesTest
     extends AbstractMavenIntegrationTestCase
@@ -40,6 +39,8 @@ public class MavenITmng1415QuotedSystemPropertiesTest
 
     /**
      * Test that quoted system properties are processed correctly. [MNG-1415]
+     *
+     * @throws Exception in case of failure
      */
     public void testitMNG1415()
         throws Exception

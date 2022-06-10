@@ -22,14 +22,13 @@ package org.apache.maven.it;
 import java.io.File;
 import java.util.Properties;
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-3760">MNG-3760</a>.
- * 
+ *
  * @author Brett Porter
- * @version $Id$
+ *
  */
 public class MavenITmng3760BaseUriPropertyTest
     extends AbstractMavenIntegrationTestCase
@@ -37,7 +36,7 @@ public class MavenITmng3760BaseUriPropertyTest
 
     public MavenITmng3760BaseUriPropertyTest()
     {
-        super( "(2.1.0-M1,3.0-alpha-1),(3.0-alpha-2,)" ); // 2.1.0-M2+
+        super( "(2.1.0-M1,3.0-alpha-1),(3.0-alpha-2,3.5.4)" ); // 2.1.0-M2+
     }
 
     public void testitMNG3760()

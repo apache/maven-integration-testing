@@ -32,13 +32,13 @@ import ${package}.util.ResourceExtractor;
 /**
  * This is a sample integration test. The IT tests typically
  * operate by having a sample project in the
- * /src/test/resources folder along with a junit test like
+ * /src/test/resources directory along with a junit test like
  * this one. The junit test uses the verifier (which uses
  * the invoker) to invoke a new instance of Maven on the
- * project in the resources folder. It then checks the
+ * project in the resources directory. It then checks the
  * results. This is a non-trivial example that shows two
  * phases. See more information inline in the code.
- * 
+ *
  * @author <a href="mailto:brianf@apache.org">Brian Fox</a>
  * @version ${symbol_dollar}Id: MavenITmngXXXXDescriptionOfProblemTest.java 707999 2008-10-26 14:42:38Z bentmann ${symbol_dollar}
  */

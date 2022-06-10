@@ -21,24 +21,23 @@ package org.apache.maven.it;
 
 import java.io.File;
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-3743">MNG-3743</a>.
  *
- * @todo Fill in a better description of what this test verifies!
- * 
+ * todo Fill in a better description of what this test verifies!
+ *
  * @author <a href="mailto:brianf@apache.org">Brian Fox</a>
  * @author jdcasey
- * 
+ *
  */
 public class MavenITmng3743ForkWithPluginManagementTest
     extends AbstractMavenIntegrationTestCase
 {
     public MavenITmng3743ForkWithPluginManagementTest()
     {
-        super( "(2.0.8,3.1-SNAPSHOT)" ); // only test in 2.0.9+
+        super( "(2.0.8,3.1)" ); // only test in 2.0.9+
     }
 
     public void testitMNG3743 ()
@@ -53,7 +52,7 @@ public class MavenITmng3743ForkWithPluginManagementTest
         verifier.executeGoal( "install" );
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
-        
+
         verifier = newVerifier( projectDir.getAbsolutePath(), "remote" );
         verifier.executeGoal( "site" );
         verifier.verifyErrorFreeLog();

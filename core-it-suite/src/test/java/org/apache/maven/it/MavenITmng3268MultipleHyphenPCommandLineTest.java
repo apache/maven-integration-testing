@@ -19,7 +19,6 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
@@ -27,7 +26,7 @@ import java.io.File;
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-3268">MNG-3268</a>.
  *
- * @version $Id$
+ *
  */
 public class MavenITmng3268MultipleHyphenPCommandLineTest
     extends AbstractMavenIntegrationTestCase
@@ -53,10 +52,10 @@ public class MavenITmng3268MultipleHyphenPCommandLineTest
         verifier.executeGoal( "package" );
 
         verifier.verifyErrorFreeLog();
-        verifier.assertFilePresent( "target/profile1/touch.txt" );
-        verifier.assertFilePresent( "target/profile2/touch.txt" );
-        verifier.assertFilePresent( "target/profile3/touch.txt" );
-        verifier.assertFilePresent( "target/profile4/touch.txt" );
+        verifier.verifyFilePresent( "target/profile1/touch.txt" );
+        verifier.verifyFilePresent( "target/profile2/touch.txt" );
+        verifier.verifyFilePresent( "target/profile3/touch.txt" );
+        verifier.verifyFilePresent( "target/profile4/touch.txt" );
         verifier.resetStreams();
     }
 

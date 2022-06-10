@@ -32,7 +32,6 @@ import java.util.Properties;
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-3732">MNG-3732</a>.
  *
  * @author Benjamin Bentmann
- * @version $Id$
  */
 public class MavenITmng3732ActiveProfilesTest
     extends AbstractMavenIntegrationTestCase
@@ -45,6 +44,8 @@ public class MavenITmng3732ActiveProfilesTest
 
     /**
      * Verify that MavenProject.getActiveProfiles() includes profiles from all sources.
+     *
+     * @throws Exception in case of failure
      */
     public void testitMNG3732()
         throws Exception
@@ -56,7 +57,14 @@ public class MavenITmng3732ActiveProfilesTest
         verifier.deleteDirectory( "target" );
         verifier.addCliOption( "--settings" );
         verifier.addCliOption( "settings.xml" );
-        verifier.addCliOption( "-Ppom,profiles,settings" );
+        if ( matchesVersionRange( "[4.0.0-alpha-1,)" ) )
+        {
+            verifier.addCliOption( "-Ppom,settings" );
+        }
+        else
+        {
+            verifier.addCliOption( "-Ppom,profiles,settings" );
+        }
         verifier.executeGoal( "validate" );
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();

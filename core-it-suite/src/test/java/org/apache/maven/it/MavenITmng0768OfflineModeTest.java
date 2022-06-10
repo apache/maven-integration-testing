@@ -19,9 +19,15 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
+import org.eclipse.jetty.server.Handler;
+import org.eclipse.jetty.server.NetworkConnector;
+import org.eclipse.jetty.server.Request;
+import org.eclipse.jetty.server.Server;
+import org.eclipse.jetty.server.handler.AbstractHandler;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -30,20 +36,11 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Properties;
 
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import org.mortbay.jetty.Handler;
-import org.mortbay.jetty.Request;
-import org.mortbay.jetty.Server;
-import org.mortbay.jetty.handler.AbstractHandler;
-
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-768">MNG-768</a>.
- * 
+ *
  * @author John Casey
- * @version $Id$
+ *
  */
 public class MavenITmng0768OfflineModeTest
     extends AbstractMavenIntegrationTestCase
@@ -56,6 +53,8 @@ public class MavenITmng0768OfflineModeTest
 
     /**
      * Test offline mode.
+     *
+     * @throws Exception in case of failure
      */
     public void testitMNG768()
         throws Exception
@@ -66,8 +65,9 @@ public class MavenITmng0768OfflineModeTest
 
         Handler repoHandler = new AbstractHandler()
         {
-            public void handle( String target, HttpServletRequest request, HttpServletResponse response, int dispatch )
-                throws IOException, ServletException
+            public void handle( String target, Request baseRequest, HttpServletRequest request,
+                                HttpServletResponse response )
+                throws IOException
             {
                 System.out.println( "Handling " + request.getMethod() + " " + request.getRequestURL() );
 
@@ -101,11 +101,17 @@ public class MavenITmng0768OfflineModeTest
 
         Server server = new Server( 0 );
         server.setHandler( repoHandler );
-        server.start();
-        int port = server.getConnectors()[0].getLocalPort();
 
         try
         {
+            server.start();
+            if ( server.isFailed() )
+            {
+                fail( "Couldn't bind the server socket to a free port!" );
+            }
+
+            int port = ( (NetworkConnector) server.getConnectors()[0] ).getLocalPort();
+
             {
                 // phase 1: run build in online mode to fill local repo
                 Verifier verifier = newVerifier( testDir.getAbsolutePath() );
@@ -119,7 +125,7 @@ public class MavenITmng0768OfflineModeTest
                 verifier.addCliOption( "--settings" );
                 verifier.addCliOption( "settings.xml" );
                 verifier.executeGoal( "org.apache.maven.its.plugins:maven-it-plugin-dependency-resolution:2.1-SNAPSHOT:compile" );
-                verifier.assertFilePresent( "target/compile.txt" );
+                verifier.verifyFilePresent( "target/compile.txt" );
                 verifier.verifyErrorFreeLog();
                 verifier.resetStreams();
             }
@@ -136,7 +142,7 @@ public class MavenITmng0768OfflineModeTest
                 verifier.addCliOption( "settings.xml" );
                 verifier.setLogFileName( "log2.txt" );
                 verifier.executeGoal( "org.apache.maven.its.plugins:maven-it-plugin-dependency-resolution:2.1-SNAPSHOT:compile" );
-                verifier.assertFilePresent( "target/compile.txt" );
+                verifier.verifyFilePresent( "target/compile.txt" );
                 verifier.verifyErrorFreeLog();
                 verifier.resetStreams();
             }
@@ -167,12 +173,14 @@ public class MavenITmng0768OfflineModeTest
                 verifier.resetStreams();
             }
 
+            System.out.println( "Bound server socket to the port " + port );
+
             assertTrue( requestedUris.toString(), requestedUris.isEmpty() );
         }
         finally
         {
             server.stop();
+            server.join();
         }
     }
-
 }

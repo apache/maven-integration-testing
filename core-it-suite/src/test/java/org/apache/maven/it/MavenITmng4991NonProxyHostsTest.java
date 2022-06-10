@@ -19,23 +19,22 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
+import org.eclipse.jetty.server.Handler;
+import org.eclipse.jetty.server.NetworkConnector;
+import org.eclipse.jetty.server.Server;
+import org.eclipse.jetty.server.handler.DefaultHandler;
+import org.eclipse.jetty.server.handler.HandlerList;
+import org.eclipse.jetty.server.handler.ResourceHandler;
 
 import java.io.File;
 import java.net.InetAddress;
 import java.util.List;
 import java.util.Properties;
 
-import org.mortbay.jetty.Handler;
-import org.mortbay.jetty.Server;
-import org.mortbay.jetty.handler.DefaultHandler;
-import org.mortbay.jetty.handler.HandlerList;
-import org.mortbay.jetty.handler.ResourceHandler;
-
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-4991">MNG-4991</a>.
- * 
+ *
  * @author Benjamin Bentmann
  */
 public class MavenITmng4991NonProxyHostsTest
@@ -49,6 +48,8 @@ public class MavenITmng4991NonProxyHostsTest
 
     /**
      * Verify that the nonProxyHosts settings is respected.
+     *
+     * @throws Exception in case of failure
      */
     public void testit()
         throws Exception
@@ -63,7 +64,6 @@ public class MavenITmng4991NonProxyHostsTest
 
         Server server = new Server( 0 );
         server.setHandler( handlers );
-        server.start();
 
         /*
          * NOTE: To guard against automatic fallback to direct connection when the proxy is unreachable, we set up
@@ -71,18 +71,31 @@ public class MavenITmng4991NonProxyHostsTest
          */
         Server proxy = new Server( 0 );
         proxy.setHandler( new DefaultHandler() );
-        proxy.start();
 
         Verifier verifier = newVerifier( testDir.getAbsolutePath() );
         try
         {
+            server.start();
+            if ( server.isFailed() )
+            {
+                fail( "Couldn't bind the server socket to a free port!" );
+            }
+
+            proxy.start();
+            if ( proxy.isFailed() )
+            {
+                fail( "Couldn't bind the server socket to a free port!" );
+            }
+
             verifier.setAutoclean( false );
             verifier.deleteDirectory( "target" );
             verifier.deleteArtifacts( "org.apache.maven.its.mng4991" );
             Properties filterProps = verifier.newDefaultFilterProperties();
-            filterProps.setProperty( "@port@", Integer.toString( server.getConnectors()[0].getLocalPort() ) );
-            filterProps.setProperty( "@proxyPort@", Integer.toString( proxy.getConnectors()[0].getLocalPort() ) );
-            filterProps.setProperty( "@localhost@", InetAddress.getLocalHost().getCanonicalHostName() );
+            int port = ( (NetworkConnector) server.getConnectors()[0] ).getLocalPort();
+            filterProps.setProperty( "@port@", Integer.toString( port ) );
+            int proxyPort = ( (NetworkConnector) proxy.getConnectors()[0] ).getLocalPort();
+            filterProps.setProperty( "@proxyPort@", Integer.toString( proxyPort ) );
+            filterProps.setProperty( "@localhost@", InetAddress.getLoopbackAddress().getCanonicalHostName() );
             verifier.filterFile( "settings-template.xml", "settings.xml", "UTF-8", filterProps );
             verifier.addCliOption( "-s" );
             verifier.addCliOption( "settings.xml" );
@@ -94,11 +107,12 @@ public class MavenITmng4991NonProxyHostsTest
             verifier.resetStreams();
             server.stop();
             proxy.stop();
+            server.join();
+            proxy.join();
         }
 
         List<String> compile = verifier.loadLines( "target/compile.txt", "UTF-8" );
 
         assertTrue( compile.toString(), compile.contains( "dep-0.1.jar" ) );
     }
-
 }

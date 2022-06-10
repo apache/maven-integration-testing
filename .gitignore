@@ -12,3 +12,6 @@ bin
 .idea
 jvz-*
 .flattened-pom.xml
+.checkstyle
+dependency-reduced-pom.xml
+.factorypath

@@ -25,8 +25,8 @@ import java.io.File;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-4633">MNG-4633</a>.
- * 
- * @version $Id$
+ *
+ *
  * @author Kristian Rosenvold
  */
 public class MavenITmng4633DualCompilerExecutionsWeaveModeTest
@@ -40,7 +40,9 @@ public class MavenITmng4633DualCompilerExecutionsWeaveModeTest
 
     /**
      * Submodule2 depends on compiler output from submodule1, but dependency is in generate-resources phase in
-     * submodule2. This effectively tests the moddule-locking of the project artifact.
+     * submodule2. This effectively tests the module-locking of the project artifact.
+     *
+     * @throws Exception in case of failure
      */
     public void testit()
         throws Exception
@@ -55,5 +57,5 @@ public class MavenITmng4633DualCompilerExecutionsWeaveModeTest
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
     }
-    
+
 }

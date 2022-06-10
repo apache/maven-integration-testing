@@ -19,15 +19,14 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
 
 /**
- * 
+ *
  * @author Benjamin Bentmann
- * @version $Id$
+ *
  */
 public class MavenIT0130CleanLifecycleTest
     extends AbstractMavenIntegrationTestCase
@@ -40,6 +39,8 @@ public class MavenIT0130CleanLifecycleTest
 
     /**
      * Test default binding of goals for "clean" lifecycle.
+     *
+     * @throws Exception in case of failure
      */
     public void testit0130()
         throws Exception
@@ -50,7 +51,7 @@ public class MavenIT0130CleanLifecycleTest
         verifier.deleteDirectory( "target" );
         verifier.setAutoclean( false );
         verifier.executeGoal( "clean" );
-        verifier.assertFilePresent( "target/clean-clean.txt" );
+        verifier.verifyFilePresent( "target/clean-clean.txt" );
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
     }

@@ -19,16 +19,15 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-3885">MNG-3885</a>.
- * 
+ *
  * @author Benjamin Bentmann
- * @version $Id$
+ *
  */
 public class MavenITmng3885UniqueVersionFromParentProfileTest
     extends AbstractMavenIntegrationTestCase
@@ -43,6 +42,8 @@ public class MavenITmng3885UniqueVersionFromParentProfileTest
     /**
      * Test that uniqueVersion=false defined by a parent profile is effective for child modules when building
      * from the parent.
+     *
+     * @throws Exception in case of failure
      */
     public void testitNonUniqueVersionReactor()
         throws Exception
@@ -59,12 +60,14 @@ public class MavenITmng3885UniqueVersionFromParentProfileTest
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
 
-        verifier.assertFilePresent( "repo-f/org/apache/maven/its/mng3885/sub/0.2-SNAPSHOT/sub-0.2-SNAPSHOT.jar" );
+        verifier.verifyFilePresent( "repo-f/org/apache/maven/its/mng3885/sub/0.2-SNAPSHOT/sub-0.2-SNAPSHOT.jar" );
     }
 
     /**
      * Test that uniqueVersion=false defined by a parent profile is effective for child modules when building
      * the child in isolation.
+     *
+     * @throws Exception in case of failure
      */
     public void testitNonUniqueVersionStandalone()
         throws Exception
@@ -81,12 +84,14 @@ public class MavenITmng3885UniqueVersionFromParentProfileTest
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
 
-        verifier.assertFilePresent( "repo-f/org/apache/maven/its/mng3885/sub/0.2-SNAPSHOT/sub-0.2-SNAPSHOT.jar" );
+        verifier.verifyFilePresent( "repo-f/org/apache/maven/its/mng3885/sub/0.2-SNAPSHOT/sub-0.2-SNAPSHOT.jar" );
     }
 
     /**
      * Test that uniqueVersion=true defined by a parent profile is effective for child modules when building
      * from the parent.
+     *
+     * @throws Exception in case of failure
      */
     public void testitUniqueVersionReactor()
         throws Exception
@@ -103,13 +108,15 @@ public class MavenITmng3885UniqueVersionFromParentProfileTest
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
 
-        verifier.assertFileNotPresent( "repo-t/org/apache/maven/its/mng3885/sub/0.2-SNAPSHOT/sub-0.2-SNAPSHOT.jar" );
-        verifier.assertFilePresent( "repo-t/org/apache/maven/its/mng3885/sub/0.2-SNAPSHOT/sub-0.2-*-1.jar" );
+        verifier.verifyFileNotPresent( "repo-t/org/apache/maven/its/mng3885/sub/0.2-SNAPSHOT/sub-0.2-SNAPSHOT.jar" );
+        verifier.verifyFilePresent( "repo-t/org/apache/maven/its/mng3885/sub/0.2-SNAPSHOT/sub-0.2-*-1.jar" );
     }
 
     /**
      * Test that uniqueVersion=true defined by a parent profile is effective for child modules when building
      * the child in isolation.
+     *
+     * @throws Exception in case of failure
      */
     public void testitUniqueVersionStandalone()
         throws Exception
@@ -126,8 +133,8 @@ public class MavenITmng3885UniqueVersionFromParentProfileTest
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
 
-        verifier.assertFileNotPresent( "repo-t/org/apache/maven/its/mng3885/sub/0.2-SNAPSHOT/sub-0.2-SNAPSHOT.jar" );
-        verifier.assertFilePresent( "repo-t/org/apache/maven/its/mng3885/sub/0.2-SNAPSHOT/sub-0.2-*-1.jar" );
+        verifier.verifyFileNotPresent( "repo-t/org/apache/maven/its/mng3885/sub/0.2-SNAPSHOT/sub-0.2-SNAPSHOT.jar" );
+        verifier.verifyFilePresent( "repo-t/org/apache/maven/its/mng3885/sub/0.2-SNAPSHOT/sub-0.2-*-1.jar" );
     }
 
 }

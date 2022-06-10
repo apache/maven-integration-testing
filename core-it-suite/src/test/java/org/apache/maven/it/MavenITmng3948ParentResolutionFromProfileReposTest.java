@@ -19,16 +19,15 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-3948">MNG-3948</a>.
- * 
+ *
  * @author Benjamin Bentmann
- * @version $Id$
+ *
  */
 public class MavenITmng3948ParentResolutionFromProfileReposTest
     extends AbstractMavenIntegrationTestCase
@@ -41,6 +40,8 @@ public class MavenITmng3948ParentResolutionFromProfileReposTest
 
     /**
      * Test that parent POMs can be resolved from remote repositories defined by (active) profiles in profiles.xml.
+     *
+     * @throws Exception in case of failure
      */
     public void testitFromProfilesXml()
         throws Exception
@@ -58,11 +59,13 @@ public class MavenITmng3948ParentResolutionFromProfileReposTest
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
 
-        verifier.assertArtifactPresent( "org.apache.maven.its.mng3948", "parent", "0.1", "pom" );
+        verifier.verifyArtifactPresent( "org.apache.maven.its.mng3948", "parent", "0.1", "pom" );
     }
 
     /**
      * Test that parent POMs can be resolved from remote repositories defined by (active) profiles in the POM.
+     *
+     * @throws Exception in case of failure
      */
     public void testitFromPom()
         throws Exception
@@ -79,7 +82,7 @@ public class MavenITmng3948ParentResolutionFromProfileReposTest
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
 
-        verifier.assertArtifactPresent( "org.apache.maven.its.mng3948", "parent", "0.2", "pom" );
+        verifier.verifyArtifactPresent( "org.apache.maven.its.mng3948", "parent", "0.2", "pom" );
     }
 
 }

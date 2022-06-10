@@ -19,14 +19,13 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-4840">MNG-4840</a>.
- * 
+ *
  * @author Benjamin Bentmann
  */
 public class MavenITmng4840MavenPrerequisiteTest
@@ -40,6 +39,8 @@ public class MavenITmng4840MavenPrerequisiteTest
 
     /**
      * Verify that builds fail straight when the current Maven version doesn't match a plugin's prerequisite.
+     *
+     * @throws Exception in case of failure
      */
     public void testitMojoExecution()
         throws Exception
@@ -72,6 +73,8 @@ public class MavenITmng4840MavenPrerequisiteTest
     /**
      * Verify that automatic plugin version resolution automatically skips plugin versions whose prerequisite on
      * the current Maven version isn't satisfied.
+     *
+     * @throws Exception in case of failure
      */
     public void testitPluginVersionResolution()
         throws Exception
@@ -89,8 +92,8 @@ public class MavenITmng4840MavenPrerequisiteTest
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
 
-        verifier.assertFilePresent( "target/touch-1.txt" );
-        verifier.assertFileNotPresent( "target/touch-2.txt" );
+        verifier.verifyFilePresent( "target/touch-1.txt" );
+        verifier.verifyFileNotPresent( "target/touch-2.txt" );
     }
 
 }

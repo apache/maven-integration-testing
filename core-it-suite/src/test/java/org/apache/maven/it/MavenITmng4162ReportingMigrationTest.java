@@ -19,7 +19,6 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
@@ -27,7 +26,7 @@ import java.util.Properties;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-4162">MNG-4162</a>.
- * 
+ *
  * @author Benjamin Bentmann
  */
 public class MavenITmng4162ReportingMigrationTest
@@ -42,6 +41,8 @@ public class MavenITmng4162ReportingMigrationTest
     /**
      * Verify that the legacy reporting section is automatically converted into ordinary plugin configuration of the
      * Maven Site Plugin to ease migration.
+     *
+     * @throws Exception in case of failure
      */
     public void testit()
         throws Exception

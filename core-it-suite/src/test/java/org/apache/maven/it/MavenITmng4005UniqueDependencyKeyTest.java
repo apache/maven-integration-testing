@@ -19,7 +19,6 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
@@ -27,7 +26,7 @@ import java.util.List;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-4005">MNG-4005</a>.
- * 
+ *
  * @author Benjamin Bentmann
  */
 public class MavenITmng4005UniqueDependencyKeyTest
@@ -41,6 +40,8 @@ public class MavenITmng4005UniqueDependencyKeyTest
 
     /**
      * Test that duplicate dependencies cause a validation error during building.
+     *
+     * @throws Exception in case of failure
      */
     public void testitDependency()
         throws Exception
@@ -50,6 +51,8 @@ public class MavenITmng4005UniqueDependencyKeyTest
 
     /**
      * Test that duplicate managed dependencies cause a validation error during building.
+     *
+     * @throws Exception in case of failure
      */
     public void testitManagedDependency()
         throws Exception
@@ -59,6 +62,8 @@ public class MavenITmng4005UniqueDependencyKeyTest
 
     /**
      * Test that duplicate dependencies in profiles cause a validation error during building.
+     *
+     * @throws Exception in case of failure
      */
     public void testitProfileDependency()
         throws Exception
@@ -68,6 +73,8 @@ public class MavenITmng4005UniqueDependencyKeyTest
 
     /**
      * Test that duplicate managed dependencies in profiles cause a validation error during building.
+     *
+     * @throws Exception in case of failure
      */
     public void testitProfileManagedDependency()
         throws Exception
@@ -83,21 +90,36 @@ public class MavenITmng4005UniqueDependencyKeyTest
         Verifier verifier = newVerifier( testDir.getAbsolutePath() );
         verifier.setAutoclean( false );
         verifier.deleteDirectory( "target" );
-        verifier.executeGoal( "validate" );
-        verifier.verifyErrorFreeLog();
+        try {
+            verifier.executeGoal( "validate" );
+        }
+        catch ( VerificationException e )
+        {
+            // expected with Maven 4+
+        }
         verifier.resetStreams();
 
+        String logLevel;
+        if ( matchesVersionRange( "(,4.0.0-alpha-1)" ) )
+        {
+            logLevel = "WARNING";
+        }
+        else
+        {
+            logLevel = "ERROR";
+        }
+
         List<String> lines = verifier.loadLines( verifier.getLogFileName(), "UTF-8" );
-        boolean foundWarning = false;
+        boolean foundMessage = false;
         for ( String line : lines )
         {
-            if ( line.startsWith( "[WARNING]" ) && line.indexOf( "must be unique: junit:junit:jar" ) > 0 )
+            if ( line.startsWith( "[" + logLevel + "]" ) && line.indexOf( "must be unique: junit:junit:jar" ) > 0 )
             {
-                foundWarning = true;
+                foundMessage = true;
             }
         }
-        
-        assertTrue( "Duplicate dependency warning wasn't generated.", foundWarning );
+
+        assertTrue( "Duplicate dependency message wasn't generated.", foundMessage );
     }
 
 }

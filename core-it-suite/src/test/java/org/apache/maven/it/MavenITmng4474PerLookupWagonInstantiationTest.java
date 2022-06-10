@@ -19,15 +19,16 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
 import java.util.Properties;
 
+import static org.junit.Assert.assertNotEquals;
+
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-4474">MNG-4474</a>.
- * 
+ *
  * @author Benjamin Bentmann
  */
 public class MavenITmng4474PerLookupWagonInstantiationTest
@@ -41,6 +42,8 @@ public class MavenITmng4474PerLookupWagonInstantiationTest
 
     /**
      * Verify that the wagon manager does not erroneously cache/reuse wagon instances that use per-lookup instantiation.
+     *
+     * @throws Exception in case of failure
      */
     public void testit()
         throws Exception
@@ -59,7 +62,7 @@ public class MavenITmng4474PerLookupWagonInstantiationTest
         assertNotNull( hash1 );
         String hash2 = props.getProperty( "coreit://two.hash" );
         assertNotNull( hash2 );
-        assertFalse( hash1.equals( hash2 ) );
+        assertNotEquals( hash1, hash2 );
     }
 
 }

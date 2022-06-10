@@ -21,14 +21,13 @@ package org.apache.maven.it;
 
 import java.io.File;
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-2744">MNG-2744</a>.
- * 
+ *
  * @author Benjamin Bentmann
- * @version $Id$
+ *
  */
 public class MavenITmng2744checksumVerificationTest
     extends AbstractMavenIntegrationTestCase
@@ -41,6 +40,8 @@ public class MavenITmng2744checksumVerificationTest
 
     /**
      * Tests that hex digits of checksums are compared without regard to case.
+     *
+     * @throws Exception in case of failure
      */
     public void testitMNG2744()
         throws Exception
@@ -57,10 +58,10 @@ public class MavenITmng2744checksumVerificationTest
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
 
-        verifier.assertArtifactPresent( "org.apache.maven.its.mng2744", "a", "1", "jar" );
-        verifier.assertArtifactPresent( "org.apache.maven.its.mng2744", "a", "1", "pom" );
-        verifier.assertArtifactPresent( "org.apache.maven.its.mng2744", "b", "1", "jar" );
-        verifier.assertArtifactPresent( "org.apache.maven.its.mng2744", "b", "1", "pom" );
+        verifier.verifyArtifactPresent( "org.apache.maven.its.mng2744", "a", "1", "jar" );
+        verifier.verifyArtifactPresent( "org.apache.maven.its.mng2744", "a", "1", "pom" );
+        verifier.verifyArtifactPresent( "org.apache.maven.its.mng2744", "b", "1", "jar" );
+        verifier.verifyArtifactPresent( "org.apache.maven.its.mng2744", "b", "1", "pom" );
     }
 
 }

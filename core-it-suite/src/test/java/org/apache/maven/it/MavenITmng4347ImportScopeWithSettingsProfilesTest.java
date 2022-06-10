@@ -19,14 +19,13 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-4347">MNG-4347</a>.
- * 
+ *
  * @author John Casey
  */
 public class MavenITmng4347ImportScopeWithSettingsProfilesTest
@@ -42,6 +41,8 @@ public class MavenITmng4347ImportScopeWithSettingsProfilesTest
      * Test that profiles from settings.xml will be used to resolve import-scoped dependency POMs.
      * In this case, the settings profile enables snapshot resolution on the central repository, which
      * is required to resolve the import-scoped POM with a SNAPSHOT version.
+     *
+     * @throws Exception in case of failure
      */
     public void testit()
         throws Exception
@@ -49,19 +50,19 @@ public class MavenITmng4347ImportScopeWithSettingsProfilesTest
         File testDir = ResourceExtractor.simpleExtractResources( getClass(), "/mng-4347" );
 
         Verifier verifier = newVerifier( testDir.getAbsolutePath() );
-        
+
         verifier.deleteDirectory( "target" );
-        verifier.deleteArtifacts( "org.apache.maven.it.mng4347" );
-        
+        verifier.deleteArtifacts( "org.apache.maven.its.mng4347" );
+
         verifier.setAutoclean( false );
-        
+
         verifier.addCliOption( "-s" );
         verifier.addCliOption( "settings.xml" );
-        
+
         verifier.filterFile( "settings-template.xml", "settings.xml", "UTF-8", verifier.newDefaultFilterProperties() );
-        
+
         verifier.executeGoal( "validate" );
-        
+
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
     }

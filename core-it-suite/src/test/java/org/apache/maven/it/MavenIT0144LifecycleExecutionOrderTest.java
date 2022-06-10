@@ -28,7 +28,7 @@ import java.util.List;
 
 /**
  * @author Benjamin Bentmann
- * @version $Id$
+ *
  */
 public class MavenIT0144LifecycleExecutionOrderTest
     extends AbstractMavenIntegrationTestCase
@@ -41,6 +41,8 @@ public class MavenIT0144LifecycleExecutionOrderTest
 
     /**
      * Test that the lifecycle phases execute in proper order.
+     *
+     * @throws Exception in case of failure
      */
     public void testit0144()
         throws Exception

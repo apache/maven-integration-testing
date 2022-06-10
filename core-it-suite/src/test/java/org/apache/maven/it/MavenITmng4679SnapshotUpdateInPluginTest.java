@@ -19,7 +19,6 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
@@ -27,7 +26,7 @@ import java.util.Properties;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-4679">MNG-4679</a>.
- * 
+ *
  * @author Benjamin Bentmann
  */
 public class MavenITmng4679SnapshotUpdateInPluginTest
@@ -42,6 +41,8 @@ public class MavenITmng4679SnapshotUpdateInPluginTest
     /**
      * Verify that plugins using the 2.x style artifact resolver/collector directly are subject to the snapshot update
      * mode of the current Maven session.
+     *
+     * @throws Exception in case of failure
      */
     public void testit()
         throws Exception
@@ -63,7 +64,7 @@ public class MavenITmng4679SnapshotUpdateInPluginTest
         verifier.verifyErrorFreeLog();
 
         assertChecksum( verifier, "jar", "2ea5c3d713bbaba7b87746449b91cd00e876703d" );
-        assertChecksum( verifier, "pom", "7de357a948a8bb2357759c7c585adb504e579bad" );
+        assertChecksum( verifier, "pom", "0b58dbbc61f81b85a70692ffdce88cf1892a8da4" );
 
         filterProps.setProperty( "@repo@", "repo-2" );
         verifier.filterFile( "settings-template.xml", "settings.xml", "UTF-8", filterProps );
@@ -76,7 +77,7 @@ public class MavenITmng4679SnapshotUpdateInPluginTest
         verifier.resetStreams();
 
         assertChecksum( verifier, "jar", "f3d46277c2ab45ff9bbd97605c942bed7fc27f97" );
-        assertChecksum( verifier, "pom", "8f17048dee72cc6ec33e9ab30fa00a910e1d6997" );
+        assertChecksum( verifier, "pom", "127f0dc26035352bb54890315ad7d2ada067756a" );
     }
 
     private void assertChecksum( Verifier verifier, String ext, String checksum )

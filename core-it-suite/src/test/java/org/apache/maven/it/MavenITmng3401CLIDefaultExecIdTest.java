@@ -26,7 +26,7 @@ import org.apache.maven.it.util.ResourceExtractor;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-3401">MNG-3401</a>.
- * 
+ *
  * @author <a href="mailto:brianf@apache.org">Brian Fox</a>
  * @author jdcasey
  */
@@ -42,6 +42,8 @@ public class MavenITmng3401CLIDefaultExecIdTest
     /**
      * Test that the configuration of an execution block with the id "default-cli" applies to direct CLI
      * invocations of a goal as well if the plugin is configured under build/plugins.
+     *
+     * @throws Exception in case of failure
      */
     public void testitWithoutPluginManagement()
         throws Exception
@@ -52,6 +54,8 @@ public class MavenITmng3401CLIDefaultExecIdTest
     /**
      * Test that the configuration of an execution block with the id "default-cli" applies to direct CLI
      * invocations of a goal as well if the plugin is configured under build/pluginManagement/plugins.
+     *
+     * @throws Exception in case of failure
      */
     public void testitWithPluginManagement()
         throws Exception

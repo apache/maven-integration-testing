@@ -19,14 +19,13 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-1073">MNG-1073</a>.
- * 
+ *
  * @author Benjamin Bentmann
  */
 public class MavenITmng1073AggregatorForksReactorTest
@@ -40,6 +39,8 @@ public class MavenITmng1073AggregatorForksReactorTest
 
     /**
      * Verify that aggregator mojos invoked from the CLI that fork the lifecycle do so for the entire reactor.
+     *
+     * @throws Exception in case of failure
      */
     public void testitForkLifecycle()
         throws Exception
@@ -59,13 +60,15 @@ public class MavenITmng1073AggregatorForksReactorTest
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
 
-        verifier.assertFilePresent( "target/forked/touch.txt" );
-        verifier.assertFilePresent( "sub-1/target/forked/touch.txt" );
-        verifier.assertFilePresent( "sub-2/target/forked/touch.txt" );
+        verifier.verifyFilePresent( "target/forked/touch.txt" );
+        verifier.verifyFilePresent( "sub-1/target/forked/touch.txt" );
+        verifier.verifyFilePresent( "sub-2/target/forked/touch.txt" );
     }
 
     /**
      * Verify that aggregator mojos invoked from the CLI that fork a goal do so for the entire reactor.
+     *
+     * @throws Exception in case of failure
      */
     public void testitForkGoal()
         throws Exception
@@ -82,9 +85,9 @@ public class MavenITmng1073AggregatorForksReactorTest
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
 
-        verifier.assertFilePresent( "target/touch.txt" );
-        verifier.assertFilePresent( "sub-1/target/touch.txt" );
-        verifier.assertFilePresent( "sub-2/target/touch.txt" );
+        verifier.verifyFilePresent( "target/touch.txt" );
+        verifier.verifyFilePresent( "sub-1/target/touch.txt" );
+        verifier.verifyFilePresent( "sub-2/target/touch.txt" );
     }
 
 }

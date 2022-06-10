@@ -20,10 +20,11 @@ package org.apache.maven.it;
  */
 
 import org.apache.maven.it.util.ResourceExtractor;
-import org.mortbay.jetty.Handler;
-import org.mortbay.jetty.Request;
-import org.mortbay.jetty.Server;
-import org.mortbay.jetty.handler.AbstractHandler;
+import org.eclipse.jetty.server.Handler;
+import org.eclipse.jetty.server.NetworkConnector;
+import org.eclipse.jetty.server.Request;
+import org.eclipse.jetty.server.Server;
+import org.eclipse.jetty.server.handler.AbstractHandler;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -36,7 +37,7 @@ import java.util.Properties;
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-5175">MNG-5175</a>.
  * test correct integration of wagon http: read time out configuration from settings.xml
  *
- * @version $Id$
+ *
  */
 public class MavenITmng5175WagonHttpTest
     extends AbstractMavenIntegrationTestCase
@@ -50,17 +51,21 @@ public class MavenITmng5175WagonHttpTest
         super( "[3.0.4,)" ); // 3.0.4+
     }
 
-    public void setUp()
+    @Override
+    protected void setUp()
         throws Exception
     {
         Handler handler = new AbstractHandler()
         {
-            public void handle( String target, HttpServletRequest request, HttpServletResponse response, int dispatch )
+            @Override
+            public void handle( String target, Request baseRequest, HttpServletRequest request,
+                                HttpServletResponse response )
                 throws IOException, ServletException
             {
                 try
                 {
-                    Thread.sleep( 15 );
+                    // wait long enough for read timeout to happen in client
+                    Thread.sleep( 100 );
                 }
                 catch ( InterruptedException e )
                 {
@@ -78,25 +83,30 @@ public class MavenITmng5175WagonHttpTest
         server = new Server( 0 );
         server.setHandler( handler );
         server.start();
-
-        port = server.getConnectors()[0].getLocalPort();
+        if ( server.isFailed() )
+        {
+            fail( "Couldn't bind the server socket to a free port!" );
+        }
+        port = ( (NetworkConnector) server.getConnectors()[0] ).getLocalPort();
+        System.out.println( "Bound server socket to the port " + port );
     }
 
+    @Override
     protected void tearDown()
         throws Exception
     {
-        super.tearDown();
-
         if ( server != null )
         {
             server.stop();
-            server = null;
+            server.join();
         }
     }
 
     /**
      * Test that the read time out from settings is used.
      * basically use a 1ms time out and wait a bit in the handler
+     *
+     * @throws Exception in case of failure
      */
     public void testmng5175_ReadTimeOutFromSettings()
         throws Exception
@@ -113,14 +123,14 @@ public class MavenITmng5175WagonHttpTest
         verifier.addCliOption( "-U" );
         verifier.addCliOption( "--settings" );
         verifier.addCliOption( "settings.xml" );
-        //verifier.
+        verifier.addCliOption( "--fail-never" );
+        verifier.addCliOption( "--errors" );
+        verifier.setMavenDebug( true );
         verifier.executeGoal( "validate" );
 
+        verifier.verifyTextInLog(
+                "Could not transfer artifact org.apache.maven.its.mng5175:fake-dependency:pom:1.0-SNAPSHOT" );
         verifier.verifyTextInLog( "Read timed out" );
         verifier.resetStreams();
-
-
     }
-
-
 }

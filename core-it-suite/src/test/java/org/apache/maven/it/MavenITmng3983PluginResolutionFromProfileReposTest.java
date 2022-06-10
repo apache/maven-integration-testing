@@ -19,16 +19,15 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-3983">MNG-3983</a>.
- * 
+ *
  * @author Benjamin Bentmann
- * @version $Id$
+ *
  */
 public class MavenITmng3983PluginResolutionFromProfileReposTest
     extends AbstractMavenIntegrationTestCase
@@ -41,6 +40,8 @@ public class MavenITmng3983PluginResolutionFromProfileReposTest
 
     /**
      * Test that plugins can be resolved from remote plugin repositories defined by (active) profiles in the POM.
+     *
+     * @throws Exception in case of failure
      */
     public void testitFromPom()
         throws Exception
@@ -59,11 +60,13 @@ public class MavenITmng3983PluginResolutionFromProfileReposTest
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
 
-        verifier.assertArtifactPresent( "org.apache.maven.its.mng3983", "p", "0.1", "jar" );
+        verifier.verifyArtifactPresent( "org.apache.maven.its.mng3983", "p", "0.1", "jar" );
     }
 
     /**
      * Test that plugins can be resolved from remote plugin repositories defined by (active) profiles in profiles.xml.
+     *
+     * @throws Exception in case of failure
      */
     public void testitFromProfilesXml()
         throws Exception
@@ -83,11 +86,13 @@ public class MavenITmng3983PluginResolutionFromProfileReposTest
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
 
-        verifier.assertArtifactPresent( "org.apache.maven.its.mng3983", "p", "0.1", "jar" );
+        verifier.verifyArtifactPresent( "org.apache.maven.its.mng3983", "p", "0.1", "jar" );
     }
 
     /**
      * Test that plugins can be resolved from remote plugin repositories defined by (active) profiles in settings.xml.
+     *
+     * @throws Exception in case of failure
      */
     public void testitFromSettings()
         throws Exception
@@ -106,7 +111,7 @@ public class MavenITmng3983PluginResolutionFromProfileReposTest
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
 
-        verifier.assertArtifactPresent( "org.apache.maven.its.mng3983", "p", "0.1", "jar" );
+        verifier.verifyArtifactPresent( "org.apache.maven.its.mng3983", "p", "0.1", "jar" );
     }
 
 }

@@ -19,7 +19,6 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
@@ -27,9 +26,9 @@ import java.util.Properties;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-3811">MNG-3811</a>.
- * 
+ *
  * @author Brett Porter
- * @version $Id$
+ *
  */
 public class MavenITmng3811ReportingPluginConfigurationInheritanceTest
     extends AbstractMavenIntegrationTestCase
@@ -42,6 +41,8 @@ public class MavenITmng3811ReportingPluginConfigurationInheritanceTest
 
     /**
      * Verifies that reporting configuration is inherited properly.
+     *
+     * @throws Exception in case of failure
      */
     public void testitMNG3811()
         throws Exception

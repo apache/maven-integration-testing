@@ -19,7 +19,6 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
@@ -27,7 +26,7 @@ import java.util.Properties;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-4433">MNG-4433</a>.
- * 
+ *
  * @author Benjamin Bentmann
  */
 public class MavenITmng4433ForceParentSnapshotUpdateTest
@@ -41,6 +40,8 @@ public class MavenITmng4433ForceParentSnapshotUpdateTest
 
     /**
      * Verify that snapshot updates of parent POMs can be forced from the command line via "-U".
+     *
+     * @throws Exception in case of failure
      */
     public void testit()
         throws Exception
@@ -62,8 +63,8 @@ public class MavenITmng4433ForceParentSnapshotUpdateTest
         verifier.executeGoal( "validate" );
         verifier.verifyErrorFreeLog();
 
-        verifier.assertFilePresent( "target/old.txt" );
-        verifier.assertFileNotPresent( "target/new.txt" );
+        verifier.verifyFilePresent( "target/old.txt" );
+        verifier.verifyFileNotPresent( "target/new.txt" );
 
         filterProps.setProperty( "@repo@", "repo-2" );
         verifier.filterFile( "settings-template.xml", "settings.xml", "UTF-8", filterProps );
@@ -75,8 +76,8 @@ public class MavenITmng4433ForceParentSnapshotUpdateTest
 
         verifier.resetStreams();
 
-        verifier.assertFileNotPresent( "target/old.txt" );
-        verifier.assertFilePresent( "target/new.txt" );
+        verifier.verifyFileNotPresent( "target/old.txt" );
+        verifier.verifyFilePresent( "target/new.txt" );
     }
 
 }

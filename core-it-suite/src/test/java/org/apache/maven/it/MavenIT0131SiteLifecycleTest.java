@@ -19,15 +19,14 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
 
 /**
- * 
+ *
  * @author Benjamin Bentmann
- * @version $Id$
+ *
  */
 public class MavenIT0131SiteLifecycleTest
     extends AbstractMavenIntegrationTestCase
@@ -40,6 +39,8 @@ public class MavenIT0131SiteLifecycleTest
 
     /**
      * Test default binding of goals for "site" lifecycle.
+     *
+     * @throws Exception in case of failure
      */
     public void testit0131()
         throws Exception
@@ -50,8 +51,8 @@ public class MavenIT0131SiteLifecycleTest
         verifier.deleteDirectory( "target" );
         verifier.setAutoclean( false );
         verifier.executeGoal( "site-deploy" );
-        verifier.assertFilePresent( "target/site-site.txt" );
-        verifier.assertFilePresent( "target/site-deploy.txt" );
+        verifier.verifyFilePresent( "target/site-site.txt" );
+        verifier.verifyFilePresent( "target/site-deploy.txt" );
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
     }

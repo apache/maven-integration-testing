@@ -21,14 +21,13 @@ package org.apache.maven.it;
 
 import java.io.File;
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-3679">MNG-3679</a>:
- * it checks that a plugin execution with an id that contains an expression will 
+ * it checks that a plugin execution with an id that contains an expression will
  * still execute without a problem.
- * 
+ *
  * @author jdcasey
  */
 public class MavenITmng3679PluginExecIdInterpolationTest
@@ -51,8 +50,8 @@ public class MavenITmng3679PluginExecIdInterpolationTest
         verifier.executeGoal( "validate" );
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
-        
-        verifier.assertFilePresent( "target/check.txt" );
+
+        verifier.verifyFilePresent( "target/check.txt" );
     }
 
 }

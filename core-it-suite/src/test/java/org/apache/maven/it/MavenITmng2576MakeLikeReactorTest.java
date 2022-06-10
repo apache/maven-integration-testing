@@ -21,12 +21,11 @@ package org.apache.maven.it;
 
 import java.io.File;
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-2576">MNG-2576</a>.
- * 
+ *
  * @author Benjamin Bentmann
  */
 public class MavenITmng2576MakeLikeReactorTest
@@ -35,7 +34,7 @@ public class MavenITmng2576MakeLikeReactorTest
 
     public MavenITmng2576MakeLikeReactorTest()
     {
-        super( "[2.1.0,)" ); 
+        super( "[2.1.0,)" );
     }
 
     private void clean( Verifier verifier )
@@ -50,6 +49,8 @@ public class MavenITmng2576MakeLikeReactorTest
 
     /**
      * Verify that project list by itself only builds specified projects.
+     *
+     * @throws Exception in case of failure
      */
     public void testitMakeOnlyList()
         throws Exception
@@ -66,15 +67,17 @@ public class MavenITmng2576MakeLikeReactorTest
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
 
-        verifier.assertFileNotPresent( "target/touch.txt" );
-        verifier.assertFileNotPresent( "sub-a/target/touch.txt" );
-        verifier.assertFilePresent( "sub-b/target/touch.txt" );
-        verifier.assertFileNotPresent( "sub-c/target/touch.txt" );
-        verifier.assertFileNotPresent( "sub-d/target/touch.txt" );
+        verifier.verifyFileNotPresent( "target/touch.txt" );
+        verifier.verifyFileNotPresent( "sub-a/target/touch.txt" );
+        verifier.verifyFilePresent( "sub-b/target/touch.txt" );
+        verifier.verifyFileNotPresent( "sub-c/target/touch.txt" );
+        verifier.verifyFileNotPresent( "sub-d/target/touch.txt" );
     }
 
     /**
      * Verify that project list and all their upstream projects are built.
+     *
+     * @throws Exception in case of failure
      */
     public void testitMakeUpstream()
         throws Exception
@@ -92,15 +95,17 @@ public class MavenITmng2576MakeLikeReactorTest
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
 
-        verifier.assertFilePresent( "target/touch.txt" );
-        verifier.assertFilePresent( "sub-a/target/touch.txt" );
-        verifier.assertFilePresent( "sub-b/target/touch.txt" );
-        verifier.assertFileNotPresent( "sub-c/target/touch.txt" );
-        verifier.assertFileNotPresent( "sub-d/target/touch.txt" );
+        verifier.verifyFilePresent( "target/touch.txt" );
+        verifier.verifyFilePresent( "sub-a/target/touch.txt" );
+        verifier.verifyFilePresent( "sub-b/target/touch.txt" );
+        verifier.verifyFileNotPresent( "sub-c/target/touch.txt" );
+        verifier.verifyFileNotPresent( "sub-d/target/touch.txt" );
     }
 
     /**
      * Verify that project list and all their downstream projects are built.
+     *
+     * @throws Exception in case of failure
      */
     public void testitMakeDownstream()
         throws Exception
@@ -118,15 +123,17 @@ public class MavenITmng2576MakeLikeReactorTest
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
 
-        verifier.assertFileNotPresent( "target/touch.txt" );
-        verifier.assertFileNotPresent( "sub-a/target/touch.txt" );
-        verifier.assertFilePresent( "sub-b/target/touch.txt" );
-        verifier.assertFilePresent( "sub-c/target/touch.txt" );
-        verifier.assertFileNotPresent( "sub-d/target/touch.txt" );
+        verifier.verifyFileNotPresent( "target/touch.txt" );
+        verifier.verifyFileNotPresent( "sub-a/target/touch.txt" );
+        verifier.verifyFilePresent( "sub-b/target/touch.txt" );
+        verifier.verifyFilePresent( "sub-c/target/touch.txt" );
+        verifier.verifyFileNotPresent( "sub-d/target/touch.txt" );
     }
 
     /**
      * Verify that project list and all their upstream and downstream projects are built.
+     *
+     * @throws Exception in case of failure
      */
     public void testitMakeBoth()
         throws Exception
@@ -145,15 +152,17 @@ public class MavenITmng2576MakeLikeReactorTest
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
 
-        verifier.assertFilePresent( "target/touch.txt" );
-        verifier.assertFilePresent( "sub-a/target/touch.txt" );
-        verifier.assertFilePresent( "sub-b/target/touch.txt" );
-        verifier.assertFilePresent( "sub-c/target/touch.txt" );
-        verifier.assertFileNotPresent( "sub-d/target/touch.txt" );
+        verifier.verifyFilePresent( "target/touch.txt" );
+        verifier.verifyFilePresent( "sub-a/target/touch.txt" );
+        verifier.verifyFilePresent( "sub-b/target/touch.txt" );
+        verifier.verifyFilePresent( "sub-c/target/touch.txt" );
+        verifier.verifyFileNotPresent( "sub-d/target/touch.txt" );
     }
 
     /**
      * Verify that using the mere basedir in the project list properly matches projects with non-default POM files.
+     *
+     * @throws Exception in case of failure
      */
     public void testitMatchesByBasedir()
         throws Exception
@@ -163,7 +172,7 @@ public class MavenITmng2576MakeLikeReactorTest
         Verifier verifier = newVerifier( testDir.getAbsolutePath() );
         verifier.setAutoclean( false );
         clean( verifier );
-        verifier.assertFileNotPresent( "sub-d/pom.xml" );
+        verifier.verifyFileNotPresent( "sub-d/pom.xml" );
         verifier.addCliOption( "-pl" );
         verifier.addCliOption( "sub-d" );
         verifier.setLogFileName( "log-basedir.txt" );
@@ -171,28 +180,30 @@ public class MavenITmng2576MakeLikeReactorTest
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
 
-        verifier.assertFileNotPresent( "target/touch.txt" );
-        verifier.assertFileNotPresent( "sub-a/target/touch.txt" );
-        verifier.assertFileNotPresent( "sub-b/target/touch.txt" );
-        verifier.assertFileNotPresent( "sub-c/target/touch.txt" );
-        verifier.assertFilePresent( "sub-d/target/touch.txt" );
+        verifier.verifyFileNotPresent( "target/touch.txt" );
+        verifier.verifyFileNotPresent( "sub-a/target/touch.txt" );
+        verifier.verifyFileNotPresent( "sub-b/target/touch.txt" );
+        verifier.verifyFileNotPresent( "sub-c/target/touch.txt" );
+        verifier.verifyFilePresent( "sub-d/target/touch.txt" );
     }
 
     /**
      * Verify that using the mere basedir in the project list properly matches projects with non-default POM files.
+     *
+     * @throws Exception in case of failure
      */
     public void testitMatchesByBasedirPlus()
         throws Exception
     {
         // as per MNG-5230
         requiresMavenVersion( "[3.2,)" );
-        
+
         File testDir = ResourceExtractor.simpleExtractResources( getClass(), "/mng-2576" );
 
         Verifier verifier = newVerifier( testDir.getAbsolutePath() );
         verifier.setAutoclean( false );
         clean( verifier );
-        verifier.assertFileNotPresent( "sub-d/pom.xml" );
+        verifier.verifyFileNotPresent( "sub-d/pom.xml" );
         verifier.addCliOption( "-pl" );
         verifier.addCliOption( "+sub-d" );
         verifier.setLogFileName( "log-basedir-plus.txt" );
@@ -200,14 +211,16 @@ public class MavenITmng2576MakeLikeReactorTest
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
 
-        verifier.assertFileNotPresent( "target/touch.txt" );
-        verifier.assertFileNotPresent( "sub-a/target/touch.txt" );
-        verifier.assertFileNotPresent( "sub-b/target/touch.txt" );
-        verifier.assertFileNotPresent( "sub-c/target/touch.txt" );
-        verifier.assertFilePresent( "sub-d/target/touch.txt" );
+        verifier.verifyFileNotPresent( "target/touch.txt" );
+        verifier.verifyFileNotPresent( "sub-a/target/touch.txt" );
+        verifier.verifyFileNotPresent( "sub-b/target/touch.txt" );
+        verifier.verifyFileNotPresent( "sub-c/target/touch.txt" );
+        verifier.verifyFilePresent( "sub-d/target/touch.txt" );
     }
     /**
      * Verify that the project list can also specify project ids.
+     *
+     * @throws Exception in case of failure
      */
     public void testitMatchesById()
         throws Exception
@@ -224,15 +237,17 @@ public class MavenITmng2576MakeLikeReactorTest
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
 
-        verifier.assertFileNotPresent( "target/touch.txt" );
-        verifier.assertFileNotPresent( "sub-a/target/touch.txt" );
-        verifier.assertFilePresent( "sub-b/target/touch.txt" );
-        verifier.assertFileNotPresent( "sub-c/target/touch.txt" );
-        verifier.assertFileNotPresent( "sub-d/target/touch.txt" );
+        verifier.verifyFileNotPresent( "target/touch.txt" );
+        verifier.verifyFileNotPresent( "sub-a/target/touch.txt" );
+        verifier.verifyFilePresent( "sub-b/target/touch.txt" );
+        verifier.verifyFileNotPresent( "sub-c/target/touch.txt" );
+        verifier.verifyFileNotPresent( "sub-d/target/touch.txt" );
     }
 
     /**
-     * Verify that the project list can also specify aritfact ids.
+     * Verify that the project list can also specify artifact ids.
+     *
+     * @throws Exception in case of failure
      */
     public void testitMatchesByArtifactId()
         throws Exception
@@ -252,15 +267,17 @@ public class MavenITmng2576MakeLikeReactorTest
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
 
-        verifier.assertFileNotPresent( "target/touch.txt" );
-        verifier.assertFileNotPresent( "sub-a/target/touch.txt" );
-        verifier.assertFilePresent( "sub-b/target/touch.txt" );
-        verifier.assertFileNotPresent( "sub-c/target/touch.txt" );
-        verifier.assertFileNotPresent( "sub-d/target/touch.txt" );
+        verifier.verifyFileNotPresent( "target/touch.txt" );
+        verifier.verifyFileNotPresent( "sub-a/target/touch.txt" );
+        verifier.verifyFilePresent( "sub-b/target/touch.txt" );
+        verifier.verifyFileNotPresent( "sub-c/target/touch.txt" );
+        verifier.verifyFileNotPresent( "sub-d/target/touch.txt" );
     }
 
     /**
      * Verify that reactor is resumed from specified project.
+     *
+     * @throws Exception in case of failure
      */
     public void testitResumeFrom()
         throws Exception
@@ -277,10 +294,10 @@ public class MavenITmng2576MakeLikeReactorTest
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
 
-        verifier.assertFileNotPresent( "target/touch.txt" );
-        verifier.assertFileNotPresent( "sub-a/target/touch.txt" );
-        verifier.assertFilePresent( "sub-b/target/touch.txt" );
-        verifier.assertFilePresent( "sub-c/target/touch.txt" );
+        verifier.verifyFileNotPresent( "target/touch.txt" );
+        verifier.verifyFileNotPresent( "sub-a/target/touch.txt" );
+        verifier.verifyFilePresent( "sub-b/target/touch.txt" );
+        verifier.verifyFilePresent( "sub-c/target/touch.txt" );
     }
 
 }

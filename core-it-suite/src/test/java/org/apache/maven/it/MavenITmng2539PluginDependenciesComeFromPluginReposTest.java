@@ -19,15 +19,14 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-2539">MNG-2539</a>.
- * 
- * @version $Id$
+ *
+ *
  */
 public class MavenITmng2539PluginDependenciesComeFromPluginReposTest
     extends AbstractMavenIntegrationTestCase
@@ -41,6 +40,8 @@ public class MavenITmng2539PluginDependenciesComeFromPluginReposTest
 
     /**
      * Verify that dependencies specified in plugins are also retrieved from ordinary/non-plugin repositories.
+     *
+     * @throws Exception in case of failure
      */
     public void testitMNG2539()
         throws Exception
@@ -58,7 +59,7 @@ public class MavenITmng2539PluginDependenciesComeFromPluginReposTest
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
 
-        verifier.assertFilePresent( "target/log.txt" );
+        verifier.verifyFilePresent( "target/log.txt" );
     }
 
 }

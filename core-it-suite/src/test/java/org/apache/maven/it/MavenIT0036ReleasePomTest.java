@@ -19,16 +19,15 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-607">MNG-607</a>.
- * 
+ *
  * @author John Casey
- * @version $Id$
+ *
  */
 public class MavenIT0036ReleasePomTest
     extends AbstractMavenIntegrationTestCase
@@ -40,6 +39,8 @@ public class MavenIT0036ReleasePomTest
 
     /**
      * Test building from release-pom.xml when it's available
+     *
+     * @throws Exception in case of failure
      */
     public void testit0036()
         throws Exception
@@ -53,8 +54,8 @@ public class MavenIT0036ReleasePomTest
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
 
-        verifier.assertFilePresent( "target/passed.log" );
-        verifier.assertFileNotPresent( "target/failed.log" );
+        verifier.verifyFilePresent( "target/passed.log" );
+        verifier.verifyFileNotPresent( "target/failed.log" );
     }
 
 }

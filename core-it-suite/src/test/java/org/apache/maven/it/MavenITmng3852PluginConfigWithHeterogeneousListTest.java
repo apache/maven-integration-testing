@@ -19,7 +19,6 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
@@ -27,9 +26,9 @@ import java.util.Properties;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-3852">MNG-3852</a>.
- * 
+ *
  * @author Benjamin Bentmann
- * @version $Id$
+ *
  */
 public class MavenITmng3852PluginConfigWithHeterogeneousListTest
     extends AbstractMavenIntegrationTestCase
@@ -43,6 +42,8 @@ public class MavenITmng3852PluginConfigWithHeterogeneousListTest
     /**
      * Verify that list-valued plugin parameters respect the ordering of their elements as given in the POM, even
      * if these elements have different names.
+     *
+     * @throws Exception in case of failure
      */
     public void testitMNG3852()
         throws Exception

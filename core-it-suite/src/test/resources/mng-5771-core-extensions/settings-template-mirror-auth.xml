@@ -1,21 +1,21 @@
 <settings>
-  <servers>        
+  <servers>
     <server>
       <id>repoman</id>
       <username>maven</username>
       <password>secret</password>
     </server>
   </servers>
-  
+
   <mirrors>
     <mirror>
       <id>repoman</id>
       <name>Mirror</name>
       <url>http://localhost:@port@</url>
-      <mirrorOf>external:*</mirrorOf>
+      <mirrorOf>@mirrorOf@</mirrorOf>
     </mirror>
   </mirrors>
-  
+
   <profiles>
     <profile>
       <id>development</id>

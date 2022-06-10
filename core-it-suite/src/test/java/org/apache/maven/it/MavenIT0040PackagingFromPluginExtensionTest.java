@@ -19,16 +19,15 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-598">MNG-598</a>.
- * 
+ *
  * @author Brett Porter
- * @version $Id$
+ *
  */
 public class MavenIT0040PackagingFromPluginExtensionTest
     extends AbstractMavenIntegrationTestCase
@@ -41,6 +40,8 @@ public class MavenIT0040PackagingFromPluginExtensionTest
 
     /**
      * Test the use of a packaging from a plugin
+     *
+     * @throws Exception in case of failure
      */
     public void testit0040()
         throws Exception
@@ -54,7 +55,7 @@ public class MavenIT0040PackagingFromPluginExtensionTest
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
 
-        verifier.assertFilePresent( "target/maven-it-it0040-1.0-it.jar" );
+        verifier.verifyFilePresent( "target/maven-it-it0040-1.0-it.jar" );
     }
 
 }

@@ -19,7 +19,6 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
@@ -36,6 +35,8 @@ public class MavenIT0009GoalConfigurationTest
     /**
      * Test plugin configuration and goal configuration that overrides what the
      * mojo has specified.
+     *
+     * @throws Exception in case of failure
      */
     public void testit0009()
         throws Exception
@@ -48,9 +49,9 @@ public class MavenIT0009GoalConfigurationTest
         verifier.setAutoclean( false );
         verifier.deleteDirectory( "target" );
         verifier.executeGoal( "validate" );
-        verifier.assertFilePresent( supportSpaceInXml ? "target/  pluginItem  " : "target/pluginItem");
-        verifier.assertFilePresent( "target/goalItem" );
-        verifier.assertFileNotPresent( "target/bad-item" );
+        verifier.verifyFilePresent( supportSpaceInXml ? "target/  pluginItem  " : "target/pluginItem");
+        verifier.verifyFilePresent( "target/goalItem" );
+        verifier.verifyFileNotPresent( "target/bad-item" );
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
     }

@@ -26,8 +26,8 @@ import java.io.File;
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-5572">MNG-5572</a>
  * as a response to <a href="https://issues.apache.org/jira/browse/MNG-1911">MNG-1911</a>
- * 
- * 
+ *
+ *
  * @author rfscholte
  */
 public class MavenITmng5572ReactorPluginExtensionsTest
@@ -40,7 +40,9 @@ public class MavenITmng5572ReactorPluginExtensionsTest
     }
 
     /**
-     * Test that Maven warns when one reactor project contains a plugin, and another tries to use it with extensions 
+     * Test that Maven warns when one reactor project contains a plugin, and another tries to use it with extensions
+     *
+     * @throws Exception in case of failure
      */
     public void testit()
         throws Exception
@@ -61,7 +63,14 @@ public class MavenITmng5572ReactorPluginExtensionsTest
         verifier.setAutoclean( false );
         verifier.executeGoal( "validate" );
         verifier.verifyErrorFreeLog();
-        verifier.verifyTextInLog( "[WARNING] project uses org.apache.maven.its.mng5572:plugin as extensions, which is not possible within the same reactor build. This plugin was pulled from the local repository!" );
+        if ( getMavenVersion().getMajorVersion() <= 3 )
+        {
+            verifier.verifyTextInLog( "[WARNING] project uses org.apache.maven.its.mng5572:plugin as extensions, which is not possible within the same reactor build. This plugin was pulled from the local repository!" );
+        }
+        else
+        {
+            verifier.verifyTextInLog( "[WARNING] 'project' uses 'org.apache.maven.its.mng5572:plugin' as extension which is not possible within the same reactor build. This plugin was pulled from the local repository!" );
+        }
         verifier.resetStreams();
     }
 

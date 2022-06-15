@@ -12,7 +12,7 @@ pipeline {
           agent { node { label 'ubuntu' } }
           steps {
               timeout( time: 180, unit: 'MINUTES' ) {
-                mavenBuild( "jdk11", "maven_3.8.5")
+                mavenBuild( "jdk_1.8_latest", "maven_3.8.5")
             }
           }
         }
@@ -20,7 +20,7 @@ pipeline {
           agent { node { label 'ubuntu' } }
           steps {
               timeout( time: 180, unit: 'MINUTES' ) {
-                mavenBuild( "jdk11", "maven_3.8.5")
+                mavenBuild( "jdk_11_latest", "maven_3.8.5")
             }
           }
         }

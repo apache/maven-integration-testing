@@ -8,6 +8,14 @@ pipeline {
   stages {
     stage("Parallel Stage") {
       parallel {
+        stage("Build / Test - mvn 3.8.5 - JDK7") {
+          agent { node { label 'ubuntu' } }
+          steps {
+              timeout( time: 180, unit: 'MINUTES' ) {
+                mavenBuild( "jdk_1.7_latest", "maven_3.8.5")
+            }
+          }
+        }
         stage("Build / Test - mvn 3.8.5 - JDK8") {
           agent { node { label 'ubuntu' } }
           steps {

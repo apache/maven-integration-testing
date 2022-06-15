@@ -24,7 +24,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, macOS-latest]
-        java: [8, 11, 17]
+        java: [7, 8, 11, 17]
       fail-fast: false
 
     runs-on: ${{ matrix.os }}
@@ -34,7 +34,7 @@ jobs:
       - name: Set up Maven
         uses: stCarolas/setup-maven@v4
         with:
-          maven-version: 3.8.5
+          maven-version: 3.8.6
       - name: Set up JDK
         uses: actions/setup-java@v2
         with:

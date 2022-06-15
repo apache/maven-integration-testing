@@ -42,7 +42,7 @@ def mavenBuild(jdk, mvnName) {
     }
     finally
     {
-      junit testResults: '**/target/surefire-reports/*.xml', allowEmptyResults: true
+      junit testResults: 'core-it-suite/target/surefire-reports/*.xml', allowEmptyResults: true
     }
   }
 }

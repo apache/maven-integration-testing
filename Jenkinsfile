@@ -37,7 +37,7 @@ def mavenBuild(jdk, mvnName) {
                "PATH+MAVEN=${ tool "$jdk" }/bin:${tool "$mvnName"}/bin",
                "MAVEN_OPTS=-Xms2g -Xmx4g -Djava.awt.headless=true"]) {
         sh "rm -rf `pwd`/repo"
-        sh "mvn clean install -Prun-its,embedded -Dmaven.repo.local=`pwd`/repo"
+        sh "mvn clean install -Prun-its,embedded -Dmaven.repo.local=`pwd`/repo -B"
       }
     }
     finally

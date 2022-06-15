@@ -41,3 +41,6 @@ jobs:
           java-version: ${{ matrix.java }}
           distribution: 'temurin'
           cache: 'maven'          
+      - name: Running integration tests
+        shell: bash
+        run: "mvn clean install -Prun-its,embedded -Dmaven.repo.local=`pwd`/repo"

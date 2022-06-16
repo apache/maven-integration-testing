@@ -23,7 +23,7 @@ jobs:
   build:
     strategy:
       matrix:
-        os: [ubuntu-latest, macOS-latest]
+        os: [ubuntu-latest]
         java: [8, 11, 17]
       fail-fast: false
 

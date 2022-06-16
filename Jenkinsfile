@@ -25,7 +25,7 @@ pipeline {
           }
         }
         stage("Build / Test - mvn latest - JDK8 - windowx") {
-          agent { node { label 'windows' } }
+          agent { node { label 'Windows' } }
           steps {
               timeout( time: 180, unit: 'MINUTES' ) {
                 mavenBuild( "jdk_1.8_latest", "maven_latest")
@@ -33,7 +33,7 @@ pipeline {
           }
         }
         stage("Build / Test - mvn latest - JDK11 - windows") {
-          agent { node { label 'windows' } }
+          agent { node { label 'Windows' } }
           steps {
               timeout( time: 180, unit: 'MINUTES' ) {
                 mavenBuild( "jdk_11_latest", "maven_latest")

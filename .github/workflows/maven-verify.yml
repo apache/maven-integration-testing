@@ -40,7 +40,7 @@ jobs:
           cache: 'maven'
 
       - name: Set up Maven
-        run: mvn --errors --batch-mode --show-version org.apache.maven.plugins:maven-wrapper-plugin:3.1.0:wrapper "-Dmaven=3.8.6"
+        run: mvn --errors --batch-mode --show-version wrapper:wrapper "-Dmaven=3.8.6"
 
       - name: Running integration tests
         # execute on any push or pull request from forked repo

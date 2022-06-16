@@ -49,7 +49,11 @@ def mavenBuild(jdk, mvnName) {
   script {
     try {
         withMaven(jdk: "$jdk", maven: "$mvnName", publisherStrategy: 'EXPLICIT', mavenOpts: "-Xms2g -Xmx4g -Djava.awt.headless=true") {
-            sh "mvn -V clean install -Prun-its,embedded -Dmaven.repo.local=./repository -B"
+            if (isUnix()) {
+                sh "mvn -V clean install -Prun-its,embedded -B"
+            } else {
+                bat "mvn -V clean install -Prun-its,embedded -B"
+            }
         }
     }
     finally

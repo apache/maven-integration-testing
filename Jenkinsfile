@@ -51,7 +51,7 @@ def mavenBuild(jdk, mvnName) {
       withEnv(["JAVA_HOME=${ tool "$jdk" }",
                "PATH+MAVEN=${ tool "$jdk" }/bin:${tool "$mvnName"}/bin",
                "MAVEN_OPTS=-Xms2g -Xmx4g -Djava.awt.headless=true"]) {
-        if (isUnix() {
+        if (isUnix()) {
           sh "mvn -V clean install -Prun-its,embedded -Dmaven.repo.local=`pwd`/repo -B"
         } else {
           bat "mvn -V clean install -Prun-its,embedded -Dmaven.repo.local=./repo -B"

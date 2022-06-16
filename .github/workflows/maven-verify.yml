@@ -43,4 +43,4 @@ jobs:
           cache: 'maven'          
       - name: Running integration tests
         shell: bash
-        run: "mvn -B clean install -Prun-its,embedded -Dmaven.repo.local=`pwd`/repo"
+        run: "mvn -B clean install -Prun-its,embedded"

@@ -82,6 +82,8 @@ under the License.
     <proxy.nonProxyHosts>localhost</proxy.nonProxyHosts>
     <slf4jVersion>1.6.1</slf4jVersion>
     <jetty9Version>9.0.4.v20130625</jetty9Version>
+
+    <stubPluginVersion>0.1-stub-SNAPSHOT</stubPluginVersion>
   </properties>
 
   <dependencies>
@@ -160,6 +162,42 @@ under the License.
     </testResources>
     <plugins>
       <plugin>
+        <groupId>org.apache.maven.its</groupId>
+        <artifactId>core-it-bootstrap</artifactId>
+        <version>2.1-SNAPSHOT</version>
+        <executions>
+          <execution>
+            <id>boostrap</id>
+            <phase>process-test-classes</phase>
+            <goals>
+              <goal>download</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <file>src/test/resources/bootstrap.txt</file>
+          <dependencies>
+            <dependency>
+              <groupId>org.apache.maven.its.plugins</groupId>
+              <artifactId>maven-it-plugin-project-interpolation</artifactId>
+              <version>2.1-SNAPSHOT</version>
+              <scope>runtime</scope>
+              <exclusions>
+                <!--
+                NOTE: This artifact (and its dependency maven-verifier) are in use by the class loader employed by Surefire
+                to orchestrate this test. Re-downloading (newer snapshots of) these artifacts during the tests will wreck
+                havoc on the class loader, i.e. tests fail due to NoClassDefFoundError's in the test controller.
+                -->
+                <exclusion>
+                  <groupId>org.apache.maven.its</groupId>
+                  <artifactId>maven-it-helper</artifactId>
+                </exclusion>
+              </exclusions>
+            </dependency>
+          </dependencies>
+        </configuration>
+      </plugin>
+      <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
         <configuration>
@@ -207,7 +245,7 @@ under the License.
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-surefire-plugin</artifactId>
             <configuration>
-              <parallel>classes</parallel>
+              <parallel>suitesAndClasses</parallel>
               <threadCount>6</threadCount>
             </configuration>
           </plugin>

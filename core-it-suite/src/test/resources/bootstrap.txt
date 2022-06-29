@@ -76,6 +76,7 @@ org.apache.maven.plugins:maven-ejb-plugin:2.5.1
 org.apache.maven.plugins:maven-install-plugin:0.1-stub-SNAPSHOT
 org.apache.maven.plugins:maven-install-plugin:2.4
 org.apache.maven.plugins:maven-install-plugin:2.5.2
+org.apache.maven.plugins:maven-install-plugin:3.0.0-M1
 org.apache.maven.plugins:maven-jar-plugin:0.1-stub-SNAPSHOT
 org.apache.maven.plugins:maven-jar-plugin:2.2
 org.apache.maven.plugins:maven-jar-plugin:2.4

@@ -33,20 +33,20 @@ under the License.
   <name>Bootstrap plugin</name>
 
   <properties>
-    <maven.version>3.8.6</maven.version>
-    <maven.resolver.version>1.8.1</maven.resolver.version>
+    <mavenVersion>3.8.6</mavenVersion>
+    <mavenResolverVersion>1.8.1</mavenResolverVersion>
   </properties>
 
   <dependencies>
     <dependency>
       <groupId>org.apache.maven</groupId>
       <artifactId>maven-plugin-api</artifactId>
-      <version>${maven.version}</version>
+      <version>${mavenVersion}</version>
     </dependency>
     <dependency>
       <groupId>org.apache.maven</groupId>
       <artifactId>maven-core</artifactId>
-      <version>${maven.version}</version>
+      <version>${mavenVersion}</version>
     </dependency>
     <dependency>
       <groupId>org.apache.maven.plugin-tools</groupId>
@@ -55,7 +55,7 @@ under the License.
     <dependency>
       <groupId>org.apache.maven.resolver</groupId>
       <artifactId>maven-resolver-impl</artifactId>
-      <version>${maven.resolver.version}</version>
+      <version>${mavenResolverVersion}</version>
     </dependency>
   </dependencies>
 

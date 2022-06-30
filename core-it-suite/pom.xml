@@ -168,14 +168,14 @@ under the License.
         <executions>
           <execution>
             <id>boostrap</id>
-            <phase>initialize</phase>
+            <phase>process-test-classes</phase>
             <goals>
               <goal>download</goal>
             </goals>
           </execution>
         </executions>
         <configuration>
-          <file>src/test/resources/bootstrap.txt</file>
+          <file>${project.build.directory}/test-classes/bootstrap.txt</file>
           <dependencies>
             <dependency>
               <groupId>org.apache.maven.its.plugins</groupId>

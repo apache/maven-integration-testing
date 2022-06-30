@@ -75,6 +75,7 @@ org.apache.maven.plugins:maven-dependency-plugin:2.8
 org.apache.maven.plugins:maven-deploy-plugin:0.1-stub-SNAPSHOT
 org.apache.maven.plugins:maven-deploy-plugin:2.7
 org.apache.maven.plugins:maven-deploy-plugin:3.0.0-M1
+org.apache.maven.plugins:maven-deploy-plugin:3.0.0-M2
 org.apache.maven.plugins:maven-ear-plugin:0.1-stub-SNAPSHOT
 org.apache.maven.plugins:maven-ear-plugin:2.8
 org.apache.maven.plugins:maven-ejb-plugin:0.1-stub-SNAPSHOT

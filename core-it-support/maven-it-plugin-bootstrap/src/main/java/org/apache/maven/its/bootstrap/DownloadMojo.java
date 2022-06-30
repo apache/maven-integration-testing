@@ -24,6 +24,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -36,6 +37,7 @@ import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.plugins.annotations.Component;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
+import org.apache.maven.project.ProjectBuildingRequest;
 import org.codehaus.plexus.util.StringUtils;
 import org.eclipse.aether.RepositorySystem;
 import org.eclipse.aether.RepositorySystemSession;
@@ -69,6 +71,9 @@ public class DownloadMojo
      */
     @Parameter
     private File file;
+
+    @Parameter( property = "maven.it.central", required = true )
+    private String mavenCentral;
 
     @Component
     private RepositorySystem repositorySystem;
@@ -104,10 +109,12 @@ public class DownloadMojo
             }
         }
 
-        RepositorySystemSession repositorySystemSession = session.getProjectBuildingRequest().getRepositorySession();
+        ProjectBuildingRequest projectBuildingRequest = session.getProjectBuildingRequest();
+        RepositorySystemSession repositorySystemSession = projectBuildingRequest.getRepositorySession();
+        List<RemoteRepository> repos = Arrays.asList(
+                new RemoteRepository.Builder( "central", "default", mavenCentral ).build()
+        );
         ArtifactTypeRegistry registry = RepositoryUtils.newArtifactTypeRegistry( artifactHandlerManager );
-        List<RemoteRepository> repos = RepositoryUtils.toRepos(
-                session.getProjectBuildingRequest().getRemoteRepositories() );
         for ( Dependency dependency : dependencies )
         {
             try

@@ -24,7 +24,6 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -72,9 +71,6 @@ public class DownloadMojo
     @Parameter
     private File file;
 
-    @Parameter( property = "maven.it.central", required = true )
-    private String mavenCentral;
-
     @Component
     private RepositorySystem repositorySystem;
 
@@ -111,9 +107,7 @@ public class DownloadMojo
 
         ProjectBuildingRequest projectBuildingRequest = session.getProjectBuildingRequest();
         RepositorySystemSession repositorySystemSession = projectBuildingRequest.getRepositorySession();
-        List<RemoteRepository> repos = Arrays.asList(
-                new RemoteRepository.Builder( "central", "default", mavenCentral ).build()
-        );
+        List<RemoteRepository> repos = RepositoryUtils.toRepos( projectBuildingRequest.getRemoteRepositories() );
         ArtifactTypeRegistry registry = RepositoryUtils.newArtifactTypeRegistry( artifactHandlerManager );
         for ( Dependency dependency : dependencies )
         {

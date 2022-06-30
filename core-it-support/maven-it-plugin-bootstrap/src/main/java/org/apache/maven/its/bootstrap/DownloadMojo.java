@@ -116,6 +116,7 @@ public class DownloadMojo
                 DependencyRequest request = new DependencyRequest(
                         new CollectRequest( Collections.singletonList( dep ), Collections.emptyList(), repos ),
                         null );
+                System.out.println( "Resolving: " + dep.getArtifact() );
                 repositorySystem.resolveDependencies( repositorySystemSession, request );
             }
             catch ( Exception e )

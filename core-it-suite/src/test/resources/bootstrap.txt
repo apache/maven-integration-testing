@@ -1,3 +1,9 @@
+#0
+#1   This file contains a list of artifacts that will be downloaded (with their transitive dependencies)
+#2   during the bootstrap phase.
+#3   It should be kept sorted alphabetically using the following command:
+#4     mv bootstrap.txt tmp.txt && cat tmp.txt | sort -u > bootstrap.txt && rm tmp.txt
+#5
 com.google.code.findbugs:jsr305:1.3.9
 com.google.guava:guava:10.0.1
 com.thoughtworks.qdox:qdox:2.0-M9

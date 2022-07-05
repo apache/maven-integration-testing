@@ -42,7 +42,8 @@ public class MavenITmng7443ConsistencyOfOptionalProjectsAndProfilesTest extends 
         Verifier verifier = newVerifier( testDir.getAbsolutePath() );
         verifier.addCliOption( "-pl" );
         verifier.addCliOption( "?:does-not-exist" );
-        verifier.addCliOption( "-P?does-not-exist-either" );
+        verifier.addCliOption( "-P" );
+        verifier.addCliOption( "?does-not-exist-either" );
 
         verifier.executeGoals( Arrays.asList( "clean", "verify" ) );
 

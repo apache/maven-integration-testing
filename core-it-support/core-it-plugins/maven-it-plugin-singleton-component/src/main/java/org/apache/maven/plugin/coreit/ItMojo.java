@@ -21,6 +21,9 @@ package org.apache.maven.plugin.coreit;
 
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
+import org.apache.maven.plugins.annotations.LifecyclePhase;
+import org.apache.maven.plugins.annotations.Mojo;
+import org.apache.maven.plugins.annotations.Parameter;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -34,47 +37,42 @@ import java.util.Properties;
  *
  * @author Benjamin Bentmann
  *
- * @goal it
- * @phase initialize
- */
+  */
+@Mojo( name = "it", defaultPhase = LifecyclePhase.INITIALIZE )
 public class ItMojo
     extends AbstractMojo
 {
 
     /**
      * The path to the output file.
-     *
-     * @parameter property="touch.outputFile" default-value="target/comp.properties"
      */
+    @Parameter( property = "touch.outputFile", defaultValue = "target/comp.properties" )
     private File outputFile;
 
     /**
      * Component lookup without role hint.
      *
-     * @component
      */
+    @org.apache.maven.plugins.annotations.Component
     private Component componentWithoutRoleHint;
 
     /**
      * Component lookup with explicit role hint.
-     *
-     * @component roleHint="default"
      */
+    @org.apache.maven.plugins.annotations.Component( hint = "default" )
     private Component componentWithRoleHint;
 
     /**
      * Component lookup via active map.
-     *
-     * @component role="org.apache.maven.plugin.coreit.Component"
      */
-    private Map componentMap;
+    @org.apache.maven.plugins.annotations.Component
+    private Map<String, Component> componentMap;
 
     /**
      * Component lookup via active list.
-     *
-     * @component role="org.apache.maven.plugin.coreit.Component"
      */
-    private List componentList;
+    @org.apache.maven.plugins.annotations.Component
+    private List<Component> componentList;
 
     /**
      * Runs this mojo.

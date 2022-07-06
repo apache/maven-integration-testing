@@ -30,6 +30,9 @@ import java.util.Properties;
 /**
  * Check that we correctly use the implementation parameter.
  *
+ * TODO: this mojo can not be converted to mojo annotations
+ * TODO: because the @Parameter#implementation has never been implemented.
+ *
  * @goal param-implementation
  */
 public class ParameterImplementationMojo

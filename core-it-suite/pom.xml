@@ -139,7 +139,6 @@ under the License.
     <dependency>
       <groupId>org.apache.maven</groupId>
       <artifactId>maven-repository-metadata</artifactId>
-      <version>3.6.3</version>
     </dependency>
   </dependencies>
 
@@ -355,7 +354,6 @@ under the License.
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-dependency-plugin</artifactId>
-            <version>2.10</version>
             <executions>
               <execution>
                 <id>download-maven-distro</id>
@@ -382,7 +380,6 @@ under the License.
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-antrun-plugin</artifactId>
-            <version>3.0.0</version>
             <executions>
               <execution>
                 <id>unpack-maven-distro</id>

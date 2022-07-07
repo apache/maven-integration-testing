@@ -19,6 +19,7 @@ package org.apache.maven.it;
  * under the License.
  */
 
+import org.junit.jupiter.api.Test;
 import org.apache.maven.it.util.ResourceExtractor;
 import org.eclipse.jetty.server.Handler;
 import org.eclipse.jetty.server.NetworkConnector;
@@ -57,6 +58,7 @@ public class MavenITmng4326LocalSnapshotSuppressesRemoteCheckTest
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testit()
         throws Exception
     {

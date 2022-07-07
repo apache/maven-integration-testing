@@ -19,6 +19,7 @@ package org.apache.maven.it;
  * under the License.
  */
 
+import org.junit.jupiter.api.Test;
 import java.io.File;
 import java.util.Properties;
 
@@ -39,6 +40,7 @@ public class MavenITmng4189UniqueVersionSnapshotTest
         super( "[2.2.1,),[3.0-alpha-3,)" );
     }
 
+    @Test
     public void testit()
         throws Exception
     {

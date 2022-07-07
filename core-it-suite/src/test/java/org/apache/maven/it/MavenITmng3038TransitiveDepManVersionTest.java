@@ -19,6 +19,8 @@ package org.apache.maven.it;
  * under the License.
  */
 
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 import java.io.File;
 import java.io.IOException;
 
@@ -30,6 +32,7 @@ import org.apache.maven.it.util.ResourceExtractor;
  * @author Joakim Erdfelt
  *
  */
+@Disabled
 public class MavenITmng3038TransitiveDepManVersionTest
     extends AbstractMavenIntegrationTestCase
 {
@@ -38,6 +41,7 @@ public class MavenITmng3038TransitiveDepManVersionTest
         super( ALL_MAVEN_VERSIONS );
     }
 
+    @Test
     public void testitMNG3038()
         throws Exception
     {

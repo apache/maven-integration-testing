@@ -19,6 +19,7 @@ package org.apache.maven.it;
  * under the License.
  */
 
+import org.junit.jupiter.api.Test;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
@@ -43,6 +44,7 @@ public class MavenITmng4231SnapshotUpdatePolicyTest
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testitAlways()
         throws Exception
     {
@@ -82,6 +84,7 @@ public class MavenITmng4231SnapshotUpdatePolicyTest
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testitNever()
         throws Exception
     {

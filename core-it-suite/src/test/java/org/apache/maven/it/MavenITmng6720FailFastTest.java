@@ -19,6 +19,7 @@ package org.apache.maven.it;
  * under the License.
  */
 
+import org.junit.jupiter.api.Test;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
@@ -41,6 +42,7 @@ public class MavenITmng6720FailFastTest
         super( "[3.6.2,)" );
     }
 
+    @Test
     public void testItShouldWaitForConcurrentModulesToFinish()
         throws Exception
     {
@@ -71,7 +73,5 @@ public class MavenITmng6720FailFastTest
         List<String> module3Lines = verifier.loadFile(
             new File( testDir, "module-3/target/surefire-reports/Module3Test-output.txt" ), false );
         assertTrue( module3Lines.isEmpty() );
-
-
     }
 }

@@ -19,6 +19,7 @@ package org.apache.maven.it;
  * under the License.
  */
 
+import org.junit.jupiter.api.Test;
 import java.io.File;
 
 import org.apache.maven.it.util.ResourceExtractor;
@@ -40,6 +41,7 @@ public class MavenITmng3716AggregatorForkingTest
         super( "(2.0.8,)" ); // only test in 2.0.9+
     }
 
+    @Test
     public void testitMNG3716()
         throws Exception
     {

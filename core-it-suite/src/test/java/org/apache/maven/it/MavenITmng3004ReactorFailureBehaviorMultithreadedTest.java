@@ -19,6 +19,7 @@ package org.apache.maven.it;
  * under the License.
  */
 
+import org.junit.jupiter.api.Test;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
@@ -43,6 +44,7 @@ public class MavenITmng3004ReactorFailureBehaviorMultithreadedTest
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testitFailFastSingleThread()
         throws Exception
     {
@@ -81,6 +83,7 @@ public class MavenITmng3004ReactorFailureBehaviorMultithreadedTest
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testitFailNeverSingleThread()
         throws Exception
     {
@@ -111,6 +114,7 @@ public class MavenITmng3004ReactorFailureBehaviorMultithreadedTest
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testitFailAtEndSingleThread()
         throws Exception
     {
@@ -148,6 +152,7 @@ public class MavenITmng3004ReactorFailureBehaviorMultithreadedTest
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testitFailNeverTwoThreads()
         throws Exception
     {
@@ -178,6 +183,7 @@ public class MavenITmng3004ReactorFailureBehaviorMultithreadedTest
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testitFailAtEndTwoThreads()
         throws Exception
     {

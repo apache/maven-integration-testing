@@ -19,6 +19,9 @@ package org.apache.maven.it;
  * under the License.
  */
 
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.apache.maven.it.util.ResourceExtractor;
 import org.eclipse.jetty.server.Handler;
 import org.eclipse.jetty.server.NetworkConnector;
@@ -55,7 +58,7 @@ public class MavenITmng2387InactiveProxyTest
         super( "[2.0.11,2.1.0-M1),[2.1.0,)" ); // 2.0.11+, 2.1.0+
     }
 
-    @Override
+    @BeforeEach
     protected void setUp()
         throws Exception
     {
@@ -94,7 +97,7 @@ public class MavenITmng2387InactiveProxyTest
         System.out.println( "Bound server socket to the HTTPS port " + port );
     }
 
-    @Override
+    @AfterEach
     protected void tearDown()
         throws Exception
     {
@@ -115,6 +118,7 @@ public class MavenITmng2387InactiveProxyTest
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testit()
         throws Exception
     {

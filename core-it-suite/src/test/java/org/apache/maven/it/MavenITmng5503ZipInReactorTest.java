@@ -19,6 +19,8 @@ package org.apache.maven.it;
  * under the License.
  */
 
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
@@ -28,6 +30,7 @@ import java.io.File;
  *
  * @author jvz
  */
+@Disabled
 public class MavenITmng5503ZipInReactorTest
     extends AbstractMavenIntegrationTestCase
 {
@@ -43,6 +46,7 @@ public class MavenITmng5503ZipInReactorTest
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testit()
         throws Exception
     {

@@ -19,6 +19,7 @@ package org.apache.maven.it;
  * under the License.
  */
 
+import org.junit.jupiter.api.Test;
 import java.io.File;
 import java.util.List;
 
@@ -50,6 +51,7 @@ public class MavenITmng3023ReactorDependencyResolutionTest
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testitMNG3023A() throws Exception
     {
         File testDir = ResourceExtractor.simpleExtractResources( getClass(), "/mng-3023" );
@@ -87,6 +89,7 @@ public class MavenITmng3023ReactorDependencyResolutionTest
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testitMNG3023B()
         throws Exception
     {
@@ -123,6 +126,7 @@ public class MavenITmng3023ReactorDependencyResolutionTest
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testitMNG3023C()
         throws Exception
     {

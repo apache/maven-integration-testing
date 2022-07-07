@@ -19,6 +19,7 @@ package org.apache.maven.it;
  * under the License.
  */
 
+import org.junit.jupiter.api.Test;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
@@ -38,12 +39,14 @@ public class MavenITmng4800NearestWinsVsScopeWideningTest
         super( "[3.0-beta-4,)" );
     }
 
+    @Test
     public void testitAB()
         throws Exception
     {
         testit( "test-ab" );
     }
 
+    @Test
     public void testitBA()
         throws Exception
     {

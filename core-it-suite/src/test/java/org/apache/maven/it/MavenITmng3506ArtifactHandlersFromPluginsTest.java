@@ -19,6 +19,7 @@ package org.apache.maven.it;
  * under the License.
  */
 
+import org.junit.jupiter.api.Test;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
@@ -46,6 +47,7 @@ public class MavenITmng3506ArtifactHandlersFromPluginsTest
         super( "(2.2.0,)" );
     }
 
+    @Test
     public void testProjectPackagingUsage()
         throws IOException, VerificationException
     {

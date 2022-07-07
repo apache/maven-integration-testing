@@ -19,6 +19,7 @@ package org.apache.maven.it;
  * under the License.
  */
 
+import org.junit.jupiter.api.Test;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
@@ -49,6 +50,7 @@ public class MavenIT0143TransitiveDependencyScopesTest
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testitCompileScope()
         throws Exception
     {
@@ -105,6 +107,7 @@ public class MavenIT0143TransitiveDependencyScopesTest
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testitProvidedScope()
         throws Exception
     {
@@ -152,6 +155,7 @@ public class MavenIT0143TransitiveDependencyScopesTest
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testitRuntimeScope()
         throws Exception
     {
@@ -199,6 +203,7 @@ public class MavenIT0143TransitiveDependencyScopesTest
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testitTestScope()
         throws Exception
     {

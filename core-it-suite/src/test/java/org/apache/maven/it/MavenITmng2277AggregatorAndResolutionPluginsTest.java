@@ -19,6 +19,7 @@ package org.apache.maven.it;
  * under the License.
  */
 
+import org.junit.jupiter.api.Test;
 import java.io.File;
 
 import org.apache.maven.it.util.ResourceExtractor;
@@ -38,6 +39,7 @@ public class MavenITmng2277AggregatorAndResolutionPluginsTest
         super( "(2.0.7,)" ); // 2.0.8+
     }
 
+    @Test
     public void testitMNG2277()
         throws Exception
     {

@@ -19,6 +19,7 @@ package org.apache.maven.it;
  * under the License.
  */
 
+import org.junit.jupiter.api.Test;
 import java.io.File;
 import java.util.Collections;
 
@@ -44,6 +45,7 @@ public class MavenITmng4465PluginPrefixFromLocalCacheOfDownRepoTest
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testit()
         throws Exception
     {

@@ -19,6 +19,7 @@ package org.apache.maven.it;
  * under the License.
  */
 
+import org.junit.jupiter.api.Test;
 import java.io.File;
 import java.util.Properties;
 
@@ -32,6 +33,7 @@ public class MavenITmng5768CliExecutionIdTest
         super( "(3.2.5,)" );
     }
 
+    @Test
     public void testit()
         throws Exception
     {

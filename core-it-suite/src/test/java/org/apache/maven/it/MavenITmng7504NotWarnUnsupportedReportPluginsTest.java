@@ -23,6 +23,7 @@ import java.io.IOException;
 import java.util.List;
 
 import org.apache.maven.it.util.ResourceExtractor;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test for
@@ -41,6 +42,7 @@ public class MavenITmng7504NotWarnUnsupportedReportPluginsTest extends AbstractM
         super( "[3.9.0]" );
     }
 
+    @Test
     public void testWarnNotPresent() throws IOException, VerificationException
     {
         File rootDir = ResourceExtractor.simpleExtractResources( getClass(), PROJECT_PATH );

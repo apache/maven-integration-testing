@@ -19,6 +19,7 @@ package org.apache.maven.it;
  * under the License.
  */
 
+import org.junit.jupiter.api.Test;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
@@ -45,6 +46,7 @@ public class MavenITmng3885UniqueVersionFromParentProfileTest
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testitNonUniqueVersionReactor()
         throws Exception
     {
@@ -69,6 +71,7 @@ public class MavenITmng3885UniqueVersionFromParentProfileTest
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testitNonUniqueVersionStandalone()
         throws Exception
     {
@@ -93,6 +96,7 @@ public class MavenITmng3885UniqueVersionFromParentProfileTest
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testitUniqueVersionReactor()
         throws Exception
     {
@@ -118,6 +122,7 @@ public class MavenITmng3885UniqueVersionFromParentProfileTest
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testitUniqueVersionStandalone()
         throws Exception
     {

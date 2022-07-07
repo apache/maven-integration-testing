@@ -19,6 +19,9 @@ package org.apache.maven.it;
  * under the License.
  */
 
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.apache.maven.it.util.ResourceExtractor;
 import org.apache.maven.it.utils.DeployedResource;
 import org.codehaus.plexus.util.StringUtils;
@@ -73,7 +76,7 @@ public class MavenITmng4235HttpAuthDeploymentChecksumsTest
         super( "[2.0.5,2.2.0),(2.2.0,)" );
     }
 
-    @Override
+    @BeforeEach
     protected void setUp()
         throws Exception
     {
@@ -115,7 +118,7 @@ public class MavenITmng4235HttpAuthDeploymentChecksumsTest
         System.out.println( "Bound server socket to the port " + port );
     }
 
-    @Override
+    @AfterEach
     protected void tearDown()
         throws Exception
     {
@@ -134,6 +137,7 @@ public class MavenITmng4235HttpAuthDeploymentChecksumsTest
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testit()
         throws Exception
     {

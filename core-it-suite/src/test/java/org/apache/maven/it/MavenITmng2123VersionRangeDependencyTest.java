@@ -19,6 +19,7 @@ package org.apache.maven.it;
  * under the License.
  */
 
+import org.junit.jupiter.api.Test;
 import java.io.File;
 import java.util.List;
 
@@ -36,6 +37,7 @@ public class MavenITmng2123VersionRangeDependencyTest
         super( "(2.0.8,)" );
     }
 
+    @Test
     public void testitMNG2123()
         throws Exception
     {

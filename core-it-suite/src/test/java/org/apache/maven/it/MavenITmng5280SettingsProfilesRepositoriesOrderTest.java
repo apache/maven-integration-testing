@@ -19,6 +19,9 @@ package org.apache.maven.it;
  * under the License.
  */
 
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.apache.maven.it.util.ResourceExtractor;
 import org.eclipse.jetty.server.NetworkConnector;
 import org.eclipse.jetty.server.Request;
@@ -52,7 +55,7 @@ public class MavenITmng5280SettingsProfilesRepositoriesOrderTest
         super( "[3.1-A,)" );
     }
 
-    @Override
+    @BeforeEach
     protected void setUp()
         throws Exception
     {
@@ -60,7 +63,7 @@ public class MavenITmng5280SettingsProfilesRepositoriesOrderTest
         server = new Server( 0 );
     }
 
-    @Override
+    @AfterEach
     protected void tearDown()
         throws Exception
     {
@@ -76,6 +79,7 @@ public class MavenITmng5280SettingsProfilesRepositoriesOrderTest
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testRepositoriesOrder()
         throws Exception
     {
@@ -112,6 +116,7 @@ public class MavenITmng5280SettingsProfilesRepositoriesOrderTest
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testPluginRepositoriesOrder()
         throws Exception
     {

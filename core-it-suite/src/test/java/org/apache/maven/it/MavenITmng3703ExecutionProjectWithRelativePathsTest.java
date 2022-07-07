@@ -19,6 +19,7 @@ package org.apache.maven.it;
  * under the License.
  */
 
+import org.junit.jupiter.api.Test;
 import java.io.File;
 
 import org.apache.maven.it.util.ResourceExtractor;
@@ -39,6 +40,7 @@ public class MavenITmng3703ExecutionProjectWithRelativePathsTest
         super( "[2.1.0-M1,)" ); // only test in 2.1.0+
     }
 
+    @Test
     public void testForkFromMojo()
         throws Exception
     {
@@ -64,6 +66,7 @@ public class MavenITmng3703ExecutionProjectWithRelativePathsTest
         verifier.resetStreams();
     }
 
+    @Test
     public void testForkFromReport()
         throws Exception
     {

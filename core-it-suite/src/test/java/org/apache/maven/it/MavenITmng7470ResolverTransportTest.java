@@ -5,6 +5,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.maven.it.util.ResourceExtractor;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-7470">MNG-7470</a>:
@@ -24,7 +27,7 @@ public class MavenITmng7470ResolverTransportTest
         super( "[3.9.0,)" );
     }
 
-    @Override
+    @BeforeEach
     protected void setUp()
         throws Exception
     {
@@ -44,7 +47,7 @@ public class MavenITmng7470ResolverTransportTest
         System.out.println( "Bound server socket to the port " + port );
     }
 
-    @Override
+    @AfterEach
     protected void tearDown()
         throws Exception
     {
@@ -92,18 +95,21 @@ public class MavenITmng7470ResolverTransportTest
         verifier.resetStreams();
     }
 
+    @Test
     public void testResolverTransportDefault()
             throws Exception
     {
         performTest( null, "[DEBUG] Using transporter WagonTransporter" );
     }
 
+    @Test
     public void testResolverTransportWagon()
             throws Exception
     {
         performTest( "wagon", "[DEBUG] Using transporter WagonTransporter" );
     }
 
+    @Test
     public void testResolverTransportNative()
             throws Exception
     {

@@ -19,6 +19,7 @@ package org.apache.maven.it;
  * under the License.
  */
 
+import org.junit.jupiter.api.Test;
 import java.io.File;
 
 import org.apache.maven.it.util.ResourceExtractor;
@@ -33,6 +34,7 @@ public class MavenITmng5742BuildExtensionClassloaderTest
         super( "(3.2.5,)" );
     }
 
+    @Test
     public void testBuildExtensionClassloader()
         throws Exception
     {

@@ -19,6 +19,7 @@ package org.apache.maven.it;
  * under the License.
  */
 
+import org.junit.jupiter.api.Test;
 import java.io.File;
 
 import org.apache.maven.it.util.ResourceExtractor;
@@ -37,6 +38,7 @@ public class MavenITmng3503Xpp3ShadingTest
         super( "(2.0.9,2.1.0-M1),(2.1.0-M1,)" ); // only test in 2.0.10+, and not in 2.1.0-M1
     }
 
+    @Test
     public void testitMNG3503NoLinkageErrors()
         throws Exception
     {
@@ -56,6 +58,7 @@ public class MavenITmng3503Xpp3ShadingTest
         assertEquals( "<root />", FileUtils.fileRead( new File( dir, "target/serialized.xml" ), "UTF-8" ) );
     }
 
+    @Test
     public void testitMNG3503Xpp3Shading()
         throws Exception
     {

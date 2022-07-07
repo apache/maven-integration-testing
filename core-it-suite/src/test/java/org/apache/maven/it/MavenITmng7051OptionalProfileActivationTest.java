@@ -19,6 +19,7 @@ package org.apache.maven.it;
  * under the License.
  */
 
+import org.junit.jupiter.api.Test;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
@@ -38,6 +39,7 @@ public class MavenITmng7051OptionalProfileActivationTest
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testActivatingNonExistingProfileBreaks() throws Exception
     {
         final File projectDir = ResourceExtractor.simpleExtractResources( getClass(), PROJECT_PATH );
@@ -64,6 +66,7 @@ public class MavenITmng7051OptionalProfileActivationTest
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testActivatingNonExistingProfileWithQuestionMarkDoesNotBreak() throws Exception
     {
         final File projectDir = ResourceExtractor.simpleExtractResources( getClass(), PROJECT_PATH );
@@ -83,6 +86,7 @@ public class MavenITmng7051OptionalProfileActivationTest
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testActivatingExistingAndNonExistingProfiles() throws Exception
     {
         final File projectDir = ResourceExtractor.simpleExtractResources( getClass(), PROJECT_PATH );
@@ -102,6 +106,7 @@ public class MavenITmng7051OptionalProfileActivationTest
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testDeactivatingNonExistingProfileWithQuestionMarkDoesNotBreak() throws Exception
     {
         final File projectDir = ResourceExtractor.simpleExtractResources( getClass(), PROJECT_PATH );
@@ -121,6 +126,7 @@ public class MavenITmng7051OptionalProfileActivationTest
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testDeactivatingExistingAndNonExistingProfiles() throws Exception
     {
         final File projectDir = ResourceExtractor.simpleExtractResources( getClass(), PROJECT_PATH );

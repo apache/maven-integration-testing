@@ -19,6 +19,7 @@ package org.apache.maven.it;
  * under the License.
  */
 
+import org.junit.jupiter.api.Test;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
@@ -40,6 +41,7 @@ public class MavenITmng1412DependenciesOrderTest
         super( "(2.0.8,)" ); // 2.0.9+
     }
 
+    @Test
     public void testitMNG1412()
         throws Exception
     {

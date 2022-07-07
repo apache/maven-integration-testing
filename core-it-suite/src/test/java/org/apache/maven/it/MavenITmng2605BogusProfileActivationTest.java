@@ -19,6 +19,7 @@ package org.apache.maven.it;
  * under the License.
  */
 
+import org.junit.jupiter.api.Test;
 import java.io.File;
 import java.util.Properties;
 
@@ -45,6 +46,7 @@ public class MavenITmng2605BogusProfileActivationTest
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testitMNG2605()
         throws Exception
     {

@@ -19,6 +19,7 @@ package org.apache.maven.it;
  * under the License.
  */
 
+import org.junit.jupiter.api.Test;
 import java.io.File;
 import java.util.List;
 
@@ -32,6 +33,7 @@ public class MavenITmng5581LifecycleMappingDelegate
         super( "[3.2.1,)" );
     }
 
+    @Test
     public void testCustomLifecycle()
         throws Exception
     {

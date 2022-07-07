@@ -19,6 +19,8 @@ package org.apache.maven.it;
  * under the License.
  */
 
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
@@ -30,6 +32,7 @@ import java.util.List;
  * @author Benjamin Bentmann
  *
  */
+@Disabled
 public class MavenITmng3890TransitiveDependencyScopeUpdateTest
     extends AbstractMavenIntegrationTestCase
 {
@@ -44,6 +47,7 @@ public class MavenITmng3890TransitiveDependencyScopeUpdateTest
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testitMNG3890()
         throws Exception
     {

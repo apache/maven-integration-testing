@@ -19,13 +19,12 @@ package org.apache.maven.it;
  * under the License.
  */
 
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
 import java.util.List;
-
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.is;
 
 public class MavenITmng6566ExecuteAnnotationShouldNotReExecuteGoalsTest
     extends AbstractMavenIntegrationTestCase
@@ -40,6 +39,7 @@ public class MavenITmng6566ExecuteAnnotationShouldNotReExecuteGoalsTest
         super( "[4.0.0-alpha-1,)" );
     }
 
+    @BeforeEach
     public void setUp()
             throws Exception
     {
@@ -52,6 +52,7 @@ public class MavenITmng6566ExecuteAnnotationShouldNotReExecuteGoalsTest
         verifier.verifyErrorFreeLog();
     }
 
+    @Test
     public void testRunsCompileGoalOnceWithDirectPluginInvocation()
             throws Exception
     {
@@ -72,6 +73,7 @@ public class MavenITmng6566ExecuteAnnotationShouldNotReExecuteGoalsTest
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testRunsCompileGoalOnceWithPhaseExecution()
             throws Exception
     {
@@ -99,6 +101,6 @@ public class MavenITmng6566ExecuteAnnotationShouldNotReExecuteGoalsTest
                 counter++;
             }
         }
-        assertThat( "Compile goal was expected to run once", counter, is( 1 ) );
+        assertEquals( "Compile goal was expected to run once", counter, 1 );
     }
 }

@@ -19,6 +19,7 @@ package org.apache.maven.it;
  * under the License.
  */
 
+import org.junit.jupiter.api.Test;
 import org.apache.maven.it.util.ResourceExtractor;
 import org.apache.maven.shared.utils.io.FileUtils;
 
@@ -63,6 +64,7 @@ public class MavenITmng6957BuildConsumer
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testPublishedPoms()
                     throws Exception
     {

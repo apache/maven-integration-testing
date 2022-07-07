@@ -19,6 +19,8 @@ package org.apache.maven.it;
  * under the License.
  */
 
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 import java.io.File;
 
 import org.apache.maven.it.util.ResourceExtractor;
@@ -29,6 +31,7 @@ import org.apache.maven.it.util.ResourceExtractor;
  * When multiple activators are present in a profile they should be AND'd. All activator must
  * conditions must be satisfied in order for the profile to be activated.
  */
+@Disabled
 public class MavenITmng4565MultiConditionProfileActivationTest
     extends AbstractMavenIntegrationTestCase
 {
@@ -44,6 +47,7 @@ public class MavenITmng4565MultiConditionProfileActivationTest
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testProfilesWithMultipleActivators()
         throws Exception
     {

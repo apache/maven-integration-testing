@@ -19,6 +19,7 @@ package org.apache.maven.it;
  * under the License.
  */
 
+import org.junit.jupiter.api.Test;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
@@ -43,12 +44,14 @@ public class MavenITmng5482AetherNotFoundTest
         super( "[3.1-A,)" );
     }
 
+    @Test
     public void testPluginDependency()
         throws IOException, VerificationException
     {
         check( "plugin-dependency" );
     }
 
+    @Test
     public void testPluginSite()
         throws IOException, VerificationException
     {

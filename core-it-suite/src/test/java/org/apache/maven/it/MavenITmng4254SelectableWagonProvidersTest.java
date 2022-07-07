@@ -19,6 +19,7 @@ package org.apache.maven.it;
  * under the License.
  */
 
+import org.junit.jupiter.api.Test;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
@@ -41,6 +42,7 @@ public class MavenITmng4254SelectableWagonProvidersTest
         super( "(2.2.0,3.0-alpha-1)" );
     }
 
+    @Test
     public void testCliUsage()
         throws IOException, VerificationException
     {
@@ -63,6 +65,7 @@ public class MavenITmng4254SelectableWagonProvidersTest
         assertEquals( "org.apache.maven.wagon.providers.coreit.CoreItHttpWagon", props.getProperty( "wagon.class" ) );
     }
 
+    @Test
     public void testSettingsUsage()
         throws IOException, VerificationException
     {
@@ -86,6 +89,7 @@ public class MavenITmng4254SelectableWagonProvidersTest
         assertEquals( "org.apache.maven.wagon.providers.coreit.CoreItHttpWagon", props.getProperty( "wagon.class" ) );
     }
 
+    @Test
     public void testDefaultHttpWagon()
         throws IOException, VerificationException
     {
@@ -107,6 +111,7 @@ public class MavenITmng4254SelectableWagonProvidersTest
         assertEquals( "org.apache.maven.wagon.providers.http.LightweightHttpWagon", props.getProperty( "wagon.class" ) );
     }
 
+    @Test
     public void testDefaultHttpsWagon()
         throws IOException, VerificationException
     {

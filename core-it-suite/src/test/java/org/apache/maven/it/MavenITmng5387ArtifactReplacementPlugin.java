@@ -19,6 +19,8 @@ package org.apache.maven.it;
  * under the License.
  */
 
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.apache.maven.it.util.ResourceExtractor;
 import org.apache.maven.shared.utils.io.FileUtils;
 
@@ -35,22 +37,14 @@ public class MavenITmng5387ArtifactReplacementPlugin
         super( "[3.1,)" );
     }
 
+    @BeforeEach
     public void setUp()
         throws Exception
     {
-        super.setUp();
-
         testDir = ResourceExtractor.simpleExtractResources( getClass(), "/mng-5387" );
-
     }
 
-    protected void tearDown()
-        throws Exception
-    {
-
-        super.tearDown();
-    }
-
+    @Test
     public void testArtifactReplacementExecution()
         throws Exception
     {

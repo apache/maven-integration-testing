@@ -19,6 +19,7 @@ package org.apache.maven.it;
  * under the License.
  */
 
+import org.junit.jupiter.api.Test;
 import java.io.File;
 import org.apache.maven.it.util.ResourceExtractor;
 
@@ -28,6 +29,7 @@ public class MavenIT0199CyclicImportScopeTest extends AbstractMavenIntegrationTe
         super(ALL_MAVEN_VERSIONS);
     }
 
+    @Test
     public void testit0199() throws Exception {
         // v1: parent not using BOM; explicit dep from componentB → componentA
         // v2: BOM introduced; componentB → componentA picks up implicit version 1 from main@v1
@@ -47,7 +49,7 @@ public class MavenIT0199CyclicImportScopeTest extends AbstractMavenIntegrationTe
         verifier.deleteDirectory("target");
         verifier.executeGoal("install");
         if (expectedArtifact != null) {
-            verifier.assertFilePresent(expectedArtifact);
+            verifier.verifyFilePresent(expectedArtifact);
         }
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();

@@ -19,6 +19,7 @@ package org.apache.maven.it;
  * under the License.
  */
 
+import org.junit.jupiter.api.Test;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
@@ -43,6 +44,7 @@ public class MavenITmng4482ForcePluginSnapshotUpdateTest
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testit()
         throws Exception
     {
@@ -71,7 +73,7 @@ public class MavenITmng4482ForcePluginSnapshotUpdateTest
 
         Properties props1 = verifier.loadProperties( "target/touch.properties" );
         assertEquals( "old", props1.getProperty( "one" ) );
-        assertSame( null, props1.getProperty( "two" ) );
+        assertNull( props1.getProperty( "two" ) );
 
         filterProps.setProperty( "@repo@", "repo-2" );
         verifier.filterFile( "settings-template.xml", "settings.xml", "UTF-8", filterProps );
@@ -86,7 +88,7 @@ public class MavenITmng4482ForcePluginSnapshotUpdateTest
 
         Properties props2 = verifier.loadProperties( "target/touch.properties" );
         assertEquals( "new", props2.getProperty( "two" ) );
-        assertSame( null, props2.getProperty( "one" ) );
+        assertNull( props2.getProperty( "one" ) );
     }
 
 }

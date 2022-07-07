@@ -19,6 +19,7 @@ package org.apache.maven.it;
  * under the License.
  */
 
+import org.junit.jupiter.api.Test;
 import java.io.File;
 
 import org.apache.maven.it.util.ResourceExtractor;
@@ -39,6 +40,7 @@ public class MavenITmng3746POMPropertyOverrideTest
         super( "(2.0.8,)" ); // only test in 2.0.9+
     }
 
+    @Test
     public void testitMNG3746_UsingDefaultSystemProperty()
         throws Exception
     {
@@ -63,6 +65,7 @@ public class MavenITmng3746POMPropertyOverrideTest
         verifier.resetStreams();
     }
 
+    @Test
     public void testitMNG3746_UsingCLIProperty()
         throws Exception
     {

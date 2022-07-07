@@ -3,6 +3,7 @@ package org.apache.maven.it;
 import java.io.File;
 
 import org.apache.maven.it.util.ResourceExtractor;
+import org.junit.jupiter.api.Test;
 
 public class MavenITmng5805PkgTypeMojoConfiguration
     extends AbstractMavenIntegrationTestCase
@@ -13,6 +14,7 @@ public class MavenITmng5805PkgTypeMojoConfiguration
         super( "(3.3.3,3.5.0-alpha)" );
     }
 
+    @Test
     public void testPkgTypeMojoConfiguration()
         throws Exception
     {

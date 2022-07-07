@@ -19,6 +19,7 @@ package org.apache.maven.it;
  * under the License.
  */
 
+import org.junit.jupiter.api.Test;
 import java.io.File;
 import java.util.List;
 import java.util.regex.Pattern;
@@ -38,6 +39,7 @@ public class MavenITmng3641ProfileActivationWarningTest
         super( "[2.0.11,2.1.0-M1),[2.1.0,4.0.0-alpha-1)" ); // only test in 2.0.11+, 2.1.0+
     }
 
+    @Test
     public void testitMNG3641()
         throws Exception
     {

@@ -19,6 +19,7 @@ package org.apache.maven.it;
  * under the License.
  */
 
+import org.junit.jupiter.api.Test;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
@@ -35,6 +36,7 @@ public class MavenITmng7160ExtensionClassloader
         super( "[3.9.0,)" );
     }
 
+    @Test
     public void testVerify() throws IOException, VerificationException
     {
         final File projectDir = ResourceExtractor.simpleExtractResources( getClass(), "/mng-7160-extensionclassloader" );

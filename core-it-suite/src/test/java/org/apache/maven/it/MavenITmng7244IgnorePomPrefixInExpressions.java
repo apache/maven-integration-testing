@@ -23,6 +23,7 @@ import org.apache.maven.it.util.ResourceExtractor;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import org.junit.jupiter.api.Test;
 
 public class MavenITmng7244IgnorePomPrefixInExpressions extends AbstractMavenIntegrationTestCase
 {
@@ -33,6 +34,7 @@ public class MavenITmng7244IgnorePomPrefixInExpressions extends AbstractMavenInt
         super( "[4.0.0-alpha-1,)" );
     }
 
+    @Test
     public void testIgnorePomPrefixInExpressions() throws IOException, VerificationException
     {
         final File projectDir = ResourceExtractor.simpleExtractResources( getClass(), PROJECT_PATH );

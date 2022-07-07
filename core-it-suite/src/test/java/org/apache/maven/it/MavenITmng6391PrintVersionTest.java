@@ -19,6 +19,7 @@ package org.apache.maven.it;
  * under the License.
  */
 
+import org.junit.jupiter.api.Test;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
@@ -52,6 +53,7 @@ public class MavenITmng6391PrintVersionTest
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testitShouldPrintVersionAtTopAndAtBottom()
         throws Exception
     {
@@ -96,6 +98,7 @@ public class MavenITmng6391PrintVersionTest
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testitShouldPrintVersionInAllLines()
         throws Exception
     {

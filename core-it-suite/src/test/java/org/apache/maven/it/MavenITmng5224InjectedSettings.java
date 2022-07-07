@@ -19,6 +19,7 @@ package org.apache.maven.it;
  * under the License.
  */
 
+import org.junit.jupiter.api.Test;
 import org.apache.maven.it.util.ResourceExtractor;
 import org.codehaus.plexus.util.xml.Xpp3Dom;
 import org.codehaus.plexus.util.xml.Xpp3DomBuilder;
@@ -48,6 +49,7 @@ public class MavenITmng5224InjectedSettings
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testmng5224_ReadSettings()
         throws Exception
     {

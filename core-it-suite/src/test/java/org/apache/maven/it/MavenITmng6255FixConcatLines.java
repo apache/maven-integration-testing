@@ -19,6 +19,7 @@ package org.apache.maven.it;
  * under the License.
  */
 
+import org.junit.jupiter.api.Test;
 import java.io.File;
 import java.util.Properties;
 
@@ -41,11 +42,6 @@ public class MavenITmng6255FixConcatLines
         super( "[3.5.3,)" );
     }
 
-    protected MavenITmng6255FixConcatLines( String constraint )
-    {
-        super( constraint );
-    }
-
     /**
      * Check that <code>CR</code> line endings work.
      * <p>
@@ -64,6 +60,7 @@ public class MavenITmng6255FixConcatLines
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testJvmConfigFileLF()
         throws Exception
     {
@@ -75,6 +72,7 @@ public class MavenITmng6255FixConcatLines
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testJvmConfigFileCRLF()
         throws Exception
     {

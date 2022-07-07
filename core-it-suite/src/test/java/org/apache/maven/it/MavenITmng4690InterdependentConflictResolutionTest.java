@@ -19,6 +19,7 @@ package org.apache.maven.it;
  * under the License.
  */
 
+import org.junit.jupiter.api.Test;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
@@ -40,6 +41,7 @@ public class MavenITmng4690InterdependentConflictResolutionTest
 
     // Ideally, all six permutations of the three direct dependencies should yield the same result...
 
+    @Test
     public void testitADX()
         throws Exception
     {
@@ -47,12 +49,14 @@ public class MavenITmng4690InterdependentConflictResolutionTest
         testit( "test-adx" );
     }
 
+    @Test
     public void testitAXD()
         throws Exception
     {
         testit( "test-axd" );
     }
 
+    @Test
     public void testitDAX()
         throws Exception
     {
@@ -60,18 +64,21 @@ public class MavenITmng4690InterdependentConflictResolutionTest
         testit( "test-dax" );
     }
 
+    @Test
     public void testitDXA()
         throws Exception
     {
         testit( "test-dxa" );
     }
 
+    @Test
     public void testitXAD()
         throws Exception
     {
         testit( "test-xad" );
     }
 
+    @Test
     public void testitXDA()
         throws Exception
     {

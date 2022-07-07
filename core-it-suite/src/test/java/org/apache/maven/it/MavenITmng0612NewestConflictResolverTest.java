@@ -19,6 +19,8 @@ package org.apache.maven.it;
  * under the License.
  */
 
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
@@ -29,6 +31,7 @@ import java.io.File;
  * @author Mark Hobson
  *
  */
+@Disabled
 public class MavenITmng0612NewestConflictResolverTest
     extends AbstractMavenIntegrationTestCase
 {
@@ -42,6 +45,7 @@ public class MavenITmng0612NewestConflictResolverTest
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testitMNG612()
         throws Exception
     {

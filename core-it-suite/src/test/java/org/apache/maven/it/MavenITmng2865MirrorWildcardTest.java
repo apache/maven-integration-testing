@@ -19,6 +19,7 @@ package org.apache.maven.it;
  * under the License.
  */
 
+import org.junit.jupiter.api.Test;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
@@ -44,6 +45,7 @@ public class MavenITmng2865MirrorWildcardTest
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testitFileRepo()
         throws Exception
     {
@@ -55,6 +57,7 @@ public class MavenITmng2865MirrorWildcardTest
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testitLocalhostRepo()
         throws Exception
     {
@@ -66,6 +69,7 @@ public class MavenITmng2865MirrorWildcardTest
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testitExternalRepo()
         throws Exception
     {
@@ -77,6 +81,7 @@ public class MavenITmng2865MirrorWildcardTest
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testitCentralRepo()
         throws Exception
     {

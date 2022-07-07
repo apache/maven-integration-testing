@@ -19,6 +19,9 @@ package org.apache.maven.it;
  * under the License.
  */
 
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import java.io.File;
 import java.io.IOException;
 
@@ -62,7 +65,7 @@ public class MavenITmng3599useHttpProxyForWebDAVTest
         super( "(2.0.9,3.3.9)" );
     }
 
-    @Override
+    @BeforeEach
     protected void setUp()
         throws Exception
     {
@@ -125,7 +128,7 @@ public class MavenITmng3599useHttpProxyForWebDAVTest
         System.out.println( "Bound server socket to the port " + port );
     }
 
-    @Override
+    @AfterEach
     protected void tearDown()
         throws Exception
     {
@@ -136,6 +139,7 @@ public class MavenITmng3599useHttpProxyForWebDAVTest
         }
     }
 
+    @Test
     public void testitUseHttpProxyForHttp()
         throws Exception
     {
@@ -171,7 +175,7 @@ public class MavenITmng3599useHttpProxyForWebDAVTest
         verifier.resetStreams();
 
         verifier.verifyArtifactPresent( "org.apache.maven.its.mng3599", "test-dependency", "1.0", "jar" );
-        verifier.assertArtifactContents( "org.apache.maven.its.mng3599", "test-dependency", "1.0", "jar",
+        verifier.verifyArtifactContent( "org.apache.maven.its.mng3599", "test-dependency", "1.0", "jar",
                                          CONTENT );
     }
 
@@ -180,6 +184,7 @@ public class MavenITmng3599useHttpProxyForWebDAVTest
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testitUseHttpProxyForWebDAV()
         throws Exception
     {
@@ -217,7 +222,7 @@ public class MavenITmng3599useHttpProxyForWebDAVTest
         verifier.resetStreams();
 
         verifier.verifyArtifactPresent( "org.apache.maven.its.mng3599", "test-dependency", "1.0", "jar" );
-        verifier.assertArtifactContents( "org.apache.maven.its.mng3599", "test-dependency", "1.0", "jar",
+        verifier.verifyArtifactContent( "org.apache.maven.its.mng3599", "test-dependency", "1.0", "jar",
                                          CONTENT );
     }
 }

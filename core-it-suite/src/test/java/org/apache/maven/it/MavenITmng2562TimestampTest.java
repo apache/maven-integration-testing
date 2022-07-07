@@ -19,6 +19,7 @@ package org.apache.maven.it;
  * under the License.
  */
 
+import org.junit.jupiter.api.Test;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
@@ -40,6 +41,7 @@ public class MavenITmng2562TimestampTest
         super( "[2.1.0-M1,3.2.2)" ); // 2.1.0+ only
     }
 
+    @Test
     public void testitDefaultFormat()
         throws Exception
     {
@@ -65,6 +67,7 @@ public class MavenITmng2562TimestampTest
         assertEquals( timestamp1, timestamp2 );
     }
 
+    @Test
     public void testitCustomFormat()
         throws Exception
     {
@@ -86,6 +89,7 @@ public class MavenITmng2562TimestampTest
         assertTrue( now + " vs " + date, Math.abs( now.getTime() - date.getTime() ) < 24 * 60 * 60 * 1000 );
     }
 
+    @Test
     public void testitSameValueAcrossModules()
         throws Exception
     {

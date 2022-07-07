@@ -19,8 +19,7 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import static org.junit.Assert.assertThat;
-import static org.hamcrest.CoreMatchers.containsString;
+import org.junit.jupiter.api.Test;
 
 import java.io.File;
 
@@ -39,6 +38,7 @@ public class MavenITmng6330RelativePath
         super( "(,3.5.0),(3.5.2,)" );
     }
 
+    @Test
     public void testRelativePath() throws Exception
     {
         File testDir = ResourceExtractor.simpleExtractResources( getClass(), "/mng-6330-relative-path" );
@@ -53,7 +53,7 @@ public class MavenITmng6330RelativePath
         }
         catch ( VerificationException e )
         {
-            assertThat( e.getMessage(), containsString("Non-resolvable parent POM") );
+            assertTrue( e.getMessage().contains( "Non-resolvable parent POM" ) );
         }
     }
 }

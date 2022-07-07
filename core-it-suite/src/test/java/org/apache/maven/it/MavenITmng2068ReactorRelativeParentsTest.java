@@ -19,6 +19,7 @@ package org.apache.maven.it;
  * under the License.
  */
 
+import org.junit.jupiter.api.Test;
 import java.io.File;
 
 import org.apache.maven.it.util.ResourceExtractor;
@@ -47,6 +48,7 @@ public class MavenITmng2068ReactorRelativeParentsTest
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testitInheritedIdFields()
         throws Exception
     {
@@ -66,6 +68,7 @@ public class MavenITmng2068ReactorRelativeParentsTest
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testitExplicitIdFields()
         throws Exception
     {
@@ -85,6 +88,7 @@ public class MavenITmng2068ReactorRelativeParentsTest
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testitComplex()
         throws Exception
     {

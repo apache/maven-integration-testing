@@ -19,6 +19,7 @@ package org.apache.maven.it;
  * under the License.
  */
 
+import org.junit.jupiter.api.Test;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
@@ -39,6 +40,7 @@ public class MavenITmng6326CoreExtensionsNotFoundTest
         super( "[3.8.5,)" );
     }
 
+    @Test
     public void testCoreExtensionsNotFound()
         throws Exception
     {

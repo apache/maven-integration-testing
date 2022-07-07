@@ -20,6 +20,7 @@ package org.apache.maven.it;
  */
 
 import org.apache.maven.it.util.ResourceExtractor;
+import org.junit.jupiter.api.Test;
 
 import java.io.File;
 
@@ -43,6 +44,7 @@ public class MavenITBootstrapTest
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testBootstrap()
         throws Exception
     {

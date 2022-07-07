@@ -19,6 +19,7 @@ package org.apache.maven.it;
  * under the License.
  */
 
+import org.junit.jupiter.api.Test;
 import java.io.File;
 import java.util.Properties;
 
@@ -39,6 +40,7 @@ public class MavenITmng3760BaseUriPropertyTest
         super( "(2.1.0-M1,3.0-alpha-1),(3.0-alpha-2,3.5.4)" ); // 2.1.0-M2+
     }
 
+    @Test
     public void testitMNG3760()
         throws Exception
     {
@@ -59,6 +61,7 @@ public class MavenITmng3760BaseUriPropertyTest
         assertEquals( "${baseUri}", props.getProperty( "project.properties.baseUriProperty" ) );
     }
 
+    @Test
     public void testitMNG3760SystemPropertyOverride()
         throws Exception
     {

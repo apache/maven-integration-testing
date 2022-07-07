@@ -19,6 +19,7 @@ package org.apache.maven.it;
  * under the License.
  */
 
+import org.junit.jupiter.api.Test;
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -48,6 +49,7 @@ public class MavenITmng0828PluginConfigValuesInDebugTest
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testitMNG0828()
         throws Exception
     {

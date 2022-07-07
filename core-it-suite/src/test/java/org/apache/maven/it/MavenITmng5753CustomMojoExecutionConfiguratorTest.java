@@ -19,6 +19,7 @@ package org.apache.maven.it;
  * under the License.
  */
 
+import org.junit.jupiter.api.Test;
 import java.io.File;
 
 import org.apache.maven.it.util.ResourceExtractor;
@@ -33,6 +34,7 @@ public class MavenITmng5753CustomMojoExecutionConfiguratorTest
         super( "[3.3.0-alpha,)" );
     }
 
+    @Test
     public void testCustomMojoExecutionConfigurator()
         throws Exception
     {

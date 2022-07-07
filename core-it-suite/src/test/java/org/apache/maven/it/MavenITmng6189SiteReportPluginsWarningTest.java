@@ -19,6 +19,7 @@ package org.apache.maven.it;
  * under the License.
  */
 
+import org.junit.jupiter.api.Test;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
@@ -38,6 +39,7 @@ public class MavenITmng6189SiteReportPluginsWarningTest
         super( "(3.5-alpha-1,)" );
     }
 
+    @Test
     public void testit()
         throws Exception
     {

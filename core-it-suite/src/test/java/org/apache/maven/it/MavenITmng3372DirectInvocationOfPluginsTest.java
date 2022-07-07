@@ -19,6 +19,7 @@ package org.apache.maven.it;
  * under the License.
  */
 
+import org.junit.jupiter.api.Test;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
@@ -38,6 +39,7 @@ public class MavenITmng3372DirectInvocationOfPluginsTest
         super( "(2.0.5,)" );
     }
 
+    @Test
     public void testitMNG3372()
         throws Exception
     {
@@ -68,6 +70,7 @@ public class MavenITmng3372DirectInvocationOfPluginsTest
         verifier.resetStreams();
     }
 
+    @Test
     public void testDependencyTreeInvocation()
         throws Exception
     {

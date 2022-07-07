@@ -19,6 +19,8 @@ package org.apache.maven.it;
  * under the License.
  */
 
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 import java.io.File;
 
 import org.apache.maven.it.util.ResourceExtractor;
@@ -32,6 +34,7 @@ import org.apache.maven.it.util.ResourceExtractor;
  *
  * @author jvanzyl
  */
+@Disabled
 public class MavenITmng5557ProperlyRestrictedReactor
     extends AbstractMavenIntegrationTestCase
 {
@@ -40,6 +43,7 @@ public class MavenITmng5557ProperlyRestrictedReactor
         super( "[3.1.2,)" );
     }
 
+    @Test
     public void testRunningRestrictedReactor()
         throws Exception
     {

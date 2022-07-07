@@ -19,6 +19,7 @@ package org.apache.maven.it;
  * under the License.
  */
 
+import org.junit.jupiter.api.Test;
 import org.apache.maven.it.util.ResourceExtractor;
 import org.eclipse.jetty.server.Connector;
 import org.eclipse.jetty.server.HttpConfiguration;
@@ -62,6 +63,7 @@ public class MavenITmng4428FollowHttpRedirectTest
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testitHttpToHttp()
         throws Exception
     {
@@ -73,6 +75,7 @@ public class MavenITmng4428FollowHttpRedirectTest
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testitHttpsToHttps()
         throws Exception
     {
@@ -84,6 +87,7 @@ public class MavenITmng4428FollowHttpRedirectTest
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testitHttpToHttps()
         throws Exception
     {
@@ -97,6 +101,7 @@ public class MavenITmng4428FollowHttpRedirectTest
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testitHttpsToHttp()
         throws Exception
     {
@@ -111,6 +116,7 @@ public class MavenITmng4428FollowHttpRedirectTest
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testitRelativeLocation()
         throws Exception
     {

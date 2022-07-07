@@ -1,7 +1,7 @@
 package org.apache.maven.it;
 
 import org.apache.maven.it.util.ResourceExtractor;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.io.File;
 

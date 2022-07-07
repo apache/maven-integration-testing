@@ -19,6 +19,9 @@ package org.apache.maven.it;
  * under the License.
  */
 
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.apache.maven.it.util.ResourceExtractor;
 import org.eclipse.jetty.security.ConstraintMapping;
 import org.eclipse.jetty.security.ConstraintSecurityHandler;
@@ -61,7 +64,7 @@ public class MavenITmng3953AuthenticatedDeploymentTest
         super( "(2.0.1,)" );
     }
 
-    @Override
+    @BeforeEach
     protected void setUp()
         throws Exception
     {
@@ -121,7 +124,7 @@ public class MavenITmng3953AuthenticatedDeploymentTest
         deployed = false;
     }
 
-    @Override
+    @AfterEach
     protected void tearDown()
         throws Exception
     {
@@ -137,6 +140,7 @@ public class MavenITmng3953AuthenticatedDeploymentTest
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testitRelease()
         throws Exception
     {
@@ -148,6 +152,7 @@ public class MavenITmng3953AuthenticatedDeploymentTest
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testitSnapshot()
         throws Exception
     {

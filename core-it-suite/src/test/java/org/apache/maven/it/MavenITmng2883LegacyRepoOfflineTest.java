@@ -19,6 +19,7 @@ package org.apache.maven.it;
  * under the License.
  */
 
+import org.junit.jupiter.api.Test;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
@@ -40,6 +41,7 @@ public class MavenITmng2883LegacyRepoOfflineTest
         super( "(2.0.9,2.1.0-M1),(2.1.0-M1,3.0-alpha-1)" );
     }
 
+    @Test
     public void testParentUnresolvable()
         throws Exception
     {
@@ -133,6 +135,7 @@ public class MavenITmng2883LegacyRepoOfflineTest
         }
     }
 
+    @Test
     public void testDependencyUnresolvable()
         throws Exception
     {
@@ -228,6 +231,7 @@ public class MavenITmng2883LegacyRepoOfflineTest
         }
     }
 
+    @Test
     public void testPluginUnresolvable()
         throws Exception
     {

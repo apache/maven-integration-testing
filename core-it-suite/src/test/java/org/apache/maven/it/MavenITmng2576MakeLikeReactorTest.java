@@ -19,6 +19,7 @@ package org.apache.maven.it;
  * under the License.
  */
 
+import org.junit.jupiter.api.Test;
 import java.io.File;
 
 import org.apache.maven.it.util.ResourceExtractor;
@@ -52,6 +53,7 @@ public class MavenITmng2576MakeLikeReactorTest
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testitMakeOnlyList()
         throws Exception
     {
@@ -79,6 +81,7 @@ public class MavenITmng2576MakeLikeReactorTest
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testitMakeUpstream()
         throws Exception
     {
@@ -107,6 +110,7 @@ public class MavenITmng2576MakeLikeReactorTest
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testitMakeDownstream()
         throws Exception
     {
@@ -135,6 +139,7 @@ public class MavenITmng2576MakeLikeReactorTest
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testitMakeBoth()
         throws Exception
     {
@@ -164,6 +169,7 @@ public class MavenITmng2576MakeLikeReactorTest
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testitMatchesByBasedir()
         throws Exception
     {
@@ -192,6 +198,7 @@ public class MavenITmng2576MakeLikeReactorTest
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testitMatchesByBasedirPlus()
         throws Exception
     {
@@ -222,6 +229,7 @@ public class MavenITmng2576MakeLikeReactorTest
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testitMatchesById()
         throws Exception
     {
@@ -249,6 +257,7 @@ public class MavenITmng2576MakeLikeReactorTest
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testitMatchesByArtifactId()
         throws Exception
     {
@@ -279,6 +288,7 @@ public class MavenITmng2576MakeLikeReactorTest
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testitResumeFrom()
         throws Exception
     {

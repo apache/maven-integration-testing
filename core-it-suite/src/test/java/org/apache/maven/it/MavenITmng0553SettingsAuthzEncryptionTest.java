@@ -19,6 +19,9 @@ package org.apache.maven.it;
  * under the License.
  */
 
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
@@ -62,7 +65,7 @@ public class MavenITmng0553SettingsAuthzEncryptionTest
         super( "[2.1.0,3.0-alpha-1),[3.0-alpha-3,)" );
     }
 
-    @Override
+    @BeforeEach
     protected void setUp()
         throws Exception
     {
@@ -103,7 +106,7 @@ public class MavenITmng0553SettingsAuthzEncryptionTest
         System.out.println( "Bound server socket to the port " + port );
     }
 
-    @Override
+    @AfterEach
     protected void tearDown()
         throws Exception
     {
@@ -119,6 +122,7 @@ public class MavenITmng0553SettingsAuthzEncryptionTest
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testitBasic()
         throws Exception
     {
@@ -148,6 +152,7 @@ public class MavenITmng0553SettingsAuthzEncryptionTest
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testitRelocation()
         throws Exception
     {
@@ -185,6 +190,7 @@ public class MavenITmng0553SettingsAuthzEncryptionTest
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testitEncryption()
         throws Exception
     {

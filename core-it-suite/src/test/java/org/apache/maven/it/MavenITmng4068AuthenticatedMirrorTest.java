@@ -19,6 +19,9 @@ package org.apache.maven.it;
  * under the License.
  */
 
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.apache.maven.it.util.ResourceExtractor;
 import org.eclipse.jetty.security.ConstraintMapping;
 import org.eclipse.jetty.security.ConstraintSecurityHandler;
@@ -60,7 +63,7 @@ public class MavenITmng4068AuthenticatedMirrorTest
         super( ALL_MAVEN_VERSIONS );
     }
 
-    @Override
+    @BeforeEach
     protected void setUp()
         throws Exception
     {
@@ -103,7 +106,7 @@ public class MavenITmng4068AuthenticatedMirrorTest
         System.out.println( "Bound server socket to the port " + port );
     }
 
-    @Override
+    @AfterEach
     protected void tearDown()
         throws Exception
     {
@@ -120,6 +123,7 @@ public class MavenITmng4068AuthenticatedMirrorTest
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testit()
         throws Exception
     {

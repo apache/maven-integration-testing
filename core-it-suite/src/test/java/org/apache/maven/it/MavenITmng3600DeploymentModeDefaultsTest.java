@@ -19,6 +19,7 @@ package org.apache.maven.it;
  * under the License.
  */
 
+import org.junit.jupiter.api.Test;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
@@ -38,6 +39,7 @@ public class MavenITmng3600DeploymentModeDefaultsTest
         super( "(2.1.0-M1,3.0-alpha-1),[3.0.1,)" );
     }
 
+    @Test
     public void testitMNG3600NoSettings()
         throws Exception
     {
@@ -57,6 +59,7 @@ public class MavenITmng3600DeploymentModeDefaultsTest
         assertNull( props.get( "file.mode" ) );
     }
 
+    @Test
     public void testitMNG3600ServerDefaults()
         throws Exception
     {
@@ -78,6 +81,7 @@ public class MavenITmng3600DeploymentModeDefaultsTest
         assertNull( props.get( "file.mode" ) );
     }
 
+    @Test
     public void testitMNG3600ModesSet()
         throws Exception
     {

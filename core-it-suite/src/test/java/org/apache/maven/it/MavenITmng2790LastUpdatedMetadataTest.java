@@ -19,6 +19,7 @@ package org.apache.maven.it;
  * under the License.
  */
 
+import org.junit.jupiter.api.Test;
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -47,6 +48,7 @@ public class MavenITmng2790LastUpdatedMetadataTest
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testitMNG2790()
         throws Exception
     {

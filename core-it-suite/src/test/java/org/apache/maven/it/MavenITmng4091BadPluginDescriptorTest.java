@@ -19,6 +19,7 @@ package org.apache.maven.it;
  * under the License.
  */
 
+import org.junit.jupiter.api.Test;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
@@ -38,6 +39,7 @@ public class MavenITmng4091BadPluginDescriptorTest
         super( "[2.1.0,)" ); // only test in 2.1.0+
     }
 
+    @Test
     public void testitMNG4091_InvalidDescriptor()
         throws Exception
     {
@@ -78,6 +80,7 @@ public class MavenITmng4091BadPluginDescriptorTest
         assertTrue( "User-friendly message was not found in output.", foundMessage );
     }
 
+    @Test
     public void testitMNG4091_PluginDependency()
         throws Exception
     {

@@ -19,6 +19,7 @@ package org.apache.maven.it;
  * under the License.
  */
 
+import org.junit.jupiter.api.Test;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
@@ -44,6 +45,7 @@ public class MavenIT0072InterpolationWithDottedPropertyTest
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testit0072()
         throws Exception
     {

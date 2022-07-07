@@ -19,6 +19,7 @@ package org.apache.maven.it;
  * under the License.
  */
 
+import org.junit.jupiter.api.Test;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
@@ -38,36 +39,42 @@ public class MavenITmng3775ConflictResolutionBacktrackingTest
         super( "[3.0,)" );
     }
 
+    @Test
     public void testitABC()
         throws Exception
     {
         testit( "test-abc" );
     }
 
+    @Test
     public void testitACB()
         throws Exception
     {
         testit( "test-acb" );
     }
 
+    @Test
     public void testitBAC()
         throws Exception
     {
         testit( "test-bac" );
     }
 
+    @Test
     public void testitBCA()
         throws Exception
     {
         testit( "test-bca" );
     }
 
+    @Test
     public void testitCAB()
         throws Exception
     {
         testit( "test-cab" );
     }
 
+    @Test
     public void testitCBA()
         throws Exception
     {

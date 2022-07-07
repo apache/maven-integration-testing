@@ -19,6 +19,7 @@ package org.apache.maven.it;
  * under the License.
  */
 
+import org.junit.jupiter.api.Test;
 import java.io.File;
 
 import org.apache.maven.it.util.ResourceExtractor;
@@ -33,6 +34,7 @@ public class MavenITmng6127PluginExecutionConfigurationInterferenceTest
         super( "[3.5.1,)" );
     }
 
+    @Test
     public void testCustomMojoExecutionConfigurator()
         throws Exception
     {

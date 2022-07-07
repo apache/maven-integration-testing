@@ -19,6 +19,7 @@ package org.apache.maven.it;
  * under the License.
  */
 
+import org.junit.jupiter.api.Test;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
@@ -56,6 +57,7 @@ public class MavenITmng6118SubmoduleInvocation extends AbstractMavenIntegrationT
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testInSubModule() throws Exception
     {
         // Compile the whole project first.
@@ -74,6 +76,7 @@ public class MavenITmng6118SubmoduleInvocation extends AbstractMavenIntegrationT
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testWithFile() throws Exception
     {
         // Compile the whole project first.
@@ -92,6 +95,7 @@ public class MavenITmng6118SubmoduleInvocation extends AbstractMavenIntegrationT
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testWithFileAndAlsoMake() throws Exception
     {
         Verifier verifier = newVerifier( testDir.getAbsolutePath() );
@@ -107,6 +111,7 @@ public class MavenITmng6118SubmoduleInvocation extends AbstractMavenIntegrationT
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testInSubModuleWithAlsoMake() throws Exception
     {
         File submoduleDirectory = new File( testDir, "app" );

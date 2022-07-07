@@ -19,6 +19,7 @@ package org.apache.maven.it;
  * under the License.
  */
 
+import org.junit.jupiter.api.Test;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -45,6 +46,7 @@ public class MavenITmng6754TimestampInMultimoduleProject
         super( "[3.8.2,)" );
     }
 
+    @Test
     public void testArtifactsHaveSameTimestamp()
             throws Exception
     {

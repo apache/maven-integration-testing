@@ -19,6 +19,8 @@ package org.apache.maven.it;
  * under the License.
  */
 
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 import java.io.File;
 
 /*
@@ -40,6 +42,7 @@ import java.io.File;
  * under the License.
  */
 
+import org.junit.jupiter.api.Test;
 import org.apache.maven.it.util.ResourceExtractor;
 
 /**
@@ -52,6 +55,7 @@ import org.apache.maven.it.util.ResourceExtractor;
  * The test confirms that the dominant repository definition (child) wins while resolving the import POMs.
  *
  */
+@Disabled
 public class MavenITmng6772NestedImportScopeRepositoryOverride
     extends AbstractMavenIntegrationTestCase
 {
@@ -62,6 +66,7 @@ public class MavenITmng6772NestedImportScopeRepositoryOverride
     }
 
     // This will test the behavior using ProjectModelResolver
+    @Test
     public void testitInProject()
         throws Exception
     {
@@ -79,6 +84,7 @@ public class MavenITmng6772NestedImportScopeRepositoryOverride
     }
 
     // This will test the behavior using DefaultModelResolver
+    @Test
     public void testitInDependency()
         throws Exception
     {

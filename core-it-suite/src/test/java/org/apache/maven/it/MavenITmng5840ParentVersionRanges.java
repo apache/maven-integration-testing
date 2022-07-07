@@ -3,6 +3,7 @@ package org.apache.maven.it;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
+import org.junit.jupiter.api.Test;
 
 public class MavenITmng5840ParentVersionRanges
     extends AbstractMavenIntegrationTestCase
@@ -12,6 +13,7 @@ public class MavenITmng5840ParentVersionRanges
         super( "[3.3,)" );
     }
 
+    @Test
     public void testParentRangeRelativePathPointsToWrongVersion()
         throws Exception
     {
@@ -28,6 +30,7 @@ public class MavenITmng5840ParentVersionRanges
         verifier.resetStreams();
     }
 
+    @Test
     public void testParentRangeRelativePathPointsToCorrectVersion()
         throws Exception
     {

@@ -19,6 +19,7 @@ package org.apache.maven.it;
  * under the License.
  */
 
+import org.junit.jupiter.api.Test;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
@@ -35,6 +36,7 @@ public class MavenITmng6981ProjectListShouldIncludeChildrenTest
         super( "[4.0.0-alpha-1,)" );
     }
 
+    @Test
     public void testProjectListShouldIncludeChildrenByDefault()
             throws Exception
     {
@@ -52,6 +54,7 @@ public class MavenITmng6981ProjectListShouldIncludeChildrenTest
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testFileSwitchAllowsExcludeOfChildren()
             throws Exception
     {

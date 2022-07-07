@@ -19,6 +19,7 @@ package org.apache.maven.it;
  * under the License.
  */
 
+import org.junit.jupiter.api.Test;
 import java.io.File;
 import java.util.Properties;
 
@@ -47,6 +48,7 @@ public class MavenITmng4126ParentProfilesXmlTest
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testitReactorBuild()
         throws Exception
     {
@@ -70,6 +72,7 @@ public class MavenITmng4126ParentProfilesXmlTest
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testitChildOnlyBuild()
         throws Exception
     {

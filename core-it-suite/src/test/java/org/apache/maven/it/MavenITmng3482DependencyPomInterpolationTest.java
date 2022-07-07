@@ -19,6 +19,7 @@ package org.apache.maven.it;
  * under the License.
  */
 
+import org.junit.jupiter.api.Test;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
@@ -39,6 +40,7 @@ public class MavenITmng3482DependencyPomInterpolationTest
         super( ALL_MAVEN_VERSIONS );
     }
 
+    @Test
     public void testitMNG3482()
         throws Exception
     {

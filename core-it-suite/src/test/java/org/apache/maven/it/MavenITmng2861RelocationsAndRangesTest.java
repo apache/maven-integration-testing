@@ -19,6 +19,7 @@ package org.apache.maven.it;
  * under the License.
  */
 
+import org.junit.jupiter.api.Test;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
@@ -38,6 +39,7 @@ public class MavenITmng2861RelocationsAndRangesTest
         super( "(2.0.8,)" );
     }
 
+    @Test
     public void testitMNG2861()
         throws Exception
     {

@@ -19,6 +19,7 @@ package org.apache.maven.it;
  * under the License.
  */
 
+import org.junit.jupiter.api.Test;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
@@ -42,6 +43,7 @@ public class MavenITmng3530DynamicPOMInterpolationTest
         super( "[2.1.0-M1,3.0-alpha-1)" );
     }
 
+    @Test
     public void testitMNG3530_BuildPath()
         throws Exception
     {
@@ -68,6 +70,7 @@ public class MavenITmng3530DynamicPOMInterpolationTest
         verifier.resetStreams();
     }
 
+    @Test
     public void testitMNG3530_POMProperty()
         throws Exception
     {
@@ -95,6 +98,7 @@ public class MavenITmng3530DynamicPOMInterpolationTest
         verifier.resetStreams();
     }
 
+    @Test
     public void testitMNG3530_ResourceDirectoryInterpolation()
         throws Exception
     {

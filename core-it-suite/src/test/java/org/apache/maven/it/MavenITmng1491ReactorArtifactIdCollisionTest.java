@@ -19,6 +19,7 @@ package org.apache.maven.it;
  * under the License.
  */
 
+import org.junit.jupiter.api.Test;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
@@ -37,6 +38,7 @@ public class MavenITmng1491ReactorArtifactIdCollisionTest
         super( ALL_MAVEN_VERSIONS );
     }
 
+    @Test
     public void testitMNG1491()
         throws Exception
     {

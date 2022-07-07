@@ -19,6 +19,7 @@ package org.apache.maven.it;
  * under the License.
  */
 
+import org.junit.jupiter.api.Test;
 import java.io.File;
 import java.util.List;
 
@@ -37,6 +38,7 @@ public class MavenITmng5935OptionalLostInTranstiveManagedDependenciesTest
         super( "[3.5.1,)" );
     }
 
+    @Test
     public void testitMNG5935()
         throws Exception
     {

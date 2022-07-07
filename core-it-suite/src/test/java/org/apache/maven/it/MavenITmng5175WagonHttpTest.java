@@ -19,6 +19,9 @@ package org.apache.maven.it;
  * under the License.
  */
 
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.apache.maven.it.util.ResourceExtractor;
 import org.eclipse.jetty.server.Handler;
 import org.eclipse.jetty.server.NetworkConnector;
@@ -51,7 +54,7 @@ public class MavenITmng5175WagonHttpTest
         super( "[3.0.4,)" ); // 3.0.4+
     }
 
-    @Override
+    @BeforeEach
     protected void setUp()
         throws Exception
     {
@@ -91,7 +94,7 @@ public class MavenITmng5175WagonHttpTest
         System.out.println( "Bound server socket to the port " + port );
     }
 
-    @Override
+    @AfterEach
     protected void tearDown()
         throws Exception
     {
@@ -108,6 +111,7 @@ public class MavenITmng5175WagonHttpTest
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testmng5175_ReadTimeOutFromSettings()
         throws Exception
     {

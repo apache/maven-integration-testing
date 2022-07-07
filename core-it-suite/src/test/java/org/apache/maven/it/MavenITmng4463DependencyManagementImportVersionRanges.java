@@ -22,6 +22,7 @@ import java.io.File;
 import java.util.List;
 import java.util.regex.Pattern;
 import org.apache.maven.it.util.ResourceExtractor;
+import org.junit.jupiter.api.Test;
 
 /**
  * Integration tests for <a href="https://issues.apache.org/jira/browse/MNG-4463">MNG-4463</a>.
@@ -37,6 +38,7 @@ public class MavenITmng4463DependencyManagementImportVersionRanges
         super( "[4.0.0-alpha-1,)" );
     }
 
+    @Test
     public void testInclusiveUpperBoundResolvesToHighestVersion()
         throws Exception
     {
@@ -52,6 +54,7 @@ public class MavenITmng4463DependencyManagementImportVersionRanges
         assertTrue( artifacts.toString(), artifacts.contains( "org.apache.maven:maven-plugin-api:jar:3.0" ) );
     }
 
+    @Test
     public void testExclusiveUpperBoundResolvesToHighestVersion()
         throws Exception
     {
@@ -67,6 +70,7 @@ public class MavenITmng4463DependencyManagementImportVersionRanges
         assertTrue( artifacts.toString(), artifacts.contains( "org.apache.maven:maven-plugin-api:jar:3.0" ) );
     }
 
+    @Test
     public void testFailureWithoutUpperBound()
         throws Exception
     {

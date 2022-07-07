@@ -19,6 +19,7 @@ package org.apache.maven.it;
  * under the License.
  */
 
+import org.junit.jupiter.api.Test;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
@@ -44,6 +45,7 @@ public class MavenITmng4776ForkedReactorPluginVersionResolutionTest
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testitLifecycle()
         throws Exception
     {
@@ -68,6 +70,7 @@ public class MavenITmng4776ForkedReactorPluginVersionResolutionTest
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testitCmdLine()
         throws Exception
     {

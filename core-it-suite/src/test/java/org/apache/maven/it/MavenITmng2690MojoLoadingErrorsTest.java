@@ -19,14 +19,13 @@ package org.apache.maven.it;
  * under the License.
  */
 
+import org.junit.jupiter.api.Test;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
 import java.util.regex.Pattern;
-
-import junit.framework.TestCase;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-2690">MNG-2690</a>.
@@ -46,6 +45,7 @@ public class MavenITmng2690MojoLoadingErrorsTest
         super( "(2.1.0-M1,)" );
     }
 
+    @Test
     public void testNoClassDefFromMojoLoad()
         throws IOException, VerificationException
     {
@@ -74,10 +74,11 @@ public class MavenITmng2690MojoLoadingErrorsTest
         int msg = indexOf( lines, "(?i).*required class is missing.*" );
         assertTrue( "User-friendly message was not found in output.", msg >= 0 );
 
-        int cls = lines.get( msg ).toString().replace( '/', '.' ).indexOf( TestCase.class.getName() );
+        int cls = lines.get( msg ).toString().replace( '/', '.' ).indexOf( "junit.framework.TestCase" );
         assertTrue( "Missing class name was not found in output.", cls >= 0 );
     }
 
+    @Test
     public void testNoClassDefFromMojoConfiguration()
         throws IOException, VerificationException
     {
@@ -106,10 +107,11 @@ public class MavenITmng2690MojoLoadingErrorsTest
         int msg = indexOf( lines, "(?i).*required class (i|wa)s missing( during (mojo )?configuration)?.*" );
         assertTrue( "User-friendly message was not found in output.", msg >= 0 );
 
-        int cls = lines.get( msg ).toString().replace( '/', '.' ).indexOf( TestCase.class.getName() );
+        int cls = lines.get( msg ).toString().replace( '/', '.' ).indexOf( "junit.framework.TestCase" );
         assertTrue( "Missing class name was not found in output.", cls >= 0 );
     }
 
+    @Test
     public void testMojoComponentLookupException()
         throws IOException, VerificationException
     {
@@ -142,6 +144,7 @@ public class MavenITmng2690MojoLoadingErrorsTest
         assertTrue( "User-friendly message was not found in output.", indexOf( lines, compLookupMsg ) > 0 );
     }
 
+    @Test
     public void testMojoRequirementComponentLookupException()
         throws IOException, VerificationException
     {

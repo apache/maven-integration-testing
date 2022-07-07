@@ -19,6 +19,7 @@ package org.apache.maven.it;
  * under the License.
  */
 
+import org.junit.jupiter.api.Test;
 import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
@@ -35,6 +36,7 @@ public class MavenITmng7335MissingJarInParallelBuild
         super( "[3.8.1,)" );
     }
 
+    @Test
     public void testMissingJarInParallelBuild() throws IOException, VerificationException
     {
         final File projectDir = ResourceExtractor.simpleExtractResources( getClass(), PROJECT_PATH );

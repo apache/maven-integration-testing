@@ -19,6 +19,7 @@ package org.apache.maven.it;
  * under the License.
  */
 
+import org.junit.jupiter.api.Test;
 import java.io.File;
 import java.net.URI;
 import org.apache.maven.it.util.ResourceExtractor;
@@ -40,6 +41,7 @@ public class MavenITmng6759TransitiveDependencyRepositoriesTest extends Abstract
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testTransitiveDependenciesAccountForRepositoriesListedByDependencyTrailPredecessor() throws Exception {
         installDependencyCInCustomRepo();
         File testDir = ResourceExtractor.simpleExtractResources( getClass(), projectBaseDir );

@@ -19,6 +19,7 @@ package org.apache.maven.it;
  * under the License.
  */
 
+import org.junit.jupiter.api.Test;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
@@ -42,6 +43,7 @@ public class MavenITmng6511OptionalProjectSelectionTest extends AbstractMavenInt
         testDir = ResourceExtractor.simpleExtractResources( getClass(), RESOURCE_PATH );
     }
 
+    @Test
     public void testSelectExistingOptionalProfile() throws VerificationException
     {
         newVerifier( testDir.getAbsolutePath() ).executeGoal( "clean" );
@@ -54,6 +56,7 @@ public class MavenITmng6511OptionalProjectSelectionTest extends AbstractMavenInt
         verifier.verifyFilePresent( "existing-module/target/touch.txt" ); // existing-module should have been built.
     }
 
+    @Test
     public void testSelectExistingOptionalProfileByArtifactId() throws VerificationException
     {
         newVerifier( testDir.getAbsolutePath() ).executeGoal( "clean" );
@@ -66,6 +69,7 @@ public class MavenITmng6511OptionalProjectSelectionTest extends AbstractMavenInt
         verifier.verifyFilePresent( "existing-module/target/touch.txt" ); // existing-module should have been built.
     }
 
+    @Test
     public void testSelectNonExistingOptionalProfile() throws VerificationException
     {
         newVerifier( testDir.getAbsolutePath() ).executeGoal( "clean" );
@@ -78,6 +82,7 @@ public class MavenITmng6511OptionalProjectSelectionTest extends AbstractMavenInt
         verifier.verifyFilePresent( "existing-module/target/touch.txt" ); // existing-module should have been built.
     }
 
+    @Test
     public void testDeselectExistingOptionalProfile() throws VerificationException
     {
         newVerifier( testDir.getAbsolutePath() ).executeGoal( "clean" );
@@ -90,6 +95,7 @@ public class MavenITmng6511OptionalProjectSelectionTest extends AbstractMavenInt
         verifier.verifyFileNotPresent( "existing-module/target/touch.txt" ); // existing-module should not have been built.
     }
 
+    @Test
     public void testDeselectNonExistingOptionalProfile() throws VerificationException
     {
         newVerifier( testDir.getAbsolutePath() ).executeGoal( "clean" );

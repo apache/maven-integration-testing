@@ -19,6 +19,7 @@ package org.apache.maven.it;
  * under the License.
  */
 
+import org.junit.jupiter.api.Test;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
@@ -42,6 +43,7 @@ public class MavenITmng3710PollutedClonedPluginsTest
         super( "(2.0.8,)" ); // only test in 2.0.9+
     }
 
+    @Test
     public void testitMNG3710_POMInheritance()
         throws Exception
     {
@@ -74,6 +76,7 @@ public class MavenITmng3710PollutedClonedPluginsTest
 
     }
 
+    @Test
     public void testitMNG3710_OriginalModel()
         throws Exception
     {

@@ -19,6 +19,7 @@ package org.apache.maven.it;
  * under the License.
  */
 
+import org.junit.jupiter.api.Test;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
@@ -34,6 +35,7 @@ public class MavenITmng2339BadProjectInterpolationTest
         super( "(2.0.8,)" ); // 2.0.9+
     }
 
+    @Test
     public void testitMNG2339a()
         throws Exception
     {
@@ -52,6 +54,7 @@ public class MavenITmng2339BadProjectInterpolationTest
     }
 
     // test that -Dversion=1.0 is still available for interpolation.
+    @Test
     public void testitMNG2339b()
         throws Exception
     {

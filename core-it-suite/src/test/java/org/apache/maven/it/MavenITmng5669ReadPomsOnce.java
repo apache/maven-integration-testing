@@ -19,6 +19,7 @@ package org.apache.maven.it;
  * under the License.
  */
 
+import org.junit.jupiter.api.Test;
 import java.io.File;
 import java.util.Arrays;
 import java.util.Collections;
@@ -45,6 +46,7 @@ public class MavenITmng5669ReadPomsOnce
         super( "[4.0.0-alpha-1,)" );
     }
 
+    @Test
     public void testWithoutBuildConsumer()
         throws Exception
     {
@@ -98,6 +100,7 @@ public class MavenITmng5669ReadPomsOnce
         assertEquals( uniqueBuildingSources.size(), 201 /* is 202 minus superpom */ );
     }
 
+    @Test
     public void testWithBuildConsumer()
         throws Exception
     {

@@ -19,6 +19,7 @@ package org.apache.maven.it;
  * under the License.
  */
 
+import org.junit.jupiter.api.Test;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
@@ -34,6 +35,7 @@ public class MavenITmng7112ProjectsWithNonRecursiveTest
         super( "[4.0.0-alpha-1,)" );
     }
 
+    @Test
     public void testAggregatesCanBeBuiltNonRecursively()
             throws IOException, VerificationException
     {
@@ -55,6 +57,7 @@ public class MavenITmng7112ProjectsWithNonRecursiveTest
         verifier.verifyFileNotPresent( "aggregator-b/module-b/target/touch.txt" );
     }
 
+    @Test
     public void testAggregatesCanBeDeselectedNonRecursively()
             throws IOException, VerificationException
     {

@@ -19,11 +19,11 @@ package org.apache.maven.it;
  * under the License.
  */
 
+import org.junit.jupiter.api.Test;
 import java.io.File;
 import java.io.IOException;
 
 import org.apache.maven.it.util.ResourceExtractor;
-import org.junit.Test;
 
 public class MavenITmng7045DropUselessAndOutdatedCdiApiTest
     extends AbstractMavenIntegrationTestCase

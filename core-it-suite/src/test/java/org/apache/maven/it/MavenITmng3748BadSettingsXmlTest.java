@@ -19,6 +19,7 @@ package org.apache.maven.it;
  * under the License.
  */
 
+import org.junit.jupiter.api.Test;
 import java.io.File;
 import java.util.List;
 
@@ -42,6 +43,7 @@ public class MavenITmng3748BadSettingsXmlTest
         super( "(2.0.8,)" ); // only test in 2.0.9+
     }
 
+    @Test
     public void testit()
         throws Exception
     {

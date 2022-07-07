@@ -19,6 +19,7 @@ package org.apache.maven.it;
  * under the License.
  */
 
+import org.junit.jupiter.api.Test;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
@@ -43,6 +44,7 @@ public class MavenITmng4960MakeLikeReactorResumeTest
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testitFromUpstream()
         throws Exception
     {
@@ -74,6 +76,7 @@ public class MavenITmng4960MakeLikeReactorResumeTest
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testitFromDownstream()
         throws Exception
     {

@@ -19,6 +19,9 @@ package org.apache.maven.it;
  * under the License.
  */
 
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.apache.maven.it.util.ResourceExtractor;
 import org.eclipse.jetty.server.Handler;
 import org.eclipse.jetty.server.NetworkConnector;
@@ -56,7 +59,7 @@ public class MavenITmng5868NoDuplicateAttachedArtifacts
         super( "[3.8.2,)" );
     }
 
-    @Override
+    @BeforeEach
     protected void setUp()
         throws Exception
     {
@@ -103,7 +106,7 @@ public class MavenITmng5868NoDuplicateAttachedArtifacts
         System.out.println( "Bound server socket to the port " + port );
     }
 
-    @Override
+    @AfterEach
     protected void tearDown()
         throws Exception
     {
@@ -114,6 +117,7 @@ public class MavenITmng5868NoDuplicateAttachedArtifacts
         }
     }
 
+    @Test
     public void testNoDeployNotDuplicate()
         throws Exception
     {

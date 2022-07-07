@@ -19,6 +19,7 @@ package org.apache.maven.it;
  * under the License.
  */
 
+import org.junit.jupiter.api.Test;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
@@ -39,6 +40,7 @@ public class MavenITmng2739RequiredRepositoryElementsTest
         super( "(2.0.9,)" ); // only test in 2.0.9+
     }
 
+    @Test
     public void testitMNG2739_RepositoryId()
         throws Exception
     {
@@ -77,6 +79,7 @@ public class MavenITmng2739RequiredRepositoryElementsTest
         assertFalse( "Missing repository-id should not result in a NullPointerException.", foundNpe );
     }
 
+    @Test
     public void testitMNG2739_RepositoryUrl()
         throws Exception
     {

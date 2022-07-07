@@ -19,6 +19,7 @@ package org.apache.maven.it;
  * under the License.
  */
 
+import org.junit.jupiter.api.Test;
 import java.io.File;
 import java.util.Properties;
 
@@ -36,16 +37,12 @@ public class MavenITmng5889FindBasedir
         super( "[3.5.0,3.5.1)" );
     }
 
-    protected MavenITmng5889FindBasedir( String constraint )
-    {
-        super( constraint );
-    }
-
     /**
      * check that <code>path/to/.mvn/</code> is found when path to POM set by <code>--file path/to/pom.xml</code>
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testMvnFileLongOption()
         throws Exception
     {
@@ -57,6 +54,7 @@ public class MavenITmng5889FindBasedir
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testMvnFileShortOption()
         throws Exception
     {
@@ -68,6 +66,7 @@ public class MavenITmng5889FindBasedir
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testMvnFileLongOptionModule()
         throws Exception
     {
@@ -79,6 +78,7 @@ public class MavenITmng5889FindBasedir
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testMvnFileShortOptionModule()
         throws Exception
     {

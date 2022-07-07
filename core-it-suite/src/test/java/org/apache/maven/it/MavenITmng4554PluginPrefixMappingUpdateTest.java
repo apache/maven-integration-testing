@@ -19,6 +19,7 @@ package org.apache.maven.it;
  * under the License.
  */
 
+import org.junit.jupiter.api.Test;
 import org.apache.maven.it.util.ResourceExtractor;
 import org.apache.maven.shared.utils.io.FileUtils;
 import org.eclipse.jetty.server.NetworkConnector;
@@ -58,6 +59,7 @@ public class MavenITmng4554PluginPrefixMappingUpdateTest
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testitCached()
         throws Exception
     {
@@ -144,6 +146,7 @@ public class MavenITmng4554PluginPrefixMappingUpdateTest
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testitForcedUpdate()
         throws Exception
     {
@@ -231,6 +234,7 @@ public class MavenITmng4554PluginPrefixMappingUpdateTest
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testitRefetched()
         throws Exception
     {

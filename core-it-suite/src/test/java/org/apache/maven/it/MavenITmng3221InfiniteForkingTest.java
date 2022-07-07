@@ -19,6 +19,7 @@ package org.apache.maven.it;
  * under the License.
  */
 
+import org.junit.jupiter.api.Test;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
@@ -36,6 +37,7 @@ public class MavenITmng3221InfiniteForkingTest
         super( "(2.0.8,3.0-alpha-1)" ); // irrelevant in 3.0+
     }
 
+    @Test
     public void testitMNG3221a()
         throws Exception
     {
@@ -74,6 +76,7 @@ public class MavenITmng3221InfiniteForkingTest
         }
    }
 
+    @Test
     public void testitMNG3221b()
         throws Exception
     {

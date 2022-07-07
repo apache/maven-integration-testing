@@ -23,6 +23,7 @@ import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
 import java.util.List;
+import org.junit.jupiter.api.Test;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-2720">MNG-2720</a>.
@@ -46,6 +47,7 @@ public class MavenITmng2720SiblingClasspathArtifactsTest
         super( "[2.1.0,)" );
     }
 
+    @Test
     public void testIT()
         throws Exception
     {

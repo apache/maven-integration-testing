@@ -19,6 +19,7 @@ package org.apache.maven.it;
  * under the License.
  */
 
+import org.junit.jupiter.api.Test;
 import java.io.File;
 import java.util.List;
 
@@ -42,6 +43,7 @@ public class MavenITmng2045testJarDependenciesBrokenInReactorTest
         super( "(2.0.7,)" ); // 2.0.8+
     }
 
+    @Test
     public void testitMNG2045()
         throws Exception
     {

@@ -19,6 +19,7 @@ package org.apache.maven.it;
  * under the License.
  */
 
+import org.junit.jupiter.api.Test;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
@@ -37,6 +38,7 @@ public class MavenITmng3536AppendedAbsolutePathsTest
         super( "[2.1.0-M1,)"); // 2.1.0+ only
     }
 
+    @Test
     public void testitMNG3536()
         throws Exception
     {

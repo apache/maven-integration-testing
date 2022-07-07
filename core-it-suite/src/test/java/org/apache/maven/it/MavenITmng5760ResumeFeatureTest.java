@@ -19,6 +19,7 @@ package org.apache.maven.it;
  * under the License.
  */
 
+import org.junit.jupiter.api.Test;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
@@ -62,6 +63,7 @@ public class MavenITmng5760ResumeFeatureTest extends AbstractMavenIntegrationTes
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testShouldSuggestToResumeWithoutArgs() throws Exception
     {
         Verifier verifier = newVerifier( parentDependentTestDir.getAbsolutePath() );
@@ -92,6 +94,7 @@ public class MavenITmng5760ResumeFeatureTest extends AbstractMavenIntegrationTes
         verifier.resetStreams();
     }
 
+    @Test
     public void testShouldSkipSuccessfulProjects() throws Exception
     {
         Verifier verifier = newVerifier( parentDependentTestDir.getAbsolutePath() );
@@ -129,6 +132,7 @@ public class MavenITmng5760ResumeFeatureTest extends AbstractMavenIntegrationTes
         }
     }
 
+    @Test
     public void testShouldSkipSuccessfulModulesWhenTheFirstModuleFailed() throws Exception
     {
         // In this multi-module project, the submodules are not dependent on the parent.
@@ -160,6 +164,7 @@ public class MavenITmng5760ResumeFeatureTest extends AbstractMavenIntegrationTes
         verifier.resetStreams();
     }
 
+    @Test
     public void testShouldNotCrashWithoutProject() throws Exception
     {
         // There is no Maven project available in the test directory.
@@ -180,6 +185,7 @@ public class MavenITmng5760ResumeFeatureTest extends AbstractMavenIntegrationTes
         }
     }
 
+    @Test
     public void testFailureWithParallelBuild() throws Exception
     {
         // four modules: a, b, c, d
@@ -232,6 +238,7 @@ public class MavenITmng5760ResumeFeatureTest extends AbstractMavenIntegrationTes
         }
     }
 
+    @Test
     public void testFailureAfterSkipWithParallelBuild() throws Exception
     {
         // four modules: a, b, c, d

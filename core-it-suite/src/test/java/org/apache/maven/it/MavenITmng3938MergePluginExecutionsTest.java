@@ -19,6 +19,7 @@ package org.apache.maven.it;
  * under the License.
  */
 
+import org.junit.jupiter.api.Test;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
@@ -47,6 +48,7 @@ public class MavenITmng3938MergePluginExecutionsTest
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testitWithoutPluginMngt()
         throws Exception
     {
@@ -60,6 +62,7 @@ public class MavenITmng3938MergePluginExecutionsTest
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testitWithPluginMngt()
         throws Exception
     {

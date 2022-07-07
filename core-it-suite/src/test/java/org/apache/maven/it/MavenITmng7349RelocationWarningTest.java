@@ -19,6 +19,7 @@ package org.apache.maven.it;
  * under the License.
  */
 
+import org.junit.jupiter.api.Test;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -34,6 +35,7 @@ public class MavenITmng7349RelocationWarningTest
         super( "[3.8.5,)" );
     }
 
+    @Test
     public void testit()
             throws Exception
     {

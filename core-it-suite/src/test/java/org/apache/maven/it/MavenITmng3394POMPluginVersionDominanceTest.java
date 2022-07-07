@@ -19,6 +19,7 @@ package org.apache.maven.it;
  * under the License.
  */
 
+import org.junit.jupiter.api.Test;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
@@ -58,6 +59,7 @@ public class MavenITmng3394POMPluginVersionDominanceTest
         verifier.verifyFilePresent( "target/resources-resources.txt" );
     }
 
+    @Test
     public void testitMNG3394b()
         throws Exception
     {

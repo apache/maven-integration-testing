@@ -19,6 +19,7 @@ package org.apache.maven.it;
  * under the License.
  */
 
+import org.junit.jupiter.api.Test;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
@@ -37,6 +38,7 @@ public class MavenITmng3220ImportScopeTest
         super( "(2.0.8,3.0-alpha-1),[3.0-alpha-3,)" );
     }
 
+    @Test
     public void testitMNG3220a()
         throws Exception
     {
@@ -57,6 +59,7 @@ public class MavenITmng3220ImportScopeTest
         verifier.resetStreams();
     }
 
+    @Test
     public void testitMNG3220b()
         throws Exception
     {

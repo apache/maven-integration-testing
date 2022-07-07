@@ -19,6 +19,7 @@ package org.apache.maven.it;
  * under the License.
  */
 
+import org.junit.jupiter.api.Test;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
@@ -36,6 +37,7 @@ public class MavenITmng5639ImportScopePomResolutionTest
         super( "[3.2.2,)" );
     }
 
+    @Test
     public void testitMNG5639()
         throws Exception
     {

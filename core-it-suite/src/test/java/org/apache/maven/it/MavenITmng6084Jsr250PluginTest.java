@@ -19,6 +19,8 @@ package org.apache.maven.it;
  * under the License.
  */
 
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
@@ -37,22 +39,14 @@ public class MavenITmng6084Jsr250PluginTest
         super( "[3.5.1,)" );
     }
 
+    @BeforeEach
     public void setUp()
         throws Exception
     {
-        super.setUp();
-
         testDir = ResourceExtractor.simpleExtractResources( getClass(), "/mng-6084-jsr250-support" );
-
     }
 
-    protected void tearDown()
-        throws Exception
-    {
-
-        super.tearDown();
-    }
-
+    @Test
     public void testJsr250PluginExecution()
         throws Exception
     {

@@ -19,6 +19,7 @@ package org.apache.maven.it;
  * under the License.
  */
 
+import org.junit.jupiter.api.Test;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
@@ -40,12 +41,14 @@ public class MavenITmng4768NearestMatchConflictResolutionTest
 
     // Ideally, all six permutations of the three direct dependencies should yield the same result...
 
+    @Test
     public void testitABD()
         throws Exception
     {
         testit( "test-abd" );
     }
 
+    @Test
     public void testitADB()
         throws Exception
     {
@@ -53,18 +56,21 @@ public class MavenITmng4768NearestMatchConflictResolutionTest
         testit( "test-adb" );
     }
 
+    @Test
     public void testitBAD()
         throws Exception
     {
         testit( "test-bad" );
     }
 
+    @Test
     public void testitBDA()
         throws Exception
     {
         testit( "test-bda" );
     }
 
+    @Test
     public void testitDAB()
         throws Exception
     {
@@ -72,6 +78,7 @@ public class MavenITmng4768NearestMatchConflictResolutionTest
         testit( "test-dab" );
     }
 
+    @Test
     public void testitDBA()
         throws Exception
     {

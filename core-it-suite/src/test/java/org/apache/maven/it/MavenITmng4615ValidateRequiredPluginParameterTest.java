@@ -19,6 +19,7 @@ package org.apache.maven.it;
  * under the License.
  */
 
+import org.junit.jupiter.api.Test;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
@@ -44,6 +45,7 @@ public class MavenITmng4615ValidateRequiredPluginParameterTest
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testitAllSet()
         throws Exception
     {
@@ -67,6 +69,7 @@ public class MavenITmng4615ValidateRequiredPluginParameterTest
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testitExprMissing()
         throws Exception
     {
@@ -96,6 +99,7 @@ public class MavenITmng4615ValidateRequiredPluginParameterTest
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testitExprSet()
         throws Exception
     {
@@ -121,6 +125,7 @@ public class MavenITmng4615ValidateRequiredPluginParameterTest
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testitPomValMissing()
         throws Exception
     {
@@ -152,6 +157,7 @@ public class MavenITmng4615ValidateRequiredPluginParameterTest
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testitPomValSet()
         throws Exception
     {

@@ -19,6 +19,7 @@ package org.apache.maven.it;
  * under the License.
  */
 
+import org.junit.jupiter.api.Test;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -45,6 +46,7 @@ public class MavenITmng5222MojoDeprecatedTest
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testEmptyConfiguration()
         throws Exception
     {
@@ -93,6 +95,7 @@ public class MavenITmng5222MojoDeprecatedTest
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testDeprecatedProperty()
         throws Exception
     {
@@ -162,6 +165,7 @@ public class MavenITmng5222MojoDeprecatedTest
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testDeprecatedConfig()
         throws Exception
     {

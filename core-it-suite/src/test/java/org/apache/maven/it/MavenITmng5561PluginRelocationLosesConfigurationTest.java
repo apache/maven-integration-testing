@@ -19,6 +19,7 @@ package org.apache.maven.it;
  * under the License.
  */
 
+import org.junit.jupiter.api.Test;
 import java.io.File;
 
 import org.apache.maven.it.util.ResourceExtractor;
@@ -32,6 +33,7 @@ public class MavenITmng5561PluginRelocationLosesConfigurationTest
         super( "[3.8.5,)" );
     }
 
+    @Test
     public void testit()
             throws Exception
     {

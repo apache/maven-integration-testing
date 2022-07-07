@@ -19,6 +19,7 @@ package org.apache.maven.it;
  * under the License.
  */
 
+import org.junit.jupiter.api.Test;
 import java.io.File;
 import java.util.Properties;
 
@@ -44,6 +45,7 @@ public class MavenITmng3808ReportInheritanceOrderingTest
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testitMNG3808()
         throws Exception
     {

@@ -19,6 +19,7 @@ package org.apache.maven.it;
  * under the License.
  */
 
+import org.junit.jupiter.api.Test;
 import java.io.File;
 
 import org.apache.maven.it.util.ResourceExtractor;
@@ -42,6 +43,7 @@ public class MavenITmng3284UsingCachedPluginsTest
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testitMNG3284()
         throws Exception
     {

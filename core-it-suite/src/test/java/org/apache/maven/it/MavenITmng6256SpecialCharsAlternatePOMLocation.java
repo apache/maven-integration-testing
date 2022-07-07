@@ -19,6 +19,7 @@ package org.apache.maven.it;
  * under the License.
  */
 
+import org.junit.jupiter.api.Test;
 import java.io.File;
 
 import org.apache.maven.it.util.ResourceExtractor;
@@ -36,16 +37,12 @@ public class MavenITmng6256SpecialCharsAlternatePOMLocation
         super( "(3.6.0,)" );
     }
 
-    protected MavenITmng6256SpecialCharsAlternatePOMLocation( String constraint )
-    {
-        super( constraint );
-    }
-
     /**
      * check script is working when path to POM is set to <code>directory-with- -space</code>
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testDirectoryWithSpace()
         throws Exception
     {
@@ -58,6 +55,7 @@ public class MavenITmng6256SpecialCharsAlternatePOMLocation
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testDirectoryWithClosingBracket()
         throws Exception
     {

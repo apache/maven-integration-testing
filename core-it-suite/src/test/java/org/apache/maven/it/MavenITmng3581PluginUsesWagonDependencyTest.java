@@ -19,6 +19,7 @@ package org.apache.maven.it;
  * under the License.
  */
 
+import org.junit.jupiter.api.Test;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
@@ -43,6 +44,7 @@ public class MavenITmng3581PluginUsesWagonDependencyTest
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testit()
         throws Exception
     {
@@ -51,6 +53,7 @@ public class MavenITmng3581PluginUsesWagonDependencyTest
         Verifier verifier = newVerifier( testDir.getAbsolutePath() );
         verifier.setAutoclean( false );
         verifier.executeGoal( "initialize" );
+        verifier.addCliOption( "-B" );
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
     }

@@ -19,6 +19,7 @@ package org.apache.maven.it;
  * under the License.
  */
 
+import org.junit.jupiter.api.Test;
 import java.io.File;
 
 import org.apache.maven.it.util.ResourceExtractor;
@@ -40,6 +41,7 @@ public class MavenITmng5640LifecycleParticipantAfterSessionEnd
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testBuildFailureUTFail()
         throws Exception
     {
@@ -81,6 +83,7 @@ public class MavenITmng5640LifecycleParticipantAfterSessionEnd
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testBuildFailureMissingDependency()
         throws Exception
     {
@@ -121,6 +124,7 @@ public class MavenITmng5640LifecycleParticipantAfterSessionEnd
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testBuildError()
         throws Exception
     {
@@ -168,6 +172,7 @@ public class MavenITmng5640LifecycleParticipantAfterSessionEnd
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testBuildErrorRt()
         throws Exception
     {

@@ -19,6 +19,7 @@ package org.apache.maven.it;
  * under the License.
  */
 
+import org.junit.jupiter.api.Test;
 import java.io.File;
 
 import org.apache.maven.it.util.ResourceExtractor;
@@ -35,6 +36,7 @@ public class MavenITmng6972AllowAccessToGraphPackageTest
         super( "[3.9.0,)" );
     }
 
+    @Test
     public void testit()
         throws Exception
     {

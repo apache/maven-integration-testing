@@ -19,6 +19,7 @@ package org.apache.maven.it;
  * under the License.
  */
 
+import org.junit.jupiter.api.Test;
 import org.apache.maven.it.util.ResourceExtractor;
 
 import java.io.File;
@@ -37,6 +38,7 @@ public class MavenITmng3535SelfReferentialPropertiesTest
         super( "[2.1.0-M1,3.0-alpha-1),[3.0-alpha-3,)" );
     }
 
+    @Test
     public void testitMNG3535_ShouldSucceed()
         throws Exception
     {
@@ -54,6 +56,7 @@ public class MavenITmng3535SelfReferentialPropertiesTest
         verifier.resetStreams();
     }
 
+    @Test
     public void testitMNG3535_ShouldFail()
         throws Exception
     {

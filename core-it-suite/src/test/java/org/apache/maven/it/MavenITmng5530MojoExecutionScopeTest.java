@@ -19,6 +19,7 @@ package org.apache.maven.it;
  * under the License.
  */
 
+import org.junit.jupiter.api.Test;
 import java.io.File;
 
 import org.apache.maven.it.util.ResourceExtractor;
@@ -31,6 +32,7 @@ public class MavenITmng5530MojoExecutionScopeTest
         super( "[3.2.1,)" );
     }
 
+    @Test
     public void test_copyfiles()
         throws Exception
     {
@@ -57,6 +59,7 @@ public class MavenITmng5530MojoExecutionScopeTest
         verifier.verifyFilePresent( "target/execution-before.txt" );
     }
 
+    @Test
     public void test_copyfiles_multithreaded()
         throws Exception
     {
@@ -84,6 +87,7 @@ public class MavenITmng5530MojoExecutionScopeTest
         verifier.verifyFilePresent( "target/execution-before.txt" );
     }
 
+    @Test
     public void testExtension()
         throws Exception
     {

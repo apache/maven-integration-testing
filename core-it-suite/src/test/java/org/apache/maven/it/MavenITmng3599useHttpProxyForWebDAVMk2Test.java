@@ -19,18 +19,24 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import java.io.File;
-import java.io.IOException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.apache.maven.it.util.ResourceExtractor;
+
+import java.io.File;
+import java.io.IOException;
+
 import org.apache.maven.shared.utils.StringUtils;
 import org.apache.maven.shared.utils.io.FileUtils;
+import org.apache.maven.shared.verifier.Verifier;
+import org.apache.maven.shared.verifier.util.ResourceExtractor;
 import org.eclipse.jetty.server.Handler;
 import org.eclipse.jetty.server.NetworkConnector;
 import org.eclipse.jetty.server.Request;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.handler.AbstractHandler;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-3599">MNG-3599</a>.
@@ -62,7 +68,7 @@ public class MavenITmng3599useHttpProxyForWebDAVMk2Test
         super( "[3.3.9,)" );
     }
 
-    @Override
+    @BeforeEach
     protected void setUp()
         throws Exception
     {
@@ -138,7 +144,7 @@ public class MavenITmng3599useHttpProxyForWebDAVMk2Test
         System.out.println( "Bound server socket to the port " + port );
     }
 
-    @Override
+    @AfterEach
     protected void tearDown()
         throws Exception
     {
@@ -149,6 +155,7 @@ public class MavenITmng3599useHttpProxyForWebDAVMk2Test
         }
     }
 
+    @Test
     public void testitUseHttpProxyForHttp()
         throws Exception
     {
@@ -184,7 +191,7 @@ public class MavenITmng3599useHttpProxyForWebDAVMk2Test
         verifier.resetStreams();
 
         verifier.verifyArtifactPresent( "org.apache.maven.its.mng3599", "test-dependency", "1.0", "jar" );
-        verifier.assertArtifactContents( "org.apache.maven.its.mng3599", "test-dependency", "1.0", "jar",
+        verifier.verifyArtifactContent( "org.apache.maven.its.mng3599", "test-dependency", "1.0", "jar",
                                          CONTENT );
     }
 
@@ -193,6 +200,7 @@ public class MavenITmng3599useHttpProxyForWebDAVMk2Test
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testitUseHttpProxyForWebDAV()
         throws Exception
     {
@@ -228,7 +236,7 @@ public class MavenITmng3599useHttpProxyForWebDAVMk2Test
         verifier.resetStreams();
 
         verifier.verifyArtifactPresent( "org.apache.maven.its.mng3599", "test-dependency", "1.0", "jar" );
-        verifier.assertArtifactContents( "org.apache.maven.its.mng3599", "test-dependency", "1.0", "jar",
+        verifier.verifyArtifactContent( "org.apache.maven.its.mng3599", "test-dependency", "1.0", "jar",
                                          CONTENT );
     }
 }

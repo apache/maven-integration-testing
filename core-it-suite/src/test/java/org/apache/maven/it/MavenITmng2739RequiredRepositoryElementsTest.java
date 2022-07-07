@@ -19,10 +19,13 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.util.ResourceExtractor;
-
 import java.io.File;
 import java.util.List;
+
+import org.apache.maven.shared.verifier.VerificationException;
+import org.apache.maven.shared.verifier.Verifier;
+import org.apache.maven.shared.verifier.util.ResourceExtractor;
+import org.junit.jupiter.api.Test;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-2739">MNG-2739</a>.
@@ -39,6 +42,7 @@ public class MavenITmng2739RequiredRepositoryElementsTest
         super( "(2.0.9,)" ); // only test in 2.0.9+
     }
 
+    @Test
     public void testitMNG2739_RepositoryId()
         throws Exception
     {
@@ -77,6 +81,7 @@ public class MavenITmng2739RequiredRepositoryElementsTest
         assertFalse( "Missing repository-id should not result in a NullPointerException.", foundNpe );
     }
 
+    @Test
     public void testitMNG2739_RepositoryUrl()
         throws Exception
     {

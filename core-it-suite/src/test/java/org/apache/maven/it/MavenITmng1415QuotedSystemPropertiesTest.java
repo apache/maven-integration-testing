@@ -19,10 +19,12 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.util.ResourceExtractor;
-
 import java.io.File;
 import java.util.Properties;
+
+import org.apache.maven.shared.verifier.Verifier;
+import org.apache.maven.shared.verifier.util.ResourceExtractor;
+import org.junit.jupiter.api.Test;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-1415">MNG-1415</a>.
@@ -42,6 +44,7 @@ public class MavenITmng1415QuotedSystemPropertiesTest
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testitMNG1415()
         throws Exception
     {
@@ -50,7 +53,7 @@ public class MavenITmng1415QuotedSystemPropertiesTest
         Verifier verifier = newVerifier( testDir.getAbsolutePath() );
         verifier.setAutoclean( false );
         verifier.deleteDirectory( "target" );
-        verifier.addCliOption( "-Dtest.property=\"Test Property\"" );
+        verifier.addCliOption( "-Dtest.property=Test Property" );
         verifier.executeGoal( "validate" );
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();

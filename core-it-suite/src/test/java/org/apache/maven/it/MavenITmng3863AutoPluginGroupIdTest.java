@@ -19,9 +19,12 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.util.ResourceExtractor;
-
 import java.io.File;
+
+import org.apache.maven.shared.verifier.VerificationException;
+import org.apache.maven.shared.verifier.Verifier;
+import org.apache.maven.shared.verifier.util.ResourceExtractor;
+import org.junit.jupiter.api.Test;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-3863">MNG-3863</a>.
@@ -43,6 +46,7 @@ public class MavenITmng3863AutoPluginGroupIdTest
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testitMNG3853()
         throws Exception
     {

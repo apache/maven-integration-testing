@@ -19,10 +19,12 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.util.ResourceExtractor;
-
 import java.io.File;
 import java.util.List;
+
+import org.apache.maven.shared.verifier.Verifier;
+import org.apache.maven.shared.verifier.util.ResourceExtractor;
+import org.junit.jupiter.api.Test;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-2861">MNG-2861</a>.
@@ -38,6 +40,7 @@ public class MavenITmng2861RelocationsAndRangesTest
         super( "(2.0.8,)" );
     }
 
+    @Test
     public void testitMNG2861()
         throws Exception
     {

@@ -19,12 +19,14 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.util.ResourceExtractor;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import org.apache.maven.shared.verifier.Verifier;
+import org.apache.maven.shared.verifier.util.ResourceExtractor;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author Benjamin Bentmann
@@ -44,6 +46,7 @@ public class MavenIT0144LifecycleExecutionOrderTest
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testit0144()
         throws Exception
     {

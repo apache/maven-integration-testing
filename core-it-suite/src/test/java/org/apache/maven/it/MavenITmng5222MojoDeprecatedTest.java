@@ -25,7 +25,9 @@ import java.util.List;
 import java.util.Properties;
 import java.util.regex.Pattern;
 
-import org.apache.maven.it.util.ResourceExtractor;
+import org.apache.maven.shared.verifier.Verifier;
+import org.apache.maven.shared.verifier.util.ResourceExtractor;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test for
@@ -45,6 +47,7 @@ public class MavenITmng5222MojoDeprecatedTest
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testEmptyConfiguration()
         throws Exception
     {
@@ -93,6 +96,7 @@ public class MavenITmng5222MojoDeprecatedTest
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testDeprecatedProperty()
         throws Exception
     {
@@ -162,6 +166,7 @@ public class MavenITmng5222MojoDeprecatedTest
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testDeprecatedConfig()
         throws Exception
     {

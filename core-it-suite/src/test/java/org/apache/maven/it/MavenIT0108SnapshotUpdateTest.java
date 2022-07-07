@@ -26,13 +26,19 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
-import org.apache.maven.it.util.ResourceExtractor;
 import org.apache.maven.shared.utils.io.FileUtils;
+import org.apache.maven.shared.verifier.VerificationException;
+import org.apache.maven.shared.verifier.Verifier;
+import org.apache.maven.shared.verifier.util.ResourceExtractor;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 /**
  * Downloads a snapshot dependency that was deployed with uniqueVersion = false, and checks it can be
  * updated. See MNG-1908.
  */
+@Disabled // MNG-3137
 public class MavenIT0108SnapshotUpdateTest
     extends AbstractMavenIntegrationTestCase
 {
@@ -51,11 +57,10 @@ public class MavenIT0108SnapshotUpdateTest
 
     private static final int TIME_OFFSET = 50000;
 
+    @BeforeEach
     protected void setUp()
         throws Exception
     {
-        super.setUp();
-
         File testDir = ResourceExtractor.simpleExtractResources( getClass(), "/it0108" );
         verifier = newVerifier( testDir.getAbsolutePath() );
         localRepoFile = getLocalRepoFile( verifier );
@@ -73,6 +78,7 @@ public class MavenIT0108SnapshotUpdateTest
         verifier.verifyArtifactNotPresent( "org.apache.maven", "maven-core-it-support", "1.0-SNAPSHOT", "jar" );
     }
 
+    @Test
     public void testSnapshotUpdated()
         throws Exception
     {
@@ -96,6 +102,7 @@ public class MavenIT0108SnapshotUpdateTest
         verifier.resetStreams();
     }
 
+    @Test
     public void testSnapshotUpdatedWithMetadata()
         throws Exception
     {
@@ -123,6 +130,7 @@ public class MavenIT0108SnapshotUpdateTest
         verifier.resetStreams();
     }
 
+    @Test
     public void testSnapshotUpdatedWithLocalMetadata()
         throws Exception
     {
@@ -177,6 +185,7 @@ public class MavenIT0108SnapshotUpdateTest
         verifier.resetStreams();
     }
 
+    @Test
     public void testSnapshotUpdatedWithMetadataUsingFileTimestamp()
         throws Exception
     {
@@ -214,7 +223,7 @@ public class MavenIT0108SnapshotUpdateTest
         throws IOException, VerificationException
     {
         verifier.verifyArtifactPresent( "org.apache.maven", "maven-core-it-support", "1.0-SNAPSHOT", "jar" );
-        verifier.assertArtifactContents( "org.apache.maven", "maven-core-it-support", "1.0-SNAPSHOT", "jar", s );
+        verifier.verifyArtifactContent( "org.apache.maven", "maven-core-it-support", "1.0-SNAPSHOT", "jar", s );
     }
 
     private static File deleteLocalArtifact( Verifier verifier, File localRepoFile )

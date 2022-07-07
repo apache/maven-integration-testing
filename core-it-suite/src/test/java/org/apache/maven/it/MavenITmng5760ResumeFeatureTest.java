@@ -19,11 +19,14 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.util.ResourceExtractor;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+
+import org.apache.maven.shared.verifier.VerificationException;
+import org.apache.maven.shared.verifier.Verifier;
+import org.apache.maven.shared.verifier.util.ResourceExtractor;
+import org.junit.jupiter.api.Test;
 
 /**
  * This is a collection of test cases for <a href="https://issues.apache.org/jira/browse/MNG-5760">MNG-5760</a>,
@@ -62,6 +65,7 @@ public class MavenITmng5760ResumeFeatureTest extends AbstractMavenIntegrationTes
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testShouldSuggestToResumeWithoutArgs() throws Exception
     {
         Verifier verifier = newVerifier( parentDependentTestDir.getAbsolutePath() );
@@ -92,6 +96,7 @@ public class MavenITmng5760ResumeFeatureTest extends AbstractMavenIntegrationTes
         verifier.resetStreams();
     }
 
+    @Test
     public void testShouldSkipSuccessfulProjects() throws Exception
     {
         Verifier verifier = newVerifier( parentDependentTestDir.getAbsolutePath() );
@@ -129,6 +134,7 @@ public class MavenITmng5760ResumeFeatureTest extends AbstractMavenIntegrationTes
         }
     }
 
+    @Test
     public void testShouldSkipSuccessfulModulesWhenTheFirstModuleFailed() throws Exception
     {
         // In this multi-module project, the submodules are not dependent on the parent.
@@ -160,6 +166,7 @@ public class MavenITmng5760ResumeFeatureTest extends AbstractMavenIntegrationTes
         verifier.resetStreams();
     }
 
+    @Test
     public void testShouldNotCrashWithoutProject() throws Exception
     {
         // There is no Maven project available in the test directory.
@@ -180,6 +187,7 @@ public class MavenITmng5760ResumeFeatureTest extends AbstractMavenIntegrationTes
         }
     }
 
+    @Test
     public void testFailureWithParallelBuild() throws Exception
     {
         // four modules: a, b, c, d
@@ -232,6 +240,7 @@ public class MavenITmng5760ResumeFeatureTest extends AbstractMavenIntegrationTes
         }
     }
 
+    @Test
     public void testFailureAfterSkipWithParallelBuild() throws Exception
     {
         // four modules: a, b, c, d

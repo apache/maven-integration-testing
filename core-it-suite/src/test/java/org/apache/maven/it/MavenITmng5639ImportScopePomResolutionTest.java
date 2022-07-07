@@ -19,9 +19,11 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.util.ResourceExtractor;
-
 import java.io.File;
+
+import org.apache.maven.shared.verifier.Verifier;
+import org.apache.maven.shared.verifier.util.ResourceExtractor;
+import org.junit.jupiter.api.Test;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-5639">MNG-5639</a>:
@@ -36,6 +38,7 @@ public class MavenITmng5639ImportScopePomResolutionTest
         super( "[3.2.2,)" );
     }
 
+    @Test
     public void testitMNG5639()
         throws Exception
     {

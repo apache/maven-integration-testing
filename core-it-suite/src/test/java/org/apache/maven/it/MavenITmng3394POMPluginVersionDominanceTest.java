@@ -19,9 +19,11 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.util.ResourceExtractor;
-
 import java.io.File;
+
+import org.apache.maven.shared.verifier.Verifier;
+import org.apache.maven.shared.verifier.util.ResourceExtractor;
+import org.junit.jupiter.api.Test;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-3394">MNG-3394</a>:
@@ -58,6 +60,7 @@ public class MavenITmng3394POMPluginVersionDominanceTest
         verifier.verifyFilePresent( "target/resources-resources.txt" );
     }
 
+    @Test
     public void testitMNG3394b()
         throws Exception
     {

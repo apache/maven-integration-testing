@@ -18,11 +18,14 @@
  */
 package org.apache.maven.it;
 
-import org.apache.maven.it.util.ResourceExtractor;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+
+import org.apache.maven.shared.verifier.VerificationException;
+import org.apache.maven.shared.verifier.Verifier;
+import org.apache.maven.shared.verifier.util.ResourceExtractor;
+import org.junit.jupiter.api.Test;
 
 public class MavenITmng7404IgnorePrefixlessExpressionsTest extends AbstractMavenIntegrationTestCase
 {
@@ -33,6 +36,7 @@ public class MavenITmng7404IgnorePrefixlessExpressionsTest extends AbstractMaven
         super( "[4.0.0-alpha-1,)" );
     }
 
+    @Test
     public void testIgnorePrefixlessExpressions() throws IOException, VerificationException
     {
         final File projectDir = ResourceExtractor.simpleExtractResources( getClass(), PROJECT_PATH );

@@ -24,8 +24,10 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.TimeZone;
 
-import org.apache.maven.it.util.ResourceExtractor;
 import org.apache.maven.shared.utils.io.FileUtils;
+import org.apache.maven.shared.verifier.Verifier;
+import org.apache.maven.shared.verifier.util.ResourceExtractor;
+import org.junit.jupiter.api.Test;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-2790">MNG-2790</a>.
@@ -47,6 +49,7 @@ public class MavenITmng2790LastUpdatedMetadataTest
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testitMNG2790()
         throws Exception
     {

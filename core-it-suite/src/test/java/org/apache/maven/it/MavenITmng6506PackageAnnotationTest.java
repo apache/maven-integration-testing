@@ -21,7 +21,9 @@ package org.apache.maven.it;
 
 import java.io.File;
 
-import org.apache.maven.it.util.ResourceExtractor;
+import org.apache.maven.shared.verifier.Verifier;
+import org.apache.maven.shared.verifier.util.ResourceExtractor;
+import org.junit.jupiter.api.Test;
 
 public class MavenITmng6506PackageAnnotationTest
     extends AbstractMavenIntegrationTestCase
@@ -32,6 +34,7 @@ public class MavenITmng6506PackageAnnotationTest
         super( "[3.6.1,)" );
     }
 
+    @Test
     public void testGetPackageAnnotation()
             throws Exception
     {

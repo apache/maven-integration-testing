@@ -19,15 +19,19 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.util.ResourceExtractor;
-
 import java.io.File;
+
+import org.apache.maven.shared.verifier.Verifier;
+import org.apache.maven.shared.verifier.util.ResourceExtractor;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-5206">MNG-5206</a>.
  *
  * @author Olivier Lamy
  */
+@Disabled
 public class MavenITmng5206PlexusLifecycleHonoured
     extends AbstractMavenIntegrationTestCase
 {
@@ -42,6 +46,7 @@ public class MavenITmng5206PlexusLifecycleHonoured
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testit()
         throws Exception
     {

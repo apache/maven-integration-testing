@@ -21,8 +21,10 @@ package org.apache.maven.it;
 
 import java.io.File;
 
-import org.apache.maven.it.util.ResourceExtractor;
 import org.apache.maven.shared.utils.io.FileUtils;
+import org.apache.maven.shared.verifier.Verifier;
+import org.apache.maven.shared.verifier.util.ResourceExtractor;
+import org.junit.jupiter.api.Test;
 
 public class MavenITmng5753CustomMojoExecutionConfiguratorTest
     extends AbstractMavenIntegrationTestCase
@@ -33,6 +35,7 @@ public class MavenITmng5753CustomMojoExecutionConfiguratorTest
         super( "[3.3.0-alpha,)" );
     }
 
+    @Test
     public void testCustomMojoExecutionConfigurator()
         throws Exception
     {

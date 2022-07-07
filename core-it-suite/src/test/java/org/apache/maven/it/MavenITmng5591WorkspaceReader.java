@@ -21,7 +21,9 @@ package org.apache.maven.it;
 
 import java.io.File;
 
-import org.apache.maven.it.util.ResourceExtractor;
+import org.apache.maven.shared.verifier.Verifier;
+import org.apache.maven.shared.verifier.util.ResourceExtractor;
+import org.junit.jupiter.api.Test;
 
 public class MavenITmng5591WorkspaceReader
     extends AbstractMavenIntegrationTestCase
@@ -31,6 +33,7 @@ public class MavenITmng5591WorkspaceReader
         super( "[3.1.0,)" );
     }
 
+    @Test
     public void testWorkspaceReader()
         throws Exception
     {

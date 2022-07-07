@@ -27,7 +27,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.apache.maven.it.util.ResourceExtractor;
+import org.apache.maven.shared.verifier.Verifier;
+import org.apache.maven.shared.verifier.util.ResourceExtractor;
+import org.junit.jupiter.api.Test;
 
 /**
  * An integration test to ensure any pomfile is only read once.
@@ -45,6 +47,7 @@ public class MavenITmng5669ReadPomsOnce
         super( "[4.0.0-alpha-1,)" );
     }
 
+    @Test
     public void testWithoutBuildConsumer()
         throws Exception
     {
@@ -98,6 +101,7 @@ public class MavenITmng5669ReadPomsOnce
         assertEquals( uniqueBuildingSources.size(), 201 /* is 202 minus superpom */ );
     }
 
+    @Test
     public void testWithBuildConsumer()
         throws Exception
     {

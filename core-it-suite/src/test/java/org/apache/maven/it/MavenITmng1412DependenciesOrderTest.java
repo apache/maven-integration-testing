@@ -19,10 +19,12 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.util.ResourceExtractor;
-
 import java.io.File;
 import java.util.List;
+
+import org.apache.maven.shared.verifier.Verifier;
+import org.apache.maven.shared.verifier.util.ResourceExtractor;
+import org.junit.jupiter.api.Test;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-1412">MNG-1412</a>:
@@ -40,6 +42,7 @@ public class MavenITmng1412DependenciesOrderTest
         super( "(2.0.8,)" ); // 2.0.9+
     }
 
+    @Test
     public void testitMNG1412()
         throws Exception
     {

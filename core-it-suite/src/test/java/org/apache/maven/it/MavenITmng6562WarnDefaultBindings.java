@@ -19,10 +19,12 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.util.ResourceExtractor;
-
 import java.io.File;
 import java.util.Arrays;
+
+import org.apache.maven.shared.verifier.Verifier;
+import org.apache.maven.shared.verifier.util.ResourceExtractor;
+import org.junit.jupiter.api.Test;
 
 public class MavenITmng6562WarnDefaultBindings
     extends AbstractMavenIntegrationTestCase
@@ -33,6 +35,7 @@ public class MavenITmng6562WarnDefaultBindings
         super( "[4.0.0-alpha-1,)" );
     }
 
+    @Test
     public void testItShouldNotWarn()
         throws Exception
     {
@@ -50,6 +53,9 @@ public class MavenITmng6562WarnDefaultBindings
 
         verifier.verifyErrorFreeLog();
     }
+
+
+    @Test
 
 
     public void testItShouldNotWarn2()
@@ -70,6 +76,7 @@ public class MavenITmng6562WarnDefaultBindings
         verifier.verifyErrorFreeLog();
     }
 
+    @Test
     public void testItShouldWarnForCompilerPlugin()
                     throws Exception
     {
@@ -86,6 +93,7 @@ public class MavenITmng6562WarnDefaultBindings
                 + ", you should define versions in pluginManagement section of your pom.xml or parent" );
     }
 
+    @Test
     public void testItShouldWarnForCompilerPlugin2()
                     throws Exception
     {
@@ -103,6 +111,7 @@ public class MavenITmng6562WarnDefaultBindings
                 + ", you should define versions in pluginManagement section of your pom.xml or parent" );
     }
 
+    @Test
     public void testItShouldWarnForCompilerPlugin3()
                     throws Exception
     {
@@ -120,6 +129,7 @@ public class MavenITmng6562WarnDefaultBindings
                 + ", you should define versions in pluginManagement section of your pom.xml or parent" );
     }
 
+    @Test
     public void testItShouldWarnForCompilerPluginAndSurefirePlugin()
                     throws Exception
     {

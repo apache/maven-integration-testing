@@ -22,7 +22,9 @@ package org.apache.maven.it;
 import java.io.File;
 import java.util.List;
 
-import org.apache.maven.it.util.ResourceExtractor;
+import org.apache.maven.shared.verifier.Verifier;
+import org.apache.maven.shared.verifier.util.ResourceExtractor;
+import org.junit.jupiter.api.Test;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-2045">MNG-2045</a>:
@@ -42,6 +44,7 @@ public class MavenITmng2045testJarDependenciesBrokenInReactorTest
         super( "(2.0.7,)" ); // 2.0.8+
     }
 
+    @Test
     public void testitMNG2045()
         throws Exception
     {

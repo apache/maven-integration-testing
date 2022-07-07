@@ -19,10 +19,13 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.util.ResourceExtractor;
-
 import java.io.File;
 import java.util.List;
+
+import org.apache.maven.shared.verifier.Verifier;
+import org.apache.maven.shared.verifier.util.ResourceExtractor;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-3890">MNG-3890</a>.
@@ -30,6 +33,7 @@ import java.util.List;
  * @author Benjamin Bentmann
  *
  */
+@Disabled
 public class MavenITmng3890TransitiveDependencyScopeUpdateTest
     extends AbstractMavenIntegrationTestCase
 {
@@ -44,6 +48,7 @@ public class MavenITmng3890TransitiveDependencyScopeUpdateTest
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testitMNG3890()
         throws Exception
     {

@@ -19,9 +19,11 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.util.ResourceExtractor;
-
 import java.io.File;
+
+import org.apache.maven.shared.verifier.Verifier;
+import org.apache.maven.shared.verifier.util.ResourceExtractor;
+import org.junit.jupiter.api.Test;
 
 public class MavenIT0032MavenPrerequisiteTest
     extends AbstractMavenIntegrationTestCase
@@ -36,6 +38,7 @@ public class MavenIT0032MavenPrerequisiteTest
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testit0032()
         throws Exception
     {

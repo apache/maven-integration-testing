@@ -23,7 +23,9 @@ import java.io.File;
 import java.util.List;
 import java.util.regex.Pattern;
 
-import org.apache.maven.it.util.ResourceExtractor;
+import org.apache.maven.shared.verifier.Verifier;
+import org.apache.maven.shared.verifier.util.ResourceExtractor;
+import org.junit.jupiter.api.Test;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-3641">MNG-3641</a>:
@@ -38,6 +40,7 @@ public class MavenITmng3641ProfileActivationWarningTest
         super( "[2.0.11,2.1.0-M1),[2.1.0,4.0.0-alpha-1)" ); // only test in 2.0.11+, 2.1.0+
     }
 
+    @Test
     public void testitMNG3641()
         throws Exception
     {

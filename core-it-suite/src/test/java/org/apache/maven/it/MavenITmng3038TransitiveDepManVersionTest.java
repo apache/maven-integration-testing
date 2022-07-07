@@ -22,7 +22,11 @@ package org.apache.maven.it;
 import java.io.File;
 import java.io.IOException;
 
-import org.apache.maven.it.util.ResourceExtractor;
+import org.apache.maven.shared.verifier.VerificationException;
+import org.apache.maven.shared.verifier.Verifier;
+import org.apache.maven.shared.verifier.util.ResourceExtractor;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-3038">MNG-3038</a>
@@ -30,6 +34,7 @@ import org.apache.maven.it.util.ResourceExtractor;
  * @author Joakim Erdfelt
  *
  */
+@Disabled
 public class MavenITmng3038TransitiveDepManVersionTest
     extends AbstractMavenIntegrationTestCase
 {
@@ -38,6 +43,7 @@ public class MavenITmng3038TransitiveDepManVersionTest
         super( ALL_MAVEN_VERSIONS );
     }
 
+    @Test
     public void testitMNG3038()
         throws Exception
     {

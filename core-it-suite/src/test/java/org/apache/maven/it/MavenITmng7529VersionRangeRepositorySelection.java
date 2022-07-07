@@ -20,8 +20,10 @@ package org.apache.maven.it;
  */
 
 import java.io.File;
-import java.util.Properties;
-import org.apache.maven.it.util.ResourceExtractor;
+
+import org.apache.maven.shared.verifier.Verifier;
+import org.apache.maven.shared.verifier.util.ResourceExtractor;
+import org.junit.jupiter.api.Test;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-7529">MNG-7529</a>.
@@ -39,6 +41,7 @@ public class MavenITmng7529VersionRangeRepositorySelection
    *
    * @throws Exception in case of failure
    */
+  @Test
   public void testit()
       throws Exception {
     File testDir = ResourceExtractor.simpleExtractResources(getClass(), "/mng-7529");

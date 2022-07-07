@@ -19,7 +19,13 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.util.ResourceExtractor;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import java.io.File;
+
+import org.apache.maven.shared.verifier.Verifier;
+import org.apache.maven.shared.verifier.util.ResourceExtractor;
 import org.eclipse.jetty.security.ConstraintMapping;
 import org.eclipse.jetty.security.ConstraintSecurityHandler;
 import org.eclipse.jetty.security.HashLoginService;
@@ -32,10 +38,9 @@ import org.eclipse.jetty.server.handler.HandlerList;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.util.security.Constraint;
 import org.eclipse.jetty.util.security.Password;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.File;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import static org.eclipse.jetty.servlet.ServletContextHandler.SECURITY;
 import static org.eclipse.jetty.servlet.ServletContextHandler.SESSIONS;
@@ -61,7 +66,7 @@ public class MavenITmng3953AuthenticatedDeploymentTest
         super( "(2.0.1,)" );
     }
 
-    @Override
+    @BeforeEach
     protected void setUp()
         throws Exception
     {
@@ -121,7 +126,7 @@ public class MavenITmng3953AuthenticatedDeploymentTest
         deployed = false;
     }
 
-    @Override
+    @AfterEach
     protected void tearDown()
         throws Exception
     {
@@ -137,6 +142,7 @@ public class MavenITmng3953AuthenticatedDeploymentTest
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testitRelease()
         throws Exception
     {
@@ -148,6 +154,7 @@ public class MavenITmng3953AuthenticatedDeploymentTest
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testitSnapshot()
         throws Exception
     {

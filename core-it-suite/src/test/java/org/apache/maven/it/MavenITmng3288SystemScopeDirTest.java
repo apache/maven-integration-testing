@@ -21,7 +21,10 @@ package org.apache.maven.it;
 
 import java.io.File;
 
-import org.apache.maven.it.util.ResourceExtractor;
+import org.apache.maven.shared.verifier.VerificationException;
+import org.apache.maven.shared.verifier.Verifier;
+import org.apache.maven.shared.verifier.util.ResourceExtractor;
+import org.junit.jupiter.api.Test;
 
 /**
  * This is a test for <a href="https://issues.apache.org/jira/browse/MNG-3288">MNG-3288</a>.
@@ -41,6 +44,7 @@ public class MavenITmng3288SystemScopeDirTest
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testitMNG3288()
         throws Exception
     {

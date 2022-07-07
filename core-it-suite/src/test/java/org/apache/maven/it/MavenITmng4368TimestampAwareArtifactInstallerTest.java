@@ -19,10 +19,12 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.util.ResourceExtractor;
-import org.apache.maven.shared.utils.io.FileUtils;
-
 import java.io.File;
+
+import org.apache.maven.shared.utils.io.FileUtils;
+import org.apache.maven.shared.verifier.Verifier;
+import org.apache.maven.shared.verifier.util.ResourceExtractor;
+import org.junit.jupiter.api.Test;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-4368">MNG-4368</a>.
@@ -44,6 +46,7 @@ public class MavenITmng4368TimestampAwareArtifactInstallerTest
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testitPomPackaging()
         throws Exception
     {
@@ -94,6 +97,7 @@ public class MavenITmng4368TimestampAwareArtifactInstallerTest
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testitJarPackaging()
         throws Exception
     {

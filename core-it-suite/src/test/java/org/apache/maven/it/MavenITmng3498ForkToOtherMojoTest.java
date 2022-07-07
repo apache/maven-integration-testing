@@ -19,9 +19,10 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.util.ResourceExtractor;
-
 import java.io.File;
+
+import org.apache.maven.shared.verifier.Verifier;
+import org.apache.maven.shared.verifier.util.ResourceExtractor;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-3498">MNG-3498</a>.

@@ -21,7 +21,9 @@ package org.apache.maven.it;
 
 import java.io.File;
 
-import org.apache.maven.it.util.ResourceExtractor;
+import org.apache.maven.shared.verifier.Verifier;
+import org.apache.maven.shared.verifier.util.ResourceExtractor;
+import org.junit.jupiter.api.Test;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-6256">MNG-6256</a>: check that directories
@@ -36,16 +38,12 @@ public class MavenITmng6256SpecialCharsAlternatePOMLocation
         super( "(3.6.0,)" );
     }
 
-    protected MavenITmng6256SpecialCharsAlternatePOMLocation( String constraint )
-    {
-        super( constraint );
-    }
-
     /**
      * check script is working when path to POM is set to <code>directory-with- -space</code>
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testDirectoryWithSpace()
         throws Exception
     {
@@ -58,6 +56,7 @@ public class MavenITmng6256SpecialCharsAlternatePOMLocation
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testDirectoryWithClosingBracket()
         throws Exception
     {

@@ -19,11 +19,14 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.util.ResourceExtractor;
-
 import java.io.File;
 import java.util.Arrays;
 import java.util.List;
+
+import org.apache.maven.shared.verifier.VerificationException;
+import org.apache.maven.shared.verifier.Verifier;
+import org.apache.maven.shared.verifier.util.ResourceExtractor;
+import org.junit.jupiter.api.Test;
 
 /**
  * An integration test to check that concurrently running projects are finished
@@ -41,6 +44,7 @@ public class MavenITmng6720FailFastTest
         super( "[3.6.2,)" );
     }
 
+    @Test
     public void testItShouldWaitForConcurrentModulesToFinish()
         throws Exception
     {
@@ -56,7 +60,7 @@ public class MavenITmng6720FailFastTest
         try
         {
             verifier.executeGoals( Arrays.asList( "clean", "test" ) );
-        } catch (VerificationException e)
+        } catch ( VerificationException e )
         {
             //expected
         }
@@ -71,7 +75,5 @@ public class MavenITmng6720FailFastTest
         List<String> module3Lines = verifier.loadFile(
             new File( testDir, "module-3/target/surefire-reports/Module3Test-output.txt" ), false );
         assertTrue( module3Lines.isEmpty() );
-
-
     }
 }

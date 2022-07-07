@@ -19,11 +19,13 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.util.ResourceExtractor;
-
 import java.io.File;
 import java.util.List;
 import java.util.regex.Pattern;
+
+import org.apache.maven.shared.verifier.Verifier;
+import org.apache.maven.shared.verifier.util.ResourceExtractor;
+import org.junit.jupiter.api.Test;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-5608">MNG-5608</a>:
@@ -39,6 +41,7 @@ public class MavenITmng5608ProfileActivationWarningTest
         super( "(3.2.1,)" );
     }
 
+    @Test
     public void testitMNG5608()
         throws Exception
     {

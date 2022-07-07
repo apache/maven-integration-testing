@@ -22,11 +22,12 @@ package org.apache.maven.it;
 import java.io.File;
 import java.util.Properties;
 
-import org.apache.maven.it.util.ResourceExtractor;
-
 import com.google.common.base.Charsets;
 import com.google.common.base.Joiner;
 import com.google.common.io.Files;
+import org.apache.maven.shared.verifier.Verifier;
+import org.apache.maven.shared.verifier.util.ResourceExtractor;
+import org.junit.jupiter.api.Test;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-6255">MNG-6255</a>:
@@ -39,11 +40,6 @@ public class MavenITmng6255FixConcatLines
     public MavenITmng6255FixConcatLines()
     {
         super( "[3.5.3,)" );
-    }
-
-    protected MavenITmng6255FixConcatLines( String constraint )
-    {
-        super( constraint );
     }
 
     /**
@@ -64,6 +60,7 @@ public class MavenITmng6255FixConcatLines
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testJvmConfigFileLF()
         throws Exception
     {
@@ -75,6 +72,7 @@ public class MavenITmng6255FixConcatLines
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testJvmConfigFileCRLF()
         throws Exception
     {

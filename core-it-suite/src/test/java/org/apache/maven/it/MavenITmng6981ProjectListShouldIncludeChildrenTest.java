@@ -19,10 +19,13 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.util.ResourceExtractor;
-
 import java.io.File;
 import java.util.List;
+
+import org.apache.maven.shared.verifier.VerificationException;
+import org.apache.maven.shared.verifier.Verifier;
+import org.apache.maven.shared.verifier.util.ResourceExtractor;
+import org.junit.jupiter.api.Test;
 
 public class MavenITmng6981ProjectListShouldIncludeChildrenTest
         extends AbstractMavenIntegrationTestCase
@@ -35,6 +38,7 @@ public class MavenITmng6981ProjectListShouldIncludeChildrenTest
         super( "[4.0.0-alpha-1,)" );
     }
 
+    @Test
     public void testProjectListShouldIncludeChildrenByDefault()
             throws Exception
     {
@@ -52,6 +56,7 @@ public class MavenITmng6981ProjectListShouldIncludeChildrenTest
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testFileSwitchAllowsExcludeOfChildren()
             throws Exception
     {

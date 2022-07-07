@@ -19,10 +19,12 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.util.ResourceExtractor;
-
 import java.io.File;
 import java.util.List;
+
+import org.apache.maven.shared.verifier.Verifier;
+import org.apache.maven.shared.verifier.util.ResourceExtractor;
+import org.junit.jupiter.api.Test;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-3775">MNG-3775</a>.
@@ -38,36 +40,42 @@ public class MavenITmng3775ConflictResolutionBacktrackingTest
         super( "[3.0,)" );
     }
 
+    @Test
     public void testitABC()
         throws Exception
     {
         testit( "test-abc" );
     }
 
+    @Test
     public void testitACB()
         throws Exception
     {
         testit( "test-acb" );
     }
 
+    @Test
     public void testitBAC()
         throws Exception
     {
         testit( "test-bac" );
     }
 
+    @Test
     public void testitBCA()
         throws Exception
     {
         testit( "test-bca" );
     }
 
+    @Test
     public void testitCAB()
         throws Exception
     {
         testit( "test-cab" );
     }
 
+    @Test
     public void testitCBA()
         throws Exception
     {

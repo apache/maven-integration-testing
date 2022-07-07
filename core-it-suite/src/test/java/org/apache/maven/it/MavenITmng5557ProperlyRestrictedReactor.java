@@ -21,7 +21,11 @@ package org.apache.maven.it;
 
 import java.io.File;
 
-import org.apache.maven.it.util.ResourceExtractor;
+import org.apache.maven.shared.verifier.VerificationException;
+import org.apache.maven.shared.verifier.Verifier;
+import org.apache.maven.shared.verifier.util.ResourceExtractor;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test to make sure that the reactor is properly constrained when --projects is used. Previous to 3.1.2 all of the
@@ -32,6 +36,7 @@ import org.apache.maven.it.util.ResourceExtractor;
  *
  * @author jvanzyl
  */
+@Disabled
 public class MavenITmng5557ProperlyRestrictedReactor
     extends AbstractMavenIntegrationTestCase
 {
@@ -40,6 +45,7 @@ public class MavenITmng5557ProperlyRestrictedReactor
         super( "[3.1.2,)" );
     }
 
+    @Test
     public void testRunningRestrictedReactor()
         throws Exception
     {

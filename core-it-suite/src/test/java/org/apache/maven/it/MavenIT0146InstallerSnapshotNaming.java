@@ -19,18 +19,22 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.util.ResourceExtractor;
+import java.io.File;
+import java.io.IOException;
+import java.net.InetAddress;
+import java.util.Properties;
+
+import org.apache.maven.shared.verifier.Verifier;
+import org.apache.maven.shared.verifier.util.ResourceExtractor;
 import org.eclipse.jetty.server.Handler;
 import org.eclipse.jetty.server.NetworkConnector;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.handler.DefaultHandler;
 import org.eclipse.jetty.server.handler.HandlerList;
 import org.eclipse.jetty.server.handler.ResourceHandler;
-
-import java.io.File;
-import java.io.IOException;
-import java.net.InetAddress;
-import java.util.Properties;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class MavenIT0146InstallerSnapshotNaming
     extends AbstractMavenIntegrationTestCase
@@ -48,7 +52,7 @@ public class MavenIT0146InstallerSnapshotNaming
         testDir = ResourceExtractor.simpleExtractResources( getClass(), "/it0146" );
     }
 
-    @Override
+    @BeforeEach
     protected void setUp()
         throws Exception
     {
@@ -69,7 +73,7 @@ public class MavenIT0146InstallerSnapshotNaming
     }
 
 
-    @Override
+    @AfterEach
     protected void tearDown()
         throws Exception
     {
@@ -80,6 +84,7 @@ public class MavenIT0146InstallerSnapshotNaming
         }
     }
 
+    @Test
     public void testitRemoteDownloadTimestampedName()
         throws Exception
     {
@@ -108,6 +113,7 @@ public class MavenIT0146InstallerSnapshotNaming
     }
 
 
+    @Test
     public void testitNonTimestampedNameWithInstalledSNAPSHOT()
         throws Exception
     {

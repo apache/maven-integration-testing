@@ -21,7 +21,9 @@ package org.apache.maven.it;
 
 import java.io.File;
 
-import org.apache.maven.it.util.ResourceExtractor;
+import org.apache.maven.shared.verifier.Verifier;
+import org.apache.maven.shared.verifier.util.ResourceExtractor;
+import org.junit.jupiter.api.Test;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-2432">MNG-2432</a>
@@ -44,6 +46,7 @@ public class MavenITmng2432PluginPrefixOrderTest
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testitMNG2432()
         throws Exception
     {

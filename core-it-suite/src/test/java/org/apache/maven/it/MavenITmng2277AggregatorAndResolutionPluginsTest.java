@@ -21,7 +21,9 @@ package org.apache.maven.it;
 
 import java.io.File;
 
-import org.apache.maven.it.util.ResourceExtractor;
+import org.apache.maven.shared.verifier.Verifier;
+import org.apache.maven.shared.verifier.util.ResourceExtractor;
+import org.junit.jupiter.api.Test;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-2277">MNG-2277</a>.
@@ -38,6 +40,7 @@ public class MavenITmng2277AggregatorAndResolutionPluginsTest
         super( "(2.0.7,)" ); // 2.0.8+
     }
 
+    @Test
     public void testitMNG2277()
         throws Exception
     {

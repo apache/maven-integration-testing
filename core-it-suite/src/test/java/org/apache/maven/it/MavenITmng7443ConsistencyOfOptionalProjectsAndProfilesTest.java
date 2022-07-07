@@ -19,13 +19,15 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.util.ResourceExtractor;
-import org.junit.Assert;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
+
+import org.apache.maven.shared.verifier.VerificationException;
+import org.apache.maven.shared.verifier.Verifier;
+import org.apache.maven.shared.verifier.util.ResourceExtractor;
+import org.junit.jupiter.api.Test;
 
 public class MavenITmng7443ConsistencyOfOptionalProjectsAndProfilesTest extends AbstractMavenIntegrationTestCase
 {
@@ -34,6 +36,7 @@ public class MavenITmng7443ConsistencyOfOptionalProjectsAndProfilesTest extends 
         super( "[4.0.0-alpha-1,)" );
     }
 
+    @Test
     public void testConsistentLoggingOfOptionalProfilesAndProjects() throws IOException, VerificationException
     {
         File testDir = ResourceExtractor.simpleExtractResources( getClass(),
@@ -68,7 +71,7 @@ public class MavenITmng7443ConsistencyOfOptionalProjectsAndProfilesTest extends 
             }
         }
 
-        Assert.assertEquals( 2, profileSelectorMissingCounter );
-        Assert.assertEquals( 2, projectSelectorMissingCounter );
+        assertEquals( 2, profileSelectorMissingCounter );
+        assertEquals( 2, projectSelectorMissingCounter );
     }
 }

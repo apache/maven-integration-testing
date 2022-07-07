@@ -19,9 +19,12 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.util.ResourceExtractor;
-
 import java.io.File;
+
+import org.apache.maven.shared.verifier.Verifier;
+import org.apache.maven.shared.verifier.util.ResourceExtractor;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-5382">MNG-5382</a>.
@@ -39,22 +42,14 @@ public class MavenITmng5382Jsr330Plugin
         super( "[3.1-alpha,)" );
     }
 
+    @BeforeEach
     public void setUp()
         throws Exception
     {
-        super.setUp();
-
         testDir = ResourceExtractor.simpleExtractResources( getClass(), "/mng-5382" );
-
     }
 
-    protected void tearDown()
-        throws Exception
-    {
-
-        super.tearDown();
-    }
-
+    @Test
     public void testJsr330PluginExecution()
         throws Exception
     {

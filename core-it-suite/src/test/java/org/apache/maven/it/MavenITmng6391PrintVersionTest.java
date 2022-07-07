@@ -19,12 +19,14 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.util.ResourceExtractor;
-
 import java.io.File;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
+
+import org.apache.maven.shared.verifier.Verifier;
+import org.apache.maven.shared.verifier.util.ResourceExtractor;
+import org.junit.jupiter.api.Test;
 
 /**
  * An integration test to check the enhancements to print out version
@@ -52,6 +54,7 @@ public class MavenITmng6391PrintVersionTest
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testitShouldPrintVersionAtTopAndAtBottom()
         throws Exception
     {
@@ -96,6 +99,7 @@ public class MavenITmng6391PrintVersionTest
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testitShouldPrintVersionInAllLines()
         throws Exception
     {

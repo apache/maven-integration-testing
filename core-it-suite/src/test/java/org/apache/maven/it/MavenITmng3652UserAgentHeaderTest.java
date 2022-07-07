@@ -19,18 +19,23 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.util.ResourceExtractor;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.List;
+
+import org.apache.maven.shared.verifier.Verifier;
+import org.apache.maven.shared.verifier.util.ResourceExtractor;
 import org.eclipse.jetty.server.Handler;
 import org.eclipse.jetty.server.NetworkConnector;
 import org.eclipse.jetty.server.Request;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.handler.AbstractHandler;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.File;
-import java.io.IOException;
-import java.util.List;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-3652">MNG-3652</a>.
@@ -51,7 +56,7 @@ public class MavenITmng3652UserAgentHeaderTest
         super( "[3.0-beta-3,)" );
     }
 
-    @Override
+    @BeforeEach
     protected void setUp()
         throws Exception
     {
@@ -90,7 +95,7 @@ public class MavenITmng3652UserAgentHeaderTest
         System.out.println( "Bound server socket to the port " + port );
     }
 
-    @Override
+    @AfterEach
     protected void tearDown()
         throws Exception
     {
@@ -106,6 +111,7 @@ public class MavenITmng3652UserAgentHeaderTest
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testmng3652_UnConfiguredHttp()
         throws Exception
     {
@@ -148,6 +154,7 @@ public class MavenITmng3652UserAgentHeaderTest
             + javaVersion + "; " + os + ")", userAgent );
     }
 
+    @Test
     public void testmng3652_UnConfiguredDAV()
         throws Exception
     {
@@ -192,6 +199,7 @@ public class MavenITmng3652UserAgentHeaderTest
             + javaVersion + "; " + os + ")", userAgent );
     }
 
+    @Test
     public void testmng3652_ConfigurationInSettingsWithoutUserAgent()
         throws Exception
     {
@@ -238,6 +246,7 @@ public class MavenITmng3652UserAgentHeaderTest
             + javaVersion + "; " + os + ")", userAgent );
     }
 
+    @Test
     public void testmng3652_UserAgentConfiguredInSettings()
         throws Exception
     {
@@ -271,7 +280,8 @@ public class MavenITmng3652UserAgentHeaderTest
         assertEquals( "My wonderful header", customHeader );
     }
 
-    public void testmng3652_AdditionalHttpHeaderConfiguredInSettings()
+    @Test
+    public void testmng3652_AdditionnalHttpHeaderConfiguredInSettings()
         throws Exception
     {
         File testDir = ResourceExtractor.simpleExtractResources( getClass(), "/mng-3652" );

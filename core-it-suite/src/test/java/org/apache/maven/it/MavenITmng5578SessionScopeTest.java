@@ -21,7 +21,9 @@ package org.apache.maven.it;
 
 import java.io.File;
 
-import org.apache.maven.it.util.ResourceExtractor;
+import org.apache.maven.shared.verifier.Verifier;
+import org.apache.maven.shared.verifier.util.ResourceExtractor;
+import org.junit.jupiter.api.Test;
 
 public class MavenITmng5578SessionScopeTest
     extends AbstractMavenIntegrationTestCase
@@ -31,6 +33,7 @@ public class MavenITmng5578SessionScopeTest
         super( "[3.2.4,)" );
     }
 
+    @Test
     public void testBasic()
         throws Exception
     {
@@ -54,6 +57,7 @@ public class MavenITmng5578SessionScopeTest
         verifier.verifyErrorFreeLog();
     }
 
+    @Test
     public void testBasic_multithreaded()
         throws Exception
     {
@@ -81,6 +85,7 @@ public class MavenITmng5578SessionScopeTest
         verifier.verifyErrorFreeLog();
     }
 
+    @Test
     public void testBasic_buildExtension()
         throws Exception
     {
@@ -104,6 +109,7 @@ public class MavenITmng5578SessionScopeTest
         verifier.verifyErrorFreeLog();
     }
 
+    @Test
     public void testExtension()
         throws Exception
     {

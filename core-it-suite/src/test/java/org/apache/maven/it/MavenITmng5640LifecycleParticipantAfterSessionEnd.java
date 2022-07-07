@@ -21,7 +21,10 @@ package org.apache.maven.it;
 
 import java.io.File;
 
-import org.apache.maven.it.util.ResourceExtractor;
+import org.apache.maven.shared.verifier.VerificationException;
+import org.apache.maven.shared.verifier.Verifier;
+import org.apache.maven.shared.verifier.util.ResourceExtractor;
+import org.junit.jupiter.api.Test;
 
 /**
  * IT that verifies that lifecycle participant
@@ -40,6 +43,7 @@ public class MavenITmng5640LifecycleParticipantAfterSessionEnd
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testBuildFailureUTFail()
         throws Exception
     {
@@ -63,7 +67,7 @@ public class MavenITmng5640LifecycleParticipantAfterSessionEnd
             verifier.executeGoal( "package" );
             fail( "The build should fail" );
         }
-        catch (VerificationException e)
+        catch ( VerificationException e)
         {
             // expected, as the build will fail due to always failing UT
         }
@@ -81,6 +85,7 @@ public class MavenITmng5640LifecycleParticipantAfterSessionEnd
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testBuildFailureMissingDependency()
         throws Exception
     {
@@ -104,7 +109,7 @@ public class MavenITmng5640LifecycleParticipantAfterSessionEnd
             verifier.executeGoal( "package" );
             fail( "The build should fail" );
         }
-        catch (VerificationException e)
+        catch ( VerificationException e )
         {
             // expected, as the build will fail due to always failing UT
         }
@@ -121,6 +126,7 @@ public class MavenITmng5640LifecycleParticipantAfterSessionEnd
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testBuildError()
         throws Exception
     {
@@ -168,6 +174,7 @@ public class MavenITmng5640LifecycleParticipantAfterSessionEnd
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testBuildErrorRt()
         throws Exception
     {

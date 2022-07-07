@@ -19,10 +19,12 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.util.ResourceExtractor;
-
 import java.io.File;
 import java.util.Properties;
+
+import org.apache.maven.shared.verifier.Verifier;
+import org.apache.maven.shared.verifier.util.ResourceExtractor;
+import org.junit.jupiter.api.Test;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-3529">MNG-3529</a>.
@@ -43,6 +45,7 @@ public class MavenITmng3529QuotedCliArgTest
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testit()
         throws Exception
     {
@@ -52,7 +55,7 @@ public class MavenITmng3529QuotedCliArgTest
         verifier.setForkJvm( true ); // NOTE: We want to go through the launcher script
         verifier.setAutoclean( false );
         verifier.deleteDirectory( "target" );
-        verifier.addCliOption( "-Dtest.a=\"  \"" );
+        verifier.addCliOption( "-Dtest.a=  " );
         verifier.executeGoal( "validate" );
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();

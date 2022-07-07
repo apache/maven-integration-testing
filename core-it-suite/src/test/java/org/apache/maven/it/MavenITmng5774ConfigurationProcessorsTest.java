@@ -3,7 +3,10 @@ package org.apache.maven.it;
 import java.io.File;
 import java.util.Properties;
 
-import org.apache.maven.it.util.ResourceExtractor;
+import org.apache.maven.shared.verifier.VerificationException;
+import org.apache.maven.shared.verifier.Verifier;
+import org.apache.maven.shared.verifier.util.ResourceExtractor;
+import org.junit.jupiter.api.Test;
 
 public class MavenITmng5774ConfigurationProcessorsTest
     extends AbstractMavenIntegrationTestCase
@@ -13,6 +16,7 @@ public class MavenITmng5774ConfigurationProcessorsTest
         super( "(3.2.5,)" );
     }
 
+    @Test
     public void testBehaviourWhereThereIsOneUserSuppliedConfigurationProcessor()
         throws Exception
     {
@@ -37,6 +41,7 @@ public class MavenITmng5774ConfigurationProcessorsTest
         verifier.resetStreams();
     }
 
+    @Test
     public void testBehaviourWhereThereAreTwoUserSuppliedConfigurationProcessor()
         throws Exception
     {

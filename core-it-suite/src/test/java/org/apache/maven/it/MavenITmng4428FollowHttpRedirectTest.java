@@ -19,7 +19,17 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.util.ResourceExtractor;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import java.io.File;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.List;
+import java.util.Properties;
+
+import org.apache.maven.shared.verifier.Verifier;
+import org.apache.maven.shared.verifier.util.ResourceExtractor;
 import org.eclipse.jetty.server.Connector;
 import org.eclipse.jetty.server.HttpConfiguration;
 import org.eclipse.jetty.server.HttpConnectionFactory;
@@ -31,14 +41,7 @@ import org.eclipse.jetty.server.ServerConnector;
 import org.eclipse.jetty.server.SslConnectionFactory;
 import org.eclipse.jetty.server.handler.AbstractHandler;
 import org.eclipse.jetty.util.ssl.SslContextFactory;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.File;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.List;
-import java.util.Properties;
+import org.junit.jupiter.api.Test;
 
 import static org.eclipse.jetty.http.HttpVersion.HTTP_1_1;
 
@@ -62,6 +65,7 @@ public class MavenITmng4428FollowHttpRedirectTest
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testitHttpToHttp()
         throws Exception
     {
@@ -73,6 +77,7 @@ public class MavenITmng4428FollowHttpRedirectTest
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testitHttpsToHttps()
         throws Exception
     {
@@ -85,6 +90,7 @@ public class MavenITmng4428FollowHttpRedirectTest
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testitRelativeLocation()
         throws Exception
     {

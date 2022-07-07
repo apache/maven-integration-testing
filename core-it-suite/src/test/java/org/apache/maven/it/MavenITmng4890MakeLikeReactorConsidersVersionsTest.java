@@ -19,9 +19,11 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.util.ResourceExtractor;
-
 import java.io.File;
+
+import org.apache.maven.shared.verifier.Verifier;
+import org.apache.maven.shared.verifier.util.ResourceExtractor;
+import org.junit.jupiter.api.Test;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-4890">MNG-4890</a>.
@@ -43,6 +45,7 @@ public class MavenITmng4890MakeLikeReactorConsidersVersionsTest
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testitAM()
         throws Exception
     {
@@ -72,6 +75,7 @@ public class MavenITmng4890MakeLikeReactorConsidersVersionsTest
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testitAMD()
         throws Exception
     {

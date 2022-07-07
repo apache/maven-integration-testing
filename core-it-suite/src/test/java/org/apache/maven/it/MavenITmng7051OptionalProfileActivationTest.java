@@ -19,9 +19,12 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.util.ResourceExtractor;
-
 import java.io.File;
+
+import org.apache.maven.shared.verifier.VerificationException;
+import org.apache.maven.shared.verifier.Verifier;
+import org.apache.maven.shared.verifier.util.ResourceExtractor;
+import org.junit.jupiter.api.Test;
 
 public class MavenITmng7051OptionalProfileActivationTest
         extends AbstractMavenIntegrationTestCase
@@ -38,6 +41,7 @@ public class MavenITmng7051OptionalProfileActivationTest
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testActivatingNonExistingProfileBreaks() throws Exception
     {
         final File projectDir = ResourceExtractor.simpleExtractResources( getClass(), PROJECT_PATH );
@@ -64,6 +68,7 @@ public class MavenITmng7051OptionalProfileActivationTest
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testActivatingNonExistingProfileWithQuestionMarkDoesNotBreak() throws Exception
     {
         final File projectDir = ResourceExtractor.simpleExtractResources( getClass(), PROJECT_PATH );
@@ -83,6 +88,7 @@ public class MavenITmng7051OptionalProfileActivationTest
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testActivatingExistingAndNonExistingProfiles() throws Exception
     {
         final File projectDir = ResourceExtractor.simpleExtractResources( getClass(), PROJECT_PATH );
@@ -102,6 +108,7 @@ public class MavenITmng7051OptionalProfileActivationTest
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testDeactivatingNonExistingProfileWithQuestionMarkDoesNotBreak() throws Exception
     {
         final File projectDir = ResourceExtractor.simpleExtractResources( getClass(), PROJECT_PATH );
@@ -121,6 +128,7 @@ public class MavenITmng7051OptionalProfileActivationTest
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testDeactivatingExistingAndNonExistingProfiles() throws Exception
     {
         final File projectDir = ResourceExtractor.simpleExtractResources( getClass(), PROJECT_PATH );

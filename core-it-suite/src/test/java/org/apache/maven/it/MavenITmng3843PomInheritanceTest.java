@@ -19,14 +19,14 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.util.ResourceExtractor;
-
 import java.io.File;
 import java.util.Collection;
 import java.util.Properties;
 import java.util.TreeSet;
 
-import static org.junit.Assert.assertNotEquals;
+import org.apache.maven.shared.verifier.Verifier;
+import org.apache.maven.shared.verifier.util.ResourceExtractor;
+import org.junit.jupiter.api.Test;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-3843">MNG-3843</a>.
@@ -48,6 +48,7 @@ public class MavenITmng3843PomInheritanceTest
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testitMNG3843()
         throws Exception
     {

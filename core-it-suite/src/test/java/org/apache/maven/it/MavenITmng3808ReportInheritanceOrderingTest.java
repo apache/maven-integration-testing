@@ -22,7 +22,9 @@ package org.apache.maven.it;
 import java.io.File;
 import java.util.Properties;
 
-import org.apache.maven.it.util.ResourceExtractor;
+import org.apache.maven.shared.verifier.Verifier;
+import org.apache.maven.shared.verifier.util.ResourceExtractor;
+import org.junit.jupiter.api.Test;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-3808">MNG-3808</a>.
@@ -44,6 +46,7 @@ public class MavenITmng3808ReportInheritanceOrderingTest
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testitMNG3808()
         throws Exception
     {

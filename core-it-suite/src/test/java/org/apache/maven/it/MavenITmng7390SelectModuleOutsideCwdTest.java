@@ -19,9 +19,13 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.util.ResourceExtractor;
-
 import java.io.File;
+
+import org.apache.maven.shared.verifier.VerificationException;
+import org.apache.maven.shared.verifier.Verifier;
+import org.apache.maven.shared.verifier.util.ResourceExtractor;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * This test suite tests whether other modules in the same multi-module project can be selected when invoking Maven from a submodule.
@@ -39,7 +43,7 @@ public class MavenITmng7390SelectModuleOutsideCwdTest extends AbstractMavenInteg
         super( "[4.0.0-alpha-1,)" );
     }
 
-    @Override
+    @BeforeEach
     protected void setUp() throws Exception
     {
         moduleADir = ResourceExtractor.simpleExtractResources( getClass(), "/mng-7390-pl-outside-cwd/module-a" );
@@ -51,6 +55,7 @@ public class MavenITmng7390SelectModuleOutsideCwdTest extends AbstractMavenInteg
         verifier.executeGoal( "clean" );
     }
 
+    @Test
     public void testSelectModuleByCoordinate() throws Exception
     {
         final Verifier verifier = newVerifier( moduleADir.getAbsolutePath() );
@@ -64,6 +69,7 @@ public class MavenITmng7390SelectModuleOutsideCwdTest extends AbstractMavenInteg
         verifier.verifyFilePresent( "../module-b/target/touch.txt" );
     }
 
+    @Test
     public void testSelectMultipleModulesByCoordinate() throws Exception
     {
         final Verifier verifier = newVerifier( moduleADir.getAbsolutePath() );
@@ -77,6 +83,7 @@ public class MavenITmng7390SelectModuleOutsideCwdTest extends AbstractMavenInteg
         verifier.verifyFilePresent( "../module-b/target/touch.txt" );
     }
 
+    @Test
     public void testSelectModuleByRelativePath() throws Exception
     {
         final Verifier verifier = newVerifier( moduleADir.getAbsolutePath() );
@@ -90,6 +97,7 @@ public class MavenITmng7390SelectModuleOutsideCwdTest extends AbstractMavenInteg
         verifier.verifyFilePresent( "../module-b/target/touch.txt" );
     }
 
+    @Test
     public void testSelectModulesByRelativePath() throws Exception
     {
         final Verifier verifier = newVerifier( moduleADir.getAbsolutePath() );
@@ -107,6 +115,7 @@ public class MavenITmng7390SelectModuleOutsideCwdTest extends AbstractMavenInteg
      Maven determines whether the target module is in a multi-module project based on the presence of a .mvn directory in root.
      This test verifies that when that directory is missing, the module cannot be found.
      */
+    @Test
     public void testSelectModulesOutsideCwdDoesNotWorkWhenDotMvnIsNotPresent() throws Exception
     {
         final String noDotMvnPath = "/mng-7390-pl-outside-cwd-no-dotmvn/module-a";

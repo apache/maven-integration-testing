@@ -21,7 +21,9 @@ package org.apache.maven.it;
 
 import java.io.File;
 
-import org.apache.maven.it.util.ResourceExtractor;
+import org.apache.maven.shared.verifier.Verifier;
+import org.apache.maven.shared.verifier.util.ResourceExtractor;
+import org.junit.jupiter.api.Test;
 
 /**
  * This test suite tests whether the consumer pom feature can load a project with a {@code parent} tag 
@@ -40,6 +42,7 @@ public class MavenITmng7360BuildConsumer extends AbstractMavenIntegrationTestCas
         super( "[4.0.0-alpha-1,)" );
     }
 
+    @Test
     public void testSelectModuleByCoordinate() throws Exception
     {
         final File projectDir = ResourceExtractor.simpleExtractResources( getClass(), PROJECT_PATH );

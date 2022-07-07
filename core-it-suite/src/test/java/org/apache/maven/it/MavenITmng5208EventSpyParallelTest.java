@@ -20,8 +20,13 @@ package org.apache.maven.it;
  */
 
 import java.io.File;
-import org.apache.maven.it.util.ResourceExtractor;
 
+import org.apache.maven.shared.verifier.Verifier;
+import org.apache.maven.shared.verifier.util.ResourceExtractor;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
+
+@Disabled
 public class MavenITmng5208EventSpyParallelTest
     extends AbstractMavenIntegrationTestCase
 {
@@ -36,6 +41,7 @@ public class MavenITmng5208EventSpyParallelTest
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testCorrectModuleFails()
         throws Exception
     {

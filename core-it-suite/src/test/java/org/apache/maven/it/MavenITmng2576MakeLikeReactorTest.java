@@ -21,7 +21,9 @@ package org.apache.maven.it;
 
 import java.io.File;
 
-import org.apache.maven.it.util.ResourceExtractor;
+import org.apache.maven.shared.verifier.Verifier;
+import org.apache.maven.shared.verifier.util.ResourceExtractor;
+import org.junit.jupiter.api.Test;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-2576">MNG-2576</a>.
@@ -52,6 +54,7 @@ public class MavenITmng2576MakeLikeReactorTest
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testitMakeOnlyList()
         throws Exception
     {
@@ -79,6 +82,7 @@ public class MavenITmng2576MakeLikeReactorTest
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testitMakeUpstream()
         throws Exception
     {
@@ -107,6 +111,7 @@ public class MavenITmng2576MakeLikeReactorTest
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testitMakeDownstream()
         throws Exception
     {
@@ -135,6 +140,7 @@ public class MavenITmng2576MakeLikeReactorTest
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testitMakeBoth()
         throws Exception
     {
@@ -164,6 +170,7 @@ public class MavenITmng2576MakeLikeReactorTest
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testitMatchesByBasedir()
         throws Exception
     {
@@ -192,6 +199,7 @@ public class MavenITmng2576MakeLikeReactorTest
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testitMatchesByBasedirPlus()
         throws Exception
     {
@@ -222,6 +230,7 @@ public class MavenITmng2576MakeLikeReactorTest
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testitMatchesById()
         throws Exception
     {
@@ -249,6 +258,7 @@ public class MavenITmng2576MakeLikeReactorTest
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testitMatchesByArtifactId()
         throws Exception
     {
@@ -279,6 +289,7 @@ public class MavenITmng2576MakeLikeReactorTest
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testitResumeFrom()
         throws Exception
     {

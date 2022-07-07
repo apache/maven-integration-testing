@@ -21,7 +21,9 @@ package org.apache.maven.it;
 
 import java.io.File;
 
-import org.apache.maven.it.util.ResourceExtractor;
+import org.apache.maven.shared.verifier.Verifier;
+import org.apache.maven.shared.verifier.util.ResourceExtractor;
+import org.junit.jupiter.api.Test;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-3284">MNG-3284</a>:
@@ -42,6 +44,7 @@ public class MavenITmng3284UsingCachedPluginsTest
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testitMNG3284()
         throws Exception
     {

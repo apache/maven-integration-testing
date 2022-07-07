@@ -19,9 +19,11 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.util.ResourceExtractor;
-
 import java.io.File;
+
+import org.apache.maven.shared.verifier.Verifier;
+import org.apache.maven.shared.verifier.util.ResourceExtractor;
+import org.junit.jupiter.api.Test;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-2339">MNG-2339</a>.
@@ -34,6 +36,7 @@ public class MavenITmng2339BadProjectInterpolationTest
         super( "(2.0.8,)" ); // 2.0.9+
     }
 
+    @Test
     public void testitMNG2339a()
         throws Exception
     {
@@ -52,6 +55,7 @@ public class MavenITmng2339BadProjectInterpolationTest
     }
 
     // test that -Dversion=1.0 is still available for interpolation.
+    @Test
     public void testitMNG2339b()
         throws Exception
     {

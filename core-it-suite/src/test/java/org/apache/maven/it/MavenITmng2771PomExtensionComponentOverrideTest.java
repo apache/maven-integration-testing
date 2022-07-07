@@ -19,9 +19,12 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.util.ResourceExtractor;
-
 import java.io.File;
+
+import org.apache.maven.shared.verifier.Verifier;
+import org.apache.maven.shared.verifier.util.ResourceExtractor;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-2771">MNG-2771</a>
@@ -29,6 +32,7 @@ import java.io.File;
  * @author Mark Hobson
  *
  */
+@Disabled
 public class MavenITmng2771PomExtensionComponentOverrideTest
     extends AbstractMavenIntegrationTestCase
 {
@@ -42,6 +46,7 @@ public class MavenITmng2771PomExtensionComponentOverrideTest
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testitMNG2771()
         throws Exception
     {

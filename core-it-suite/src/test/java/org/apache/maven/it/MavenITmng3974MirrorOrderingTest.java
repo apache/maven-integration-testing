@@ -19,9 +19,11 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.util.ResourceExtractor;
-
 import java.io.File;
+
+import org.apache.maven.shared.verifier.Verifier;
+import org.apache.maven.shared.verifier.util.ResourceExtractor;
+import org.junit.jupiter.api.Test;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-3974">MNG-3974</a>.
@@ -44,6 +46,7 @@ public class MavenITmng3974MirrorOrderingTest
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testitFirstMatchWins()
         throws Exception
     {

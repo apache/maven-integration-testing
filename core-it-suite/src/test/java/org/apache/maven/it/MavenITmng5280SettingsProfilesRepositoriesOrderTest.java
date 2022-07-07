@@ -19,14 +19,9 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.apache.maven.it.util.ResourceExtractor;
-import org.eclipse.jetty.server.NetworkConnector;
-import org.eclipse.jetty.server.Request;
-import org.eclipse.jetty.server.Server;
-import org.eclipse.jetty.server.handler.AbstractHandler;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -34,6 +29,16 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.util.Properties;
+
+import org.apache.maven.shared.verifier.Verifier;
+import org.apache.maven.shared.verifier.util.ResourceExtractor;
+import org.eclipse.jetty.server.NetworkConnector;
+import org.eclipse.jetty.server.Request;
+import org.eclipse.jetty.server.Server;
+import org.eclipse.jetty.server.handler.AbstractHandler;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-5280">MNG-5280</a>.
@@ -52,7 +57,7 @@ public class MavenITmng5280SettingsProfilesRepositoriesOrderTest
         super( "[3.1-A,)" );
     }
 
-    @Override
+    @BeforeEach
     protected void setUp()
         throws Exception
     {
@@ -60,7 +65,7 @@ public class MavenITmng5280SettingsProfilesRepositoriesOrderTest
         server = new Server( 0 );
     }
 
-    @Override
+    @AfterEach
     protected void tearDown()
         throws Exception
     {
@@ -76,6 +81,7 @@ public class MavenITmng5280SettingsProfilesRepositoriesOrderTest
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testRepositoriesOrder()
         throws Exception
     {
@@ -112,6 +118,7 @@ public class MavenITmng5280SettingsProfilesRepositoriesOrderTest
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testPluginRepositoriesOrder()
         throws Exception
     {

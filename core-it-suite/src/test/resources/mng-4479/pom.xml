@@ -64,7 +64,7 @@ under the License.
       <plugin>
         <!-- NOTE: The presence of another plugin declaration is crucial to trigger the bug -->
         <artifactId>maven-resources-plugin</artifactId>
-        <version>2.1</version>
+        <version>3.2.0</version>
       </plugin>
     </plugins>
   </build>

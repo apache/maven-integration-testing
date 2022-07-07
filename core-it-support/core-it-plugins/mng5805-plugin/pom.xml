@@ -32,10 +32,6 @@ under the License.
   <artifactId>mng-5805-pkg-type-mojo-configuration-plugin</artifactId>
   <packaging>maven-plugin</packaging>
 
-  <properties>
-    <maven-version>3.0</maven-version>
-  </properties>
-
   <name>Maven IT Plugin :: mng-5805 plugin</name>
 
   <dependencies>
@@ -52,7 +48,6 @@ under the License.
     <dependency>
       <groupId>org.apache.maven</groupId>
       <artifactId>maven-model</artifactId>
-      <version>${maven-version}</version>
       <scope>provided</scope>
     </dependency>
   </dependencies>

@@ -57,6 +57,10 @@ under the License.
       <artifactId>maven-resolver-impl</artifactId>
       <version>${mavenResolverVersion}</version>
     </dependency>
+    <dependency>
+      <groupId>org.codehaus.plexus</groupId>
+      <artifactId>plexus-utils</artifactId>
+    </dependency>
   </dependencies>
 
 </project>

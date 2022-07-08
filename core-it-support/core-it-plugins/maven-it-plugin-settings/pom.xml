@@ -53,6 +53,10 @@ under the License.
       <artifactId>maven-settings</artifactId>
       <scope>provided</scope>
     </dependency>
+    <dependency>
+      <groupId>org.codehaus.plexus</groupId>
+      <artifactId>plexus-utils</artifactId>
+    </dependency>
 
   </dependencies>
 </project>

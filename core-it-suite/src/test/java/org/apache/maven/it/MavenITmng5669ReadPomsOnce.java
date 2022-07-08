@@ -57,7 +57,7 @@ public class MavenITmng5669ReadPomsOnce
         Verifier verifier = newVerifier( testDir.getAbsolutePath(), false );
         Map<String, String> filterProperties =
             Collections.singletonMap( "${javaAgentJar}",
-                                      verifier.getArtifactPath( "mng-coreit", "javaagent", "1.0-SNAPSHOT", "jar" ) );
+                                      verifier.getArtifactPath( "org.apache.maven.its", "core-it-javaagent", "2.1-SNAPSHOT", "jar" ) );
         verifier.filterFile( ".mvn/jvm.config", ".mvn/jvm.config", null, filterProperties );
 
         verifier.setForkJvm( true ); // pick up agent
@@ -111,7 +111,7 @@ public class MavenITmng5669ReadPomsOnce
         Verifier verifier = newVerifier( testDir.getAbsolutePath(), false );
         Map<String, String> filterProperties =
             Collections.singletonMap( "${javaAgentJar}",
-                                      verifier.getArtifactPath( "mng-coreit", "javaagent", "1.0-SNAPSHOT", "jar" ) );
+                                      verifier.getArtifactPath( "org.apache.maven.its", "core-it-javaagent", "2.1-SNAPSHOT", "jar" ) );
         verifier.filterFile( ".mvn/jvm.config", ".mvn/jvm.config", null, filterProperties );
 
         verifier.setLogFileName( "log-bc.txt" );

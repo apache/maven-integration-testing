@@ -20,9 +20,6 @@ package org.apache.maven.it;
  */
 
 import java.io.File;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 import org.apache.maven.it.util.ResourceExtractor;
 
@@ -33,19 +30,9 @@ import org.apache.maven.it.util.ResourceExtractor;
 public class MavenITmng7474SessionScopeTest
         extends AbstractMavenIntegrationTestCase
 {
-    private File projectDir;
-
     public MavenITmng7474SessionScopeTest()
     {
         super( "[3.9.0,)" );
-    }
-
-    @Override
-    protected void setUp()
-        throws Exception
-    {
-        File testDir = ResourceExtractor.simpleExtractResources( getClass(), "/mng-7474-session-scope" );
-        projectDir = new File( testDir, "project" );
     }
 
     public void testSessionScope()
@@ -57,8 +44,6 @@ public class MavenITmng7474SessionScopeTest
         verifier.executeGoal( "validate" );
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
-
-        List<String> logLines = verifier.loadFile( verifier.getBasedir(), verifier.getLogFileName(), false );
     }
 
 }

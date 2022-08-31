@@ -19,10 +19,12 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.junit.jupiter.api.Test;
 import java.io.File;
 import java.net.URI;
-import org.apache.maven.it.util.ResourceExtractor;
+
+import org.apache.maven.shared.verifier.Verifier;
+import org.apache.maven.shared.verifier.util.ResourceExtractor;
+import org.junit.jupiter.api.Test;
 
 /**
  * This is a test for <a href="https://issues.apache.org/jira/browse/MNG-6759">MNG-6759</a>.

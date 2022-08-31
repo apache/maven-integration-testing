@@ -19,7 +19,6 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.junit.jupiter.api.Test;
 import java.io.File;
 import java.util.Arrays;
 import java.util.Collections;
@@ -28,7 +27,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.apache.maven.it.util.ResourceExtractor;
+import org.apache.maven.shared.verifier.Verifier;
+import org.apache.maven.shared.verifier.util.ResourceExtractor;
+import org.junit.jupiter.api.Test;
 
 /**
  * An integration test to ensure any pomfile is only read once.

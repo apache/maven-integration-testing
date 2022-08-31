@@ -19,10 +19,12 @@ package org.apache.maven.it;
  * under the License.
  */
 
+import java.io.File;
+
+import org.apache.maven.shared.verifier.Verifier;
+import org.apache.maven.shared.verifier.util.ResourceExtractor;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
-import java.io.File;
-import org.apache.maven.it.util.ResourceExtractor;
 
 @Disabled
 public class MavenITmng5208EventSpyParallelTest

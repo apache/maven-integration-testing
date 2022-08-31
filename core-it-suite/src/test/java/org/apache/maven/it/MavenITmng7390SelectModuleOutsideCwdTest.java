@@ -19,11 +19,13 @@ package org.apache.maven.it;
  * under the License.
  */
 
+import java.io.File;
+
+import org.apache.maven.shared.verifier.VerificationException;
+import org.apache.maven.shared.verifier.Verifier;
+import org.apache.maven.shared.verifier.util.ResourceExtractor;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.apache.maven.it.util.ResourceExtractor;
-
-import java.io.File;
 
 /**
  * This test suite tests whether other modules in the same multi-module project can be selected when invoking Maven from a submodule.

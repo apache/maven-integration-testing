@@ -19,12 +19,14 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.apache.maven.it.util.ResourceExtractor;
-
 import java.io.File;
 import java.util.List;
+
+import org.apache.maven.shared.verifier.VerificationException;
+import org.apache.maven.shared.verifier.Verifier;
+import org.apache.maven.shared.verifier.util.ResourceExtractor;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class MavenITmng6566ExecuteAnnotationShouldNotReExecuteGoalsTest
     extends AbstractMavenIntegrationTestCase

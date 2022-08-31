@@ -19,12 +19,13 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.junit.jupiter.api.Test;
-import org.apache.maven.it.util.ResourceExtractor;
-
 import java.io.File;
 import java.util.LinkedList;
 import java.util.List;
+
+import org.apache.maven.shared.verifier.Verifier;
+import org.apache.maven.shared.verifier.util.ResourceExtractor;
+import org.junit.jupiter.api.Test;
 
 /**
  * Using a <code>${revision}</code> in the version will change the reactor order before fixing

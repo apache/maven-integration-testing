@@ -19,10 +19,11 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.junit.jupiter.api.Test;
-import org.apache.maven.it.util.ResourceExtractor;
-
 import java.io.File;
+
+import org.apache.maven.shared.verifier.Verifier;
+import org.apache.maven.shared.verifier.util.ResourceExtractor;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test case adapted from MNG-2576

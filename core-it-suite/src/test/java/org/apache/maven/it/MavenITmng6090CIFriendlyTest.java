@@ -19,11 +19,12 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.junit.jupiter.api.Test;
-import org.apache.maven.it.util.ResourceExtractor;
-
 import java.io.File;
 import java.util.Arrays;
+
+import org.apache.maven.shared.verifier.Verifier;
+import org.apache.maven.shared.verifier.util.ResourceExtractor;
+import org.junit.jupiter.api.Test;
 
 /**
  * The usage of a <code>${revision}</code> for the version in the pom file and furthermore

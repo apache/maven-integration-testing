@@ -19,10 +19,6 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.junit.jupiter.api.ClassDescriptor;
-import org.junit.jupiter.api.ClassOrderer;
-import org.junit.jupiter.api.ClassOrdererContext;
-
 import java.io.PrintStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -30,7 +26,11 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.maven.shared.verifier.Verifier;
 import org.codehaus.plexus.util.IOUtil;
+import org.junit.jupiter.api.ClassDescriptor;
+import org.junit.jupiter.api.ClassOrderer;
+import org.junit.jupiter.api.ClassOrdererContext;
 
 /**
  * The Core IT suite.

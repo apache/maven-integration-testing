@@ -19,12 +19,13 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import org.junit.jupiter.api.Test;
-import org.apache.maven.it.util.ResourceExtractor;
-
 import java.io.File;
 import java.util.Collections;
 import java.util.List;
+
+import org.apache.maven.shared.verifier.Verifier;
+import org.apache.maven.shared.verifier.util.ResourceExtractor;
+import org.junit.jupiter.api.Test;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-3769">MNG-3769</a>.

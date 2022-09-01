@@ -57,18 +57,6 @@
     </modules>
     <packaging>pom</packaging>
 
-  <build>
-    <pluginManagement>
-      <plugins>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-resources-plugin</artifactId>
-          <version>3.2.0</version>
-        </plugin>
-      </plugins>
-    </pluginManagement>
-  </build>
-
     <dependencies>
         <dependency>
             <groupId>commons-lang</groupId>
@@ -80,6 +68,11 @@
     <build>
         <pluginManagement>
             <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-resources-plugin</artifactId>
+                    <version>3.2.0</version>
+                </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-clean-plugin</artifactId>

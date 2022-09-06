@@ -102,6 +102,7 @@ org.apache.maven.plugins:maven-site-plugin:${stubPluginVersion}
 org.apache.maven.plugins:maven-site-plugin:3.9.1
 org.apache.maven.plugins:maven-source-plugin:${stubPluginVersion}
 org.apache.maven.plugins:maven-surefire-plugin:${stubPluginVersion}
+org.apache.maven.plugins:maven-surefire-plugin:3.0.0-M5
 org.apache.maven.plugins:maven-surefire-plugin:3.0.0-M7
 org.apache.maven.plugins:maven-war-plugin:${stubPluginVersion}
 org.apache.maven.plugins:maven-war-plugin:3.3.2

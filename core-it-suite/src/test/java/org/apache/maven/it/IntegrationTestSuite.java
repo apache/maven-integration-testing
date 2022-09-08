@@ -445,7 +445,6 @@ public class IntegrationTestSuite
         suite.addTestSuite( MavenITmng3940EnvVarInterpolationTest.class );
         suite.addTestSuite( MavenITmng3938MergePluginExecutionsTest.class );
         suite.addTestSuite( MavenITmng3937MergedPluginExecutionGoalsTest.class );
-        suite.addTestSuite( MavenITmng3933ProfilesXmlActivationTest.class );
         suite.addTestSuite( MavenITmng3927PluginDefaultExecutionConfigTest.class );
         suite.addTestSuite( MavenITmng3925MergedPluginExecutionOrderTest.class );
         suite.addTestSuite( MavenITmng3924XmlMarkupInterpolationTest.class );

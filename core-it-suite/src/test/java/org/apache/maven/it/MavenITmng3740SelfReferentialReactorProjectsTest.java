@@ -23,6 +23,7 @@ import java.io.File;
 
 import org.apache.maven.shared.verifier.Verifier;
 import org.apache.maven.shared.verifier.util.ResourceExtractor;
+import org.junit.jupiter.api.Test;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-3740">MNG-3740</a>.
@@ -43,6 +44,7 @@ public class MavenITmng3740SelfReferentialReactorProjectsTest
         super( "(2.0.8,)" ); // only test in 2.0.9+
     }
 
+    @Test
     public void testitMNG3740 ()
         throws Exception
     {

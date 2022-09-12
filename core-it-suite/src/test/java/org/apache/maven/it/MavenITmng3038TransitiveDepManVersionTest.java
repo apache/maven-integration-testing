@@ -34,7 +34,7 @@ import org.junit.jupiter.api.Test;
  * @author Joakim Erdfelt
  *
  */
-@Disabled
+@Disabled( "cannot reproduce" )
 public class MavenITmng3038TransitiveDepManVersionTest
     extends AbstractMavenIntegrationTestCase
 {

@@ -33,7 +33,7 @@ import org.junit.jupiter.api.Test;
  * @author Benjamin Bentmann
  *
  */
-@Disabled
+@Disabled( "won't fix" )
 public class MavenITmng3890TransitiveDependencyScopeUpdateTest
     extends AbstractMavenIntegrationTestCase
 {

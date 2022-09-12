@@ -32,7 +32,7 @@ import org.junit.jupiter.api.Test;
  *
  * @author Benjamin Bentmann
  */
-@Disabled
+@Disabled( "not fixed yet" )
 public class MavenITmng3092SnapshotsExcludedFromVersionRangeTest
     extends AbstractMavenIntegrationTestCase
 {

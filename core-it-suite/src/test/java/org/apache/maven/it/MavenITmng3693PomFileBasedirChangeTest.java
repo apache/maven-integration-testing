@@ -24,6 +24,7 @@ import java.io.File;
 import org.apache.maven.shared.utils.io.FileUtils;
 import org.apache.maven.shared.verifier.Verifier;
 import org.apache.maven.shared.verifier.util.ResourceExtractor;
+import org.junit.jupiter.api.Test;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-3693">MNG-3693</a>:
@@ -42,6 +43,7 @@ public class MavenITmng3693PomFileBasedirChangeTest
         super( ALL_MAVEN_VERSIONS );
     }
 
+    @Test
     public void testitMNG3693 ()
         throws Exception
     {

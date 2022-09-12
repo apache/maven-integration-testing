@@ -23,6 +23,7 @@ import java.io.File;
 
 import org.apache.maven.shared.verifier.Verifier;
 import org.apache.maven.shared.verifier.util.ResourceExtractor;
+import org.junit.jupiter.api.Test;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-3485">MNG-3485</a>.
@@ -37,6 +38,7 @@ public class MavenITmng3485OverrideWagonExtensionTest
         super( "(2.0.8,3.0-alpha-1),[3.0-alpha-7,)" );
     }
 
+    @Test
     public void testitMNG3485 ()
         throws Exception
     {

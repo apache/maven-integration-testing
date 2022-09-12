@@ -23,6 +23,7 @@ import java.io.File;
 
 import org.apache.maven.shared.verifier.Verifier;
 import org.apache.maven.shared.verifier.util.ResourceExtractor;
+import org.junit.jupiter.api.Test;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-1493">MNG-1493</a>.
@@ -35,6 +36,7 @@ public class MavenITmng1493NonStandardModulePomNamesTest
         super( "(2.0.8,)" ); // 2.0.9+ (including snapshots)
     }
 
+    @Test
     public void testitMNG1493 ()
         throws Exception
     {

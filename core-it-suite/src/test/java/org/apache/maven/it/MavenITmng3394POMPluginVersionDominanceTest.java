@@ -44,6 +44,7 @@ public class MavenITmng3394POMPluginVersionDominanceTest
         super( "(2.0.8,)" ); // only test in 2.0.9+
     }
 
+    @Test
     public void testitMNG3394a ()
         throws Exception
     {

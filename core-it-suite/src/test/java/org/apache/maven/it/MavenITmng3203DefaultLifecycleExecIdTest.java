@@ -23,6 +23,7 @@ import java.io.File;
 
 import org.apache.maven.shared.verifier.Verifier;
 import org.apache.maven.shared.verifier.util.ResourceExtractor;
+import org.junit.jupiter.api.Test;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-3203">MNG-3203</a>.
@@ -42,6 +43,7 @@ public class MavenITmng3203DefaultLifecycleExecIdTest
         super( "[2.2.0,)" );
     }
 
+    @Test
     public void testitMNG3203 ()
         throws Exception
     {

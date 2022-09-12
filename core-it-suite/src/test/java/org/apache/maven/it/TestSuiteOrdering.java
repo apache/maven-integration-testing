@@ -105,18 +105,11 @@ public class TestSuiteOrdering implements ClassOrderer
          * a fail fast technique as well.
          */
 
-        // -------------------------------------------------------------------------------------------------------------
-        // Tests that currently don't pass for any Maven version, i.e. the corresponding issue hasn't been resolved yet
-        // -------------------------------------------------------------------------------------------------------------
         suite.addTestSuite( MavenITmng3890TransitiveDependencyScopeUpdateTest.class );
         suite.addTestSuite( MavenITmng3092SnapshotsExcludedFromVersionRangeTest.class );
         suite.addTestSuite( MavenITmng3038TransitiveDepManVersionTest.class );
         suite.addTestSuite( MavenITmng2771PomExtensionComponentOverrideTest.class );
         suite.addTestSuite( MavenITmng0612NewestConflictResolverTest.class );
-
-        // -------------------------------------------------------------------------------------------------------------
-        // Tests that don't run stable and need to be fixed
-        // -------------------------------------------------------------------------------------------------------------
         suite.addTestSuite( MavenIT0108SnapshotUpdateTest.class );
         suite.addTestSuite( MavenITmng7474SessionScopeTest.class );
         suite.addTestSuite( MavenITmng7529VersionRangeRepositorySelection.class );

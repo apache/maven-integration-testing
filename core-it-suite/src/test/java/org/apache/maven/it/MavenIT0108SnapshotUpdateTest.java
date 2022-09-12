@@ -36,9 +36,9 @@ import org.junit.jupiter.api.Test;
 
 /**
  * Downloads a snapshot dependency that was deployed with uniqueVersion = false, and checks it can be
- * updated. See MNG-1908.
+ * updated. See <a href="https://issues.apache.org/jira/browse/MNG-1908">MNG-1908</a>.
  */
-@Disabled // MNG-3137
+@Disabled( "flaky test, see MNG-3137" )
 public class MavenIT0108SnapshotUpdateTest
     extends AbstractMavenIntegrationTestCase
 {

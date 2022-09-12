@@ -24,6 +24,7 @@ import java.util.Properties;
 
 import org.apache.maven.shared.verifier.Verifier;
 import org.apache.maven.shared.verifier.util.ResourceExtractor;
+import org.junit.jupiter.api.Test;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-2254">MNG-2254</a>:
@@ -46,6 +47,7 @@ public class MavenITmng2254PomEncodingTest
      *
      * @throws Exception in case of failure
      */
+    @Test
     public void testitMNG2254 ()
         throws Exception
     {

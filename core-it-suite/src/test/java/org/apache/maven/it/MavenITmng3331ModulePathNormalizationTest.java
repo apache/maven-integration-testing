@@ -23,6 +23,7 @@ import java.io.File;
 
 import org.apache.maven.shared.verifier.Verifier;
 import org.apache.maven.shared.verifier.util.ResourceExtractor;
+import org.junit.jupiter.api.Test;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-3331">MNG-3331</a>.
@@ -38,6 +39,7 @@ public class MavenITmng3331ModulePathNormalizationTest
         super( ALL_MAVEN_VERSIONS );
     }
 
+    @Test
     public void testitMNG3331a ()
         throws Exception
     {
@@ -68,6 +70,7 @@ public class MavenITmng3331ModulePathNormalizationTest
         verifier.resetStreams();
     }
 
+    @Test
     public void testitMNG3331b ()
         throws Exception
     {

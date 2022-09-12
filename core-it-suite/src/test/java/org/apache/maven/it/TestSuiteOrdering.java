@@ -105,6 +105,9 @@ public class TestSuiteOrdering implements ClassOrderer
          * a fail fast technique as well.
          */
 
+        suite.addTestSuite( MavenITmng5889FindBasedir.class );
+        suite.addTestSuite( MavenITmng7360BuildConsumer.class );
+        suite.addTestSuite( MavenITmng5452MavenBuildTimestampUTCTest.class );
         suite.addTestSuite( MavenITmng3890TransitiveDependencyScopeUpdateTest.class );
         suite.addTestSuite( MavenITmng3092SnapshotsExcludedFromVersionRangeTest.class );
         suite.addTestSuite( MavenITmng3038TransitiveDepManVersionTest.class );

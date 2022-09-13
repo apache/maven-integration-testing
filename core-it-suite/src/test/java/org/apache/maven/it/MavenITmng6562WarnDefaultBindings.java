@@ -56,8 +56,6 @@ public class MavenITmng6562WarnDefaultBindings
 
 
     @Test
-
-
     public void testItShouldNotWarn2()
                     throws Exception
     {

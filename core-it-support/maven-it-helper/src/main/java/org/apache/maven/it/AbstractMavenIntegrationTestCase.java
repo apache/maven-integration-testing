@@ -568,33 +568,19 @@ public abstract class AbstractMavenIntegrationTestCase
 
             String path = settingsFile.getAbsolutePath();
 
-            // dedicated CLI option only available since MNG-3914
-            if ( matchesVersionRange( "[2.1.0,)" ) )
+            verifier.addCliOption( "--global-settings" );
+            if ( path.indexOf( ' ' ) < 0 )
             {
-                verifier.addCliOption( "--global-settings" );
-                if ( path.indexOf( ' ' ) < 0 )
-                {
-                    verifier.addCliOption( path );
-                }
-                else
-                {
-                    verifier.addCliOption( '"' + path + '"' );
-                }
+                verifier.addCliOption( path );
             }
             else
             {
-                verifier.getSystemProperties().put( "org.apache.maven.global-settings", path );
+                verifier.addCliOption( '"' + path + '"' );
             }
         }
 
         try
         {
-            // Java7 TLS protocol
-            if ( VersionRange.createFromVersionSpec( "(,1.8.0)" ).containsVersion( getJavaVersion() ) )
-            {
-                verifier.addCliOption( "-Dhttps.protocols=TLSv1.2" );
-            }
-
             // auto set source+target to lowest reasonable java version
             // Java9 requires at least 1.6
             if ( VersionRange.createFromVersionSpec( "[9,12)" ).containsVersion( getJavaVersion() ) )

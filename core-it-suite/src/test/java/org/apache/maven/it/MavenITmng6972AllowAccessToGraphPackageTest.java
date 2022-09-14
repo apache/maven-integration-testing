@@ -56,13 +56,11 @@ public class MavenITmng6972AllowAccessToGraphPackageTest
         verifier.deleteArtifact( "mng-6972-allow-access-to-graph-package", "using-module", "1.0", "jar" );
 
         verifier = newVerifier( new File( testDir.getAbsolutePath(), "build-plugin" ).getAbsolutePath() );
-        verifier.getSystemProperties().put( "maven.multiModuleProjectDirectory", testDir.getAbsolutePath() );
         verifier.executeGoal( "install" );
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();
 
         verifier = newVerifier( new File( testDir.getAbsolutePath(), "using-module" ).getAbsolutePath() );
-        verifier.getSystemProperties().put( "maven.multiModuleProjectDirectory", testDir.getAbsolutePath() );
         verifier.executeGoal( "install" );
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();

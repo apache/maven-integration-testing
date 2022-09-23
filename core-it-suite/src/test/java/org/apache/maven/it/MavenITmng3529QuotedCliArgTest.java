@@ -54,7 +54,7 @@ public class MavenITmng3529QuotedCliArgTest
         verifier.setForkJvm( true ); // NOTE: We want to go through the launcher script
         verifier.setAutoclean( false );
         verifier.deleteDirectory( "target" );
-        verifier.addCliOption( "-Dtest.a=\"  \"" );
+        verifier.addCliOption( "-Dtest.a=  " );
         verifier.executeGoal( "validate" );
         verifier.verifyErrorFreeLog();
         verifier.resetStreams();

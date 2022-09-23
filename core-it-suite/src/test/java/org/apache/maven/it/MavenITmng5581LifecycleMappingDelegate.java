@@ -52,18 +52,21 @@ public class MavenITmng5581LifecycleMappingDelegate
         Verifier verifier;
 
         // install the test extension
-        verifier = newVerifier( extensionDir.getAbsolutePath(), "remote" );
+        verifier = newVerifier( extensionDir.getAbsolutePath() );
         verifier.executeGoal( "install" );
         verifier.resetStreams();
         verifier.verifyErrorFreeLog();
 
         // compile the test project
-        verifier = newVerifier( projectDir.getAbsolutePath(), "remote" );
+        verifier = newVerifier( projectDir.getAbsolutePath() );
+        verifier.setLogFileName( "compile-log.txt" );
         verifier.executeGoal( "compile" );
         verifier.resetStreams();
         verifier.verifyErrorFreeLog();
 
         // run custom "test-only" build phase
+        verifier = newVerifier( projectDir.getAbsolutePath() );
+        verifier.setLogFileName( "test-only-log.txt" );
         verifier.setForkJvm( true );
         verifier.setMavenDebug( true );
         verifier.executeGoal( "test-only" );

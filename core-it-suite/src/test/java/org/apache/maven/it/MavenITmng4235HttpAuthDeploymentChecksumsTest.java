@@ -19,6 +19,9 @@ package org.apache.maven.it;
  * under the License.
  */
 
+import org.apache.maven.shared.verifier.util.ResourceExtractor;
+import org.apache.maven.shared.verifier.Verifier;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -31,8 +34,6 @@ import java.util.Properties;
 import java.util.concurrent.ConcurrentLinkedDeque;
 
 import org.apache.maven.it.utils.DeployedResource;
-import org.apache.maven.shared.verifier.Verifier;
-import org.apache.maven.shared.verifier.util.ResourceExtractor;
 import org.codehaus.plexus.util.StringUtils;
 import org.eclipse.jetty.security.ConstraintMapping;
 import org.eclipse.jetty.security.ConstraintSecurityHandler;

@@ -19,10 +19,10 @@ package org.apache.maven.it;
  * under the License.
  */
 
-import java.io.File;
-
-import org.apache.maven.shared.verifier.Verifier;
 import org.apache.maven.shared.verifier.util.ResourceExtractor;
+import org.apache.maven.shared.verifier.Verifier;
+
+import java.io.File;
 
 /**
  * An integration test which proves that the bug of MNG-7310 is fixed.

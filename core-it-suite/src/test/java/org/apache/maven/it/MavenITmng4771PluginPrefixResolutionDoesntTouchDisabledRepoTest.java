@@ -19,6 +19,10 @@ package org.apache.maven.it;
  * under the License.
  */
 
+import org.apache.maven.shared.verifier.util.ResourceExtractor;
+import org.apache.maven.shared.verifier.Verifier;
+import org.apache.maven.shared.verifier.VerificationException;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -27,9 +31,6 @@ import java.util.Deque;
 import java.util.Properties;
 import java.util.concurrent.ConcurrentLinkedDeque;
 
-import org.apache.maven.shared.verifier.VerificationException;
-import org.apache.maven.shared.verifier.Verifier;
-import org.apache.maven.shared.verifier.util.ResourceExtractor;
 import org.eclipse.jetty.server.NetworkConnector;
 import org.eclipse.jetty.server.Request;
 import org.eclipse.jetty.server.Server;

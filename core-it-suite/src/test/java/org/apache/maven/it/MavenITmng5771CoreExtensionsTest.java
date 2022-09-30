@@ -1,10 +1,11 @@
 package org.apache.maven.it;
 
+import org.apache.maven.shared.verifier.util.ResourceExtractor;
+import org.apache.maven.shared.verifier.Verifier;
+
 import java.io.File;
 import java.util.Properties;
 
-import org.apache.maven.shared.verifier.Verifier;
-import org.apache.maven.shared.verifier.util.ResourceExtractor;
 import org.junit.jupiter.api.Test;
 
 /**

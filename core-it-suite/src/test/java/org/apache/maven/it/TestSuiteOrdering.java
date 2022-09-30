@@ -114,6 +114,7 @@ public class TestSuiteOrdering implements ClassOrderer
         suite.addTestSuite( MavenITmng2771PomExtensionComponentOverrideTest.class );
         suite.addTestSuite( MavenITmng0612NewestConflictResolverTest.class );
         suite.addTestSuite( MavenIT0108SnapshotUpdateTest.class );
+        suite.addTestSuite( MavenITmng7310LifecycleActivatedInSpecifiedModuleTest.class );
         suite.addTestSuite( MavenITmng7474SessionScopeTest.class );
         suite.addTestSuite( MavenITmng7529VersionRangeRepositorySelection.class );
         suite.addTestSuite( MavenITmng7443ConsistencyOfOptionalProjectsAndProfilesTest.class );

@@ -20,36 +20,28 @@ under the License.
 -->
 
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-
-  <groupId>mng-5581-lifecycle-mapping-delegate</groupId>
-  <artifactId>mng-5581-lifecycle-mapping-delegate-basic</artifactId>
+  <parent>
+    <groupId>com.example</groupId>
+    <artifactId>parent</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+  </parent>
+  <artifactId>extension-user</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-
-  <dependencies>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>4.11</version>
-    </dependency>
-  </dependencies>
+  <packaging>jar</packaging>
+  <properties>
+    <plugin.version>0.1</plugin.version>
+  </properties>
 
   <build>
-    <extensions>
-      <extension>
-        <groupId>mng-5581-lifecycle-mapping-delegate</groupId>
-        <artifactId>mng-5581-lifecycle-mapping-delegate-extension</artifactId>
-        <version>0.1</version>
-      </extension>
-    </extensions>
-    <pluginManagement>
-      <plugins>
-        <plugin>
-          <artifactId>maven-compiler-plugin</artifactId>
-          <version>3.10.1</version>
-        </plugin>
-      </plugins>
-    </pluginManagement>
+    <plugins>
+      <plugin>
+        <groupId>mng-7310-lifecycle-activated-in-specified-module</groupId>
+        <artifactId>mng-7310-lifecycle-activated-in-specified-module</artifactId>
+        <version>${plugin.version}</version>
+        <extensions>true</extensions>
+      </plugin>
+    </plugins>
   </build>
 </project>

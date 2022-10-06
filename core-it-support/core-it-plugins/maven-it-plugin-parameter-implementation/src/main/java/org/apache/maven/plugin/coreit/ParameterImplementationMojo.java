@@ -21,6 +21,8 @@ package org.apache.maven.plugin.coreit;
 
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
+import org.apache.maven.plugins.annotations.Mojo;
+import org.apache.maven.plugins.annotations.Parameter;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -29,28 +31,22 @@ import java.util.Properties;
 
 /**
  * Check that we correctly use the implementation parameter.
- *
- * TODO: this mojo can not be converted to mojo annotations
- * TODO: because the @Parameter#implementation has never been implemented.
- *
- * @goal param-implementation
  */
+@Mojo( name = "param-implementation" )
 public class ParameterImplementationMojo
     extends AbstractMojo
 {
 
     /**
      * The path to the properties file for the parameter information.
-     *
-     * @parameter
      */
+    @Parameter
     private File outputFile;
 
     /**
      * A parameter whose type is an interface but with a default implementation class.
-     *
-     * @parameter implementation="org.apache.maven.plugin.coreit.sub.AnImplementation"
      */
+    @Parameter( implementation = org.apache.maven.plugin.coreit.sub.AnImplementation.class )
     private AnInterface theParameter;
 
     public void execute()

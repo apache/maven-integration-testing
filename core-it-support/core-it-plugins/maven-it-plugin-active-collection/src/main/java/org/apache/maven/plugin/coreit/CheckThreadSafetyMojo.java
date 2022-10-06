@@ -21,6 +21,7 @@ package org.apache.maven.plugin.coreit;
 
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
+import org.apache.maven.plugins.annotations.Component;
 import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
@@ -53,14 +54,14 @@ public class CheckThreadSafetyMojo
     /**
      * The available components, as a map.
      */
-    @org.apache.maven.plugins.annotations.Component
-    private Map<String, Component> componentMap;
+    @Component
+    private Map<String, TestComponent> componentMap;
 
     /**
      * The available components, as a list.
      */
-    @org.apache.maven.plugins.annotations.Component
-    private List<Component> componentList;
+    @Component
+    private List<TestComponent> componentList;
 
     /**
      * The path to the properties file to create.

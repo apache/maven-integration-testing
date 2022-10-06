@@ -21,6 +21,7 @@ package org.apache.maven.plugin.coreit;
 
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
+import org.apache.maven.plugins.annotations.Component;
 import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
@@ -51,8 +52,8 @@ public class ItMojo
      * NOTE: We don't specify a role hint here!
      *
      */
-    @org.apache.maven.plugins.annotations.Component
-    private Component component;
+    @Component
+    private TestComponent component;
 
     /**
      * Runs this mojo.

@@ -21,6 +21,7 @@ package org.apache.maven.plugin.coreit;
 
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
+import org.apache.maven.plugins.annotations.Component;
 import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
@@ -53,26 +54,26 @@ public class ItMojo
      * Component lookup without role hint.
      *
      */
-    @org.apache.maven.plugins.annotations.Component
-    private Component componentWithoutRoleHint;
+    @Component
+    private TestComponent componentWithoutRoleHint;
 
     /**
      * Component lookup with explicit role hint.
      */
-    @org.apache.maven.plugins.annotations.Component( hint = "default" )
-    private Component componentWithRoleHint;
+    @Component( hint = "default" )
+    private TestComponent componentWithRoleHint;
 
     /**
      * Component lookup via active map.
      */
-    @org.apache.maven.plugins.annotations.Component
-    private Map<String, Component> componentMap;
+    @Component
+    private Map<String, TestComponent> componentMap;
 
     /**
      * Component lookup via active list.
      */
-    @org.apache.maven.plugins.annotations.Component
-    private List<Component> componentList;
+    @Component
+    private List<TestComponent> componentList;
 
     /**
      * Runs this mojo.
@@ -82,8 +83,8 @@ public class ItMojo
     public void execute()
         throws MojoExecutionException
     {
-        Component componentFromMap = (Component) componentMap.values().iterator().next();
-        Component componentFromList = (Component) componentList.iterator().next();
+        TestComponent componentFromMap = (TestComponent) componentMap.values().iterator().next();
+        TestComponent componentFromList = (TestComponent) componentList.iterator().next();
 
         getLog().info( "[MAVEN-CORE-IT-LOG] Using component: " + componentWithoutRoleHint );
         getLog().info( "[MAVEN-CORE-IT-LOG] Using component: " + componentWithRoleHint );

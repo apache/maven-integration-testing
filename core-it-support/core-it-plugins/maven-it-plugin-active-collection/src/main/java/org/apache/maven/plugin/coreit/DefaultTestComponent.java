@@ -9,7 +9,7 @@ package org.apache.maven.plugin.coreit;
  * "License"); you may not use this file except in compliance
  * with the License.  You may obtain a copy of the License at
  *
- *  http://www.apache.org/licenses/LICENSE-2.0
+ *   http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing,
  * software distributed under the License is distributed on an
@@ -19,21 +19,13 @@ package org.apache.maven.plugin.coreit;
  * under the License.
  */
 
-import org.codehaus.plexus.component.annotations.Component;
-
 /**
- * A dummy component whose role hint is not "default", yet should be used to satisfy an ordinary component requirement.
+ * A simple test component.
  *
  * @author Benjamin Bentmann
  */
-@Component ( role = org.apache.maven.plugin.coreit.Component.class, hint = "concrete" )
-public class ConcreteComponent
-    implements org.apache.maven.plugin.coreit.Component
+public class DefaultTestComponent
+        implements TestComponent
 {
-
-    public String getId()
-    {
-        return "concrete";
-    }
 
 }

@@ -50,7 +50,7 @@ public class ForkGoalAggregatorMojo
     {
         for ( MavenProject reactorProject : reactorProjects )
         {
-            MavenProject executedProject = ( reactorProject ).getExecutionProject();
+            MavenProject executedProject = reactorProject.getExecutionProject();
 
             if ( !executedProject.getBuild().getFinalName().equals( TouchMojo.FINAL_NAME ) )
             {

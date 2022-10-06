@@ -47,7 +47,7 @@ under the License.
     <dependency>
       <groupId>org.apache.maven.plugin-tools</groupId>
       <artifactId>maven-plugin-annotations</artifactId>
-      <version>3.6.5-SNAPSHOT</version>
+      <version>3.6.5-20221006.213415-47</version>
       <scope>provided</scope>
     </dependency>
   </dependencies>
@@ -57,9 +57,9 @@ under the License.
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-plugin-plugin</artifactId>
+        <version>3.6.5-20221006.213415-47</version>
         <configuration>
           <extractors>
-            <extractor>java-javadoc</extractor>
             <extractor>java-annotations</extractor>
           </extractors>
         </configuration>

@@ -224,6 +224,16 @@ under the License.
           </dependency>
         </dependencies>
       </plugin>
+      <plugin>
+        <groupId>org.apache.rat</groupId>
+        <artifactId>apache-rat-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>rat-check</id>
+            <inherited>false</inherited>
+          </execution>
+        </executions>
+      </plugin>
     </plugins>
   </build>
 </project>

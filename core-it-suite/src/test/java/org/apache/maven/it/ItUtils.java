@@ -23,6 +23,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.security.DigestInputStream;
 import java.security.MessageDigest;
+import java.util.List;
 
 /**
  * @author Benjamin Bentmann
@@ -65,4 +66,24 @@ class ItUtils
         return hash.toString();
     }
 
+    /**
+     * Throws an exception if the text <strong>is</strong> present in the log.
+     *
+     * @param verifier the verifier to use
+     * @param text the text to assert present
+     * @throws VerificationException if text is not found in log
+     */
+    static void verifyTextNotInLog( Verifier verifier, String text )
+            throws VerificationException
+    {
+        List<String> lines = verifier.loadFile( verifier.getBasedir(), verifier.getLogFileName(), false );
+
+        for ( String line : lines )
+        {
+            if ( Verifier.stripAnsi( line ).contains( text ) )
+            {
+                throw new VerificationException( "Text found in log: " + text );
+            }
+        }
+    }
 }

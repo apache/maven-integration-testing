@@ -67,7 +67,7 @@ under the License.
       <id>jar</id>
       <activation>
         <property>
-          <name>project.packaging</name>
+          <name>packaging</name>
           <value>jar</value>
         </property>
       </activation>
@@ -79,7 +79,7 @@ under the License.
       <id>war</id>
       <activation>
         <property>
-          <name>project.packaging</name>
+          <name>packaging</name>
           <value>war</value>
         </property>
       </activation>
@@ -91,7 +91,7 @@ under the License.
       <id>pom</id>
       <activation>
         <property>
-          <name>project.packaging</name>
+          <name>packaging</name>
           <value>pom</value>
         </property>
       </activation>

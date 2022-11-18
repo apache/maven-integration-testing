@@ -550,6 +550,16 @@ public abstract class AbstractMavenIntegrationTestCase
         throws VerificationException
     {
         Verifier verifier = new Verifier( basedir, debug );
+        verifier.getVerifierProperties().setProperty( "use.mavenRepoLocal", Boolean.FALSE.toString() );
+
+        verifier.setLocalRepo( new File( "target/it-local-repo" ).getAbsolutePath() );
+        verifier.addCliArguments( "-Dmaven.repo.local=" + verifier.getLocalRepository() );
+
+        String mavenRepoLocal = System.getProperty( "maven.repo.local", null );
+        if ( mavenRepoLocal != null )
+        {
+            verifier.addCliArguments( "-Dmaven.repo.local.tail=" + mavenRepoLocal );
+        }
 
         verifier.setAutoclean( false );
 

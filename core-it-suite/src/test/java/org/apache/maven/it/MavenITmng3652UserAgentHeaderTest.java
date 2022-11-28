@@ -295,6 +295,7 @@ public class MavenITmng3652UserAgentHeaderTest
     public void testmng3652_AdditionnalHttpHeaderConfiguredInSettings()
         throws Exception
     {
+        // TODO: once there is generic (not transport dependent) way to add custom headers remove this
         Assumptions.assumeFalse( matchesVersionRange( "[4.0.0-alpha-3,)" ) );
 
         File testDir = ResourceExtractor.simpleExtractResources( getClass(), "/mng-3652" );
@@ -316,8 +317,9 @@ public class MavenITmng3652UserAgentHeaderTest
         if ( matchesVersionRange( "[4.0.0-alpha-3,)" ) )
         {
             // in Maven4+ default transport is not Wagon anymore, so apply settings as it should be instead
-            verifier.addCliArgument( "-Daether.connector.userAgent=\"Maven Fu\"" );
+            verifier.addCliArgument( "-Daether.connector.userAgent=Maven Fu" );
             // currently Maven does not implement anything aside of Wagon hack for extra headers
+            // Custom-Header: My wonderful header
         }
         verifier.addCliArgument( "-X" );
 

@@ -17,7 +17,7 @@ class MavenITmng7606DependencyImportScopeTest
 
     public MavenITmng7606DependencyImportScopeTest()
     {
-        super( "[3.9.0,)" );
+        super( ALL_MAVEN_VERSIONS );
     }
 
     /**
@@ -32,15 +32,11 @@ class MavenITmng7606DependencyImportScopeTest
         File testDir = ResourceExtractor.simpleExtractResources( getClass(), "/mng-7606" );
 
         Verifier verifier = newVerifier( testDir.getAbsolutePath() );
-        verifier.setAutoclean( false );
-        //verifier.setDebugJvm( true );
-        //verifier.setForkJvm( true );
-        verifier.deleteDirectory( "target" );
+        verifier.setAutoclean( true );
         verifier.deleteArtifacts( "org.apache.maven.its.mng7606" );
-        verifier.addCliArgument( "validate" );
+        verifier.addCliArgument( "verify" );
         verifier.execute();
         verifier.verifyErrorFreeLog();
-        
     }
 
 }

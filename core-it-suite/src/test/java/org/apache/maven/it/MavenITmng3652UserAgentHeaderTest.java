@@ -35,6 +35,7 @@ import org.eclipse.jetty.server.Request;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.handler.AbstractHandler;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assumptions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -121,19 +122,19 @@ public class MavenITmng3652UserAgentHeaderTest
         File projectDir = new File( testDir, "test-project" );
 
         Verifier verifier = newVerifier( pluginDir.getAbsolutePath(), "remote" );
-        verifier.executeGoal( "install" );
+        verifier.addCliArgument( "install" );
+        verifier.execute();
         verifier.verifyErrorFreeLog();
-        verifier.resetStreams();
 
         verifier = newVerifier( projectDir.getAbsolutePath(), "remote" );
 
-        verifier.addCliOption( "-DtestPort=" + port );
-        verifier.addCliOption( "-X" );
+        verifier.addCliArgument( "-DtestPort=" + port );
+        verifier.addCliArgument( "-X" );
 
         verifier.setLogFileName( "log-unConfiguredHttp.txt" );
-        verifier.executeGoal( "validate" );
+        verifier.addCliArgument( "validate" );
+        verifier.execute();
         verifier.verifyErrorFreeLog();
-        verifier.resetStreams();
 
         String userAgent = this.userAgent;
         assertNotNull( userAgent );
@@ -164,21 +165,21 @@ public class MavenITmng3652UserAgentHeaderTest
         File projectDir = new File( testDir, "test-project" );
 
         Verifier verifier = newVerifier( pluginDir.getAbsolutePath(), "remote" );
-        verifier.executeGoal( "install" );
+        verifier.addCliArgument( "install" );
+        verifier.execute();
         verifier.verifyErrorFreeLog();
-        verifier.resetStreams();
 
         verifier = newVerifier( projectDir.getAbsolutePath(), "remote" );
 
         // test webdav
-        verifier.addCliOption( "-DtestPort=" + port );
-        verifier.addCliOption( "-DtestProtocol=dav:http" );
-        verifier.addCliOption( "-X" );
+        verifier.addCliArgument( "-DtestPort=" + port );
+        verifier.addCliArgument( "-DtestProtocol=dav:http" );
+        verifier.addCliArgument( "-X" );
 
         verifier.setLogFileName( "log-unConfiguredDAV.txt" );
-        verifier.executeGoal( "validate" );
+        verifier.addCliArgument( "validate" );
+        verifier.execute();
         verifier.verifyErrorFreeLog();
-        verifier.resetStreams();
 
         File touchFile = new File( projectDir, "target/touch.txt" );
         assertTrue( touchFile.exists() );
@@ -209,23 +210,28 @@ public class MavenITmng3652UserAgentHeaderTest
         File projectDir = new File( testDir, "test-project" );
 
         Verifier verifier = newVerifier( pluginDir.getAbsolutePath(), "remote" );
-        verifier.executeGoal( "install" );
+        verifier.addCliArgument( "install" );
+        verifier.execute();
         verifier.verifyErrorFreeLog();
-        verifier.resetStreams();
 
         verifier = newVerifier( projectDir.getAbsolutePath(), "remote" );
 
         // test settings with no config
 
-        verifier.addCliOption( "-DtestPort=" + port );
-        verifier.addCliOption( "--settings" );
-        verifier.addCliOption( "settings-no-config.xml" );
-        verifier.addCliOption( "-X" );
+        verifier.addCliArgument( "-DtestPort=" + port );
+        verifier.addCliArgument( "--settings" );
+        verifier.addCliArgument( "settings-no-config.xml" );
+        if ( matchesVersionRange( "[4.0.0-alpha-3,)" ) )
+        {
+            // in Maven4+ default transport is not Wagon anymore, so apply settings as it should be instead
+            verifier.addCliArgument( "-Daether.connector.requestTimeout=30" );
+        }
+        verifier.addCliArgument( "-X" );
 
         verifier.setLogFileName( "log-configWithoutUserAgent.txt" );
-        verifier.executeGoal( "validate" );
+        verifier.addCliArgument( "validate" );
+        verifier.execute();
         verifier.verifyErrorFreeLog();
-        verifier.resetStreams();
 
         File touchFile = new File( projectDir, "target/touch.txt" );
         assertTrue( touchFile.exists() );
@@ -256,57 +262,69 @@ public class MavenITmng3652UserAgentHeaderTest
         File projectDir = new File( testDir, "test-project" );
 
         Verifier verifier = newVerifier( pluginDir.getAbsolutePath(), "remote" );
-        verifier.executeGoal( "install" );
+        verifier.addCliArgument( "install" );
+        verifier.execute();
         verifier.verifyErrorFreeLog();
-        verifier.resetStreams();
 
         verifier = newVerifier( projectDir.getAbsolutePath(), "remote" );
 
         // test settings with config
 
-        verifier.addCliOption( "-DtestPort=" + port );
-        verifier.addCliOption( "--settings" );
-        verifier.addCliOption( "settings.xml" );
-        verifier.addCliOption( "-X" );
+        verifier.addCliArgument( "-DtestPort=" + port );
+        verifier.addCliArgument( "--settings" );
+        verifier.addCliArgument( "settings.xml" );
+        if ( matchesVersionRange( "[4.0.0-alpha-3,)" ) )
+        {
+            // in Maven4+ default transport is not Wagon anymore, so apply settings as it should be instead
+            verifier.addCliArgument( "-Daether.connector.userAgent=Maven Fu" );
+        }
+        verifier.addCliArgument( "-X" );
 
         verifier.setLogFileName( "log-configWithUserAgent.txt" );
-        verifier.executeGoal( "validate" );
+        verifier.addCliArgument( "validate" );
+        verifier.execute();
         verifier.verifyErrorFreeLog();
-        verifier.resetStreams();
 
         String userAgent = this.userAgent;
         assertNotNull( userAgent );
 
         assertEquals( "Maven Fu", userAgent );
-        assertEquals( "My wonderful header", customHeader );
     }
 
     @Test
     public void testmng3652_AdditionnalHttpHeaderConfiguredInSettings()
         throws Exception
     {
+        Assumptions.assumeFalse( matchesVersionRange( "[4.0.0-alpha-3,)" ) );
+
         File testDir = ResourceExtractor.simpleExtractResources( getClass(), "/mng-3652" );
         File pluginDir = new File( testDir, "test-plugin" );
         File projectDir = new File( testDir, "test-project" );
 
         Verifier verifier = newVerifier( pluginDir.getAbsolutePath(), "remote" );
-        verifier.executeGoal( "install" );
+        verifier.addCliArgument( "install" );
+        verifier.execute();
         verifier.verifyErrorFreeLog();
-        verifier.resetStreams();
 
         verifier = newVerifier( projectDir.getAbsolutePath(), "remote" );
 
         // test settings with config
 
-        verifier.addCliOption( "-DtestPort=" + port );
-        verifier.addCliOption( "--settings" );
-        verifier.addCliOption( "settings.xml" );
-        verifier.addCliOption( "-X" );
+        verifier.addCliArgument( "-DtestPort=" + port );
+        verifier.addCliArgument( "--settings" );
+        verifier.addCliArgument( "settings.xml" );
+        if ( matchesVersionRange( "[4.0.0-alpha-3,)" ) )
+        {
+            // in Maven4+ default transport is not Wagon anymore, so apply settings as it should be instead
+            verifier.addCliArgument( "-Daether.connector.userAgent=\"Maven Fu\"" );
+            // currently Maven does not implement anything aside of Wagon hack for extra headers
+        }
+        verifier.addCliArgument( "-X" );
 
         verifier.setLogFileName( "log-configWithUserAgent.txt" );
-        verifier.executeGoal( "validate" );
+        verifier.addCliArgument( "validate" );
+        verifier.execute();
         verifier.verifyErrorFreeLog();
-        verifier.resetStreams();
 
         String userAgent = this.userAgent;
         assertNotNull( userAgent );

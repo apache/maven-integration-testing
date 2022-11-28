@@ -28,7 +28,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Properties;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.eclipse.jetty.server.Handler;
 import org.eclipse.jetty.server.NetworkConnector;
@@ -42,8 +43,6 @@ import org.junit.jupiter.api.Test;
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-5175">MNG-5175</a>.
  * test correct integration of wagon http: read time out configuration from settings.xml
- *
- *
  */
 public class MavenITmng5175WagonHttpTest
     extends AbstractMavenIntegrationTestCase
@@ -122,22 +121,23 @@ public class MavenITmng5175WagonHttpTest
 
         Verifier verifier = newVerifier( testDir.getAbsolutePath() );
 
-        Properties filterProps = new Properties();
-        filterProps.setProperty( "@port@", Integer.toString( port ) );
+        Map<String, String> filterProps = new HashMap<>();
+        filterProps.put( "@port@", Integer.toString( port ) );
 
         verifier.filterFile( "settings-template.xml", "settings.xml", "UTF-8", filterProps );
 
-        verifier.addCliOption( "-U" );
-        verifier.addCliOption( "--settings" );
-        verifier.addCliOption( "settings.xml" );
-        verifier.addCliOption( "--fail-never" );
-        verifier.addCliOption( "--errors" );
-        verifier.setMavenDebug( true );
-        verifier.executeGoal( "validate" );
+        verifier.addCliArgument( "-Daether.connector.requestTimeout=10" );
+        verifier.addCliArgument( "-U" );
+        verifier.addCliArgument( "--settings" );
+        verifier.addCliArgument( "settings.xml" );
+        verifier.addCliArgument( "--fail-never" );
+        verifier.addCliArgument( "--errors" );
+        verifier.addCliArgument( "-X" );
+        verifier.addCliArgument( "validate" );
+        verifier.execute();
 
         verifier.verifyTextInLog(
                 "Could not transfer artifact org.apache.maven.its.mng5175:fake-dependency:pom:1.0-SNAPSHOT" );
         verifier.verifyTextInLog( "Read timed out" );
-        verifier.resetStreams();
     }
 }

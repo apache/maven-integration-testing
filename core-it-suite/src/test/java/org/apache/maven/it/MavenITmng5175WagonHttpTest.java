@@ -126,6 +126,7 @@ public class MavenITmng5175WagonHttpTest
 
         verifier.filterFile( "settings-template.xml", "settings.xml", "UTF-8", filterProps );
 
+        // This is the PROPER way to set timeout, recognized by ALL transports
         verifier.addCliArgument( "-Daether.connector.requestTimeout=10" );
         verifier.addCliArgument( "-U" );
         verifier.addCliArgument( "--settings" );

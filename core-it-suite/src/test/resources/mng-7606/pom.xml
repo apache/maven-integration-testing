@@ -27,8 +27,8 @@
 
     <dependencyManagement>
         <dependencies>
-            <!-- The bug manifests if there are more than 2 import scoped POMs
-                 reason: first is "stuck" with request.setRawModel( inputModel ); call
+            <!-- The bug manifests if there are more than 1 import scoped POMs.
+                 Reason: first model is "stuck" with request.setRawModel( inputModel ) forever
                  See commit: e921f1564ef9460ca58745eb52e3967dbbd0b9e7
             -->
             <dependency>

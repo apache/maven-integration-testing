@@ -2,6 +2,7 @@
   <servers>
     <server>
       <id>test</id>
+      <!-- Plexus Configuration consumed by Wagon only -->
       <configuration>
         <httpHeaders>
           <property>

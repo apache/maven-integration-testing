@@ -25,6 +25,7 @@ import org.apache.maven.shared.verifier.Verifier;
 import java.io.File;
 import java.util.List;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -49,6 +50,7 @@ public class MavenITmng3043BestEffortReactorResolutionTest
      * @throws Exception in case of failure
      */
     @Test
+    @Disabled("Disabled by MNG-7629")
     public void testitTestPhase()
         throws Exception
     {

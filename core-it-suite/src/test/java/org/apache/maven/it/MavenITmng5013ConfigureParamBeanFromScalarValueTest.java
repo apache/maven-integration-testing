@@ -59,7 +59,8 @@ public class MavenITmng5013ConfigureParamBeanFromScalarValueTest
 
         Properties props = verifier.loadProperties( "target/config.properties" );
         assertEquals( "PASSED", props.getProperty( "beanParam.fieldParam" ) );
-        assertEquals( "true", props.getProperty( "beanParam.setterCalled" ) );
+        assertEquals( "true", props.getProperty( "beanParam.setCalled" ) );
+        assertEquals( "false", props.getProperty( "beanParam.setterCalled" ) );
     }
 
 }

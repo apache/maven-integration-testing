@@ -46,6 +46,24 @@ under the License.
         </repository>
       </repositories>
     </profile>
+    <profile>
+      <!--
+      NOTE: Since Maven Central (release repo) is not added implicitly by Maven Core anymore we cannot rely on the implicit behavior of MNG-4963.
+      -->
+      <id>it-defaults-4.0.0</id>
+      <repositories>
+        <repository>
+          <id>maven-core-it-4.0.0</id>
+          <url>@baseurl@/repo</url>
+          <releases>
+            <enabled>true</enabled>
+          </releases>
+          <snapshots>
+            <enabled>false</enabled>
+          </snapshots>
+        </repository>
+      </repositories>
+    </profile>
   </profiles>
   <activeProfiles>
     <activeProfile>it-defaults</activeProfile>

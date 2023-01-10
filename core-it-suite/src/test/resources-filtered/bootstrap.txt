@@ -39,7 +39,6 @@ org.apache.maven.its.plugins:maven-it-plugin-no-project:${project.version}
 org.apache.maven.its.plugins:maven-it-plugin-online:${project.version}
 org.apache.maven.its.plugins:maven-it-plugin-optional-mojos:${project.version}
 org.apache.maven.its.plugins:maven-it-plugin-packaging:${project.version}
-org.apache.maven.its.plugins:maven-it-plugin-parameter-implementation:${project.version}
 org.apache.maven.its.plugins:maven-it-plugin-plexus-component-api:${project.version}
 org.apache.maven.its.plugins:maven-it-plugin-plexus-utils-11:${project.version}
 org.apache.maven.its.plugins:maven-it-plugin-plexus-utils-new:${project.version}

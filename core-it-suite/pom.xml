@@ -352,11 +352,6 @@ under the License.
     </dependency>
     <dependency>
       <groupId>org.apache.maven.its.plugins</groupId>
-      <artifactId>maven-it-plugin-parameter-implementation</artifactId>
-      <version>${project.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.maven.its.plugins</groupId>
       <artifactId>maven-it-plugin-plugin-dependency</artifactId>
       <version>${project.version}</version>
     </dependency>

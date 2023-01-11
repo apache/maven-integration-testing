@@ -78,6 +78,7 @@ org.apache.maven.plugins:maven-dependency-plugin:3.1.1
 org.apache.maven.plugins:maven-dependency-plugin:3.3.0
 org.apache.maven.plugins:maven-deploy-plugin:${stubPluginVersion}
 org.apache.maven.plugins:maven-deploy-plugin:2.7
+org.apache.maven.plugins:maven-deploy-plugin:3.0.0-M2
 org.apache.maven.plugins:maven-deploy-plugin:3.0.0
 org.apache.maven.plugins:maven-ear-plugin:${stubPluginVersion}
 org.apache.maven.plugins:maven-ear-plugin:3.2.0
@@ -132,6 +133,7 @@ org.apache.maven:maven-script-ant:2.1.0
 org.apache.maven:maven-settings-builder:3.1.1
 org.apache.maven:maven-settings:3.1.1
 org.codehaus.gmavenplus:gmavenplus-plugin:1.11.0
+org.codehaus.mojo:build-helper-maven-plugin:3.2.0
 org.codehaus.mojo:flatten-maven-plugin:1.0.0
 org.codehaus.plexus:plexus-classworlds:2.5.1
 org.codehaus.plexus:plexus-component-annotations:1.5.5

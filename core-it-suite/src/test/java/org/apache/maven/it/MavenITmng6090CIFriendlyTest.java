@@ -94,10 +94,10 @@ public class MavenITmng6090CIFriendlyTest
         verifier.setAutoclean( false );
         verifier.setForkJvm(true);
 
-        verifier.addCliOption( "-Drevision=1.2" );
-        verifier.addCliOption( "-Dmaven.experimental.buildconsumer=true" );
+        verifier.addCliArgument( "-Drevision=1.2" );
+        verifier.addCliArgument( "-Dmaven.experimental.buildconsumer=true" );
         verifier.setLogFileName( "install-log.txt" );
-        verifier.addCliArguments( "clean", "install" );
+        verifier.addCliArguments( "clean", "verify" );
         verifier.execute();
         verifier.verifyErrorFreeLog();
 
@@ -106,9 +106,8 @@ public class MavenITmng6090CIFriendlyTest
         verifier.setAutoclean( false );
         verifier.setForkJvm(true);
 
-        verifier.addCliOption( "-Drevision=1.2" );
-        verifier.addCliOption( "-pl" );
-        verifier.addCliOption( "module-3" );
+        verifier.addCliArgument( "-Drevision=1.2" );
+        verifier.addCliArguments( "-pl", "module-3" );
         verifier.addCliArgument( "package" );
         verifier.execute();
         verifier.verifyErrorFreeLog();

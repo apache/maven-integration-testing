@@ -24,7 +24,7 @@ import org.apache.maven.shared.verifier.Verifier;
 
 import java.io.File;
 import java.util.List;
-import java.util.Map;
+import java.util.Properties;
 
 import org.junit.jupiter.api.Test;
 
@@ -58,9 +58,9 @@ public class MavenITmng1895ScopeConflictResolutionTest
         verifier.setAutoclean( false );
         verifier.deleteArtifacts( "org.apache.maven.its.mng1895" );
         verifier.deleteDirectory( "target" );
-        verifier.addCliArgument( "-s" );
-        verifier.addCliArgument( "settings.xml" );
-        verifier.filterFile( "settings-template.xml", "settings.xml", "UTF-8", verifier.newDefaultFilterMap() );
+        verifier.addCliOption( "-s" );
+        verifier.addCliOption( "settings.xml" );
+        verifier.filterFile( "settings-template.xml", "settings.xml", "UTF-8", verifier.newDefaultFilterProperties() );
         verifier.addCliArgument( "validate" );
         verifier.execute();
         verifier.verifyErrorFreeLog();
@@ -239,11 +239,11 @@ public class MavenITmng1895ScopeConflictResolutionTest
         verifier.setAutoclean( false );
         verifier.deleteArtifacts( "org.apache.maven.its.mng1895" );
         verifier.deleteDirectory( "target" );
-        verifier.addCliArgument( "-s" );
-        verifier.addCliArgument( "settings.xml" );
-        Map<String, String> props = verifier.newDefaultFilterMap();
-        props.put( "@scope.a@", scopeA );
-        props.put( "@scope.b@", scopeB );
+        verifier.addCliOption( "-s" );
+        verifier.addCliOption( "settings.xml" );
+        Properties props = verifier.newDefaultFilterProperties();
+        props.setProperty( "@scope.a@", scopeA );
+        props.setProperty( "@scope.b@", scopeB );
         verifier.filterFile( "settings-template.xml", "settings.xml", "UTF-8", props );
         verifier.filterFile( "pom-template.xml", "pom.xml", "UTF-8", props );
         verifier.setLogFileName( "log-" + scopeB + "-vs-" + scopeA + ".txt" );

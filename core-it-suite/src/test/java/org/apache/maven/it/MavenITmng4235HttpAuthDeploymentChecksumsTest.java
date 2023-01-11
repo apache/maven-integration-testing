@@ -204,7 +204,7 @@ public class MavenITmng4235HttpAuthDeploymentChecksumsTest
 
             if ( "PUT".equals( request.getMethod() ) )
             {
-                Resource resource = getResource( request );
+                Resource resource = getResource( request.getPathInfo() );
 
                 // NOTE: This can get called concurrently but File.mkdirs() isn't thread-safe in all JREs
                 File dir = resource.getFile().getParentFile();

@@ -36,6 +36,7 @@ import org.codehaus.plexus.util.StringUtils;
 import org.eclipse.jetty.security.ConstraintMapping;
 import org.eclipse.jetty.security.ConstraintSecurityHandler;
 import org.eclipse.jetty.security.HashLoginService;
+import org.eclipse.jetty.security.UserStore;
 import org.eclipse.jetty.server.Handler;
 import org.eclipse.jetty.server.NetworkConnector;
 import org.eclipse.jetty.server.Request;
@@ -43,7 +44,6 @@ import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.handler.AbstractHandler;
 import org.eclipse.jetty.server.handler.HandlerList;
 import org.eclipse.jetty.servlet.ServletContextHandler;
-import org.eclipse.jetty.util.B64Code;
 import org.eclipse.jetty.util.security.Constraint;
 import org.eclipse.jetty.util.security.Password;
 import org.junit.jupiter.api.AfterEach;
@@ -92,7 +92,7 @@ public class MavenITmng4470AuthenticatedDeploymentToProxyTest
                 if ( auth != null )
                 {
                     auth = auth.substring( auth.indexOf( ' ' ) + 1 ).trim();
-                    auth = B64Code.decode( auth, StandardCharsets.US_ASCII.name() );
+                    auth = new String( java.util.Base64.getDecoder().decode( auth ), StandardCharsets.US_ASCII );
                 }
                 System.out.println( "Proxy-Authorization: " + auth );
 
@@ -155,7 +155,9 @@ public class MavenITmng4470AuthenticatedDeploymentToProxyTest
         constraintMapping.setPathSpec( "/*" );
 
         HashLoginService userRealm = new HashLoginService( "TestRealm" );
-        userRealm.putUser( "testuser", new Password( "testtest" ), new String[] { "deployer" } );
+        UserStore userStore = new UserStore();
+        userStore.addUser( "testuser", new Password( "testtest" ), new String[] { "deployer" } );
+        userRealm.setUserStore( userStore );
 
         server = new Server( 0 );
         ServletContextHandler ctx = new ServletContextHandler( server, "/", SESSIONS | SECURITY );
@@ -224,8 +226,8 @@ public class MavenITmng4470AuthenticatedDeploymentToProxyTest
         verifier.setAutoclean( false );
         verifier.filterFile( "settings-template.xml", "settings.xml", "UTF-8",
                              Collections.singletonMap( "@port@", Integer.toString( port ) ) );
-        verifier.addCliOption( "--settings" );
-        verifier.addCliOption( "settings.xml" );
+        verifier.addCliArgument( "--settings" );
+        verifier.addCliArgument( "settings.xml" );
         verifier.addCliArgument( "validate" );
         verifier.execute();
         verifier.verifyErrorFreeLog();

@@ -28,6 +28,7 @@ import java.util.Properties;
 import org.eclipse.jetty.security.ConstraintMapping;
 import org.eclipse.jetty.security.ConstraintSecurityHandler;
 import org.eclipse.jetty.security.HashLoginService;
+import org.eclipse.jetty.security.UserStore;
 import org.eclipse.jetty.server.NetworkConnector;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.handler.DefaultHandler;
@@ -78,7 +79,9 @@ public class MavenITmng4489MirroringOfExtensionRepoTest
         constraintMapping.setPathSpec( "/*" );
 
         HashLoginService userRealm = new HashLoginService( "TestRealm" );
-        userRealm.putUser( "testuser", new Password( "testtest" ), new String[] { "user" } );
+        UserStore userStore = new UserStore();
+        userStore.addUser( "testuser", new Password( "testtest" ), new String[] { "user" } );
+        userRealm.setUserStore( userStore );
 
         Server server = new Server( 0 );
         ServletContextHandler ctx = new ServletContextHandler( server, "/", SESSIONS | SECURITY );

@@ -38,6 +38,7 @@ import org.codehaus.plexus.util.StringUtils;
 import org.eclipse.jetty.security.ConstraintMapping;
 import org.eclipse.jetty.security.ConstraintSecurityHandler;
 import org.eclipse.jetty.security.HashLoginService;
+import org.eclipse.jetty.security.UserStore;
 import org.eclipse.jetty.server.NetworkConnector;
 import org.eclipse.jetty.server.Request;
 import org.eclipse.jetty.server.Server;
@@ -97,7 +98,9 @@ public class MavenITmng4235HttpAuthDeploymentChecksumsTest
         constraintMapping.setPathSpec( "/*" );
 
         HashLoginService userRealm = new HashLoginService( "TestRealm" );
-        userRealm.putUser( "testuser", new Password( "testpass" ), new String[] { "deployer" } );
+        UserStore userStore = new UserStore();
+        userStore.addUser( "testuser", new Password( "testpass" ), new String[] { "deployer" } );
+        userRealm.setUserStore( userStore );
 
         ServletContextHandler ctx = new ServletContextHandler( server, "/", SESSIONS | SECURITY );
         ConstraintSecurityHandler securityHandler = (ConstraintSecurityHandler) ctx.getSecurityHandler();

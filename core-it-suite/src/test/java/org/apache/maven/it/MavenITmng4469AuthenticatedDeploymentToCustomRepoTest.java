@@ -30,6 +30,7 @@ import java.io.File;
 import org.eclipse.jetty.security.ConstraintMapping;
 import org.eclipse.jetty.security.ConstraintSecurityHandler;
 import org.eclipse.jetty.security.HashLoginService;
+import org.eclipse.jetty.security.UserStore;
 import org.eclipse.jetty.server.Handler;
 import org.eclipse.jetty.server.NetworkConnector;
 import org.eclipse.jetty.server.Request;
@@ -103,7 +104,9 @@ public class MavenITmng4469AuthenticatedDeploymentToCustomRepoTest
         constraintMapping.setPathSpec( "/*" );
 
         HashLoginService userRealm = new HashLoginService( "TestRealm" );
-        userRealm.putUser( "testuser", new Password( "testtest" ), new String[] { "deployer" } );
+        UserStore userStore = new UserStore();
+        userStore.addUser( "testuser", new Password( "testtest" ), new String[] { "deployer" } );
+        userRealm.setUserStore( userStore );
 
         server = new Server( 0 );
         ServletContextHandler ctx = new ServletContextHandler( server, "/", SESSIONS | SECURITY );

@@ -27,6 +27,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import java.io.File;
 import java.nio.charset.StandardCharsets;
+import java.util.Base64;
 import java.util.Collections;
 import java.util.Deque;
 import java.util.concurrent.ConcurrentLinkedDeque;
@@ -89,7 +90,7 @@ public class MavenITmng4470AuthenticatedDeploymentToProxyTest
                 if ( auth != null )
                 {
                     auth = auth.substring( auth.indexOf( ' ' ) + 1 ).trim();
-                    auth = new String( java.util.Base64.getDecoder().decode( auth ), StandardCharsets.US_ASCII );
+                    auth = new String( Base64.getDecoder().decode( auth ), StandardCharsets.US_ASCII );
                 }
                 System.out.println( "Proxy-Authorization: " + auth );
 

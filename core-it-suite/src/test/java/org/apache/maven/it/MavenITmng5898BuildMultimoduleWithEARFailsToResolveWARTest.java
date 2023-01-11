@@ -53,7 +53,7 @@ public class MavenITmng5898BuildMultimoduleWithEARFailsToResolveWARTest
         Verifier verifier = newVerifier( testDir.getAbsolutePath() );
         verifier.setAutoclean( false );
         verifier.deleteDirectory( "target" );
-        verifier.addCliArgument( "test" );
+        verifier.addCliArgument( "verify" );
         verifier.execute();
         verifier.verifyErrorFreeLog();
     }

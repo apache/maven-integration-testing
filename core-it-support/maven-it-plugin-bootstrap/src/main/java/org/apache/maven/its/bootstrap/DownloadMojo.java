@@ -31,6 +31,7 @@ import org.apache.maven.RepositoryUtils;
 import org.apache.maven.artifact.handler.manager.ArtifactHandlerManager;
 import org.apache.maven.execution.MavenSession;
 import org.apache.maven.model.Dependency;
+import org.apache.maven.model.Plugin;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.plugins.annotations.Component;
@@ -102,6 +103,21 @@ public class DownloadMojo
             {
                 dependencies.add( toDependency( artifact ) );
             }
+        }
+
+        // HACK: this plugin is executing in bootstrap project that has packaging=pom, but still enlists install/deploy
+        try
+        {
+            for ( Plugin plugin : session.getCurrentProject().getBuildPlugins() )
+            {
+                dependencies.add( toDependency(
+                        plugin.getGroupId() + ":" + plugin.getArtifactId() + ":" + plugin.getVersion()
+                ) );
+            }
+        }
+        catch ( Exception e )
+        {
+            throw new MojoFailureException( e );
         }
 
         ProjectBuildingRequest projectBuildingRequest = session.getProjectBuildingRequest();

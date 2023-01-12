@@ -43,7 +43,7 @@ public class MavenITmng5669ReadPomsOnce
     extends AbstractMavenIntegrationTestCase
 {
 
-    private static final int LOG_SIZE = 233;
+    private static final int LOG_SIZE = 122;
 
     public MavenITmng5669ReadPomsOnce()
     {

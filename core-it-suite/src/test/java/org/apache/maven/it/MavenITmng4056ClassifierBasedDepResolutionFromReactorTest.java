@@ -90,8 +90,14 @@ public class MavenITmng4056ClassifierBasedDepResolutionFromReactorTest
         }
 
         List<String> classpath = verifier.loadLines( "consumer/target/compile.txt", "UTF-8" );
-        assertTrue( classpath.toString(), classpath.contains( "producer/test.jar" ) );
-        assertTrue( classpath.toString(), classpath.contains( "producer/client.jar" ) );
+        if ( matchesVersionRange( "[4.0.0-alpha-4,)" ) )
+        {
+            assertTrue( classpath.toString(), classpath.contains( "producer/producer-0.1-tests.jar" ) );
+            assertTrue( classpath.toString(), classpath.contains( "producer/producer-0.1-client.jar" ) );
+        } else {
+            assertTrue( classpath.toString(), classpath.contains( "producer/test.jar" ) );
+            assertTrue( classpath.toString(), classpath.contains( "producer/client.jar" ) );
+        }
     }
 
 }

@@ -74,7 +74,7 @@ public class MavenITmng5760ResumeFeatureTest extends AbstractMavenIntegrationTes
 
         try
         {
-            verifier.addCliArgument( "test" );
+            verifier.addCliArgument( "verify" );
             verifier.execute();
             fail( "Expected this invocation to fail" );
         }
@@ -87,7 +87,7 @@ public class MavenITmng5760ResumeFeatureTest extends AbstractMavenIntegrationTes
         // New build with -r should resume the build from module-b, skipping module-a since it has succeeded already.
         verifier = newVerifier( parentDependentTestDir.getAbsolutePath() );
         verifier.addCliOption( "-r" );
-        verifier.addCliArgument( "test" );
+        verifier.addCliArgument( "verify" );
         verifier.execute();
         verifyTextNotInLog( verifier, "Building module-a 1.0" );
         verifier.verifyTextInLog( "Building module-b 1.0" );
@@ -103,7 +103,7 @@ public class MavenITmng5760ResumeFeatureTest extends AbstractMavenIntegrationTes
 
         try
         {
-            verifier.addCliArgument( "test" );
+            verifier.addCliArgument( "verify" );
             verifier.execute();
             fail( "Expected this invocation to fail" );
         }
@@ -119,7 +119,7 @@ public class MavenITmng5760ResumeFeatureTest extends AbstractMavenIntegrationTes
         // ... but adding -r should exclude those two from the build because the previous Maven invocation
         // marked them as successfully built.
         verifier.addCliOption( "-r" );
-        verifier.addCliArgument( "test" );
+        verifier.addCliArgument( "verify" );
         verifier.execute();
     }
 
@@ -135,7 +135,7 @@ public class MavenITmng5760ResumeFeatureTest extends AbstractMavenIntegrationTes
 
         try
         {
-            verifier.addCliArgument( "test" );
+            verifier.addCliArgument( "verify" );
             verifier.execute();
             fail( "Expected this invocation to fail" );
         }
@@ -146,7 +146,7 @@ public class MavenITmng5760ResumeFeatureTest extends AbstractMavenIntegrationTes
 
         verifier = newVerifier( parentIndependentTestDir.getAbsolutePath() );
         verifier.addCliOption( "-r" );
-        verifier.addCliArgument( "test" );
+        verifier.addCliArgument( "verify" );
         verifier.execute();
         verifier.verifyTextInLog( "Building module-a 1.0" );
         verifyTextNotInLog( verifier, "Building module-b 1.0" );

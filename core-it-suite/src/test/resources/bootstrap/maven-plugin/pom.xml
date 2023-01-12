@@ -22,27 +22,18 @@ under the License.
 <project>
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>org.apache.maven.its.bootstrap</groupId>
-    <artifactId>maven-it-boostrap</artifactId>
-    <version>1.0</version>
-    <packaging>pom</packaging>
+    <parent>
+        <groupId>org.apache.maven.its.bootstrap</groupId>
+        <artifactId>maven-it-boostrap</artifactId>
+        <version>1.0</version>
+    </parent>
 
-    <name>Maven Integration Test :: Boostrap</name>
-    <description>
-        This project pulls down all the artifacts/plugins required for the IT suite. Due to MNG-2974, snapshot versions of
-        plugins cannot be downloaded by Maven from non-default repositories configured in the POM if the plugin is invoked
-        directly from the command line. Also, having this in a central place spares us from copying the snapshot repo
-        config all around in the IT POMs.
-    </description>
+    <artifactId>maven-plugin</artifactId>
+    <packaging>maven-plugin</packaging>
 
-    <modules>
-        <module>jar</module>
-        <module>maven-plugin</module>
-        <module>war</module>
-    </modules>
+    <name>Maven Integration Test :: Boostrap :: maven-plugin</name>
 
     <build>
-        <!-- This merely locks the plugin versions to disable auto-update -->
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.its</groupId>
@@ -55,7 +46,8 @@ under the License.
                             <goal>download</goal>
                         </goals>
                         <configuration>
-                            <file>${bootstrap}</file>
+                            <!-- We do not what to resolve what parent did, we are interested in packaging only -->
+                            <file>${bootstrap}-nofile</file>
                         </configuration>
                     </execution>
                 </executions>

@@ -105,7 +105,7 @@ public class DownloadMojo
             }
         }
 
-        // HACK: this plugin is executing in bootstrap project that has packaging=pom, but still enlists install/deploy
+        // In project this plugin is executing will collect default bound plugins in packaging
         try
         {
             for ( Plugin plugin : session.getCurrentProject().getBuildPlugins() )

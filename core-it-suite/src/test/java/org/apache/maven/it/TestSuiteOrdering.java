@@ -50,6 +50,9 @@ public class TestSuiteOrdering implements ClassOrderer
     {
         try
         {
+            System.clearProperty( "maven.bootclasspath" );
+            System.clearProperty( "maven.conf" );
+            System.clearProperty( "classworlds.conf" );
             Verifier verifier = new Verifier( "" );
             String mavenVersion = verifier.getMavenVersion();
             String executable = verifier.getExecutable();

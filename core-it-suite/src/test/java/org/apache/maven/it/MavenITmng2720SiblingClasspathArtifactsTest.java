@@ -57,6 +57,7 @@ public class MavenITmng2720SiblingClasspathArtifactsTest
 
         Verifier verifier = newVerifier( testDir.getAbsolutePath() );
         verifier.setAutoclean( false );
+        verifier.deleteDirectory( "target" );
         verifier.deleteDirectory( "child2/target" );
         verifier.deleteDirectory( "child3/target" );
         verifier.addCliArgument( "initialize" );
@@ -90,14 +91,16 @@ public class MavenITmng2720SiblingClasspathArtifactsTest
         assertFalse( classPath.toString(), classPath.contains( "main" ) );
         assertFalse( classPath.toString(), classPath.contains( "test.jar" ) );
         assertFalse( classPath.toString(), classPath.contains( "test" ) );
+        assertFalse( classPath.toString(), classPath.contains( "child1-1-tests.jar" ) );
     }
 
     private void assertTestJar( List<String> classPath )
     {
         assertFalse( classPath.toString(), classPath.contains( "main.jar" ) );
         assertFalse( classPath.toString(), classPath.contains( "main" ) );
-        assertTrue( classPath.toString(), classPath.contains( "test.jar" ) );
+        assertFalse( classPath.toString(), classPath.contains( "test.jar" ) );
         assertFalse( classPath.toString(), classPath.contains( "test" ) );
+        assertTrue( classPath.toString(), classPath.contains( "child1-1-tests.jar" ) );
     }
 
 }

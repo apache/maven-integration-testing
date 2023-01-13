@@ -25,6 +25,7 @@ import org.apache.maven.shared.verifier.Verifier;
 import java.io.File;
 import java.util.List;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -56,6 +57,7 @@ public class MavenITmng3043BestEffortReactorResolutionTest
 
         Verifier verifier = newVerifier( testDir.getAbsolutePath() );
         verifier.setAutoclean( false );
+        verifier.deleteDirectory( "target" );
         verifier.deleteDirectory( "consumer-a/target" );
         verifier.deleteDirectory( "consumer-b/target" );
         verifier.deleteDirectory( "consumer-c/target" );
@@ -113,6 +115,7 @@ public class MavenITmng3043BestEffortReactorResolutionTest
 
         Verifier verifier = newVerifier( testDir.getAbsolutePath() );
         verifier.setAutoclean( false );
+        verifier.deleteDirectory( "target" );
         verifier.deleteDirectory( "consumer-a/target" );
         verifier.deleteDirectory( "consumer-b/target" );
         verifier.deleteDirectory( "consumer-c/target" );
@@ -125,34 +128,34 @@ public class MavenITmng3043BestEffortReactorResolutionTest
         List<String> classpath;
 
         classpath = verifier.loadLines( "consumer-a/target/compile.txt", "UTF-8" );
-        assertContains( classpath, new String[] { "tests.jar" } );
-        assertNotContains( classpath, new String[] { "client.jar" } );
+        assertContains( classpath, new String[] { "dependency-0.1-SNAPSHOT-tests.jar" } );
+        assertNotContains( classpath, new String[] { "dependency-0.1-SNAPSHOT-client.jar" } );
         classpath = verifier.loadLines( "consumer-a/target/runtime.txt", "UTF-8" );
-        assertContains( classpath, new String[] { "tests.jar" } );
-        assertNotContains( classpath, new String[] { "client.jar" } );
+        assertContains( classpath, new String[] { "dependency-0.1-SNAPSHOT-tests.jar" } );
+        assertNotContains( classpath, new String[] { "dependency-0.1-SNAPSHOT-client.jar" } );
         classpath = verifier.loadLines( "consumer-a/target/test.txt", "UTF-8" );
-        assertContains( classpath, new String[] { "tests.jar" } );
-        assertNotContains( classpath, new String[] { "client.jar" } );
+        assertContains( classpath, new String[] { "dependency-0.1-SNAPSHOT-tests.jar" } );
+        assertNotContains( classpath, new String[] { "dependency-0.1-SNAPSHOT-client.jar" } );
 
         classpath = verifier.loadLines( "consumer-b/target/compile.txt", "UTF-8" );
-        assertContains( classpath, new String[] { "client.jar" } );
-        assertNotContains( classpath, new String[] { "tests.jar" } );
+        assertContains( classpath, new String[] { "dependency-0.1-SNAPSHOT-client.jar" } );
+        assertNotContains( classpath, new String[] { "dependency-0.1-SNAPSHOT-tests.jar" } );
         classpath = verifier.loadLines( "consumer-b/target/runtime.txt", "UTF-8" );
-        assertContains( classpath, new String[] { "client.jar" } );
-        assertNotContains( classpath, new String[] { "tests.jar" } );
+        assertContains( classpath, new String[] { "dependency-0.1-SNAPSHOT-client.jar" } );
+        assertNotContains( classpath, new String[] { "dependency-0.1-SNAPSHOT-tests.jar" } );
         classpath = verifier.loadLines( "consumer-b/target/test.txt", "UTF-8" );
-        assertContains( classpath, new String[] { "client.jar" } );
-        assertNotContains( classpath, new String[] { "tests.jar" } );
+        assertContains( classpath, new String[] { "dependency-0.1-SNAPSHOT-client.jar" } );
+        assertNotContains( classpath, new String[] { "dependency-0.1-SNAPSHOT-tests.jar" } );
 
         classpath = verifier.loadLines( "consumer-c/target/compile.txt", "UTF-8" );
-        assertContains( classpath, new String[] { "client.jar" } );
-        assertContains( classpath, new String[] { "tests.jar" } );
+        assertContains( classpath, new String[] { "dependency-0.1-SNAPSHOT-client.jar" } );
+        assertContains( classpath, new String[] { "dependency-0.1-SNAPSHOT-tests.jar" } );
         classpath = verifier.loadLines( "consumer-c/target/runtime.txt", "UTF-8" );
-        assertContains( classpath, new String[] { "client.jar" } );
-        assertContains( classpath, new String[] { "tests.jar" } );
+        assertContains( classpath, new String[] { "dependency-0.1-SNAPSHOT-client.jar" } );
+        assertContains( classpath, new String[] { "dependency-0.1-SNAPSHOT-tests.jar" } );
         classpath = verifier.loadLines( "consumer-c/target/test.txt", "UTF-8" );
-        assertContains( classpath, new String[] { "client.jar" } );
-        assertContains( classpath, new String[] { "tests.jar" } );
+        assertContains( classpath, new String[] { "dependency-0.1-SNAPSHOT-client.jar" } );
+        assertContains( classpath, new String[] { "dependency-0.1-SNAPSHOT-tests.jar" } );
     }
 
     private void assertContains( List<String> collection, String[] items )

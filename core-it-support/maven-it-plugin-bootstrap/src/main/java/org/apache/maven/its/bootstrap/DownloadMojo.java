@@ -124,9 +124,7 @@ public class DownloadMojo
             {
                 org.eclipse.aether.graph.Dependency root = RepositoryUtils.toDependency(
                         dependency, repositorySystemSession.getArtifactTypeRegistry() );
-
-                CollectRequest collectRequest =
-                        new CollectRequest( root, null, repos );
+                CollectRequest collectRequest = new CollectRequest( root, null, repos );
                 collectRequest.setRequestContext( "bootstrap" );
                 DependencyRequest request = new DependencyRequest( collectRequest, null ) ;
                 System.out.println( "Resolving: " + root.getArtifact() );

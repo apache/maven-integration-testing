@@ -23,13 +23,11 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 import org.apache.maven.RepositoryUtils;
-import org.apache.maven.artifact.handler.manager.ArtifactHandlerManager;
 import org.apache.maven.execution.MavenSession;
 import org.apache.maven.model.Dependency;
 import org.apache.maven.model.Plugin;
@@ -40,17 +38,13 @@ import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.project.MavenProject;
 import org.apache.maven.project.ProjectBuildingRequest;
-import org.eclipse.aether.DefaultRepositorySystemSession;
 import org.eclipse.aether.RepositorySystem;
 import org.eclipse.aether.RepositorySystemSession;
-import org.eclipse.aether.artifact.ArtifactTypeRegistry;
 import org.eclipse.aether.collection.CollectRequest;
-import org.eclipse.aether.collection.DependencySelector;
 import org.eclipse.aether.repository.RemoteRepository;
+import org.eclipse.aether.resolution.ArtifactDescriptorRequest;
+import org.eclipse.aether.resolution.ArtifactDescriptorResult;
 import org.eclipse.aether.resolution.DependencyRequest;
-import org.eclipse.aether.util.graph.selector.AndDependencySelector;
-import org.eclipse.aether.util.graph.selector.ExclusionDependencySelector;
-import org.eclipse.aether.util.graph.selector.ScopeDependencySelector;
 
 /**
  * Boostrap plugin to download all required dependencies (provided in file) or to collect lifecycle bound build plugin
@@ -84,9 +78,6 @@ public class DownloadMojo
 
     @Component
     private MavenSession session;
-
-    @Component
-    private ArtifactHandlerManager artifactHandlerManager;
 
     @Override
     public void execute() throws MojoFailureException
@@ -128,46 +119,25 @@ public class DownloadMojo
         ProjectBuildingRequest projectBuildingRequest = session.getProjectBuildingRequest();
         RepositorySystemSession repositorySystemSession = projectBuildingRequest.getRepositorySession();
         List<RemoteRepository> repos = RepositoryUtils.toRepos( projectBuildingRequest.getRemoteRepositories() );
-        ArtifactTypeRegistry registry = RepositoryUtils.newArtifactTypeRegistry( artifactHandlerManager );
-
-        // Hack ahead: maven-plugin-plugin depends on maven-plugin-tools-ant and maven-plugin-tools-beanshell as
-        // runtime/optional, so this way of "dependency resolution" as below WILL NOT resolve those two as
-        // OptionalDependencySelector will kick in and kick them out, BUT those two are resolved when m-p-p is used
-        // as plugin. To properly solve this we should "push" all one level up: set root we resolve and enumerate all
-        // dependencies we want to resolve, but alas that would slow down the thing as we'd need to build POMs for all
-        // resolved projects. OTOH, we cannot globally omit OptionalDependencySelector either, as that would lead us
-        // to some ancient obscure unresolvable artifacts and would abort Bootstrap process.
-        //
-        // In short, when we are resolving maven-plugin-plugin, we use custom session for it with modified selectors,
-        // while for everything else everything remains same as before.
-
-        RepositorySystemSession resolveSession;
-
-        DefaultRepositorySystemSession hackSession = new DefaultRepositorySystemSession( repositorySystemSession );
-        DependencySelector depFilter = new AndDependencySelector(
-                new ScopeDependencySelector( "test", "provided" ),
-                // new OptionalDependencySelector(), <-- we need this!
-                new ExclusionDependencySelector() );
-        hackSession.setDependencySelector( depFilter );
 
         for ( Dependency dependency : dependencies )
         {
             try
             {
-                org.eclipse.aether.graph.Dependency dep = RepositoryUtils.toDependency( dependency, registry );
-                DependencyRequest request = new DependencyRequest(
-                        new CollectRequest( Collections.singletonList( dep ), Collections.emptyList(), repos ),
-                        null );
-                System.out.println( "Resolving: " + dep.getArtifact() );
-                if ( "maven-plugin-plugin".equals( dependency.getArtifactId() ) )
-                {
-                    resolveSession = hackSession;
-                }
-                else
-                {
-                    resolveSession = repositorySystemSession;
-                }
-                repositorySystem.resolveDependencies( resolveSession, request );
+                org.eclipse.aether.graph.Dependency root = RepositoryUtils.toDependency(
+                        dependency, repositorySystemSession.getArtifactTypeRegistry() );
+
+                ArtifactDescriptorRequest artifactDescriptorRequest =
+                        new ArtifactDescriptorRequest( root.getArtifact(), repos, "bootstrap" );
+                ArtifactDescriptorResult artifactDescriptorResult =
+                        repositorySystem.readArtifactDescriptor( repositorySystemSession, artifactDescriptorRequest );
+
+                CollectRequest collectRequest =
+                        new CollectRequest( root, artifactDescriptorResult.getDependencies(), repos );
+                collectRequest.setRequestContext( "bootstrap" );
+                DependencyRequest request = new DependencyRequest( collectRequest, null ) ;
+                System.out.println( "Resolving: " + root.getArtifact() );
+                repositorySystem.resolveDependencies( repositorySystemSession, request );
             }
             catch ( Exception e )
             {

@@ -42,8 +42,6 @@ import org.eclipse.aether.RepositorySystem;
 import org.eclipse.aether.RepositorySystemSession;
 import org.eclipse.aether.collection.CollectRequest;
 import org.eclipse.aether.repository.RemoteRepository;
-import org.eclipse.aether.resolution.ArtifactDescriptorRequest;
-import org.eclipse.aether.resolution.ArtifactDescriptorResult;
 import org.eclipse.aether.resolution.DependencyRequest;
 
 /**
@@ -127,13 +125,8 @@ public class DownloadMojo
                 org.eclipse.aether.graph.Dependency root = RepositoryUtils.toDependency(
                         dependency, repositorySystemSession.getArtifactTypeRegistry() );
 
-                ArtifactDescriptorRequest artifactDescriptorRequest =
-                        new ArtifactDescriptorRequest( root.getArtifact(), repos, "bootstrap" );
-                ArtifactDescriptorResult artifactDescriptorResult =
-                        repositorySystem.readArtifactDescriptor( repositorySystemSession, artifactDescriptorRequest );
-
                 CollectRequest collectRequest =
-                        new CollectRequest( root, artifactDescriptorResult.getDependencies(), repos );
+                        new CollectRequest( root, null, repos );
                 collectRequest.setRequestContext( "bootstrap" );
                 DependencyRequest request = new DependencyRequest( collectRequest, null ) ;
                 System.out.println( "Resolving: " + root.getArtifact() );

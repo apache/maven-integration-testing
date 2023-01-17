@@ -25,7 +25,6 @@ import org.apache.maven.shared.verifier.Verifier;
 import java.io.File;
 import java.util.List;
 
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 /**

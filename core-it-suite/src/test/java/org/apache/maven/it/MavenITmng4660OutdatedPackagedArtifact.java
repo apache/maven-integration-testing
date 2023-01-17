@@ -119,7 +119,7 @@ public class MavenITmng4660OutdatedPackagedArtifact extends AbstractMavenIntegra
         {
             verifier3.verifyTextInLog( "File '"
                     + Paths.get( "module-a", "target", "classes", "example.properties" )
-                    + "' is more recent than the packaged artifact for 'module-a', please run a full `mvn verify` build"
+                    + "' is more recent than the packaged artifact for 'module-a', please run a full `mvn package` build"
             );
         }
         catch ( VerificationException e )

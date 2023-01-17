@@ -64,7 +64,7 @@ public class MavenITmng4233ReactorResolutionForManuallyCreatedArtifactTest
 
         Properties props = verifier.loadProperties( "consumer/target/artifact.properties" );
         assertEquals(
-            new File( testDir.getCanonicalFile(), "target/project-local-repo/org.apache.maven.its.mng4233/producer/producer-1.0-SNAPSHOT.jar" ), new File(
+            new File( testDir.getCanonicalFile(), "producer/pom.xml" ), new File(
             props.getProperty( "org.apache.maven.its.mng4233:producer:jar:1.0-SNAPSHOT" ) ).getCanonicalFile() );
     }
 

@@ -87,10 +87,10 @@ public class MavenITmng2921ActiveAttachedArtifactsTest
             testArtifacts.contains( "org.apache.maven.its.mng2921:producer:test-jar:tests:1.0-SNAPSHOT" ) );
 
         Collection<String> testClassPath = verifier.loadLines( "consumer/target/test-classpath.txt", "UTF-8" );
-        assertTrue( testClassPath.toString(), testClassPath.contains( "ejbs/ejbs-1.0-SNAPSHOT-client.jar" ) );
-        assertTrue( testClassPath.toString(), testClassPath.contains( "tests/tests-1.0-SNAPSHOT-tests.jar" ) );
-        assertTrue( testClassPath.toString(), testClassPath.contains( "producer/producer-1.0-SNAPSHOT-client.jar" ) );
-        assertTrue( testClassPath.toString(), testClassPath.contains( "producer/producer-1.0-SNAPSHOT-tests.jar" ) );
+        assertTrue( testClassPath.toString(), testClassPath.contains( "ejbs/attached.jar" ) );
+        assertTrue( testClassPath.toString(), testClassPath.contains( "tests/attached.jar" ) );
+        assertTrue( testClassPath.toString(), testClassPath.contains( "producer/client.jar" ) );
+        assertTrue( testClassPath.toString(), testClassPath.contains( "producer/tests.jar" ) );
     }
 
 }

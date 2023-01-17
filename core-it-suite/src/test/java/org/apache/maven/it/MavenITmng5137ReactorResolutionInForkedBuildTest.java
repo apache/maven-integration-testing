@@ -67,7 +67,7 @@ public class MavenITmng5137ReactorResolutionInForkedBuildTest
 
         List<String> compile = verifier.loadLines( "consumer/target/compile.txt", "UTF-8" );
 
-        assertTrue( compile.toString(), compile.contains( "producer/producer-0.1.jar" ) );
+        assertTrue( compile.toString(), compile.contains( "producer/pom.xml" ) );
     }
 
 }

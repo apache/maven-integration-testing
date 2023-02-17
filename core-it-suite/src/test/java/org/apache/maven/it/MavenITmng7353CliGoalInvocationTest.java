@@ -32,7 +32,7 @@ public class MavenITmng7353CliGoalInvocationTest
 {
     public MavenITmng7353CliGoalInvocationTest()
     {
-        super( "[3.9.0,)" );
+        super( "[3.8.8,)" );
     }
 
     private void run( String id, String goal, String expectedInvocation )
@@ -59,7 +59,7 @@ public class MavenITmng7353CliGoalInvocationTest
     }
 
     /**
-     * new pluginPrefix:version:goal in Maven 3.9.0
+     * new pluginPrefix:version:goal in Maven 3.8.8
      */
     public void testPrefixVersionGoal()
         throws Exception
@@ -68,7 +68,7 @@ public class MavenITmng7353CliGoalInvocationTest
     }
 
     /**
-     * new pluginPrefix:version:goal in Maven 3.9.0
+     * new pluginPrefix:version:goal in Maven 3.8.8
      */
     public void testPrefixVersionGoalAtId()
         throws Exception

@@ -37,16 +37,16 @@ class MavenITmng7679SingleMojoNoPomTest
     public MavenITmng7679SingleMojoNoPomTest()
     {
         // affected Maven versions: 3.8.7, 3.9.0, 4.0.0-alpha-4
-        super( "[,3.8.7)(3.8.7,3.9.0),(3.9.0,4.0.0-alpha-4),[4.0.0-alpha-5,)" );
+        super( "(,3.8.7)(3.8.7,3.9.0),(3.9.0,4.0.0-alpha-4),(4.0.0-alpha-4,)" );
     }
 
     /**
-     * Verify that maven invocation works.
+     * Verify that maven invocation works (no NPE/error happens).
      *
      * @throws Exception in case of failure
      */
     @Test
-    void testBuildSubtree()
+    void testSingleMojoNoPom()
         throws Exception
     {
         File testDir = ResourceExtractor.simpleExtractResources( getClass(), "/mng-7679" );

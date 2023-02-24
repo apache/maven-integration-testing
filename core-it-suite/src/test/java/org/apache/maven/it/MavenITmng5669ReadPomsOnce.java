@@ -48,7 +48,30 @@ public class MavenITmng5669ReadPomsOnce
     }
 
     @Test
-    public void testWithoutBuildConsumer()
+    public void testWithoutBuildConsumerDF() throws Exception
+    {
+        testWithoutBuildConsumer( "df" );
+    }
+
+    @Test
+    public void testWithoutBuildConsumerBF() throws Exception
+    {
+        testWithoutBuildConsumer( "bf" );
+    }
+
+    @Test
+    public void testWithBuildConsumerDF() throws Exception
+    {
+        testWithBuildConsumer( "df" );
+    }
+
+    @Test
+    public void testWithBuildConsumerBF() throws Exception
+    {
+        testWithBuildConsumer( "bf" );
+    }
+
+    public void testWithoutBuildConsumer(String dependencyCollector)
         throws Exception
     {
         // prepare JavaAgent
@@ -59,15 +82,17 @@ public class MavenITmng5669ReadPomsOnce
                                       verifier.getArtifactPath( "org.apache.maven.its", "core-it-javaagent", "2.1-SNAPSHOT", "jar" ) );
         verifier.filterFile( ".mvn/jvm.config", ".mvn/jvm.config", null, filterProperties );
 
+        verifier.setLogFileName( dependencyCollector + "-log.txt" );
         verifier.setForkJvm( true ); // pick up agent
         verifier.setAutoclean( false );
         verifier.addCliArgument( "-q" );
         verifier.addCliArgument( "-U" );
+        verifier.addCliArgument( "-Daether.dependencyCollector.impl=" + dependencyCollector );
         verifier.addCliArgument( "-Dmaven.experimental.buildconsumer=false" );
         verifier.addCliArgument( "verify");
         verifier.execute();
 
-        List<String> logTxt = verifier.loadLines( "log.txt", "utf-8" );
+        List<String> logTxt = verifier.loadLines( dependencyCollector + "-log.txt", "utf-8" );
 
         // count source items
         Map<String, Long> sourceMap = logTxt.stream()
@@ -84,8 +109,7 @@ public class MavenITmng5669ReadPomsOnce
         assertTrue("Duplicate items: " + String.join(System.lineSeparator(), duplicates), duplicates.isEmpty());
     }
 
-    @Test
-    public void testWithBuildConsumer()
+    public void testWithBuildConsumer(String dependencyCollector)
         throws Exception
     {
         // prepare JavaAgent
@@ -96,16 +120,17 @@ public class MavenITmng5669ReadPomsOnce
                                       verifier.getArtifactPath( "org.apache.maven.its", "core-it-javaagent", "2.1-SNAPSHOT", "jar" ) );
         verifier.filterFile( ".mvn/jvm.config", ".mvn/jvm.config", null, filterProperties );
 
-        verifier.setLogFileName( "log-bc.txt" );
+        verifier.setLogFileName( dependencyCollector + "-log-bc.txt" );
         verifier.setForkJvm( true ); // pick up agent
         verifier.setAutoclean( false );
         verifier.addCliArgument( "-q" );
         verifier.addCliArgument( "-U" );
+        verifier.addCliArgument( "-Daether.dependencyCollector.impl=" + dependencyCollector );
         verifier.addCliArgument( "-Dmaven.experimental.buildconsumer=true" );
         verifier.addCliArgument( "verify" );
         verifier.execute();
 
-        List<String> logTxt = verifier.loadLines( "log-bc.txt", "utf-8" );
+        List<String> logTxt = verifier.loadLines( dependencyCollector + "-log-bc.txt", "utf-8" );
 
         // count source items
         Map<String, Long> sourceMap = logTxt.stream()

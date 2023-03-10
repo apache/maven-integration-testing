@@ -51,6 +51,6 @@ under the License.
         </profile>
     </profiles>
     <activeProfiles>
-        <activeProfile>it-bootstrap</activeProfile>
+<!--        <activeProfile>it-bootstrap</activeProfile>-->
     </activeProfiles>
 </settings>

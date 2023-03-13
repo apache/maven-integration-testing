@@ -85,14 +85,16 @@ class MavenITmng7737ProfileActivationTest
 
         verifier.verifyTextInLog( "settings-active-default" );
         verifier.verifyTextInLog( "settings-active" );
-        verifier.verifyTextInLog( "settings-jdk"); // TODO: maybe refine? We are not testing p-u
+        verifier.verifyTextInLog( "settings-jdk"); // enough, as we build on 8+ at least one is present
         verifier.verifyTextInLog( "settings-os-" + Os.OS_FAMILY );
         verifier.verifyTextInLog( "settings-property" );
         verifier.verifyTextInLog( "settings-file-exists-present" );
         verifier.verifyTextInLog( "settings-file-missing-absent" );
 
-        // TODO: pom-active-default ???
-        verifier.verifyTextInLog( "pom-jdk"); // TODO: maybe refine? We are not testing p-u
+        // In case of POM, the pom-active-default documented constraint stands:
+        // "This profile will automatically be active for all builds unless
+        // **another profile in the same POM** is activated using one of the previously described methods."
+        verifier.verifyTextInLog( "pom-jdk"); // enough, as we build on 8+ at least one is present
         verifier.verifyTextInLog( "pom-os-" + Os.OS_FAMILY );
         verifier.verifyTextInLog( "pom-property" );
         verifier.verifyTextInLog( "pom-file-exists-present" );

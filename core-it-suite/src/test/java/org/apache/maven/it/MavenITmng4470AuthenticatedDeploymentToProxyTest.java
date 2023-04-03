@@ -32,8 +32,8 @@ import java.util.Collections;
 import java.util.Deque;
 import java.util.concurrent.ConcurrentLinkedDeque;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.maven.it.utils.DeployedResource;
-import org.codehaus.plexus.util.StringUtils;
 import org.eclipse.jetty.security.ConstraintMapping;
 import org.eclipse.jetty.security.ConstraintSecurityHandler;
 import org.eclipse.jetty.security.HashLoginService;

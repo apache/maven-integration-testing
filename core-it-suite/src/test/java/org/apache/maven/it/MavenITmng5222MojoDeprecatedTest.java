@@ -63,8 +63,9 @@ public class MavenITmng5222MojoDeprecatedTest
         verifier.verifyErrorFreeLog();
 
         List<String> logLines = verifier.loadFile( verifier.getBasedir(), verifier.getLogFileName(), false );
+        List<String> warnLines = findDeprecationWarning( logLines );
 
-        assertTrue( logLines.stream().anyMatch(s -> s.contains("Goal 'deprecated-config' is deprecated: This goal is deprecated")) );
+        assertTrue( warnLines.stream().anyMatch(s -> s.contains("Goal 'deprecated-config' is deprecated: This goal is deprecated")) );
 
         Properties configProps = verifier.loadProperties( "target/config.properties" );
 

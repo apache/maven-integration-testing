@@ -40,6 +40,7 @@ under the License.
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <rootdir>${project.rootdir}</rootdir>
+        <activated>false</activated>
     </properties>
 
     <modules>
@@ -73,5 +74,19 @@ under the License.
             </plugin>
         </plugins>
     </build>
+
+    <profiles>
+        <profile>
+            <id>rootdir-profile-activation</id>
+            <activation>
+                <file>
+                    <exists>${rootdir}/.mvn/.gitkeep</exists>
+                </file>
+            </activation>
+            <properties>
+                <activated>true</activated>
+            </properties>
+        </profile>
+    </profiles>
 
 </project>

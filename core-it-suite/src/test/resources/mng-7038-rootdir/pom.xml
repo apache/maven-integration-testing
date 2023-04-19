@@ -80,7 +80,7 @@ under the License.
             <id>rootdir-profile-activation</id>
             <activation>
                 <file>
-                    <exists>${rootdir}/.mvn/.gitkeep</exists>
+                    <exists>${rootDirectory}/.mvn/.gitkeep</exists>
                 </file>
             </activation>
             <properties>

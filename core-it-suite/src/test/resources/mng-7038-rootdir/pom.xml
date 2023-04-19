@@ -32,7 +32,7 @@ under the License.
 
     <name>Maven Integration Test :: MNG-7038</name>
     <description>
-        Test project.rootdir, session.topdir and session.rootdir properties.
+        Test project.rootDirectory, session.topDirectory and session.rootDirectory properties.
     </description>
 
     <properties>
@@ -64,9 +64,9 @@ under the License.
                             <outputFile>target/pom.properties</outputFile>
                             <expressions>
                                 <expression>project/properties</expression>
-                                <expression>project/rootdir</expression>
-                                <expression>session/rootdir</expression>
-                                <expression>session/topdir</expression>
+                                <expression>project/rootDirectory</expression>
+                                <expression>session/rootDirectory</expression>
+                                <expression>session/topDirectory</expression>
                             </expressions>
                         </configuration>
                     </execution>

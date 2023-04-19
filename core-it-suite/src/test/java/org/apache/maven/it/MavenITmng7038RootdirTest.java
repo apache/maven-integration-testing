@@ -53,41 +53,41 @@ public class MavenITmng7038RootdirTest
         verifier.verifyFilePresent( "target/pom.properties" );
         props = verifier.loadProperties( "target/pom.properties" );
         assertEquals( "project.properties.rootdir", testDir.getAbsolutePath(), props.getProperty( "project.properties.rootdir" ) );
-        assertEquals( "project.rootdir", testDir.getAbsolutePath(), props.getProperty( "project.rootdir" ) );
-        assertEquals( "session.topdir", testDir.getAbsolutePath(), props.getProperty( "session.topdir" ) );
-        assertEquals( "session.rootdir", testDir.getAbsolutePath(), props.getProperty( "session.rootdir" ) );
+        assertEquals( "project.rootDirectory", testDir.getAbsolutePath(), props.getProperty( "project.rootDirectory" ) );
+        assertEquals( "session.topDirectory", testDir.getAbsolutePath(), props.getProperty( "session.topDirectory" ) );
+        assertEquals( "session.rootDirectory", testDir.getAbsolutePath(), props.getProperty( "session.rootDirectory" ) );
         assertEquals( "project.properties.activated", Boolean.TRUE.toString(), props.getProperty( "project.properties.activated" ) );
 
         verifier.verifyFilePresent( "module-a/target/pom.properties" );
         props = verifier.loadProperties( "module-a/target/pom.properties" );
         assertEquals( "project.properties.rootdir", new File(testDir, "module-a").getAbsolutePath(), props.getProperty( "project.properties.rootdir" ) );
-        assertEquals( "project.rootdir", new File(testDir, "module-a").getAbsolutePath(), props.getProperty( "project.rootdir" ) );
-        assertEquals( "session.topdir", testDir.getAbsolutePath(), props.getProperty( "session.topdir" ) );
-        assertEquals( "session.rootdir", testDir.getAbsolutePath(), props.getProperty( "session.rootdir" ) );
+        assertEquals( "project.rootDirectory", new File(testDir, "module-a").getAbsolutePath(), props.getProperty( "project.rootDirectory" ) );
+        assertEquals( "session.topDirectory", testDir.getAbsolutePath(), props.getProperty( "session.topDirectory" ) );
+        assertEquals( "session.rootDirectory", testDir.getAbsolutePath(), props.getProperty( "session.rootDirectory" ) );
         assertEquals( "project.properties.activated", Boolean.FALSE.toString(), props.getProperty( "project.properties.activated" ) );
 
         verifier.verifyFilePresent( "module-a/module-a-1/target/pom.properties" );
         props = verifier.loadProperties( "module-a/module-a-1/target/pom.properties" );
         assertEquals( "project.properties.rootdir", new File(testDir, "module-a").getAbsolutePath(), props.getProperty( "project.properties.rootdir" ) );
-        assertEquals( "project.rootdir", new File(testDir, "module-a").getAbsolutePath(), props.getProperty( "project.rootdir" ) );
-        assertEquals( "session.topdir", testDir.getAbsolutePath(), props.getProperty( "session.topdir" ) );
-        assertEquals( "session.rootdir", testDir.getAbsolutePath(), props.getProperty( "session.rootdir" ) );
+        assertEquals( "project.rootDirectory", new File(testDir, "module-a").getAbsolutePath(), props.getProperty( "project.rootDirectory" ) );
+        assertEquals( "session.topDirectory", testDir.getAbsolutePath(), props.getProperty( "session.topDirectory" ) );
+        assertEquals( "session.rootDirectory", testDir.getAbsolutePath(), props.getProperty( "session.rootDirectory" ) );
         assertEquals( "project.properties.activated", Boolean.FALSE.toString(), props.getProperty( "project.properties.activated" ) );
 
         verifier.verifyFilePresent( "module-b/target/pom.properties" );
         props = verifier.loadProperties( "module-b/target/pom.properties" );
         assertEquals( "project.properties.rootdir", testDir.getAbsolutePath(), props.getProperty( "project.properties.rootdir" ) );
-        assertEquals( "project.rootdir", testDir.getAbsolutePath(), props.getProperty( "project.rootdir" ) );
-        assertEquals( "session.topdir", testDir.getAbsolutePath(), props.getProperty( "session.topdir" ) );
-        assertEquals( "session.rootdir", testDir.getAbsolutePath(), props.getProperty( "session.rootdir" ) );
+        assertEquals( "project.rootDirectory", testDir.getAbsolutePath(), props.getProperty( "project.rootDirectory" ) );
+        assertEquals( "session.topDirectory", testDir.getAbsolutePath(), props.getProperty( "session.topDirectory" ) );
+        assertEquals( "session.rootDirectory", testDir.getAbsolutePath(), props.getProperty( "session.rootDirectory" ) );
         assertEquals( "project.properties.activated", Boolean.TRUE.toString(), props.getProperty( "project.properties.activated" ) );
 
         verifier.verifyFilePresent( "module-b/module-b-1/target/pom.properties" );
         props = verifier.loadProperties( "module-b/module-b-1/target/pom.properties" );
         assertEquals( "project.properties.rootdir", testDir.getAbsolutePath(), props.getProperty( "project.properties.rootdir" ) );
-        assertEquals( "project.rootdir", testDir.getAbsolutePath(), props.getProperty( "project.rootdir" ) );
-        assertEquals( "session.topdir", testDir.getAbsolutePath(), props.getProperty( "session.topdir" ) );
-        assertEquals( "session.rootdir", testDir.getAbsolutePath(), props.getProperty( "session.rootdir" ) );
+        assertEquals( "project.rootDirectory", testDir.getAbsolutePath(), props.getProperty( "project.rootDirectory" ) );
+        assertEquals( "session.topDirectory", testDir.getAbsolutePath(), props.getProperty( "session.topDirectory" ) );
+        assertEquals( "session.rootDirectory", testDir.getAbsolutePath(), props.getProperty( "session.rootDirectory" ) );
         assertEquals( "project.properties.activated", Boolean.TRUE.toString(), props.getProperty( "project.properties.activated" ) );
     }
 
@@ -107,17 +107,17 @@ public class MavenITmng7038RootdirTest
         verifier.verifyFilePresent( "target/pom.properties" );
         props = verifier.loadProperties( "target/pom.properties" );
         assertEquals( "project.properties.rootdir", new File(testDir, "module-a").getAbsolutePath(), props.getProperty( "project.properties.rootdir" ) );
-        assertEquals( "project.rootdir", new File(testDir, "module-a").getAbsolutePath(), props.getProperty( "project.rootdir" ) );
-        assertEquals( "session.topdir", new File(testDir, "module-a").getAbsolutePath(), props.getProperty( "session.topdir" ) );
-        assertEquals( "session.rootdir", new File(testDir, "module-a").getAbsolutePath(), props.getProperty( "session.rootdir" ) );
+        assertEquals( "project.rootDirectory", new File(testDir, "module-a").getAbsolutePath(), props.getProperty( "project.rootDirectory" ) );
+        assertEquals( "session.topDirectory", new File(testDir, "module-a").getAbsolutePath(), props.getProperty( "session.topDirectory" ) );
+        assertEquals( "session.rootDirectory", new File(testDir, "module-a").getAbsolutePath(), props.getProperty( "session.rootDirectory" ) );
         assertEquals( "project.properties.activated", Boolean.FALSE.toString(), props.getProperty( "project.properties.activated" ) );
 
         verifier.verifyFilePresent( "module-a-1/target/pom.properties" );
         props = verifier.loadProperties( "module-a-1/target/pom.properties" );
         assertEquals( "project.properties.rootdir", new File(testDir, "module-a").getAbsolutePath(), props.getProperty( "project.properties.rootdir" ) );
-        assertEquals( "project.rootdir", new File(testDir, "module-a").getAbsolutePath(), props.getProperty( "project.rootdir" ) );
-        assertEquals( "session.topdir", new File(testDir, "module-a").getAbsolutePath(), props.getProperty( "session.topdir" ) );
-        assertEquals( "session.rootdir", new File(testDir, "module-a").getAbsolutePath(), props.getProperty( "session.rootdir" ) );
+        assertEquals( "project.rootDirectory", new File(testDir, "module-a").getAbsolutePath(), props.getProperty( "project.rootDirectory" ) );
+        assertEquals( "session.topDirectory", new File(testDir, "module-a").getAbsolutePath(), props.getProperty( "session.topDirectory" ) );
+        assertEquals( "session.rootDirectory", new File(testDir, "module-a").getAbsolutePath(), props.getProperty( "session.rootDirectory" ) );
         assertEquals( "project.properties.activated", Boolean.FALSE.toString(), props.getProperty( "project.properties.activated" ) );
     }
 
@@ -138,17 +138,17 @@ public class MavenITmng7038RootdirTest
         verifier.verifyFilePresent( "target/pom.properties" );
         props = verifier.loadProperties( "target/pom.properties" );
         assertEquals( "project.properties.rootdir", testDir.getAbsolutePath(), props.getProperty( "project.properties.rootdir" ) );
-        assertEquals( "project.rootdir", testDir.getAbsolutePath(), props.getProperty( "project.rootdir" ) );
-        assertEquals( "session.topdir", new File(testDir, "module-b").getAbsolutePath(), props.getProperty( "session.topdir" ) );
-        assertEquals( "session.rootdir", testDir.getAbsolutePath(), props.getProperty( "session.rootdir" ) );
+        assertEquals( "project.rootDirectory", testDir.getAbsolutePath(), props.getProperty( "project.rootDirectory" ) );
+        assertEquals( "session.topDirectory", new File(testDir, "module-b").getAbsolutePath(), props.getProperty( "session.topDirectory" ) );
+        assertEquals( "session.rootDirectory", testDir.getAbsolutePath(), props.getProperty( "session.rootDirectory" ) );
         assertEquals( "project.properties.activated", Boolean.TRUE.toString(), props.getProperty( "project.properties.activated" ) );
 
         verifier.verifyFilePresent( "module-b-1/target/pom.properties" );
         props = verifier.loadProperties( "module-b-1/target/pom.properties" );
         assertEquals( "project.properties.rootdir", testDir.getAbsolutePath(), props.getProperty( "project.properties.rootdir" ) );
-        assertEquals( "project.rootdir", testDir.getAbsolutePath(), props.getProperty( "project.rootdir" ) );
-        assertEquals( "session.topdir", new File(testDir, "module-b").getAbsolutePath(), props.getProperty( "session.topdir" ) );
-        assertEquals( "session.rootdir", testDir.getAbsolutePath(), props.getProperty( "session.rootdir" ) );
+        assertEquals( "project.rootDirectory", testDir.getAbsolutePath(), props.getProperty( "project.rootDirectory" ) );
+        assertEquals( "session.topDirectory", new File(testDir, "module-b").getAbsolutePath(), props.getProperty( "session.topDirectory" ) );
+        assertEquals( "session.rootDirectory", testDir.getAbsolutePath(), props.getProperty( "session.rootDirectory" ) );
         assertEquals( "project.properties.activated", Boolean.TRUE.toString(), props.getProperty( "project.properties.activated" ) );
     }
 

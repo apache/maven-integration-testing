@@ -36,7 +36,7 @@ class MavenITmng7740ConsumerBuildShouldCleanUpOldFilesTest
 
     protected MavenITmng7740ConsumerBuildShouldCleanUpOldFilesTest()
     {
-        super( "[4.0.0-alpha-5,)" );
+        super( "[4.0.0-alpha-6,)" );
     }
 
     @Test
@@ -49,7 +49,6 @@ class MavenITmng7740ConsumerBuildShouldCleanUpOldFilesTest
         verifier.addCliArgument( "validate" );
 
         verifier.execute();
-        verifier.execute();
 
         verifier.verifyErrorFreeLog();
 
@@ -57,7 +56,7 @@ class MavenITmng7740ConsumerBuildShouldCleanUpOldFilesTest
             final List<Path> consumerFiles = stream.filter( path -> path.getFileName().toString().contains("consumer")
                             && path.getFileName().toString().contains( "pom" ))
                     .collect( Collectors.toList());
-            assertTrue("Expected only 1 consumer pom file.", consumerFiles.size() == 1);
+            assertTrue("Expected no consumer pom file.", consumerFiles.size() == 0);
         }
     }
 }

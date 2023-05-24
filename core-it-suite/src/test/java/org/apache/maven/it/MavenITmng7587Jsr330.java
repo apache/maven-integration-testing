@@ -41,7 +41,7 @@ class MavenITmng7587Jsr330
     public MavenITmng7587Jsr330()
     {
         // affected Maven versions: 3.9.2 and 4.0.0-alpha-5
-        super( ALL_MAVEN_VERSIONS );
+        super( "(3.9.2,3.999),(4.0.0-alpha-5,)" );
     }
 
     /**

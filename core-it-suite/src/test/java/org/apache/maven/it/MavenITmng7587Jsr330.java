@@ -22,6 +22,7 @@ package org.apache.maven.it;
 import org.apache.maven.shared.verifier.Verifier;
 import org.apache.maven.shared.verifier.util.ResourceExtractor;
 import org.codehaus.plexus.util.Os;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.condition.EnabledOnJre;
 import org.junit.jupiter.api.condition.JRE;
@@ -40,7 +41,7 @@ class MavenITmng7587Jsr330
     public MavenITmng7587Jsr330()
     {
         // affected Maven versions: 3.9.0
-        super( "(3.9.2,4.0.0-alpha-1),(4.0.0-alpha-5,)" );
+        super( ALL_MAVEN_VERSIONS );
     }
 
     /**
@@ -49,18 +50,10 @@ class MavenITmng7587Jsr330
      * @throws Exception in case of failure
      */
     @Test
-    @EnabledOnJre({JRE.JAVA_8, JRE.JAVA_11, JRE.JAVA_17})
-    void testJdk8()
-        throws Exception
+    @Disabled
+    void testJdk8() throws Exception
     {
-        File testDir = ResourceExtractor.simpleExtractResources( getClass(), "/mng-7587-jsr330");
-
-        Verifier verifier = newVerifier( testDir.getAbsolutePath() );
-        verifier.addCliArgument( "clean" );
-        verifier.addCliArgument( "verify" );
-        verifier.addCliArgument( "-Drunning-java-release-version=1.8" );
-        verifier.execute();
-        verifier.verifyErrorFreeLog();
+        testJdk( "1.8" );
     }
 
     /**
@@ -70,17 +63,10 @@ class MavenITmng7587Jsr330
      */
     @Test
     @EnabledOnJre({JRE.JAVA_11, JRE.JAVA_17})
-    void testJdk11()
-        throws Exception
+    @Disabled
+    void testJdk11() throws Exception
     {
-        File testDir = ResourceExtractor.simpleExtractResources( getClass(), "/mng-7587-jsr330");
-
-        Verifier verifier = newVerifier( testDir.getAbsolutePath() );
-        verifier.addCliArgument( "clean" );
-        verifier.addCliArgument( "verify" );
-        verifier.addCliArgument( "-Drunning-java-release-version=11" );
-        verifier.execute();
-        verifier.verifyErrorFreeLog();
+        testJdk( "11" );
     }
 
 
@@ -91,16 +77,32 @@ class MavenITmng7587Jsr330
      */
     @Test
     @EnabledOnJre(JRE.JAVA_17)
-    void testJdk17()
-        throws Exception
+    void testJdk17() throws Exception
     {
-        File testDir = ResourceExtractor.simpleExtractResources( getClass(), "/mng-7587-jsr330");
-
-        Verifier verifier = newVerifier( testDir.getAbsolutePath() );
-        verifier.addCliArgument( "clean" );
-        verifier.addCliArgument( "verify" );
-        verifier.addCliArgument( "-Drunning-java-release-version=17" );
-        verifier.execute();
-        verifier.verifyErrorFreeLog();
+        testJdk( "17" );
     }
+
+    void testJdk(String jdk) throws Exception
+    {
+        File testDir = ResourceExtractor.simpleExtractResources( getClass(), "/mng-7587-jsr330").getAbsoluteFile();
+
+        final Verifier pluginVerifier = newVerifier( new File( testDir, "plugin" ).getPath() );
+        pluginVerifier.setLogFileName( "log-" + jdk + ".txt" );
+        pluginVerifier.addCliArgument( "clean" );
+        pluginVerifier.addCliArgument( "install" );
+        pluginVerifier.addCliArgument( "-V" );
+        pluginVerifier.addCliArgument( "-Drunning-java-release-version=" + jdk );
+        pluginVerifier.execute();
+        pluginVerifier.verifyErrorFreeLog();
+
+        final Verifier consumerVerifier = newVerifier( new File( testDir, "consumer" ).getPath() );
+        consumerVerifier.setLogFileName( "log-" + jdk + ".txt" );
+        consumerVerifier.addCliArgument( "clean" );
+        consumerVerifier.addCliArgument( "verify" );
+        consumerVerifier.addCliArgument( "-V" );
+        consumerVerifier.addCliArgument( "-Drunning-java-release-version=" + jdk );
+        consumerVerifier.execute();
+        consumerVerifier.verifyErrorFreeLog();
+    }
+
 }

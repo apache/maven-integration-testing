@@ -5,15 +5,12 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>sample.plugin</groupId>
-  <artifactId>hello-maven-plugin</artifactId>
+  <groupId>org.apache.maven.its.mng7587</groupId>
+  <artifactId>plugin</artifactId>
   <version>1.0-SNAPSHOT</version>
   <packaging>maven-plugin</packaging>
 
   <name>hello-maven-plugin Maven Plugin</name>
-
-  <!-- FIXME change it to the project's website -->
-  <url>http://www.example.com</url>
 
   <prerequisites>
     <maven>${maven.version}</maven>
@@ -24,6 +21,7 @@
     <maven.compiler.source>${running-java-release-version}</maven.compiler.source>
     <maven.compiler.target>${running-java-release-version}</maven.compiler.target>
     <maven.version>3.8.6</maven.version>
+    <running-java-release-version>foo</running-java-release-version>
   </properties>
 
   <dependencies>
@@ -40,34 +38,10 @@
       <scope>provided</scope>
     </dependency>
     <dependency>
-      <groupId>org.apache.maven</groupId>
-      <artifactId>maven-artifact</artifactId>
-      <version>${maven.version}</version>
-      <scope>provided</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.maven</groupId>
-      <artifactId>maven-compat</artifactId>
-      <version>${maven.version}</version>
-      <scope>test</scope>
-    </dependency> 
-    <dependency>
       <groupId>org.apache.maven.plugin-tools</groupId>
       <artifactId>maven-plugin-annotations</artifactId>
       <version>3.6.0</version>
       <scope>provided</scope>
-    </dependency>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>4.12</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.maven.plugin-testing</groupId>
-      <artifactId>maven-plugin-testing-harness</artifactId>
-      <version>3.3.0</version>
-      <scope>test</scope>
     </dependency>
   </dependencies>
 
@@ -88,7 +62,7 @@
         </plugin>
         <plugin>
           <artifactId>maven-plugin-plugin</artifactId>
-          <version>3.6.0</version>
+          <version>3.9.0</version>
         </plugin>
         <plugin>
           <artifactId>maven-surefire-plugin</artifactId>
@@ -97,10 +71,6 @@
         <plugin>
           <artifactId>maven-jar-plugin</artifactId>
           <version>3.3.0</version>
-        </plugin>
-        <plugin>
-          <artifactId>maven-invoker-plugin</artifactId>
-          <version>3.1.0</version>
         </plugin>
       </plugins>
     </pluginManagement>

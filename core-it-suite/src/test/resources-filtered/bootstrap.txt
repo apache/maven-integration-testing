@@ -96,6 +96,7 @@ org.apache.maven.plugins:maven-plugin-plugin:${stubPluginVersion}
 org.apache.maven.plugins:maven-plugin-plugin:3.2
 org.apache.maven.plugins:maven-plugin-plugin:3.3
 org.apache.maven.plugins:maven-plugin-plugin:3.6.0
+org.apache.maven.plugins:maven-plugin-plugin:3.9.0
 org.apache.maven.plugins:maven-rar-plugin:${stubPluginVersion}
 org.apache.maven.plugins:maven-release-plugin:3.0.0-M5
 org.apache.maven.plugins:maven-resources-plugin:${stubPluginVersion}

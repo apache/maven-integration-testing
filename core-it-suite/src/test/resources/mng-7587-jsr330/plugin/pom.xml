@@ -18,10 +18,7 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <maven.compiler.source>${running-java-release-version}</maven.compiler.source>
-    <maven.compiler.target>${running-java-release-version}</maven.compiler.target>
     <maven.version>3.8.6</maven.version>
-    <running-java-release-version>foo</running-java-release-version>
   </properties>
 
   <dependencies>
@@ -75,6 +72,13 @@
       </plugins>
     </pluginManagement>
     <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <release>17</release>
+        </configuration>
+      </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-plugin-plugin</artifactId>

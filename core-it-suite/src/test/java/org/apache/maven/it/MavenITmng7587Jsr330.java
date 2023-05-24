@@ -45,32 +45,6 @@ class MavenITmng7587Jsr330
     }
 
     /**
-     * Verify components can be written using JSR330 on JDK 1.8.
-     *
-     * @throws Exception in case of failure
-     */
-    @Test
-    @Disabled
-    void testJdk8() throws Exception
-    {
-        testJdk( "1.8" );
-    }
-
-    /**
-     * Verify components can be written using JSR330 on JDK 11.
-     *
-     * @throws Exception in case of failure
-     */
-    @Test
-    @EnabledOnJre({JRE.JAVA_11, JRE.JAVA_17})
-    @Disabled
-    void testJdk11() throws Exception
-    {
-        testJdk( "11" );
-    }
-
-
-    /**
      * Verify components can be written using JSR330 on JDK 17.
      *
      * @throws Exception in case of failure
@@ -79,28 +53,19 @@ class MavenITmng7587Jsr330
     @EnabledOnJre(JRE.JAVA_17)
     void testJdk17() throws Exception
     {
-        testJdk( "17" );
-    }
-
-    void testJdk(String jdk) throws Exception
-    {
         File testDir = ResourceExtractor.simpleExtractResources( getClass(), "/mng-7587-jsr330").getAbsoluteFile();
 
         final Verifier pluginVerifier = newVerifier( new File( testDir, "plugin" ).getPath() );
-        pluginVerifier.setLogFileName( "log-" + jdk + ".txt" );
         pluginVerifier.addCliArgument( "clean" );
         pluginVerifier.addCliArgument( "install" );
         pluginVerifier.addCliArgument( "-V" );
-        pluginVerifier.addCliArgument( "-Drunning-java-release-version=" + jdk );
         pluginVerifier.execute();
         pluginVerifier.verifyErrorFreeLog();
 
         final Verifier consumerVerifier = newVerifier( new File( testDir, "consumer" ).getPath() );
-        consumerVerifier.setLogFileName( "log-" + jdk + ".txt" );
         consumerVerifier.addCliArgument( "clean" );
         consumerVerifier.addCliArgument( "verify" );
         consumerVerifier.addCliArgument( "-V" );
-        consumerVerifier.addCliArgument( "-Drunning-java-release-version=" + jdk );
         consumerVerifier.execute();
         consumerVerifier.verifyErrorFreeLog();
     }

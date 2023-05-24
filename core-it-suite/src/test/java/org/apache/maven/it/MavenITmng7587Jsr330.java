@@ -30,9 +30,9 @@ import org.junit.jupiter.api.condition.JRE;
 import java.io.File;
 
 /**
- * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-7737">MNG-7737</a>.
- * Simply verifies that various (expected) profiles are properly activated or not.
- *
+ * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-7587">MNG-7587</a>.
+ * Simply verifies that plexus component using JSR330 and compiled with JDK 17 bytecode can
+ * work on maven.
  */
 class MavenITmng7587Jsr330
     extends AbstractMavenIntegrationTestCase
@@ -40,7 +40,7 @@ class MavenITmng7587Jsr330
 
     public MavenITmng7587Jsr330()
     {
-        // affected Maven versions: 3.9.0
+        // affected Maven versions: 3.9.2 and 4.0.0-alpha-5
         super( ALL_MAVEN_VERSIONS );
     }
 

@@ -112,6 +112,7 @@ public class TestSuiteOrdering implements ClassOrderer
          * a fail fast technique as well.
          */
         suite.addTestSuite( MavenITmng7740ConsumerBuildShouldCleanUpOldFilesTest.class );
+        suite.addTestSuite( MavenITmng7587Jsr330.class );
         suite.addTestSuite( MavenITmng7038RootdirTest.class );
         suite.addTestSuite( MavenITmng7697PomWithEmojiTest.class );
         suite.addTestSuite( MavenITmng7737ProfileActivationTest.class );

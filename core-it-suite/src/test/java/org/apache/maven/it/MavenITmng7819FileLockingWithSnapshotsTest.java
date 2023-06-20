@@ -22,6 +22,7 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.maven.shared.verifier.Verifier;
 import org.apache.maven.shared.verifier.util.ResourceExtractor;
 import org.eclipse.jetty.server.Handler;
@@ -76,6 +77,12 @@ class MavenITmng7819FileLockingWithSnapshotsTest extends AbstractMavenIntegratio
 
         Verifier verifier = newVerifier(testDir.getAbsolutePath());
         verifier.setForkJvm(true);
+
+        // produce required precondition state: local repository must not have any of the org.apache.maven.its.mng7819
+        // artifacts
+        String path = verifier.getArtifactPath("org.apache.maven.its.mng7819", "dependency", "1.0.0-SNAPSHOT", "pom");
+        File groupDirectory = new File(path).getParentFile().getParentFile().getParentFile();
+        FileUtils.deleteDirectory(groupDirectory);
 
         Map<String, String> properties = new HashMap<>();
         properties.put("@port@", Integer.toString(port));

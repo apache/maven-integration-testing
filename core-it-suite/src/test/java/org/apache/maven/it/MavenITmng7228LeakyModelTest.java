@@ -33,7 +33,7 @@ class MavenITmng7228LeakyModelTest extends AbstractMavenIntegrationTestCase {
 
     protected MavenITmng7228LeakyModelTest() {
         // broken: 4.0.0-alpha-3 - 4.0.0-alpha-6
-        super("[,4.0.0-alpha-3),(4.0.0-alpha-5,]");
+        super("[,4.0.0-alpha-3),(4.0.0-alpha-6,]");
     }
 
     @Test

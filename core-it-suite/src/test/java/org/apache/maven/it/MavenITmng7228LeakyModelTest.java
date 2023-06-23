@@ -25,11 +25,15 @@ import org.apache.maven.shared.verifier.Verifier;
 import org.apache.maven.shared.verifier.util.ResourceExtractor;
 import org.junit.jupiter.api.Test;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.containsString;
+import static org.hamcrest.Matchers.not;
+
 class MavenITmng7228LeakyModelTest extends AbstractMavenIntegrationTestCase {
 
     protected MavenITmng7228LeakyModelTest() {
         // broken: 4.0.0-alpha-3 - 4.0.0-alpha-6
-        super("[,4.0.0-alpha-3),(4.0.0-alpha-6,]");
+        super("[,4.0.0-alpha-3),(4.0.0-alpha-5,]");
     }
 
     @Test
@@ -53,16 +57,16 @@ class MavenITmng7228LeakyModelTest extends AbstractMavenIntegrationTestCase {
         String pom = FileUtils.readFileToString(
                 new File(verifier.getArtifactPath("org.apache.maven.its.mng7228", "test", "1.0.0-SNAPSHOT", "pom")));
 
-        assertTrue(pom.contains("projectProperty"));
-        assertFalse(pom.contains("activeProperty"));
-        assertFalse(pom.contains("manualProperty"));
+        assertThat(pom, containsString("projectProperty"));
+        assertThat(pom, not(containsString("activeProperty")));
+        assertThat(pom, not(containsString("manualProperty")));
 
-        assertTrue(pom.contains("project-repo"));
-        assertFalse(pom.contains("active-repoP"));
-        assertFalse(pom.contains("manual-repo"));
+        assertThat(pom, containsString("project-repo"));
+        assertThat(pom, not(containsString("active-repo")));
+        assertThat(pom, not(containsString("manual-repo")));
 
-        assertTrue(pom.contains("project-plugin-repo"));
-        assertFalse(pom.contains("active-plugin-repoP"));
-        assertFalse(pom.contains("manual-plugin-repo"));
+        assertThat(pom, containsString("project-plugin-repo"));
+        assertThat(pom, not(containsString("active-plugin-repo")));
+        assertThat(pom, not(containsString("manual-plugin-repo")));
     }
 }

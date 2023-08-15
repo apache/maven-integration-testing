@@ -32,7 +32,7 @@ under the License.
   <name>Maven IT Plugin :: mng-7529 plugin</name>
 
   <properties>
-    <maven-version>3.6.0</maven-version>
+    <maven-version>3.8.1</maven-version>
   </properties>
 
   <dependencies>

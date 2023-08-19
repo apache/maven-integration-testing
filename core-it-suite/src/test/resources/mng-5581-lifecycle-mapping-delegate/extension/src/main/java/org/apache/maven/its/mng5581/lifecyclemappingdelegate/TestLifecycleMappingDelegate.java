@@ -57,7 +57,7 @@ public class TestLifecycleMappingDelegate implements LifecycleMappingDelegate {
             throws PluginNotFoundException, PluginResolutionException, PluginDescriptorParsingException,
                     MojoNotFoundException, InvalidPluginDescriptorException {
 
-        Map<String, List<MojoExecution>> pluginExecutions = new LinkedHashMap<String, List<MojoExecution>>();
+        Map<String, List<MojoExecution>> pluginExecutions = new LinkedHashMap<>();
 
         for (Plugin plugin : project.getBuild().getPlugins()) {
             for (PluginExecution execution : plugin.getExecutions()) {

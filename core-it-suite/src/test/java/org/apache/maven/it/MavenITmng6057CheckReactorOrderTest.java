@@ -66,9 +66,9 @@ public class MavenITmng6057CheckReactorOrderTest extends AbstractMavenIntegratio
         assertEquals(3, resultingLines.size());
 
         // We expect those lines in the following exact order.
-        assertTrue(resultingLines.get(0).startsWith("[INFO] base-project"));
-        assertTrue(resultingLines.get(1).startsWith("[INFO] module-1"));
-        assertTrue(resultingLines.get(2).startsWith("[INFO] module-2"));
+        assertTrue(resultingLines.get(0).startsWith("[INFO] mng-6057-check-reactor-order:base-project:1.3.0-SNAPSHOT"));
+        assertTrue(resultingLines.get(1).startsWith("[INFO] mng-6057-check-reactor-order:module-1:1.3.0-SNAPSHOT"));
+        assertTrue(resultingLines.get(2).startsWith("[INFO] mng-6057-check-reactor-order:module-2:1.3.0-SNAPSHOT"));
     }
 
     /**

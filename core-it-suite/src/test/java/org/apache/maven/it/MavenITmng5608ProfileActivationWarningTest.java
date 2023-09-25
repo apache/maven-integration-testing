@@ -36,7 +36,7 @@ public class MavenITmng5608ProfileActivationWarningTest
 
     public MavenITmng5608ProfileActivationWarningTest()
     {
-        super( "(3.2.1,)" );
+        super( "(3.2.1,3.8.8]" );
     }
 
     public void testitMNG5608()

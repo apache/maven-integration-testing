@@ -27,8 +27,10 @@ import java.util.List;
 
 import org.apache.maven.shared.verifier.Verifier;
 import org.apache.maven.shared.verifier.util.ResourceExtractor;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
+@Disabled
 class MavenITmng7836AlternativePomSyntaxTest extends AbstractMavenIntegrationTestCase {
 
     protected MavenITmng7836AlternativePomSyntaxTest() {

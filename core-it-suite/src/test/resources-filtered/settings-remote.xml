@@ -67,6 +67,35 @@ plugins/artifacts from test repos so use of these settings should be the excepti
         </pluginRepository>
       </pluginRepositories>
     </profile>
+    <profile>
+      <id>asf-snapshot-repo</id>
+      <repositories>
+        <repository>
+          <id>asf-snapshot</id>
+          <name>Apache Maven Snapshot Repository</name>
+          <url>https://repository.apache.org/snapshots/</url>
+          <releases>
+            <enabled>false</enabled>
+          </releases>
+          <snapshots>
+            <enabled>true</enabled>
+          </snapshots>
+        </repository>
+      </repositories>
+      <pluginRepositories>
+        <pluginRepository>
+          <id>asf-snapshot</id>
+          <name>Apache Maven Snapshot Repository</name>
+          <url>https://repository.apache.org/snapshots/</url>
+          <releases>
+            <enabled>false</enabled>
+          </releases>
+          <snapshots>
+            <enabled>true</enabled>
+          </snapshots>
+        </pluginRepository>
+      </pluginRepositories>
+    </profile>
   </profiles>
   <activeProfiles>
     <activeProfile>it-defaults</activeProfile>

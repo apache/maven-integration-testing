@@ -40,14 +40,16 @@ class MavenITmng7836AlternativePomSyntaxTest extends AbstractMavenIntegrationTes
     void testAlternativeSyntax() throws Exception {
         File testDir = ResourceExtractor.simpleExtractResources(getClass(), "/mng-7836-alternative-pom-syntax");
 
-        final Verifier pluginVerifier = newVerifier(new File(testDir, "maven-hocon-extension").getPath());
+        final Verifier pluginVerifier = newVerifier(new File(testDir, "maven-hocon-extension").getPath(), "remote");
         pluginVerifier.addCliArgument("clean");
         pluginVerifier.addCliArgument("install");
         pluginVerifier.addCliArgument("-V");
+        pluginVerifier.addCliArguments("-P", "asf-snapshot-repo");
+
         pluginVerifier.execute();
         pluginVerifier.verifyErrorFreeLog();
 
-        final Verifier consumerVerifier = newVerifier(new File(testDir, "simple").getPath());
+        final Verifier consumerVerifier = newVerifier(new File(testDir, "simple").getPath(), "remote");
         consumerVerifier.addCliArgument("clean");
         consumerVerifier.addCliArgument("install");
         consumerVerifier.addCliArgument("-Drat.skip=true");

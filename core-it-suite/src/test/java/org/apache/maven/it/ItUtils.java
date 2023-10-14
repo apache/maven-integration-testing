@@ -70,10 +70,17 @@ class ItUtils {
         return baos.toString();
     }
 
+    /**
+     * @see ItUtils#setUserHome(Verifier, Path)
+     */
     public static void setUserHome(Verifier verifier, File file) {
         setUserHome(verifier, file.toPath());
     }
 
+    /**
+     * Note that this only has effect when fork mode is set to true.
+     * Please make sure to call {@link Verifier#setForkJvm(boolean)} and set it to true
+     */
     public static void setUserHome(Verifier verifier, Path home) {
         // NOTE: We set the user.home directory instead of say settings.security to reflect Maven's normal behavior
         String path = home.toAbsolutePath().toString();

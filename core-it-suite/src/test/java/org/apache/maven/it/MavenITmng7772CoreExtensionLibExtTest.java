@@ -18,16 +18,16 @@
  */
 package org.apache.maven.it;
 
-import org.apache.maven.shared.verifier.Verifier;
-import org.apache.maven.shared.verifier.util.ResourceExtractor;
-import org.junit.jupiter.api.Test;
-
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
+
+import org.apache.maven.shared.verifier.Verifier;
+import org.apache.maven.shared.verifier.util.ResourceExtractor;
+import org.junit.jupiter.api.Test;
 
 public class MavenITmng7772CoreExtensionLibExtTest extends AbstractMavenIntegrationTestCase {
     public MavenITmng7772CoreExtensionLibExtTest() {
@@ -68,6 +68,8 @@ public class MavenITmng7772CoreExtensionLibExtTest extends AbstractMavenIntegrat
                 .findFirst()
                 .orElse(null);
 
-        return buildingJarLine != null ? Paths.get(buildingJarLine.replace("[INFO] Building jar:", "").trim()) : null;
+        return buildingJarLine != null
+                ? Paths.get(buildingJarLine.replace("[INFO] Building jar:", "").trim())
+                : null;
     }
 }

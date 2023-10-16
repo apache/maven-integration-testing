@@ -19,7 +19,11 @@
 package org.apache.maven.it;
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Arrays;
 
 import org.apache.maven.shared.verifier.Verifier;
 import org.apache.maven.shared.verifier.util.ResourceExtractor;
@@ -31,7 +35,7 @@ public class MavenITmng7772CoreExtensionFoundTest extends AbstractMavenIntegrati
     }
 
     @Test
-    public void testCoreExtensionsFound() throws Exception {
+    public void testWithExtensionsXmlCoreExtensionsFound() throws Exception {
         File testDir = ResourceExtractor.simpleExtractResources(getClass(), "/mng-7772-core-extensions-found");
 
         Verifier verifier = newVerifier(new File(testDir, "extension").getAbsolutePath());
@@ -40,12 +44,51 @@ public class MavenITmng7772CoreExtensionFoundTest extends AbstractMavenIntegrati
         verifier.verifyErrorFreeLog();
 
         verifier = newVerifier(testDir.getAbsolutePath());
-        ItUtils.setUserHome(verifier, Paths.get(testDir.toPath().toString(), "home"));
+        ItUtils.setUserHome(verifier, Paths.get(testDir.toPath().toString(), "home-extensions-xml"));
         verifier.setForkJvm(true);
 
         verifier.addCliArgument("validate");
         verifier.execute();
 
         verifier.verifyTextInLog("[INFO] Extension loaded!");
+    }
+
+    @Test
+    public void testWithLibExtCoreExtensionsFound() throws Exception {
+        File testDir = ResourceExtractor.simpleExtractResources(getClass(), "/mng-7772-core-extensions-found");
+
+        Verifier verifier = newVerifier(new File(testDir, "extension").getAbsolutePath());
+        verifier.addCliArgument("package");
+        verifier.execute();
+        verifier.verifyErrorFreeLog();
+
+        Path jarPath = getJarPath(verifier);
+        assertNotNull("Jar output path was not found in the log", jarPath);
+
+        Path jarToPath = Paths.get(testDir.toString(), "home-lib-ext", ".m2", "ext", "extension.jar");
+        try {
+            Files.copy(jarPath, jarToPath);
+
+            verifier = newVerifier(testDir.getAbsolutePath());
+            ItUtils.setUserHome(verifier, Paths.get(testDir.toPath().toString(), "home-lib-ext"));
+            verifier.setForkJvm(true);
+            verifier.addCliArgument("validate");
+            verifier.execute();
+            verifier.verifyTextInLog("[INFO] Extension loaded!");
+        } finally {
+            Files.deleteIfExists(jarToPath);
+        }
+    }
+
+    private Path getJarPath(Verifier verifier) throws IOException {
+        String logs = ItUtils.getLogContent(verifier);
+        String buildingJarLine = Arrays.stream(logs.split("\n"))
+                .filter(line -> line.startsWith("[INFO] Building jar: "))
+                .findFirst()
+                .orElse(null);
+
+        return buildingJarLine != null
+                ? Paths.get(buildingJarLine.replace("[INFO] Building jar:", "").trim())
+                : null;
     }
 }

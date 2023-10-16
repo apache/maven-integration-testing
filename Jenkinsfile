@@ -8,35 +8,35 @@ pipeline {
   stages {
     stage("Parallel Stage") {
       parallel {
-        stage("Build / Test - mvn latest - JDK8 - ubuntu") {
-          agent { node { label 'ubuntu' } }
-          steps {
-              timeout( time: 180, unit: 'MINUTES' ) {
-                mavenBuild( "jdk_1.8_latest", "maven_latest")
-            }
-          }
-        }
         stage("Build / Test - mvn latest - JDK11 - ubuntu") {
           agent { node { label 'ubuntu' } }
           steps {
-              timeout( time: 180, unit: 'MINUTES' ) {
-                mavenBuild( "jdk_11_latest", "maven_latest")
+            timeout( time: 180, unit: 'MINUTES' ) {
+              mavenBuild( "jdk_11_latest", "maven_latest")
             }
           }
         }
-        stage("Build / Test - mvn latest - JDK8 - windowx") {
-          agent { node { label 'Windows' } }
+        stage("Build / Test - mvn latest - JDK21 - ubuntu") {
+          agent { node { label 'ubuntu' } }
           steps {
-              timeout( time: 180, unit: 'MINUTES' ) {
-                mavenBuild( "jdk_1.8_latest", "maven_latest")
+            timeout( time: 180, unit: 'MINUTES' ) {
+              mavenBuild( "jdk_21_latest", "maven_latest")
             }
           }
         }
         stage("Build / Test - mvn latest - JDK11 - windows") {
           agent { node { label 'Windows' } }
           steps {
-              timeout( time: 180, unit: 'MINUTES' ) {
-                mavenBuild( "jdk_11_latest", "maven_latest")
+            timeout( time: 180, unit: 'MINUTES' ) {
+              mavenBuild( "jdk_11_latest", "maven_latest")
+            }
+          }
+        }
+        stage("Build / Test - mvn latest - JDK21 - windows") {
+          agent { node { label 'Windows' } }
+          steps {
+            timeout( time: 180, unit: 'MINUTES' ) {
+              mavenBuild( "jdk_21_latest", "maven_latest")
             }
           }
         }

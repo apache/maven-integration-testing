@@ -32,14 +32,10 @@ under the License.
       mvn clean deploy -DaltDeploymentRepository=default::default::file://
      -->
 
-  <properties>
-    <slf4jVersion>1.7.36</slf4jVersion>
-  </properties>
-
   <dependencies>
     <dependency>
       <groupId>org.apache.maven</groupId>
-      <artifactId>maven-core</artifactId>
+      <artifactId>maven-api-core</artifactId>
       <version>4.0.0-alpha-7</version>
       <scope>provided</scope>
     </dependency>
@@ -49,12 +45,6 @@ under the License.
       <artifactId>javax.inject</artifactId>
       <version>1</version>
       <scope>provided</scope>
-    </dependency>
-
-    <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>slf4j-api</artifactId>
-      <version>${slf4jVersion}</version>
     </dependency>
   </dependencies>
 

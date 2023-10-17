@@ -19,11 +19,9 @@
 package org.apache.maven.it;
 
 import java.io.File;
-import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Arrays;
 
 import org.apache.maven.shared.verifier.Verifier;
 import org.apache.maven.shared.verifier.util.ResourceExtractor;
@@ -62,7 +60,9 @@ public class MavenITmng7772CoreExtensionFoundTest extends AbstractMavenIntegrati
         verifier.execute();
         verifier.verifyErrorFreeLog();
 
-        Path jarPath = getJarPath(verifier);
+        Path jarPath = Paths.get(verifier.getArtifactPath(
+                "org.apache.maven.its.7772-core-extensions-scopes", "maven-it-core-extensions", "0.1", "jar", ""));
+
         assertNotNull("Jar output path was not found in the log", jarPath);
 
         Path jarToPath = Paths.get(testDir.toString(), "home-lib-ext", ".m2", "ext", "extension.jar");
@@ -78,17 +78,5 @@ public class MavenITmng7772CoreExtensionFoundTest extends AbstractMavenIntegrati
         } finally {
             Files.deleteIfExists(jarToPath);
         }
-    }
-
-    private Path getJarPath(Verifier verifier) throws IOException {
-        String logs = ItUtils.getLogContent(verifier);
-        String buildingJarLine = Arrays.stream(logs.split("\n"))
-                .filter(line -> line.startsWith("[INFO] Building jar: "))
-                .findFirst()
-                .orElse(null);
-
-        return buildingJarLine != null
-                ? Paths.get(buildingJarLine.replace("[INFO] Building jar:", "").trim())
-                : null;
     }
 }

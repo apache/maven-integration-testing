@@ -127,7 +127,6 @@ public class TestSuiteOrdering implements ClassOrderer {
         suite.addTestSuite(MavenITmng7819FileLockingWithSnapshotsTest.class);
         suite.addTestSuite(MavenITmng5659ProjectSettingsTest.class);
         suite.addTestSuite(MavenITmng5600DependencyManagementImportExclusionsTest.class);
-        suite.addTestSuite(MavenITmng7772CoreExtensionLibExtTest.class);
         suite.addTestSuite(MavenITmng7772CoreExtensionFoundTest.class);
         suite.addTestSuite(MavenITmng7772CoreExtensionsNotFoundTest.class);
         suite.addTestSuite(MavenITmng7740ConsumerBuildShouldCleanUpOldFilesTest.class);

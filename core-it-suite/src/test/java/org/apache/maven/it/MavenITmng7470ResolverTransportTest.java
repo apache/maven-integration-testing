@@ -130,7 +130,9 @@ public class MavenITmng7470ResolverTransportTest extends AbstractMavenIntegratio
 
     @Test
     public void testResolverTransportApache() throws Exception {
-        performTest( JDK_TRANSPORT_IN_MAVEN_SINCE.compareTo(getMavenVersion()) > 0 ? "apache" : "native", APACHE_LOG_SNIPPET);
+        performTest(
+                JDK_TRANSPORT_IN_MAVEN_SINCE.compareTo(getMavenVersion()) > 0 ? "apache" : "native",
+                APACHE_LOG_SNIPPET);
     }
 
     @Test

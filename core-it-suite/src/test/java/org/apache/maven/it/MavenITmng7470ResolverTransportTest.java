@@ -111,11 +111,26 @@ public class MavenITmng7470ResolverTransportTest extends AbstractMavenIntegratio
 
     private static final String JDK_LOG_SNIPPET = "[DEBUG] Using transporter JdkHttpTransporter";
 
+    /**
+     * Returns {@code true} if JDK HttpClient transport is usable (Java11 or better).
+     */
+    private boolean isJdkTransportUsable() {
+        return JDK_TRANSPORT_USABLE_ON_JDK_SINCE.compareTo(getJavaVersion()) < 1;
+    }
+
+    /**
+     * Returns {@code true} if JDK HttpClient transport is present in Maven (since 4.0.0-alpha-9, the Resovler 2.0.0
+     * upgrade).
+     */
+    private boolean isJdkTransportPresent() {
+        return JDK_TRANSPORT_IN_MAVEN_SINCE.compareTo(getMavenVersion()) < 1;
+    }
+
     private String defaultLogSnippet() {
-        if (JDK_TRANSPORT_USABLE_ON_JDK_SINCE.compareTo(getJavaVersion()) > 0) {
-            return APACHE_LOG_SNIPPET;
+        if (isJdkTransportUsable() && isJdkTransportPresent()) {
+            return JDK_LOG_SNIPPET;
         }
-        return JDK_TRANSPORT_IN_MAVEN_SINCE.compareTo(getMavenVersion()) > 0 ? APACHE_LOG_SNIPPET : JDK_LOG_SNIPPET;
+        return APACHE_LOG_SNIPPET;
     }
 
     @Test
@@ -130,15 +145,12 @@ public class MavenITmng7470ResolverTransportTest extends AbstractMavenIntegratio
 
     @Test
     public void testResolverTransportApache() throws Exception {
-        performTest(
-                JDK_TRANSPORT_IN_MAVEN_SINCE.compareTo(getMavenVersion()) > 0 ? "apache" : "native",
-                APACHE_LOG_SNIPPET);
+        performTest(isJdkTransportPresent() ? "apache" : "native", APACHE_LOG_SNIPPET);
     }
 
     @Test
     public void testResolverTransportJdk() throws Exception {
-        Assumptions.assumeTrue(JDK_TRANSPORT_USABLE_ON_JDK_SINCE.compareTo(getJavaVersion()) < 1
-                && JDK_TRANSPORT_IN_MAVEN_SINCE.compareTo(getMavenVersion()) < 1);
+        Assumptions.assumeTrue(isJdkTransportUsable() && isJdkTransportPresent());
         performTest("jdk", JDK_LOG_SNIPPET);
     }
 }

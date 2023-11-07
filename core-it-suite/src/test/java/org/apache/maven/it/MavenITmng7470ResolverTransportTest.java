@@ -27,6 +27,7 @@ import org.apache.maven.artifact.versioning.DefaultArtifactVersion;
 import org.apache.maven.shared.verifier.Verifier;
 import org.apache.maven.shared.verifier.util.ResourceExtractor;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assumptions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -43,7 +44,7 @@ public class MavenITmng7470ResolverTransportTest extends AbstractMavenIntegratio
 
     private static final ArtifactVersion JDK_TRANSPORT_USABLE_ON_JDK_SINCE = new DefaultArtifactVersion("11");
 
-    private static final ArtifactVersion JDK_TRANSPORT_IN_USE_SINCE =
+    private static final ArtifactVersion JDK_TRANSPORT_IN_MAVEN_SINCE =
             new DefaultArtifactVersion("4.0.0-alpha-9-SNAPSHOT");
 
     public MavenITmng7470ResolverTransportTest() {
@@ -114,7 +115,7 @@ public class MavenITmng7470ResolverTransportTest extends AbstractMavenIntegratio
         if (JDK_TRANSPORT_USABLE_ON_JDK_SINCE.compareTo(getJavaVersion()) > 0) {
             return APACHE_LOG_SNIPPET;
         }
-        return JDK_TRANSPORT_IN_USE_SINCE.compareTo(getMavenVersion()) > 0 ? APACHE_LOG_SNIPPET : JDK_LOG_SNIPPET;
+        return JDK_TRANSPORT_IN_MAVEN_SINCE.compareTo(getMavenVersion()) > 0 ? APACHE_LOG_SNIPPET : JDK_LOG_SNIPPET;
     }
 
     @Test
@@ -129,11 +130,13 @@ public class MavenITmng7470ResolverTransportTest extends AbstractMavenIntegratio
 
     @Test
     public void testResolverTransportApache() throws Exception {
-        performTest("apache", APACHE_LOG_SNIPPET);
+        performTest( JDK_TRANSPORT_IN_MAVEN_SINCE.compareTo(getMavenVersion()) > 0 ? "apache" : "native", APACHE_LOG_SNIPPET);
     }
 
     @Test
     public void testResolverTransportJdk() throws Exception {
+        Assumptions.assumeTrue(JDK_TRANSPORT_USABLE_ON_JDK_SINCE.compareTo(getJavaVersion()) < 1
+                && JDK_TRANSPORT_IN_MAVEN_SINCE.compareTo(getMavenVersion()) < 1);
         performTest("jdk", JDK_LOG_SNIPPET);
     }
 }

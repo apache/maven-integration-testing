@@ -41,6 +41,8 @@ public class MavenITmng7470ResolverTransportTest extends AbstractMavenIntegratio
 
     private int port;
 
+    private static final ArtifactVersion JDK_TRANSPORT_USABLE_ON_JDK_SINCE = new DefaultArtifactVersion("11");
+
     private static final ArtifactVersion JDK_TRANSPORT_IN_USE_SINCE =
             new DefaultArtifactVersion("4.0.0-alpha-9-SNAPSHOT");
 
@@ -108,11 +110,16 @@ public class MavenITmng7470ResolverTransportTest extends AbstractMavenIntegratio
 
     private static final String JDK_LOG_SNIPPET = "[DEBUG] Using transporter JdkHttpTransporter";
 
+    private String defaultLogSnippet() {
+        if (JDK_TRANSPORT_USABLE_ON_JDK_SINCE.compareTo(getJavaVersion()) > 0) {
+            return APACHE_LOG_SNIPPET;
+        }
+        return JDK_TRANSPORT_IN_USE_SINCE.compareTo(getMavenVersion()) > 0 ? APACHE_LOG_SNIPPET : JDK_LOG_SNIPPET;
+    }
+
     @Test
     public void testResolverTransportDefault() throws Exception {
-        performTest(
-                null,
-                JDK_TRANSPORT_IN_USE_SINCE.compareTo(getMavenVersion()) > 0 ? APACHE_LOG_SNIPPET : JDK_LOG_SNIPPET);
+        performTest(null, defaultLogSnippet());
     }
 
     @Test

@@ -29,12 +29,12 @@ import org.junit.jupiter.api.Test;
 /**
  * This is a test set for
  * <a href="https://issues.apache.org/jira/browse/MNG-7965">MNG-7965</a>.
- * Allow to exclude plugins from validation. Affected is Maven 4.0.0-alpha-9.
+ * Allow to exclude plugins from validation. Affected ones as Maven 4.0.0-alpha-8 and Maven 4.0.0-alpha-9.
  */
 class MavenITmng7965PomDuplicateTagsTest extends AbstractMavenIntegrationTestCase {
 
     protected MavenITmng7965PomDuplicateTagsTest() {
-        super("(,4.0.0-alpha-9),(4.0.0-alpha-9,)");
+        super("(,4.0.0-alpha-8),(4.0.0-alpha-9,)");
     }
 
     @Test

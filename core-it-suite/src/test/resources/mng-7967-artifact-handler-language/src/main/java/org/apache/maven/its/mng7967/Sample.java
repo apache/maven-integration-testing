@@ -19,12 +19,12 @@
 package org.apache.maven.its.mng7967;
 
 /**
- * This is a sample class with broken method javadoc.
+ * This is a sample class with intentionally broken javadoc on method.
  */
 public class Sample {
 
     /**
-     * Hello world method, with intentionally brokek javadoc.
+     * Hello world method, with intentionally broken javadoc, the params are off.
      *
      * @param where The where is not where but who, is here to fail Javadoc.
      * @return The "Hello" string.

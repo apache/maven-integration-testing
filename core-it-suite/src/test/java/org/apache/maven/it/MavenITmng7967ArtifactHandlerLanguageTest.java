@@ -42,15 +42,15 @@ class MavenITmng7967ArtifactHandlerLanguageTest extends AbstractMavenIntegration
         File testDir = ResourceExtractor.simpleExtractResources(getClass(), "/mng-7967-artifact-handler-language");
 
         Verifier verifier = newVerifier(testDir.getAbsolutePath());
-        verifier.setLogFileName("with-warning-log.txt");
         verifier.deleteDirectory("target");
         verifier.addCliArgument("org.apache.maven.plugins:maven-javadoc-plugin:3.6.3:jar");
 
+        boolean invocationFailed = false;
         // whatever outcome we do not fail here, but later
         try {
             verifier.execute();
         } catch (VerificationException e) {
-            // skip
+            invocationFailed = true;
         }
 
         List<String> logs = verifier.loadLines(verifier.getLogFileName(), null);
@@ -63,6 +63,8 @@ class MavenITmng7967ArtifactHandlerLanguageTest extends AbstractMavenIntegration
 
         // javadoc invocation should actually fail the build
         verifyTextInLog(logs, "[ERROR] Failed to execute goal org.apache.maven.plugins:maven-javadoc-plugin");
+
+        assertTrue("The Maven invocation should have failed: the javadoc should error out", invocationFailed);
     }
 
     private void verifyTextInLog(List<String> logs, String text) {

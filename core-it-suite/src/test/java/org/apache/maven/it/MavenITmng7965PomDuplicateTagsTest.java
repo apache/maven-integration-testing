@@ -64,8 +64,4 @@ class MavenITmng7965PomDuplicateTagsTest extends AbstractMavenIntegrationTestCas
     private void verifyTextInLog(List<String> logs, String text) {
         assertTrue("Log file not contains: " + text, logs.stream().anyMatch(l -> l.contains(text)));
     }
-
-    private void verifyTextNotInLog(List<String> logs, String text) {
-        assertFalse("Log file contains: " + text, logs.stream().anyMatch(l -> l.contains(text)));
-    }
 }

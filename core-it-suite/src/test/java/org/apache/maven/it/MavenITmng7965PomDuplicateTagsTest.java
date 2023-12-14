@@ -20,6 +20,7 @@ package org.apache.maven.it;
 
 import java.io.File;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import org.apache.maven.shared.verifier.VerificationException;
 import org.apache.maven.shared.verifier.Verifier;
@@ -56,12 +57,13 @@ class MavenITmng7965PomDuplicateTagsTest extends AbstractMavenIntegrationTestCas
         List<String> logs = verifier.loadLines(verifier.getLogFileName(), null);
 
         // the POM is not parseable
-        verifyTextInLog(logs, "[FATAL] Non-parseable POM");
+        verifyRegexInLog(logs, "\\[ERROR\\]\\s+Non-parseable POM");
 
         assertTrue("The Maven invocation should have failed: the POM is non-parseable", invocationFailed);
     }
 
-    private void verifyTextInLog(List<String> logs, String text) {
-        assertTrue("Log file not contains: " + text, logs.stream().anyMatch(l -> l.contains(text)));
+    private void verifyRegexInLog(List<String> logs, String text) {
+        Pattern p = Pattern.compile(text);
+        assertTrue("Log file not contains: " + text, logs.stream().anyMatch(p.asPredicate()));
     }
 }

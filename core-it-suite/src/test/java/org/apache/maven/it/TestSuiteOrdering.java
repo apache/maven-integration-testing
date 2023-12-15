@@ -121,6 +121,7 @@ public class TestSuiteOrdering implements ClassOrderer {
          * a fail fast technique as well.
          */
         suite.addTestSuite(MavenITmng7967ArtifactHandlerLanguageTest.class);
+        suite.addTestSuite(MavenITmng7965PomDuplicateTagsTest.class);
         suite.addTestSuite(MavenITmng7939PluginsValidationExcludesTest.class);
         suite.addTestSuite(MavenITmng7837ProjectElementInPomTest.class);
         suite.addTestSuite(MavenITmng7804PluginExecutionOrderTest.class);

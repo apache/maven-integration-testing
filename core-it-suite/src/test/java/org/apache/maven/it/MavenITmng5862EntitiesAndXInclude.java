@@ -39,6 +39,7 @@ public class MavenITmng5862EntitiesAndXInclude extends AbstractMavenIntegrationT
 
         Verifier verifier = newVerifier(testDir.getPath());
         verifier.addCliArgument("install");
+        verifier.addCliArgument("-Dmaven.xinclude=true");
         verifier.execute();
         verifier.verifyErrorFreeLog();
 

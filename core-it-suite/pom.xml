@@ -518,6 +518,8 @@ under the License.
                 <exclude>src/test/resources/mng-2254/latin-1/pom.xml</exclude>
                 <exclude>src/test/resources/mng-2362/latin-1/pom.xml</exclude>
                 <exclude>src/test/resources/mng-3839/pom.xml</exclude>
+                <exclude>src/test/resources/mng-5862-entities-xinclude/pom.xml</exclude>
+                <exclude>src/test/resources/mng-5862-entities-xinclude/child/pom.xml</exclude>
               </excludes>
             </pom>
           </configuration>

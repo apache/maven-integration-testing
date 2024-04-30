@@ -5,4 +5,5 @@
     <groupId>org.apache.maven.its.mng7819</groupId>
     <artifactId>dependency</artifactId>
     <version>1.0.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
 </project>

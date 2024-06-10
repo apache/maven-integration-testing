@@ -36,7 +36,7 @@ import org.junit.jupiter.api.Test;
 class MavenITmng3477DependencyResolutionErrorMessageTest extends AbstractMavenIntegrationTestCase {
 
     public MavenITmng3477DependencyResolutionErrorMessageTest() {
-        super("[2.1.0,3.0-alpha-1),[3.0-beta-1,)");
+        super("[4.0.0-beta-4,)");
     }
 
     /**
@@ -44,7 +44,7 @@ class MavenITmng3477DependencyResolutionErrorMessageTest extends AbstractMavenIn
      *
      * @throws Exception in case of failure
      */
-    void testit(int port, String[] logExpectPatterns) throws Exception {
+    void testit(int port, String[] logExpectPatterns, String projectFile) throws Exception {
         File testDir = ResourceExtractor.simpleExtractResources(getClass(), "/mng-3477");
 
         Verifier verifier = newVerifier(testDir.getAbsolutePath());
@@ -56,10 +56,10 @@ class MavenITmng3477DependencyResolutionErrorMessageTest extends AbstractMavenIn
         verifier.setAutoclean(false);
         verifier.deleteArtifacts("org.apache.maven.its.mng3477");
         verifier.addCliArgument("-U");
-        verifier.addCliArgument("--settings");
-        verifier.addCliArgument("settings.xml");
+        verifier.addCliArguments("--settings", "settings.xml");
+        verifier.addCliArguments("-f", projectFile);
         verifier.addCliArgument("validate");
-        verifier.setLogFileName("log-" + port + ".txt");
+        verifier.setLogFileName("log-" + projectFile + "-" + port + ".txt");
         try {
             verifier.execute();
             fail("Build should have failed to resolve dependency");
@@ -85,7 +85,17 @@ class MavenITmng3477DependencyResolutionErrorMessageTest extends AbstractMavenIn
      */
     @Test
     void connectionProblems() throws Exception {
-        testit(54312, new String[] {".*org.apache.maven.its.mng3477:dep:.*:1.0.*Connection.*refused.*"});
+        testit(54312, new String[] {".*org.apache.maven.its.mng3477:dep:.*:1.0.*Connection.*refused.*"}, "pom.xml");
+    }
+
+    @Test
+    void connectionProblemsPlugin() throws Exception {
+        testit(
+                54312,
+                new String[] {
+                    ".*The following artifacts could not be resolved: org.apache.maven.its.plugins:maven-it-plugin-not-exists:pom:1.2.3 \\(absent\\): Could not transfer artifact org.apache.maven.its.plugins:maven-it-plugin-not-exists:pom:1.2.3 from/to maven-core-it \\(http://localhost:.*/repo\\): Connection to http://localhost:.*2/repo/ refused.*"
+                },
+                "pom-plugin.xml");
     }
 
     @Test
@@ -99,10 +109,40 @@ class MavenITmng3477DependencyResolutionErrorMessageTest extends AbstractMavenIn
             }
 
             int port = ((NetworkConnector) server.getConnectors()[0]).getLocalPort();
-            testit(port, new String[] {
-                ".*Could not find artifact org.apache.maven.its.mng3477:dep:.*:1.0 in central \\(http://localhost:.*/repo\\).*",
-                ".*Could not find artifact org.apache.maven.its.mng3477:dep:.*:1.0 in maven-core-it \\(http://localhost:.*/repo\\).*"
-            });
+            testit(
+                    port,
+                    new String[] {
+                        ".*Could not find artifact org.apache.maven.its.mng3477:dep:.*:1.0 in central \\(http://localhost:.*/repo\\).*",
+                        ".*Could not find artifact org.apache.maven.its.mng3477:dep:.*:1.0 in maven-core-it \\(http://localhost:.*/repo\\).*"
+                    },
+                    "pom.xml");
+
+        } finally {
+            if (server != null) {
+                server.stop();
+                server.join();
+            }
+        }
+    }
+
+    @Test
+    void notFoundProblemsPlugin() throws Exception {
+        Server server = null;
+        try {
+            server = new Server(0);
+            server.start();
+            if (server.isFailed()) {
+                fail("Couldn't bind the server socket to a free port!");
+            }
+
+            int port = ((NetworkConnector) server.getConnectors()[0]).getLocalPort();
+            testit(
+                    port,
+                    new String[] {
+                        ".*Could not find artifact org.apache.maven.its.plugins:maven-it-plugin-not-exists:jar:1.2.3 in central \\(http://localhost:.*/repo\\).*",
+                        ".*Could not find artifact org.apache.maven.its.plugins:maven-it-plugin-not-exists:jar:1.2.3 in maven-core-it \\(http://localhost:.*/repo\\).*"
+                    },
+                    "pom-plugin.xml");
 
         } finally {
             if (server != null) {

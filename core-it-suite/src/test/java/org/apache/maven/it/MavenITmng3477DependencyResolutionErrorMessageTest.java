@@ -32,6 +32,7 @@ import org.junit.jupiter.api.Test;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-3477">MNG-3477</a>.
+ * and extends for <a href="https://issues.apache.org/jira/browse/MNG-7758">MNG-7758</a>
  */
 class MavenITmng3477DependencyResolutionErrorMessageTest extends AbstractMavenIntegrationTestCase {
 

@@ -90,6 +90,7 @@ org.apache.maven.plugins:maven-dependency-plugin:3.3.0
 org.apache.maven.plugins:maven-deploy-plugin:${stubPluginVersion}
 org.apache.maven.plugins:maven-deploy-plugin:2.7
 org.apache.maven.plugins:maven-deploy-plugin:3.0.0
+org.apache.maven.plugins:maven-deploy-plugin:4.0.0-SNAPSHOT
 org.apache.maven.plugins:maven-ear-plugin:${stubPluginVersion}
 org.apache.maven.plugins:maven-ear-plugin:3.2.0
 org.apache.maven.plugins:maven-ejb-plugin:${stubPluginVersion}
@@ -97,6 +98,7 @@ org.apache.maven.plugins:maven-ejb-plugin:3.1.0
 org.apache.maven.plugins:maven-help-plugin:3.3.0
 org.apache.maven.plugins:maven-install-plugin:${stubPluginVersion}
 org.apache.maven.plugins:maven-install-plugin:3.0.1
+org.apache.maven.plugins:maven-install-plugin:4.0.0-SNAPSHOT
 org.apache.maven.plugins:maven-jar-plugin:${stubPluginVersion}
 org.apache.maven.plugins:maven-jar-plugin:3.3.0
 org.apache.maven.plugins:maven-javadoc-plugin:${stubPluginVersion}
@@ -111,6 +113,7 @@ org.apache.maven.plugins:maven-release-plugin:3.0.0-M5
 org.apache.maven.plugins:maven-resources-plugin:${stubPluginVersion}
 org.apache.maven.plugins:maven-resources-plugin:3.2.0
 org.apache.maven.plugins:maven-resources-plugin:3.3.0
+org.apache.maven.plugins:maven-resources-plugin:4.0.0-SNAPSHOT
 org.apache.maven.plugins:maven-site-plugin:${stubPluginVersion}
 org.apache.maven.plugins:maven-site-plugin:3.9.1
 org.apache.maven.plugins:maven-shade-plugin:3.5.0

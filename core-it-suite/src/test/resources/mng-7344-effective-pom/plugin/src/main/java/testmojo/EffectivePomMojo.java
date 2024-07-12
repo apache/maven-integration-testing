@@ -63,7 +63,7 @@ public class EffectivePomMojo extends AbstractMojo {
                 .forEach(dependency -> {
                     getLog().info("" + dependency);
                     try {
-                        getLog().info(getImportedFrom(dependency));
+                        getLog().info("[IMPORTED FROM] " + getImportedFrom(dependency));
                     } catch (Exception ex) {
                         getLog().error("Failed to get importedFrom");
                     }

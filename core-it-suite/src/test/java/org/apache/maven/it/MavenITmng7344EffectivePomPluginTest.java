@@ -50,6 +50,6 @@ public class MavenITmng7344EffectivePomPluginTest extends AbstractMavenIntegrati
         verifier.addCliArgument("compile");
         verifier.execute();
 
-        verifier.verifyTextInLog("[INFO] bom-intermediate-1.0-SNAPSHOT.pom @ 8:3");
+        verifier.verifyTextInLog("[IMPORTED FROM] bom-intermediate-1.0-SNAPSHOT.pom");
     }
 }

@@ -120,6 +120,7 @@ public class TestSuiteOrdering implements ClassOrderer {
          * the tests are to finishing. Newer tests are also more likely to fail, so this is
          * a fail fast technique as well.
          */
+        suite.addTestSuite(MavenITmng7344EffectivePomPluginTest.class);
         suite.addTestSuite(MavenITmng8123BuildCacheTest.class);
         suite.addTestSuite(MavenITmng8106OverlappingDirectoryRolesTest.class);
         suite.addTestSuite(MavenITmng8005IdeWorkspaceReaderUsedTest.class);
@@ -777,7 +778,6 @@ public class TestSuiteOrdering implements ClassOrderer {
         suite.addTestSuite(MavenIT0010DependencyClosureResolutionTest.class);
         suite.addTestSuite(MavenIT0009GoalConfigurationTest.class);
         suite.addTestSuite(MavenIT0008SimplePluginTest.class);
-        suite.addTestSuite(MavenITmng7344EffectivePomPluginTest.class);
         /*
          * Add tests in reverse alpha order above.
          */

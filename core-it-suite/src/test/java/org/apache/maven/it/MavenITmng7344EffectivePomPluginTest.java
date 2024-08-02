@@ -26,7 +26,7 @@ import org.junit.jupiter.api.Test;
 
 public class MavenITmng7344EffectivePomPluginTest extends AbstractMavenIntegrationTestCase {
     public MavenITmng7344EffectivePomPluginTest() {
-        super("[4.0.0-alpha-13,)");
+        super("[4.0.0-beta-4-SNAPSHOT,)");
     }
 
     @Test

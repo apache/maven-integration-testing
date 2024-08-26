@@ -19,11 +19,13 @@
 package org.apache.maven.it;
 
 import java.io.File;
-import java.util.Properties;
 
+import org.apache.maven.shared.verifier.VerificationException;
 import org.apache.maven.shared.verifier.Verifier;
 import org.apache.maven.shared.verifier.util.ResourceExtractor;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-8181">MNG-8181</a>.
@@ -34,7 +36,7 @@ public class MavenITmng8181CentralRepoTest extends AbstractMavenIntegrationTestC
     }
 
     /**
-     *  Verify that using the same repo id allows to override "central". This test checks the effective model.
+     *  Verify that the central url can be overridden by a user property.
      *
      * @throws Exception in case of failure
      */
@@ -46,25 +48,10 @@ public class MavenITmng8181CentralRepoTest extends AbstractMavenIntegrationTestC
         verifier.setAutoclean(false);
         verifier.addCliArgument("--install-settings=install-settings.xml");
         verifier.addCliArgument("--settings=settings.xml");
-        verifier.addCliArgument("org.apache.maven.its.plugins:maven-it-plugin-expression:2.1-SNAPSHOT:eval");
-        verifier.execute();
-        verifier.verifyErrorFreeLog();
-
-        verifier.setAutoclean(false);
-        verifier.addCliArgument("--install-settings=install-settings.xml");
-        verifier.addCliArgument("--settings=settings.xml");
-        verifier.addCliArgument("-X");
+        verifier.addCliArgument("-Dmaven.repo.local=" + testDir.toPath().resolve("target/local-repo"));
         verifier.addCliArgument("-Dmaven.repo.central=http://repo1.maven.org/");
-        verifier.addCliArgument("org.apache.maven.its.plugins:maven-it-plugin-expression:2.1-SNAPSHOT:eval");
-        verifier.execute();
-        verifier.verifyErrorFreeLog();
-
-        verifier.verifyFilePresent("target/expression.properties");
-        Properties props = verifier.loadProperties("target/expression.properties");
-
-        assertEquals("1", props.getProperty("session.session.remoteRepositories"));
-        assertEquals(
-                "http://repo1.maven.org/",
-                props.getProperty("session.session.remoteRepositories.0.repository.mirroredRepositories.0.url"));
+        verifier.addCliArgument("validate");
+        assertThrows(VerificationException.class, verifier::execute);
+        verifier.verifyTextInLog("central (http://repo1.maven.org/, default, releases)");
     }
 }

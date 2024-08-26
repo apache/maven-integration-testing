@@ -20,6 +20,12 @@ under the License.
 <project xmlns="http://maven.apache.org/POM/4.1.0" root="true">
   <modelVersion>4.1.0</modelVersion>
 
+  <parent>
+    <groupId>org.apache</groupId>
+    <artifactId>apache</artifactId>
+    <version>33</version>
+  </parent>
+
   <groupId>org.apache.maven.its.it0043</groupId>
   <artifactId>maven-it-it0043</artifactId>
   <version>1.0-SNAPSHOT</version>
@@ -27,19 +33,4 @@ under the License.
   <name>Maven Integration Test :: it0043</name>
   <description>Test for repository inheritance - ensure using the same id overrides the defaults</description>
 
-  <build>
-    <plugins>
-      <plugin>
-        <groupId>org.apache.maven.its.plugins</groupId>
-        <artifactId>maven-it-plugin-expression</artifactId>
-        <version>2.1-SNAPSHOT</version>
-        <configuration>
-          <outputFile>target/expression.properties</outputFile>
-          <expressions>
-            <expression>session</expression>
-          </expressions>
-        </configuration>
-      </plugin>
-    </plugins>
-  </build>
 </project>

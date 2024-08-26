@@ -46,6 +46,13 @@ public class MavenITmng8181CentralRepoTest extends AbstractMavenIntegrationTestC
         verifier.setAutoclean(false);
         verifier.addCliArgument("--install-settings=install-settings.xml");
         verifier.addCliArgument("--settings=settings.xml");
+        verifier.addCliArgument("org.apache.maven.its.plugins:maven-it-plugin-expression:2.1-SNAPSHOT:eval");
+        verifier.execute();
+        verifier.verifyErrorFreeLog();
+
+        verifier.setAutoclean(false);
+        verifier.addCliArgument("--install-settings=install-settings.xml");
+        verifier.addCliArgument("--settings=settings.xml");
         verifier.addCliArgument("-X");
         verifier.addCliArgument("-Dmaven.repo.central=http://repo1.maven.org/");
         verifier.addCliArgument("org.apache.maven.its.plugins:maven-it-plugin-expression:2.1-SNAPSHOT:eval");

@@ -117,7 +117,7 @@ public class MavenITmng3043BestEffortReactorResolutionTest extends AbstractMaven
         verifier.execute();
         verifier.verifyErrorFreeLog();
 
-        String prefix = matchesVersionRange("[4.0.0-alpha-4,)") ? "dependency-0.1-SNAPSHOT-" : "";
+        String prefix = "";
 
         List<String> classpath;
 

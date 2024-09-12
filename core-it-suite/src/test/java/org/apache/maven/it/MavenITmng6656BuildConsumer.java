@@ -111,15 +111,9 @@ public class MavenITmng6656BuildConsumer extends AbstractMavenIntegrationTestCas
     }
 
     static void assertTextEquals(File file1, File file2) throws IOException {
-        List<String> s1 = FileUtils.loadFile(file1);
-        List<String> s2 = FileUtils.loadFile(file2);
-        try {
-            assertEquals("Not same size", s1.size(), s2.size());
-            for (int i = 0; i < s1.size(); i++) {
-                assertEquals("Mismatch line " + i, s1.get(i), s2.get(i));
-            }
-        } catch (AssertionFailedError error) {
-            assertEquals(error.getMessage(), s1, s2);
-        }
+        assertEquals(
+                "pom files differ " + file1 + " " + file2,
+                String.join("\n",FileUtils.loadFile(file1)),
+                String.join("\n",FileUtils.loadFile(file2)));
     }
 }

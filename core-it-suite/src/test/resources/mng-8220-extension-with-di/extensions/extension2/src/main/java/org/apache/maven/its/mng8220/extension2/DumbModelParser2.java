@@ -24,7 +24,6 @@ import java.util.Optional;
 
 import org.apache.maven.api.di.Inject;
 import org.apache.maven.api.di.Named;
-import org.apache.maven.api.di.Singleton;
 import org.apache.maven.api.model.Model;
 import org.apache.maven.api.services.Source;
 import org.apache.maven.api.spi.ModelParser;

@@ -18,12 +18,12 @@
  */
 package org.apache.maven.its.mng8220.extension3;
 
+import javax.inject.Inject;
+import javax.inject.Named;
+
 import java.nio.file.Path;
 import java.util.Map;
 import java.util.Optional;
-
-import javax.inject.Inject;
-import javax.inject.Named;
 
 import org.apache.maven.api.model.Model;
 import org.apache.maven.api.services.Source;

@@ -50,6 +50,9 @@ public class MavenITmng8220ExtensionWithDITest extends AbstractMavenIntegrationT
         verifier.addCliArgument("validate");
         verifier.execute();
         verifier.verifyErrorFreeLog();
-        verifier.verifyTextInLog("[MNG-8220] DumbModelParser Called from extension");
+        verifier.verifyTextInLog("[MNG-8220] DumbModelParser1 Called from extension");
+        verifier.verifyTextInLog("[MNG-8220] DumbModelParser2 Called from extension");
+        verifier.verifyTextInLog("[MNG-8220] DumbModelParser3 Called from extension");
+        verifier.verifyTextInLog("[MNG-8220] DumbModelParser4 Called from extension");
     }
 }

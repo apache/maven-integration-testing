@@ -34,7 +34,7 @@ class MavenITmng8293BomImportFromReactor extends AbstractMavenIntegrationTestCas
     }
 
     /**
-     *  Verify that project without root POM can be loaded up
+     *  Verify that project doing BOM import of BOM from reactor can be loaded up
      */
     @Test
     void testitNoRootPomCanBeLoaded() throws Exception {

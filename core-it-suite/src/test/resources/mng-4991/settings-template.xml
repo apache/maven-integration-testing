@@ -37,13 +37,4 @@ under the License.
       <nonProxyHosts>@localhost@</nonProxyHosts>
     </proxy>
   </proxies>
-  <profiles>
-    <profile>
-      <id>it-defaults</id>
-      <!-- disable central override and use built-in values -->
-    </profile>
-  </profiles>
-  <activeProfiles>
-    <activeProfile>it-defaults</activeProfile>
-  </activeProfiles>
 </settings>

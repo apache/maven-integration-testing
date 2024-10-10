@@ -96,6 +96,7 @@ org.apache.maven.plugins:maven-ear-plugin:${stubPluginVersion}
 org.apache.maven.plugins:maven-ear-plugin:3.2.0
 org.apache.maven.plugins:maven-ejb-plugin:${stubPluginVersion}
 org.apache.maven.plugins:maven-ejb-plugin:3.1.0
+org.apache.maven.plugins:maven-enforcer-plugin:3.0.0
 org.apache.maven.plugins:maven-help-plugin:3.3.0
 org.apache.maven.plugins:maven-install-plugin:${stubPluginVersion}
 org.apache.maven.plugins:maven-install-plugin:3.0.1
@@ -110,14 +111,17 @@ org.apache.maven.plugins:maven-plugin-plugin:3.6.0
 org.apache.maven.plugins:maven-plugin-plugin:3.9.0
 org.apache.maven.plugins:maven-rar-plugin:${stubPluginVersion}
 org.apache.maven.plugins:maven-release-plugin:3.0.0-M5
+org.apache.maven.plugins:maven-remote-resources-plugin:1.7.0
 org.apache.maven.plugins:maven-resources-plugin:${stubPluginVersion}
 org.apache.maven.plugins:maven-resources-plugin:3.2.0
 org.apache.maven.plugins:maven-resources-plugin:3.3.0
 org.apache.maven.plugins:maven-site-plugin:${stubPluginVersion}
 org.apache.maven.plugins:maven-site-plugin:3.9.1
+org.apache.maven.plugins:maven-site-plugin:3.11.0
 org.apache.maven.plugins:maven-shade-plugin:3.5.0
 org.apache.maven.plugins:maven-source-plugin:${stubPluginVersion}
 org.apache.maven.plugins:maven-surefire-plugin:${stubPluginVersion}
+org.apache.maven.plugins:maven-surefire-plugin:2.22.2
 org.apache.maven.plugins:maven-surefire-plugin:3.0.0-M5
 org.apache.maven.plugins:maven-surefire-plugin:3.0.0-M7
 org.apache.maven.plugins:maven-surefire-plugin:3.2.2

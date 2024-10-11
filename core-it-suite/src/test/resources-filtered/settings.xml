@@ -33,7 +33,7 @@ own test repos or can employ the local repository (after bootstrapping). This co
         <repository>
           <id>central</id>
           <name>Apache Maven Integration Testing Repository</name>
-          <url>file:target/null</url>
+          <url>https://repo.maven.apache.org/maven2</url>
           <releases>
             <enabled>true</enabled>
           </releases>
@@ -46,7 +46,7 @@ own test repos or can employ the local repository (after bootstrapping). This co
         <pluginRepository>
           <id>central</id>
           <name>Apache Maven Integration Testing Repository</name>
-          <url>file:target/null</url>
+          <url>https://repo.maven.apache.org/maven2</url>
           <releases>
             <enabled>true</enabled>
           </releases>

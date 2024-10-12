@@ -254,6 +254,10 @@ public abstract class AbstractMavenIntegrationTestCase {
 
     protected Verifier newVerifier(String basedir, String settings, boolean debug) throws VerificationException {
         Verifier verifier = new Verifier(basedir, debug);
+        verifier.getVerifierProperties().setProperty("use.mavenRepoLocal", Boolean.FALSE.toString());
+        verifier.setLocalRepo(System.getProperty("maven.repo.local"));
+        verifier.addCliArgument("-Dmaven.repo.local=" + verifier.getLocalRepository());
+        verifier.addCliArgument("-Daether.lrm.enhanced.split=true");
 
         verifier.setAutoclean(false);
 

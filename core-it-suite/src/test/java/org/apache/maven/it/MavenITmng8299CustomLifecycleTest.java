@@ -42,10 +42,12 @@ class MavenITmng8299CustomLifecycleTest extends AbstractMavenIntegrationTestCase
 
         Verifier verifier = newVerifier(new File(testDir, "CustomLifecyclePlugin").getAbsolutePath());
         verifier.addCliArgument("install");
+        verifier.execute();
         verifier.verifyErrorFreeLog();
 
         verifier = newVerifier(new File(testDir, "CustomLifecycleProject").getAbsolutePath());
         verifier.addCliArgument("phase3");
+        verifier.execute();
         verifier.verifyErrorFreeLog();
         verifier.verifyTextInLog("[INFO] Doing Phase 1 stuff. Oh yeah baby.");
     }

@@ -67,7 +67,11 @@ public class MavenITmng4720DependencyManagementExclusionMergeTest extends Abstra
         assertFalse(classpath.toString(), classpath.contains("b-0.1.jar"));
 
         // dependency management in a excludes d
-        assertFalse(classpath.toString(), classpath.contains("d-0.1.jar"));
+        if (matchesVersionRange("[4.0.0-beta-5,)")) {
+            assertFalse(classpath.toString(), classpath.contains("d-0.1.jar"));
+        } else {
+            assertTrue(classpath.toString(), classpath.contains("d-0.1.jar"));
+        }
     }
 
     /**

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.1.0" root="true">
+  <parent />
+  <artifactId>mng-8041-downstream</artifactId>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.apache.maven.its</groupId>
+      <artifactId>mng-8041-upstream</artifactId>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.its</groupId>
+        <artifactId>mng-8041-plugin</artifactId>
+        <executions>
+          <execution>
+            <goals>
+              <goal>static-tree</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+</project>

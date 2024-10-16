@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.1.0">
+  <parent />
+
+  <artifactId>mng-8041-plugin</artifactId>
+  <packaging>maven-plugin</packaging>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.apache.maven</groupId>
+      <artifactId>maven-api-core</artifactId>
+      <version>4.0.0-beta-5-SNAPSHOT</version>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-plugin-plugin</artifactId>
+        <version>4.0.0-beta-1</version>
+        <configuration>
+          <goalPrefix>test</goalPrefix>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+
+</project>

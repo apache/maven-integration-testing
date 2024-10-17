@@ -81,6 +81,7 @@ under the License.
             </goals>
             <phase>generate-sources</phase>
             <configuration>
+              <useBaseVersion>true</useBaseVersion>
               <artifactItems>
                 <artifactItem>
                   <groupId>org.apache.maven</groupId>

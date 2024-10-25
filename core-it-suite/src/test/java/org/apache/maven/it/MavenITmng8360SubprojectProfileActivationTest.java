@@ -43,7 +43,7 @@ class MavenITmng8360SubprojectProfileActivationTest extends AbstractMavenIntegra
         Verifier verifier = newVerifier(testDir.getAbsolutePath());
         verifier.addCliArguments("-s", "settings.xml");
         verifier.addCliArguments("-f", "module1");
-        verifier.addCliArgument("help:3.3.0:active-profiles");
+        verifier.addCliArgument("org.apache.maven.plugins:maven-help-plugin:3.3.0:active-profiles");
         verifier.execute();
         verifier.verifyErrorFreeLog();
 

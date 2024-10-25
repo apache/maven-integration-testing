@@ -49,7 +49,7 @@ class MavenITmng8347TransitiveDependencyManagerTest extends AbstractMavenIntegra
 
         Verifier verifier = new Verifier(testDir.getAbsolutePath());
         verifier.addCliArgument("-V");
-        verifier.addCliArgument("eu.maveniverse.maven.plugins:toolbox:0.3.5:tree");
+        verifier.addCliArgument("dependency:3.8.0:tree");
         verifier.addCliArgument("-Dmaven.repo.local.tail=" + testDir + "/local-repo");
         verifier.addCliArgument("-Dmaven.repo.local.tail.ignoreAvailability");
         verifier.execute();
@@ -59,46 +59,30 @@ class MavenITmng8347TransitiveDependencyManagerTest extends AbstractMavenIntegra
         if (matchesVersionRange("[3.9.0,4.0.0-alpha-12)")) {
             // Maven3 is not transitive
             a(l, "[INFO] org.apache.maven.it.mresolver614:root:jar:1.0.0");
-            a(l, "[INFO] \\- org.apache.maven.it.mresolver614:level1:jar:1.0.0 [compile]");
-            a(l, "[INFO]    \\- org.apache.maven.it.mresolver614:level2:jar:1.0.0 [compile]");
-            a(l, "[INFO]       \\- org.apache.maven.it.mresolver614:level3:jar:1.0.0 [compile]");
-            a(l, "[INFO]          \\- org.apache.maven.it.mresolver614:level4:jar:1.0.0 [compile]");
-            a(l, "[INFO]             \\- org.apache.maven.it.mresolver614:level5:jar:1.0.0 [compile]");
-            a(
-                    l,
-                    "[INFO]                \\- org.apache.maven.it.mresolver614:level6:jar:1.0.2 [compile] (version managed from 1.0.0)");
+            a(l, "[INFO] \\- org.apache.maven.it.mresolver614:level1:jar:1.0.0:compile");
+            a(l, "[INFO]    \\- org.apache.maven.it.mresolver614:level2:jar:1.0.0:compile");
+            a(l, "[INFO]       \\- org.apache.maven.it.mresolver614:level3:jar:1.0.0:compile");
+            a(l, "[INFO]          \\- org.apache.maven.it.mresolver614:level4:jar:1.0.0:compile");
+            a(l, "[INFO]             \\- org.apache.maven.it.mresolver614:level5:jar:1.0.0:compile");
+            a(l, "[INFO]                \\- org.apache.maven.it.mresolver614:level6:jar:1.0.2:compile");
         } else if (matchesVersionRange("[4.0.0-alpha-12,4.0.0-beta-5]")) {
             // Maven 4 is transitive (added in 4.0.0-alpha-12, but was broken up to beta-6)
             a(l, "[INFO] org.apache.maven.it.mresolver614:root:jar:1.0.0");
-            a(l, "[INFO] \\- org.apache.maven.it.mresolver614:level1:jar:1.0.0 [compile]");
-            a(l, "[INFO]    \\- org.apache.maven.it.mresolver614:level2:jar:1.0.0 [compile]");
-            a(
-                    l,
-                    "[INFO]       \\- org.apache.maven.it.mresolver614:level3:jar:1.0.1 [compile] (version managed from 1.0.0)");
-            a(
-                    l,
-                    "[INFO]          \\- org.apache.maven.it.mresolver614:level4:jar:1.0.1 [compile] (version managed from 1.0.0)");
-            a(
-                    l,
-                    "[INFO]             \\- org.apache.maven.it.mresolver614:level5:jar:1.0.2 [compile] (version managed from 1.0.0)");
-            a(
-                    l,
-                    "[INFO]                \\- org.apache.maven.it.mresolver614:level6:jar:1.0.2 [compile] (version managed from 1.0.0)");
+            a(l, "[INFO] \\- org.apache.maven.it.mresolver614:level1:jar:1.0.0:compile");
+            a(l, "[INFO]    \\- org.apache.maven.it.mresolver614:level2:jar:1.0.0:compile");
+            a(l, "[INFO]       \\- org.apache.maven.it.mresolver614:level3:jar:1.0.1:compile");
+            a(l, "[INFO]          \\- org.apache.maven.it.mresolver614:level4:jar:1.0.1:compile");
+            a(l, "[INFO]             \\- org.apache.maven.it.mresolver614:level5:jar:1.0.2:compile");
+            a(l, "[INFO]                \\- org.apache.maven.it.mresolver614:level6:jar:1.0.2:compile");
         } else if (matchesVersionRange("[4.0.0-beta-6,)")) {
             // Maven 4 is transitive and should produce expected results
             a(l, "[INFO] org.apache.maven.it.mresolver614:root:jar:1.0.0");
-            a(l, "[INFO] \\- org.apache.maven.it.mresolver614:level1:jar:1.0.0 [compile]");
-            a(l, "[INFO]    \\- org.apache.maven.it.mresolver614:level2:jar:1.0.0 [compile]");
-            a(l, "[INFO]       \\- org.apache.maven.it.mresolver614:level3:jar:1.0.0 [compile]");
-            a(
-                    l,
-                    "[INFO]          \\- org.apache.maven.it.mresolver614:level4:jar:1.0.1 [compile] (version managed from 1.0.0)");
-            a(
-                    l,
-                    "[INFO]             \\- org.apache.maven.it.mresolver614:level5:jar:1.0.2 [compile] (version managed from 1.0.0)");
-            a(
-                    l,
-                    "[INFO]                \\- org.apache.maven.it.mresolver614:level6:jar:1.0.2 [compile] (version managed from 1.0.0)");
+            a(l, "[INFO] \\- org.apache.maven.it.mresolver614:level1:jar:1.0.0:compile");
+            a(l, "[INFO]    \\- org.apache.maven.it.mresolver614:level2:jar:1.0.0:compile");
+            a(l, "[INFO]       \\- org.apache.maven.it.mresolver614:level3:jar:1.0.0:compile");
+            a(l, "[INFO]          \\- org.apache.maven.it.mresolver614:level4:jar:1.0.1:compile");
+            a(l, "[INFO]             \\- org.apache.maven.it.mresolver614:level5:jar:1.0.2:compile");
+            a(l, "[INFO]                \\- org.apache.maven.it.mresolver614:level6:jar:1.0.2:compile");
         }
     }
 

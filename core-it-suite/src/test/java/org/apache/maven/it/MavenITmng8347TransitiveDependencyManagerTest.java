@@ -87,6 +87,34 @@ class MavenITmng8347TransitiveDependencyManagerTest extends AbstractMavenIntegra
     }
 
     /**
+     * Mimic bnd-maven-plugin:7.0.0: have direct dependency on plexus-build-api:0.0.7 and observe plexus-utils.
+     * Beta-5 makes it 1.5.5 while correct version is 1.5.8.
+     */
+    @Test
+    void useCaseBndPlugin() throws Exception {
+        File testDir = ResourceExtractor.simpleExtractResources(getClass(), "/mng-8347-bnd-plugin");
+
+        Verifier verifier = new Verifier(testDir.getAbsolutePath());
+        verifier.addCliArgument("-V");
+        verifier.addCliArgument("dependency:3.8.0:tree");
+        verifier.addCliArgument("-Dmaven.repo.local.tail=" + testDir + "/local-repo");
+        verifier.addCliArgument("-Dmaven.repo.local.tail.ignoreAvailability");
+        verifier.execute();
+        verifier.verifyErrorFreeLog();
+
+        List<String> l = verifier.loadLines(verifier.getLogFileName(), "UTF-8");
+        if (matchesVersionRange("[4.0.0-beta-5]")) {
+            a(l, "[INFO] org.apache.maven.it.mresolver614:root:jar:1.0.0");
+            a(l, "[INFO] \\- org.sonatype.plexus:plexus-build-api:jar:0.0.7:compile");
+            a(l, "[INFO]    \\- org.codehaus.plexus:plexus-utils:jar:1.5.5:compile");
+        } else {
+            a(l, "[INFO] org.apache.maven.it.mresolver614:root:jar:1.0.0");
+            a(l, "[INFO] \\- org.sonatype.plexus:plexus-build-api:jar:0.0.7:compile");
+            a(l, "[INFO]    \\- org.codehaus.plexus:plexus-utils:jar:1.5.8:compile");
+        }
+    }
+
+    /**
      * Assert true, log lines contains string...
      */
     protected void a(List<String> logLines, String string) {

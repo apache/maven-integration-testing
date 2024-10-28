@@ -115,6 +115,30 @@ class MavenITmng8347TransitiveDependencyManagerTest extends AbstractMavenIntegra
     }
 
     /**
+     * Make Quarkus TLS Registry first level dependency and make sure expected stuff are present.
+     */
+    @Test
+    void useCaseQuarkusTlsRegistry() throws Exception {
+        File testDir = ResourceExtractor.simpleExtractResources(getClass(), "/mng-8347-quarkus-tls-registry");
+
+        Verifier verifier = new Verifier(testDir.getAbsolutePath());
+        verifier.addCliArgument("-V");
+        verifier.addCliArgument("dependency:3.8.0:tree");
+        verifier.addCliArgument("-Dmaven.repo.local.tail=" + testDir + "/local-repo");
+        verifier.addCliArgument("-Dmaven.repo.local.tail.ignoreAvailability");
+        verifier.execute();
+        verifier.verifyErrorFreeLog();
+
+        // this really boils down to "transitive" vs "non-transitive"
+        List<String> l = verifier.loadLines(verifier.getLogFileName(), "UTF-8");
+        if (matchesVersionRange("[,4.0.0-alpha-11)")) {
+            a(l, "[INFO]    |  |  |  \\- com.fasterxml.jackson.core:jackson-core:jar:2.16.1:compile");
+        } else {
+            a(l, "[INFO]    |  |  |  \\- com.fasterxml.jackson.core:jackson-core:jar:2.17.2:compile");
+        }
+    }
+
+    /**
      * Assert true, log lines contains string...
      */
     protected void a(List<String> logLines, String string) {

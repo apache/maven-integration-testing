@@ -90,7 +90,7 @@ under the License.
           <dependency>
             <groupId>org.codehaus.plexus</groupId>
             <artifactId>plexus-utils</artifactId>
-            <version>0.1-stub</version>
+            <version>3.0.24</version>
           </dependency>
           <dependency>
             <groupId>org.codehaus.plexus</groupId>

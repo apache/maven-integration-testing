@@ -19,6 +19,7 @@
 package org.apache.maven.it;
 
 import java.io.File;
+import java.util.List;
 
 import org.apache.maven.shared.verifier.Verifier;
 import org.apache.maven.shared.verifier.util.ResourceExtractor;
@@ -44,5 +45,16 @@ class MavenITmng8340GeneratedPomInTargetTest extends AbstractMavenIntegrationTes
         verifier.addCliArgument("package");
         verifier.execute();
         verifier.verifyErrorFreeLog();
+
+        List<String> l = verifier.loadLines(verifier.getLogFileName(), "UTF-8");
+        if (matchesVersionRange("[4.0.0-beta-5]")) {
+            assertTrue(l.stream()
+                    .anyMatch(i -> i.contains(
+                            "[FATAL] 'parent.relativePath' points at '../../pom.xml' but no POM could be found")));
+        } else {
+            assertFalse(l.stream()
+                    .anyMatch(i -> i.contains(
+                            "[FATAL] 'parent.relativePath' points at '../../pom.xml' but no POM could be found")));
+        }
     }
 }

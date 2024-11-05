@@ -19,24 +19,9 @@ under the License.
 Maven Core Integration Tests
 ========
 
-<https://maven.apache.org/core-its/>
+Integration tests have been merged into Maven core repository.
 
-If you want to run the integration tests against a custom build of Maven use the following command:
-
-```
-mvn clean install -Prun-its -Dmaven.repo.local=`pwd`/repo -DmavenDistro=/path/to/apache-maven-dist.zip
-```
-
-or if behind a proxy
-
-```
-mvn clean install -Prun-its -Dmaven.repo.local=`pwd`/repo -DmavenDistro=/path/to/apache-maven-dist.zip -Dproxy.active=true -Dproxy.type=http -Dproxy.host=... -Dproxy.port=... -Dproxy.user=... -Dproxy.pass=...
-```
-
-Using the script 
-
-Build Maven core with the profile `-PversionlessMavenDist`
-
-Now Run the script: `sh ./run-its.sh` 
-
-Maven Developers List: dev@maven.apache.org
+Branches are still available:
+* [maven-3.8.x](https://github.com/apache/maven-integration-testing/tree/maven-3.8.x) for Maven 3.8.x
+* [maven-3.9.x](https://github.com/apache/maven-integration-testing/tree/maven-3.9.x) for Maven 3.9.x
+* [maven-4.x](https://github.com/apache/maven-integration-testing/tree/maven-4.x) for historical reasons (should not be used)

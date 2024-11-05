@@ -1,1 +1,0 @@
-Check to make sure the build fails when two projects' artifactIds collide inside the reactor.

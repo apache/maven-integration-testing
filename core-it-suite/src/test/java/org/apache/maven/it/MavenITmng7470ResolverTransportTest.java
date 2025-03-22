@@ -80,6 +80,7 @@ public class MavenITmng7470ResolverTransportTest extends AbstractMavenIntegratio
         verifier.deleteDirectory("target");
         verifier.deleteArtifacts("org.apache.maven.resolver.resolver-demo-maven-plugin");
         verifier.deleteArtifacts("org.apache.maven.its.resolver-transport");
+        verifier.addCliArgument("-U");
         verifier.addCliArgument("-X");
         verifier.addCliArgument("-s");
         verifier.addCliArgument(new File(projectDir, "settings.xml").getAbsolutePath());

@@ -23,8 +23,6 @@ import java.io.File;
 import org.apache.maven.shared.verifier.Verifier;
 import org.apache.maven.shared.verifier.util.ResourceExtractor;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.condition.EnabledOnJre;
-import org.junit.jupiter.api.condition.JRE;
 
 /**
  * This is a test set for <a href="https://issues.apache.org/jira/browse/MNG-7587">MNG-7587</a>.
@@ -34,18 +32,16 @@ import org.junit.jupiter.api.condition.JRE;
 class MavenITmng7587Jsr330 extends AbstractMavenIntegrationTestCase {
 
     public MavenITmng7587Jsr330() {
-        // affected Maven versions: 4.0.0-alpha-5
-        super("(4.0.0-alpha-5,)");
+        super("(3.9.10,)");
     }
 
     /**
-     * Verify components can be written using JSR330 on JDK 17.
+     * Verify components can be written using JSR330.
      *
      * @throws Exception in case of failure
      */
     @Test
-    @EnabledOnJre(JRE.JAVA_17)
-    void testJdk17() throws Exception {
+    void test() throws Exception {
         File testDir = ResourceExtractor.simpleExtractResources(getClass(), "/mng-7587-jsr330")
                 .getAbsoluteFile();
 

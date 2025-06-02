@@ -42,6 +42,7 @@ class MavenITmng7587Jsr330 extends AbstractMavenIntegrationTestCase {
      */
     @Test
     void test() throws Exception {
+        requiresJavaVersion("[17,)");
         File testDir = ResourceExtractor.simpleExtractResources(getClass(), "/mng-7587-jsr330")
                 .getAbsoluteFile();
 

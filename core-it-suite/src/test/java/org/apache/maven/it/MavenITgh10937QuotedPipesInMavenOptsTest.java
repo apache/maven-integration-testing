@@ -21,6 +21,7 @@ package org.apache.maven.it;
 import java.io.File;
 import java.util.Properties;
 
+import org.apache.maven.shared.utils.StringUtils;
 import org.apache.maven.shared.verifier.Verifier;
 import org.apache.maven.shared.verifier.util.ResourceExtractor;
 import org.junit.jupiter.api.Test;
@@ -50,7 +51,10 @@ class MavenITgh10937QuotedPipesInMavenOptsTest extends AbstractMavenIntegrationT
         verifier.verifyErrorFreeLog();
 
         Properties props = verifier.loadProperties("target/pom.properties");
-        assertEquals("foo|bar", props.getProperty("project.properties.pom.prop.jvm-opts"));
-        assertEquals("foo|bar", props.getProperty("project.properties.pom.prop.maven-opts"));
+        // Strip quotes because the bash startup script in 3.9.x preserves them while cmd does not
+        // In this test we only care that the pipe does not cause issues and is retained,
+        // not what happens to the surrounding quotes.
+        assertEquals("foo|bar", StringUtils.strip(props.getProperty("project.properties.pom.prop.jvm-opts"), "\""));
+        assertEquals("foo|bar", StringUtils.strip(props.getProperty("project.properties.pom.prop.maven-opts"), "\""));
     }
 }

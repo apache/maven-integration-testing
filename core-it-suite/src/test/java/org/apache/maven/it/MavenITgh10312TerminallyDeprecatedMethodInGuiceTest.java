@@ -1,0 +1,77 @@
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
+package org.apache.maven.it;
+
+import java.io.File;
+import java.util.List;
+
+import org.apache.maven.shared.verifier.Verifier;
+import org.apache.maven.shared.verifier.util.ResourceExtractor;
+import org.junit.jupiter.api.Test;
+
+/**
+ * This is a test set for <a href="https://github.com/apache/maven/issues/10312">GH-10312</a>.
+ */
+class MavenITgh10312TerminallyDeprecatedMethodInGuiceTest extends AbstractMavenIntegrationTestCase {
+
+    MavenITgh10312TerminallyDeprecatedMethodInGuiceTest() {
+        super("[3.9.12,)");
+    }
+
+    @Test
+    void worryingShouldNotBePrinted() throws Exception {
+        requiresJavaVersion("[24,)");
+        File testDir =
+                ResourceExtractor.simpleExtractResources(getClass(), "/gh-10312-terminally-deprecated-method-in-guice");
+
+        Verifier verifier = new Verifier(testDir.getAbsolutePath());
+        verifier.setForkJvm(true);
+        verifier.addCliArgument("validate");
+        verifier.execute();
+
+        List<String> lines = verifier.loadLines(verifier.getLogFileName(), null);
+        assertFalse(
+                "Expected no warning about sun.misc.Unsafe::staticFieldBase, but got: " + lines,
+                lines.stream()
+                        .anyMatch(
+                                line -> line.contains(
+                                        "WARNING: sun.misc.Unsafe::staticFieldBase has been called by com.google.inject.internal.aop.HiddenClassDefiner")));
+    }
+
+    @Test
+    void allowOverwriteByUser() throws Exception {
+        requiresJavaVersion("[24,26)");
+        File testDir =
+                ResourceExtractor.simpleExtractResources(getClass(), "/gh-10312-terminally-deprecated-method-in-guice");
+
+        Verifier verifier = new Verifier(testDir.getAbsolutePath());
+        verifier.setForkJvm(true);
+        verifier.addCliArgument("validate");
+        verifier.addCliArgument("-Dguice_custom_class_loading=BRIDGE");
+        verifier.execute();
+
+        List<String> lines = verifier.loadLines(verifier.getLogFileName(), null);
+        assertTrue(
+                "Expected warning about sun.misc.Unsafe::staticFieldBase, but got: " + lines,
+                lines.stream()
+                        .anyMatch(
+                                line -> line.contains(
+                                        "WARNING: sun.misc.Unsafe::staticFieldBase has been called by com.google.inject.internal.aop.HiddenClassDefiner")));
+    }
+}

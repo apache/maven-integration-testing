@@ -81,6 +81,9 @@ under the License.
     <jetty9Version>9.4.50.v20221201</jetty9Version>
 
     <stubPluginVersion>0.1-stub-SNAPSHOT</stubPluginVersion>
+
+    <!-- show warning messages in the logs, but not break a build -->
+    <checkstyle.failOnViolation>false</checkstyle.failOnViolation>
   </properties>
 
   <dependencies>

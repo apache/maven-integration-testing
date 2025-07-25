@@ -28,7 +28,6 @@ import org.apache.maven.plugins.annotations.ResolutionScope;
 import org.apache.maven.project.DefaultDependencyResolutionRequest;
 import org.apache.maven.project.DefaultProjectBuildingRequest;
 import org.apache.maven.project.DependencyResolutionRequest;
-import org.apache.maven.project.DependencyResolutionResult;
 import org.apache.maven.project.MavenProject;
 import org.apache.maven.project.ProjectDependenciesResolver;
 
@@ -58,7 +57,7 @@ public class ResolveMojo extends AbstractMojo {
             request.setMavenProject(project);
             request.setRepositorySession(buildingRequest.getRepositorySession());
 
-            DependencyResolutionResult result = dependencyResolver.resolve(request);
+            dependencyResolver.resolve(request);
 
             getLog().info("Resolution successful, resolved ok");
         } catch (Exception e) {

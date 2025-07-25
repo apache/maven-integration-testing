@@ -87,8 +87,7 @@ class PropertyUtil {
             } else if (obj instanceof Map) {
                 Map map = (Map) obj;
                 props.put(key, Integer.toString(map.size()));
-                int index = 0;
-                for (Iterator it = map.entrySet().iterator(); it.hasNext(); index++) {
+                for (Iterator it = map.entrySet().iterator(); it.hasNext(); ) {
                     Map.Entry entry = (Map.Entry) it.next();
                     store(props, key + "." + entry.getKey(), entry.getValue(), visited);
                 }

@@ -38,6 +38,7 @@ public class UsesWagonMojo extends AbstractMojo {
     @Component
     private WagonManager wagonManager;
 
+    @SuppressWarnings("checkstyle:UnusedLocalVariable")
     public void execute() throws MojoExecutionException {
         Wagon fileWagon;
         try {

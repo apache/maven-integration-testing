@@ -55,6 +55,8 @@ jobs:
 
       - name: Set up Maven
         run: mvn --errors --batch-mode --show-version org.apache.maven.plugins:maven-wrapper-plugin:3.3.4:wrapper "-Dmaven=3.9.11"
+        shell: bash
 
       - name: Running integration tests
-        run: "./mvnw -B clean install -Prun-its,embedded -Dmaven.repo.local=`pwd`/repo"
+        run: ./mvnw -B clean install -Prun-its,embedded -Dmaven.repo.local=`pwd`/repo
+        shell: bash

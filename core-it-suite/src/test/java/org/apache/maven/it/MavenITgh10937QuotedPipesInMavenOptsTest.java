@@ -34,7 +34,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class MavenITgh10937QuotedPipesInMavenOptsTest extends AbstractMavenIntegrationTestCase {
 
     MavenITgh10937QuotedPipesInMavenOptsTest() {
-        super("[3.0.0,)");
+        super("[3.9.12,)");
     }
 
     /**

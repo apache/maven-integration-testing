@@ -22,6 +22,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -37,11 +38,17 @@ import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.project.MavenProject;
 import org.apache.maven.project.ProjectBuildingRequest;
+import org.eclipse.aether.DefaultRepositorySystemSession;
 import org.eclipse.aether.RepositorySystem;
 import org.eclipse.aether.RepositorySystemSession;
 import org.eclipse.aether.collection.CollectRequest;
+import org.eclipse.aether.metadata.DefaultMetadata;
+import org.eclipse.aether.metadata.Metadata;
 import org.eclipse.aether.repository.RemoteRepository;
+import org.eclipse.aether.repository.RepositoryPolicy;
 import org.eclipse.aether.resolution.DependencyRequest;
+import org.eclipse.aether.resolution.MetadataRequest;
+import org.eclipse.aether.resolution.MetadataResult;
 
 /**
  * Boostrap plugin to download all required dependencies (provided in file) or to collect lifecycle bound build plugin
@@ -68,6 +75,12 @@ public class DownloadMojo extends AbstractMojo {
     @Parameter
     private File file;
 
+    /**
+     * A list of groupIds to resolve metadata.
+     */
+    @Parameter
+    private List<String> groupsToResolve;
+
     @Component
     private RepositorySystem repositorySystem;
 
@@ -76,6 +89,16 @@ public class DownloadMojo extends AbstractMojo {
 
     @Override
     public void execute() throws MojoFailureException {
+
+        ProjectBuildingRequest projectBuildingRequest = session.getProjectBuildingRequest();
+        RepositorySystemSession repositorySystemSession = projectBuildingRequest.getRepositorySession();
+        List<RemoteRepository> repos = RepositoryUtils.toRepos(projectBuildingRequest.getRemoteRepositories());
+
+        if (groupsToResolve != null && !groupsToResolve.isEmpty()) {
+            resolveMetaData(groupsToResolve, repositorySystemSession, repos);
+            return;
+        }
+
         // this or that: either resolver file listed artifacts or collect lifecycle packaging plugins
         if (file != null && file.exists()) {
             System.out.println("Collecting artifacts from file: " + file);
@@ -100,10 +123,6 @@ public class DownloadMojo extends AbstractMojo {
                 dependencies.add(toDependency(artifact));
             }
         }
-
-        ProjectBuildingRequest projectBuildingRequest = session.getProjectBuildingRequest();
-        RepositorySystemSession repositorySystemSession = projectBuildingRequest.getRepositorySession();
-        List<RemoteRepository> repos = RepositoryUtils.toRepos(projectBuildingRequest.getRemoteRepositories());
 
         for (Dependency dependency : dependencies) {
             try {
@@ -137,5 +156,35 @@ public class DownloadMojo extends AbstractMojo {
             coordinate.setClassifier(tokens[4]);
         }
         return coordinate;
+    }
+
+    /**
+     * Resolve metadata for maven plugins needs for MavenITmng7353CliGoalInvocationTest.
+     */
+    private void resolveMetaData(
+            List<String> groupsToResolve,
+            RepositorySystemSession repositorySystemSession,
+            List<RemoteRepository> repos) {
+
+        getLog().info("Resolving metadata for groups: " + groupsToResolve);
+
+        List<MetadataRequest> requests = new ArrayList<>();
+
+        for (String groupId : groupsToResolve) {
+            Metadata metadata =
+                    new DefaultMetadata(groupId, "maven-metadata.xml", DefaultMetadata.Nature.RELEASE_OR_SNAPSHOT);
+            for (RemoteRepository repository : repos) {
+                requests.add(new MetadataRequest(metadata, repository, "plugin"));
+            }
+        }
+
+        DefaultRepositorySystemSession session = new DefaultRepositorySystemSession(repositorySystemSession);
+        session.setUpdatePolicy(RepositoryPolicy.UPDATE_POLICY_ALWAYS);
+
+        List<MetadataResult> metadataResults = repositorySystem.resolveMetadata(session, requests);
+        for (MetadataResult metadataResult : metadataResults) {
+            getLog().info("metadata result: " + metadataResult.toString() + " from repository: "
+                    + metadataResult.getRequest().getRepository());
+        }
     }
 }

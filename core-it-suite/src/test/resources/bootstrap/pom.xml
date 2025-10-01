@@ -51,12 +51,26 @@ under the License.
         <version>2.1-SNAPSHOT</version>
         <executions>
           <execution>
+            <id>dependencies</id>
             <goals>
               <goal>download</goal>
             </goals>
             <phase>process-resources</phase>
             <configuration>
               <file>${file}</file>
+            </configuration>
+          </execution>
+          <execution>
+            <id>metadata</id>
+            <goals>
+              <goal>download</goal>
+            </goals>
+            <phase>process-resources</phase>
+            <inherited>false</inherited>
+            <configuration>
+              <groupsToResolve>
+                <group>org.apache.maven.plugins</group>
+              </groupsToResolve>
             </configuration>
           </execution>
         </executions>

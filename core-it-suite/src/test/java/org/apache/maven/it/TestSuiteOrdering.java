@@ -125,15 +125,12 @@ public class TestSuiteOrdering implements ClassOrderer {
         suite.addTestSuite(MavenITgh10937QuotedPipesInMavenOptsTest.class);
         suite.addTestSuite(MavenITmng8106OverlappingDirectoryRolesTest.class);
         suite.addTestSuite(MavenITmng7939PluginsValidationExcludesTest.class);
-        suite.addTestSuite(MavenITmng7804PluginExecutionOrderTest.class);
         suite.addTestSuite(MavenITmng7836AlternativePomSyntaxTest.class);
         suite.addTestSuite(MavenITmng7891ConfigurationForExtensionsTest.class);
         suite.addTestSuite(MavenITmng6401ProxyPortInterpolationTest.class);
         suite.addTestSuite(MavenITmng7228LeakyModelTest.class);
         suite.addTestSuite(MavenITmng7819FileLockingWithSnapshotsTest.class);
-        suite.addTestSuite(MavenITmng5659ProjectSettingsTest.class);
         suite.addTestSuite(MavenITmng5600DependencyManagementImportExclusionsTest.class);
-        suite.addTestSuite(MavenITmng7740ConsumerBuildShouldCleanUpOldFilesTest.class);
         suite.addTestSuite(MavenITmng7587Jsr330.class);
         suite.addTestSuite(MavenITmng7038RootdirTest.class);
         suite.addTestSuite(MavenITmng7697PomWithEmojiTest.class);
@@ -145,7 +142,6 @@ public class TestSuiteOrdering implements ClassOrderer {
         suite.addTestSuite(MavenITmng6609ProfileActivationForPackagingTest.class);
         suite.addTestSuite(MavenITmng7566JavaPrerequisiteTest.class);
         suite.addTestSuite(MavenITmng5889FindBasedir.class);
-        suite.addTestSuite(MavenITmng7360BuildConsumer.class);
         suite.addTestSuite(MavenITmng5452MavenBuildTimestampUTCTest.class);
         suite.addTestSuite(MavenITmng3890TransitiveDependencyScopeUpdateTest.class);
         suite.addTestSuite(MavenITmng3092SnapshotsExcludedFromVersionRangeTest.class);
@@ -156,7 +152,6 @@ public class TestSuiteOrdering implements ClassOrderer {
         suite.addTestSuite(MavenITmng7310LifecycleActivatedInSpecifiedModuleTest.class);
         suite.addTestSuite(MavenITmng7474SessionScopeTest.class);
         suite.addTestSuite(MavenITmng7529VersionRangeRepositorySelection.class);
-        suite.addTestSuite(MavenITmng7443ConsistencyOfOptionalProjectsAndProfilesTest.class);
         suite.addTestSuite(MavenITmng7353CliGoalInvocationTest.class);
         suite.addTestSuite(MavenITmng7504NotWarnUnsupportedReportPluginsTest.class);
         suite.addTestSuite(MavenITmng7160ExtensionClassloader.class);
@@ -177,7 +172,6 @@ public class TestSuiteOrdering implements ClassOrderer {
         suite.addTestSuite(MavenITmng7128BlockExternalHttpReactorTest.class);
         suite.addTestSuite(MavenITmng6511OptionalProjectSelectionTest.class);
         suite.addTestSuite(MavenITmng7110ExtensionClassloader.class);
-        suite.addTestSuite(MavenITmng7051OptionalProfileActivationTest.class);
         suite.addTestSuite(MavenITmng6957BuildConsumer.class);
         suite.addTestSuite(MavenITmng7045DropUselessAndOutdatedCdiApiTest.class);
         suite.addTestSuite(MavenITmng6566ExecuteAnnotationShouldNotReExecuteGoalsTest.class);
@@ -188,7 +182,6 @@ public class TestSuiteOrdering implements ClassOrderer {
         suite.addTestSuite(MavenITmng6759TransitiveDependencyRepositoriesTest.class);
         suite.addTestSuite(MavenITmng6720FailFastTest.class);
         suite.addTestSuite(MavenITmng6656BuildConsumer.class);
-        suite.addTestSuite(MavenITmng6562WarnDefaultBindings.class);
         suite.addTestSuite(MavenITmng6558ToolchainsBuildingEventTest.class);
         suite.addTestSuite(MavenITmng6506PackageAnnotationTest.class);
         suite.addTestSuite(MavenITmng6391PrintVersionTest.class);
@@ -207,7 +200,6 @@ public class TestSuiteOrdering implements ClassOrderer {
         suite.addTestSuite(MavenITmng6090CIFriendlyTest.class);
         suite.addTestSuite(MavenITmng6084Jsr250PluginTest.class);
         suite.addTestSuite(MavenITmng6071GetResourceWithCustomPom.class);
-        suite.addTestSuite(MavenITmng6065FailOnSeverityTest.class);
         suite.addTestSuite(MavenITmng6057CheckReactorOrderTest.class);
         suite.addTestSuite(MavenITmng5965ParallelBuildMultipliesWorkTest.class);
         suite.addTestSuite(MavenITmng5958LifecyclePhaseBinaryCompat.class);
@@ -314,8 +306,6 @@ public class TestSuiteOrdering implements ClassOrderer {
         suite.addTestSuite(MavenITmng4679SnapshotUpdateInPluginTest.class);
         suite.addTestSuite(MavenITmng4677DisabledPluginConfigInheritanceTest.class);
         suite.addTestSuite(MavenITmng4666CoreRealmImportTest.class);
-        suite.addTestSuite(MavenITmng4660ResumeFromTest.class);
-        suite.addTestSuite(MavenITmng4660OutdatedPackagedArtifact.class);
         suite.addTestSuite(MavenITmng4654ArtifactHandlerForMainArtifactTest.class);
         suite.addTestSuite(MavenITmng4644StrictPomParsingRejectsMisplacedTextTest.class);
         suite.addTestSuite(MavenITmng4633DualCompilerExecutionsWeaveModeTest.class);

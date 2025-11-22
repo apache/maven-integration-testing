@@ -32,7 +32,7 @@ import org.junit.jupiter.api.Test;
 public class MavenITmng4262MakeLikeReactorDottedPath370Test extends AbstractMavenIntegrationTestCase {
 
     public MavenITmng4262MakeLikeReactorDottedPath370Test() {
-        super("[4.0.0-alpha-1,)");
+        super(ALL_MAVEN_VERSIONS);
     }
 
     private void clean(Verifier verifier) throws Exception {
@@ -47,6 +47,7 @@ public class MavenITmng4262MakeLikeReactorDottedPath370Test extends AbstractMave
      */
     @Test
     public void testitMakeRoot() throws Exception {
+        requiresMavenVersion("[4.0.0,)");
         File testDir = ResourceExtractor.simpleExtractResources(getClass(), "/mng-4262");
 
         Verifier verifier = newVerifier(new File(testDir, "parent").getAbsolutePath());

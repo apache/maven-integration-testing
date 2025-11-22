@@ -20,7 +20,6 @@ package org.apache.maven.it;
 
 import java.io.File;
 
-import org.apache.maven.shared.verifier.VerificationException;
 import org.apache.maven.shared.verifier.Verifier;
 import org.apache.maven.shared.verifier.util.ResourceExtractor;
 import org.junit.jupiter.api.Test;
@@ -34,11 +33,11 @@ public class MavenITmng3991ValidDependencyScopeTest extends AbstractMavenIntegra
 
     public MavenITmng3991ValidDependencyScopeTest() {
         // TODO: One day, we should be able to error out but this requires to consider extensions and their use cases
-        super("[4.0,)");
+        super(ALL_MAVEN_VERSIONS);
     }
 
     /**
-     * Test that invalid dependency scopes cause a validation error during building.
+     * Test that invalid dependency scopes cause a validation warning during building.
      *
      * @throws Exception in case of failure
      */
@@ -49,13 +48,10 @@ public class MavenITmng3991ValidDependencyScopeTest extends AbstractMavenIntegra
         Verifier verifier = newVerifier(testDir.getAbsolutePath());
         verifier.setAutoclean(false);
         verifier.deleteDirectory("target");
-        try {
-            verifier.addCliArgument("validate");
-            verifier.execute();
-            verifier.verifyErrorFreeLog();
-            fail("Invalid dependency scope did not cause validation error");
-        } catch (VerificationException e) {
-            // expected
-        }
+        verifier.addCliArgument("validate");
+        verifier.execute();
+        verifier.verifyErrorFreeLog();
+        verifier.verifyTextInLog(
+                "[WARNING] 'dependencies.dependency.scope' for org.apache.maven.its.mng3991:a:jar must be one of");
     }
 }

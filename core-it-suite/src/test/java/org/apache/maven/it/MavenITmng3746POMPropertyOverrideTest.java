@@ -79,9 +79,11 @@ public class MavenITmng3746POMPropertyOverrideTest extends AbstractMavenIntegrat
         verifier = newVerifier(projectDir.getAbsolutePath());
         verifier.setLogFileName("log-cli.txt");
 
-        verifier.addCliArgument("-Dtest.verification=cli");
+        // user properties are copied to system properties... setting java.version here
+        // has impact on system property used by code, so use a value that will be more safely
+        verifier.addCliArgument("-Dtest.verification=100");
         verifier.addCliArgument("-Dtest.usingCliValue=true");
-        verifier.addCliArgument("-Djava.version=cli");
+        verifier.addCliArgument("-Djava.version=100");
 
         verifier.addCliArgument("validate");
         verifier.execute();

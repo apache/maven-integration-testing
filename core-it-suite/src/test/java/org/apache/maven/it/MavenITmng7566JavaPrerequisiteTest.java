@@ -32,7 +32,7 @@ import org.junit.jupiter.api.Test;
 class MavenITmng7566JavaPrerequisiteTest extends AbstractMavenIntegrationTestCase {
 
     public MavenITmng7566JavaPrerequisiteTest() {
-        super("[4.0.0-alpha-3,)");
+        super("[3.9.12,)");
     }
 
     /**

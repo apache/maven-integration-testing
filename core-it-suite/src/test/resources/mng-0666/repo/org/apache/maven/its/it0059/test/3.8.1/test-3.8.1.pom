@@ -1,5 +1,5 @@
 <project>
-  <groupId>junit</groupId>
-  <artifactId>junit</artifactId>
+  <groupId>test</groupId>
+  <artifactId>test</artifactId>
   <version>3.8.1</version>
 </project>

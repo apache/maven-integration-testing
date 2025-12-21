@@ -20,15 +20,18 @@ package org.apache.maven.its.it0121.A;
 
 import java.io.*;
 
-import junit.framework.*;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
-public class AppTest extends TestCase {
+public class AppTest {
+
+    @Test
     public void testOutput() {
         App app = new App();
         StringWriter actual = new StringWriter();
         PrintWriter writer = new PrintWriter(actual);
         app.output(writer);
 
-        assertTrue(actual.getBuffer().length() > 10);
+        Assertions.assertTrue(actual.getBuffer().length() > 10);
     }
 }

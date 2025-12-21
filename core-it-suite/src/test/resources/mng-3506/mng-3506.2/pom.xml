@@ -27,15 +27,6 @@ under the License.
   <artifactId>mng-3506.2</artifactId>
   <packaging>coreit-2</packaging>
 
-  <dependencies>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>3.8.1</version>
-      <scope>test</scope>
-    </dependency>
-  </dependencies>
-
   <build>
     <plugins>
       <plugin>

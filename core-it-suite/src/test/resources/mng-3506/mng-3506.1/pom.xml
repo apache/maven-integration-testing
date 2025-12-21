@@ -28,13 +28,4 @@ under the License.
 
   <!-- This lifecycle and artifact handler are loaded in the parent POM -->
   <packaging>coreit-1</packaging>
-
-  <dependencies>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>3.8.1</version>
-      <scope>test</scope>
-    </dependency>
-  </dependencies>
 </project>

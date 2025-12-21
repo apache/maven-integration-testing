@@ -39,7 +39,7 @@ public class MavenITmng7504NotWarnUnsupportedReportPluginsTest extends AbstractM
     private static final String PROJECT_PATH = "/mng-7504-warn-unsupported-report-plugins";
 
     public MavenITmng7504NotWarnUnsupportedReportPluginsTest() {
-        super("[3.9.0]");
+        super(ALL_MAVEN_VERSIONS);
     }
 
     @Test

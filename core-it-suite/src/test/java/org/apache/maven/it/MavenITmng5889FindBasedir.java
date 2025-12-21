@@ -31,7 +31,7 @@ import org.junit.jupiter.api.Test;
  */
 public class MavenITmng5889FindBasedir extends AbstractMavenIntegrationTestCase {
     public MavenITmng5889FindBasedir() {
-        super("[3.5.0,3.5.1)");
+        super(ALL_MAVEN_VERSIONS);
     }
 
     /**

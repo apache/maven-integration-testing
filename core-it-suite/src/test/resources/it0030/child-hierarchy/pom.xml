@@ -13,11 +13,4 @@
     <module>project1</module>
     <module>project2</module>
   </modules>
-  <dependencies>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <scope>test</scope>
-    </dependency>
-  </dependencies>
 </project>

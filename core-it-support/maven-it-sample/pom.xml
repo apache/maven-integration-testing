@@ -39,12 +39,6 @@ under the License.
       <artifactId>maven-it-helper</artifactId>
       <version>2.1-SNAPSHOT</version>
     </dependency>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>3.8.2</version>
-      <scope>test</scope>
-    </dependency>
   </dependencies>
 
    <!-- TODO: remove when snapshots are released -->

@@ -63,7 +63,7 @@ public class MavenITmng5640LifecycleParticipantAfterSessionEnd extends AbstractM
         } catch (VerificationException e) {
             // expected, as the build will fail due to always failing UT
         }
-        verifier.verifyTextInLog("testApp(org.apache.maven.its.mng5640.FailingTest)");
+        verifier.verifyTextInLog("org.apache.maven.its.mng5640.FailingTest.testApp()");
 
         verifier.verifyFilePresent("target/afterProjectsRead.txt");
         // See https://issues.apache.org/jira/browse/MNG-5641

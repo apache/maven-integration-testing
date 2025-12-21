@@ -18,16 +18,18 @@
  */
 package org.apache.maven.its.mng5640;
 
-import junit.framework.TestCase;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  * Always failing UT.
  */
-public class FailingTest extends TestCase {
+public class FailingTest {
     /**
      * Rigourous Test :-)
      */
+    @Test
     public void testApp() {
-        assertTrue(false);
+        Assertions.assertTrue(false);
     }
 }

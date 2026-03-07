@@ -100,7 +100,7 @@ public class MavenITmng7470ResolverTransportTest extends AbstractMavenIntegratio
 
     private static final String WAGON_LOG_SNIPPET = "[DEBUG] Using transporter WagonTransporter";
 
-    private static final String NATIVE_LOG_SNIPPET = "[DEBUG] Using transporter HttpTransporter";
+    private static final String NATIVE_LOG_SNIPPET = "[DEBUG] Using transporter ApacheTransporter";
 
     @Test
     public void testResolverTransportDefault() throws Exception {

@@ -24,4 +24,5 @@ Integration tests have been merged into Maven core repository.
 Branches are still available:
 * [maven-3.8.x](https://github.com/apache/maven-integration-testing/tree/maven-3.8.x) for Maven 3.8.x
 * [maven-3.9.x](https://github.com/apache/maven-integration-testing/tree/maven-3.9.x) for Maven 3.9.x
+* [maven-3.10.x](https://github.com/apache/maven-integration-testing/tree/maven-3.10.x) for Maven 3.10.x
 * [maven-4.x](https://github.com/apache/maven-integration-testing/tree/maven-4.x) for historical reasons (should not be used)

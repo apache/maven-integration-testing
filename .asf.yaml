@@ -5,6 +5,7 @@ github:
   protected_branches:
     master: { }
     maven-4.x:  { }
+    maven-3.10.x:  { }
     maven-3.9.x:  { }
     maven-3.8.x:  { }
   pull_requests:

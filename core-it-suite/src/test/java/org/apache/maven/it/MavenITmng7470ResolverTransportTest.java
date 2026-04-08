@@ -100,11 +100,19 @@ public class MavenITmng7470ResolverTransportTest extends AbstractMavenIntegratio
 
     private static final String WAGON_LOG_SNIPPET = "[DEBUG] Using transporter WagonTransporter";
 
-    private static final String NATIVE_LOG_SNIPPET = "[DEBUG] Using transporter ApacheTransporter";
+    // Resolver1: HttpTransporter
+    private static final String NATIVE_R1_LOG_SNIPPET = "[DEBUG] Using transporter HttpTransporter";
+
+    // Resolver2: renamed to ApacheTransporter
+    private static final String NATIVE_R2_LOG_SNIPPET = "[DEBUG] Using transporter ApacheTransporter";
 
     @Test
     public void testResolverTransportDefault() throws Exception {
-        performTest(null, NATIVE_LOG_SNIPPET);
+        if (matchesVersionRange("[3.9.0,3.10.0)")) {
+            performTest(null, NATIVE_R1_LOG_SNIPPET);
+        } else {
+            performTest(null, NATIVE_R2_LOG_SNIPPET);
+        }
     }
 
     @Test
@@ -114,6 +122,10 @@ public class MavenITmng7470ResolverTransportTest extends AbstractMavenIntegratio
 
     @Test
     public void testResolverTransportNative() throws Exception {
-        performTest("native", NATIVE_LOG_SNIPPET);
+        if (matchesVersionRange("[3.9.0,3.10.0)")) {
+            performTest("native", NATIVE_R1_LOG_SNIPPET);
+        } else {
+            performTest("native", NATIVE_R2_LOG_SNIPPET);
+        }
     }
 }

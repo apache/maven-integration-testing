@@ -33,7 +33,7 @@ import org.junit.jupiter.api.Test;
 public class MavenITmng4368TimestampAwareArtifactInstallerTest extends AbstractMavenIntegrationTestCase {
 
     public MavenITmng4368TimestampAwareArtifactInstallerTest() {
-        super("[2.0.3,3.0-alpha-1),[3.0-alpha-6,3.9.15-SNAPSHOT)");
+        super("[2.0.3,3.0-alpha-1),[3.0-alpha-6,3.10.0-SNAPSHOT)");
     }
 
     /**

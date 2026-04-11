@@ -23,10 +23,10 @@ under the License.
 
   <parent>
     <groupId>org.apache.maven.its.mng7038</groupId>
-    <artifactId>module-b</artifactId>
+    <artifactId>module</artifactId>
     <version>1.0</version>
   </parent>
 
-  <artifactId>module-b-1</artifactId>
+  <artifactId>module-1</artifactId>
 
 </project>

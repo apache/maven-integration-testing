@@ -30,8 +30,7 @@ under the License.
   <description>Test project.rootDirectory, session.topDirectory and session.rootDirectory properties.</description>
 
   <modules>
-    <module>module-a</module>
-    <module>module-b</module>
+    <module>module</module>
   </modules>
 
   <properties>
@@ -39,6 +38,7 @@ under the License.
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
     <rootdir>${project.rootDirectory}</rootdir>
+    <bsedir>${project.basedir}</bsedir>
     <activated>false</activated>
   </properties>
 
@@ -74,7 +74,7 @@ under the License.
       <id>rootdir-profile-activation</id>
       <activation>
         <file>
-          <exists>${rootDirectory}/.mvn/.gitkeep</exists>
+          <exists>${project.rootDirectory}/.mvn/.gitkeep</exists>
         </file>
       </activation>
       <properties>

@@ -46,7 +46,6 @@ under the License.
     <module>maven-rar-plugin</module>
     <module>maven-resources-plugin</module>
     <module>maven-site-plugin</module>
-    <module>maven-source-plugin</module>
     <module>maven-surefire-plugin</module>
     <module>maven-war-plugin</module>
   </modules>

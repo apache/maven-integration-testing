@@ -734,8 +734,6 @@ public class TestSuiteOrdering implements ClassOrderer {
         suite.addTestSuite(MavenIT0064MojoConfigViaSettersTest.class);
         suite.addTestSuite(MavenIT0063SystemScopeDependencyTest.class);
         suite.addTestSuite(MavenIT0056MultipleGoalExecutionsTest.class);
-        suite.addTestSuite(MavenIT0052ReleaseProfileTest.class);
-        suite.addTestSuite(MavenIT0051ReleaseProfileTest.class);
         suite.addTestSuite(MavenIT0041ArtifactTypeFromPluginExtensionTest.class);
         suite.addTestSuite(MavenIT0040PackagingFromPluginExtensionTest.class);
         suite.addTestSuite(MavenIT0038AlternatePomFileDifferentDirTest.class);

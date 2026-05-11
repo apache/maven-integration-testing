@@ -77,10 +77,11 @@ public class MavenITmng3843PomInheritanceTest extends AbstractMavenIntegrationTe
         assertEquals("", props.getProperty("project.url", ""));
         assertEquals("", props.getProperty("project.inceptionYear", ""));
         assertEquals("", props.getProperty("project.build.defaultGoal", ""));
-        if (matchesVersionRange("[4.0.0-alpha-6,)")) {
-            assertEquals("2", props.getProperty("project.properties"));
+        if (matchesVersionRange("[3.10.0,)")) {
+            assertEquals("3", props.getProperty("project.properties"));
             assertEquals("UTF-8", props.getProperty("project.properties.project.build.sourceEncoding"));
             assertEquals("UTF-8", props.getProperty("project.properties.project.reporting.outputEncoding"));
+            assertEquals("1980-02-01T00:00:00Z", props.getProperty("project.properties.project.build.outputTimestamp"));
         } else {
             assertMissing(props, "project.properties.");
         }

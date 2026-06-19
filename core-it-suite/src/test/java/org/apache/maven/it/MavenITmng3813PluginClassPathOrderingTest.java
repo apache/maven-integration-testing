@@ -66,14 +66,26 @@ public class MavenITmng3813PluginClassPathOrderingTest extends AbstractMavenInte
         assertTrue(pclProps.getProperty(resName).endsWith("/dep-a-0.1.jar!/" + resName));
 
         assertEquals("8", pclProps.getProperty(resName + ".count"));
-
-        assertTrue(pclProps.getProperty(resName + ".0").endsWith("/dep-a-0.1.jar!/" + resName));
-        assertTrue(pclProps.getProperty(resName + ".1").endsWith("/dep-aa-0.1.jar!/" + resName));
-        assertTrue(pclProps.getProperty(resName + ".2").endsWith("/dep-ac-0.1.jar!/" + resName));
-        assertTrue(pclProps.getProperty(resName + ".3").endsWith("/dep-ab-0.1.jar!/" + resName));
-        assertTrue(pclProps.getProperty(resName + ".4").endsWith("/dep-ad-0.1.jar!/" + resName));
-        assertTrue(pclProps.getProperty(resName + ".5").endsWith("/dep-c-0.1.jar!/" + resName));
-        assertTrue(pclProps.getProperty(resName + ".6").endsWith("/dep-b-0.1.jar!/" + resName));
-        assertTrue(pclProps.getProperty(resName + ".7").endsWith("/dep-d-0.1.jar!/" + resName));
+        if (matchesVersionRange("[3.10.0-SNAPSHOT,)")) {
+            // all modern Maven 3, 3.10+ and above all up to Maven 4
+            assertTrue(pclProps.getProperty(resName + ".0").endsWith("/dep-a-0.1.jar!/" + resName));
+            assertTrue(pclProps.getProperty(resName + ".1").endsWith("/dep-c-0.1.jar!/" + resName));
+            assertTrue(pclProps.getProperty(resName + ".2").endsWith("/dep-b-0.1.jar!/" + resName));
+            assertTrue(pclProps.getProperty(resName + ".3").endsWith("/dep-d-0.1.jar!/" + resName));
+            assertTrue(pclProps.getProperty(resName + ".4").endsWith("/dep-aa-0.1.jar!/" + resName));
+            assertTrue(pclProps.getProperty(resName + ".5").endsWith("/dep-ac-0.1.jar!/" + resName));
+            assertTrue(pclProps.getProperty(resName + ".6").endsWith("/dep-ab-0.1.jar!/" + resName));
+            assertTrue(pclProps.getProperty(resName + ".7").endsWith("/dep-ad-0.1.jar!/" + resName));
+        } else {
+            // all Maven 3 so far, 3.9.x and older
+            assertTrue(pclProps.getProperty(resName + ".0").endsWith("/dep-a-0.1.jar!/" + resName));
+            assertTrue(pclProps.getProperty(resName + ".1").endsWith("/dep-aa-0.1.jar!/" + resName));
+            assertTrue(pclProps.getProperty(resName + ".2").endsWith("/dep-ac-0.1.jar!/" + resName));
+            assertTrue(pclProps.getProperty(resName + ".3").endsWith("/dep-ab-0.1.jar!/" + resName));
+            assertTrue(pclProps.getProperty(resName + ".4").endsWith("/dep-ad-0.1.jar!/" + resName));
+            assertTrue(pclProps.getProperty(resName + ".5").endsWith("/dep-c-0.1.jar!/" + resName));
+            assertTrue(pclProps.getProperty(resName + ".6").endsWith("/dep-b-0.1.jar!/" + resName));
+            assertTrue(pclProps.getProperty(resName + ".7").endsWith("/dep-d-0.1.jar!/" + resName));
+        }
     }
 }

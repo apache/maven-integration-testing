@@ -77,8 +77,8 @@ public class MavenITgh12288SettingsProfileAetherPropertiesTest extends AbstractM
 
     @Test
     public void testActiveByDefaultDeactivatedViaCli() throws Exception {
-        File testDir = ResourceExtractor.simpleExtractResources(
-                getClass(), "/gh-12288-settings-profile-aether-properties");
+        File testDir =
+                ResourceExtractor.simpleExtractResources(getClass(), "/gh-12288-settings-profile-aether-properties");
 
         Verifier verifier = newVerifier(testDir.getAbsolutePath());
         verifier.setAutoclean(false);
@@ -111,8 +111,8 @@ public class MavenITgh12288SettingsProfileAetherPropertiesTest extends AbstractM
     }
 
     private void runAndAssertCustomPrefix(String settingsFile) throws Exception {
-        File testDir = ResourceExtractor.simpleExtractResources(
-                getClass(), "/gh-12288-settings-profile-aether-properties");
+        File testDir =
+                ResourceExtractor.simpleExtractResources(getClass(), "/gh-12288-settings-profile-aether-properties");
 
         Verifier verifier = newVerifier(testDir.getAbsolutePath());
         verifier.setAutoclean(false);

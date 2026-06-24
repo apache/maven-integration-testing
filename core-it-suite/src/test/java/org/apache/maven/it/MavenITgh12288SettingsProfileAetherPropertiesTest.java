@@ -80,7 +80,7 @@ public class MavenITgh12288SettingsProfileAetherPropertiesTest extends AbstractM
         File testDir =
                 ResourceExtractor.simpleExtractResources(getClass(), "/gh-12288-settings-profile-aether-properties");
 
-        Verifier verifier = newVerifier(testDir.getAbsolutePath());
+        Verifier verifier = newVerifier(testDir.getAbsolutePath(), null, false);
         verifier.setAutoclean(false);
         verifier.setLogFileName("log-deactivation.txt");
         verifier.deleteDirectory("target");
@@ -114,7 +114,7 @@ public class MavenITgh12288SettingsProfileAetherPropertiesTest extends AbstractM
         File testDir =
                 ResourceExtractor.simpleExtractResources(getClass(), "/gh-12288-settings-profile-aether-properties");
 
-        Verifier verifier = newVerifier(testDir.getAbsolutePath());
+        Verifier verifier = newVerifier(testDir.getAbsolutePath(), null, false);
         verifier.setAutoclean(false);
         verifier.deleteDirectory("target");
         verifier.deleteArtifacts("org.apache.maven.its.settings.profile.aether");

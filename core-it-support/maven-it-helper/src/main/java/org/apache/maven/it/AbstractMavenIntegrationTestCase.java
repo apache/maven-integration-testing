@@ -55,7 +55,8 @@ public abstract class AbstractMavenIntegrationTestCase {
 
     private String testName;
 
-    private static final Pattern DEFAULT_MATCH_PATTERN = Pattern.compile("(.*?)-(RC[0-9]+|SNAPSHOT|RC[0-9]+-SNAPSHOT)");
+    private static final Pattern DEFAULT_MATCH_PATTERN =
+            Pattern.compile("(.*?)-([Rr][Cc]-?[0-9]+|SNAPSHOT|[Rr][Cc]-?[0-9]+-SNAPSHOT)");
 
     protected static final String ALL_MAVEN_VERSIONS = "[2.0,)";
 

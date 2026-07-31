@@ -39,6 +39,8 @@ public class MavenIntegrationTestCaseTest {
         assertVersionEquals("2.0.10", "2.0.10-SNAPSHOT", test);
         assertVersionEquals("2.0.10", "2.0.10-RC1", test);
         assertVersionEquals("2.0.10", "2.0.10-RC1-SNAPSHOT", test);
+        assertVersionEquals("3.10.0", "3.10.0-RC-1", test);
+        assertVersionEquals("3.10.0", "3.10.0-rc-1", test);
     }
 
     private static void assertVersionEquals(String expected, String version, AbstractMavenIntegrationTestCase test) {

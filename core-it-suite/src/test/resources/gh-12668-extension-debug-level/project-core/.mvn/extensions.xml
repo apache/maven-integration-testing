@@ -1,0 +1,8 @@
+<extensions>
+  <extension>
+    <groupId>org.apache.maven.its.gh12668</groupId>
+    <artifactId>extension</artifactId>
+    <version>1.0</version>
+    <classLoadingStrategy>plugin</classLoadingStrategy>
+  </extension>
+</extensions>

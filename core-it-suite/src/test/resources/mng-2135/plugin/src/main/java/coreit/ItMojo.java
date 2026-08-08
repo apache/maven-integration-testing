@@ -40,15 +40,13 @@ package coreit;
 import java.io.*;
 
 import org.apache.maven.plugin.*;
+import org.apache.maven.plugins.annotations.Mojo;
+import org.apache.maven.plugins.annotations.Parameter;
 
-/**
- * @goal it
- */
+@Mojo(name = "it")
 public class ItMojo extends AbstractMojo {
 
-    /**
-     * @parameter default-value="${project.build.directory}/touch.txt"
-     */
+    @Parameter(defaultValue = "${project.build.directory}/touch.txt")
     private File outputFile;
 
     public void execute() throws MojoExecutionException {

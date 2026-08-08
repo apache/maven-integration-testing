@@ -37,6 +37,8 @@ package org.apache.maven.its.it0124;
  * under the License.
  */
 
+import javax.inject.Inject;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -46,22 +48,19 @@ import org.apache.maven.artifact.factory.ArtifactFactory;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
+import org.apache.maven.plugins.annotations.Mojo;
+import org.apache.maven.plugins.annotations.Parameter;
 
 /**
  * Simple mojo to write the injected artifact factory implementation to a file.
  *
  * @author <a href="mailto:markhobson@gmail.com">Mark Hobson</a>
- * @goal lookup
  */
+@Mojo(name = "lookup")
 public class LookupMojo extends AbstractMojo {
-    /**
-     * @component
-     */
     private ArtifactFactory artifactFactory;
 
-    /**
-     * @parameter expression="${project.build.directory}"
-     */
+    @Parameter(defaultValue = "${project.build.directory}")
     private String buildDirectory;
 
     /*
@@ -84,5 +83,10 @@ public class LookupMojo extends AbstractMojo {
         } catch (IOException exception) {
             throw new MojoExecutionException("Cannot create lookup.log", exception);
         }
+    }
+
+    @Inject
+    public LookupMojo(ArtifactFactory artifactFactory) {
+        this.artifactFactory = artifactFactory;
     }
 }

@@ -35,7 +35,7 @@ import org.apache.maven.project.MavenProject;
 @Mojo(name = "validate", defaultPhase = LifecyclePhase.VALIDATE)
 public class Mojo3563 extends AbstractMojo {
 
-    @Parameter(defaultValue = "${project}")
+    @Parameter(defaultValue = "${project}", readonly = true)
     private MavenProject project;
 
     public void execute() throws MojoExecutionException, MojoFailureException {

@@ -37,7 +37,7 @@ import org.codehaus.plexus.util.IOUtil;
 @Mojo(name = "validate", defaultPhase = LifecyclePhase.VALIDATE)
 public class Mojo3563 extends AbstractMojo {
 
-    @Parameter(defaultValue = "${project}")
+    @Parameter(defaultValue = "${project}", readonly = true)
     private MavenProject project;
 
     @Parameter(required = true)

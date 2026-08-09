@@ -53,7 +53,7 @@ public class MyMojo extends AbstractMojo {
     @Parameter(defaultValue = "${project.build.directory}")
     private String outputDirectory;
 
-    @Parameter(defaultValue = "${reactorProjects}", required = true)
+    @Parameter(defaultValue = "${reactorProjects}", required = true, readonly = true)
     private List reactorProjects;
 
     /**

@@ -47,7 +47,7 @@ import org.codehaus.plexus.util.FileUtils;
 
 @Mojo(name = "move-pom", defaultPhase = LifecyclePhase.PACKAGE)
 public class MyMojo extends AbstractMojo {
-    @Parameter(defaultValue = "${project}", required = true)
+    @Parameter(defaultValue = "${project}", required = true, readonly = true)
     private MavenProject project;
 
     public void execute() throws MojoExecutionException {

@@ -57,7 +57,7 @@ public class TestMojo extends AbstractMojo {
     /**
      * The Maven project.
      */
-    @Parameter(defaultValue = "${project}")
+    @Parameter(defaultValue = "${project}", readonly = true)
     private MavenProject project;
 
     /**

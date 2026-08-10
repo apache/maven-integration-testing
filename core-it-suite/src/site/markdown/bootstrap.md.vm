@@ -28,7 +28,7 @@ under the License.
 
 Core IT Bootstrapping downloads from Central repository every dependency (artifacts, plugins) required to let Core ITs Suite run without downloading anything later (see [Core ITs Suite and dependencies](./index.html#Core_ITs_Suite_and_Dependencies_.28incl._Plugins.29) rationale).
 
-Content to download is defined in [a series of bootstrap projects](https://github.com/apache/maven-integration-testing/tree/master/core-it-suite/src/test/resources/bootstrap):
+Content to download is defined in [a series of bootstrap projects](https://github.com/apache/maven-integration-testing/tree/maven-3.10.x/core-it-suite/src/test/resources/bootstrap):
 
 <!-- MACRO{toc|section=1|fromDepth=2} -->
 

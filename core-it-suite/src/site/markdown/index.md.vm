@@ -31,7 +31,7 @@ This module provides the [effective Core Integration Tests suite](./testapidocs/
 Running Core ITs Suite
 ----------------------
 
-Follow the steps that are described in the [README.md](https://github.com/apache/maven-integration-testing/blob/master/README.md) of the official [Core ITs Suite](https://github.com/apache/maven-integration-testing) repository.
+Follow the steps that are described in the [README.md](https://github.com/apache/maven-integration-testing/blob/maven-3.10.x/README.md) of the official [Core ITs Suite](https://github.com/apache/maven-integration-testing) repository.
 
 Core ITs Suite Results
 ----------------------
@@ -49,9 +49,9 @@ Currently deployed [Surefire Report](./surefire-report.html) was generated with 
 Core ITs Suite and Dependencies (incl. Plugins)
 -----------------------------------------------
 
-A good IT does not depend on external repos like Central, it uses dedicated test plugins and test repositories. The [default `settings.xml`](https://github.com/apache/maven-integration-testing/blob/master/core-it-suite/src/test/resources-filtered/settings.xml) used by ITs helps to enforce this by pointing `central` at `file:target/null`, which obviously can't resolve anything. This setup using a file-based dummy repo also helps execution time, because this repo produces (expected) `404`s much faster than a HTTP-based repo.
+A good IT does not depend on external repos like Central, it uses dedicated test plugins and test repositories. The [default `settings.xml`](https://github.com/apache/maven-integration-testing/blob/maven-3.10.x/core-it-suite/src/test/resources-filtered/settings.xml) used by ITs helps to enforce this by pointing `central` at `file:target/null`, which obviously can't resolve anything. This setup using a file-based dummy repo also helps execution time, because this repo produces (expected) `404`s much faster than a HTTP-based repo.
 
-The one place where access to Central is desired is by adding artifacts to the [bootstrap.txt](https://github.com/apache/maven-integration-testing/blob/master/core-it-suite/src/test/resources/bootstrap.txt) file, which is used to prime the local repo with any artifacts the ITs will need. This file should be kept sorted alphabetically for ease of use.
+The one place where access to Central is desired is by adding artifacts to the [bootstrap.txt](https://github.com/apache/maven-integration-testing/blob/maven-3.10.x/core-it-suite/src/test/resources-filtered/bootstrap.txt) file, which is used to prime the local repo with any artifacts the ITs will need. This file should be kept sorted alphabetically for ease of use.
 
 So some care needs to be taken when introducing new dependencies into the ITs themselves or [the support plugins](../core-it-support/). Many times the failures that we encounter are discrepancies between actual artifact consumption required and what is populated during bootstrapping. When forgetting, typical failures (as seen in ASF CI) will give following traces in log:
 

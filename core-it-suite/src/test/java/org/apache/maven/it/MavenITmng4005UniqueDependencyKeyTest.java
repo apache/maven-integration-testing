@@ -91,7 +91,7 @@ public class MavenITmng4005UniqueDependencyKeyTest extends AbstractMavenIntegrat
         }
 
         String logLevel;
-        if (matchesVersionRange("(,4.0.0-alpha-1)")) {
+        if (matchesVersionRange("(,3.10.0-alpha-1)")) {
             logLevel = "WARNING";
         } else {
             logLevel = "ERROR";

@@ -27,7 +27,7 @@ import org.junit.jupiter.api.Test;
 
 public class MavenIT0085TransitiveSystemScopeTest extends AbstractMavenIntegrationTestCase {
     public MavenIT0085TransitiveSystemScopeTest() {
-        super(ALL_MAVEN_VERSIONS);
+        super("(,3.10.0-alpha-1)");
     }
 
     /**

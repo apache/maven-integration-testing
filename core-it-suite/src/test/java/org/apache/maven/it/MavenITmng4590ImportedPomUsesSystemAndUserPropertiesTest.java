@@ -33,7 +33,7 @@ import org.junit.jupiter.api.Test;
 public class MavenITmng4590ImportedPomUsesSystemAndUserPropertiesTest extends AbstractMavenIntegrationTestCase {
 
     public MavenITmng4590ImportedPomUsesSystemAndUserPropertiesTest() {
-        super("[2.0.9,3.0-alpha-1),[3.0-beta-1,)");
+        super("[2.0.9,3.0-alpha-1),[3.0-beta-1,3.10.0-alpha-1)");
     }
 
     /**

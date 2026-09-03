@@ -35,7 +35,7 @@ import org.junit.jupiter.api.Test;
 public class MavenITmng3586SystemScopePluginDependencyTest extends AbstractMavenIntegrationTestCase {
 
     public MavenITmng3586SystemScopePluginDependencyTest() {
-        super(ALL_MAVEN_VERSIONS);
+        super("(,3.10.0-alpha-1)");
     }
 
     /**

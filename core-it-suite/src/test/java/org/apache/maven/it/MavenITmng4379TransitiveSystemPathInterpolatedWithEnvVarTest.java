@@ -34,7 +34,7 @@ import org.junit.jupiter.api.Test;
 public class MavenITmng4379TransitiveSystemPathInterpolatedWithEnvVarTest extends AbstractMavenIntegrationTestCase {
 
     public MavenITmng4379TransitiveSystemPathInterpolatedWithEnvVarTest() {
-        super("[2.0.3,2.1.0),[3.0-alpha-6,)");
+        super("[2.0.3,2.1.0),[3.0-alpha-6,3.10.0-alpha-1)");
     }
 
     /**

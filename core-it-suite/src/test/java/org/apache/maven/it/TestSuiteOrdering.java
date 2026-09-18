@@ -121,6 +121,7 @@ public class TestSuiteOrdering implements ClassOrderer {
          * a fail fast technique as well.
          */
 
+        suite.addTestSuite(MavenITmng6797ModelProblemsTest.class);
         suite.addTestSuite(MavenITgh11969ColorAlwaysTest.class);
         suite.addTestSuite(MavenITgh12668ExtensionDebugLevel.class);
         suite.addTestSuite(MavenITgh12288SettingsProfileAetherPropertiesTest.class);

@@ -21,9 +21,6 @@ package org.apache.maven.it;
 import java.io.File;
 import java.io.IOException;
 
-import org.apache.maven.it.VerificationException;
-import org.apache.maven.it.Verifier;
-import org.apache.maven.it.ResourceExtractor;
 import org.junit.jupiter.api.Test;
 
 public class MavenITmng7045DropUselessAndOutdatedCdiApiTest extends AbstractMavenIntegrationTestCase {

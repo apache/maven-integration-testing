@@ -25,8 +25,6 @@ import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-import org.apache.maven.it.Verifier;
-import org.apache.maven.it.ResourceExtractor;
 import org.eclipse.jetty.server.Handler;
 import org.eclipse.jetty.server.NetworkConnector;
 import org.eclipse.jetty.server.Request;

@@ -22,8 +22,6 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.maven.it.Verifier;
-import org.apache.maven.it.ResourceExtractor;
 import org.junit.jupiter.api.Test;
 
 public class MavenITmng7349RelocationWarningTest extends AbstractMavenIntegrationTestCase {

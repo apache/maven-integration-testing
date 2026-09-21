@@ -22,8 +22,6 @@ import java.io.File;
 import java.net.URI;
 import java.util.Properties;
 
-import org.apache.maven.it.Verifier;
-import org.apache.maven.it.ResourceExtractor;
 import org.junit.jupiter.api.Test;
 
 /**

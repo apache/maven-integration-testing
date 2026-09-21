@@ -23,8 +23,6 @@ import java.util.Map;
 import java.util.Properties;
 
 import org.apache.maven.shared.utils.io.FileUtils;
-import org.apache.maven.it.Verifier;
-import org.apache.maven.it.ResourceExtractor;
 import org.junit.jupiter.api.Test;
 
 /**

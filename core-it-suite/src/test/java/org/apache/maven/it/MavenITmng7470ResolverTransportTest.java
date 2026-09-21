@@ -22,8 +22,6 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.maven.it.Verifier;
-import org.apache.maven.it.ResourceExtractor;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

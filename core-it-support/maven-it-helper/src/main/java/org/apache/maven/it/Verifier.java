@@ -27,7 +27,6 @@ import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -134,7 +133,8 @@ public class Verifier {
 
     public Verifier(String basedir) throws VerificationException {
         this.basedir = basedir;
-        this.executorHelper = ExecutorHelper.forExecutors(VERIFIER_FORK_MODE, EMBEDDED_MAVEN_EXECUTOR, FORKED_MAVEN_EXECUTOR);
+        this.executorHelper =
+                ExecutorHelper.forExecutors(VERIFIER_FORK_MODE, EMBEDDED_MAVEN_EXECUTOR, FORKED_MAVEN_EXECUTOR);
         this.defaultCliArguments = newDefaultCliArguments();
     }
 

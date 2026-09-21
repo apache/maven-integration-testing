@@ -24,8 +24,8 @@ import java.util.List;
 import java.util.Properties;
 import java.util.regex.Pattern;
 
-import org.apache.maven.shared.verifier.Verifier;
-import org.apache.maven.shared.verifier.util.ResourceExtractor;
+import org.apache.maven.it.Verifier;
+import org.apache.maven.it.ResourceExtractor;
 import org.junit.jupiter.api.Test;
 
 /**

@@ -21,8 +21,6 @@ package org.apache.maven.it;
 import java.io.File;
 import java.util.Collection;
 
-import org.apache.maven.shared.verifier.Verifier;
-import org.apache.maven.shared.verifier.util.ResourceExtractor;
 import org.junit.jupiter.api.Test;
 
 /**

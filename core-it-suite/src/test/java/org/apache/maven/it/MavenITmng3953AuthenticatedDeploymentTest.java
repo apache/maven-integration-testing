@@ -23,8 +23,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import java.io.File;
 
-import org.apache.maven.shared.verifier.Verifier;
-import org.apache.maven.shared.verifier.util.ResourceExtractor;
+import org.apache.maven.it.Verifier;
+import org.apache.maven.it.ResourceExtractor;
 import org.eclipse.jetty.security.ConstraintMapping;
 import org.eclipse.jetty.security.ConstraintSecurityHandler;
 import org.eclipse.jetty.security.HashLoginService;

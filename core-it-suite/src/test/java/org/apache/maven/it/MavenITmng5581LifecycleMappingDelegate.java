@@ -21,9 +21,9 @@ package org.apache.maven.it;
 import java.io.File;
 import java.util.List;
 
-import org.apache.maven.shared.verifier.VerificationException;
-import org.apache.maven.shared.verifier.Verifier;
-import org.apache.maven.shared.verifier.util.ResourceExtractor;
+import org.apache.maven.it.VerificationException;
+import org.apache.maven.it.Verifier;
+import org.apache.maven.it.ResourceExtractor;
 import org.junit.jupiter.api.Test;
 
 public class MavenITmng5581LifecycleMappingDelegate extends AbstractMavenIntegrationTestCase {

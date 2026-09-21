@@ -20,8 +20,8 @@ package org.apache.maven.it;
 
 import java.io.File;
 
-import org.apache.maven.shared.verifier.Verifier;
-import org.apache.maven.shared.verifier.util.ResourceExtractor;
+import org.apache.maven.it.Verifier;
+import org.apache.maven.it.ResourceExtractor;
 import org.junit.jupiter.api.Test;
 
 public class MavenITmng5840RelativePathReactorMatching extends AbstractMavenIntegrationTestCase {

@@ -22,9 +22,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
-import org.apache.maven.it.VerificationException;
-import org.apache.maven.it.Verifier;
-import org.apache.maven.it.ResourceExtractor;
 import org.junit.jupiter.api.Test;
 
 public class MavenITmng7244IgnorePomPrefixInExpressions extends AbstractMavenIntegrationTestCase {

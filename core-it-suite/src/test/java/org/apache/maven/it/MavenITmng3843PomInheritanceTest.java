@@ -23,8 +23,6 @@ import java.util.Collection;
 import java.util.Properties;
 import java.util.TreeSet;
 
-import org.apache.maven.it.Verifier;
-import org.apache.maven.it.ResourceExtractor;
 import org.junit.jupiter.api.Test;
 
 /**

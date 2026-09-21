@@ -586,6 +586,16 @@ public class Verifier {
      * @throws IOException If the file could not be filtered.
      * @since 1.2
      */
+    /**
+     * @deprecated use {@link #filterFile(String, String, String, Map)}
+     */
+    @Deprecated
+    @SuppressWarnings({"rawtypes", "unchecked"})
+    public File filterFile(String srcPath, String dstPath, String fileEncoding, Properties filterProperties)
+            throws IOException {
+        return filterFile(srcPath, dstPath, fileEncoding, (Map) filterProperties);
+    }
+
     public File filterFile(String srcPath, String dstPath, String fileEncoding, Map<String, String> filterMap)
             throws IOException {
         File srcFile = new File(getBasedir(), srcPath);

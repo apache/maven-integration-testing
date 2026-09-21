@@ -18,8 +18,10 @@
  */
 package org.apache.maven.it;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FilenameFilter;
 import java.io.IOException;
@@ -817,19 +819,27 @@ public class Verifier {
             args.add(cliArgument.replace("${basedir}", getBasedir()));
         }
 
-        if (logFileName != null) {
-            args.add(0, logFileName);
-            args.add(0, "-l");
-        }
-
         File logFile = getLogFile();
+
+        // Capture the real stdout/stderr of the Maven-under-test and write both into the log file,
+        // exactly as maven-verifier's ForkedLauncher/Embedded3xLauncher did (both streams into the
+        // same writer). Unlike a "-l <file>" CLI argument, this does not fight with a CLI argument
+        // list that (rarely) adds its own "-l" (e.g. MavenITmng3183LoggingToFileTest), since it
+        // captures whatever actually reaches the process' own stdout/stderr rather than competing
+        // with it for the same log destination. Each pump thread in maven-executor closes whatever
+        // stream it is given, so two private ByteArrayOutputStreams are used (close() on those is a
+        // harmless no-op) and copied into the real log file afterward, under our own control.
+        ByteArrayOutputStream stdOut = new ByteArrayOutputStream();
+        ByteArrayOutputStream stdErr = new ByteArrayOutputStream();
 
         try {
             ExecutorRequest.Builder builder = ExecutorRequest.mavenBuilder()
                     .command(executable)
                     .cwd(Paths.get(basedir))
                     .arguments(args)
-                    .skipMavenRc(true);
+                    .skipMavenRc(true)
+                    .stdOut(stdOut)
+                    .stdErr(stdErr);
             if (!environmentVariables.isEmpty()) {
                 builder.environmentVariables(environmentVariables);
             }
@@ -842,13 +852,26 @@ public class Verifier {
             ExecutorRequest request = builder.build();
             ExecutorResult result = executorHelper.execute(mode, request);
 
+            writeLogFile(logFile, stdOut, stdErr);
+
             if (!result.success()) {
                 throw new VerificationException("Exit code was non-zero: "
                         + result.exitCode().orElse(-1) + "; command line and log = \n" + getExecutable() + " "
                         + StringUtils.join(args.iterator(), " ") + "\n" + getLogContents(logFile));
             }
         } catch (ExecutorException e) {
+            writeLogFile(logFile, stdOut, stdErr);
             throw new VerificationException("Failed to execute Maven", e);
+        }
+    }
+
+    private static void writeLogFile(File logFile, ByteArrayOutputStream stdOut, ByteArrayOutputStream stdErr)
+            throws VerificationException {
+        try (FileOutputStream fos = new FileOutputStream(logFile)) {
+            stdOut.writeTo(fos);
+            stdErr.writeTo(fos);
+        } catch (IOException e) {
+            throw new VerificationException("Could not write log file: " + logFile, e);
         }
     }
 

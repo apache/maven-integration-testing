@@ -22,8 +22,6 @@ import java.io.File;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.maven.artifact.versioning.DefaultArtifactVersion;
-import org.apache.maven.it.Verifier;
-import org.apache.maven.it.ResourceExtractor;
 import org.junit.jupiter.api.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;

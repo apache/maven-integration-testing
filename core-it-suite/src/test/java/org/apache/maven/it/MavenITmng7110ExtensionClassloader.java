@@ -24,9 +24,6 @@ import java.io.IOException;
 import java.io.Reader;
 import java.util.Properties;
 
-import org.apache.maven.it.VerificationException;
-import org.apache.maven.it.Verifier;
-import org.apache.maven.it.ResourceExtractor;
 import org.junit.jupiter.api.Test;
 
 public class MavenITmng7110ExtensionClassloader extends AbstractMavenIntegrationTestCase {

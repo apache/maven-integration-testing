@@ -22,8 +22,6 @@ import java.io.File;
 import java.util.Collection;
 import java.util.Collections;
 
-import org.apache.maven.it.Verifier;
-import org.apache.maven.it.ResourceExtractor;
 import org.junit.jupiter.api.Test;
 
 /**

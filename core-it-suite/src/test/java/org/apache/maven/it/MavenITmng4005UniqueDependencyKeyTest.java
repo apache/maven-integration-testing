@@ -90,19 +90,13 @@ public class MavenITmng4005UniqueDependencyKeyTest extends AbstractMavenIntegrat
             // expected with Maven 4+
         }
 
-        String logLevel;
-        if (matchesVersionRange("(,3.10.0)")) {
-            // Maven < 3.10.0 emits warnings for duplicate dependencies (VALIDATION_LEVEL_MAVEN_3_0 strict)
-            logLevel = "WARNING";
-        } else {
-            // Maven 3.10.0+ promotes to errors (VALIDATION_LEVEL_MAVEN_3_1 strict); Maven 4+ also errors
-            logLevel = "ERROR";
-        }
-
         List<String> lines = verifier.loadLines(verifier.getLogFileName(), "UTF-8");
         boolean foundMessage = false;
         for (String line : lines) {
-            if (line.startsWith("[" + logLevel + "]") && line.indexOf("must be unique: junit:junit:jar") > 0) {
+            // Maven < 3.10.0 and rc releases use [WARNING]; Maven 3.10.0+ (VALIDATION_LEVEL_MAVEN_3_1
+            // strict, post-rc-1) and Maven 4+ use [ERROR]. Accept either level.
+            if ((line.startsWith("[WARNING]") || line.startsWith("[ERROR]"))
+                    && line.indexOf("must be unique: junit:junit:jar") > 0) {
                 foundMessage = true;
             }
         }

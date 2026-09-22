@@ -56,9 +56,11 @@ public class MavenITmng1701DuplicatePluginTest extends AbstractMavenIntegrationT
         }
 
         String logLevel;
-        if (matchesVersionRange("(,4.0.0-alpha-1)")) {
+        if (matchesVersionRange("(,3.10.0)")) {
+            // Maven < 3.10.0 emits warnings for duplicate plugins (VALIDATION_LEVEL_MAVEN_3_0 strict)
             logLevel = "WARNING";
         } else {
+            // Maven 3.10.0+ promotes to errors (VALIDATION_LEVEL_MAVEN_3_1 strict); Maven 4+ also errors
             logLevel = "ERROR";
         }
 

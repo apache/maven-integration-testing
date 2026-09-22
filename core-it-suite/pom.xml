@@ -104,8 +104,8 @@ under the License.
       <!-- NOTE: Use compile scope for transitivity. -->
     </dependency>
     <dependency>
-      <groupId>org.apache.maven.shared</groupId>
-      <artifactId>maven-verifier</artifactId>
+      <groupId>org.apache.maven.executor</groupId>
+      <artifactId>maven-executor</artifactId>
       <!-- TODO: not transitive in tests artifact, so must be left in main
         scope <scope>test</scope> -->
     </dependency>

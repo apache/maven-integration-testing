@@ -34,6 +34,10 @@ under the License.
 
   <build>
     <plugins>
+      <!-- Merged into a single plugin declaration to avoid duplicate plugin errors.
+           The original test had two separate declarations of maven-it-plugin-log-file which were
+           merged by Maven < 3.10.0. Maven 3.10.0+ treats duplicate plugin declarations as errors
+           (VALIDATION_LEVEL_MAVEN_3_1 strict mode), so the executions are combined here. -->
       <plugin>
         <groupId>org.apache.maven.its.plugins</groupId>
         <artifactId>maven-it-plugin-log-file</artifactId>
@@ -47,6 +51,16 @@ under the License.
             <phase>validate</phase>
             <configuration>
               <logFile>target/step-1.properties</logFile>
+            </configuration>
+          </execution>
+          <execution>
+            <id>step 3</id>
+            <goals>
+              <goal>reset</goal>
+            </goals>
+            <phase>validate</phase>
+            <configuration>
+              <logFile>target/step-3.properties</logFile>
             </configuration>
           </execution>
         </executions>
@@ -67,23 +81,6 @@ under the License.
               <expressions>
                 <expression>project/properties</expression>
               </expressions>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.its.plugins</groupId>
-        <artifactId>maven-it-plugin-log-file</artifactId>
-        <version>2.1-SNAPSHOT</version>
-        <executions>
-          <execution>
-            <id>step 3</id>
-            <goals>
-              <goal>reset</goal>
-            </goals>
-            <phase>validate</phase>
-            <configuration>
-              <logFile>target/step-3.properties</logFile>
             </configuration>
           </execution>
         </executions>

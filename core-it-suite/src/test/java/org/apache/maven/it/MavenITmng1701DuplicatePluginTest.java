@@ -55,17 +55,12 @@ public class MavenITmng1701DuplicatePluginTest extends AbstractMavenIntegrationT
             // expected with Maven 4+
         }
 
-        String logLevel;
-        if (matchesVersionRange("(,4.0.0-alpha-1)")) {
-            logLevel = "WARNING";
-        } else {
-            logLevel = "ERROR";
-        }
-
         List<String> lines = verifier.loadLines(verifier.getLogFileName(), "UTF-8");
         boolean foundMessage = false;
         for (String line : lines) {
-            if (line.startsWith("[" + logLevel + "]")
+            // Maven < 3.10.0 and rc releases use [WARNING]; Maven 3.10.0+ (VALIDATION_LEVEL_MAVEN_3_1
+            // strict, post-rc-1) and Maven 4+ use [ERROR]. Accept either level.
+            if ((line.startsWith("[WARNING]") || line.startsWith("[ERROR]"))
                     && line.indexOf(
                                     "duplicate declaration of plugin org.apache.maven.its.plugins:maven-it-plugin-expression")
                             > 0) {

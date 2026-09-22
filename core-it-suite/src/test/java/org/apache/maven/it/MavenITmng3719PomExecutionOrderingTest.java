@@ -36,7 +36,9 @@ import org.junit.jupiter.api.Test;
 public class MavenITmng3719PomExecutionOrderingTest extends AbstractMavenIntegrationTestCase {
 
     public MavenITmng3719PomExecutionOrderingTest() {
-        super("[2.0.11,2.1.0-M1),[2.1.0-M2,4.0.0-alpha-1)");
+        // Maven 3.10.0+ treats duplicate plugin declarations as errors (VALIDATION_LEVEL_MAVEN_3_1 strict)
+        // so the test fixture was updated to use a single merged plugin declaration instead.
+        super("[2.0.11,2.1.0-M1),[2.1.0-M2,)");
     }
 
     /**

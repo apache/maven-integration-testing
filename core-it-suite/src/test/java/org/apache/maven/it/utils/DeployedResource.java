@@ -40,16 +40,23 @@ package org.apache.maven.it.utils;
  * @author Olivier Lamy
  */
 public class DeployedResource {
-    public String httpMethod;
+    private final String httpMethod;
 
-    public String requestUri;
+    private final String requestUri;
 
-    public String contentLength;
+    private final String contentLength;
 
-    public String transferEncoding;
+    private final String transferEncoding;
 
-    public DeployedResource() {
-        // no op
+    public DeployedResource(String httpMethod, String requestUri, String contentLength, String transferEncoding) {
+        this.httpMethod = httpMethod;
+        this.requestUri = requestUri;
+        this.contentLength = contentLength;
+        this.transferEncoding = transferEncoding;
+    }
+
+    public String getTransferEncoding() {
+        return transferEncoding;
     }
 
     @Override

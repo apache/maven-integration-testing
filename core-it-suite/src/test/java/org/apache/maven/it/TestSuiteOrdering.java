@@ -106,6 +106,7 @@ public class TestSuiteOrdering implements ClassOrderer {
         }
     }
 
+    @SuppressWarnings("checkstyle:MethodLength")
     public TestSuiteOrdering() {
         TestSuiteOrdering suite = this;
 

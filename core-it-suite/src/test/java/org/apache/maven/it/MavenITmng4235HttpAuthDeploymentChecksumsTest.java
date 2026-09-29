@@ -155,7 +155,7 @@ public class MavenITmng4235HttpAuthDeploymentChecksumsTest extends AbstractMaven
         assertHash(verifier, "repo/org/apache/maven/its/mng4235/test/maven-metadata.xml", ".md5", "MD5");
 
         for (DeployedResource deployedResource : repoHandler.deployedResources) {
-            if (StringUtils.equalsIgnoreCase("chunked", deployedResource.transferEncoding)) {
+            if (StringUtils.equalsIgnoreCase("chunked", deployedResource.getTransferEncoding())) {
                 fail("deployedResource " + deployedResource
                         + " use chunked transfert encoding some http server doesn't support that");
             }
@@ -190,12 +190,11 @@ public class MavenITmng4235HttpAuthDeploymentChecksumsTest extends AbstractMaven
 
                 Files.copy(request.getInputStream(), resource.getFile().toPath(), REPLACE_EXISTING);
 
-                DeployedResource deployedResource = new DeployedResource();
-
-                deployedResource.httpMethod = request.getMethod();
-                deployedResource.requestUri = request.getRequestURI();
-                deployedResource.transferEncoding = request.getHeader("Transfer-Encoding");
-                deployedResource.contentLength = request.getHeader("Content-Length");
+                DeployedResource deployedResource = new DeployedResource(
+                        request.getMethod(),
+                        request.getRequestURI(),
+                        request.getHeader("Content-Length"),
+                        request.getHeader("Transfer-Encoding"));
 
                 deployedResources.add(deployedResource);
 

@@ -36,7 +36,7 @@ import org.junit.jupiter.api.Test;
  */
 class MavenITmng3477DependencyResolutionErrorMessageTest extends AbstractMavenIntegrationTestCase {
 
-    public MavenITmng3477DependencyResolutionErrorMessageTest() {
+    MavenITmng3477DependencyResolutionErrorMessageTest() {
         super("[3.9.8,)");
     }
 

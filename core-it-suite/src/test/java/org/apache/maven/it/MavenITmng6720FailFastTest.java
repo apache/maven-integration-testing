@@ -35,7 +35,7 @@ import org.junit.jupiter.api.Test;
  */
 class MavenITmng6720FailFastTest extends AbstractMavenIntegrationTestCase {
 
-    public MavenITmng6720FailFastTest() {
+    MavenITmng6720FailFastTest() {
         super("[3.6.2,)");
     }
 

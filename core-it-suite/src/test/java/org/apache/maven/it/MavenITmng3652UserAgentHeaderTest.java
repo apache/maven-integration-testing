@@ -100,7 +100,7 @@ public class MavenITmng3652UserAgentHeaderTest extends AbstractMavenIntegrationT
      * @throws Exception in case of failure
      */
     @Test
-    public void testmng3652_UnConfiguredHttp() throws Exception {
+    public void testmng3652UnConfiguredHttp() throws Exception {
         File testDir = ResourceExtractor.simpleExtractResources(getClass(), "/mng-3652");
         File pluginDir = new File(testDir, "test-plugin");
         File projectDir = new File(testDir, "test-project");
@@ -134,7 +134,6 @@ public class MavenITmng3652UserAgentHeaderTest extends AbstractMavenIntegrationT
         String mavenVersion = lines.get(0);
         String javaVersion = lines.get(1);
         String os = lines.get(2) + " " + lines.get(3);
-        String artifactVersion = lines.get(4);
 
         assertEquals(
                 "Comparing User-Agent '" + userAgent + "'",
@@ -143,7 +142,7 @@ public class MavenITmng3652UserAgentHeaderTest extends AbstractMavenIntegrationT
     }
 
     @Test
-    public void testmng3652_UnConfiguredDAV() throws Exception {
+    public void testmng3652UnConfiguredDAV() throws Exception {
         File testDir = ResourceExtractor.simpleExtractResources(getClass(), "/mng-3652");
         File pluginDir = new File(testDir, "test-plugin");
         File projectDir = new File(testDir, "test-project");
@@ -176,7 +175,6 @@ public class MavenITmng3652UserAgentHeaderTest extends AbstractMavenIntegrationT
         String mavenVersion = lines.get(0);
         String javaVersion = lines.get(1);
         String os = lines.get(2) + " " + lines.get(3);
-        String artifactVersion = lines.get(4);
 
         String userAgent = this.userAgent;
         assertNotNull(userAgent);
@@ -188,7 +186,7 @@ public class MavenITmng3652UserAgentHeaderTest extends AbstractMavenIntegrationT
     }
 
     @Test
-    public void testmng3652_ConfigurationInSettingsWithoutUserAgent() throws Exception {
+    public void testmng3652ConfigurationInSettingsWithoutUserAgent() throws Exception {
         File testDir = ResourceExtractor.simpleExtractResources(getClass(), "/mng-3652");
         File pluginDir = new File(testDir, "test-plugin");
         File projectDir = new File(testDir, "test-project");
@@ -223,7 +221,6 @@ public class MavenITmng3652UserAgentHeaderTest extends AbstractMavenIntegrationT
         String mavenVersion = lines.get(0);
         String javaVersion = lines.get(1);
         String os = lines.get(2) + " " + lines.get(3);
-        String artifactVersion = lines.get(4);
 
         String userAgent = this.userAgent;
         assertNotNull(userAgent);
@@ -235,7 +232,7 @@ public class MavenITmng3652UserAgentHeaderTest extends AbstractMavenIntegrationT
     }
 
     @Test
-    public void testmng3652_UserAgentConfiguredInSettings() throws Exception {
+    public void testmng3652UserAgentConfiguredInSettings() throws Exception {
         File testDir = ResourceExtractor.simpleExtractResources(getClass(), "/mng-3652");
         File pluginDir = new File(testDir, "test-plugin");
         File projectDir = new File(testDir, "test-project");
@@ -267,7 +264,7 @@ public class MavenITmng3652UserAgentHeaderTest extends AbstractMavenIntegrationT
     }
 
     @Test
-    public void testmng3652_AdditionnalHttpHeaderConfiguredInSettings() throws Exception {
+    public void testmng3652AdditionnalHttpHeaderConfiguredInSettings() throws Exception {
         File testDir = ResourceExtractor.simpleExtractResources(getClass(), "/mng-3652");
         File pluginDir = new File(testDir, "test-plugin");
         File projectDir = new File(testDir, "test-project");

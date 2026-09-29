@@ -31,7 +31,7 @@ import org.junit.jupiter.api.Test;
  */
 class MavenITmng7566JavaPrerequisiteTest extends AbstractMavenIntegrationTestCase {
 
-    public MavenITmng7566JavaPrerequisiteTest() {
+    MavenITmng7566JavaPrerequisiteTest() {
         super("[3.9.12,)");
     }
 

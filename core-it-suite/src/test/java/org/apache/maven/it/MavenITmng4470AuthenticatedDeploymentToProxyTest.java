@@ -91,12 +91,11 @@ public class MavenITmng4470AuthenticatedDeploymentToProxyTest extends AbstractMa
                     ((Request) request).setHandled(true);
                 }
 
-                DeployedResource deployedResource = new DeployedResource();
-
-                deployedResource.httpMethod = request.getMethod();
-                deployedResource.requestUri = request.getRequestURI();
-                deployedResource.transferEncoding = request.getHeader("Transfer-Encoding");
-                deployedResource.contentLength = request.getHeader("Content-Length");
+                DeployedResource deployedResource = new DeployedResource(
+                        request.getMethod(),
+                        request.getRequestURI(),
+                        request.getHeader("Content-Length"),
+                        request.getHeader("Transfer-Encoding"));
 
                 deployedResources.add(deployedResource);
                 System.out.println(tn + " Done (proxy) " + request.getMethod() + " " + request.getRequestURL());
@@ -119,12 +118,11 @@ public class MavenITmng4470AuthenticatedDeploymentToProxyTest extends AbstractMa
 
                 ((Request) request).setHandled(true);
 
-                DeployedResource deployedResource = new DeployedResource();
-
-                deployedResource.httpMethod = request.getMethod();
-                deployedResource.requestUri = request.getRequestURI();
-                deployedResource.transferEncoding = request.getHeader("Transfer-Encoding");
-                deployedResource.contentLength = request.getHeader("Content-Length");
+                DeployedResource deployedResource = new DeployedResource(
+                        request.getMethod(),
+                        request.getRequestURI(),
+                        request.getHeader("Content-Length"),
+                        request.getHeader("Transfer-Encoding"));
 
                 deployedResources.add(deployedResource);
                 System.out.println(tn + " Done (repos) " + request.getMethod() + " " + request.getRequestURL());
@@ -211,7 +209,7 @@ public class MavenITmng4470AuthenticatedDeploymentToProxyTest extends AbstractMa
         verifier.verifyErrorFreeLog();
 
         for (DeployedResource deployedResource : deployedResources) {
-            if (StringUtils.equalsIgnoreCase("chunked", deployedResource.transferEncoding)) {
+            if (StringUtils.equalsIgnoreCase("chunked", deployedResource.getTransferEncoding())) {
                 fail("deployedResource " + deployedResource
                         + " use chunked transfert encoding some http server doesn't support that");
             }

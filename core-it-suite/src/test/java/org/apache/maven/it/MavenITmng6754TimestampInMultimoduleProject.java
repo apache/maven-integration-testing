@@ -42,6 +42,7 @@ public class MavenITmng6754TimestampInMultimoduleProject extends AbstractMavenIn
     }
 
     @Test
+    @SuppressWarnings("checkstyle:MethodLength")
     public void testArtifactsHaveSameTimestamp() throws Exception {
         final File testDir = ResourceExtractor.simpleExtractResources(getClass(), RESOURCE_PATH);
         final Verifier verifier = newVerifier(testDir.getAbsolutePath());
@@ -364,6 +365,8 @@ public class MavenITmng6754TimestampInMultimoduleProject extends AbstractMavenIn
             case "remote":
                 phase = "Deployed";
                 break;
+            default:
+                throw new IllegalArgumentException("Unknown location: " + location);
         }
         assertEquals(
                 String.format(
@@ -382,6 +385,8 @@ public class MavenITmng6754TimestampInMultimoduleProject extends AbstractMavenIn
             case "remote":
                 phase = "Deployed";
                 break;
+            default:
+                throw new IllegalArgumentException("Unknown location: " + location);
         }
         Path file = getRepoFile(repoDir, moduleName, version, fileName);
         assertTrue(

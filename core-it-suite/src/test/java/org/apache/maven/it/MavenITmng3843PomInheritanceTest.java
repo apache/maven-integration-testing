@@ -45,6 +45,7 @@ public class MavenITmng3843PomInheritanceTest extends AbstractMavenIntegrationTe
      * @throws Exception in case of failure
      */
     @Test
+    @SuppressWarnings("checkstyle:MethodLength")
     public void testitMNG3843() throws Exception {
         File testDir = ResourceExtractor.simpleExtractResources(getClass(), "/mng-3843");
 

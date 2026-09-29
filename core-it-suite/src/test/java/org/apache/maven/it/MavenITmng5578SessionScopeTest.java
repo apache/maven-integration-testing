@@ -52,7 +52,7 @@ public class MavenITmng5578SessionScopeTest extends AbstractMavenIntegrationTest
     }
 
     @Test
-    public void testBasic_multithreaded() throws Exception {
+    public void testBasicMultithreaded() throws Exception {
         File testDir = ResourceExtractor.simpleExtractResources(getClass(), "/mng-5578-session-scope");
         File pluginDir = new File(testDir, "plugin");
         File projectDir = new File(testDir, "basic");
@@ -78,7 +78,7 @@ public class MavenITmng5578SessionScopeTest extends AbstractMavenIntegrationTest
     }
 
     @Test
-    public void testBasic_buildExtension() throws Exception {
+    public void testBasicBuildExtension() throws Exception {
         File testDir = ResourceExtractor.simpleExtractResources(getClass(), "/mng-5578-session-scope");
         File pluginDir = new File(testDir, "plugin");
         File projectDir = new File(testDir, "basic");

@@ -49,10 +49,12 @@ def mavenBuild(jdk, mvnName) {
   script {
     try {
         withMaven(jdk: "$jdk", maven: "$mvnName", publisherStrategy: 'EXPLICIT', mavenOpts: "-Xms2g -Xmx4g -Djava.awt.headless=true") {
+            // parallel stages can share an agent; a shared ~/.m2 lets their ITs race on the same artifacts
+            String localRepo = "${env.WORKSPACE}/.repository"
             if (isUnix()) {
-                sh "mvn -V clean install -Prun-its,embedded -B"
+                sh "mvn -V clean install -Prun-its,embedded -B -Dmaven.repo.local=${localRepo}"
             } else {
-                bat "mvn -V clean install -Prun-its,embedded -B"
+                bat "mvn -V clean install -Prun-its,embedded -B -Dmaven.repo.local=${localRepo}"
             }
         }
     }

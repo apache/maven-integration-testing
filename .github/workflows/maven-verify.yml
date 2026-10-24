@@ -53,6 +53,9 @@ jobs:
           show-download-progress: true # ITs verify transfer progress output
           distribution: 'zulu'
           cache: 'maven'
+          cache-jdk: false
+          # only pushes to the default branch and .x lines save; other branches and pull requests restore
+          cache-read-only: ${{ !(github.event_name == 'push' && (github.ref_name == github.event.repository.default_branch || endsWith(github.ref_name, '.x'))) }}
 
       - name: Set up Maven
         run: mvn --errors --batch-mode --show-version org.apache.maven.plugins:maven-wrapper-plugin:3.3.4:wrapper "-Dmaven=3.10.0-rc-1"

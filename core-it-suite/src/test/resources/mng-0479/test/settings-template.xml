@@ -45,6 +45,19 @@ under the License.
             <updatePolicy>never</updatePolicy>
           </snapshots>
         </repository>
+        <repository>
+          <id>alt-central</id>
+          <name>alt-central-mng-0479</name>
+          <url>https://repo1.maven.org/maven2</url>
+          <releases>
+            <enabled>true</enabled>
+            <checksumPolicy>fail</checksumPolicy>
+            <updatePolicy>never</updatePolicy>
+          </releases>
+          <snapshots>
+            <enabled>false</enabled>
+          </snapshots>
+        </repository>
       </repositories>
       <pluginRepositories>
         <pluginRepository>
@@ -60,6 +73,19 @@ under the License.
             <enabled>true</enabled>
             <checksumPolicy>fail</checksumPolicy>
             <updatePolicy>never</updatePolicy>
+          </snapshots>
+        </pluginRepository>
+        <pluginRepository>
+          <id>alt-central</id>
+          <name>alt-central-mng-0479</name>
+          <url>https://repo1.maven.org/maven2</url>
+          <releases>
+            <enabled>true</enabled>
+            <checksumPolicy>fail</checksumPolicy>
+            <updatePolicy>never</updatePolicy>
+          </releases>
+          <snapshots>
+            <enabled>false</enabled>
           </snapshots>
         </pluginRepository>
       </pluginRepositories>

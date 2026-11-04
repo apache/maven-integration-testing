@@ -46,6 +46,16 @@ public class MavenITmng0479OverrideCentralRepoTest extends AbstractMavenIntegrat
     public void testitModel() throws Exception {
         File testDir = ResourceExtractor.simpleExtractResources(getClass(), "/mng-0479");
 
+        // Note: starting with Resolver 2.0.25 that contains this fix https://github.com/apache/maven-resolver/pull/2192
+        // this IT as is, pass-ok with 3.10.0, but it fails with 3.10.1 (Resolver 2.0.25) due that pull request above.
+        // The fix in PR pulls out all repositories for consideration, as central is redefined as snapshot repository!
+        // Hence, added a fix that works for both, 3.10.0 and 3.10.1+: added second "alt central" that points to real
+        // Central, as after PR 2192, there is no more "way" to trick Maven, it is now strict.
+        //
+        // History: This IT is for MNG-479, but later was "refurbished" for MNG-4769, where the override of Central
+        // to "snapshot only" was added (and relevant assertions). Hence, the workaround above, as it leave all
+        // those things in place, but also makes IT pass with 3.10.1+
+
         // Phase 1: Ensure the test plugin is downloaded before the test cuts off access to central
         File child1 = new File(testDir, "setup");
         Verifier verifier = newVerifier(child1.getAbsolutePath());

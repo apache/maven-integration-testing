@@ -66,6 +66,10 @@ under the License.
           <groupId>junit</groupId>
           <artifactId>junit</artifactId>
         </exclusion>
+        <exclusion>
+          <groupId>org.junit.jupiter</groupId>
+          <artifactId>junit-jupiter</artifactId>
+        </exclusion>
       </exclusions>
     </dependency>
   </dependencies>
